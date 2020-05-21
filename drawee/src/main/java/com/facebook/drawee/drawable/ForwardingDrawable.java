@@ -48,7 +48,7 @@ public class ForwardingDrawable extends Drawable
    *
    * @param drawable drawable that this forwarding drawable will forward to
    */
-  public ForwardingDrawable(@Nullable Drawable drawable) {
+  public ForwardingDrawable(final @Nullable Drawable drawable) {
     mCurrentDelegate = drawable;
     DrawableUtils.setCallbacks(mCurrentDelegate, this, this);
   }
@@ -61,7 +61,7 @@ public class ForwardingDrawable extends Drawable
    * @param newDelegate
    * @return the previous delegate
    */
-  public @Nullable Drawable setCurrent(@Nullable Drawable newDelegate) {
+  public @Nullable Drawable setCurrent(final @Nullable Drawable newDelegate) {
     Drawable previousDelegate = setCurrentWithoutInvalidate(newDelegate);
     invalidateSelf();
     return previousDelegate;
@@ -74,7 +74,7 @@ public class ForwardingDrawable extends Drawable
    * @param newDelegate
    * @return the previous delegate
    */
-  protected @Nullable Drawable setCurrentWithoutInvalidate(@Nullable Drawable newDelegate) {
+  protected @Nullable Drawable setCurrentWithoutInvalidate(final @Nullable Drawable newDelegate) {
     Drawable previousDelegate = mCurrentDelegate;
     DrawableUtils.setCallbacks(previousDelegate, null, null);
     DrawableUtils.setCallbacks(newDelegate, null, null);
@@ -95,7 +95,7 @@ public class ForwardingDrawable extends Drawable
   }
 
   @Override
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     mDrawableProperties.setAlpha(alpha);
     if (mCurrentDelegate != null) {
       mCurrentDelegate.setAlpha(alpha);
@@ -103,7 +103,7 @@ public class ForwardingDrawable extends Drawable
   }
 
   @Override
-  public void setColorFilter(ColorFilter colorFilter) {
+  public void setColorFilter(final ColorFilter colorFilter) {
     mDrawableProperties.setColorFilter(colorFilter);
     if (mCurrentDelegate != null) {
       mCurrentDelegate.setColorFilter(colorFilter);
@@ -111,7 +111,7 @@ public class ForwardingDrawable extends Drawable
   }
 
   @Override
-  public void setDither(boolean dither) {
+  public void setDither(final boolean dither) {
     mDrawableProperties.setDither(dither);
     if (mCurrentDelegate != null) {
       mCurrentDelegate.setDither(dither);
@@ -119,7 +119,7 @@ public class ForwardingDrawable extends Drawable
   }
 
   @Override
-  public void setFilterBitmap(boolean filterBitmap) {
+  public void setFilterBitmap(final boolean filterBitmap) {
     mDrawableProperties.setFilterBitmap(filterBitmap);
     if (mCurrentDelegate != null) {
       mCurrentDelegate.setFilterBitmap(filterBitmap);
@@ -127,7 +127,7 @@ public class ForwardingDrawable extends Drawable
   }
 
   @Override
-  public boolean setVisible(boolean visible, boolean restart) {
+  public boolean setVisible(final boolean visible, final boolean restart) {
     final boolean superResult = super.setVisible(visible, restart);
     if (mCurrentDelegate == null) {
       return superResult;
@@ -137,7 +137,7 @@ public class ForwardingDrawable extends Drawable
   }
 
   @Override
-  protected void onBoundsChange(Rect bounds) {
+  protected void onBoundsChange(final Rect bounds) {
     if (mCurrentDelegate != null) {
       mCurrentDelegate.setBounds(bounds);
     }
@@ -162,7 +162,7 @@ public class ForwardingDrawable extends Drawable
   }
 
   @Override
-  protected boolean onStateChange(int[] state) {
+  protected boolean onStateChange(final int[] state) {
     if (mCurrentDelegate == null) {
       return super.onStateChange(state);
     }
@@ -171,7 +171,7 @@ public class ForwardingDrawable extends Drawable
   }
 
   @Override
-  protected boolean onLevelChange(int level) {
+  protected boolean onLevelChange(final int level) {
     if (mCurrentDelegate == null) {
       return super.onLevelChange(level);
     }
@@ -180,7 +180,7 @@ public class ForwardingDrawable extends Drawable
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     if (mCurrentDelegate != null) {
       mCurrentDelegate.draw(canvas);
     }
@@ -205,7 +205,7 @@ public class ForwardingDrawable extends Drawable
   }
 
   @Override
-  public boolean getPadding(Rect padding) {
+  public boolean getPadding(final Rect padding) {
     if (mCurrentDelegate == null) {
       return super.getPadding(padding);
     }
@@ -230,7 +230,7 @@ public class ForwardingDrawable extends Drawable
   // DrawableParent methods
 
   @Override
-  public Drawable setDrawable(@Nullable Drawable newDrawable) {
+  public Drawable setDrawable(final @Nullable Drawable newDrawable) {
     return setCurrent(newDrawable);
   }
 
@@ -242,30 +242,30 @@ public class ForwardingDrawable extends Drawable
   // Drawable.Callback methods
 
   @Override
-  public void invalidateDrawable(Drawable who) {
+  public void invalidateDrawable(final Drawable who) {
     invalidateSelf();
   }
 
   @Override
-  public void scheduleDrawable(Drawable who, Runnable what, long when) {
+  public void scheduleDrawable(final Drawable who, final Runnable what, final long when) {
     scheduleSelf(what, when);
   }
 
   @Override
-  public void unscheduleDrawable(Drawable who, Runnable what) {
+  public void unscheduleDrawable(final Drawable who, final Runnable what) {
     unscheduleSelf(what);
   }
 
   //  TransformAwareDrawable methods
 
   @Override
-  public void setTransformCallback(TransformCallback transformCallback) {
+  public void setTransformCallback(final TransformCallback transformCallback) {
     mTransformCallback = transformCallback;
   }
 
   // TransformationCallback methods
 
-  protected void getParentTransform(Matrix transform) {
+  protected void getParentTransform(final Matrix transform) {
     if (mTransformCallback != null) {
       mTransformCallback.getTransform(transform);
     } else {
@@ -274,12 +274,12 @@ public class ForwardingDrawable extends Drawable
   }
 
   @Override
-  public void getTransform(Matrix transform) {
+  public void getTransform(final Matrix transform) {
     getParentTransform(transform);
   }
 
   @Override
-  public void getRootBounds(RectF bounds) {
+  public void getRootBounds(final RectF bounds) {
     if (mTransformCallback != null) {
       mTransformCallback.getRootBounds(bounds);
     } else {
@@ -293,7 +293,7 @@ public class ForwardingDrawable extends Drawable
    *
    * @param outBounds rect to fill with bounds
    */
-  public void getTransformedBounds(RectF outBounds) {
+  public void getTransformedBounds(final RectF outBounds) {
     getParentTransform(sTempTransform);
     // IMPORTANT: {@code getBounds} should be called after {@code getParentTransform},
     // because the parent may have to change our bounds.
@@ -303,7 +303,7 @@ public class ForwardingDrawable extends Drawable
 
   @Override
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  public void setHotspot(float x, float y) {
+  public void setHotspot(final float x, final float y) {
     if (mCurrentDelegate != null) {
       mCurrentDelegate.setHotspot(x, y);
     }

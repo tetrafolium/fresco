@@ -41,12 +41,12 @@ public class JpegTranscoderUtils {
    * @return true if and only if given number of degrees is allowed rotation angle, that is it is
    *     equal to 0, 90, 180 or 270
    */
-  public static boolean isRotationAngleAllowed(int degrees) {
+  public static boolean isRotationAngleAllowed(final int degrees) {
     return (degrees >= 0) && (degrees <= 270) && (degrees % 90 == 0);
   }
 
   /** @return true if and only if given value is a valid EXIF orientation */
-  public static boolean isExifOrientationAllowed(int exifOrientation) {
+  public static boolean isExifOrientationAllowed(final int exifOrientation) {
     switch (exifOrientation) {
       case ExifInterface.ORIENTATION_NORMAL:
       case ExifInterface.ORIENTATION_ROTATE_90:
@@ -63,10 +63,10 @@ public class JpegTranscoderUtils {
   }
 
   public static int getSoftwareNumerator(
-      RotationOptions rotationOptions,
-      @Nullable ResizeOptions resizeOptions,
-      EncodedImage encodedImage,
-      boolean resizingEnabled) {
+      final RotationOptions rotationOptions,
+      final @Nullable ResizeOptions resizeOptions,
+      final EncodedImage encodedImage,
+      final boolean resizingEnabled) {
     if (!resizingEnabled) {
       return SCALE_DENOMINATOR;
     }
@@ -98,7 +98,7 @@ public class JpegTranscoderUtils {
     return (numerator < 1) ? 1 : numerator;
   }
 
-  public static int getRotationAngle(RotationOptions rotationOptions, EncodedImage encodedImage) {
+  public static int getRotationAngle(final RotationOptions rotationOptions, final EncodedImage encodedImage) {
     if (!rotationOptions.rotationEnabled()) {
       return RotationOptions.NO_ROTATION;
     }
@@ -117,7 +117,7 @@ public class JpegTranscoderUtils {
    *     orientation
    */
   public static int getForceRotatedInvertedExifOrientation(
-      RotationOptions rotationOptions, EncodedImage encodedImage) {
+      final RotationOptions rotationOptions, final EncodedImage encodedImage) {
     int exifOrientation = encodedImage.getExifOrientation();
     int index = INVERTED_EXIF_ORIENTATIONS.indexOf(exifOrientation);
     if (index < 0) {
@@ -133,7 +133,7 @@ public class JpegTranscoderUtils {
   }
 
   @VisibleForTesting
-  public static float determineResizeRatio(ResizeOptions resizeOptions, int width, int height) {
+  public static float determineResizeRatio(final ResizeOptions resizeOptions, final int width, final int height) {
     if (resizeOptions == null) {
       return 1.0f;
     }
@@ -152,7 +152,7 @@ public class JpegTranscoderUtils {
   }
 
   @VisibleForTesting
-  public static int roundNumerator(float maxRatio, float roundUpFraction) {
+  public static int roundNumerator(final float maxRatio, final float roundUpFraction) {
     return (int) (roundUpFraction + maxRatio * SCALE_DENOMINATOR);
   }
 
@@ -163,7 +163,7 @@ public class JpegTranscoderUtils {
    * @return The ratio to use for software resize using the downsampling limitation
    */
   @VisibleForTesting
-  public static int calculateDownsampleNumerator(int downsampleRatio) {
+  public static int calculateDownsampleNumerator(final int downsampleRatio) {
     return Math.max(1, SCALE_DENOMINATOR / downsampleRatio);
   }
 
@@ -230,7 +230,7 @@ public class JpegTranscoderUtils {
     return matrix;
   }
 
-  private static int extractOrientationFromMetadata(EncodedImage encodedImage) {
+  private static int extractOrientationFromMetadata(final EncodedImage encodedImage) {
     switch (encodedImage.getRotationAngle()) {
       case RotationOptions.ROTATE_90:
       case RotationOptions.ROTATE_180:

@@ -34,17 +34,17 @@ public class CircularBitmapTransformation implements BitmapTransformation {
     }
   }
 
-  public CircularBitmapTransformation(boolean antiAliased) {
+  public CircularBitmapTransformation(final boolean antiAliased) {
     this(antiAliased, false);
   }
 
-  public CircularBitmapTransformation(boolean antiAliased, boolean useFastNativeRounding) {
+  public CircularBitmapTransformation(final boolean antiAliased, final boolean useFastNativeRounding) {
     mAntiAliased = antiAliased;
     mUseFastNativeRounding = useFastNativeRounding;
   }
 
   @Override
-  public void transform(Bitmap bitmap) {
+  public void transform(final Bitmap bitmap) {
     try {
       if (mUseFastNativeRounding) {
         sToCircleFast.invoke(null, bitmap, mAntiAliased);
@@ -64,7 +64,7 @@ public class CircularBitmapTransformation implements BitmapTransformation {
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (this == obj) {
       return true;
     }

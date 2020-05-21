@@ -89,11 +89,11 @@ public class ImageFormatCheckerTest {
     }
   }
 
-  private static List<String> getName(String path) {
+  private static List<String> getName(final String path) {
     return Arrays.asList(path);
   }
 
-  private static List<String> getNames(int amount, String pathFormat) {
+  private static List<String> getNames(final int amount, final String pathFormat) {
     List<String> result = new ArrayList<>();
     for (int i = 1; i <= amount; ++i) {
       result.add(String.format(pathFormat, i));
@@ -101,7 +101,7 @@ public class ImageFormatCheckerTest {
     return result;
   }
 
-  private InputStream getResourceStream(String name) throws IOException {
+  private InputStream getResourceStream(final String name) throws IOException {
     InputStream is = ImageFormatCheckerTest.class.getResourceAsStream(name);
     assertNotNull("failed to read resource: " + name, is);
     return is;

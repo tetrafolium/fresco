@@ -25,13 +25,13 @@ public class CircularBorderBitmapDrawable extends BitmapDrawable {
   private int mRadius;
   private int mAlpha = 255;
 
-  public CircularBorderBitmapDrawable(Resources res, Bitmap bitmap) {
+  public CircularBorderBitmapDrawable(final Resources res, final Bitmap bitmap) {
     super(res, bitmap);
     mBorderPaint.setStyle(Paint.Style.STROKE);
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     if (mRadius == 0) return;
 
     if (mBorderOptions == null || mBorderOptions.padding < 0.0f || mBorderOptions.width < 0.0f) {
@@ -65,12 +65,12 @@ public class CircularBorderBitmapDrawable extends BitmapDrawable {
   }
 
   @Override
-  protected void onBoundsChange(Rect bounds) {
+  protected void onBoundsChange(final Rect bounds) {
     super.onBoundsChange(bounds);
     mRadius = Math.min(bounds.width(), bounds.height()) / 2;
   }
 
-  public void setBorder(@Nullable BorderOptions borderOptions) {
+  public void setBorder(final @Nullable BorderOptions borderOptions) {
     if (mBorderOptions == null || !mBorderOptions.equals(borderOptions)) {
       mBorderOptions = borderOptions;
       ensureBorderPaint();
@@ -83,7 +83,7 @@ public class CircularBorderBitmapDrawable extends BitmapDrawable {
   }
 
   @Override
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     super.setAlpha(alpha);
     mAlpha = alpha;
     ensureBorderPaint();

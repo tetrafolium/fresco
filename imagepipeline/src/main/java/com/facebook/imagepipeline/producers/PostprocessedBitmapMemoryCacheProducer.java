@@ -30,9 +30,9 @@ public class PostprocessedBitmapMemoryCacheProducer
   private final Producer<CloseableReference<CloseableImage>> mInputProducer;
 
   public PostprocessedBitmapMemoryCacheProducer(
-      MemoryCache<CacheKey, CloseableImage> memoryCache,
-      CacheKeyFactory cacheKeyFactory,
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final MemoryCache<CacheKey, CloseableImage> memoryCache,
+      final CacheKeyFactory cacheKeyFactory,
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     mMemoryCache = memoryCache;
     mCacheKeyFactory = cacheKeyFactory;
     mInputProducer = inputProducer;
@@ -100,7 +100,7 @@ public class PostprocessedBitmapMemoryCacheProducer
         final CacheKey cacheKey,
         final boolean isRepeatedProcessor,
         final MemoryCache<CacheKey, CloseableImage> memoryCache,
-        boolean isMemoryCachedEnabled) {
+        final boolean isMemoryCachedEnabled) {
       super(consumer);
       this.mCacheKey = cacheKey;
       this.mIsRepeatedProcessor = isRepeatedProcessor;
@@ -110,7 +110,7 @@ public class PostprocessedBitmapMemoryCacheProducer
 
     @Override
     protected void onNewResultImpl(
-        CloseableReference<CloseableImage> newResult, @Status int status) {
+        final CloseableReference<CloseableImage> newResult, final @Status int status) {
       // ignore invalid intermediate results and forward the null result if last
       if (newResult == null) {
         if (isLast(status)) {

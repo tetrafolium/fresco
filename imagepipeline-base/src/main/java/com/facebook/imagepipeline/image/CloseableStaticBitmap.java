@@ -40,10 +40,10 @@ public class CloseableStaticBitmap extends CloseableBitmap implements HasBitmap 
    * @param resourceReleaser ResourceReleaser to release the bitmap to
    */
   public CloseableStaticBitmap(
-      Bitmap bitmap,
-      ResourceReleaser<Bitmap> resourceReleaser,
-      QualityInfo qualityInfo,
-      int rotationAngle) {
+      final Bitmap bitmap,
+      final ResourceReleaser<Bitmap> resourceReleaser,
+      final QualityInfo qualityInfo,
+      final int rotationAngle) {
     this(bitmap, resourceReleaser, qualityInfo, rotationAngle, ExifInterface.ORIENTATION_UNDEFINED);
   }
 
@@ -54,11 +54,11 @@ public class CloseableStaticBitmap extends CloseableBitmap implements HasBitmap 
    * @param resourceReleaser ResourceReleaser to release the bitmap to
    */
   public CloseableStaticBitmap(
-      Bitmap bitmap,
-      ResourceReleaser<Bitmap> resourceReleaser,
-      QualityInfo qualityInfo,
-      int rotationAngle,
-      int exifOrientation) {
+      final Bitmap bitmap,
+      final ResourceReleaser<Bitmap> resourceReleaser,
+      final QualityInfo qualityInfo,
+      final int rotationAngle,
+      final int exifOrientation) {
     mBitmap = Preconditions.checkNotNull(bitmap);
     mBitmapReference = CloseableReference.of(mBitmap, Preconditions.checkNotNull(resourceReleaser));
     mQualityInfo = qualityInfo;
@@ -73,7 +73,7 @@ public class CloseableStaticBitmap extends CloseableBitmap implements HasBitmap 
    * @param bitmapReference the bitmap reference.
    */
   public CloseableStaticBitmap(
-      CloseableReference<Bitmap> bitmapReference, QualityInfo qualityInfo, int rotationAngle) {
+      final CloseableReference<Bitmap> bitmapReference, final QualityInfo qualityInfo, final int rotationAngle) {
     this(bitmapReference, qualityInfo, rotationAngle, ExifInterface.ORIENTATION_UNDEFINED);
   }
 
@@ -84,10 +84,10 @@ public class CloseableStaticBitmap extends CloseableBitmap implements HasBitmap 
    * @param bitmapReference the bitmap reference.
    */
   public CloseableStaticBitmap(
-      CloseableReference<Bitmap> bitmapReference,
-      QualityInfo qualityInfo,
-      int rotationAngle,
-      int exifOrientation) {
+      final CloseableReference<Bitmap> bitmapReference,
+      final QualityInfo qualityInfo,
+      final int rotationAngle,
+      final int exifOrientation) {
     mBitmapReference = Preconditions.checkNotNull(bitmapReference.cloneOrNull());
     mBitmap = mBitmapReference.get();
     mQualityInfo = qualityInfo;
@@ -187,11 +187,11 @@ public class CloseableStaticBitmap extends CloseableBitmap implements HasBitmap 
     return getBitmapHeight(mBitmap);
   }
 
-  private static int getBitmapWidth(@Nullable Bitmap bitmap) {
+  private static int getBitmapWidth(final @Nullable Bitmap bitmap) {
     return (bitmap == null) ? 0 : bitmap.getWidth();
   }
 
-  private static int getBitmapHeight(@Nullable Bitmap bitmap) {
+  private static int getBitmapHeight(final @Nullable Bitmap bitmap) {
     return (bitmap == null) ? 0 : bitmap.getHeight();
   }
 

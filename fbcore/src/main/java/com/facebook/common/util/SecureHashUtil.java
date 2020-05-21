@@ -17,7 +17,7 @@ import java.security.NoSuchAlgorithmException;
 /** Static methods for secure hashing. */
 public class SecureHashUtil {
 
-  public static String makeSHA1Hash(String text) {
+  public static String makeSHA1Hash(final String text) {
     try {
       return makeSHA1Hash(text.getBytes("utf-8"));
     } catch (UnsupportedEncodingException e) {
@@ -25,15 +25,15 @@ public class SecureHashUtil {
     }
   }
 
-  public static String makeSHA1Hash(byte[] bytes) {
+  public static String makeSHA1Hash(final byte[] bytes) {
     return makeHash(bytes, "SHA-1");
   }
 
-  public static String makeSHA256Hash(byte[] bytes) {
+  public static String makeSHA256Hash(final byte[] bytes) {
     return makeHash(bytes, "SHA-256");
   }
 
-  public static String makeSHA1HashBase64(byte[] bytes) {
+  public static String makeSHA1HashBase64(final byte[] bytes) {
     try {
       MessageDigest md = MessageDigest.getInstance("SHA-1");
       md.update(bytes, 0, bytes.length);
@@ -44,7 +44,7 @@ public class SecureHashUtil {
     }
   }
 
-  public static String makeMD5Hash(String text) {
+  public static String makeMD5Hash(final String text) {
     try {
       return makeMD5Hash(text.getBytes("utf-8"));
     } catch (UnsupportedEncodingException e) {
@@ -52,11 +52,11 @@ public class SecureHashUtil {
     }
   }
 
-  public static String makeMD5Hash(byte[] bytes) {
+  public static String makeMD5Hash(final byte[] bytes) {
     return makeHash(bytes, "MD5");
   }
 
-  public static String makeMD5Hash(InputStream stream) throws IOException {
+  public static String makeMD5Hash(final InputStream stream) throws IOException {
     return makeHash(stream, "MD5");
   }
 
@@ -67,7 +67,7 @@ public class SecureHashUtil {
     (byte) 'c', (byte) 'd', (byte) 'e', (byte) 'f'
   };
 
-  public static String convertToHex(byte[] raw) throws UnsupportedEncodingException {
+  public static String convertToHex(final byte[] raw) throws UnsupportedEncodingException {
     StringBuilder sb = new StringBuilder(raw.length);
     for (byte b : raw) {
       int v = b & 0xFF;
@@ -77,7 +77,7 @@ public class SecureHashUtil {
     return sb.toString();
   }
 
-  private static String makeHash(byte[] bytes, String algorithm) {
+  private static String makeHash(final byte[] bytes, final String algorithm) {
     try {
       MessageDigest md = MessageDigest.getInstance(algorithm);
       md.update(bytes, 0, bytes.length);
@@ -92,7 +92,7 @@ public class SecureHashUtil {
 
   private static final int BUFFER_SIZE = 4096;
 
-  private static String makeHash(InputStream stream, String algorithm) throws IOException {
+  private static String makeHash(final InputStream stream, final String algorithm) throws IOException {
     try {
       MessageDigest md = MessageDigest.getInstance(algorithm);
       byte[] buffer = new byte[BUFFER_SIZE];

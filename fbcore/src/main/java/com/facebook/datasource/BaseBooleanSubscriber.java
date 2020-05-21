@@ -27,7 +27,7 @@ package com.facebook.datasource;
  */
 public abstract class BaseBooleanSubscriber implements DataSubscriber<Boolean> {
   @Override
-  public void onNewResult(DataSource<Boolean> dataSource) {
+  public void onNewResult(final DataSource<Boolean> dataSource) {
     try {
       onNewResultImpl(dataSource.getResult());
     } finally {
@@ -36,7 +36,7 @@ public abstract class BaseBooleanSubscriber implements DataSubscriber<Boolean> {
   }
 
   @Override
-  public void onFailure(DataSource<Boolean> dataSource) {
+  public void onFailure(final DataSource<Boolean> dataSource) {
     try {
       onFailureImpl(dataSource);
     } finally {
@@ -45,10 +45,10 @@ public abstract class BaseBooleanSubscriber implements DataSubscriber<Boolean> {
   }
 
   @Override
-  public void onCancellation(DataSource<Boolean> dataSource) {}
+  public void onCancellation(final DataSource<Boolean> dataSource) { }
 
   @Override
-  public void onProgressUpdate(DataSource<Boolean> dataSource) {}
+  public void onProgressUpdate(final DataSource<Boolean> dataSource) { }
 
   protected abstract void onNewResultImpl(boolean isFoundInDisk);
 

@@ -44,7 +44,7 @@ public class SvgDecoderExample {
 
     @Nullable
     @Override
-    public ImageFormat determineFormat(byte[] headerBytes, int headerSize) {
+    public ImageFormat determineFormat(final byte[] headerBytes, final int headerSize) {
       if (headerSize < getHeaderSize()) {
         return null;
       }
@@ -69,7 +69,7 @@ public class SvgDecoderExample {
 
     private boolean mClosed = false;
 
-    public CloseableSvgImage(SVG svg) {
+    public CloseableSvgImage(final SVG svg) {
       mSvg = svg;
     }
 
@@ -108,10 +108,10 @@ public class SvgDecoderExample {
 
     @Override
     public CloseableImage decode(
-        EncodedImage encodedImage,
-        int length,
-        QualityInfo qualityInfo,
-        ImageDecodeOptions options) {
+        final EncodedImage encodedImage,
+        final int length,
+        final QualityInfo qualityInfo,
+        final ImageDecodeOptions options) {
       try {
         SVG svg = SVG.getFromInputStream(encodedImage.getInputStream());
         return new CloseableSvgImage(svg);
@@ -126,13 +126,13 @@ public class SvgDecoderExample {
   public static class SvgDrawableFactory implements DrawableFactory {
 
     @Override
-    public boolean supportsImageType(CloseableImage image) {
+    public boolean supportsImageType(final CloseableImage image) {
       return image instanceof CloseableSvgImage;
     }
 
     @Nullable
     @Override
-    public Drawable createDrawable(CloseableImage image) {
+    public Drawable createDrawable(final CloseableImage image) {
       return new SvgPictureDrawable(((CloseableSvgImage) image).getSvg());
     }
   }
@@ -141,13 +141,13 @@ public class SvgDecoderExample {
 
     private final SVG mSvg;
 
-    public SvgPictureDrawable(SVG svg) {
+    public SvgPictureDrawable(final SVG svg) {
       super(null);
       mSvg = svg;
     }
 
     @Override
-    protected void onBoundsChange(Rect bounds) {
+    protected void onBoundsChange(final Rect bounds) {
       super.onBoundsChange(bounds);
       setPicture(mSvg.renderToPicture(bounds.width(), bounds.height()));
     }

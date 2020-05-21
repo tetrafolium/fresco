@@ -33,7 +33,7 @@ public class RequestLoggingListener implements RequestListener {
 
   @Override
   public synchronized void onRequestStart(
-      ImageRequest request, Object callerContextObject, String requestId, boolean isPrefetch) {
+      final ImageRequest request, final Object callerContextObject, final String requestId, final boolean isPrefetch) {
     if (FLog.isLoggable(FLog.VERBOSE)) {
       FLog.v(
           TAG,
@@ -47,7 +47,7 @@ public class RequestLoggingListener implements RequestListener {
   }
 
   @Override
-  public synchronized void onProducerStart(String requestId, String producerName) {
+  public synchronized void onProducerStart(final String requestId, final String producerName) {
     if (FLog.isLoggable(FLog.VERBOSE)) {
       Pair<String, String> mapKey = Pair.create(requestId, producerName);
       long startTime = getTime();
@@ -63,7 +63,7 @@ public class RequestLoggingListener implements RequestListener {
 
   @Override
   public synchronized void onProducerFinishWithSuccess(
-      String requestId, String producerName, @Nullable Map<String, String> extraMap) {
+      final String requestId, final String producerName, final @Nullable Map<String, String> extraMap) {
     if (FLog.isLoggable(FLog.VERBOSE)) {
       Pair<String, String> mapKey = Pair.create(requestId, producerName);
       Long startTime = mProducerStartTimeMap.remove(mapKey);
@@ -82,10 +82,10 @@ public class RequestLoggingListener implements RequestListener {
 
   @Override
   public synchronized void onProducerFinishWithFailure(
-      String requestId,
-      String producerName,
-      Throwable throwable,
-      @Nullable Map<String, String> extraMap) {
+      final String requestId,
+      final String producerName,
+      final Throwable throwable,
+      final @Nullable Map<String, String> extraMap) {
     if (FLog.isLoggable(FLog.WARN)) {
       Pair<String, String> mapKey = Pair.create(requestId, producerName);
       Long startTime = mProducerStartTimeMap.remove(mapKey);
@@ -106,7 +106,7 @@ public class RequestLoggingListener implements RequestListener {
 
   @Override
   public synchronized void onProducerFinishWithCancellation(
-      String requestId, String producerName, @Nullable Map<String, String> extraMap) {
+      final String requestId, final String producerName, final @Nullable Map<String, String> extraMap) {
     if (FLog.isLoggable(FLog.VERBOSE)) {
       Pair<String, String> mapKey = Pair.create(requestId, producerName);
       Long startTime = mProducerStartTimeMap.remove(mapKey);
@@ -125,7 +125,7 @@ public class RequestLoggingListener implements RequestListener {
 
   @Override
   public synchronized void onProducerEvent(
-      String requestId, String producerName, String producerEventName) {
+      final String requestId, final String producerName, final String producerEventName) {
     if (FLog.isLoggable(FLog.VERBOSE)) {
       Pair<String, String> mapKey = Pair.create(requestId, producerName);
       Long startTime = mProducerStartTimeMap.get(mapKey);
@@ -143,7 +143,7 @@ public class RequestLoggingListener implements RequestListener {
 
   @Override
   public synchronized void onUltimateProducerReached(
-      String requestId, String producerName, boolean successful) {
+      final String requestId, final String producerName, final boolean successful) {
     if (FLog.isLoggable(FLog.VERBOSE)) {
       Pair<String, String> mapKey = Pair.create(requestId, producerName);
       Long startTime = mProducerStartTimeMap.remove(mapKey);
@@ -162,7 +162,7 @@ public class RequestLoggingListener implements RequestListener {
 
   @Override
   public synchronized void onRequestSuccess(
-      ImageRequest request, String requestId, boolean isPrefetch) {
+      final ImageRequest request, final String requestId, final boolean isPrefetch) {
     if (FLog.isLoggable(FLog.VERBOSE)) {
       Long startTime = mRequestStartTimeMap.remove(requestId);
       long currentTime = getTime();
@@ -177,7 +177,7 @@ public class RequestLoggingListener implements RequestListener {
 
   @Override
   public synchronized void onRequestFailure(
-      ImageRequest request, String requestId, Throwable throwable, boolean isPrefetch) {
+      final ImageRequest request, final String requestId, final Throwable throwable, final boolean isPrefetch) {
     if (FLog.isLoggable(FLog.WARN)) {
       Long startTime = mRequestStartTimeMap.remove(requestId);
       long currentTime = getTime();
@@ -192,7 +192,7 @@ public class RequestLoggingListener implements RequestListener {
   }
 
   @Override
-  public synchronized void onRequestCancellation(String requestId) {
+  public synchronized void onRequestCancellation(final String requestId) {
     if (FLog.isLoggable(FLog.VERBOSE)) {
       Long startTime = mRequestStartTimeMap.remove(requestId);
       long currentTime = getTime();
@@ -206,11 +206,11 @@ public class RequestLoggingListener implements RequestListener {
   }
 
   @Override
-  public boolean requiresExtraMap(String id) {
+  public boolean requiresExtraMap(final String id) {
     return FLog.isLoggable(FLog.VERBOSE);
   }
 
-  private static long getElapsedTime(@Nullable Long startTime, long endTime) {
+  private static long getElapsedTime(final @Nullable Long startTime, final long endTime) {
     if (startTime != null) {
       return endTime - startTime;
     }

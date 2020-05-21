@@ -68,7 +68,7 @@ import javax.annotation.concurrent.GuardedBy;
 public abstract class CloseableReference<T> implements Cloneable, Closeable {
 
   @IntDef({REF_TYPE_DEFAULT, REF_TYPE_FINALIZER, REF_TYPE_REF_COUNT, REF_TYPE_NOOP})
-  public @interface CloseableRefType {}
+  public @interface CloseableRefType { }
 
   public static final int REF_TYPE_DEFAULT = 0;
   public static final int REF_TYPE_FINALIZER = 1;
@@ -84,7 +84,7 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
   }
 
   public static void setDisableCloseableReferencesForBitmaps(
-      @CloseableRefType int bitmapCloseableRefType) {
+      final @CloseableRefType int bitmapCloseableRefType) {
     sBitmapCloseableRefType = bitmapCloseableRefType;
   }
 
@@ -108,7 +108,7 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
   private static final ResourceReleaser<Closeable> DEFAULT_CLOSEABLE_RELEASER =
       new ResourceReleaser<Closeable>() {
         @Override
-        public void release(Closeable value) {
+        public void release(final Closeable value) {
           try {
             Closeables.close(value, true);
           } catch (IOException ioe) {
@@ -120,7 +120,7 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
   private static final LeakHandler DEFAULT_LEAK_HANDLER =
       new LeakHandler() {
         @Override
-        public void reportLeak(SharedReference<Object> reference, @Nullable Throwable stacktrace) {
+        public void reportLeak(final SharedReference<Object> reference, final @Nullable Throwable stacktrace) {
           FLog.w(
               TAG,
               "Finalized without closing: %x %x (type = %s)",
@@ -136,7 +136,7 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
       };
 
   protected CloseableReference(
-      SharedReference<T> sharedReference, LeakHandler leakHandler, @Nullable Throwable stacktrace) {
+      final SharedReference<T> sharedReference, final LeakHandler leakHandler, final @Nullable Throwable stacktrace) {
     mSharedReference = Preconditions.checkNotNull(sharedReference);
     sharedReference.addReference();
     mLeakHandler = leakHandler;
@@ -144,10 +144,10 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
   }
 
   protected CloseableReference(
-      T t,
-      ResourceReleaser<T> resourceReleaser,
-      LeakHandler leakHandler,
-      @Nullable Throwable stacktrace) {
+      final T t,
+      final ResourceReleaser<T> resourceReleaser,
+      final LeakHandler leakHandler,
+      final @Nullable Throwable stacktrace) {
     mSharedReference = new SharedReference<T>(t, resourceReleaser);
     mLeakHandler = leakHandler;
     mStacktrace = stacktrace;
@@ -158,7 +158,7 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
    *
    * <p>Returns null if the parameter is null.
    */
-  public static <T extends Closeable> CloseableReference<T> of(@PropagatesNullable T t) {
+  public static <T extends Closeable> CloseableReference<T> of(final @PropagatesNullable T t) {
     return of(t, (ResourceReleaser<T>) DEFAULT_CLOSEABLE_RELEASER);
   }
 
@@ -167,7 +167,7 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
    * ResourceReleaser<T>. If t is null, this will just return null.
    */
   public static <T> CloseableReference<T> of(
-      @PropagatesNullable T t, ResourceReleaser<T> resourceReleaser) {
+      final @PropagatesNullable T t, final ResourceReleaser<T> resourceReleaser) {
     return of(t, resourceReleaser, DEFAULT_LEAK_HANDLER);
   }
 
@@ -178,7 +178,7 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
    * <p>Returns null if the parameter is null.
    */
   public static <T extends Closeable> CloseableReference<T> of(
-      @PropagatesNullable T t, LeakHandler leakHandler) {
+      final @PropagatesNullable T t, final LeakHandler leakHandler) {
     if (t == null) {
       return null;
     } else {
@@ -191,7 +191,7 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
   }
 
   public static <T> CloseableReference<T> of(
-      @PropagatesNullable T t, ResourceReleaser<T> resourceReleaser, LeakHandler leakHandler) {
+      final @PropagatesNullable T t, final ResourceReleaser<T> resourceReleaser, final LeakHandler leakHandler) {
     if (t == null) {
       return null;
     } else {
@@ -209,10 +209,10 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
    * t is null, this will just return null.
    */
   public static <T> CloseableReference<T> of(
-      @PropagatesNullable T t,
-      ResourceReleaser<T> resourceReleaser,
-      LeakHandler leakHandler,
-      @Nullable Throwable stacktrace) {
+      final @PropagatesNullable T t,
+      final ResourceReleaser<T> resourceReleaser,
+      final LeakHandler leakHandler,
+      final @Nullable Throwable stacktrace) {
     if (t == null) {
       return null;
     } else {
@@ -307,7 +307,7 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
    *
    * @return true if the closeable reference is valid
    */
-  public static boolean isValid(@Nullable CloseableReference<?> ref) {
+  public static boolean isValid(final @Nullable CloseableReference<?> ref) {
     return ref != null && ref.isValid();
   }
 
@@ -317,7 +317,7 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
    * @param ref the reference to clone
    */
   @Nullable
-  public static <T> CloseableReference<T> cloneOrNull(@Nullable CloseableReference<T> ref) {
+  public static <T> CloseableReference<T> cloneOrNull(final @Nullable CloseableReference<T> ref) {
     return (ref != null) ? ref.cloneOrNull() : null;
   }
 
@@ -330,7 +330,7 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
    * @return the list of cloned references or null
    */
   public static <T> List<CloseableReference<T>> cloneOrNull(
-      @PropagatesNullable Collection<CloseableReference<T>> refs) {
+      final @PropagatesNullable Collection<CloseableReference<T>> refs) {
     if (refs == null) {
       return null;
     }
@@ -346,7 +346,7 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
    *
    * @param ref the reference to close
    */
-  public static void closeSafely(@Nullable CloseableReference<?> ref) {
+  public static void closeSafely(final @Nullable CloseableReference<?> ref) {
     if (ref != null) {
       ref.close();
     }
@@ -357,7 +357,7 @@ public abstract class CloseableReference<T> implements Cloneable, Closeable {
    *
    * @param references the reference to close
    */
-  public static void closeSafely(@Nullable Iterable<? extends CloseableReference<?>> references) {
+  public static void closeSafely(final @Nullable Iterable<? extends CloseableReference<?>> references) {
     if (references != null) {
       for (CloseableReference<?> ref : references) {
         closeSafely(ref);

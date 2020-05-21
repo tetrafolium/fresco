@@ -47,7 +47,7 @@ public class SimpleGallerySectionSpec {
   }
 
   @OnEvent(RenderEvent.class)
-  static RenderInfo onRender(final SectionContext c, @FromEvent Uri model) {
+  static RenderInfo onRender(final SectionContext c, final @FromEvent Uri model) {
     return ComponentRenderInfo.create()
         .component(
             FrescoVitoImage.create(c)

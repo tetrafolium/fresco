@@ -19,13 +19,13 @@ public class AQueryAdapter extends ImageListAdapter {
 
   private AQuery mAQuery;
 
-  public AQueryAdapter(Context context, PerfListener perfListener) {
+  public AQueryAdapter(final Context context, final PerfListener perfListener) {
     super(context, perfListener);
     mAQuery = new AQuery(context);
   }
 
   @Override
-  public AQueryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public AQueryHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
     final InstrumentedImageView instrImageView = new InstrumentedImageView(getContext());
     return new AQueryHolder(getContext(), mAQuery, parent, instrImageView, getPerfListener());
   }

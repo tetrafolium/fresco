@@ -23,16 +23,16 @@ public class FixedNumberBitmapFramePreparationStrategy implements BitmapFramePre
     this(DEFAULT_FRAMES_TO_PREPARE);
   }
 
-  public FixedNumberBitmapFramePreparationStrategy(int framesToPrepare) {
+  public FixedNumberBitmapFramePreparationStrategy(final int framesToPrepare) {
     mFramesToPrepare = framesToPrepare;
   }
 
   @Override
   public void prepareFrames(
-      BitmapFramePreparer bitmapFramePreparer,
-      BitmapFrameCache bitmapFrameCache,
-      AnimationBackend animationBackend,
-      int lastDrawnFrameNumber) {
+      final BitmapFramePreparer bitmapFramePreparer,
+      final BitmapFrameCache bitmapFrameCache,
+      final AnimationBackend animationBackend,
+      final int lastDrawnFrameNumber) {
     for (int i = 1; i <= mFramesToPrepare; i++) {
       int nextFrameNumber = (lastDrawnFrameNumber + i) % animationBackend.getFrameCount();
       if (FLog.isLoggable(FLog.VERBOSE)) {

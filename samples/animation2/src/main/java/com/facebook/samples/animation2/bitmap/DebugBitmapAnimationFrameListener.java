@@ -29,16 +29,16 @@ public class DebugBitmapAnimationFrameListener implements BitmapAnimationBackend
   private long mLastFrameStart;
 
   @Override
-  public void onDrawFrameStart(BitmapAnimationBackend backend, int frameNumber) {
+  public void onDrawFrameStart(final BitmapAnimationBackend backend, final int frameNumber) {
     mLastFrameStart = System.currentTimeMillis();
     FLog.d(TAG, "Frame: event=start, number=%d", frameNumber);
   }
 
   @Override
   public void onFrameDrawn(
-      BitmapAnimationBackend backend,
-      int frameNumber,
-      @BitmapAnimationBackend.FrameType int frameType) {
+      final BitmapAnimationBackend backend,
+      final int frameNumber,
+      final @BitmapAnimationBackend.FrameType int frameType) {
     increaseFrameTypeCount(frameType);
     FLog.d(
         TAG,
@@ -50,7 +50,7 @@ public class DebugBitmapAnimationFrameListener implements BitmapAnimationBackend
   }
 
   @Override
-  public void onFrameDropped(BitmapAnimationBackend backend, int frameNumber) {
+  public void onFrameDropped(final BitmapAnimationBackend backend, final int frameNumber) {
     mDroppedFrameCount++;
     FLog.d(
         TAG,
@@ -72,7 +72,7 @@ public class DebugBitmapAnimationFrameListener implements BitmapAnimationBackend
         mUnknownCount);
   }
 
-  private void increaseFrameTypeCount(@BitmapAnimationBackend.FrameType int frameType) {
+  private void increaseFrameTypeCount(final @BitmapAnimationBackend.FrameType int frameType) {
     switch (frameType) {
       case BitmapAnimationBackend.FRAME_TYPE_CACHED:
         mCachedCount++;
@@ -93,7 +93,7 @@ public class DebugBitmapAnimationFrameListener implements BitmapAnimationBackend
     }
   }
 
-  private static String getFrameTypeName(@BitmapAnimationBackend.FrameType int frameType) {
+  private static String getFrameTypeName(final @BitmapAnimationBackend.FrameType int frameType) {
     switch (frameType) {
       case BitmapAnimationBackend.FRAME_TYPE_CACHED:
         return "cached";

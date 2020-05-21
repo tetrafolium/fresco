@@ -21,12 +21,12 @@ public class PoolStats<V> {
 
   Map<Integer, IntPair> mBucketStats;
 
-  public PoolStats(BasePool<V> pool) {
+  public PoolStats(final BasePool<V> pool) {
     mPool = pool;
     mBucketStats = new HashMap<>();
   }
 
-  public void setPool(BasePool<V> pool) {
+  public void setPool(final BasePool<V> pool) {
     mPool = pool;
   }
 

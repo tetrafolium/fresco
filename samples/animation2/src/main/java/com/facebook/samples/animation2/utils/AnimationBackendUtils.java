@@ -49,5 +49,5 @@ public final class AnimationBackendUtils {
         UiThreadImmediateExecutorService.getInstance());
   }
 
-  private AnimationBackendUtils() {}
+  private AnimationBackendUtils() { }
 }

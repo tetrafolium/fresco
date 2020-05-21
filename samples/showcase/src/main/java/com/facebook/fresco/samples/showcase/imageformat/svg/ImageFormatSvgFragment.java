@@ -33,12 +33,12 @@ public class ImageFormatSvgFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_format_svg, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     mSimpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.drawee_view);
     mSimpleDraweeView.setImageURI(sampleUris().createSvgUri());
 
@@ -46,7 +46,7 @@ public class ImageFormatSvgFragment extends BaseShowcaseFragment {
     switchBackground.setOnCheckedChangeListener(
         new CompoundButton.OnCheckedChangeListener() {
           @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+          public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             mSimpleDraweeView
                 .getHierarchy()
                 .setBackgroundImage(isChecked ? new CheckerBoardDrawable(getResources()) : null);
@@ -58,7 +58,7 @@ public class ImageFormatSvgFragment extends BaseShowcaseFragment {
     switchCompat.setOnCheckedChangeListener(
         new CompoundButton.OnCheckedChangeListener() {
           @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+          public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             CustomImageFormatConfigurator.setSvgEnabled(getContext(), isChecked);
             getShowRestartMessageDialog().show(getChildFragmentManager(), null);
           }
@@ -80,7 +80,7 @@ public class ImageFormatSvgFragment extends BaseShowcaseFragment {
   public static class ShowRestartMessageDialog extends DialogFragment {
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
       // Use the Builder class for convenient dialog construction
       AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
       builder
@@ -90,7 +90,7 @@ public class ImageFormatSvgFragment extends BaseShowcaseFragment {
               R.string.message_restart_now,
               new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(final DialogInterface dialog, final int which) {
                   System.exit(0);
                 }
               });

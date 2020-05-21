@@ -34,7 +34,7 @@ public class MultiUri {
   private static final NullPointerException NO_REQUEST_EXCEPTION =
       new NullPointerException("No image request was specified!");
 
-  private MultiUri(Builder builder) {
+  private MultiUri(final Builder builder) {
     mLowResImageRequest = builder.mLowResImageRequest;
     mMultiImageRequests = builder.mMultiImageRequests;
   }
@@ -57,18 +57,18 @@ public class MultiUri {
     private @Nullable ImageRequest mLowResImageRequest;
     private @Nullable ImageRequest[] mMultiImageRequests;
 
-    private Builder() {}
+    private Builder() { }
 
     public MultiUri build() {
       return new MultiUri(this);
     }
 
-    public Builder setLowResImageRequest(@Nullable ImageRequest lowResImageRequest) {
+    public Builder setLowResImageRequest(final @Nullable ImageRequest lowResImageRequest) {
       mLowResImageRequest = lowResImageRequest;
       return this;
     }
 
-    public Builder setImageRequests(@Nullable ImageRequest... multiImageRequests) {
+    public Builder setImageRequests(final @Nullable ImageRequest... multiImageRequests) {
       mMultiImageRequests = multiImageRequests;
       return this;
     }
@@ -79,7 +79,7 @@ public class MultiUri {
       final ImagePipeline imagePipeline,
       final ImageRequest lowResImageRequest,
       final ImageRequest mainImageRequest,
-      Object callerContext) {
+      final Object callerContext) {
     MultiUri multiUri =
         MultiUri.create()
             .setLowResImageRequest(lowResImageRequest)
@@ -134,11 +134,11 @@ public class MultiUri {
   }
 
   public static DataSource<CloseableReference<CloseableImage>> getImageRequestDataSource(
-      ImagePipeline imagePipeline,
-      ImageRequest imageRequest,
-      Object callerContext,
-      @Nullable RequestListener requestListener,
-      @Nullable String uiComponentId) {
+      final ImagePipeline imagePipeline,
+      final ImageRequest imageRequest,
+      final Object callerContext,
+      final @Nullable RequestListener requestListener,
+      final @Nullable String uiComponentId) {
     return imagePipeline.fetchDecodedImage(
         imageRequest,
         callerContext,
@@ -152,8 +152,8 @@ public class MultiUri {
           final ImagePipeline imagePipeline,
           final Object callerContext,
           final @Nullable RequestListener requestListener,
-          ImageRequest[] imageRequests,
-          boolean tryBitmapCacheOnlyFirst,
+          final ImageRequest[] imageRequests,
+          final boolean tryBitmapCacheOnlyFirst,
           final @Nullable String uiComponentId) {
     List<Supplier<DataSource<CloseableReference<CloseableImage>>>> suppliers =
         new ArrayList<>(imageRequests.length * 2);

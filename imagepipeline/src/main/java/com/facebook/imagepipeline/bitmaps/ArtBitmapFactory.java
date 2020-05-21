@@ -26,7 +26,7 @@ public class ArtBitmapFactory extends PlatformBitmapFactory {
   private final CloseableReferenceFactory mCloseableReferenceFactory;
 
   public ArtBitmapFactory(
-      BitmapPool bitmapPool, CloseableReferenceFactory closeableReferenceFactory) {
+      final BitmapPool bitmapPool, final CloseableReferenceFactory closeableReferenceFactory) {
     mBitmapPool = bitmapPool;
     mCloseableReferenceFactory = closeableReferenceFactory;
   }
@@ -43,7 +43,7 @@ public class ArtBitmapFactory extends PlatformBitmapFactory {
    */
   @Override
   public CloseableReference<Bitmap> createBitmapInternal(
-      int width, int height, Bitmap.Config bitmapConfig) {
+      final int width, final int height, final Bitmap.Config bitmapConfig) {
     int sizeInBytes = BitmapUtil.getSizeInByteForBitmap(width, height, bitmapConfig);
     Bitmap bitmap = mBitmapPool.get(sizeInBytes);
     Preconditions.checkArgument(

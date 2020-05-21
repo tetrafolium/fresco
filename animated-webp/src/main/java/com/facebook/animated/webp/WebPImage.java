@@ -34,7 +34,7 @@ public class WebPImage implements AnimatedImage, AnimatedImageDecoder {
   private long mNativeContext;
 
   @DoNotStrip
-  public WebPImage() {}
+  public WebPImage() { }
 
   /**
    * Constructs the image with the native pointer. This is called by native code.
@@ -42,7 +42,7 @@ public class WebPImage implements AnimatedImage, AnimatedImageDecoder {
    * @param nativeContext the native pointer
    */
   @DoNotStrip
-  WebPImage(long nativeContext) {
+  WebPImage(final long nativeContext) {
     mNativeContext = nativeContext;
   }
 
@@ -62,7 +62,7 @@ public class WebPImage implements AnimatedImage, AnimatedImageDecoder {
    *
    * @param source the data to the image (a copy will be made)
    */
-  public static WebPImage createFromByteArray(byte[] source) {
+  public static WebPImage createFromByteArray(final byte[] source) {
     ensure();
     Preconditions.checkNotNull(source);
 
@@ -79,14 +79,14 @@ public class WebPImage implements AnimatedImage, AnimatedImageDecoder {
    *
    * @param byteBuffer the ByteBuffer containing the image
    */
-  public static WebPImage createFromByteBuffer(ByteBuffer byteBuffer) {
+  public static WebPImage createFromByteBuffer(final ByteBuffer byteBuffer) {
     ensure();
     byteBuffer.rewind();
 
     return nativeCreateFromDirectByteBuffer(byteBuffer);
   }
 
-  public static WebPImage createFromNativeMemory(long nativePtr, int sizeInBytes) {
+  public static WebPImage createFromNativeMemory(final long nativePtr, final int sizeInBytes) {
     ensure();
     Preconditions.checkArgument(nativePtr != 0);
     return nativeCreateFromNativeMemory(nativePtr, sizeInBytes);
@@ -94,12 +94,12 @@ public class WebPImage implements AnimatedImage, AnimatedImageDecoder {
 
   @Override
   public AnimatedImage decodeFromNativeMemory(
-      long nativePtr, int sizeInBytes, ImageDecodeOptions options) {
+      final long nativePtr, final int sizeInBytes, final ImageDecodeOptions options) {
     return WebPImage.createFromNativeMemory(nativePtr, sizeInBytes);
   }
 
   @Override
-  public AnimatedImage decodeFromByteBuffer(ByteBuffer byteBuffer, ImageDecodeOptions options) {
+  public AnimatedImage decodeFromByteBuffer(final ByteBuffer byteBuffer, final ImageDecodeOptions options) {
     return WebPImage.createFromByteBuffer(byteBuffer);
   }
 
@@ -134,7 +134,7 @@ public class WebPImage implements AnimatedImage, AnimatedImageDecoder {
   }
 
   @Override
-  public WebPFrame getFrame(int frameNumber) {
+  public WebPFrame getFrame(final int frameNumber) {
     return nativeGetFrame(frameNumber);
   }
 
@@ -149,7 +149,7 @@ public class WebPImage implements AnimatedImage, AnimatedImageDecoder {
   }
 
   @Override
-  public AnimatedDrawableFrameInfo getFrameInfo(int frameNumber) {
+  public AnimatedDrawableFrameInfo getFrameInfo(final int frameNumber) {
     WebPFrame frame = getFrame(frameNumber);
     try {
       return new AnimatedDrawableFrameInfo(

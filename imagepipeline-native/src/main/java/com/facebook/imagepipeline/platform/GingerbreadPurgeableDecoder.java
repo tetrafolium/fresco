@@ -59,7 +59,7 @@ public class GingerbreadPurgeableDecoder extends DalvikPurgeableDecoder {
    */
   @Override
   protected Bitmap decodeByteArrayAsPurgeable(
-      CloseableReference<PooledByteBuffer> bytesRef, BitmapFactory.Options options) {
+      final CloseableReference<PooledByteBuffer> bytesRef, final BitmapFactory.Options options) {
     return decodeFileDescriptorAsPurgeable(bytesRef, bytesRef.get().size(), null, options);
   }
 
@@ -75,13 +75,13 @@ public class GingerbreadPurgeableDecoder extends DalvikPurgeableDecoder {
    */
   @Override
   protected Bitmap decodeJPEGByteArrayAsPurgeable(
-      CloseableReference<PooledByteBuffer> bytesRef, int length, BitmapFactory.Options options) {
+      final CloseableReference<PooledByteBuffer> bytesRef, final int length, final BitmapFactory.Options options) {
     byte[] suffix = endsWithEOI(bytesRef, length) ? null : EOI;
     return decodeFileDescriptorAsPurgeable(bytesRef, length, suffix, options);
   }
 
   private static MemoryFile copyToMemoryFile(
-      CloseableReference<PooledByteBuffer> bytesRef, int inputLength, @Nullable byte[] suffix)
+      final CloseableReference<PooledByteBuffer> bytesRef, final int inputLength, final @Nullable byte[] suffix)
       throws IOException {
     int outputLength = inputLength + (suffix == null ? 0 : suffix.length);
     MemoryFile memoryFile = new MemoryFile(null, outputLength);
@@ -117,7 +117,7 @@ public class GingerbreadPurgeableDecoder extends DalvikPurgeableDecoder {
     return sGetFileDescriptorMethod;
   }
 
-  private FileDescriptor getMemoryFileDescriptor(MemoryFile memoryFile) {
+  private FileDescriptor getMemoryFileDescriptor(final MemoryFile memoryFile) {
     try {
       Object rawFD = getFileDescriptorMethod().invoke(memoryFile);
       return (FileDescriptor) rawFD;
@@ -127,10 +127,10 @@ public class GingerbreadPurgeableDecoder extends DalvikPurgeableDecoder {
   }
 
   private Bitmap decodeFileDescriptorAsPurgeable(
-      CloseableReference<PooledByteBuffer> bytesRef,
-      int inputLength,
-      byte[] suffix,
-      BitmapFactory.Options options) {
+      final CloseableReference<PooledByteBuffer> bytesRef,
+      final int inputLength,
+      final byte[] suffix,
+      final BitmapFactory.Options options) {
     MemoryFile memoryFile = null;
     try {
       memoryFile = copyToMemoryFile(bytesRef, inputLength, suffix);

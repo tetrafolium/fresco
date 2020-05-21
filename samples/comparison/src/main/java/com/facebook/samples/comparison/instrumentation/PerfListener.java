@@ -24,13 +24,13 @@ public class PerfListener {
   }
 
   /** Called whenever image request finishes successfully, that is whenever final image is set. */
-  public void reportSuccess(long waitTime) {
+  public void reportSuccess(final long waitTime) {
     mSumOfWaitTime += waitTime;
     mSuccessfulRequests++;
   }
 
   /** Called whenever image request fails, that is whenever failure drawable is set. */
-  public void reportFailure(long waitTime) {
+  public void reportFailure(final long waitTime) {
     mSumOfWaitTime += waitTime;
     mFailedRequests++;
   }
@@ -39,7 +39,7 @@ public class PerfListener {
    * Called whenever image request is cancelled, that is whenever image view is reused without
    * setting final image first
    */
-  public void reportCancellation(long waitTime) {
+  public void reportCancellation(final long waitTime) {
     mSumOfWaitTime += waitTime;
     mCancelledRequests++;
   }

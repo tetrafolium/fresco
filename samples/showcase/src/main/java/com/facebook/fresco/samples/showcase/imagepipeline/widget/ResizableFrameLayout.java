@@ -34,19 +34,19 @@ public class ResizableFrameLayout extends FrameLayout {
 
   private @Nullable SizeChangedListener mSizeChangedListener;
 
-  public ResizableFrameLayout(Context context) {
+  public ResizableFrameLayout(final Context context) {
     super(context);
   }
 
-  public ResizableFrameLayout(Context context, AttributeSet attrs) {
+  public ResizableFrameLayout(final Context context, final AttributeSet attrs) {
     super(context, attrs);
   }
 
-  public ResizableFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+  public ResizableFrameLayout(final Context context, final AttributeSet attrs, final int defStyleAttr) {
     super(context, attrs, defStyleAttr);
   }
 
-  public void init(View cornerIndicator) {
+  public void init(final View cornerIndicator) {
     mCornerIndicator = cornerIndicator;
 
     mMaximumWidth = getWidth();
@@ -54,17 +54,17 @@ public class ResizableFrameLayout extends FrameLayout {
   }
 
   public void setUpdateMaximumDimensionOnNextSizeChange(
-      boolean updateMaximumDimensionOnNextSizeChange) {
+      final boolean updateMaximumDimensionOnNextSizeChange) {
     mUpdateMaximumDimensionOnNextSizeChange = updateMaximumDimensionOnNextSizeChange;
   }
 
-  public void setSizeChangedListener(@Nullable SizeChangedListener sizeChangedListener) {
+  public void setSizeChangedListener(final @Nullable SizeChangedListener sizeChangedListener) {
     mSizeChangedListener = sizeChangedListener;
   }
 
   @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
   @Override
-  public boolean onInterceptTouchEvent(MotionEvent event) {
+  public boolean onInterceptTouchEvent(final MotionEvent event) {
     if (event.getAction() == MotionEvent.ACTION_DOWN
         && event.getX() >= mCornerIndicator.getX()
         && event.getY() >= mCornerIndicator.getY()) {
@@ -81,7 +81,7 @@ public class ResizableFrameLayout extends FrameLayout {
 
   @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
   @Override
-  public boolean onTouchEvent(MotionEvent event) {
+  public boolean onTouchEvent(final MotionEvent event) {
     if (!mResizing) {
       return false;
     }
@@ -111,7 +111,7 @@ public class ResizableFrameLayout extends FrameLayout {
   }
 
   @Override
-  protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+  protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
     super.onSizeChanged(w, h, oldw, oldh);
     if (mUpdateMaximumDimensionOnNextSizeChange) {
       mMaximumWidth = w;

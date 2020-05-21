@@ -12,12 +12,12 @@ import com.facebook.fresco.vito.view.VitoView;
 
 public class LazyVitoViewImpl2 extends LazyVitoViewImpl {
 
-  public LazyVitoViewImpl2(FrescoVitoProvider.Implementation provider) {
+  public LazyVitoViewImpl2(final FrescoVitoProvider.Implementation provider) {
     super(provider);
   }
 
   @Override
-  protected VitoView.Implementation create(FrescoVitoProvider.Implementation provider) {
+  protected VitoView.Implementation create(final FrescoVitoProvider.Implementation provider) {
     return new VitoViewImpl2(provider.getController(), provider.getImagePipeline());
   }
 }

@@ -22,15 +22,15 @@ import com.facebook.samples.comparison.instrumentation.PerfListener;
 public class FrescoHolder extends BaseViewHolder<InstrumentedDraweeView> {
 
   public FrescoHolder(
-      Context context,
-      View parentView,
-      InstrumentedDraweeView intrumentedDraweeView,
-      PerfListener perfListener) {
+      final Context context,
+      final View parentView,
+      final InstrumentedDraweeView intrumentedDraweeView,
+      final PerfListener perfListener) {
     super(context, parentView, intrumentedDraweeView, perfListener);
   }
 
   @Override
-  protected void onBind(String uriString) {
+  protected void onBind(final String uriString) {
     Uri uri = Uri.parse(uriString);
     ImageRequestBuilder imageRequestBuilder = ImageRequestBuilder.newBuilderWithSource(uri);
     if (UriUtil.isNetworkUri(uri)) {

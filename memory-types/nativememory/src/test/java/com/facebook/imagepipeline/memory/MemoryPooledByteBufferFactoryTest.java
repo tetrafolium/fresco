@@ -156,7 +156,7 @@ public class MemoryPooledByteBufferFactoryTest extends TestUsingNativeMemoryChun
   }
 
   // Assert that the first 'length' bytes of expected are the same as those in 'actual'
-  private static void assertArrayEquals(byte[] expected, byte[] actual, int length) {
+  private static void assertArrayEquals(final byte[] expected, final byte[] actual, final int length) {
     Assert.assertTrue(expected.length >= length);
     Assert.assertTrue(actual.length >= length);
     for (int i = 0; i < length; i++) {
@@ -164,7 +164,7 @@ public class MemoryPooledByteBufferFactoryTest extends TestUsingNativeMemoryChun
     }
   }
 
-  private static byte[] getBytes(MemoryPooledByteBuffer bb) {
+  private static byte[] getBytes(final MemoryPooledByteBuffer bb) {
     byte[] bytes = new byte[bb.size()];
     bb.getCloseableReference().get().read(0, bytes, 0, bytes.length);
     return bytes;

@@ -19,13 +19,13 @@ public class DefaultDebugOverlayFactory implements DebugOverlayFactory {
 
   private final Supplier<Boolean> mDebugOverlayEnabled;
 
-  public DefaultDebugOverlayFactory(Supplier<Boolean> debugOverlayEnabled) {
+  public DefaultDebugOverlayFactory(final Supplier<Boolean> debugOverlayEnabled) {
     mDebugOverlayEnabled = debugOverlayEnabled;
   }
 
   @Override
   @Nullable
-  public Drawable create(FrescoState frescoState) {
+  public Drawable create(final FrescoState frescoState) {
     if (!mDebugOverlayEnabled.get()) {
       return null;
     }

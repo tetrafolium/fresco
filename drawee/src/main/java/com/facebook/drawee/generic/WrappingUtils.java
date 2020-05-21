@@ -63,7 +63,7 @@ public class WrappingUtils {
    */
   @Nullable
   static Drawable maybeWrapWithScaleType(
-      @Nullable Drawable drawable, @Nullable ScalingUtils.ScaleType scaleType) {
+      final @Nullable Drawable drawable, final @Nullable ScalingUtils.ScaleType scaleType) {
     return maybeWrapWithScaleType(drawable, scaleType, null);
   }
 
@@ -78,9 +78,9 @@ public class WrappingUtils {
    */
   @Nullable
   static Drawable maybeWrapWithScaleType(
-      @Nullable Drawable drawable,
-      @Nullable ScalingUtils.ScaleType scaleType,
-      @Nullable PointF focusPoint) {
+      final @Nullable Drawable drawable,
+      final @Nullable ScalingUtils.ScaleType scaleType,
+      final @Nullable PointF focusPoint) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("WrappingUtils#maybeWrapWithScaleType");
     }
@@ -110,7 +110,7 @@ public class WrappingUtils {
    *     place
    */
   @Nullable
-  static Drawable maybeWrapWithMatrix(@Nullable Drawable drawable, @Nullable Matrix matrix) {
+  static Drawable maybeWrapWithMatrix(final @Nullable Drawable drawable, final @Nullable Matrix matrix) {
     if (drawable == null || matrix == null) {
       return drawable;
     }
@@ -119,7 +119,7 @@ public class WrappingUtils {
 
   /** Wraps the parent's child with a ScaleTypeDrawable. */
   static ScaleTypeDrawable wrapChildWithScaleType(
-      DrawableParent parent, ScalingUtils.ScaleType scaleType) {
+      final DrawableParent parent, final ScalingUtils.ScaleType scaleType) {
     Drawable child = parent.setDrawable(sEmptyDrawable);
     child = maybeWrapWithScaleType(child, scaleType);
     parent.setDrawable(child);
@@ -141,7 +141,7 @@ public class WrappingUtils {
    * </ul>
    */
   static void updateOverlayColorRounding(
-      DrawableParent parent, @Nullable RoundingParams roundingParams) {
+      final DrawableParent parent, final @Nullable RoundingParams roundingParams) {
     Drawable child = parent.getDrawable();
     if (roundingParams != null
         && roundingParams.getRoundingMethod() == RoundingParams.RoundingMethod.OVERLAY_COLOR) {
@@ -181,7 +181,7 @@ public class WrappingUtils {
    * </ul>
    */
   static void updateLeafRounding(
-      DrawableParent parent, @Nullable RoundingParams roundingParams, Resources resources) {
+      final DrawableParent parent, final @Nullable RoundingParams roundingParams, final Resources resources) {
     parent = findDrawableParentForLeaf(parent);
     Drawable child = parent.getDrawable();
     if (roundingParams != null
@@ -213,7 +213,7 @@ public class WrappingUtils {
    *     place
    */
   static Drawable maybeWrapWithRoundedOverlayColor(
-      @Nullable Drawable drawable, @Nullable RoundingParams roundingParams) {
+      final @Nullable Drawable drawable, final @Nullable RoundingParams roundingParams) {
     try {
       if (FrescoSystrace.isTracing()) {
         FrescoSystrace.beginSection("WrappingUtils#maybeWrapWithRoundedOverlayColor");
@@ -252,7 +252,7 @@ public class WrappingUtils {
    *     took place on a drawable's child
    */
   static Drawable maybeApplyLeafRounding(
-      @Nullable Drawable drawable, @Nullable RoundingParams roundingParams, Resources resources) {
+      final @Nullable Drawable drawable, final @Nullable RoundingParams roundingParams, final Resources resources) {
     try {
       if (FrescoSystrace.isTracing()) {
         FrescoSystrace.beginSection("WrappingUtils#maybeApplyLeafRounding");
@@ -287,7 +287,7 @@ public class WrappingUtils {
    * @return the rounded drawable, or the original drawable if rounding didn't take place
    */
   private static Drawable applyLeafRounding(
-      Drawable drawable, RoundingParams roundingParams, Resources resources) {
+      final Drawable drawable, final RoundingParams roundingParams, final Resources resources) {
     if (drawable instanceof BitmapDrawable) {
       final BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
       RoundedBitmapDrawable roundedBitmapDrawable =
@@ -314,7 +314,7 @@ public class WrappingUtils {
   }
 
   /** Applies the given rounding params on the specified rounded drawable. */
-  static void applyRoundingParams(Rounded rounded, RoundingParams roundingParams) {
+  static void applyRoundingParams(final Rounded rounded, final RoundingParams roundingParams) {
     rounded.setCircle(roundingParams.getRoundAsCircle());
     rounded.setRadii(roundingParams.getCornersRadii());
     rounded.setBorder(roundingParams.getBorderColor(), roundingParams.getBorderWidth());
@@ -324,7 +324,7 @@ public class WrappingUtils {
   }
 
   /** Resets the rounding params on the specified rounded drawable, so that no rounding occurs. */
-  static void resetRoundingParams(Rounded rounded) {
+  static void resetRoundingParams(final Rounded rounded) {
     rounded.setCircle(false);
     rounded.setRadius(0);
     rounded.setBorder(Color.TRANSPARENT, 0);
@@ -334,7 +334,7 @@ public class WrappingUtils {
   }
 
   /** Finds the immediate parent of a leaf drawable. */
-  static DrawableParent findDrawableParentForLeaf(DrawableParent parent) {
+  static DrawableParent findDrawableParentForLeaf(final DrawableParent parent) {
     while (true) {
       Drawable child = parent.getDrawable();
       if (child == parent || !(child instanceof DrawableParent)) {

@@ -17,7 +17,7 @@ import com.facebook.imageutils.BitmapUtil;
  */
 public final class InPlaceRoundFilter {
 
-  private InPlaceRoundFilter() {}
+  private InPlaceRoundFilter() { }
 
   /**
    * An implementation for rounding a given bitmap to a circular shape. The underlying
@@ -26,7 +26,7 @@ public final class InPlaceRoundFilter {
    *
    * @param bitmap The input {@link Bitmap}
    */
-  public static void roundBitmapInPlace(Bitmap bitmap) {
+  public static void roundBitmapInPlace(final Bitmap bitmap) {
     Preconditions.checkNotNull(bitmap);
     final int w = bitmap.getWidth();
     final int h = bitmap.getHeight();

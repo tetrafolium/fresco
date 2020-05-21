@@ -24,7 +24,7 @@ public class ThumbnailBranchProducer implements Producer<EncodedImage> {
 
   private final ThumbnailProducer<EncodedImage>[] mThumbnailProducers;
 
-  public ThumbnailBranchProducer(ThumbnailProducer<EncodedImage>... thumbnailProducers) {
+  public ThumbnailBranchProducer(final ThumbnailProducer<EncodedImage>... thumbnailProducers) {
     mThumbnailProducers = Preconditions.checkNotNull(thumbnailProducers);
     Preconditions.checkElementIndex(0, mThumbnailProducers.length);
   }
@@ -50,7 +50,7 @@ public class ThumbnailBranchProducer implements Producer<EncodedImage> {
     public ThumbnailConsumer(
         final Consumer<EncodedImage> consumer,
         final ProducerContext producerContext,
-        int producerIndex) {
+        final int producerIndex) {
       super(consumer);
       mProducerContext = producerContext;
       mProducerIndex = producerIndex;
@@ -58,7 +58,7 @@ public class ThumbnailBranchProducer implements Producer<EncodedImage> {
     }
 
     @Override
-    protected void onNewResultImpl(EncodedImage newResult, @Status int status) {
+    protected void onNewResultImpl(final EncodedImage newResult, final @Status int status) {
       if (newResult != null
           && (isNotLast(status)
               || ThumbnailSizeChecker.isImageBigEnough(newResult, mResizeOptions))) {
@@ -77,7 +77,7 @@ public class ThumbnailBranchProducer implements Producer<EncodedImage> {
     }
 
     @Override
-    protected void onFailureImpl(Throwable t) {
+    protected void onFailureImpl(final Throwable t) {
       boolean fallback =
           produceResultsFromThumbnailProducer(mProducerIndex + 1, getConsumer(), mProducerContext);
 
@@ -88,7 +88,7 @@ public class ThumbnailBranchProducer implements Producer<EncodedImage> {
   }
 
   private boolean produceResultsFromThumbnailProducer(
-      int startIndex, Consumer<EncodedImage> consumer, ProducerContext context) {
+      final int startIndex, final Consumer<EncodedImage> consumer, final ProducerContext context) {
     int producerIndex =
         findFirstProducerForSize(startIndex, context.getImageRequest().getResizeOptions());
 
@@ -101,7 +101,7 @@ public class ThumbnailBranchProducer implements Producer<EncodedImage> {
     return true;
   }
 
-  private int findFirstProducerForSize(int startIndex, ResizeOptions resizeOptions) {
+  private int findFirstProducerForSize(final int startIndex, final ResizeOptions resizeOptions) {
     for (int i = startIndex; i < mThumbnailProducers.length; i++) {
       if (mThumbnailProducers[i].canProvideImageForSize(resizeOptions)) {
         return i;

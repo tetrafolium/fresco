@@ -41,13 +41,13 @@ public class RotationOptions {
         DISABLE_ROTATION
       })
   @Retention(RetentionPolicy.SOURCE)
-  private @interface Rotation {}
+  private @interface Rotation { }
 
   @IntDef(
       flag = false,
       value = {NO_ROTATION, ROTATE_90, ROTATE_180, ROTATE_270})
   @Retention(RetentionPolicy.SOURCE)
-  public @interface RotationAngle {}
+  public @interface RotationAngle { }
 
   public static final int NO_ROTATION = 0;
   public static final int ROTATE_90 = 90;
@@ -103,11 +103,11 @@ public class RotationOptions {
    *
    * @param angle the angle to rotate - valid values are 0, 90, 180 and 270
    */
-  public static RotationOptions forceRotation(@RotationAngle int angle) {
+  public static RotationOptions forceRotation(final @RotationAngle int angle) {
     return new RotationOptions(angle, false);
   }
 
-  private RotationOptions(@Rotation int rotation, boolean canDeferUntilRendered) {
+  private RotationOptions(final @Rotation int rotation, final boolean canDeferUntilRendered) {
     this.mRotation = rotation;
     this.mDeferUntilRendered = canDeferUntilRendered;
   }
@@ -143,7 +143,7 @@ public class RotationOptions {
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(final Object other) {
     if (other == this) {
       return true;
     }

@@ -57,11 +57,11 @@ public abstract class BaseImageSpecTest {
   abstract Class getSpecClassName();
 
   public boolean invokeShouldUpdate(
-      Diff<Uri> uri,
-      Diff<MultiUri> multiUriDiff,
-      Diff<ImageOptions> imageOptions,
-      Diff<FrescoContext> frescoContext,
-      Diff<Float> imageAspectRatio)
+      final Diff<Uri> uri,
+      final Diff<MultiUri> multiUriDiff,
+      final Diff<ImageOptions> imageOptions,
+      final Diff<FrescoContext> frescoContext,
+      final Diff<Float> imageAspectRatio)
       throws InvocationTargetException, IllegalAccessException {
     return (boolean)
         mShouldUpdateMethod.invoke(

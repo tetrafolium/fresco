@@ -98,7 +98,7 @@ import javax.annotation.Nullable;
  * @since 2.0 (imported from Google Collections Library)
  */
 public final class Preconditions {
-  private Preconditions() {}
+  private Preconditions() { }
 
   /**
    * Ensures the truth of an expression involving one or more parameters to the calling method.
@@ -106,7 +106,7 @@ public final class Preconditions {
    * @param expression a boolean expression
    * @throws IllegalArgumentException if {@code expression} is false
    */
-  public static void checkArgument(boolean expression) {
+  public static void checkArgument(final boolean expression) {
     if (!expression) {
       throw new IllegalArgumentException();
     }
@@ -120,7 +120,7 @@ public final class Preconditions {
    *     string using {@link String#valueOf(Object)}
    * @throws IllegalArgumentException if {@code expression} is false
    */
-  public static void checkArgument(boolean expression, @Nullable Object errorMessage) {
+  public static void checkArgument(final boolean expression, final @Nullable Object errorMessage) {
     if (!expression) {
       throw new IllegalArgumentException(String.valueOf(errorMessage));
     }
@@ -142,9 +142,9 @@ public final class Preconditions {
    *     {@code errorMessageArgs} is null (don't let this happen)
    */
   public static void checkArgument(
-      boolean expression,
-      @Nullable String errorMessageTemplate,
-      @Nullable Object... errorMessageArgs) {
+      final boolean expression,
+      final @Nullable String errorMessageTemplate,
+      final @Nullable Object... errorMessageArgs) {
     if (!expression) {
       throw new IllegalArgumentException(format(errorMessageTemplate, errorMessageArgs));
     }
@@ -157,7 +157,7 @@ public final class Preconditions {
    * @param expression a boolean expression
    * @throws IllegalStateException if {@code expression} is false
    */
-  public static void checkState(boolean expression) {
+  public static void checkState(final boolean expression) {
     if (!expression) {
       throw new IllegalStateException();
     }
@@ -172,7 +172,7 @@ public final class Preconditions {
    *     string using {@link String#valueOf(Object)}
    * @throws IllegalStateException if {@code expression} is false
    */
-  public static void checkState(boolean expression, @Nullable Object errorMessage) {
+  public static void checkState(final boolean expression, final @Nullable Object errorMessage) {
     if (!expression) {
       throw new IllegalStateException(String.valueOf(errorMessage));
     }
@@ -195,9 +195,9 @@ public final class Preconditions {
    *     {@code errorMessageArgs} is null (don't let this happen)
    */
   public static void checkState(
-      boolean expression,
-      @Nullable String errorMessageTemplate,
-      @Nullable Object... errorMessageArgs) {
+      final boolean expression,
+      final @Nullable String errorMessageTemplate,
+      final @Nullable Object... errorMessageArgs) {
     if (!expression) {
       throw new IllegalStateException(format(errorMessageTemplate, errorMessageArgs));
     }
@@ -210,7 +210,7 @@ public final class Preconditions {
    * @return the non-null reference that was validated
    * @throws NullPointerException if {@code reference} is null
    */
-  public static <T> T checkNotNull(T reference) {
+  public static <T> T checkNotNull(final T reference) {
     if (reference == null) {
       throw new NullPointerException();
     }
@@ -226,7 +226,7 @@ public final class Preconditions {
    * @return the non-null reference that was validated
    * @throws NullPointerException if {@code reference} is null
    */
-  public static <T> T checkNotNull(T reference, @Nullable Object errorMessage) {
+  public static <T> T checkNotNull(final T reference, final @Nullable Object errorMessage) {
     if (reference == null) {
       throw new NullPointerException(String.valueOf(errorMessage));
     }
@@ -248,7 +248,7 @@ public final class Preconditions {
    * @throws NullPointerException if {@code reference} is null
    */
   public static <T> T checkNotNull(
-      T reference, @Nullable String errorMessageTemplate, @Nullable Object... errorMessageArgs) {
+      final T reference, final @Nullable String errorMessageTemplate, final @Nullable Object... errorMessageArgs) {
     if (reference == null) {
       // If either of these parameters is null, the right thing happens anyway
       throw new NullPointerException(format(errorMessageTemplate, errorMessageArgs));
@@ -292,7 +292,7 @@ public final class Preconditions {
    * @throws IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
    * @throws IllegalArgumentException if {@code size} is negative
    */
-  public static int checkElementIndex(int index, int size) {
+  public static int checkElementIndex(final int index, final int size) {
     return checkElementIndex(index, size, "index");
   }
 
@@ -307,7 +307,7 @@ public final class Preconditions {
    * @throws IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
    * @throws IllegalArgumentException if {@code size} is negative
    */
-  public static int checkElementIndex(int index, int size, @Nullable String desc) {
+  public static int checkElementIndex(final int index, final int size, final @Nullable String desc) {
     // Carefully optimized for execution by hotspot (explanatory comment above)
     if (index < 0 || index >= size) {
       throw new IndexOutOfBoundsException(badElementIndex(index, size, desc));
@@ -315,7 +315,7 @@ public final class Preconditions {
     return index;
   }
 
-  private static String badElementIndex(int index, int size, @Nullable String desc) {
+  private static String badElementIndex(final int index, final int size, final @Nullable String desc) {
     if (index < 0) {
       return format("%s (%s) must not be negative", desc, index);
     } else if (size < 0) {
@@ -335,7 +335,7 @@ public final class Preconditions {
    * @throws IndexOutOfBoundsException if {@code index} is negative or is greater than {@code size}
    * @throws IllegalArgumentException if {@code size} is negative
    */
-  public static int checkPositionIndex(int index, int size) {
+  public static int checkPositionIndex(final int index, final int size) {
     return checkPositionIndex(index, size, "index");
   }
 
@@ -350,7 +350,7 @@ public final class Preconditions {
    * @throws IndexOutOfBoundsException if {@code index} is negative or is greater than {@code size}
    * @throws IllegalArgumentException if {@code size} is negative
    */
-  public static int checkPositionIndex(int index, int size, @Nullable String desc) {
+  public static int checkPositionIndex(final int index, final int size, final @Nullable String desc) {
     // Carefully optimized for execution by hotspot (explanatory comment above)
     if (index < 0 || index > size) {
       throw new IndexOutOfBoundsException(badPositionIndex(index, size, desc));
@@ -358,7 +358,7 @@ public final class Preconditions {
     return index;
   }
 
-  private static String badPositionIndex(int index, int size, @Nullable String desc) {
+  private static String badPositionIndex(final int index, final int size, final @Nullable String desc) {
     if (index < 0) {
       return format("%s (%s) must not be negative", desc, index);
     } else if (size < 0) {
@@ -380,14 +380,14 @@ public final class Preconditions {
    *     or if {@code end} is less than {@code start}
    * @throws IllegalArgumentException if {@code size} is negative
    */
-  public static void checkPositionIndexes(int start, int end, int size) {
+  public static void checkPositionIndexes(final int start, final int end, final int size) {
     // Carefully optimized for execution by hotspot (explanatory comment above)
     if (start < 0 || end < start || end > size) {
       throw new IndexOutOfBoundsException(badPositionIndexes(start, end, size));
     }
   }
 
-  private static String badPositionIndexes(int start, int end, int size) {
+  private static String badPositionIndexes(final int start, final int end, final int size) {
     if (start < 0 || start > size) {
       return badPositionIndex(start, size, "start index");
     }
@@ -409,7 +409,7 @@ public final class Preconditions {
    *     to strings using {@link String#valueOf(Object)}. Arguments can be null.
    */
   // Note that this is somewhat-improperly used from Verify.java as well.
-  static String format(@Nullable String template, @Nullable Object... args) {
+  static String format(final @Nullable String template, final @Nullable Object... args) {
     template = String.valueOf(template); // null -> "null"
 
     // start substituting the arguments into the '%s' placeholders

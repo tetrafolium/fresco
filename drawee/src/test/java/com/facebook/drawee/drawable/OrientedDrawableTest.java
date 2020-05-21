@@ -155,7 +155,7 @@ public class OrientedDrawableTest {
     verifySetBounds(expectedMatrix);
   }
 
-  private void verifySetBounds(Matrix rotationMatrix) {
+  private void verifySetBounds(final Matrix rotationMatrix) {
     RectF expectedBounds = new RectF(mBounds);
     Matrix inverse = new Matrix();
     rotationMatrix.invert(inverse);

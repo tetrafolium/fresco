@@ -42,26 +42,26 @@ public class VitoViewRecyclerFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_drawee_recycler, container, false);
   }
 
   @Override
-  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
     final RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
     recyclerView.addOnLayoutChangeListener(
         new View.OnLayoutChangeListener() {
           @Override
           public void onLayoutChange(
-              View view,
-              int left,
-              int top,
-              int right,
-              int bottom,
-              int oldLeft,
-              int oldTop,
-              int oldRight,
-              int oldBottom) {
+              final View view,
+              final int left,
+              final int top,
+              final int right,
+              final int bottom,
+              final int oldLeft,
+              final int oldTop,
+              final int oldRight,
+              final int oldBottom) {
             final int imageSize = (right - left) / SPAN_COUNT;
             mResizeOptions = new ResizeOptions(imageSize, imageSize);
             mOptionsBuilder = mOptionsBuilder.resize(mResizeOptions);
@@ -81,7 +81,7 @@ public class VitoViewRecyclerFragment extends BaseShowcaseFragment {
         sampleUris(),
         new Function1<List<Uri>, Unit>() {
           @Override
-          public Unit invoke(List<Uri> uris) {
+          public Unit invoke(final List<Uri> uris) {
             adapter.setData(uris);
             return null;
           }
@@ -99,13 +99,13 @@ public class VitoViewRecyclerFragment extends BaseShowcaseFragment {
 
     private List<Uri> mUris;
 
-    SimpleAdapter(List<Uri> uris) {
+    SimpleAdapter(final List<Uri> uris) {
       mUris = uris;
       setHasStableIds(true);
     }
 
     @Override
-    public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SimpleViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
       View itemView =
           LayoutInflater.from(parent.getContext())
               .inflate(R.layout.vito_recycler_item, parent, false);
@@ -113,7 +113,7 @@ public class VitoViewRecyclerFragment extends BaseShowcaseFragment {
     }
 
     @Override
-    public void onBindViewHolder(SimpleViewHolder holder, int position) {
+    public void onBindViewHolder(final SimpleViewHolder holder, final int position) {
       final ImageOptions imageOptions =
           mOptionsBuilder.placeholder(new ColorDrawable(mRandom.nextInt())).build();
       VitoView.show(mUris.get(position), imageOptions, holder.mView);
@@ -125,11 +125,11 @@ public class VitoViewRecyclerFragment extends BaseShowcaseFragment {
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(final int position) {
       return mUris.get(position).hashCode();
     }
 
-    public void setData(List<Uri> uris) {
+    public void setData(final List<Uri> uris) {
       mUris = uris;
       notifyDataSetChanged();
     }
@@ -139,7 +139,7 @@ public class VitoViewRecyclerFragment extends BaseShowcaseFragment {
 
     private final View mView;
 
-    SimpleViewHolder(View itemView) {
+    SimpleViewHolder(final View itemView) {
       super(itemView);
       mView = itemView.findViewById(R.id.view);
     }

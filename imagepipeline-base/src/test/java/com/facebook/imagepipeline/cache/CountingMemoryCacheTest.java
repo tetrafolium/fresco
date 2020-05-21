@@ -77,7 +77,7 @@ public class CountingMemoryCacheTest {
       new ResourceReleaser<Bitmap>() {
 
         @Override
-        public void release(Bitmap value) {}
+        public void release(final Bitmap value) { }
       };
 
   @Before
@@ -88,7 +88,7 @@ public class CountingMemoryCacheTest {
     mValueDescriptor =
         new ValueDescriptor<Integer>() {
           @Override
-          public int getSizeInBytes(Integer value) {
+          public int getSizeInBytes(final Integer value) {
             return value;
           }
         };
@@ -533,7 +533,7 @@ public class CountingMemoryCacheTest {
         mCache.removeAll(
             new Predicate<String>() {
               @Override
-              public boolean apply(String key) {
+              public boolean apply(final String key) {
                 return key.equals(KEYS[2]) || key.equals(KEYS[3]);
               }
             });
@@ -698,11 +698,11 @@ public class CountingMemoryCacheTest {
     assertFalse(mCache.contains(KEYS[0]));
   }
 
-  private CloseableReference<Integer> newReference(int size) {
+  private CloseableReference<Integer> newReference(final int size) {
     return CloseableReference.of(size, mReleaser);
   }
 
-  private void assertSharedWithCount(String key, Integer value, int count) {
+  private void assertSharedWithCount(final String key, final Integer value, final int count) {
     assertTrue("key not found in the cache", mCache.mCachedEntries.contains(key));
     assertFalse("key found in the exclusives", mCache.mExclusiveEntries.contains(key));
     CountingMemoryCache.Entry<String, Integer> entry = mCache.mCachedEntries.get(key);
@@ -713,7 +713,7 @@ public class CountingMemoryCacheTest {
     assertFalse("entry is an orphan", entry.isOrphan);
   }
 
-  private void assertExclusivelyOwned(String key, Integer value) {
+  private void assertExclusivelyOwned(final String key, final Integer value) {
     assertTrue("key not found in the cache", mCache.mCachedEntries.contains(key));
     assertTrue("key not found in the exclusives", mCache.mExclusiveEntries.contains(key));
     CountingMemoryCache.Entry<String, Integer> entry = mCache.mCachedEntries.get(key);
@@ -724,24 +724,24 @@ public class CountingMemoryCacheTest {
     assertFalse("entry is an orphan", entry.isOrphan);
   }
 
-  private void assertNotCached(String key, Integer value) {
+  private void assertNotCached(final String key, final Integer value) {
     assertFalse("key found in the cache", mCache.mCachedEntries.contains(key));
     assertFalse("key found in the exclusives", mCache.mExclusiveEntries.contains(key));
   }
 
-  private void assertOrphanWithCount(CountingMemoryCache.Entry<String, Integer> entry, int count) {
+  private void assertOrphanWithCount(final CountingMemoryCache.Entry<String, Integer> entry, final int count) {
     assertNotSame("entry found in the exclusives", entry, mCache.mCachedEntries.get(entry.key));
     assertNotSame("entry found in the cache", entry, mCache.mExclusiveEntries.get(entry.key));
     assertTrue("entry is not an orphan", entry.isOrphan);
     assertEquals("client count mismatch", count, entry.clientCount);
   }
 
-  private void assertTotalSize(int count, int bytes) {
+  private void assertTotalSize(final int count, final int bytes) {
     assertEquals("total cache count mismatch", count, mCache.getCount());
     assertEquals("total cache size mismatch", bytes, mCache.getSizeInBytes());
   }
 
-  private void assertExclusivelyOwnedSize(int count, int bytes) {
+  private void assertExclusivelyOwnedSize(final int count, final int bytes) {
     assertEquals("total exclusives count mismatch", count, mCache.getEvictionQueueCount());
     assertEquals("total exclusives size mismatch", bytes, mCache.getEvictionQueueSizeInBytes());
   }

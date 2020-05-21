@@ -50,7 +50,7 @@ public class ImageRequestBuilder {
    * @param uri the uri to fetch
    * @return a new request builder instance
    */
-  public static ImageRequestBuilder newBuilderWithSource(Uri uri) {
+  public static ImageRequestBuilder newBuilderWithSource(final Uri uri) {
     return new ImageRequestBuilder().setSource(uri);
   }
 
@@ -71,7 +71,7 @@ public class ImageRequestBuilder {
    * @param resId local image resource id.
    * @return a new request builder instance.
    */
-  public static ImageRequestBuilder newBuilderWithResourceId(int resId) {
+  public static ImageRequestBuilder newBuilderWithResourceId(final int resId) {
     return newBuilderWithSource(UriUtil.getUriForResourceId(resId));
   }
 
@@ -81,7 +81,7 @@ public class ImageRequestBuilder {
    * @param imageRequest the ImageRequest from where to copy the parameters to the builder.
    * @return a new request builder instance
    */
-  public static ImageRequestBuilder fromRequest(ImageRequest imageRequest) {
+  public static ImageRequestBuilder fromRequest(final ImageRequest imageRequest) {
     return ImageRequestBuilder.newBuilderWithSource(imageRequest.getSourceUri())
         .setImageDecodeOptions(imageRequest.getImageDecodeOptions())
         .setBytesRange(imageRequest.getBytesRange())
@@ -97,7 +97,7 @@ public class ImageRequestBuilder {
         .setShouldDecodePrefetches(imageRequest.shouldDecodePrefetches());
   }
 
-  private ImageRequestBuilder() {}
+  private ImageRequestBuilder() { }
 
   /**
    * Sets the source uri (both network and local uris are supported). Note: this will enable disk
@@ -106,7 +106,7 @@ public class ImageRequestBuilder {
    * @param uri the uri to fetch the image from
    * @return the updated builder instance
    */
-  public ImageRequestBuilder setSource(Uri uri) {
+  public ImageRequestBuilder setSource(final Uri uri) {
     Preconditions.checkNotNull(uri);
 
     mSourceUri = uri;
@@ -124,7 +124,7 @@ public class ImageRequestBuilder {
    * @param requestLevel the lowest request level that is allowed
    * @return the updated builder instance
    */
-  public ImageRequestBuilder setLowestPermittedRequestLevel(RequestLevel requestLevel) {
+  public ImageRequestBuilder setLowestPermittedRequestLevel(final RequestLevel requestLevel) {
     mLowestPermittedRequestLevel = requestLevel;
     return this;
   }
@@ -142,7 +142,7 @@ public class ImageRequestBuilder {
    * @deprecated Use #setRotationOptions(RotationOptions)
    */
   @Deprecated
-  public ImageRequestBuilder setAutoRotateEnabled(boolean enabled) {
+  public ImageRequestBuilder setAutoRotateEnabled(final boolean enabled) {
     if (enabled) {
       return setRotationOptions(RotationOptions.autoRotate());
     } else {
@@ -156,7 +156,7 @@ public class ImageRequestBuilder {
    * @param resizeOptions resize options
    * @return the modified builder instance
    */
-  public ImageRequestBuilder setResizeOptions(@Nullable ResizeOptions resizeOptions) {
+  public ImageRequestBuilder setResizeOptions(final @Nullable ResizeOptions resizeOptions) {
     mResizeOptions = resizeOptions;
     return this;
   }
@@ -175,7 +175,7 @@ public class ImageRequestBuilder {
    * @param rotationOptions rotation options
    * @return the modified builder instance
    */
-  public ImageRequestBuilder setRotationOptions(@Nullable RotationOptions rotationOptions) {
+  public ImageRequestBuilder setRotationOptions(final @Nullable RotationOptions rotationOptions) {
     mRotationOptions = rotationOptions;
     return this;
   }
@@ -197,7 +197,7 @@ public class ImageRequestBuilder {
    * @param bytesRange the range of bytes
    * @return the modified builder instance
    */
-  public ImageRequestBuilder setBytesRange(@Nullable BytesRange bytesRange) {
+  public ImageRequestBuilder setBytesRange(final @Nullable BytesRange bytesRange) {
     mBytesRange = bytesRange;
     return this;
   }
@@ -208,7 +208,7 @@ public class ImageRequestBuilder {
     return mBytesRange;
   }
 
-  public ImageRequestBuilder setImageDecodeOptions(ImageDecodeOptions imageDecodeOptions) {
+  public ImageRequestBuilder setImageDecodeOptions(final ImageDecodeOptions imageDecodeOptions) {
     mImageDecodeOptions = imageDecodeOptions;
     return this;
   }
@@ -224,7 +224,7 @@ public class ImageRequestBuilder {
    * @param cacheChoice the cache choice to set
    * @return the modified builder instance
    */
-  public ImageRequestBuilder setCacheChoice(ImageRequest.CacheChoice cacheChoice) {
+  public ImageRequestBuilder setCacheChoice(final ImageRequest.CacheChoice cacheChoice) {
     mCacheChoice = cacheChoice;
     return this;
   }
@@ -240,7 +240,7 @@ public class ImageRequestBuilder {
    * @param enabled
    * @return the modified builder instance
    */
-  public ImageRequestBuilder setProgressiveRenderingEnabled(boolean enabled) {
+  public ImageRequestBuilder setProgressiveRenderingEnabled(final boolean enabled) {
     mProgressiveRenderingEnabled = enabled;
     return this;
   }
@@ -256,7 +256,7 @@ public class ImageRequestBuilder {
    * @param enabled
    * @return the modified builder instance
    */
-  public ImageRequestBuilder setLocalThumbnailPreviewsEnabled(boolean enabled) {
+  public ImageRequestBuilder setLocalThumbnailPreviewsEnabled(final boolean enabled) {
     mLocalThumbnailPreviewsEnabled = enabled;
     return this;
   }
@@ -294,7 +294,7 @@ public class ImageRequestBuilder {
    * @param requestPriority
    * @return the modified builder instance
    */
-  public ImageRequestBuilder setRequestPriority(Priority requestPriority) {
+  public ImageRequestBuilder setRequestPriority(final Priority requestPriority) {
     mRequestPriority = requestPriority;
     return this;
   }
@@ -310,7 +310,7 @@ public class ImageRequestBuilder {
    * @param postprocessor postprocessor to postprocess the output bitmap with.
    * @return the modified builder instance
    */
-  public ImageRequestBuilder setPostprocessor(@Nullable Postprocessor postprocessor) {
+  public ImageRequestBuilder setPostprocessor(final @Nullable Postprocessor postprocessor) {
     mPostprocessor = postprocessor;
     return this;
   }
@@ -327,7 +327,7 @@ public class ImageRequestBuilder {
    *     {@link com.facebook.imagepipeline.core.ImagePipelineConfig}
    * @return the modified builder instance
    */
-  public ImageRequestBuilder setRequestListener(RequestListener requestListener) {
+  public ImageRequestBuilder setRequestListener(final RequestListener requestListener) {
     mRequestListener = requestListener;
     return this;
   }
@@ -351,12 +351,12 @@ public class ImageRequestBuilder {
     return mDecodePrefetches;
   }
 
-  public ImageRequestBuilder setShouldDecodePrefetches(@Nullable Boolean shouldDecodePrefetches) {
+  public ImageRequestBuilder setShouldDecodePrefetches(final @Nullable Boolean shouldDecodePrefetches) {
     mDecodePrefetches = shouldDecodePrefetches;
     return this;
   }
 
-  public ImageRequestBuilder setResizingAllowedOverride(@Nullable Boolean resizingAllowedOverride) {
+  public ImageRequestBuilder setResizingAllowedOverride(final @Nullable Boolean resizingAllowedOverride) {
     mResizingAllowedOverride = resizingAllowedOverride;
     return this;
   }
@@ -367,7 +367,7 @@ public class ImageRequestBuilder {
 
   /** An exception class for builder methods. */
   public static class BuilderException extends RuntimeException {
-    public BuilderException(String message) {
+    public BuilderException(final String message) {
       super("Invalid request builder: " + message);
     }
   }

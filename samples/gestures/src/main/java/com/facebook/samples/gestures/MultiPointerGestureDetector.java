@@ -57,7 +57,7 @@ public class MultiPointerGestureDetector {
    *
    * @param listener listener to set
    */
-  public void setListener(Listener listener) {
+  public void setListener(final Listener listener) {
     mListener = listener;
   }
 
@@ -105,7 +105,7 @@ public class MultiPointerGestureDetector {
    *
    * @return index of the specified pointer or -1 if not found (i.e. not enough pointers are down)
    */
-  private int getPressedPointerIndex(MotionEvent event, int i) {
+  private int getPressedPointerIndex(final MotionEvent event, final int i) {
     final int count = event.getPointerCount();
     final int action = event.getActionMasked();
     final int index = event.getActionIndex();
@@ -118,7 +118,7 @@ public class MultiPointerGestureDetector {
   }
 
   /** Gets the number of pressed pointers (fingers down). */
-  private static int getPressedPointerCount(MotionEvent event) {
+  private static int getPressedPointerCount(final MotionEvent event) {
     int count = event.getPointerCount();
     int action = event.getActionMasked();
     if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_POINTER_UP) {
@@ -127,7 +127,7 @@ public class MultiPointerGestureDetector {
     return count;
   }
 
-  private void updatePointersOnTap(MotionEvent event) {
+  private void updatePointersOnTap(final MotionEvent event) {
     mPointerCount = 0;
     for (int i = 0; i < MAX_POINTERS; i++) {
       int index = getPressedPointerIndex(event, i);
@@ -142,7 +142,7 @@ public class MultiPointerGestureDetector {
     }
   }
 
-  private void updatePointersOnMove(MotionEvent event) {
+  private void updatePointersOnMove(final MotionEvent event) {
     for (int i = 0; i < MAX_POINTERS; i++) {
       int index = event.findPointerIndex(mId[i]);
       if (index != -1) {

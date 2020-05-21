@@ -96,12 +96,12 @@ public class PipelineDraweeController
   private DebugOverlayImageOriginListener mDebugOverlayImageOriginListener;
 
   public PipelineDraweeController(
-      Resources resources,
-      DeferredReleaser deferredReleaser,
-      DrawableFactory animatedDrawableFactory,
-      Executor uiThreadExecutor,
-      @Nullable MemoryCache<CacheKey, CloseableImage> memoryCache,
-      @Nullable ImmutableList<DrawableFactory> globalDrawableFactories) {
+      final Resources resources,
+      final DeferredReleaser deferredReleaser,
+      final DrawableFactory animatedDrawableFactory,
+      final Executor uiThreadExecutor,
+      final @Nullable MemoryCache<CacheKey, CloseableImage> memoryCache,
+      final @Nullable ImmutableList<DrawableFactory> globalDrawableFactories) {
     super(deferredReleaser, uiThreadExecutor, null, null);
     mResources = resources;
     mDefaultDrawableFactory = new DefaultDrawableFactory(resources, animatedDrawableFactory);
@@ -119,12 +119,12 @@ public class PipelineDraweeController
    * @param callerContext tag and context for this controller
    */
   public void initialize(
-      Supplier<DataSource<CloseableReference<CloseableImage>>> dataSourceSupplier,
-      String id,
-      CacheKey cacheKey,
-      Object callerContext,
-      @Nullable ImmutableList<DrawableFactory> customDrawableFactories,
-      @Nullable ImageOriginListener imageOriginListener) {
+      final Supplier<DataSource<CloseableReference<CloseableImage>>> dataSourceSupplier,
+      final String id,
+      final CacheKey cacheKey,
+      final Object callerContext,
+      final @Nullable ImmutableList<DrawableFactory> customDrawableFactories,
+      final @Nullable ImageOriginListener imageOriginListener) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("PipelineDraweeController#initialize");
     }
@@ -141,14 +141,14 @@ public class PipelineDraweeController
   }
 
   protected synchronized void initializePerformanceMonitoring(
-      @Nullable ImagePerfDataListener imagePerfDataListener,
-      AbstractDraweeControllerBuilder<
+      final @Nullable ImagePerfDataListener imagePerfDataListener,
+      final AbstractDraweeControllerBuilder<
               PipelineDraweeControllerBuilder,
               ImageRequest,
               CloseableReference<CloseableImage>,
               ImageInfo>
           builder,
-      Supplier<Boolean> asyncLogging) {
+      final Supplier<Boolean> asyncLogging) {
     if (mImagePerfMonitor != null) {
       mImagePerfMonitor.reset();
     }
@@ -162,30 +162,30 @@ public class PipelineDraweeController
     }
   }
 
-  public void setDrawDebugOverlay(boolean drawDebugOverlay) {
+  public void setDrawDebugOverlay(final boolean drawDebugOverlay) {
     mDrawDebugOverlay = drawDebugOverlay;
   }
 
   public void setCustomDrawableFactories(
-      @Nullable ImmutableList<DrawableFactory> customDrawableFactories) {
+      final @Nullable ImmutableList<DrawableFactory> customDrawableFactories) {
     mCustomDrawableFactories = customDrawableFactories;
   }
 
-  public synchronized void addRequestListener(RequestListener requestListener) {
+  public synchronized void addRequestListener(final RequestListener requestListener) {
     if (mRequestListeners == null) {
       mRequestListeners = new HashSet<>();
     }
     mRequestListeners.add(requestListener);
   }
 
-  public synchronized void removeRequestListener(RequestListener requestListener) {
+  public synchronized void removeRequestListener(final RequestListener requestListener) {
     if (mRequestListeners == null) {
       return;
     }
     mRequestListeners.remove(requestListener);
   }
 
-  public synchronized void addImageOriginListener(ImageOriginListener imageOriginListener) {
+  public synchronized void addImageOriginListener(final ImageOriginListener imageOriginListener) {
     if (mImageOriginListener instanceof ForwardingImageOriginListener) {
       ((ForwardingImageOriginListener) mImageOriginListener)
           .addImageOriginListener(imageOriginListener);
@@ -197,7 +197,7 @@ public class PipelineDraweeController
     }
   }
 
-  public synchronized void removeImageOriginListener(ImageOriginListener imageOriginListener) {
+  public synchronized void removeImageOriginListener(final ImageOriginListener imageOriginListener) {
     if (mImageOriginListener instanceof ForwardingImageOriginListener) {
       ((ForwardingImageOriginListener) mImageOriginListener)
           .removeImageOriginListener(imageOriginListener);
@@ -214,7 +214,7 @@ public class PipelineDraweeController
     }
   }
 
-  private void init(Supplier<DataSource<CloseableReference<CloseableImage>>> dataSourceSupplier) {
+  private void init(final Supplier<DataSource<CloseableReference<CloseableImage>>> dataSourceSupplier) {
     mDataSourceSupplier = dataSourceSupplier;
 
     maybeUpdateDebugOverlay(null);
@@ -260,7 +260,7 @@ public class PipelineDraweeController
   }
 
   @Override
-  protected Drawable createDrawable(CloseableReference<CloseableImage> image) {
+  protected Drawable createDrawable(final CloseableReference<CloseableImage> image) {
     try {
       if (FrescoSystrace.isTracing()) {
         FrescoSystrace.beginSection("PipelineDraweeController#createDrawable");
@@ -294,7 +294,7 @@ public class PipelineDraweeController
   }
 
   private @Nullable Drawable maybeCreateDrawableFromFactories(
-      @Nullable ImmutableList<DrawableFactory> drawableFactories, CloseableImage closeableImage) {
+      final @Nullable ImmutableList<DrawableFactory> drawableFactories, final CloseableImage closeableImage) {
     if (drawableFactories == null) {
       return null;
     }
@@ -310,20 +310,20 @@ public class PipelineDraweeController
   }
 
   @Override
-  public void setHierarchy(@Nullable DraweeHierarchy hierarchy) {
+  public void setHierarchy(final @Nullable DraweeHierarchy hierarchy) {
     super.setHierarchy(hierarchy);
     maybeUpdateDebugOverlay(null);
   }
 
   @Override
-  public boolean isSameImageRequest(@Nullable DraweeController other) {
+  public boolean isSameImageRequest(final @Nullable DraweeController other) {
     if (mCacheKey != null && other instanceof PipelineDraweeController) {
       return Objects.equal(mCacheKey, ((PipelineDraweeController) other).getCacheKey());
     }
     return false;
   }
 
-  private void maybeUpdateDebugOverlay(@Nullable CloseableImage image) {
+  private void maybeUpdateDebugOverlay(final @Nullable CloseableImage image) {
     if (!mDrawDebugOverlay) {
       return;
     }
@@ -351,7 +351,7 @@ public class PipelineDraweeController
    * can override this method (and call <code>super</code>) to provide additional debug information.
    */
   protected void updateDebugOverlay(
-      @Nullable CloseableImage image, DebugControllerOverlayDrawable debugOverlay) {
+      final @Nullable CloseableImage image, final DebugControllerOverlayDrawable debugOverlay) {
     debugOverlay.setControllerId(getId());
 
     final DraweeHierarchy draweeHierarchy = getHierarchy();
@@ -378,23 +378,23 @@ public class PipelineDraweeController
   }
 
   @Override
-  protected ImageInfo getImageInfo(CloseableReference<CloseableImage> image) {
+  protected ImageInfo getImageInfo(final CloseableReference<CloseableImage> image) {
     Preconditions.checkState(CloseableReference.isValid(image));
     return image.get();
   }
 
   @Override
-  protected int getImageHash(@Nullable CloseableReference<CloseableImage> image) {
+  protected int getImageHash(final @Nullable CloseableReference<CloseableImage> image) {
     return (image != null) ? image.getValueHash() : 0;
   }
 
   @Override
-  protected void releaseImage(@Nullable CloseableReference<CloseableImage> image) {
+  protected void releaseImage(final @Nullable CloseableReference<CloseableImage> image) {
     CloseableReference.closeSafely(image);
   }
 
   @Override
-  protected void releaseDrawable(@Nullable Drawable drawable) {
+  protected void releaseDrawable(final @Nullable Drawable drawable) {
     if (drawable instanceof DrawableWithCaches) {
       ((DrawableWithCaches) drawable).dropCaches();
     }
@@ -425,7 +425,7 @@ public class PipelineDraweeController
 
   @Override
   protected void onImageLoadedFromCacheImmediately(
-      String id, CloseableReference<CloseableImage> cachedImage) {
+      final String id, final CloseableReference<CloseableImage> cachedImage) {
     super.onImageLoadedFromCacheImmediately(id, cachedImage);
     synchronized (this) {
       if (mImageOriginListener != null) {
@@ -448,7 +448,7 @@ public class PipelineDraweeController
   }
 
   @Override
-  public @Nullable Map<String, Object> obtainExtrasFromImage(ImageInfo info) {
+  public @Nullable Map<String, Object> obtainExtrasFromImage(final ImageInfo info) {
     return info.getAsExtras();
   }
 }

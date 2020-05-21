@@ -21,11 +21,11 @@ public class BoundedLinkedHashSet<E> {
     mMaxSize = maxSize;
   }
 
-  public synchronized boolean contains(E o) {
+  public synchronized boolean contains(final E o) {
     return mLinkedHashSet.contains(o);
   }
 
-  public synchronized boolean add(E key) {
+  public synchronized boolean add(final E key) {
     if (mLinkedHashSet.size() == mMaxSize) {
       mLinkedHashSet.remove(mLinkedHashSet.iterator().next());
     }

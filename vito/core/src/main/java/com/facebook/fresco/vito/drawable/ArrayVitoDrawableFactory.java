@@ -16,13 +16,13 @@ public class ArrayVitoDrawableFactory implements VitoDrawableFactory {
 
   private final VitoDrawableFactory[] mDrawableFactories;
 
-  public ArrayVitoDrawableFactory(VitoDrawableFactory... drawableFactories) {
+  public ArrayVitoDrawableFactory(final VitoDrawableFactory... drawableFactories) {
     mDrawableFactories = drawableFactories;
   }
 
   @Nullable
   @Override
-  public Drawable createDrawable(CloseableImage closeableImage, ImageOptions imageOptions) {
+  public Drawable createDrawable(final CloseableImage closeableImage, final ImageOptions imageOptions) {
     for (VitoDrawableFactory factory : mDrawableFactories) {
       Drawable drawable = factory.createDrawable(closeableImage, imageOptions);
       if (drawable != null) {

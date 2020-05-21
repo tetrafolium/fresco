@@ -23,7 +23,7 @@ public class DefaultBitmapMemoryCacheParamsSupplier implements Supplier<MemoryCa
 
   private final ActivityManager mActivityManager;
 
-  public DefaultBitmapMemoryCacheParamsSupplier(ActivityManager activityManager) {
+  public DefaultBitmapMemoryCacheParamsSupplier(final ActivityManager activityManager) {
     mActivityManager = activityManager;
   }
 

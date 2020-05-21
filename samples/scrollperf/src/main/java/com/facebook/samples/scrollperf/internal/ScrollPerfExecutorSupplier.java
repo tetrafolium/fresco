@@ -26,7 +26,7 @@ public class ScrollPerfExecutorSupplier implements ExecutorSupplier {
   private final Executor mBackgroundExecutor;
   private final Executor mLightWeightBackgroundExecutor;
 
-  public ScrollPerfExecutorSupplier(int numCpuBoundThreads, int numDecodingThread) {
+  public ScrollPerfExecutorSupplier(final int numCpuBoundThreads, final int numDecodingThread) {
     ThreadFactory backgroundPriorityThreadFactory =
         new PriorityThreadFactory(Process.THREAD_PRIORITY_BACKGROUND);
 

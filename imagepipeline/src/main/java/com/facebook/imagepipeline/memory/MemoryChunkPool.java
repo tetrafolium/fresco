@@ -25,9 +25,9 @@ public abstract class MemoryChunkPool extends BasePool<MemoryChunk> {
    * @param memoryChunkPoolStatsTracker the pool stats tracker
    */
   MemoryChunkPool(
-      MemoryTrimmableRegistry memoryTrimmableRegistry,
-      PoolParams poolParams,
-      PoolStatsTracker memoryChunkPoolStatsTracker) {
+      final MemoryTrimmableRegistry memoryTrimmableRegistry,
+      final PoolParams poolParams,
+      final PoolStatsTracker memoryChunkPoolStatsTracker) {
     super(memoryTrimmableRegistry, poolParams, memoryChunkPoolStatsTracker);
     SparseIntArray bucketSizes = poolParams.bucketSizes;
     mBucketSizes = new int[bucketSizes.size()];
@@ -46,18 +46,18 @@ public abstract class MemoryChunkPool extends BasePool<MemoryChunk> {
   protected abstract MemoryChunk alloc(int bucketedSize);
 
   @Override
-  protected void free(MemoryChunk value) {
+  protected void free(final MemoryChunk value) {
     Preconditions.checkNotNull(value);
     value.close();
   }
 
   @Override
-  protected int getSizeInBytes(int bucketedSize) {
+  protected int getSizeInBytes(final int bucketedSize) {
     return bucketedSize;
   }
 
   @Override
-  protected int getBucketedSize(int requestSize) {
+  protected int getBucketedSize(final int requestSize) {
     if (requestSize <= 0) {
       throw new InvalidSizeException(requestSize);
     }
@@ -75,13 +75,13 @@ public abstract class MemoryChunkPool extends BasePool<MemoryChunk> {
   }
 
   @Override
-  protected int getBucketedSizeForValue(MemoryChunk value) {
+  protected int getBucketedSizeForValue(final MemoryChunk value) {
     Preconditions.checkNotNull(value);
     return value.getSize();
   }
 
   @Override
-  protected boolean isReusable(MemoryChunk value) {
+  protected boolean isReusable(final MemoryChunk value) {
     Preconditions.checkNotNull(value);
     return !value.isClosed();
   }

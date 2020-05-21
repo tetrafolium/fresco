@@ -15,13 +15,13 @@ import com.facebook.common.memory.PooledByteBuffer;
 public class EncodedCountingMemoryCacheFactory {
 
   public static CountingMemoryCache<CacheKey, PooledByteBuffer> get(
-      Supplier<MemoryCacheParams> encodedMemoryCacheParamsSupplier,
-      MemoryTrimmableRegistry memoryTrimmableRegistry) {
+      final Supplier<MemoryCacheParams> encodedMemoryCacheParamsSupplier,
+      final MemoryTrimmableRegistry memoryTrimmableRegistry) {
 
     ValueDescriptor<PooledByteBuffer> valueDescriptor =
         new ValueDescriptor<PooledByteBuffer>() {
           @Override
-          public int getSizeInBytes(PooledByteBuffer value) {
+          public int getSizeInBytes(final PooledByteBuffer value) {
             return value.size();
           }
         };

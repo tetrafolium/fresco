@@ -65,7 +65,7 @@ public class PoolParams {
    * @param maxSize soft-cap and hard-cap on size of the pool
    * @param bucketSizes (optional) bucket sizes and lengths for the pool
    */
-  public PoolParams(int maxSize, @Nullable SparseIntArray bucketSizes) {
+  public PoolParams(final int maxSize, final @Nullable SparseIntArray bucketSizes) {
     this(maxSize, maxSize, bucketSizes, 0, Integer.MAX_VALUE, IGNORE_THREADS);
   }
 
@@ -76,7 +76,7 @@ public class PoolParams {
    * @param maxSizeHardCap hard cap on max size of the pool
    * @param bucketSizes (optional) bucket sizes and lengths for the pool
    */
-  public PoolParams(int maxSizeSoftCap, int maxSizeHardCap, @Nullable SparseIntArray bucketSizes) {
+  public PoolParams(final int maxSizeSoftCap, final int maxSizeHardCap, final @Nullable SparseIntArray bucketSizes) {
     this(maxSizeSoftCap, maxSizeHardCap, bucketSizes, 0, Integer.MAX_VALUE, IGNORE_THREADS);
   }
 
@@ -91,12 +91,12 @@ public class PoolParams {
    * @param maxNumThreads the maximum number of threads in the pool, or -1 if the pool doesn't care
    */
   public PoolParams(
-      int maxSizeSoftCap,
-      int maxSizeHardCap,
-      @Nullable SparseIntArray bucketSizes,
-      int minBucketSize,
-      int maxBucketSize,
-      int maxNumThreads) {
+      final int maxSizeSoftCap,
+      final int maxSizeHardCap,
+      final @Nullable SparseIntArray bucketSizes,
+      final int minBucketSize,
+      final int maxBucketSize,
+      final int maxNumThreads) {
     Preconditions.checkState(maxSizeSoftCap >= 0 && maxSizeHardCap >= maxSizeSoftCap);
     this.maxSizeSoftCap = maxSizeSoftCap;
     this.maxSizeHardCap = maxSizeHardCap;

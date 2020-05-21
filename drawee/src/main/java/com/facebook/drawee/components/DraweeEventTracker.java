@@ -52,7 +52,7 @@ public class DraweeEventTracker {
     ON_SUBMIT_CACHE_HIT
   }
 
-  private DraweeEventTracker() {}
+  private DraweeEventTracker() { }
 
   public static DraweeEventTracker newInstance() {
     return sEnabled ? new DraweeEventTracker() : sInstance;
@@ -63,7 +63,7 @@ public class DraweeEventTracker {
     sEnabled = false;
   }
 
-  public void recordEvent(Event event) {
+  public void recordEvent(final Event event) {
     if (!sEnabled) {
       return;
     }

@@ -20,7 +20,7 @@ public class FrescoVitoImageDecodeOptionsBuilder
   private @Nullable PointF mFocusPoint;
   private @Nullable ScalingUtils.ScaleType mScaleType;
 
-  public FrescoVitoImageDecodeOptionsBuilder setFrom(FrescoVitoImageDecodeOptions options) {
+  public FrescoVitoImageDecodeOptionsBuilder setFrom(final FrescoVitoImageDecodeOptions options) {
     super.setFrom(options);
     mParentBounds = options.parentBounds;
     mFocusPoint = options.focusPoint;
@@ -33,7 +33,7 @@ public class FrescoVitoImageDecodeOptionsBuilder
    *
    * @param parentBounds target parent bounds for decoding.
    */
-  public FrescoVitoImageDecodeOptionsBuilder setParentBounds(Rect parentBounds) {
+  public FrescoVitoImageDecodeOptionsBuilder setParentBounds(final Rect parentBounds) {
     mParentBounds = parentBounds;
     return getThis();
   }
@@ -53,7 +53,7 @@ public class FrescoVitoImageDecodeOptionsBuilder
    *
    * @param focusPoint target focus point for decoding.
    */
-  public FrescoVitoImageDecodeOptionsBuilder setFocusPoint(PointF focusPoint) {
+  public FrescoVitoImageDecodeOptionsBuilder setFocusPoint(final PointF focusPoint) {
     mFocusPoint = focusPoint;
     return getThis();
   }
@@ -73,7 +73,7 @@ public class FrescoVitoImageDecodeOptionsBuilder
    *
    * @param scaleType target scale Type for decoding.
    */
-  public FrescoVitoImageDecodeOptionsBuilder setScaleType(ScalingUtils.ScaleType scaleType) {
+  public FrescoVitoImageDecodeOptionsBuilder setScaleType(final ScalingUtils.ScaleType scaleType) {
     mScaleType = scaleType;
     return getThis();
   }

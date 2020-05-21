@@ -30,12 +30,12 @@ public class DraweeTransitionFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_drawee_transition, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     final Uri imageUri = sampleUris().createSampleUri(ImageUriProvider.ImageSize.M);
 
     final SimpleDraweeView simpleDraweeView =
@@ -48,7 +48,7 @@ public class DraweeTransitionFragment extends BaseShowcaseFragment {
     simpleDraweeView.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             startTransition(v, imageUri);
           }
         });
@@ -59,7 +59,7 @@ public class DraweeTransitionFragment extends BaseShowcaseFragment {
     return R.string.drawee_transition_title;
   }
 
-  public void startTransition(View startView, Uri uri) {
+  public void startTransition(final View startView, final Uri uri) {
     Intent intent = ImageDetailsActivity.getStartIntent(getContext(), uri);
     final String transitionName = getString(R.string.transition_name);
     final ActivityOptions options =

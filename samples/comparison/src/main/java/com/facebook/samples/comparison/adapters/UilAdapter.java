@@ -20,13 +20,13 @@ public class UilAdapter extends ImageListAdapter {
 
   private final ImageLoader mImageLoader;
 
-  public UilAdapter(Context context, PerfListener perfListener) {
+  public UilAdapter(final Context context, final PerfListener perfListener) {
     super(context, perfListener);
     mImageLoader = SampleUilFactory.getImageLoader(context);
   }
 
   @Override
-  public UilHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public UilHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
     final InstrumentedImageView instrumentedImageView = new InstrumentedImageView(getContext());
     return new UilHolder(
         getContext(), mImageLoader, parent, instrumentedImageView, getPerfListener());

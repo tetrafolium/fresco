@@ -34,7 +34,7 @@ import javax.annotation.Nullable;
  * @since 1.0
  */
 public final class Throwables {
-  private Throwables() {}
+  private Throwables() { }
 
   /**
    * Propagates {@code throwable} exactly as-is, if and only if it is an instance of {@code
@@ -53,7 +53,7 @@ public final class Throwables {
    * </pre>
    */
   public static <X extends Throwable> void propagateIfInstanceOf(
-      @Nullable Throwable throwable, Class<X> declaredType) throws X {
+      final @Nullable Throwable throwable, final Class<X> declaredType) throws X {
     // Check for null is needed to avoid frequent JNI calls to isInstance().
     if (throwable != null && declaredType.isInstance(throwable)) {
       throw declaredType.cast(throwable);
@@ -75,7 +75,7 @@ public final class Throwables {
    *   }
    * </pre>
    */
-  public static void propagateIfPossible(@Nullable Throwable throwable) {
+  public static void propagateIfPossible(final @Nullable Throwable throwable) {
     propagateIfInstanceOf(throwable, Error.class);
     propagateIfInstanceOf(throwable, RuntimeException.class);
   }
@@ -99,7 +99,7 @@ public final class Throwables {
    * @param declaredType the single checked exception type declared by the calling method
    */
   public static <X extends Throwable> void propagateIfPossible(
-      @Nullable Throwable throwable, Class<X> declaredType) throws X {
+      final @Nullable Throwable throwable, final Class<X> declaredType) throws X {
     propagateIfInstanceOf(throwable, declaredType);
     propagateIfPossible(throwable);
   }
@@ -116,7 +116,7 @@ public final class Throwables {
    * @param declaredType2 any other checked exception type declared by the calling method
    */
   public static <X1 extends Throwable, X2 extends Throwable> void propagateIfPossible(
-      @Nullable Throwable throwable, Class<X1> declaredType1, Class<X2> declaredType2)
+      final @Nullable Throwable throwable, final Class<X1> declaredType1, final Class<X2> declaredType2)
       throws X1, X2 {
     Preconditions.checkNotNull(declaredType2);
     propagateIfInstanceOf(throwable, declaredType1);
@@ -147,7 +147,7 @@ public final class Throwables {
    * @return nothing will ever be returned; this return type is only for your convenience, as
    *     illustrated in the example above
    */
-  public static RuntimeException propagate(Throwable throwable) {
+  public static RuntimeException propagate(final Throwable throwable) {
     propagateIfPossible(Preconditions.checkNotNull(throwable));
     throw new RuntimeException(throwable);
   }
@@ -161,7 +161,7 @@ public final class Throwables {
    *       Throwables.getRootCause(e).getMessage());
    * </pre>
    */
-  public static Throwable getRootCause(Throwable throwable) {
+  public static Throwable getRootCause(final Throwable throwable) {
     Throwable cause;
     while ((cause = throwable.getCause()) != null) {
       throwable = cause;
@@ -184,7 +184,7 @@ public final class Throwables {
    * @param throwable the non-null {@code Throwable} to extract causes from
    * @return an unmodifiable list containing the cause chain starting with {@code throwable}
    */
-  public static List<Throwable> getCausalChain(Throwable throwable) {
+  public static List<Throwable> getCausalChain(final Throwable throwable) {
     Preconditions.checkNotNull(throwable);
     List<Throwable> causes = new ArrayList<Throwable>(4);
     while (throwable != null) {
@@ -200,7 +200,7 @@ public final class Throwables {
    * parsing the resulting string; if you need programmatic access to the stack frames, you can call
    * {@link Throwable#getStackTrace()}.
    */
-  public static String getStackTraceAsString(Throwable throwable) {
+  public static String getStackTraceAsString(final Throwable throwable) {
     StringWriter stringWriter = new StringWriter();
     throwable.printStackTrace(new PrintWriter(stringWriter));
     return stringWriter.toString();

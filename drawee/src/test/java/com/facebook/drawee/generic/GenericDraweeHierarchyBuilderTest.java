@@ -43,7 +43,7 @@ public class GenericDraweeHierarchyBuilderTest {
   private final PointF mFocusPoint = mock(PointF.class);
   private final RoundingParams mRoundingParams = mock(RoundingParams.class);
 
-  private void testInitialState(GenericDraweeHierarchyBuilder builder) {
+  private void testInitialState(final GenericDraweeHierarchyBuilder builder) {
     assertEquals(300, builder.getFadeDuration());
     assertEquals(0, builder.getDesiredAspectRatio(), 0);
     assertEquals(null, builder.getPlaceholderImage());

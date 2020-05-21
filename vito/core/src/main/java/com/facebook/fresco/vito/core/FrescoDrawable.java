@@ -19,7 +19,7 @@ public class FrescoDrawable extends BaseFrescoDrawable implements Closeable {
     return mFrescoState;
   }
 
-  public void setFrescoState(@Nullable FrescoState frescoState) {
+  public void setFrescoState(final @Nullable FrescoState frescoState) {
     mFrescoState = frescoState;
   }
 }

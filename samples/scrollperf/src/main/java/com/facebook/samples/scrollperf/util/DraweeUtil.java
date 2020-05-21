@@ -63,7 +63,7 @@ public final class DraweeUtil {
     return result;
   }
 
-  public static void applyScaleType(GenericDraweeHierarchyBuilder builder, final Config config) {
+  public static void applyScaleType(final GenericDraweeHierarchyBuilder builder, final Config config) {
     switch (config.scaleType) {
       case "scale_type_none":
         builder.setActualImageScaleType(null);
@@ -98,7 +98,7 @@ public final class DraweeUtil {
    * @param view The View to change the bgColor to
    * @param config The Config object
    */
-  public static void setBgColor(View view, final Config config) {
+  public static void setBgColor(final View view, final Config config) {
     int[] colors = view.getContext().getResources().getIntArray(R.array.bg_colors);
     final int bgColor = colors[config.bgColor];
     view.setBackgroundColor(bgColor);

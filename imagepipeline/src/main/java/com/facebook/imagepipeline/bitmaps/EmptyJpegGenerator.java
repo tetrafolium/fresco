@@ -591,11 +591,11 @@ public class EmptyJpegGenerator {
 
   private final PooledByteBufferFactory mPooledByteBufferFactory;
 
-  public EmptyJpegGenerator(PooledByteBufferFactory pooledByteBufferFactory) {
+  public EmptyJpegGenerator(final PooledByteBufferFactory pooledByteBufferFactory) {
     mPooledByteBufferFactory = pooledByteBufferFactory;
   }
 
-  public CloseableReference<PooledByteBuffer> generate(short width, short height) {
+  public CloseableReference<PooledByteBuffer> generate(final short width, final short height) {
     PooledByteBufferOutputStream os = null;
     try {
       os =

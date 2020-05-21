@@ -44,7 +44,7 @@ public class WebpDecodingTest extends TestCase {
     ImagePipelineFactory.initialize(configBuilder.build());
   }
 
-  private MemoryFile getMemoryFile(String path) {
+  private MemoryFile getMemoryFile(final String path) {
     try {
       byte[] data = ByteStreams.toByteArray(getTestImageInputStream(path));
       MemoryFile memoryFile = new MemoryFile(null, data.length);
@@ -67,7 +67,7 @@ public class WebpDecodingTest extends TestCase {
     return sGetFileDescriptorMethod;
   }
 
-  private FileDescriptor getMemoryFileDescriptor(MemoryFile memoryFile) {
+  private FileDescriptor getMemoryFileDescriptor(final MemoryFile memoryFile) {
     try {
       Object rawFD = getFileDescriptorMethod().invoke(memoryFile);
       return (FileDescriptor) rawFD;
@@ -76,7 +76,7 @@ public class WebpDecodingTest extends TestCase {
     }
   }
 
-  private InputStream getTestImageInputStream(String path) {
+  private InputStream getTestImageInputStream(final String path) {
     try {
       return mInstrumentation.getContext().getResources().getAssets().open(path);
     } catch (IOException e) {
@@ -151,7 +151,7 @@ public class WebpDecodingTest extends TestCase {
     assertBitmap(bitmap, 320, 214);
   }
 
-  private void assertBitmap(Bitmap bitmap, int width, int height) {
+  private void assertBitmap(final Bitmap bitmap, final int width, final int height) {
     assertNotNull("Bitmap should not be null", bitmap);
     assertEquals("Width should be decoded properly", width, bitmap.getWidth());
     assertEquals("Height should be decoded properly", height, bitmap.getHeight());

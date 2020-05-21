@@ -33,12 +33,12 @@ public class BitmapAnimationFragment extends Fragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_simple_container, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
 
     // Get the animation container
     ImageView imageView = (ImageView) view.findViewById(R.id.animation_container);
@@ -62,7 +62,7 @@ public class BitmapAnimationFragment extends Fragment {
     imageView.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             if (animatedDrawable.isRunning()) {
               animatedDrawable.stop();
             } else {

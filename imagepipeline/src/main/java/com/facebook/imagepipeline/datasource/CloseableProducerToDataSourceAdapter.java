@@ -27,9 +27,9 @@ public class CloseableProducerToDataSourceAdapter<T>
     extends AbstractProducerToDataSourceAdapter<CloseableReference<T>> {
 
   public static <T> DataSource<CloseableReference<T>> create(
-      Producer<CloseableReference<T>> producer,
-      SettableProducerContext settableProducerContext,
-      RequestListener2 listener) {
+      final Producer<CloseableReference<T>> producer,
+      final SettableProducerContext settableProducerContext,
+      final RequestListener2 listener) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("CloseableProducerToDataSourceAdapter#create");
     }
@@ -42,9 +42,9 @@ public class CloseableProducerToDataSourceAdapter<T>
   }
 
   private CloseableProducerToDataSourceAdapter(
-      Producer<CloseableReference<T>> producer,
-      SettableProducerContext settableProducerContext,
-      RequestListener2 listener) {
+      final Producer<CloseableReference<T>> producer,
+      final SettableProducerContext settableProducerContext,
+      final RequestListener2 listener) {
     super(producer, settableProducerContext, listener);
   }
 
@@ -55,13 +55,13 @@ public class CloseableProducerToDataSourceAdapter<T>
   }
 
   @Override
-  protected void closeResult(CloseableReference<T> result) {
+  protected void closeResult(final CloseableReference<T> result) {
     CloseableReference.closeSafely(result);
   }
 
   @Override
   protected void onNewResultImpl(
-      CloseableReference<T> result, int status, ProducerContext producerContext) {
+      final CloseableReference<T> result, final int status, final ProducerContext producerContext) {
     super.onNewResultImpl(CloseableReference.cloneOrNull(result), status, producerContext);
   }
 }

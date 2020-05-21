@@ -111,7 +111,7 @@ public abstract class IterativeBoxBlurFilter {
    * diameter) (can be rounded)
    */
   private static void internalHorizontalBlur(
-      int[] pixels, int[] outRow, int w, int row, int diameter, int[] div) {
+      final int[] pixels, final int[] outRow, final int w, final int row, final int diameter, final int[] div) {
     final int firstInByte = w * row;
     final int lastInByte = w * (row + 1) - 1;
     final int radius = diameter >> 1;
@@ -152,7 +152,7 @@ public abstract class IterativeBoxBlurFilter {
    * diameter) (can be rounded)
    */
   private static void internalVerticalBlur(
-      int[] pixels, int[] outCol, int w, int h, int col, int diameter, int[] div) {
+      final int[] pixels, final int[] outCol, final int w, final int h, final int col, final int diameter, final int[] div) {
     final int lastInByte = w * (h - 1) + col;
     final int radiusTimesW = (diameter >> 1) * w;
     final int diameterMinusOneTimesW = (diameter - 1) * w;
@@ -186,7 +186,7 @@ public abstract class IterativeBoxBlurFilter {
     }
   }
 
-  private static int bound(int x, int l, int h) {
+  private static int bound(final int x, final int l, final int h) {
     return x < l ? l : (x > h ? h : x);
   }
 }

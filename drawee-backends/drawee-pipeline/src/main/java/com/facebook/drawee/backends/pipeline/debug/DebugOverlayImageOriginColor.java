@@ -25,7 +25,7 @@ public class DebugOverlayImageOriginColor {
     IMAGE_ORIGIN_COLOR_MAP.append(ImageOrigin.LOCAL, Color.GREEN);
   }
 
-  public static int getImageOriginColor(int imageOrigin) {
+  public static int getImageOriginColor(final int imageOrigin) {
     return IMAGE_ORIGIN_COLOR_MAP.get(imageOrigin, Color.WHITE);
   }
 }

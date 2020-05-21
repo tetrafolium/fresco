@@ -16,7 +16,7 @@ public class AnimatedDrawableBackendAnimationInformation implements AnimationInf
   private final AnimatedDrawableBackend mAnimatedDrawableBackend;
 
   public AnimatedDrawableBackendAnimationInformation(
-      AnimatedDrawableBackend animatedDrawableBackend) {
+      final AnimatedDrawableBackend animatedDrawableBackend) {
     mAnimatedDrawableBackend = animatedDrawableBackend;
   }
 
@@ -26,7 +26,7 @@ public class AnimatedDrawableBackendAnimationInformation implements AnimationInf
   }
 
   @Override
-  public int getFrameDurationMs(int frameNumber) {
+  public int getFrameDurationMs(final int frameNumber) {
     return mAnimatedDrawableBackend.getDurationMsForFrame(frameNumber);
   }
 

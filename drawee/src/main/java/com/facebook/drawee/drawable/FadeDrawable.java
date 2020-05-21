@@ -71,7 +71,7 @@ public class FadeDrawable extends ArrayDrawable {
    *
    * @param layers layers to fade between
    */
-  public FadeDrawable(Drawable[] layers) {
+  public FadeDrawable(final Drawable[] layers) {
     this(layers, false);
   }
 
@@ -83,7 +83,7 @@ public class FadeDrawable extends ArrayDrawable {
    * @param layers layers to fade between
    * @param allLayersVisible true if all layers should be visible per default
    */
-  public FadeDrawable(Drawable[] layers, boolean allLayersVisible) {
+  public FadeDrawable(final Drawable[] layers, final boolean allLayersVisible) {
     super(layers);
     Preconditions.checkState(layers.length >= 1, "At least one layer required!");
     mLayers = layers;
@@ -116,7 +116,7 @@ public class FadeDrawable extends ArrayDrawable {
   }
 
   /** Sets the duration of the current transition in milliseconds. */
-  public void setTransitionDuration(int durationMs) {
+  public void setTransitionDuration(final int durationMs) {
     mDurationMs = durationMs;
     // re-initialize transition if it's running
     if (mTransitionState == TRANSITION_RUNNING) {
@@ -155,7 +155,7 @@ public class FadeDrawable extends ArrayDrawable {
    *
    * @param index the index of the layer to fade in.
    */
-  public void fadeInLayer(int index) {
+  public void fadeInLayer(final int index) {
     mCallOnFadeFinishedListener = index == ACTUAL_IMAGE_INDEX;
     mTransitionState = TRANSITION_STARTING;
     mIsLayerOn[index] = true;
@@ -167,7 +167,7 @@ public class FadeDrawable extends ArrayDrawable {
    *
    * @param index the index of the layer to fade out.
    */
-  public void fadeOutLayer(int index) {
+  public void fadeOutLayer(final int index) {
     mTransitionState = TRANSITION_STARTING;
     mIsLayerOn[index] = false;
     invalidateSelf();
@@ -192,7 +192,7 @@ public class FadeDrawable extends ArrayDrawable {
    *
    * @param index the index of the layer to fade to
    */
-  public void fadeToLayer(int index) {
+  public void fadeToLayer(final int index) {
     mTransitionState = TRANSITION_STARTING;
     Arrays.fill(mIsLayerOn, false);
     mIsLayerOn[index] = true;
@@ -206,7 +206,7 @@ public class FadeDrawable extends ArrayDrawable {
    *
    * @param index the index of the layer to fade up to.
    */
-  public void fadeUpToLayer(int index) {
+  public void fadeUpToLayer(final int index) {
     mTransitionState = TRANSITION_STARTING;
     Arrays.fill(mIsLayerOn, 0, index + 1, true);
     Arrays.fill(mIsLayerOn, index + 1, mLayers.length, false);
@@ -218,7 +218,7 @@ public class FadeDrawable extends ArrayDrawable {
    *
    * @param index the index of the layer to be shown
    */
-  public void showLayerImmediately(int index) {
+  public void showLayerImmediately(final int index) {
     mIsLayerOn[index] = true;
     mAlphas[index] = 255;
     invalidateSelf();
@@ -229,7 +229,7 @@ public class FadeDrawable extends ArrayDrawable {
    *
    * @param index the index of the layer to be hidden
    */
-  public void hideLayerImmediately(int index) {
+  public void hideLayerImmediately(final int index) {
     mIsLayerOn[index] = false;
     mAlphas[index] = 0;
     invalidateSelf();
@@ -250,7 +250,7 @@ public class FadeDrawable extends ArrayDrawable {
    * @param ratio
    * @return whether the all layers have reached their target opacity
    */
-  private boolean updateAlphas(float ratio) {
+  private boolean updateAlphas(final float ratio) {
     boolean done = true;
     for (int i = 0; i < mLayers.length; i++) {
       int dir = mIsLayerOn[i] ? +1 : -1;
@@ -274,7 +274,7 @@ public class FadeDrawable extends ArrayDrawable {
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     boolean done = true;
     float ratio;
 
@@ -331,7 +331,7 @@ public class FadeDrawable extends ArrayDrawable {
     }
   }
 
-  private void drawDrawableWithAlpha(Canvas canvas, Drawable drawable, int alpha) {
+  private void drawDrawableWithAlpha(final Canvas canvas, final Drawable drawable, final int alpha) {
     if (drawable != null && alpha > 0) {
       mPreventInvalidateCount++;
       drawable.mutate().setAlpha(alpha);
@@ -341,7 +341,7 @@ public class FadeDrawable extends ArrayDrawable {
   }
 
   @Override
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     if (mAlpha != alpha) {
       mAlpha = alpha;
       invalidateSelf();
@@ -372,7 +372,7 @@ public class FadeDrawable extends ArrayDrawable {
     return mTransitionState;
   }
 
-  public boolean isLayerOn(int index) {
+  public boolean isLayerOn(final int index) {
     return mIsLayerOn[index];
   }
 
@@ -380,7 +380,7 @@ public class FadeDrawable extends ArrayDrawable {
     return mDefaultLayerIsOn;
   }
 
-  public void setOnFadeFinishedListener(OnFadeFinishedListener onFadeFinishedListener) {
+  public void setOnFadeFinishedListener(final OnFadeFinishedListener onFadeFinishedListener) {
     mOnFadeFinishedListener = onFadeFinishedListener;
   }
 

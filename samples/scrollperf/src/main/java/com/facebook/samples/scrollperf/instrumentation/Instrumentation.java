@@ -42,7 +42,7 @@ public class Instrumentation {
   private long mFinishTime;
   private ImageRequestState mState;
 
-  public Instrumentation(View view) {
+  public Instrumentation(final View view) {
     mPaint = new Paint();
     mTextRect = new Rect();
     mView = view;

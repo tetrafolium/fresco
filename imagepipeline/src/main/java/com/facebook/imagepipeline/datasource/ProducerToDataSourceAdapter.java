@@ -22,16 +22,16 @@ import javax.annotation.concurrent.ThreadSafe;
 public class ProducerToDataSourceAdapter<T> extends AbstractProducerToDataSourceAdapter<T> {
 
   public static <T> DataSource<T> create(
-      Producer<T> producer,
-      SettableProducerContext settableProducerContext,
-      RequestListener2 listener) {
+      final Producer<T> producer,
+      final SettableProducerContext settableProducerContext,
+      final RequestListener2 listener) {
     return new ProducerToDataSourceAdapter<T>(producer, settableProducerContext, listener);
   }
 
   private ProducerToDataSourceAdapter(
-      Producer<T> producer,
-      SettableProducerContext settableProducerContext,
-      RequestListener2 listener) {
+      final Producer<T> producer,
+      final SettableProducerContext settableProducerContext,
+      final RequestListener2 listener) {
     super(producer, settableProducerContext, listener);
   }
 }

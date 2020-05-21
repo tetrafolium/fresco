@@ -47,7 +47,7 @@ public class FrescoVitoImageDecodeOptions extends ImageDecodeOptions {
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (this == obj) {
       return false;
     }
@@ -85,7 +85,7 @@ public class FrescoVitoImageDecodeOptions extends ImageDecodeOptions {
         .add("scaleType", scaleType);
   }
 
-  public FrescoVitoImageDecodeOptions(FrescoVitoImageDecodeOptionsBuilder b) {
+  public FrescoVitoImageDecodeOptions(final FrescoVitoImageDecodeOptionsBuilder b) {
     super(b);
     this.parentBounds = b.getParentBounds();
     this.focusPoint = b.getFocusPoint();

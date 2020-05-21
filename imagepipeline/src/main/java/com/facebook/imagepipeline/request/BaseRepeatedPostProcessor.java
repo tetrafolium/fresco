@@ -12,7 +12,7 @@ public abstract class BaseRepeatedPostProcessor extends BasePostprocessor
   private RepeatedPostprocessorRunner mCallback;
 
   @Override
-  public synchronized void setCallback(RepeatedPostprocessorRunner runner) {
+  public synchronized void setCallback(final RepeatedPostprocessorRunner runner) {
     mCallback = runner;
   }
 

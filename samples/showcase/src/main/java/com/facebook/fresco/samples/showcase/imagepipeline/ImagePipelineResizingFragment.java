@@ -67,12 +67,12 @@ public class ImagePipelineResizingFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_imagepipeline_resizing, container, false);
   }
 
   @Override
-  public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     setupImageFormatEntries(sampleUris());
 
     mButton = (Button) view.findViewById(R.id.button);
@@ -84,12 +84,12 @@ public class ImagePipelineResizingFragment extends BaseShowcaseFragment {
     mSizeSpinner.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             reloadImage();
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
+          public void onNothingSelected(final AdapterView<?> parent) { }
         });
     mSizeSpinner.setSelection(0);
 
@@ -97,19 +97,19 @@ public class ImagePipelineResizingFragment extends BaseShowcaseFragment {
     mFormatSpinner.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             reloadImage();
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
+          public void onNothingSelected(final AdapterView<?> parent) { }
         });
     mFormatSpinner.setSelection(0);
 
     mDraweeMain.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             reloadImage();
           }
         });
@@ -132,7 +132,7 @@ public class ImagePipelineResizingFragment extends BaseShowcaseFragment {
             });
   }
 
-  private void setupImageFormatEntries(ImageUriProvider imageUriProvider) {
+  private void setupImageFormatEntries(final ImageUriProvider imageUriProvider) {
     mImageFormatEntries =
         new ImageFormatEntry[] {
           new ImageFormatEntry(
@@ -170,7 +170,7 @@ public class ImagePipelineResizingFragment extends BaseShowcaseFragment {
         SPINNER_ENTRIES_SIZE[mSizeSpinner.getSelectedItemPosition()].resizeOptions);
   }
 
-  private void reloadImage(Uri imageUri, @Nullable ResizeOptions resizeOptions) {
+  private void reloadImage(final Uri imageUri, final @Nullable ResizeOptions resizeOptions) {
     final ImageRequest imageRequest =
         ImageRequestBuilder.newBuilderWithSource(imageUri)
             .setResizeOptions(resizeOptions)
@@ -194,17 +194,17 @@ public class ImagePipelineResizingFragment extends BaseShowcaseFragment {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(final int position) {
       return SPINNER_ENTRIES_SIZE[position];
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(final int position) {
       return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
       final LayoutInflater layoutInflater = getLayoutInflater();
 
       final View view =
@@ -224,7 +224,7 @@ public class ImagePipelineResizingFragment extends BaseShowcaseFragment {
 
     final @Nullable ResizeOptions resizeOptions;
 
-    SizeEntry(@Nullable ResizeOptions resizeOptions) {
+    SizeEntry(final @Nullable ResizeOptions resizeOptions) {
       this.resizeOptions = resizeOptions;
     }
 
@@ -240,7 +240,7 @@ public class ImagePipelineResizingFragment extends BaseShowcaseFragment {
 
     private final ImageFormatEntry[] mImageFormatEntries;
 
-    public SimpleImageFormatAdapter(ImageFormatEntry[] imageFormatEntries) {
+    public SimpleImageFormatAdapter(final ImageFormatEntry[] imageFormatEntries) {
       mImageFormatEntries = imageFormatEntries;
     }
 
@@ -250,17 +250,17 @@ public class ImagePipelineResizingFragment extends BaseShowcaseFragment {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(final int position) {
       return mImageFormatEntries[position];
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(final int position) {
       return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
       final LayoutInflater layoutInflater = getLayoutInflater();
 
       final View view =
@@ -281,7 +281,7 @@ public class ImagePipelineResizingFragment extends BaseShowcaseFragment {
     final @StringRes int nameResId;
     final Uri uri;
 
-    private ImageFormatEntry(@StringRes int nameResId, Uri uri) {
+    private ImageFormatEntry(final @StringRes int nameResId, final Uri uri) {
       this.nameResId = nameResId;
       this.uri = uri;
     }

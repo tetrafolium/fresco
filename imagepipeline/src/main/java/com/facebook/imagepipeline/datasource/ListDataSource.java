@@ -34,12 +34,12 @@ public class ListDataSource<T> extends AbstractDataSource<List<CloseableReferenc
   @GuardedBy("this")
   private int mFinishedDataSources;
 
-  protected ListDataSource(DataSource<CloseableReference<T>>[] dataSources) {
+  protected ListDataSource(final DataSource<CloseableReference<T>>[] dataSources) {
     mDataSources = dataSources;
     mFinishedDataSources = 0;
   }
 
-  public static <T> ListDataSource<T> create(DataSource<CloseableReference<T>>... dataSources) {
+  public static <T> ListDataSource<T> create(final DataSource<CloseableReference<T>>... dataSources) {
     Preconditions.checkNotNull(dataSources);
     Preconditions.checkState(dataSources.length > 0);
     ListDataSource<T> listDataSource = new ListDataSource<T>(dataSources);
@@ -91,7 +91,7 @@ public class ListDataSource<T> extends AbstractDataSource<List<CloseableReferenc
     return ++mFinishedDataSources == mDataSources.length;
   }
 
-  private void onDataSourceFailed(DataSource<CloseableReference<T>> dataSource) {
+  private void onDataSourceFailed(final DataSource<CloseableReference<T>> dataSource) {
     setFailure(dataSource.getFailureCause());
   }
 
@@ -120,24 +120,24 @@ public class ListDataSource<T> extends AbstractDataSource<List<CloseableReferenc
     }
 
     @Override
-    public void onFailure(DataSource<CloseableReference<T>> dataSource) {
+    public void onFailure(final DataSource<CloseableReference<T>> dataSource) {
       ListDataSource.this.onDataSourceFailed(dataSource);
     }
 
     @Override
-    public void onCancellation(DataSource<CloseableReference<T>> dataSource) {
+    public void onCancellation(final DataSource<CloseableReference<T>> dataSource) {
       ListDataSource.this.onDataSourceCancelled();
     }
 
     @Override
-    public void onNewResult(DataSource<CloseableReference<T>> dataSource) {
+    public void onNewResult(final DataSource<CloseableReference<T>> dataSource) {
       if (dataSource.isFinished() && tryFinish()) {
         ListDataSource.this.onDataSourceFinished();
       }
     }
 
     @Override
-    public void onProgressUpdate(DataSource<CloseableReference<T>> dataSource) {
+    public void onProgressUpdate(final DataSource<CloseableReference<T>> dataSource) {
       ListDataSource.this.onDataSourceProgress();
     }
   }

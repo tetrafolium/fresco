@@ -32,7 +32,7 @@ public class AnimatedFrameCache {
     private final CacheKey mImageCacheKey;
     private final int mFrameIndex;
 
-    public FrameKey(CacheKey imageCacheKey, int frameIndex) {
+    public FrameKey(final CacheKey imageCacheKey, final int frameIndex) {
       mImageCacheKey = imageCacheKey;
       mFrameIndex = frameIndex;
     }
@@ -46,7 +46,7 @@ public class AnimatedFrameCache {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
       if (o == this) {
         return true;
       }
@@ -64,7 +64,7 @@ public class AnimatedFrameCache {
     }
 
     @Override
-    public boolean containsUri(Uri uri) {
+    public boolean containsUri(final Uri uri) {
       return mImageCacheKey.containsUri(uri);
     }
 
@@ -87,20 +87,20 @@ public class AnimatedFrameCache {
   private final LinkedHashSet<CacheKey> mFreeItemsPool;
 
   public AnimatedFrameCache(
-      CacheKey imageCacheKey, final CountingMemoryCache<CacheKey, CloseableImage> backingCache) {
+      final CacheKey imageCacheKey, final CountingMemoryCache<CacheKey, CloseableImage> backingCache) {
     mImageCacheKey = imageCacheKey;
     mBackingCache = backingCache;
     mFreeItemsPool = new LinkedHashSet<>();
     mEntryStateObserver =
         new CountingMemoryCache.EntryStateObserver<CacheKey>() {
           @Override
-          public void onExclusivityChanged(CacheKey key, boolean isExclusive) {
+          public void onExclusivityChanged(final CacheKey key, final boolean isExclusive) {
             AnimatedFrameCache.this.onReusabilityChange(key, isExclusive);
           }
         };
   }
 
-  public synchronized void onReusabilityChange(CacheKey key, boolean isReusable) {
+  public synchronized void onReusabilityChange(final CacheKey key, final boolean isReusable) {
     if (isReusable) {
       mFreeItemsPool.add(key);
     } else {
@@ -118,7 +118,7 @@ public class AnimatedFrameCache {
    */
   @Nullable
   public CloseableReference<CloseableImage> cache(
-      int frameIndex, CloseableReference<CloseableImage> imageRef) {
+      final int frameIndex, final CloseableReference<CloseableImage> imageRef) {
     return mBackingCache.cache(keyFor(frameIndex), imageRef, mEntryStateObserver);
   }
 
@@ -128,12 +128,12 @@ public class AnimatedFrameCache {
    * <p>It is the caller's responsibility to close the returned reference once not needed anymore.
    */
   @Nullable
-  public CloseableReference<CloseableImage> get(int frameIndex) {
+  public CloseableReference<CloseableImage> get(final int frameIndex) {
     return mBackingCache.get(keyFor(frameIndex));
   }
 
   /** Check whether the cache contains an image for the given frame index. */
-  public boolean contains(int frameIndex) {
+  public boolean contains(final int frameIndex) {
     return mBackingCache.contains(keyFor(frameIndex));
   }
 
@@ -171,7 +171,7 @@ public class AnimatedFrameCache {
     return cacheKey;
   }
 
-  private FrameKey keyFor(int frameIndex) {
+  private FrameKey keyFor(final int frameIndex) {
     return new FrameKey(mImageCacheKey, frameIndex);
   }
 }

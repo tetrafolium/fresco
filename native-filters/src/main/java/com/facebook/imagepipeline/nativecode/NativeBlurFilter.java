@@ -39,7 +39,7 @@ public class NativeBlurFilter {
    *     65536.
    * @param blurRadius The given blur radius. Must be greater than 0 and not greater than 65536.
    */
-  public static void iterativeBoxBlur(Bitmap bitmap, int iterations, int blurRadius) {
+  public static void iterativeBoxBlur(final Bitmap bitmap, final int iterations, final int blurRadius) {
     Preconditions.checkNotNull(bitmap);
     Preconditions.checkArgument(iterations > 0);
     Preconditions.checkArgument(blurRadius > 0);

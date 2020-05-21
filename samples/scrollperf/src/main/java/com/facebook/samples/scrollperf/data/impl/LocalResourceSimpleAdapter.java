@@ -22,16 +22,16 @@ public class LocalResourceSimpleAdapter implements SimpleAdapter<Uri> {
   private final boolean mLazy;
 
   public static LocalResourceSimpleAdapter getLazyAdapter(
-      final Context context, @ArrayRes int arrayId) {
+      final Context context, final @ArrayRes int arrayId) {
     return new LocalResourceSimpleAdapter(context, arrayId, true);
   }
 
   public static LocalResourceSimpleAdapter getEagerAdapter(
-      final Context context, @ArrayRes int arrayId) {
+      final Context context, final @ArrayRes int arrayId) {
     return new LocalResourceSimpleAdapter(context, arrayId, false);
   }
 
-  private LocalResourceSimpleAdapter(final Context context, @ArrayRes int arrayId, boolean lazy) {
+  private LocalResourceSimpleAdapter(final Context context, final @ArrayRes int arrayId, final boolean lazy) {
     mSrcArray = context.getResources().getStringArray(arrayId);
     mLazy = lazy;
     mUris = new Uri[mSrcArray.length];
@@ -48,7 +48,7 @@ public class LocalResourceSimpleAdapter implements SimpleAdapter<Uri> {
   }
 
   @Override
-  public Uri get(int position) {
+  public Uri get(final int position) {
     if (mLazy && mUris[position] == null) {
       mUris[position] = Uri.parse(mSrcArray[position]);
     }

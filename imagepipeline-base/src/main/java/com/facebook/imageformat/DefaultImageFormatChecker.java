@@ -49,7 +49,7 @@ public class DefaultImageFormatChecker implements ImageFormat.FormatChecker {
    */
   @Nullable
   @Override
-  public final ImageFormat determineFormat(byte[] headerBytes, int headerSize) {
+  public final ImageFormat determineFormat(final byte[] headerBytes, final int headerSize) {
     Preconditions.checkNotNull(headerBytes);
 
     if (WebpSupportStatus.isWebpHeader(headerBytes, 0, headerSize)) {

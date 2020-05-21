@@ -21,12 +21,12 @@ public abstract class BaseDebugOverlayFactory2 implements DebugOverlayFactory2 {
 
   private final Supplier<Boolean> mDebugOverlayEnabled;
 
-  public BaseDebugOverlayFactory2(Supplier<Boolean> debugOverlayEnabled) {
+  public BaseDebugOverlayFactory2(final Supplier<Boolean> debugOverlayEnabled) {
     mDebugOverlayEnabled = debugOverlayEnabled;
   }
 
   @Override
-  public void update(FrescoDrawable2 drawable) {
+  public void update(final FrescoDrawable2 drawable) {
     if (!mDebugOverlayEnabled.get()) {
       return;
     }
@@ -37,7 +37,7 @@ public abstract class BaseDebugOverlayFactory2 implements DebugOverlayFactory2 {
 
   protected abstract void setData(DebugOverlayDrawable overlay, FrescoDrawable2 drawable);
 
-  private DebugOverlayDrawable extractOrCreate(FrescoDrawable2 drawable) {
+  private DebugOverlayDrawable extractOrCreate(final FrescoDrawable2 drawable) {
     Drawable existingOverlay = drawable.getOverlayDrawable();
     DebugOverlayDrawable overlay = null;
     if (existingOverlay instanceof LayerDrawable) {

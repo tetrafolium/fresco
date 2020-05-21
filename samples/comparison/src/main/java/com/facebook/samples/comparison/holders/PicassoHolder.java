@@ -20,17 +20,17 @@ public class PicassoHolder extends BaseViewHolder<InstrumentedImageView> {
   private final Picasso mPicasso;
 
   public PicassoHolder(
-      Context context,
-      Picasso picasso,
-      View parent,
-      InstrumentedImageView view,
-      PerfListener perfListener) {
+      final Context context,
+      final Picasso picasso,
+      final View parent,
+      final InstrumentedImageView view,
+      final PerfListener perfListener) {
     super(context, parent, view, perfListener);
     mPicasso = picasso;
   }
 
   @Override
-  protected void onBind(String uri) {
+  protected void onBind(final String uri) {
     mPicasso
         .load(uri)
         .placeholder(Drawables.sPlaceholderDrawable)

@@ -13,7 +13,7 @@ package com.facebook.common.time;
  */
 public class CurrentThreadTimeClock implements Clock {
 
-  public CurrentThreadTimeClock() {}
+  public CurrentThreadTimeClock() { }
 
   @Override
   public long now() {

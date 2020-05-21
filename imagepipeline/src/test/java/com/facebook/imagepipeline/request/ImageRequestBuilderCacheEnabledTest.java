@@ -37,7 +37,7 @@ public class ImageRequestBuilderCacheEnabledTest {
   private final boolean mExpectedDefaultDiskCacheEnabled;
 
   public ImageRequestBuilderCacheEnabledTest(
-      String uriScheme, Boolean expectedDefaultDiskCacheEnabled) {
+      final String uriScheme, final Boolean expectedDefaultDiskCacheEnabled) {
     mUriScheme = uriScheme;
     mExpectedDefaultDiskCacheEnabled = expectedDefaultDiskCacheEnabled;
   }

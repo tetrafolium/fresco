@@ -22,7 +22,7 @@ public class FileUtils {
    * @param directory directory to be created
    * @throws CreateDirectoryException
    */
-  public static void mkdirs(File directory) throws CreateDirectoryException {
+  public static void mkdirs(final File directory) throws CreateDirectoryException {
     if (directory.exists()) {
       // file exists and *is* a directory
       if (directory.isDirectory()) {
@@ -50,7 +50,7 @@ public class FileUtils {
    * @param target the new 'name' for the source file
    * @throws IOException
    */
-  public static void rename(File source, File target) throws RenameException {
+  public static void rename(final File source, final File target) throws RenameException {
     Preconditions.checkNotNull(source);
     Preconditions.checkNotNull(target);
 
@@ -77,11 +77,11 @@ public class FileUtils {
 
   /** Represents an exception during directory creation */
   public static class CreateDirectoryException extends IOException {
-    public CreateDirectoryException(String message) {
+    public CreateDirectoryException(final String message) {
       super(message);
     }
 
-    public CreateDirectoryException(String message, Throwable innerException) {
+    public CreateDirectoryException(final String message, final Throwable innerException) {
       super(message);
       initCause(innerException);
     }
@@ -89,25 +89,25 @@ public class FileUtils {
 
   /** A specialization of FileNotFoundException when the parent-dir doesn't exist */
   public static class ParentDirNotFoundException extends FileNotFoundException {
-    public ParentDirNotFoundException(String message) {
+    public ParentDirNotFoundException(final String message) {
       super(message);
     }
   }
 
   /** Represents an exception when the target file/directory cannot be deleted */
   public static class FileDeleteException extends IOException {
-    public FileDeleteException(String message) {
+    public FileDeleteException(final String message) {
       super(message);
     }
   }
 
   /** Represents an unknown rename exception */
   public static class RenameException extends IOException {
-    public RenameException(String message) {
+    public RenameException(final String message) {
       super(message);
     }
 
-    public RenameException(String message, @Nullable Throwable innerException) {
+    public RenameException(final String message, final @Nullable Throwable innerException) {
       super(message);
       initCause(innerException);
     }

@@ -29,11 +29,11 @@ class MyPagerAdapter extends PagerAdapter {
   private final int mItemCount;
   private boolean mAllowSwipingWhileZoomed = true;
 
-  public MyPagerAdapter(int itemCount) {
+  public MyPagerAdapter(final int itemCount) {
     mItemCount = itemCount;
   }
 
-  public void setAllowSwipingWhileZoomed(boolean allowSwipingWhileZoomed) {
+  public void setAllowSwipingWhileZoomed(final boolean allowSwipingWhileZoomed) {
     mAllowSwipingWhileZoomed = allowSwipingWhileZoomed;
   }
 
@@ -46,7 +46,7 @@ class MyPagerAdapter extends PagerAdapter {
   }
 
   @Override
-  public Object instantiateItem(ViewGroup container, int position) {
+  public Object instantiateItem(final ViewGroup container, final int position) {
     FrameLayout page = (FrameLayout) container.getChildAt(position);
     if (page == null) {
       return null;
@@ -68,7 +68,7 @@ class MyPagerAdapter extends PagerAdapter {
   }
 
   @Override
-  public void destroyItem(ViewGroup container, int position, Object object) {
+  public void destroyItem(final ViewGroup container, final int position, final Object object) {
     FrameLayout page = (FrameLayout) container.getChildAt(position);
     ZoomableDraweeView zoomableDraweeView = (ZoomableDraweeView) page.getChildAt(0);
     zoomableDraweeView.setController(null);
@@ -80,12 +80,12 @@ class MyPagerAdapter extends PagerAdapter {
   }
 
   @Override
-  public boolean isViewFromObject(View arg0, Object arg1) {
+  public boolean isViewFromObject(final View arg0, final Object arg1) {
     return arg0 == arg1;
   }
 
   @Override
-  public int getItemPosition(Object object) {
+  public int getItemPosition(final Object object) {
     // We want to create a new view when we call notifyDataSetChanged() to have the correct behavior
     return POSITION_NONE;
   }

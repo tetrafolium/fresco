@@ -58,11 +58,11 @@ public class PartialDiskCacheProducer implements Producer<EncodedImage> {
   private final Producer<EncodedImage> mInputProducer;
 
   public PartialDiskCacheProducer(
-      BufferedDiskCache defaultBufferedDiskCache,
-      CacheKeyFactory cacheKeyFactory,
-      PooledByteBufferFactory pooledByteBufferFactory,
-      ByteArrayPool byteArrayPool,
-      Producer<EncodedImage> inputProducer) {
+      final BufferedDiskCache defaultBufferedDiskCache,
+      final CacheKeyFactory cacheKeyFactory,
+      final PooledByteBufferFactory pooledByteBufferFactory,
+      final ByteArrayPool byteArrayPool,
+      final Producer<EncodedImage> inputProducer) {
     mDefaultBufferedDiskCache = defaultBufferedDiskCache;
     mCacheKeyFactory = cacheKeyFactory;
     mPooledByteBufferFactory = pooledByteBufferFactory;
@@ -102,7 +102,7 @@ public class PartialDiskCacheProducer implements Producer<EncodedImage> {
     final ProducerListener2 listener = producerContext.getProducerListener();
     return new Continuation<EncodedImage, Void>() {
       @Override
-      public Void then(Task<EncodedImage> task) throws Exception {
+      public Void then(final Task<EncodedImage> task) throws Exception {
         if (isTaskCancelled(task)) {
           listener.onProducerFinishWithCancellation(producerContext, PRODUCER_NAME, null);
           consumer.onCancellation();
@@ -154,10 +154,10 @@ public class PartialDiskCacheProducer implements Producer<EncodedImage> {
   }
 
   private void startInputProducer(
-      Consumer<EncodedImage> consumerOfPartialDiskCacheProducer,
-      ProducerContext producerContext,
-      CacheKey partialImageCacheKey,
-      @Nullable EncodedImage partialResultFromCache) {
+      final Consumer<EncodedImage> consumerOfPartialDiskCacheProducer,
+      final ProducerContext producerContext,
+      final CacheKey partialImageCacheKey,
+      final @Nullable EncodedImage partialResultFromCache) {
     Consumer<EncodedImage> consumer =
         new PartialDiskCacheConsumer(
             consumerOfPartialDiskCacheProducer,
@@ -170,7 +170,7 @@ public class PartialDiskCacheProducer implements Producer<EncodedImage> {
     mInputProducer.produceResults(consumer, producerContext);
   }
 
-  private static boolean isTaskCancelled(Task<?> task) {
+  private static boolean isTaskCancelled(final Task<?> task) {
     return task.isCancelled()
         || (task.isFaulted() && task.getError() instanceof CancellationException);
   }
@@ -197,7 +197,7 @@ public class PartialDiskCacheProducer implements Producer<EncodedImage> {
   }
 
   private void subscribeTaskForRequestCancellation(
-      final AtomicBoolean isCancelled, ProducerContext producerContext) {
+      final AtomicBoolean isCancelled, final ProducerContext producerContext) {
     producerContext.addCallbacks(
         new BaseProducerContextCallbacks() {
           @Override
@@ -207,7 +207,7 @@ public class PartialDiskCacheProducer implements Producer<EncodedImage> {
         });
   }
 
-  private static Uri createUriForPartialCacheKey(ImageRequest imageRequest) {
+  private static Uri createUriForPartialCacheKey(final ImageRequest imageRequest) {
     return imageRequest
         .getSourceUri()
         .buildUpon()
@@ -251,7 +251,7 @@ public class PartialDiskCacheProducer implements Producer<EncodedImage> {
     }
 
     @Override
-    public void onNewResultImpl(EncodedImage newResult, @Status int status) {
+    public void onNewResultImpl(final EncodedImage newResult, final @Status int status) {
       if (isNotLast(status)) {
         // TODO 19247361 Consider merging of non-final results
         return;
@@ -282,7 +282,7 @@ public class PartialDiskCacheProducer implements Producer<EncodedImage> {
       }
     }
 
-    private PooledByteBufferOutputStream merge(EncodedImage initialData, EncodedImage remainingData)
+    private PooledByteBufferOutputStream merge(final EncodedImage initialData, final EncodedImage remainingData)
         throws IOException {
       final int totalLength = remainingData.getSize() + remainingData.getBytesRange().from;
       final PooledByteBufferOutputStream pooledOutputStream =
@@ -296,7 +296,7 @@ public class PartialDiskCacheProducer implements Producer<EncodedImage> {
       return pooledOutputStream;
     }
 
-    private void copy(InputStream from, OutputStream to, int length) throws IOException {
+    private void copy(final InputStream from, final OutputStream to, final int length) throws IOException {
       int bytesStillToRead = length;
       final byte[] ioArray = mByteArrayPool.get(READ_SIZE);
       try {
@@ -322,7 +322,7 @@ public class PartialDiskCacheProducer implements Producer<EncodedImage> {
       }
     }
 
-    private void sendFinalResultToConsumer(PooledByteBufferOutputStream pooledOutputStream) {
+    private void sendFinalResultToConsumer(final PooledByteBufferOutputStream pooledOutputStream) {
       CloseableReference<PooledByteBuffer> result =
           CloseableReference.of(pooledOutputStream.toByteBuffer());
       EncodedImage encodedImage = null;

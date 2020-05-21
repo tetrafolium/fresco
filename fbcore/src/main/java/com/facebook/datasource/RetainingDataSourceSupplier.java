@@ -32,7 +32,7 @@ public class RetainingDataSourceSupplier<T> implements Supplier<DataSource<T>> {
     return dataSource;
   }
 
-  public void replaceSupplier(Supplier<DataSource<T>> supplier) {
+  public void replaceSupplier(final Supplier<DataSource<T>> supplier) {
     mCurrentDataSourceSupplier = supplier;
     for (RetainingDataSource dataSource : mDataSources) {
       if (!dataSource.isClosed()) {
@@ -46,7 +46,7 @@ public class RetainingDataSourceSupplier<T> implements Supplier<DataSource<T>> {
     @Nullable
     private DataSource<T> mDataSource = null;
 
-    public void setSupplier(@Nullable Supplier<DataSource<T>> supplier) {
+    public void setSupplier(final @Nullable Supplier<DataSource<T>> supplier) {
       // early return without calling {@code supplier.get()} in case we are closed
       if (isClosed()) {
         return;
@@ -95,23 +95,23 @@ public class RetainingDataSourceSupplier<T> implements Supplier<DataSource<T>> {
       return true;
     }
 
-    private void onDataSourceNewResult(DataSource<T> dataSource) {
+    private void onDataSourceNewResult(final DataSource<T> dataSource) {
       if (dataSource == mDataSource) {
         setResult(null, false, dataSource.getExtras());
       }
     }
 
-    private void onDataSourceFailed(DataSource<T> dataSource) {
+    private void onDataSourceFailed(final DataSource<T> dataSource) {
       // do not propagate failure
     }
 
-    private void onDatasourceProgress(DataSource<T> dataSource) {
+    private void onDatasourceProgress(final DataSource<T> dataSource) {
       if (dataSource == mDataSource) {
         setProgress(dataSource.getProgress());
       }
     }
 
-    private static <T> void closeSafely(DataSource<T> dataSource) {
+    private static <T> void closeSafely(final DataSource<T> dataSource) {
       if (dataSource != null) {
         dataSource.close();
       }
@@ -119,7 +119,7 @@ public class RetainingDataSourceSupplier<T> implements Supplier<DataSource<T>> {
 
     private class InternalDataSubscriber implements DataSubscriber<T> {
       @Override
-      public void onNewResult(DataSource<T> dataSource) {
+      public void onNewResult(final DataSource<T> dataSource) {
         if (dataSource.hasResult()) {
           RetainingDataSource.this.onDataSourceNewResult(dataSource);
         } else if (dataSource.isFinished()) {
@@ -128,15 +128,15 @@ public class RetainingDataSourceSupplier<T> implements Supplier<DataSource<T>> {
       }
 
       @Override
-      public void onFailure(DataSource<T> dataSource) {
+      public void onFailure(final DataSource<T> dataSource) {
         RetainingDataSource.this.onDataSourceFailed(dataSource);
       }
 
       @Override
-      public void onCancellation(DataSource<T> dataSource) {}
+      public void onCancellation(final DataSource<T> dataSource) { }
 
       @Override
-      public void onProgressUpdate(DataSource<T> dataSource) {
+      public void onProgressUpdate(final DataSource<T> dataSource) {
         RetainingDataSource.this.onDatasourceProgress(dataSource);
       }
     }

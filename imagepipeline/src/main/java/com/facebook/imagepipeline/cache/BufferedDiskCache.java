@@ -46,12 +46,12 @@ public class BufferedDiskCache {
   private final ImageCacheStatsTracker mImageCacheStatsTracker;
 
   public BufferedDiskCache(
-      FileCache fileCache,
-      PooledByteBufferFactory pooledByteBufferFactory,
-      PooledByteStreams pooledByteStreams,
-      Executor readExecutor,
-      Executor writeExecutor,
-      ImageCacheStatsTracker imageCacheStatsTracker) {
+      final FileCache fileCache,
+      final PooledByteBufferFactory pooledByteBufferFactory,
+      final PooledByteStreams pooledByteStreams,
+      final Executor readExecutor,
+      final Executor writeExecutor,
+      final ImageCacheStatsTracker imageCacheStatsTracker) {
     mFileCache = fileCache;
     mPooledByteBufferFactory = pooledByteBufferFactory;
     mPooledByteStreams = pooledByteStreams;
@@ -69,7 +69,7 @@ public class BufferedDiskCache {
    *
    * <p>Avoids a disk read.
    */
-  public boolean containsSync(CacheKey key) {
+  public boolean containsSync(final CacheKey key) {
     return mStagingArea.containsKey(key) || mFileCache.hasKeySync(key);
   }
 
@@ -137,7 +137,7 @@ public class BufferedDiskCache {
    * @return Task that resolves to cached element or null if one cannot be retrieved; returned task
    *     never rethrows any exception
    */
-  public Task<EncodedImage> get(CacheKey key, AtomicBoolean isCancelled) {
+  public Task<EncodedImage> get(final CacheKey key, final AtomicBoolean isCancelled) {
     try {
       if (FrescoSystrace.isTracing()) {
         FrescoSystrace.beginSection("BufferedDiskCache#get");
@@ -275,7 +275,7 @@ public class BufferedDiskCache {
    * Associates encodedImage with given key in disk cache. Disk write is performed on background
    * thread, so the caller of this method is not blocked
    */
-  public void put(final CacheKey key, EncodedImage encodedImage) {
+  public void put(final CacheKey key, final EncodedImage encodedImage) {
     try {
       if (FrescoSystrace.isTracing()) {
         FrescoSystrace.beginSection("BufferedDiskCache#put");
@@ -390,7 +390,7 @@ public class BufferedDiskCache {
     return mFileCache.getSize();
   }
 
-  private Task<EncodedImage> foundPinnedImage(CacheKey key, EncodedImage pinnedImage) {
+  private Task<EncodedImage> foundPinnedImage(final CacheKey key, final EncodedImage pinnedImage) {
     FLog.v(TAG, "Found image for %s in staging area", key.getUriString());
     mImageCacheStatsTracker.onStagingAreaHit(key);
     return Task.forResult(pinnedImage);
@@ -443,7 +443,7 @@ public class BufferedDiskCache {
           key,
           new WriterCallback() {
             @Override
-            public void write(OutputStream os) throws IOException {
+            public void write(final OutputStream os) throws IOException {
               mPooledByteStreams.copy(encodedImage.getInputStream(), os);
             }
           });

@@ -77,12 +77,12 @@ public class ImagePipelineFactory {
    *
    * @param newInstance
    */
-  public static void setInstance(ImagePipelineFactory newInstance) {
+  public static void setInstance(final ImagePipelineFactory newInstance) {
     sInstance = newInstance;
   }
 
   /** Initializes {@link ImagePipelineFactory} with default config. */
-  public static synchronized void initialize(Context context) {
+  public static synchronized void initialize(final Context context) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("ImagePipelineFactory#initialize");
     }
@@ -94,7 +94,7 @@ public class ImagePipelineFactory {
 
   /** Initializes {@link ImagePipelineFactory} with the specified config. */
   public static synchronized void initialize(
-      ImagePipelineConfig imagePipelineConfig, boolean forceSinglePipelineInstance) {
+      final ImagePipelineConfig imagePipelineConfig, final boolean forceSinglePipelineInstance) {
     if (sInstance != null) {
       FLog.w(
           TAG,
@@ -106,7 +106,7 @@ public class ImagePipelineFactory {
   }
 
   /** Initializes {@link ImagePipelineFactory} with the specified config. */
-  public static synchronized void initialize(ImagePipelineConfig imagePipelineConfig) {
+  public static synchronized void initialize(final ImagePipelineConfig imagePipelineConfig) {
     if (sInstance != null) {
       FLog.w(
           TAG,
@@ -151,7 +151,7 @@ public class ImagePipelineFactory {
 
   private AnimatedFactory mAnimatedFactory;
 
-  public ImagePipelineFactory(ImagePipelineConfig config) {
+  public ImagePipelineFactory(final ImagePipelineConfig config) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("ImagePipelineConfig()");
     }
@@ -185,7 +185,7 @@ public class ImagePipelineFactory {
   }
 
   @Nullable
-  public DrawableFactory getAnimatedDrawableFactory(Context context) {
+  public DrawableFactory getAnimatedDrawableFactory(final Context context) {
     AnimatedFactory animatedFactory = getAnimatedFactory();
     return animatedFactory == null ? null : animatedFactory.getAnimatedDrawableFactory(context);
   }

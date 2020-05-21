@@ -33,7 +33,7 @@ public enum MemoryTrimType {
 
   private double mSuggestedTrimRatio;
 
-  private MemoryTrimType(double suggestedTrimRatio) {
+  private MemoryTrimType(final double suggestedTrimRatio) {
     mSuggestedTrimRatio = suggestedTrimRatio;
   }
 

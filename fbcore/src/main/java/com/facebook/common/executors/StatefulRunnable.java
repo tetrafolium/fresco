@@ -66,24 +66,24 @@ public abstract class StatefulRunnable<T> implements Runnable {
    *
    * @param result
    */
-  protected void onSuccess(T result) {}
+  protected void onSuccess(final T result) { }
 
   /**
    * Called if exception occurred during computation.
    *
    * @param e
    */
-  protected void onFailure(Exception e) {}
+  protected void onFailure(final Exception e) { }
 
   /** Called when the runnable is cancelled. */
-  protected void onCancellation() {}
+  protected void onCancellation() { }
 
   /**
    * Called after onSuccess callback completes in order to dispose the result.
    *
    * @param result
    */
-  protected void disposeResult(T result) {}
+  protected void disposeResult(final T result) { }
 
   protected abstract T getResult() throws Exception;
 }

@@ -42,7 +42,7 @@ public class OOMSoftReference<T> {
     softRef3 = null;
   }
 
-  public void set(@Nonnull T hardReference) {
+  public void set(final @Nonnull T hardReference) {
     softRef1 = new SoftReference<T>(hardReference);
     softRef2 = new SoftReference<T>(hardReference);
     softRef3 = new SoftReference<T>(hardReference);

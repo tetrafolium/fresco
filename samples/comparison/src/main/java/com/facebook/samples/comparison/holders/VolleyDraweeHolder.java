@@ -17,12 +17,12 @@ import com.facebook.samples.comparison.instrumentation.PerfListener;
 public class VolleyDraweeHolder extends BaseViewHolder<InstrumentedDraweeView> {
 
   public VolleyDraweeHolder(
-      Context context, View parentView, InstrumentedDraweeView view, PerfListener perfListener) {
+      final Context context, final View parentView, final InstrumentedDraweeView view, final PerfListener perfListener) {
     super(context, parentView, view, perfListener);
   }
 
   @Override
-  protected void onBind(String uri) {
+  protected void onBind(final String uri) {
     mImageView.setImageURI(Uri.parse(uri));
   }
 }

@@ -45,7 +45,7 @@ public class RoundedColorDrawable extends Drawable implements Rounded {
    *
    * @param color of the drawable
    */
-  public RoundedColorDrawable(int color) {
+  public RoundedColorDrawable(final int color) {
     setColor(color);
   }
 
@@ -56,7 +56,7 @@ public class RoundedColorDrawable extends Drawable implements Rounded {
    * @return a new RoundedColorDrawable
    */
   @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-  public static RoundedColorDrawable fromColorDrawable(ColorDrawable colorDrawable) {
+  public static RoundedColorDrawable fromColorDrawable(final ColorDrawable colorDrawable) {
     return new RoundedColorDrawable(colorDrawable.getColor());
   }
 
@@ -67,7 +67,7 @@ public class RoundedColorDrawable extends Drawable implements Rounded {
    *     top-right, bottom-right, bottom-left.
    * @param color of the drawable
    */
-  public RoundedColorDrawable(float[] radii, int color) {
+  public RoundedColorDrawable(final float[] radii, final int color) {
     this(color);
     setRadii(radii);
   }
@@ -78,19 +78,19 @@ public class RoundedColorDrawable extends Drawable implements Rounded {
    * @param radius of the corners in pixels
    * @param color of the drawable
    */
-  public RoundedColorDrawable(float radius, int color) {
+  public RoundedColorDrawable(final float radius, final int color) {
     this(color);
     setRadius(radius);
   }
 
   @Override
-  protected void onBoundsChange(Rect bounds) {
+  protected void onBoundsChange(final Rect bounds) {
     super.onBoundsChange(bounds);
     updatePath();
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     mPaint.setColor(DrawableUtils.multiplyColorAlpha(mColor, mAlpha));
     mPaint.setStyle(Paint.Style.FILL);
     mPaint.setFilterBitmap(getPaintFilterBitmap());
@@ -109,7 +109,7 @@ public class RoundedColorDrawable extends Drawable implements Rounded {
    * @param isCircle whether or not to round as circle
    */
   @Override
-  public void setCircle(boolean isCircle) {
+  public void setCircle(final boolean isCircle) {
     mIsCircle = isCircle;
     updatePath();
     invalidateSelf();
@@ -128,7 +128,7 @@ public class RoundedColorDrawable extends Drawable implements Rounded {
    *     top-right, bottom-right, bottom-left
    */
   @Override
-  public void setRadii(float[] radii) {
+  public void setRadii(final float[] radii) {
     if (radii == null) {
       Arrays.fill(mRadii, 0);
     } else {
@@ -151,7 +151,7 @@ public class RoundedColorDrawable extends Drawable implements Rounded {
    * @param radius
    */
   @Override
-  public void setRadius(float radius) {
+  public void setRadius(final float radius) {
     Preconditions.checkArgument(radius >= 0, "radius should be non negative");
     Arrays.fill(mRadii, radius);
     updatePath();
@@ -163,7 +163,7 @@ public class RoundedColorDrawable extends Drawable implements Rounded {
    *
    * @param color
    */
-  public void setColor(int color) {
+  public void setColor(final int color) {
     if (mColor != color) {
       mColor = color;
       invalidateSelf();
@@ -186,7 +186,7 @@ public class RoundedColorDrawable extends Drawable implements Rounded {
    * @param width of the border
    */
   @Override
-  public void setBorder(int color, float width) {
+  public void setBorder(final int color, final float width) {
     if (mBorderColor != color) {
       mBorderColor = color;
       invalidateSelf();
@@ -212,7 +212,7 @@ public class RoundedColorDrawable extends Drawable implements Rounded {
   }
 
   @Override
-  public void setPadding(float padding) {
+  public void setPadding(final float padding) {
     if (mPadding != padding) {
       mPadding = padding;
       updatePath();
@@ -232,7 +232,7 @@ public class RoundedColorDrawable extends Drawable implements Rounded {
    * @param scaleDownInsideBorders
    */
   @Override
-  public void setScaleDownInsideBorders(boolean scaleDownInsideBorders) {
+  public void setScaleDownInsideBorders(final boolean scaleDownInsideBorders) {
     if (mScaleDownInsideBorders != scaleDownInsideBorders) {
       mScaleDownInsideBorders = scaleDownInsideBorders;
       updatePath();
@@ -255,7 +255,7 @@ public class RoundedColorDrawable extends Drawable implements Rounded {
    * @param paintFilterBitmap whether to set FILTER_BITMAP_FLAG flag to Paint.
    */
   @Override
-  public void setPaintFilterBitmap(boolean paintFilterBitmap) {
+  public void setPaintFilterBitmap(final boolean paintFilterBitmap) {
     if (mPaintFilterBitmap != paintFilterBitmap) {
       mPaintFilterBitmap = paintFilterBitmap;
       invalidateSelf();
@@ -274,7 +274,7 @@ public class RoundedColorDrawable extends Drawable implements Rounded {
    * @param alpha The alpha value to set, between 0 and 255.
    */
   @Override
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     if (alpha != mAlpha) {
       mAlpha = alpha;
       invalidateSelf();
@@ -298,7 +298,7 @@ public class RoundedColorDrawable extends Drawable implements Rounded {
    * @param colorFilter Ignore.
    */
   @Override
-  public void setColorFilter(ColorFilter colorFilter) {}
+  public void setColorFilter(final ColorFilter colorFilter) { }
 
   /**
    * Returns the opacity of the final color which would be used for drawing. This has been inspired

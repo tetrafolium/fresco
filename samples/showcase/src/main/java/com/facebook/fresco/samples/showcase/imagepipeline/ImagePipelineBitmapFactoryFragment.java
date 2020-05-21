@@ -42,7 +42,7 @@ public class ImagePipelineBitmapFactoryFragment extends BaseShowcaseFragment {
 
     final int descriptionResId;
 
-    CreateOptions(int descriptionResId) {
+    CreateOptions(final int descriptionResId) {
       this.descriptionResId = descriptionResId;
     }
   }
@@ -62,7 +62,7 @@ public class ImagePipelineBitmapFactoryFragment extends BaseShowcaseFragment {
   private CloseableReference<Bitmap> mDisplayedBitmap;
 
   @Override
-  public void onCreate(@Nullable Bundle savedInstanceState) {
+  public void onCreate(final @Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     mPlatformBitmapFactory = Fresco.getImagePipelineFactory().getPlatformBitmapFactory();
   }
@@ -70,12 +70,12 @@ public class ImagePipelineBitmapFactoryFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_imagepipeline_bitmap_factory, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     mImageView = view.findViewById(R.id.drawee_view);
     mSpinner = view.findViewById(R.id.spinner);
 
@@ -84,13 +84,13 @@ public class ImagePipelineBitmapFactoryFragment extends BaseShowcaseFragment {
     mSpinner.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             final CreateOptions spinnerEntry = (CreateOptions) adapter.getItem(position);
             initDisplayedBitmap(spinnerEntry);
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
+          public void onNothingSelected(final AdapterView<?> parent) { }
         });
   }
 
@@ -140,7 +140,7 @@ public class ImagePipelineBitmapFactoryFragment extends BaseShowcaseFragment {
     return mOriginalBitmap;
   }
 
-  private void initDisplayedBitmap(CreateOptions createOptions) {
+  private void initDisplayedBitmap(final CreateOptions createOptions) {
     final CloseableReference<Bitmap> oldDisplayedReference = mDisplayedBitmap;
 
     final int originalW = mOriginalBitmap.get().getWidth();
@@ -170,7 +170,7 @@ public class ImagePipelineBitmapFactoryFragment extends BaseShowcaseFragment {
     CloseableReference.closeSafely(oldDisplayedReference);
   }
 
-  private static Matrix getMatrix(float skewX, float skewY, float degrees) {
+  private static Matrix getMatrix(final float skewX, final float skewY, final float degrees) {
     Matrix matrix = new Matrix();
     matrix.postSkew(skewX, skewY);
     matrix.postRotate(degrees);
@@ -193,17 +193,17 @@ public class ImagePipelineBitmapFactoryFragment extends BaseShowcaseFragment {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(final int position) {
       return SPINNER_ENTRIES[position];
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(final int position) {
       return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
       final LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
       final View view =

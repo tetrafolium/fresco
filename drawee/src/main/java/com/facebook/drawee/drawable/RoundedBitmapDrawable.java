@@ -27,7 +27,7 @@ public class RoundedBitmapDrawable extends RoundedDrawable {
   @Nullable private final Bitmap mBitmap;
   private WeakReference<Bitmap> mLastBitmap;
 
-  public RoundedBitmapDrawable(Resources res, @Nullable Bitmap bitmap, @Nullable Paint paint) {
+  public RoundedBitmapDrawable(final Resources res, final @Nullable Bitmap bitmap, final @Nullable Paint paint) {
     super(new BitmapDrawable(res, bitmap));
     mBitmap = bitmap;
     if (paint != null) {
@@ -38,12 +38,12 @@ public class RoundedBitmapDrawable extends RoundedDrawable {
     mBorderPaint.setStyle(Paint.Style.STROKE);
   }
 
-  public RoundedBitmapDrawable(Resources res, Bitmap bitmap) {
+  public RoundedBitmapDrawable(final Resources res, final Bitmap bitmap) {
     this(res, bitmap, null);
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("RoundedBitmapDrawable#draw");
     }
@@ -92,7 +92,7 @@ public class RoundedBitmapDrawable extends RoundedDrawable {
    * @return the RoundedBitmapDrawable that is created
    */
   public static RoundedBitmapDrawable fromBitmapDrawable(
-      Resources res, BitmapDrawable bitmapDrawable) {
+      final Resources res, final BitmapDrawable bitmapDrawable) {
     return new RoundedBitmapDrawable(res, bitmapDrawable.getBitmap(), bitmapDrawable.getPaint());
   }
 
@@ -103,7 +103,7 @@ public class RoundedBitmapDrawable extends RoundedDrawable {
   }
 
   @Override
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     super.setAlpha(alpha);
     if (alpha != mPaint.getAlpha()) {
       mPaint.setAlpha(alpha);
@@ -113,7 +113,7 @@ public class RoundedBitmapDrawable extends RoundedDrawable {
   }
 
   @Override
-  public void setColorFilter(ColorFilter colorFilter) {
+  public void setColorFilter(final ColorFilter colorFilter) {
     super.setColorFilter(colorFilter);
     mPaint.setColorFilter(colorFilter);
   }

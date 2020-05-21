@@ -23,21 +23,21 @@ public class LocalAssetFetchProducer extends LocalFetchProducer {
   private final AssetManager mAssetManager;
 
   public LocalAssetFetchProducer(
-      Executor executor,
-      PooledByteBufferFactory pooledByteBufferFactory,
-      AssetManager assetManager) {
+      final Executor executor,
+      final PooledByteBufferFactory pooledByteBufferFactory,
+      final AssetManager assetManager) {
     super(executor, pooledByteBufferFactory);
     mAssetManager = assetManager;
   }
 
   @Override
-  protected EncodedImage getEncodedImage(ImageRequest imageRequest) throws IOException {
+  protected EncodedImage getEncodedImage(final ImageRequest imageRequest) throws IOException {
     return getEncodedImage(
         mAssetManager.open(getAssetName(imageRequest), AssetManager.ACCESS_STREAMING),
         getLength(imageRequest));
   }
 
-  private int getLength(ImageRequest imageRequest) {
+  private int getLength(final ImageRequest imageRequest) {
     AssetFileDescriptor fd = null;
     try {
       fd = mAssetManager.openFd(getAssetName(imageRequest));
@@ -60,7 +60,7 @@ public class LocalAssetFetchProducer extends LocalFetchProducer {
     return PRODUCER_NAME;
   }
 
-  private static String getAssetName(ImageRequest imageRequest) {
+  private static String getAssetName(final ImageRequest imageRequest) {
     return imageRequest.getSourceUri().getPath().substring(1);
   }
 }

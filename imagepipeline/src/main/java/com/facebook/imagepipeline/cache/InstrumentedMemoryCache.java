@@ -15,13 +15,13 @@ public class InstrumentedMemoryCache<K, V> implements MemoryCache<K, V> {
   private final MemoryCache<K, V> mDelegate;
   private final MemoryCacheTracker mTracker;
 
-  public InstrumentedMemoryCache(MemoryCache<K, V> delegate, MemoryCacheTracker tracker) {
+  public InstrumentedMemoryCache(final MemoryCache<K, V> delegate, final MemoryCacheTracker tracker) {
     mDelegate = delegate;
     mTracker = tracker;
   }
 
   @Override
-  public CloseableReference<V> get(K key) {
+  public CloseableReference<V> get(final K key) {
     CloseableReference<V> result = mDelegate.get(key);
     if (result == null) {
       mTracker.onCacheMiss(key);
@@ -32,28 +32,28 @@ public class InstrumentedMemoryCache<K, V> implements MemoryCache<K, V> {
   }
 
   @Override
-  public void probe(K key) {
+  public void probe(final K key) {
     mDelegate.probe(key);
   }
 
   @Override
-  public CloseableReference<V> cache(K key, CloseableReference<V> value) {
+  public CloseableReference<V> cache(final K key, final CloseableReference<V> value) {
     mTracker.onCachePut(key);
     return mDelegate.cache(key, value);
   }
 
   @Override
-  public int removeAll(Predicate<K> predicate) {
+  public int removeAll(final Predicate<K> predicate) {
     return mDelegate.removeAll(predicate);
   }
 
   @Override
-  public boolean contains(Predicate<K> predicate) {
+  public boolean contains(final Predicate<K> predicate) {
     return mDelegate.contains(predicate);
   }
 
   @Override
-  public boolean contains(K key) {
+  public boolean contains(final K key) {
     return mDelegate.contains(key);
   }
 

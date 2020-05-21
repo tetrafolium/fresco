@@ -23,10 +23,10 @@ public final class VitoUtils {
   }
 
   /** Create a string version for the given Vito ID. */
-  public static String getStringId(long id) {
+  public static String getStringId(final long id) {
     // Vito IDs and Drawee IDs overlap. We add a prefix to distinguish between them.
     return "v" + id;
   }
 
-  private VitoUtils() {}
+  private VitoUtils() { }
 }

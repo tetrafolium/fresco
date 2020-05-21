@@ -37,9 +37,9 @@ public class DefaultFrescoVitoProvider implements FrescoVitoProvider.Implementat
   }
 
   public DefaultFrescoVitoProvider(
-      FrescoContext context,
-      FrescoVitoConfig config,
-      @Nullable Supplier<Boolean> debugOverlayEnabledSupplier) {
+      final FrescoContext context,
+      final FrescoVitoConfig config,
+      final @Nullable Supplier<Boolean> debugOverlayEnabledSupplier) {
     if (!ImagePipelineFactory.hasBeenInitialized()) {
       throw new RuntimeException(
           "Fresco must be initialized before DefaultFrescoVitoProvider can be used!");

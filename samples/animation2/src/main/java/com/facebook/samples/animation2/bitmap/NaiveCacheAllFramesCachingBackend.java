@@ -27,13 +27,13 @@ public class NaiveCacheAllFramesCachingBackend implements BitmapFrameCache {
 
   @Nullable
   @Override
-  public synchronized CloseableReference<Bitmap> getCachedFrame(int frameNumber) {
+  public synchronized CloseableReference<Bitmap> getCachedFrame(final int frameNumber) {
     return CloseableReference.cloneOrNull(mBitmapSparseArray.get(frameNumber));
   }
 
   @Nullable
   @Override
-  public CloseableReference<Bitmap> getFallbackFrame(int frameNumber) {
+  public CloseableReference<Bitmap> getFallbackFrame(final int frameNumber) {
     // Not supported
     return null;
   }
@@ -41,13 +41,13 @@ public class NaiveCacheAllFramesCachingBackend implements BitmapFrameCache {
   @Nullable
   @Override
   public CloseableReference<Bitmap> getBitmapToReuseForFrame(
-      int frameNumber, int width, int height) {
+      final int frameNumber, final int width, final int height) {
     // Not supported
     return null;
   }
 
   @Override
-  public synchronized boolean contains(int frameNumber) {
+  public synchronized boolean contains(final int frameNumber) {
     return CloseableReference.isValid(mBitmapSparseArray.get(frameNumber));
   }
 
@@ -73,9 +73,9 @@ public class NaiveCacheAllFramesCachingBackend implements BitmapFrameCache {
 
   @Override
   public synchronized void onFrameRendered(
-      int frameNumber,
-      CloseableReference<Bitmap> bitmapReference,
-      @BitmapAnimationBackend.FrameType int frameType) {
+      final int frameNumber,
+      final CloseableReference<Bitmap> bitmapReference,
+      final @BitmapAnimationBackend.FrameType int frameType) {
     mBitmapSparseArray.put(frameNumber, CloseableReference.cloneOrNull(bitmapReference));
     if (mFrameCacheListener != null) {
       mFrameCacheListener.onFrameCached(this, frameNumber);
@@ -84,12 +84,12 @@ public class NaiveCacheAllFramesCachingBackend implements BitmapFrameCache {
 
   @Override
   public void onFramePrepared(
-      int frameNumber,
-      CloseableReference<Bitmap> bitmapReference,
-      @BitmapAnimationBackend.FrameType int frameType) {}
+      final int frameNumber,
+      final CloseableReference<Bitmap> bitmapReference,
+      final @BitmapAnimationBackend.FrameType int frameType) { }
 
   @Override
-  public void setFrameCacheListener(FrameCacheListener frameCacheListener) {
+  public void setFrameCacheListener(final FrameCacheListener frameCacheListener) {
     mFrameCacheListener = frameCacheListener;
   }
 }

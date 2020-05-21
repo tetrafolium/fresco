@@ -20,7 +20,7 @@ public class LocalFileFetchProducer extends LocalFetchProducer {
   public static final String PRODUCER_NAME = "LocalFileFetchProducer";
 
   public LocalFileFetchProducer(
-      Executor executor, PooledByteBufferFactory pooledByteBufferFactory) {
+      final Executor executor, final PooledByteBufferFactory pooledByteBufferFactory) {
     super(executor, pooledByteBufferFactory);
   }
 

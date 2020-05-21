@@ -20,11 +20,11 @@ public class DebugControllerOverlayDrawableTestHelper {
   }
 
   public void assertOverlayColorOk(
-      int imageWidth,
-      int imageHeight,
-      int drawableWidth,
-      int drawableHeight,
-      ScalingUtils.ScaleType scaleType) {
+      final int imageWidth,
+      final int imageHeight,
+      final int drawableWidth,
+      final int drawableHeight,
+      final ScalingUtils.ScaleType scaleType) {
     mOverlayDrawable.setBounds(0, 0, drawableWidth, drawableHeight);
     assertEquals(
         DebugControllerOverlayDrawable.TEXT_COLOR_IMAGE_OK,
@@ -32,11 +32,11 @@ public class DebugControllerOverlayDrawableTestHelper {
   }
 
   public void assertOverlayColorAlmostOk(
-      int imageWidth,
-      int imageHeight,
-      int drawableWidth,
-      int drawableHeight,
-      ScalingUtils.ScaleType scaleType) {
+      final int imageWidth,
+      final int imageHeight,
+      final int drawableWidth,
+      final int drawableHeight,
+      final ScalingUtils.ScaleType scaleType) {
     mOverlayDrawable.setBounds(0, 0, drawableWidth, drawableHeight);
     assertEquals(
         DebugControllerOverlayDrawable.TEXT_COLOR_IMAGE_ALMOST_OK,
@@ -44,11 +44,11 @@ public class DebugControllerOverlayDrawableTestHelper {
   }
 
   public void assertOverlayColorNotOk(
-      int imageWidth,
-      int imageHeight,
-      int drawableWidth,
-      int drawableHeight,
-      ScalingUtils.ScaleType scaleType) {
+      final int imageWidth,
+      final int imageHeight,
+      final int drawableWidth,
+      final int drawableHeight,
+      final ScalingUtils.ScaleType scaleType) {
     mOverlayDrawable.setBounds(0, 0, drawableWidth, drawableHeight);
     assertEquals(
         DebugControllerOverlayDrawable.TEXT_COLOR_IMAGE_NOT_OK,

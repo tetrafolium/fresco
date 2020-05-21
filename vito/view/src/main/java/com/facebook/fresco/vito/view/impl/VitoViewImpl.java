@@ -33,27 +33,27 @@ public class VitoViewImpl implements VitoView.Implementation {
   private final View.OnAttachStateChangeListener sOnAttachStateChangeListenerCallback =
       new View.OnAttachStateChangeListener() {
         @Override
-        public void onViewAttachedToWindow(View view) {
+        public void onViewAttachedToWindow(final View view) {
           onAttach(view);
         }
 
         @Override
-        public void onViewDetachedFromWindow(View view) {
+        public void onViewDetachedFromWindow(final View view) {
           onDetach(view);
         }
       };
 
-  public VitoViewImpl(FrescoContext frescoContext) {
+  public VitoViewImpl(final FrescoContext frescoContext) {
     mFrescoContext = frescoContext;
   }
 
   @Override
   public void show(
-      @Nullable Uri uri,
-      @Nullable MultiUri multiUri,
-      ImageOptions imageOptions,
-      @Nullable Object callerContext,
-      @Nullable ImageListener imageListener,
+      final @Nullable Uri uri,
+      final @Nullable MultiUri multiUri,
+      final ImageOptions imageOptions,
+      final @Nullable Object callerContext,
+      final @Nullable ImageListener imageListener,
       final View target) {
     Preconditions.checkArgument(
         !(uri != null && multiUri != null), "Setting both a Uri and MultiUri is not allowed!");
@@ -101,7 +101,7 @@ public class VitoViewImpl implements VitoView.Implementation {
     frescoDrawable.setVisibilityCallback(
         new VisibilityCallback() {
           @Override
-          public void onVisibilityChange(boolean visible) {
+          public void onVisibilityChange(final boolean visible) {
             if (!visible) {
               onDetach(target);
             }
@@ -115,35 +115,35 @@ public class VitoViewImpl implements VitoView.Implementation {
     return frescoDrawable;
   }
 
-  private void onAttach(View view) {
+  private void onAttach(final View view) {
     FrescoDrawable frescoDrawable = createFrescoDrawable(view);
     FrescoState state = getState(view);
     state.setFrescoDrawable(frescoDrawable);
     onAttach(state);
   }
 
-  private void onDetach(View view) {
+  private void onDetach(final View view) {
     onDetach(getState(view));
   }
 
-  private void onAttach(@Nullable FrescoState state) {
+  private void onAttach(final @Nullable FrescoState state) {
     if (state != null && !state.isAttached()) {
       mFrescoContext.getController().onAttach(state, null);
     }
   }
 
-  private void onDetach(@Nullable FrescoState state) {
+  private void onDetach(final @Nullable FrescoState state) {
     if (state != null && state.isAttached()) {
       mFrescoContext.getController().onDetach(state);
     }
   }
 
-  private static void setState(View view, FrescoState state) {
+  private static void setState(final View view, final FrescoState state) {
     view.setTag(R.id.fresco_vito_tag_state, state);
   }
 
   @Nullable
-  private static FrescoState getState(View view) {
+  private static FrescoState getState(final View view) {
     return (FrescoState) view.getTag(R.id.fresco_vito_tag_state);
   }
 }

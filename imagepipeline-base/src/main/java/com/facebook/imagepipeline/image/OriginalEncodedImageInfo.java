@@ -31,12 +31,12 @@ public class OriginalEncodedImageInfo {
   }
 
   public OriginalEncodedImageInfo(
-      Uri sourceUri,
-      EncodedImageOrigin origin,
-      @Nullable Object callerContext,
-      int width,
-      int height,
-      int size) {
+      final Uri sourceUri,
+      final EncodedImageOrigin origin,
+      final @Nullable Object callerContext,
+      final int width,
+      final int height,
+      final int size) {
     mUri = sourceUri;
     mOrigin = origin;
     mCallerContext = callerContext;

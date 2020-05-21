@@ -21,7 +21,7 @@ import com.facebook.common.internal.DoNotStrip;
 public class RealtimeSinceBootClock implements MonotonicClock {
   private static final RealtimeSinceBootClock INSTANCE = new RealtimeSinceBootClock();
 
-  private RealtimeSinceBootClock() {}
+  private RealtimeSinceBootClock() { }
 
   /**
    * Returns a singleton instance of this clock.

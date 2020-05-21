@@ -171,7 +171,7 @@ public class FadeDrawableAllOnTest {
     testImmediateTransition(false);
   }
 
-  private void testImmediateTransition(boolean fadeUpToLayer) {
+  private void testImmediateTransition(final boolean fadeUpToLayer) {
     resetInteractions();
     if (fadeUpToLayer) {
       mFadeDrawable.fadeUpToLayer(1);
@@ -197,7 +197,7 @@ public class FadeDrawableAllOnTest {
     testZeroTransition(false);
   }
 
-  private void testZeroTransition(boolean fadeUpToLayer) {
+  private void testZeroTransition(final boolean fadeUpToLayer) {
     resetInteractions();
     mFadeDrawable.setTransitionDuration(0);
     if (fadeUpToLayer) {
@@ -227,7 +227,7 @@ public class FadeDrawableAllOnTest {
     testTransition(false);
   }
 
-  private void testTransition(boolean fadeUpToLayer) {
+  private void testTransition(final boolean fadeUpToLayer) {
     // duration is set to 85 ms
     // 85 = 5 * 17; 5 frames of 17ms
     // 255 / 5 = 51; each frame alpha should increase by 51
@@ -413,7 +413,7 @@ public class FadeDrawableAllOnTest {
 
     private long mCurrentTimeMs;
 
-    public FakeFadeDrawable(Drawable[] layers) {
+    public FakeFadeDrawable(final Drawable[] layers) {
       super(layers, true);
       mCurrentTimeMs = 0;
     }
@@ -423,7 +423,7 @@ public class FadeDrawableAllOnTest {
       return mCurrentTimeMs;
     }
 
-    void incrementCurrentTimeMs(long increment) {
+    void incrementCurrentTimeMs(final long increment) {
       mCurrentTimeMs += increment;
     }
   }

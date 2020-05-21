@@ -65,7 +65,7 @@ public class PriorityStarvingThrottlingProducerTest {
       doAnswer(
               new Answer() {
                 @Override
-                public Object answer(InvocationOnMock invocation) throws Throwable {
+                public Object answer(final InvocationOnMock invocation) throws Throwable {
                   mThrottlerConsumers[iFinal] = (Consumer<Object>) invocation.getArguments()[0];
                   return null;
                 }
@@ -260,7 +260,7 @@ public class PriorityStarvingThrottlingProducerTest {
     assertEquals(result, 0);
   }
 
-  private static int compareItems(Priority pri1, long time1, Priority pri2, long time2) {
+  private static int compareItems(final Priority pri1, final long time1, final Priority pri2, final long time2) {
     PriorityComparator pc = new PriorityComparator();
     Consumer<Object> consumer1 = mock(Consumer.class);
     ProducerContext context1 = mock(ProducerContext.class);
@@ -273,7 +273,7 @@ public class PriorityStarvingThrottlingProducerTest {
     return pc.compare(item1, item2);
   }
 
-  private void verifyNextCalledForIndex(int val) {
+  private void verifyNextCalledForIndex(final int val) {
     verify(mProducerListeners[val])
         .onProducerFinishWithSuccess(mProducerContexts[val], PRODUCER_NAME, null);
   }

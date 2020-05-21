@@ -25,16 +25,16 @@ public class RoundingOptions {
     return AS_CIRCLE;
   }
 
-  public static RoundingOptions asCircle(boolean antiAliasing) {
+  public static RoundingOptions asCircle(final boolean antiAliasing) {
     return antiAliasing ? AS_CIRCLE_ANTI_ALIASING : AS_CIRCLE;
   }
 
-  public static RoundingOptions forCornerRadiusPx(float cornerRadiusPx) {
+  public static RoundingOptions forCornerRadiusPx(final float cornerRadiusPx) {
     return new RoundingOptions(false, cornerRadiusPx, null, false);
   }
 
   public static RoundingOptions forCornerRadii(
-      float topLeft, float topRight, float bottomRight, float bottomLeft) {
+      final float topLeft, final float topRight, final float bottomRight, final float bottomLeft) {
     float[] radii = new float[8];
     radii[0] = radii[1] = topLeft;
     radii[2] = radii[3] = topRight;
@@ -49,10 +49,10 @@ public class RoundingOptions {
   private final boolean mAntiAliasing;
 
   private RoundingOptions(
-      boolean isCircular,
-      float cornerRadiusPx,
-      @Nullable float[] cornerRadii,
-      boolean antiAliasing) {
+      final boolean isCircular,
+      final float cornerRadiusPx,
+      final @Nullable float[] cornerRadii,
+      final boolean antiAliasing) {
     mIsCircular = isCircular;
     mCornerRadius = cornerRadiusPx;
     mCornerRadii = cornerRadii;
@@ -81,7 +81,7 @@ public class RoundingOptions {
   }
 
   @Override
-  public boolean equals(@Nullable Object obj) {
+  public boolean equals(final @Nullable Object obj) {
     if (this == obj) {
       return true;
     }

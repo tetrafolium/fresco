@@ -57,7 +57,7 @@ class Bucket<V> {
    * @param maxLength max length for the bucket (used + free)
    * @param inUseLength current in-use-length for the bucket
    */
-  public Bucket(int itemSize, int maxLength, int inUseLength, boolean fixBucketsReinitialization) {
+  public Bucket(final int itemSize, final int maxLength, final int inUseLength, final boolean fixBucketsReinitialization) {
     Preconditions.checkState(itemSize > 0);
     Preconditions.checkState(maxLength >= 0);
     Preconditions.checkState(inUseLength >= 0);
@@ -122,7 +122,7 @@ class Bucket<V> {
    *
    * @param value the value to release
    */
-  public void release(V value) {
+  public void release(final V value) {
     Preconditions.checkNotNull(value);
     if (mFixBucketsReinitialization) {
       // Proper way
@@ -140,7 +140,7 @@ class Bucket<V> {
     }
   }
 
-  void addToFreeList(V value) {
+  void addToFreeList(final V value) {
     mFreeList.add(value);
   }
 

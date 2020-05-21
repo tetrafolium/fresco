@@ -15,7 +15,7 @@ public class NoOpDebugOverlayFactory implements DebugOverlayFactory {
 
   @Nullable
   @Override
-  public Drawable create(FrescoState frescoState) {
+  public Drawable create(final FrescoState frescoState) {
     return null;
   }
 }

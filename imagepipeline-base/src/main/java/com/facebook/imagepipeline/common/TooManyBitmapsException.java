@@ -14,7 +14,7 @@ public class TooManyBitmapsException extends RuntimeException {
     super();
   }
 
-  public TooManyBitmapsException(String detailMessage) {
+  public TooManyBitmapsException(final String detailMessage) {
     super(detailMessage);
   }
 }

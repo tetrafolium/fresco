@@ -18,14 +18,14 @@ public class NativeMemoryChunkPool extends MemoryChunkPool {
 
   @DoNotStrip
   public NativeMemoryChunkPool(
-      MemoryTrimmableRegistry memoryTrimmableRegistry,
-      PoolParams poolParams,
-      PoolStatsTracker nativeMemoryChunkPoolStatsTracker) {
+      final MemoryTrimmableRegistry memoryTrimmableRegistry,
+      final PoolParams poolParams,
+      final PoolStatsTracker nativeMemoryChunkPoolStatsTracker) {
     super(memoryTrimmableRegistry, poolParams, nativeMemoryChunkPoolStatsTracker);
   }
 
   @Override
-  protected NativeMemoryChunk alloc(int bucketedSize) {
+  protected NativeMemoryChunk alloc(final int bucketedSize) {
     return new NativeMemoryChunk(bucketedSize);
   }
 }

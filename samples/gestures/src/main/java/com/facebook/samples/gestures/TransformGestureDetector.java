@@ -34,7 +34,7 @@ public class TransformGestureDetector implements MultiPointerGestureDetector.Lis
 
   private Listener mListener = null;
 
-  public TransformGestureDetector(MultiPointerGestureDetector multiPointerGestureDetector) {
+  public TransformGestureDetector(final MultiPointerGestureDetector multiPointerGestureDetector) {
     mDetector = multiPointerGestureDetector;
     mDetector.setListener(this);
   }
@@ -49,7 +49,7 @@ public class TransformGestureDetector implements MultiPointerGestureDetector.Lis
    *
    * @param listener listener to set
    */
-  public void setListener(Listener listener) {
+  public void setListener(final Listener listener) {
     mListener = listener;
   }
 
@@ -69,27 +69,27 @@ public class TransformGestureDetector implements MultiPointerGestureDetector.Lis
   }
 
   @Override
-  public void onGestureBegin(MultiPointerGestureDetector detector) {
+  public void onGestureBegin(final MultiPointerGestureDetector detector) {
     if (mListener != null) {
       mListener.onGestureBegin(this);
     }
   }
 
   @Override
-  public void onGestureUpdate(MultiPointerGestureDetector detector) {
+  public void onGestureUpdate(final MultiPointerGestureDetector detector) {
     if (mListener != null) {
       mListener.onGestureUpdate(this);
     }
   }
 
   @Override
-  public void onGestureEnd(MultiPointerGestureDetector detector) {
+  public void onGestureEnd(final MultiPointerGestureDetector detector) {
     if (mListener != null) {
       mListener.onGestureEnd(this);
     }
   }
 
-  private float calcAverage(float[] arr, int len) {
+  private float calcAverage(final float[] arr, final int len) {
     float sum = 0;
     for (int i = 0; i < len; i++) {
       sum += arr[i];

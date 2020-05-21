@@ -26,22 +26,22 @@ public class InstrumentedDraweeView extends SimpleDraweeView implements Instrume
   private Instrumentation mInstrumentation;
   private ControllerListener<Object> mListener;
 
-  public InstrumentedDraweeView(Context context, GenericDraweeHierarchy hierarchy) {
+  public InstrumentedDraweeView(final Context context, final GenericDraweeHierarchy hierarchy) {
     super(context, hierarchy);
     init();
   }
 
-  public InstrumentedDraweeView(Context context) {
+  public InstrumentedDraweeView(final Context context) {
     super(context);
     init();
   }
 
-  public InstrumentedDraweeView(Context context, AttributeSet attrs) {
+  public InstrumentedDraweeView(final Context context, final AttributeSet attrs) {
     super(context, attrs);
     init();
   }
 
-  public InstrumentedDraweeView(Context context, AttributeSet attrs, int defStyle) {
+  public InstrumentedDraweeView(final Context context, final AttributeSet attrs, final int defStyle) {
     super(context, attrs, defStyle);
     init();
   }
@@ -51,30 +51,30 @@ public class InstrumentedDraweeView extends SimpleDraweeView implements Instrume
     mListener =
         new BaseControllerListener<Object>() {
           @Override
-          public void onSubmit(String id, Object callerContext) {
+          public void onSubmit(final String id, final Object callerContext) {
             mInstrumentation.onStart();
           }
 
           @Override
           public void onFinalImageSet(
-              String id, @Nullable Object imageInfo, @Nullable Animatable animatable) {
+              final String id, final @Nullable Object imageInfo, final @Nullable Animatable animatable) {
             mInstrumentation.onSuccess();
           }
 
           @Override
-          public void onFailure(String id, Throwable throwable) {
+          public void onFailure(final String id, final Throwable throwable) {
             mInstrumentation.onFailure();
           }
 
           @Override
-          public void onRelease(String id) {
+          public void onRelease(final String id) {
             mInstrumentation.onCancellation();
           }
         };
   }
 
   @Override
-  public void initInstrumentation(String tag, PerfListener perfListener) {
+  public void initInstrumentation(final String tag, final PerfListener perfListener) {
     mInstrumentation.init(tag, perfListener);
   }
 
@@ -85,7 +85,7 @@ public class InstrumentedDraweeView extends SimpleDraweeView implements Instrume
   }
 
   @Override
-  public void setImageURI(Uri uri, @Nullable Object callerContext) {
+  public void setImageURI(final Uri uri, final @Nullable Object callerContext) {
     SimpleDraweeControllerBuilder controllerBuilder =
         getControllerBuilder()
             .setUri(uri)

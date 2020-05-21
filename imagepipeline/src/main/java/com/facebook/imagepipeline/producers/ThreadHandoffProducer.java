@@ -38,13 +38,13 @@ public class ThreadHandoffProducer<T> implements Producer<T> {
           new StatefulProducerRunnable<T>(
               consumer, producerListener, context, PRODUCER_NAME, null, null) {
             @Override
-            protected void onSuccess(T ignored) {
+            protected void onSuccess(final T ignored) {
               producerListener.onProducerFinishWithSuccess(context, PRODUCER_NAME, null);
               mInputProducer.produceResults(consumer, context);
             }
 
             @Override
-            protected void disposeResult(T ignored) {}
+            protected void disposeResult(final T ignored) { }
 
             @Override
             protected @Nullable T getResult() throws Exception {
@@ -70,7 +70,7 @@ public class ThreadHandoffProducer<T> implements Producer<T> {
   }
 
   @Nullable
-  private static String getInstrumentationTag(ProducerContext context) {
+  private static String getInstrumentationTag(final ProducerContext context) {
     return FrescoInstrumenter.isTracing()
         ? "ThreadHandoffProducer_produceResults_" + context.getId()
         : null;

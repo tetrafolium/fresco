@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 public class TrivialBufferPooledByteBuffer implements PooledByteBuffer {
   private ByteBuffer mBuffer;
 
-  public TrivialBufferPooledByteBuffer(byte[] buf) {
+  public TrivialBufferPooledByteBuffer(final byte[] buf) {
     mBuffer = ByteBuffer.allocateDirect(buf.length);
     mBuffer.put(buf);
   }
@@ -26,12 +26,12 @@ public class TrivialBufferPooledByteBuffer implements PooledByteBuffer {
   }
 
   @Override
-  public byte read(int offset) {
+  public byte read(final int offset) {
     return mBuffer.get(offset);
   }
 
   @Override
-  public int read(int offset, byte[] buffer, int bufferOffset, int length) {
+  public int read(final int offset, final byte[] buffer, final int bufferOffset, final int length) {
     mBuffer.position(offset);
     mBuffer.get(buffer, bufferOffset, length);
     return length;

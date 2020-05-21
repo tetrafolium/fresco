@@ -26,7 +26,7 @@ public class MimeTypeMapWrapper {
           "heif", "image/heif",
           "heic", "image/heic");
 
-  public static String getExtensionFromMimeType(String mimeType) {
+  public static String getExtensionFromMimeType(final String mimeType) {
     String result = sMimeTypeToExtensionMap.get(mimeType);
     if (result != null) {
       return result;
@@ -34,7 +34,7 @@ public class MimeTypeMapWrapper {
     return sMimeTypeMap.getExtensionFromMimeType(mimeType);
   }
 
-  public static String getMimeTypeFromExtension(String extension) {
+  public static String getMimeTypeFromExtension(final String extension) {
     String result = sExtensionToMimeTypeMap.get(extension);
     if (result != null) {
       return result;
@@ -42,11 +42,11 @@ public class MimeTypeMapWrapper {
     return sMimeTypeMap.getMimeTypeFromExtension(extension);
   }
 
-  public static boolean hasExtension(String extension) {
+  public static boolean hasExtension(final String extension) {
     return sExtensionToMimeTypeMap.containsKey(extension) || sMimeTypeMap.hasExtension(extension);
   }
 
-  public static boolean hasMimeType(String mimeType) {
+  public static boolean hasMimeType(final String mimeType) {
     return sMimeTypeToExtensionMap.containsKey(mimeType) || sMimeTypeMap.hasMimeType(mimeType);
   }
 }

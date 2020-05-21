@@ -35,10 +35,10 @@ public class BucketsBitmapPool extends BasePool<Bitmap> implements BitmapPool {
    * @param poolParams pool parameters
    */
   public BucketsBitmapPool(
-      MemoryTrimmableRegistry memoryTrimmableRegistry,
-      PoolParams poolParams,
-      PoolStatsTracker poolStatsTracker,
-      boolean ignoreHardCap) {
+      final MemoryTrimmableRegistry memoryTrimmableRegistry,
+      final PoolParams poolParams,
+      final PoolStatsTracker poolStatsTracker,
+      final boolean ignoreHardCap) {
     super(memoryTrimmableRegistry, poolParams, poolStatsTracker, ignoreHardCap);
     initialize();
   }
@@ -51,7 +51,7 @@ public class BucketsBitmapPool extends BasePool<Bitmap> implements BitmapPool {
    * @return a new bitmap with the specified size in memory
    */
   @Override
-  protected Bitmap alloc(int size) {
+  protected Bitmap alloc(final int size) {
     return Bitmap.createBitmap(
         1,
         (int) Math.ceil(size / (double) BitmapUtil.RGB_565_BYTES_PER_PIXEL),
@@ -64,7 +64,7 @@ public class BucketsBitmapPool extends BasePool<Bitmap> implements BitmapPool {
    * @param value the bitmap to free
    */
   @Override
-  protected void free(Bitmap value) {
+  protected void free(final Bitmap value) {
     Preconditions.checkNotNull(value);
     value.recycle();
   }
@@ -76,7 +76,7 @@ public class BucketsBitmapPool extends BasePool<Bitmap> implements BitmapPool {
    * @return the 'bucketed' size
    */
   @Override
-  protected int getBucketedSize(int requestSize) {
+  protected int getBucketedSize(final int requestSize) {
     return requestSize;
   }
 
@@ -88,7 +88,7 @@ public class BucketsBitmapPool extends BasePool<Bitmap> implements BitmapPool {
    * @return bucketed size of the value
    */
   @Override
-  protected int getBucketedSizeForValue(Bitmap value) {
+  protected int getBucketedSizeForValue(final Bitmap value) {
     Preconditions.checkNotNull(value);
     return value.getAllocationByteCount();
   }
@@ -100,7 +100,7 @@ public class BucketsBitmapPool extends BasePool<Bitmap> implements BitmapPool {
    * @return size in bytes
    */
   @Override
-  protected int getSizeInBytes(int bucketedSize) {
+  protected int getSizeInBytes(final int bucketedSize) {
     return bucketedSize;
   }
 
@@ -112,14 +112,14 @@ public class BucketsBitmapPool extends BasePool<Bitmap> implements BitmapPool {
    * @return true, if the bitmap can be reused
    */
   @Override
-  protected boolean isReusable(Bitmap value) {
+  protected boolean isReusable(final Bitmap value) {
     Preconditions.checkNotNull(value);
     return !value.isRecycled() && value.isMutable();
   }
 
   @Nullable
   @Override
-  protected Bitmap getValue(Bucket<Bitmap> bucket) {
+  protected Bitmap getValue(final Bucket<Bitmap> bucket) {
     Bitmap result = super.getValue(bucket);
     if (result != null) {
       result.eraseColor(Color.TRANSPARENT);

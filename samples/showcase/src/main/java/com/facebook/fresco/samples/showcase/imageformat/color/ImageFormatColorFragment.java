@@ -34,12 +34,12 @@ public class ImageFormatColorFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_format_color, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     mSimpleDraweeView1 = (SimpleDraweeView) view.findViewById(R.id.drawee1);
     mSimpleDraweeView2 = (SimpleDraweeView) view.findViewById(R.id.drawee2);
 
@@ -52,7 +52,7 @@ public class ImageFormatColorFragment extends BaseShowcaseFragment {
     switchBackground.setOnCheckedChangeListener(
         new CompoundButton.OnCheckedChangeListener() {
           @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+          public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             mSimpleDraweeView1
                 .getHierarchy()
                 .setBackgroundImage(isChecked ? new CheckerBoardDrawable(getResources()) : null);
@@ -68,7 +68,7 @@ public class ImageFormatColorFragment extends BaseShowcaseFragment {
     switchCompat.setOnCheckedChangeListener(
         new CompoundButton.OnCheckedChangeListener() {
           @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+          public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             CustomImageFormatConfigurator.setGlobalColorDecoderEnabled(getContext(), isChecked);
           }
         });

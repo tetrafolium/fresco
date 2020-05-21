@@ -24,7 +24,7 @@ public class FileTree {
    * @param directory the directory to iterate
    * @param visitor the visitor that will be invoked for each directory/file in the tree
    */
-  public static void walkFileTree(File directory, FileTreeVisitor visitor) {
+  public static void walkFileTree(final File directory, final FileTreeVisitor visitor) {
     visitor.preVisitDirectory(directory);
     File[] files = directory.listFiles();
     if (files != null) {
@@ -43,7 +43,7 @@ public class FileTree {
    * Deletes all files and subdirectories in directory (doesn't delete the directory passed as
    * parameter).
    */
-  public static boolean deleteContents(File directory) {
+  public static boolean deleteContents(final File directory) {
     File[] files = directory.listFiles();
     boolean success = true;
     if (files != null) {
@@ -60,7 +60,7 @@ public class FileTree {
    * @param file a file or directory
    * @return true if the file/directory could be deleted
    */
-  public static boolean deleteRecursively(File file) {
+  public static boolean deleteRecursively(final File file) {
     if (file.isDirectory()) {
       deleteContents(file);
     }

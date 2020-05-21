@@ -53,13 +53,13 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
     mInitialized = false;
   }
 
-  protected BaseFrescoStethoPlugin(ImagePipelineFactory factory) {
+  protected BaseFrescoStethoPlugin(final ImagePipelineFactory factory) {
     initialize(factory);
   }
 
   protected abstract void ensureInitialized() throws DumpException;
 
-  protected void initialize(ImagePipelineFactory factory) {
+  protected void initialize(final ImagePipelineFactory factory) {
     mBitmapMemoryCacheInspector =
         new CountingMemoryCacheInspector<>(factory.getBitmapCountingMemoryCache());
     mMainFileCache = factory.getMainFileCache();
@@ -79,7 +79,7 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
    * <p>{@link #initialize} must have been called in the app before running dumpapp.
    */
   @Override
-  public void dump(DumperContext dumpContext) throws DumpException {
+  public void dump(final DumperContext dumpContext) throws DumpException {
     ensureInitialized();
     List<String> args = dumpContext.getArgsAsList();
     PrintStream writer = dumpContext.getStdout();
@@ -104,7 +104,7 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
     }
   }
 
-  private void diskcache(FileCache cache, String title, PrintStream writer, List<String> args)
+  private void diskcache(final FileCache cache, final String title, final PrintStream writer, final List<String> args)
       throws DumpException {
     DiskStorage.DiskDumpInfo intDiskDumpInfo;
     try {
@@ -121,7 +121,7 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
     }
   }
 
-  private void writeDiskDumpInfo(PrintStream writer, DiskStorage.DiskDumpInfo dumpInfo) {
+  private void writeDiskDumpInfo(final PrintStream writer, final DiskStorage.DiskDumpInfo dumpInfo) {
     if (dumpInfo.entries.isEmpty()) {
       writer.println("Empty");
       return;
@@ -154,7 +154,7 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
     return histogram;
   }
 
-  private void printFileTypes(PrintStream writer, DiskStorage.DiskDumpInfo dumpInfo) {
+  private void printFileTypes(final PrintStream writer, final DiskStorage.DiskDumpInfo dumpInfo) {
     writer.println();
     writer.println("File Type Counts:");
     for (String type : dumpInfo.typeCounts.keySet()) {
@@ -162,7 +162,7 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
     }
   }
 
-  private void addToHistogram(SparseArray<Integer> histogram, DiskStorage.DiskDumpInfoEntry entry) {
+  private void addToHistogram(final SparseArray<Integer> histogram, final DiskStorage.DiskDumpInfoEntry entry) {
     for (int i = 0; i < histogram.size(); i++) {
       int key = histogram.keyAt(i);
       if (entry.size / KB < key) {
@@ -174,7 +174,7 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
     histogram.put((int) (entry.size / KB), 1);
   }
 
-  private void printHistogram(PrintStream writer, SparseArray<Integer> histogram) {
+  private void printHistogram(final PrintStream writer, final SparseArray<Integer> histogram) {
     writer.println();
     writer.println("File Size Counts:");
     for (int i = 1; i < histogram.size(); i++) {
@@ -184,7 +184,7 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
     }
   }
 
-  private void writeDiskDumpEntry(PrintStream writer, DiskStorage.DiskDumpInfoEntry entry) {
+  private void writeDiskDumpEntry(final PrintStream writer, final DiskStorage.DiskDumpInfoEntry entry) {
     if (entry.firstBits != null && !entry.firstBits.isEmpty()) {
       writer.println("Undefined: " + entry.firstBits);
     }
@@ -194,20 +194,20 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
   }
 
   private void writeDiskDumpInfoScriptReadable(
-      PrintStream writer, DiskStorage.DiskDumpInfo dumpInfo) {
+      final PrintStream writer, final DiskStorage.DiskDumpInfo dumpInfo) {
     for (DiskStorage.DiskDumpInfoEntry entry : dumpInfo.entries) {
       writeDiskDumpEntryScriptReadable(writer, entry);
     }
   }
 
   private void writeDiskDumpEntryScriptReadable(
-      PrintStream writer, DiskStorage.DiskDumpInfoEntry entry) {
+      final PrintStream writer, final DiskStorage.DiskDumpInfoEntry entry) {
     writer.println(formatStrLocaleSafe("%s\t%s", entry.type, entry.path));
   }
 
   private void writeCacheEntry(
-      PrintStream writer,
-      CountingMemoryCacheInspector.DumpInfoEntry<CacheKey, CloseableImage> entry) {
+      final PrintStream writer,
+      final CountingMemoryCacheInspector.DumpInfoEntry<CacheKey, CloseableImage> entry) {
     if (!(entry.key instanceof BitmapMemoryCacheKey)) {
       writer.println("Undefined: " + entry.key.getClass());
     }
@@ -223,7 +223,7 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
             RealtimeSinceBootClock.get().now() - cacheKey.getInBitmapCacheSince()));
   }
 
-  private void memcache(PrintStream writer, List<String> args) throws DumpException {
+  private void memcache(final PrintStream writer, final List<String> args) throws DumpException {
     CountingMemoryCacheInspector.DumpInfo<CacheKey, CloseableImage> dumpInfo =
         mBitmapMemoryCacheInspector.dumpCacheContent();
 
@@ -286,7 +286,7 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
   }
 
   private void getFiles(
-      PrintStream writer, CountingMemoryCacheInspector.DumpInfo<CacheKey, CloseableImage> dumpInfo)
+      final PrintStream writer, final CountingMemoryCacheInspector.DumpInfo<CacheKey, CloseableImage> dumpInfo)
       throws DumpException, IOException {
     writer.println("\nStoring all images in the memory cache into /sdcard/imagedumperfiles/ ...");
 
@@ -318,10 +318,10 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
   }
 
   private void storeEntries(
-      List<CountingMemoryCacheInspector.DumpInfoEntry<CacheKey, CloseableImage>> entries,
-      int i,
-      PrintStream writer,
-      File directory)
+      final List<CountingMemoryCacheInspector.DumpInfoEntry<CacheKey, CloseableImage>> entries,
+      final int i,
+      final PrintStream writer,
+      final File directory)
       throws IOException {
     String filename;
     for (CountingMemoryCacheInspector.DumpInfoEntry<CacheKey, CloseableImage> entry : entries) {
@@ -346,7 +346,7 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
   }
 
   private void storeImage(
-      Bitmap image, File pictureFile, Bitmap.CompressFormat compressionFormat, int quality)
+      final Bitmap image, final File pictureFile, final Bitmap.CompressFormat compressionFormat, final int quality)
       throws IOException {
     FileOutputStream fos = null;
     try {
@@ -361,7 +361,7 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
     }
   }
 
-  private static void usage(PrintStream writer) {
+  private static void usage(final PrintStream writer) {
     final String cmdName = "dumpapp " + NAME;
     final String usagePrefix = "Usage: " + cmdName + " ";
 
@@ -382,7 +382,7 @@ public abstract class BaseFrescoStethoPlugin implements DumperPlugin {
     writer.println();
   }
 
-  private static String formatStrLocaleSafe(String format, Object... args) {
+  private static String formatStrLocaleSafe(final String format, final Object... args) {
     String str = String.format(/* locale */ null, "  " + format, args);
     return str;
   }

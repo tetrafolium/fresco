@@ -32,7 +32,7 @@ public class BetterImageSpan extends ReplacementSpan {
 
   @IntDef({ALIGN_BASELINE, ALIGN_BOTTOM, ALIGN_CENTER})
   @Retention(RetentionPolicy.SOURCE)
-  public @interface BetterImageSpanAlignment {}
+  public @interface BetterImageSpanAlignment { }
 
   public static final int ALIGN_BOTTOM = 0;
   public static final int ALIGN_BASELINE = 1;
@@ -42,7 +42,7 @@ public class BetterImageSpan extends ReplacementSpan {
    * A helper function to allow dropping in BetterImageSpan as a replacement to ImageSpan, and
    * allowing for center alignment if passed in.
    */
-  public static final @BetterImageSpanAlignment int normalizeAlignment(int alignment) {
+  public static final @BetterImageSpanAlignment int normalizeAlignment(final int alignment) {
     switch (alignment) {
       case DynamicDrawableSpan.ALIGN_BOTTOM:
         return ALIGN_BOTTOM;
@@ -61,11 +61,11 @@ public class BetterImageSpan extends ReplacementSpan {
   private final Paint.FontMetricsInt mFontMetricsInt = new Paint.FontMetricsInt();
   private final Drawable mDrawable;
 
-  public BetterImageSpan(Drawable drawable) {
+  public BetterImageSpan(final Drawable drawable) {
     this(drawable, ALIGN_BASELINE);
   }
 
-  public BetterImageSpan(Drawable drawable, @BetterImageSpanAlignment int verticalAlignment) {
+  public BetterImageSpan(final Drawable drawable, final @BetterImageSpanAlignment int verticalAlignment) {
     mDrawable = drawable;
     mAlignment = verticalAlignment;
     updateBounds();
@@ -78,7 +78,7 @@ public class BetterImageSpan extends ReplacementSpan {
   /** Returns the width of the image span and increases the height if font metrics are available. */
   @Override
   public int getSize(
-      Paint paint, CharSequence text, int start, int end, Paint.FontMetricsInt fontMetrics) {
+      final Paint paint, final CharSequence text, final int start, final int end, final Paint.FontMetricsInt fontMetrics) {
     updateBounds();
     if (fontMetrics == null) {
       return mWidth;
@@ -107,15 +107,15 @@ public class BetterImageSpan extends ReplacementSpan {
 
   @Override
   public void draw(
-      Canvas canvas,
-      CharSequence text,
-      int start,
-      int end,
-      float x,
-      int top,
-      int y,
-      int bottom,
-      Paint paint) {
+      final Canvas canvas,
+      final CharSequence text,
+      final int start,
+      final int end,
+      final float x,
+      final int top,
+      final int y,
+      final int bottom,
+      final Paint paint) {
     paint.getFontMetricsInt(mFontMetricsInt);
     int iconTop = y + getOffsetAboveBaseline(mFontMetricsInt);
     canvas.translate(x, iconTop);
@@ -130,7 +130,7 @@ public class BetterImageSpan extends ReplacementSpan {
     mHeight = mBounds.height();
   }
 
-  private int getOffsetAboveBaseline(Paint.FontMetricsInt fm) {
+  private int getOffsetAboveBaseline(final Paint.FontMetricsInt fm) {
     switch (mAlignment) {
       case ALIGN_BOTTOM:
         return fm.descent - mHeight;

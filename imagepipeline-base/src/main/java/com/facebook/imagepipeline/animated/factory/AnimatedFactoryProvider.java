@@ -21,10 +21,10 @@ public class AnimatedFactoryProvider {
   private static AnimatedFactory sImpl = null;
 
   public static AnimatedFactory getAnimatedFactory(
-      PlatformBitmapFactory platformBitmapFactory,
-      ExecutorSupplier executorSupplier,
-      CountingMemoryCache<CacheKey, CloseableImage> backingCache,
-      boolean downscaleFrameToDrawableDimensions) {
+      final PlatformBitmapFactory platformBitmapFactory,
+      final ExecutorSupplier executorSupplier,
+      final CountingMemoryCache<CacheKey, CloseableImage> backingCache,
+      final boolean downscaleFrameToDrawableDimensions) {
     if (!sImplLoaded) {
       try {
         final Class<?> clazz =

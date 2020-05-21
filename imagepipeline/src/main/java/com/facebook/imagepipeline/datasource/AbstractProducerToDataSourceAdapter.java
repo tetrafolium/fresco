@@ -35,9 +35,9 @@ public abstract class AbstractProducerToDataSourceAdapter<T> extends AbstractDat
   private final RequestListener2 mRequestListener;
 
   protected AbstractProducerToDataSourceAdapter(
-      Producer<T> producer,
-      SettableProducerContext settableProducerContext,
-      RequestListener2 requestListener) {
+      final Producer<T> producer,
+      final SettableProducerContext settableProducerContext,
+      final RequestListener2 requestListener) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("AbstractProducerToDataSourceAdapter()");
     }
@@ -65,13 +65,13 @@ public abstract class AbstractProducerToDataSourceAdapter<T> extends AbstractDat
   private Consumer<T> createConsumer() {
     return new BaseConsumer<T>() {
       @Override
-      protected void onNewResultImpl(@Nullable T newResult, @Status int status) {
+      protected void onNewResultImpl(final @Nullable T newResult, final @Status int status) {
         AbstractProducerToDataSourceAdapter.this.onNewResultImpl(
             newResult, status, mSettableProducerContext);
       }
 
       @Override
-      protected void onFailureImpl(Throwable throwable) {
+      protected void onFailureImpl(final Throwable throwable) {
         AbstractProducerToDataSourceAdapter.this.onFailureImpl(throwable);
       }
 
@@ -81,13 +81,13 @@ public abstract class AbstractProducerToDataSourceAdapter<T> extends AbstractDat
       }
 
       @Override
-      protected void onProgressUpdateImpl(float progress) {
+      protected void onProgressUpdateImpl(final float progress) {
         AbstractProducerToDataSourceAdapter.this.setProgress(progress);
       }
     };
   }
 
-  protected void onNewResultImpl(@Nullable T result, int status, ProducerContext producerContext) {
+  protected void onNewResultImpl(final @Nullable T result, final int status, final ProducerContext producerContext) {
     boolean isLast = BaseConsumer.isLast(status);
     if (super.setResult(result, isLast, getExtras(producerContext))) {
       if (isLast) {
@@ -96,11 +96,11 @@ public abstract class AbstractProducerToDataSourceAdapter<T> extends AbstractDat
     }
   }
 
-  protected Map<String, Object> getExtras(ProducerContext producerContext) {
+  protected Map<String, Object> getExtras(final ProducerContext producerContext) {
     return producerContext.getExtras();
   }
 
-  private void onFailureImpl(Throwable throwable) {
+  private void onFailureImpl(final Throwable throwable) {
     if (super.setFailure(throwable)) {
       mRequestListener.onRequestFailure(mSettableProducerContext, throwable);
     }

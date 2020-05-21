@@ -116,63 +116,63 @@ public class DebugControllerOverlayDrawable extends Drawable implements ImageLoa
    *
    * @param textGravity the text gravity to use
    */
-  public void setTextGravity(int textGravity) {
+  public void setTextGravity(final int textGravity) {
     mTextGravity = textGravity;
     invalidateSelf();
   }
 
-  public void setControllerId(@Nullable String controllerId) {
+  public void setControllerId(final @Nullable String controllerId) {
     mControllerId = controllerId != null ? controllerId : NO_CONTROLLER_ID;
     invalidateSelf();
   }
 
-  public void setImageId(@Nullable String imageId) {
+  public void setImageId(final @Nullable String imageId) {
     mImageId = imageId;
     invalidateSelf();
   }
 
-  public void setDimensions(int widthPx, int heightPx) {
+  public void setDimensions(final int widthPx, final int heightPx) {
     mWidthPx = widthPx;
     mHeightPx = heightPx;
     invalidateSelf();
   }
 
-  public void setAnimationInfo(int frameCount, int loopCount) {
+  public void setAnimationInfo(final int frameCount, final int loopCount) {
     mFrameCount = frameCount;
     mLoopCount = loopCount;
     invalidateSelf();
   }
 
-  public void setOrigin(String text, int color) {
+  public void setOrigin(final String text, final int color) {
     mOriginText = text;
     mOriginColor = color;
     invalidateSelf();
   }
 
   /** @param imageSizeBytes the image size in bytes */
-  public void setImageSize(int imageSizeBytes) {
+  public void setImageSize(final int imageSizeBytes) {
     mImageSizeBytes = imageSizeBytes;
   }
 
-  public void addAdditionalData(String key, String value) {
+  public void addAdditionalData(final String key, final String value) {
     mAdditionalData.put(key, value);
   }
 
-  public void setImageFormat(@Nullable String imageFormat) {
+  public void setImageFormat(final @Nullable String imageFormat) {
     mImageFormat = imageFormat;
   }
 
-  public void setScaleType(ScaleType scaleType) {
+  public void setScaleType(final ScaleType scaleType) {
     mScaleType = scaleType;
   }
 
   /** Pass a semi-transparency color (e.g., 0x66RRGGBB) to give the overlay a color shade. */
-  public void setOverlayColor(int overlayColor) {
+  public void setOverlayColor(final int overlayColor) {
     this.mOverlayColor = overlayColor;
   }
 
   @Override
-  protected void onBoundsChange(Rect bounds) {
+  protected void onBoundsChange(final Rect bounds) {
     super.onBoundsChange(bounds);
 
     // Update the text parameters since the size changed. If you modify the debug text, make sure
@@ -182,7 +182,7 @@ public class DebugControllerOverlayDrawable extends Drawable implements ImageLoa
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     Rect bounds = getBounds();
 
     // Draw bounding box
@@ -237,17 +237,17 @@ public class DebugControllerOverlayDrawable extends Drawable implements ImageLoa
   }
 
   @Override
-  public void setAlpha(int alpha) {}
+  public void setAlpha(final int alpha) { }
 
   @Override
-  public void setColorFilter(ColorFilter cf) {}
+  public void setColorFilter(final ColorFilter cf) { }
 
   @Override
   public int getOpacity() {
     return PixelFormat.TRANSLUCENT;
   }
 
-  private void prepareDebugTextParameters(Rect bounds, int numberOfLines, int maxLineLengthEm) {
+  private void prepareDebugTextParameters(final Rect bounds, final int numberOfLines, final int maxLineLengthEm) {
     int textSizePx = Math.min(bounds.width() / maxLineLengthEm, bounds.height() / numberOfLines);
     textSizePx = Math.min(MAX_TEXT_SIZE_PX, Math.max(MIN_TEXT_SIZE_PX, textSizePx));
     mPaint.setTextSize(textSizePx);
@@ -263,19 +263,19 @@ public class DebugControllerOverlayDrawable extends Drawable implements ImageLoa
             : bounds.top + TEXT_PADDING_PX + MIN_TEXT_SIZE_PX;
   }
 
-  private static String format(String text, @Nullable Object... args) {
+  private static String format(final String text, final @Nullable Object... args) {
     return args == null ? text : String.format(Locale.US, text, args);
   }
 
-  private void addDebugText(Canvas canvas, String label, Object value) {
+  private void addDebugText(final Canvas canvas, final String label, final Object value) {
     addDebugText(canvas, label, String.valueOf(value), TEXT_COLOR);
   }
 
-  private void addDebugText(Canvas canvas, String label, String value) {
+  private void addDebugText(final Canvas canvas, final String label, final String value) {
     addDebugText(canvas, label, value, TEXT_COLOR);
   }
 
-  private void addDebugText(Canvas canvas, String label, String value, int valueColor) {
+  private void addDebugText(final Canvas canvas, final String label, final String value, final int valueColor) {
     final String labelColon = label + ": ";
     final float labelWidth = mPaint.measureText(labelColon);
     final float valueWidth = mPaint.measureText(value);
@@ -299,7 +299,7 @@ public class DebugControllerOverlayDrawable extends Drawable implements ImageLoa
   }
 
   @VisibleForTesting
-  int determineSizeHintColor(int imageWidth, int imageHeight, @Nullable ScaleType scaleType) {
+  int determineSizeHintColor(final int imageWidth, final int imageHeight, final @Nullable ScaleType scaleType) {
     int visibleDrawnAreaWidth = getBounds().width();
     int visibleDrawnAreaHeight = getBounds().height();
 
@@ -355,12 +355,12 @@ public class DebugControllerOverlayDrawable extends Drawable implements ImageLoa
     return TEXT_COLOR_IMAGE_NOT_OK;
   }
 
-  public void setFinalImageTimeMs(long finalImageTimeMs) {
+  public void setFinalImageTimeMs(final long finalImageTimeMs) {
     mFinalImageTimeMs = finalImageTimeMs;
   }
 
   @Override
-  public void onFinalImageSet(long finalImageTimeMs) {
+  public void onFinalImageSet(final long finalImageTimeMs) {
     mFinalImageTimeMs = finalImageTimeMs;
     invalidateSelf();
   }

@@ -15,7 +15,7 @@ public class ImageUrlsRequest {
   private final String mEndpointUrl;
   Map<ImageFormat, ImageSize> mRequestedImageFormats;
 
-  ImageUrlsRequest(final String endpointUrl, Map<ImageFormat, ImageSize> requestedTypes) {
+  ImageUrlsRequest(final String endpointUrl, final Map<ImageFormat, ImageSize> requestedTypes) {
     mEndpointUrl = Preconditions.checkNotNull(endpointUrl);
     mRequestedImageFormats = Preconditions.checkNotNull(requestedTypes);
   }
@@ -24,7 +24,7 @@ public class ImageUrlsRequest {
     return mEndpointUrl;
   }
 
-  public ImageSize getImageSize(ImageFormat imageFormat) {
+  public ImageSize getImageSize(final ImageFormat imageFormat) {
     return mRequestedImageFormats.get(imageFormat);
   }
 }

@@ -13,7 +13,7 @@ import com.facebook.cache.common.CacheKey;
 public class NoOpImageCacheStatsTracker implements ImageCacheStatsTracker {
   private static NoOpImageCacheStatsTracker sInstance = null;
 
-  private NoOpImageCacheStatsTracker() {}
+  private NoOpImageCacheStatsTracker() { }
 
   public static synchronized NoOpImageCacheStatsTracker getInstance() {
     if (sInstance == null) {
@@ -23,44 +23,44 @@ public class NoOpImageCacheStatsTracker implements ImageCacheStatsTracker {
   }
 
   @Override
-  public void onBitmapCachePut(CacheKey cacheKey) {}
+  public void onBitmapCachePut(final CacheKey cacheKey) { }
 
   @Override
-  public void onBitmapCacheHit(CacheKey cacheKey) {}
+  public void onBitmapCacheHit(final CacheKey cacheKey) { }
 
   @Override
-  public void onBitmapCacheMiss(CacheKey cacheKey) {}
+  public void onBitmapCacheMiss(final CacheKey cacheKey) { }
 
   @Override
-  public void onMemoryCachePut(CacheKey cacheKey) {}
+  public void onMemoryCachePut(final CacheKey cacheKey) { }
 
   @Override
-  public void onMemoryCacheHit(CacheKey cacheKey) {}
+  public void onMemoryCacheHit(final CacheKey cacheKey) { }
 
   @Override
-  public void onMemoryCacheMiss(CacheKey cacheKey) {}
+  public void onMemoryCacheMiss(final CacheKey cacheKey) { }
 
   @Override
-  public void onStagingAreaHit(CacheKey cacheKey) {}
+  public void onStagingAreaHit(final CacheKey cacheKey) { }
 
   @Override
-  public void onStagingAreaMiss(CacheKey cacheKey) {}
+  public void onStagingAreaMiss(final CacheKey cacheKey) { }
 
   @Override
-  public void onDiskCacheHit(CacheKey cacheKey) {}
+  public void onDiskCacheHit(final CacheKey cacheKey) { }
 
   @Override
-  public void onDiskCacheMiss(CacheKey cacheKey) {}
+  public void onDiskCacheMiss(final CacheKey cacheKey) { }
 
   @Override
-  public void onDiskCacheGetFail(CacheKey cacheKey) {}
+  public void onDiskCacheGetFail(final CacheKey cacheKey) { }
 
   @Override
-  public void onDiskCachePut(CacheKey cacheKey) {}
+  public void onDiskCachePut(final CacheKey cacheKey) { }
 
   @Override
-  public void registerBitmapMemoryCache(MemoryCache<?, ?> bitmapMemoryCache) {}
+  public void registerBitmapMemoryCache(final MemoryCache<?, ?> bitmapMemoryCache) { }
 
   @Override
-  public void registerEncodedMemoryCache(MemoryCache<?, ?> encodedMemoryCache) {}
+  public void registerEncodedMemoryCache(final MemoryCache<?, ?> encodedMemoryCache) { }
 }

@@ -88,10 +88,10 @@ public class DraweeSpanStringBuilderTest {
   }
 
   private static void addDraweeSpan(
-      DraweeSpanStringBuilder draweeSpanStringBuilder,
-      DraweeHolder draweeHolder,
-      int index,
-      int spanLength) {
+      final DraweeSpanStringBuilder draweeSpanStringBuilder,
+      final DraweeHolder draweeHolder,
+      final int index,
+      final int spanLength) {
     draweeSpanStringBuilder.setImageSpan(
         draweeHolder, /* draweeHolder */
         index, /* startIndex */

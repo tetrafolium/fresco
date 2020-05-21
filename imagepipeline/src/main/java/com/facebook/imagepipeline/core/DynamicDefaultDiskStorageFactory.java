@@ -15,7 +15,7 @@ import com.facebook.cache.disk.DynamicDefaultDiskStorage;
 public class DynamicDefaultDiskStorageFactory implements DiskStorageFactory {
 
   @Override
-  public DiskStorage get(DiskCacheConfig diskCacheConfig) {
+  public DiskStorage get(final DiskCacheConfig diskCacheConfig) {
     return new DynamicDefaultDiskStorage(
         diskCacheConfig.getVersion(),
         diskCacheConfig.getBaseDirectoryPathSupplier(),

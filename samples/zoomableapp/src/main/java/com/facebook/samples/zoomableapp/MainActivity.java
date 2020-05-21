@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
   private MyPagerAdapter mAdapter;
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
     setContentView(R.layout.activity_main);
@@ -31,20 +31,20 @@ public class MainActivity extends Activity {
   }
 
   @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
+  public boolean onCreateOptionsMenu(final Menu menu) {
     MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.menu.menu, menu);
     return super.onCreateOptionsMenu(menu);
   }
 
   @Override
-  public boolean onPrepareOptionsMenu(Menu menu) {
+  public boolean onPrepareOptionsMenu(final Menu menu) {
     menu.findItem(R.id.allow_zoomed_swiping).setChecked(mAdapter.allowsSwipingWhileZoomed());
     return super.onPrepareOptionsMenu(menu);
   }
 
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
+  public boolean onOptionsItemSelected(final MenuItem item) {
     if (item.getItemId() == R.id.allow_zoomed_swiping) {
       mAdapter.toggleAllowSwipingWhileZoomed();
       item.setChecked(mAdapter.allowsSwipingWhileZoomed());

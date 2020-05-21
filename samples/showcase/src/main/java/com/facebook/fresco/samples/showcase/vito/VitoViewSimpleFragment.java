@@ -31,12 +31,12 @@ public class VitoViewSimpleFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_vito_view_simple, container, false);
   }
 
   @Override
-  public void onViewCreated(View container, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View container, final @Nullable Bundle savedInstanceState) {
     final Uri uri = sampleUris().createSampleUri(ImageUriProvider.ImageSize.M);
     final View view = container.findViewById(R.id.view);
 

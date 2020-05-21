@@ -43,13 +43,13 @@ public class AnimatedDrawableFrameInfo {
   public final DisposalMethod disposalMethod;
 
   public AnimatedDrawableFrameInfo(
-      int frameNumber,
-      int xOffset,
-      int yOffset,
-      int width,
-      int height,
-      BlendOperation blendOperation,
-      DisposalMethod disposalMethod) {
+      final int frameNumber,
+      final int xOffset,
+      final int yOffset,
+      final int width,
+      final int height,
+      final BlendOperation blendOperation,
+      final DisposalMethod disposalMethod) {
     this.frameNumber = frameNumber;
     this.xOffset = xOffset;
     this.yOffset = yOffset;

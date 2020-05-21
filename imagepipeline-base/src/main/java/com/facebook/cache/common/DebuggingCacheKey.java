@@ -19,7 +19,7 @@ public class DebuggingCacheKey extends SimpleCacheKey {
   private final @Nullable Object mCallerContext;
   private final Uri mSourceUri;
 
-  public DebuggingCacheKey(String key, @Nullable Object callerContext, Uri sourceUri) {
+  public DebuggingCacheKey(final String key, final @Nullable Object callerContext, final Uri sourceUri) {
     super(key);
     mCallerContext = callerContext;
     mSourceUri = sourceUri;

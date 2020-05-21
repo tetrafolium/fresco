@@ -37,7 +37,7 @@ public class PoolConfig {
   private final boolean mRegisterLruBitmapPoolAsMemoryTrimmable;
   private final boolean mIgnoreBitmapPoolHardCap;
 
-  private PoolConfig(Builder builder) {
+  private PoolConfig(final Builder builder) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("PoolConfig()");
     }
@@ -160,46 +160,46 @@ public class PoolConfig {
     private boolean mRegisterLruBitmapPoolAsMemoryTrimmable;
     public boolean mIgnoreBitmapPoolHardCap;
 
-    private Builder() {}
+    private Builder() { }
 
-    public Builder setBitmapPoolParams(PoolParams bitmapPoolParams) {
+    public Builder setBitmapPoolParams(final PoolParams bitmapPoolParams) {
       mBitmapPoolParams = Preconditions.checkNotNull(bitmapPoolParams);
       return this;
     }
 
-    public Builder setBitmapPoolStatsTracker(PoolStatsTracker bitmapPoolStatsTracker) {
+    public Builder setBitmapPoolStatsTracker(final PoolStatsTracker bitmapPoolStatsTracker) {
       mBitmapPoolStatsTracker = Preconditions.checkNotNull(bitmapPoolStatsTracker);
       return this;
     }
 
-    public Builder setFlexByteArrayPoolParams(PoolParams flexByteArrayPoolParams) {
+    public Builder setFlexByteArrayPoolParams(final PoolParams flexByteArrayPoolParams) {
       mFlexByteArrayPoolParams = flexByteArrayPoolParams;
       return this;
     }
 
-    public Builder setMemoryTrimmableRegistry(MemoryTrimmableRegistry memoryTrimmableRegistry) {
+    public Builder setMemoryTrimmableRegistry(final MemoryTrimmableRegistry memoryTrimmableRegistry) {
       mMemoryTrimmableRegistry = memoryTrimmableRegistry;
       return this;
     }
 
-    public Builder setNativeMemoryChunkPoolParams(PoolParams memoryChunkPoolParams) {
+    public Builder setNativeMemoryChunkPoolParams(final PoolParams memoryChunkPoolParams) {
       mMemoryChunkPoolParams = Preconditions.checkNotNull(memoryChunkPoolParams);
       return this;
     }
 
     public Builder setNativeMemoryChunkPoolStatsTracker(
-        PoolStatsTracker memoryChunkPoolStatsTracker) {
+        final PoolStatsTracker memoryChunkPoolStatsTracker) {
       mMemoryChunkPoolStatsTracker = Preconditions.checkNotNull(memoryChunkPoolStatsTracker);
       return this;
     }
 
-    public Builder setSmallByteArrayPoolParams(PoolParams commonByteArrayPoolParams) {
+    public Builder setSmallByteArrayPoolParams(final PoolParams commonByteArrayPoolParams) {
       mSmallByteArrayPoolParams = Preconditions.checkNotNull(commonByteArrayPoolParams);
       return this;
     }
 
     public Builder setSmallByteArrayPoolStatsTracker(
-        PoolStatsTracker smallByteArrayPoolStatsTracker) {
+        final PoolStatsTracker smallByteArrayPoolStatsTracker) {
       mSmallByteArrayPoolStatsTracker = Preconditions.checkNotNull(smallByteArrayPoolStatsTracker);
       return this;
     }
@@ -208,28 +208,28 @@ public class PoolConfig {
       return new PoolConfig(this);
     }
 
-    public Builder setBitmapPoolType(String bitmapPoolType) {
+    public Builder setBitmapPoolType(final String bitmapPoolType) {
       mBitmapPoolType = bitmapPoolType;
       return this;
     }
 
-    public Builder setBitmapPoolMaxPoolSize(int bitmapPoolMaxPoolSize) {
+    public Builder setBitmapPoolMaxPoolSize(final int bitmapPoolMaxPoolSize) {
       mBitmapPoolMaxPoolSize = bitmapPoolMaxPoolSize;
       return this;
     }
 
-    public Builder setBitmapPoolMaxBitmapSize(int bitmapPoolMaxBitmapSize) {
+    public Builder setBitmapPoolMaxBitmapSize(final int bitmapPoolMaxBitmapSize) {
       mBitmapPoolMaxBitmapSize = bitmapPoolMaxBitmapSize;
       return this;
     }
 
     public Builder setRegisterLruBitmapPoolAsMemoryTrimmable(
-        boolean registerLruBitmapPoolAsMemoryTrimmable) {
+        final boolean registerLruBitmapPoolAsMemoryTrimmable) {
       mRegisterLruBitmapPoolAsMemoryTrimmable = registerLruBitmapPoolAsMemoryTrimmable;
       return this;
     }
 
-    public Builder setIgnoreBitmapPoolHardCap(boolean ignoreBitmapPoolHardCap) {
+    public Builder setIgnoreBitmapPoolHardCap(final boolean ignoreBitmapPoolHardCap) {
       mIgnoreBitmapPoolHardCap = ignoreBitmapPoolHardCap;
       return this;
     }

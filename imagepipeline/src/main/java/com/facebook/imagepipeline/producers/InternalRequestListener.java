@@ -17,14 +17,14 @@ public class InternalRequestListener extends InternalProducerListener implements
   private final @Nullable RequestListener2 mRequestListener2;
 
   public InternalRequestListener(
-      @Nullable RequestListener requestListener, @Nullable RequestListener2 requestListener2) {
+      final @Nullable RequestListener requestListener, final @Nullable RequestListener2 requestListener2) {
     super(requestListener, requestListener2);
     mRequestListener = requestListener;
     mRequestListener2 = requestListener2;
   }
 
   @Override
-  public void onRequestStart(ProducerContext producerContext) {
+  public void onRequestStart(final ProducerContext producerContext) {
     if (mRequestListener != null) {
       mRequestListener.onRequestStart(
           producerContext.getImageRequest(),
@@ -38,7 +38,7 @@ public class InternalRequestListener extends InternalProducerListener implements
   }
 
   @Override
-  public void onRequestSuccess(ProducerContext producerContext) {
+  public void onRequestSuccess(final ProducerContext producerContext) {
     if (mRequestListener != null) {
       mRequestListener.onRequestSuccess(
           producerContext.getImageRequest(), producerContext.getId(), producerContext.isPrefetch());
@@ -49,7 +49,7 @@ public class InternalRequestListener extends InternalProducerListener implements
   }
 
   @Override
-  public void onRequestFailure(ProducerContext producerContext, Throwable throwable) {
+  public void onRequestFailure(final ProducerContext producerContext, final Throwable throwable) {
     if (mRequestListener != null) {
       mRequestListener.onRequestFailure(
           producerContext.getImageRequest(),
@@ -63,7 +63,7 @@ public class InternalRequestListener extends InternalProducerListener implements
   }
 
   @Override
-  public void onRequestCancellation(ProducerContext producerContext) {
+  public void onRequestCancellation(final ProducerContext producerContext) {
     if (mRequestListener != null) {
       mRequestListener.onRequestCancellation(producerContext.getId());
     }

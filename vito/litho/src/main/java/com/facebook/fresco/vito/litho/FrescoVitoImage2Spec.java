@@ -56,24 +56,24 @@ public class FrescoVitoImage2Spec {
   @PropDefault protected static final float imageAspectRatio = 1f;
 
   @OnCreateMountContent(mountingType = MountingType.DRAWABLE)
-  static FrescoDrawable2 onCreateMountContent(Context c) {
+  static FrescoDrawable2 onCreateMountContent(final Context c) {
     return FrescoVitoProvider.getController().createDrawable();
   }
 
   @OnMeasure
   static void onMeasure(
-      ComponentContext c,
-      ComponentLayout layout,
-      int widthSpec,
-      int heightSpec,
-      Size size,
-      @Prop(optional = true, resType = ResType.FLOAT) float imageAspectRatio) {
+      final ComponentContext c,
+      final ComponentLayout layout,
+      final int widthSpec,
+      final int heightSpec,
+      final Size size,
+      final @Prop(optional = true, resType = ResType.FLOAT) float imageAspectRatio) {
     MeasureUtils.measureWithAspectRatio(widthSpec, heightSpec, imageAspectRatio, size);
   }
 
   @OnCalculateCachedValue(name = "imageRequest")
   static VitoImageRequest onCalculateImageRequest(
-      ComponentContext c,
+      final ComponentContext c,
       @Prop(optional = true) final @Nullable Uri uri,
       @Prop(optional = true) final @Nullable MultiUri multiUri,
       @Prop(optional = true) final @Nullable ImageOptions imageOptions,
@@ -84,10 +84,10 @@ public class FrescoVitoImage2Spec {
 
   @OnPrepare
   static void onPrepare(
-      ComponentContext c,
+      final ComponentContext c,
       @Prop(optional = true) final @Nullable Object callerContext,
-      @CachedValue VitoImageRequest imageRequest,
-      Output<DataSource<Void>> prefetchDataSource) {
+      final @CachedValue VitoImageRequest imageRequest,
+      final Output<DataSource<Void>> prefetchDataSource) {
     FrescoVitoConfig config = FrescoVitoProvider.getConfig();
     if (config.prefetchInOnPrepare()) {
       prefetchDataSource.set(
@@ -98,13 +98,13 @@ public class FrescoVitoImage2Spec {
 
   @OnMount
   static void onMount(
-      ComponentContext c,
+      final ComponentContext c,
       final FrescoDrawable2 frescoDrawable,
       @Prop(optional = true) final @Nullable Object callerContext,
       @Prop(optional = true) final @Nullable ImageListener imageListener,
-      @CachedValue VitoImageRequest imageRequest,
-      @FromPrepare DataSource<Void> prefetchDataSource,
-      @FromBoundsDefined Rect viewportDimensions) {
+      final @CachedValue VitoImageRequest imageRequest,
+      final @FromPrepare DataSource<Void> prefetchDataSource,
+      final @FromBoundsDefined Rect viewportDimensions) {
     FrescoVitoProvider.getController()
         .fetch(frescoDrawable, imageRequest, callerContext, imageListener, viewportDimensions);
     if (prefetchDataSource != null) {
@@ -114,13 +114,13 @@ public class FrescoVitoImage2Spec {
 
   @OnBind
   static void onBind(
-      ComponentContext c,
+      final ComponentContext c,
       final FrescoDrawable2 frescoDrawable,
       @Prop(optional = true) final @Nullable Object callerContext,
       @Prop(optional = true) final @Nullable ImageListener imageListener,
-      @CachedValue VitoImageRequest imageRequest,
-      @FromPrepare DataSource<Void> prefetchDataSource,
-      @FromBoundsDefined Rect viewportDimensions) {
+      final @CachedValue VitoImageRequest imageRequest,
+      final @FromPrepare DataSource<Void> prefetchDataSource,
+      final @FromBoundsDefined Rect viewportDimensions) {
     // We fetch in both mount and bind in case an unbind event triggered a delayed release.
     // We'll only trigger an actual fetch if needed. Most of the time, this will be a no-op.
     FrescoVitoProvider.getController()
@@ -132,9 +132,9 @@ public class FrescoVitoImage2Spec {
 
   @OnUnbind
   static void onUnbind(
-      ComponentContext c,
-      FrescoDrawable2 frescoDrawable,
-      @FromPrepare DataSource<Void> prefetchDataSource) {
+      final ComponentContext c,
+      final FrescoDrawable2 frescoDrawable,
+      final @FromPrepare DataSource<Void> prefetchDataSource) {
     FrescoVitoProvider.getController().releaseDelayed(frescoDrawable);
     if (prefetchDataSource != null) {
       prefetchDataSource.close();
@@ -143,9 +143,9 @@ public class FrescoVitoImage2Spec {
 
   @OnUnmount
   static void onUnmount(
-      ComponentContext c,
-      FrescoDrawable2 frescoDrawable,
-      @FromPrepare DataSource<Void> prefetchDataSource) {
+      final ComponentContext c,
+      final FrescoDrawable2 frescoDrawable,
+      final @FromPrepare DataSource<Void> prefetchDataSource) {
     FrescoVitoProvider.getController().release(frescoDrawable);
     if (prefetchDataSource != null) {
       prefetchDataSource.close();
@@ -154,11 +154,11 @@ public class FrescoVitoImage2Spec {
 
   @ShouldUpdate(onMount = true)
   static boolean shouldUpdate(
-      @Prop(optional = true) Diff<Uri> uri,
-      @Prop(optional = true) Diff<MultiUri> multiUri,
-      @Prop(optional = true) Diff<ImageOptions> imageOptions,
-      @Prop(optional = true, resType = ResType.FLOAT) Diff<Float> imageAspectRatio,
-      @Prop(optional = true) Diff<ImageListener> imageListener) {
+      final @Prop(optional = true) Diff<Uri> uri,
+      final @Prop(optional = true) Diff<MultiUri> multiUri,
+      final @Prop(optional = true) Diff<ImageOptions> imageOptions,
+      final @Prop(optional = true, resType = ResType.FLOAT) Diff<Float> imageAspectRatio,
+      final @Prop(optional = true) Diff<ImageListener> imageListener) {
     return !ObjectsCompat.equals(uri.getPrevious(), uri.getNext())
         || !ObjectsCompat.equals(multiUri.getPrevious(), multiUri.getNext())
         || !ObjectsCompat.equals(imageOptions.getPrevious(), imageOptions.getNext())
@@ -167,13 +167,13 @@ public class FrescoVitoImage2Spec {
   }
 
   @OnPopulateAccessibilityNode
-  static void onPopulateAccessibilityNode(View host, AccessibilityNodeInfoCompat node) {
+  static void onPopulateAccessibilityNode(final View host, final AccessibilityNodeInfoCompat node) {
     node.setClassName(AccessibilityRole.IMAGE);
   }
 
   @OnBoundsDefined
   static void onBoundsDefined(
-      ComponentContext c, ComponentLayout layout, Output<Rect> viewportDimensions) {
+      final ComponentContext c, final ComponentLayout layout, final Output<Rect> viewportDimensions) {
     final int width = layout.getWidth();
     final int height = layout.getHeight();
     int paddingX = 0, paddingY = 0;

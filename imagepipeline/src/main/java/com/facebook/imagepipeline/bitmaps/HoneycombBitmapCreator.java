@@ -26,14 +26,14 @@ public class HoneycombBitmapCreator implements BitmapCreator {
   private final EmptyJpegGenerator mJpegGenerator;
   private final FlexByteArrayPool mFlexByteArrayPool;
 
-  public HoneycombBitmapCreator(PoolFactory poolFactory) {
+  public HoneycombBitmapCreator(final PoolFactory poolFactory) {
     mFlexByteArrayPool = poolFactory.getFlexByteArrayPool();
     mJpegGenerator = new EmptyJpegGenerator(poolFactory.getPooledByteBufferFactory());
   }
 
   @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
   @Override
-  public Bitmap createNakedBitmap(int width, int height, Bitmap.Config bitmapConfig) {
+  public Bitmap createNakedBitmap(final int width, final int height, final Bitmap.Config bitmapConfig) {
     CloseableReference<PooledByteBuffer> jpgRef =
         mJpegGenerator.generate((short) width, (short) height);
     EncodedImage encodedImage = null;
@@ -60,7 +60,7 @@ public class HoneycombBitmapCreator implements BitmapCreator {
   }
 
   private static BitmapFactory.Options getBitmapFactoryOptions(
-      int sampleSize, Bitmap.Config bitmapConfig) {
+      final int sampleSize, final Bitmap.Config bitmapConfig) {
     BitmapFactory.Options options = new BitmapFactory.Options();
     options.inDither = true; // known to improve picture quality at low cost
     options.inPreferredConfig = bitmapConfig;

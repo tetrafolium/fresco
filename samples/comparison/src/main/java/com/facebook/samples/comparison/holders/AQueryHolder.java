@@ -19,17 +19,17 @@ public class AQueryHolder extends BaseViewHolder<InstrumentedImageView> {
   private final AQuery mAQuery;
 
   public AQueryHolder(
-      Context context,
-      AQuery aQuery,
-      View parentView,
-      InstrumentedImageView instrumentedImageView,
-      PerfListener perfListener) {
+      final Context context,
+      final AQuery aQuery,
+      final View parentView,
+      final InstrumentedImageView instrumentedImageView,
+      final PerfListener perfListener) {
     super(context, parentView, instrumentedImageView, perfListener);
     mAQuery = aQuery;
   }
 
   @Override
-  protected void onBind(String uri) {
+  protected void onBind(final String uri) {
     mAQuery.id(mImageView).image(uri);
   }
 }

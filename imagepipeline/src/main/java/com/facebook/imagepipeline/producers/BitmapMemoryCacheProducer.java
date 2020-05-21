@@ -31,9 +31,9 @@ public class BitmapMemoryCacheProducer implements Producer<CloseableReference<Cl
   private final Producer<CloseableReference<CloseableImage>> mInputProducer;
 
   public BitmapMemoryCacheProducer(
-      MemoryCache<CacheKey, CloseableImage> memoryCache,
-      CacheKeyFactory cacheKeyFactory,
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final MemoryCache<CacheKey, CloseableImage> memoryCache,
+      final CacheKeyFactory cacheKeyFactory,
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     mMemoryCache = memoryCache;
     mCacheKeyFactory = cacheKeyFactory;
     mInputProducer = inputProducer;
@@ -121,7 +121,7 @@ public class BitmapMemoryCacheProducer implements Producer<CloseableReference<Cl
         CloseableReference<CloseableImage>, CloseableReference<CloseableImage>>(consumer) {
       @Override
       public void onNewResultImpl(
-          CloseableReference<CloseableImage> newResult, @Status int status) {
+          final CloseableReference<CloseableImage> newResult, final @Status int status) {
         try {
           if (FrescoSystrace.isTracing()) {
             FrescoSystrace.beginSection("BitmapMemoryCacheProducer#onNewResultImpl");
@@ -185,7 +185,7 @@ public class BitmapMemoryCacheProducer implements Producer<CloseableReference<Cl
   }
 
   private static void maybeSetExtrasFromCloseableImage(
-      HasImageMetadata imageWithMeta, ProducerContext producerContext) {
+      final HasImageMetadata imageWithMeta, final ProducerContext producerContext) {
     producerContext.putExtras(imageWithMeta.getAsExtras());
   }
 

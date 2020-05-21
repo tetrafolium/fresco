@@ -26,7 +26,7 @@ public class CountingLruMapTest {
     ValueDescriptor<Integer> valueDescriptor =
         new ValueDescriptor<Integer>() {
           @Override
-          public int getSizeInBytes(Integer value) {
+          public int getSizeInBytes(final Integer value) {
             return value;
           }
         };
@@ -180,7 +180,7 @@ public class CountingLruMapTest {
     mCountingLruMap.removeAll(
         new Predicate<String>() {
           @Override
-          public boolean apply(String key) {
+          public boolean apply(final String key) {
             return key.equals("key2") || key.equals("key3");
           }
         });
@@ -215,7 +215,7 @@ public class CountingLruMapTest {
         mCountingLruMap.getMatchingEntries(
             new Predicate<String>() {
               @Override
-              public boolean apply(String key) {
+              public boolean apply(final String key) {
                 return key.equals("key2") || key.equals("key3");
               }
             });
@@ -270,11 +270,11 @@ public class CountingLruMapTest {
     assertEquals(null, mCountingLruMap.getFirstKey());
   }
 
-  private void assertKeyOrder(String... expectedKeys) {
+  private void assertKeyOrder(final String... expectedKeys) {
     assertArrayEquals(expectedKeys, mCountingLruMap.getKeys().toArray());
   }
 
-  private void assertValueOrder(Integer... expectedVlues) {
+  private void assertValueOrder(final Integer... expectedVlues) {
     assertArrayEquals(expectedVlues, mCountingLruMap.getValues().toArray());
   }
 }

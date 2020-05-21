@@ -20,9 +20,9 @@ public class EncodedCacheKeyMultiplexProducer
   private final CacheKeyFactory mCacheKeyFactory;
 
   public EncodedCacheKeyMultiplexProducer(
-      CacheKeyFactory cacheKeyFactory,
-      boolean keepCancelledFetchAsLowPriority,
-      Producer inputProducer) {
+      final CacheKeyFactory cacheKeyFactory,
+      final boolean keepCancelledFetchAsLowPriority,
+      final Producer inputProducer) {
     super(
         inputProducer,
         "EncodedCacheKeyMultiplexProducer",
@@ -31,14 +31,14 @@ public class EncodedCacheKeyMultiplexProducer
     mCacheKeyFactory = cacheKeyFactory;
   }
 
-  protected Pair<CacheKey, ImageRequest.RequestLevel> getKey(ProducerContext producerContext) {
+  protected Pair<CacheKey, ImageRequest.RequestLevel> getKey(final ProducerContext producerContext) {
     return Pair.create(
         mCacheKeyFactory.getEncodedCacheKey(
             producerContext.getImageRequest(), producerContext.getCallerContext()),
         producerContext.getLowestPermittedRequestLevel());
   }
 
-  public EncodedImage cloneOrNull(EncodedImage encodedImage) {
+  public EncodedImage cloneOrNull(final EncodedImage encodedImage) {
     return EncodedImage.cloneOrNull(encodedImage);
   }
 }

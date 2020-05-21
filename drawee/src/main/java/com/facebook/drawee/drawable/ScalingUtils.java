@@ -123,7 +123,7 @@ public class ScalingUtils {
   }
 
   @Nullable
-  public static ScaleTypeDrawable getActiveScaleTypeDrawable(@Nullable Drawable drawable) {
+  public static ScaleTypeDrawable getActiveScaleTypeDrawable(final @Nullable Drawable drawable) {
     if (drawable == null) {
       return null;
     } else if (drawable instanceof ScaleTypeDrawable) {
@@ -151,12 +151,12 @@ public class ScalingUtils {
 
     @Override
     public Matrix getTransform(
-        Matrix outTransform,
-        Rect parentRect,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY) {
+        final Matrix outTransform,
+        final Rect parentRect,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY) {
       final float sX = (float) parentRect.width() / (float) childWidth;
       final float sY = (float) parentRect.height() / (float) childHeight;
       getTransformImpl(outTransform, parentRect, childWidth, childHeight, focusX, focusY, sX, sY);
@@ -180,14 +180,14 @@ public class ScalingUtils {
 
     @Override
     public void getTransformImpl(
-        Matrix outTransform,
-        Rect parentRect,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY,
-        float scaleX,
-        float scaleY) {
+        final Matrix outTransform,
+        final Rect parentRect,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY,
+        final float scaleX,
+        final float scaleY) {
       float dx = parentRect.left;
       float dy = parentRect.top;
       outTransform.setScale(scaleX, scaleY);
@@ -206,14 +206,14 @@ public class ScalingUtils {
 
     @Override
     public void getTransformImpl(
-        Matrix outTransform,
-        Rect parentRect,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY,
-        float scaleX,
-        float scaleY) {
+        final Matrix outTransform,
+        final Rect parentRect,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY,
+        final float scaleX,
+        final float scaleY) {
       float scale = Math.min(scaleX, scaleY);
       float dx = parentRect.left;
       float dy = parentRect.top;
@@ -233,14 +233,14 @@ public class ScalingUtils {
 
     @Override
     public void getTransformImpl(
-        Matrix outTransform,
-        Rect parentRect,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY,
-        float scaleX,
-        float scaleY) {
+        final Matrix outTransform,
+        final Rect parentRect,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY,
+        final float scaleX,
+        final float scaleY) {
       float scale = Math.min(scaleX, scaleY);
       float dx = parentRect.left;
       float dy = parentRect.top + (parentRect.height() - childHeight * scale);
@@ -260,14 +260,14 @@ public class ScalingUtils {
 
     @Override
     public void getTransformImpl(
-        Matrix outTransform,
-        Rect parentRect,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY,
-        float scaleX,
-        float scaleY) {
+        final Matrix outTransform,
+        final Rect parentRect,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY,
+        final float scaleX,
+        final float scaleY) {
       float scale = Math.min(scaleX, scaleY);
       float dx = parentRect.left + (parentRect.width() - childWidth * scale) * 0.5f;
       float dy = parentRect.top + (parentRect.height() - childHeight * scale) * 0.5f;
@@ -287,14 +287,14 @@ public class ScalingUtils {
 
     @Override
     public void getTransformImpl(
-        Matrix outTransform,
-        Rect parentRect,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY,
-        float scaleX,
-        float scaleY) {
+        final Matrix outTransform,
+        final Rect parentRect,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY,
+        final float scaleX,
+        final float scaleY) {
       float scale = Math.min(scaleX, scaleY);
       float dx = parentRect.left + (parentRect.width() - childWidth * scale);
       float dy = parentRect.top + (parentRect.height() - childHeight * scale);
@@ -314,14 +314,14 @@ public class ScalingUtils {
 
     @Override
     public void getTransformImpl(
-        Matrix outTransform,
-        Rect parentRect,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY,
-        float scaleX,
-        float scaleY) {
+        final Matrix outTransform,
+        final Rect parentRect,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY,
+        final float scaleX,
+        final float scaleY) {
       float dx = parentRect.left + (parentRect.width() - childWidth) * 0.5f;
       float dy = parentRect.top + (parentRect.height() - childHeight) * 0.5f;
       outTransform.setTranslate((int) (dx + 0.5f), (int) (dy + 0.5f));
@@ -339,14 +339,14 @@ public class ScalingUtils {
 
     @Override
     public void getTransformImpl(
-        Matrix outTransform,
-        Rect parentRect,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY,
-        float scaleX,
-        float scaleY) {
+        final Matrix outTransform,
+        final Rect parentRect,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY,
+        final float scaleX,
+        final float scaleY) {
       float scale = Math.min(Math.min(scaleX, scaleY), 1.0f);
       float dx = parentRect.left + (parentRect.width() - childWidth * scale) * 0.5f;
       float dy = parentRect.top + (parentRect.height() - childHeight * scale) * 0.5f;
@@ -366,14 +366,14 @@ public class ScalingUtils {
 
     @Override
     public void getTransformImpl(
-        Matrix outTransform,
-        Rect parentRect,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY,
-        float scaleX,
-        float scaleY) {
+        final Matrix outTransform,
+        final Rect parentRect,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY,
+        final float scaleX,
+        final float scaleY) {
       float scale, dx, dy;
       if (scaleY > scaleX) {
         scale = scaleY;
@@ -400,14 +400,14 @@ public class ScalingUtils {
 
     @Override
     public void getTransformImpl(
-        Matrix outTransform,
-        Rect parentRect,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY,
-        float scaleX,
-        float scaleY) {
+        final Matrix outTransform,
+        final Rect parentRect,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY,
+        final float scaleX,
+        final float scaleY) {
       float scale, dx, dy;
       if (scaleY > scaleX) {
         scale = scaleY;
@@ -436,14 +436,14 @@ public class ScalingUtils {
 
     @Override
     public void getTransformImpl(
-        Matrix outTransform,
-        Rect parentRect,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY,
-        float scaleX,
-        float scaleY) {
+        final Matrix outTransform,
+        final Rect parentRect,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY,
+        final float scaleX,
+        final float scaleY) {
       float scale, dx, dy;
       scale = scaleX;
       dx = parentRect.left;
@@ -464,14 +464,14 @@ public class ScalingUtils {
 
     @Override
     public void getTransformImpl(
-        Matrix outTransform,
-        Rect parentRect,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY,
-        float scaleX,
-        float scaleY) {
+        final Matrix outTransform,
+        final Rect parentRect,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY,
+        final float scaleX,
+        final float scaleY) {
       float scale, dx, dy;
       scale = scaleY;
       dx = parentRect.left + (parentRect.width() - childWidth * scale) * 0.5f;
@@ -515,12 +515,12 @@ public class ScalingUtils {
     private float mInterpolatingValue;
 
     public InterpolatingScaleType(
-        ScaleType scaleTypeFrom,
-        ScaleType scaleTypeTo,
-        @Nullable Rect boundsFrom,
-        @Nullable Rect boundsTo,
-        @Nullable PointF focusPointFrom,
-        @Nullable PointF focusPointTo) {
+        final ScaleType scaleTypeFrom,
+        final ScaleType scaleTypeTo,
+        final @Nullable Rect boundsFrom,
+        final @Nullable Rect boundsTo,
+        final @Nullable PointF focusPointFrom,
+        final @Nullable PointF focusPointTo) {
       mScaleTypeFrom = scaleTypeFrom;
       mScaleTypeTo = scaleTypeTo;
       mBoundsFrom = boundsFrom;
@@ -530,14 +530,14 @@ public class ScalingUtils {
     }
 
     public InterpolatingScaleType(
-        ScaleType scaleTypeFrom,
-        ScaleType scaleTypeTo,
-        @Nullable Rect boundsFrom,
-        @Nullable Rect boundsTo) {
+        final ScaleType scaleTypeFrom,
+        final ScaleType scaleTypeTo,
+        final @Nullable Rect boundsFrom,
+        final @Nullable Rect boundsTo) {
       this(scaleTypeFrom, scaleTypeTo, boundsFrom, boundsTo, null, null);
     }
 
-    public InterpolatingScaleType(ScaleType scaleTypeFrom, ScaleType scaleTypeTo) {
+    public InterpolatingScaleType(final ScaleType scaleTypeFrom, final ScaleType scaleTypeTo) {
       this(scaleTypeFrom, scaleTypeTo, null, null);
     }
 
@@ -572,7 +572,7 @@ public class ScalingUtils {
      * the transform same as ScaleTypeTo. Inbetween values will produce a transform that is a linear
      * combination between the two.
      */
-    public void setValue(float value) {
+    public void setValue(final float value) {
       mInterpolatingValue = value;
     }
 
@@ -588,12 +588,12 @@ public class ScalingUtils {
 
     @Override
     public Matrix getTransform(
-        Matrix transform,
-        Rect parentBounds,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY) {
+        final Matrix transform,
+        final Rect parentBounds,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY) {
       Rect boundsFrom = (mBoundsFrom != null) ? mBoundsFrom : parentBounds;
       Rect boundsTo = (mBoundsTo != null) ? mBoundsTo : parentBounds;
 

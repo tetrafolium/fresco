@@ -58,7 +58,7 @@ public class RoundedCornersDrawable extends ForwardingDrawable implements Rounde
    *
    * @param drawable underlying drawable
    */
-  public RoundedCornersDrawable(Drawable drawable) {
+  public RoundedCornersDrawable(final Drawable drawable) {
     super(Preconditions.checkNotNull(drawable));
   }
 
@@ -67,7 +67,7 @@ public class RoundedCornersDrawable extends ForwardingDrawable implements Rounde
    *
    * @param type type of rounding process
    */
-  public void setType(Type type) {
+  public void setType(final Type type) {
     mType = type;
     updatePath();
     invalidateSelf();
@@ -79,7 +79,7 @@ public class RoundedCornersDrawable extends ForwardingDrawable implements Rounde
    * @param isCircle whether or not to round as circle
    */
   @Override
-  public void setCircle(boolean isCircle) {
+  public void setCircle(final boolean isCircle) {
     mIsCircle = isCircle;
     updatePath();
     invalidateSelf();
@@ -97,7 +97,7 @@ public class RoundedCornersDrawable extends ForwardingDrawable implements Rounde
    * @param radius corner radius in pixels
    */
   @Override
-  public void setRadius(float radius) {
+  public void setRadius(final float radius) {
     Arrays.fill(mRadii, radius);
     updatePath();
     invalidateSelf();
@@ -110,7 +110,7 @@ public class RoundedCornersDrawable extends ForwardingDrawable implements Rounde
    * @param radii Array of 8 values, 4 pairs of [X,Y] radii
    */
   @Override
-  public void setRadii(float[] radii) {
+  public void setRadii(final float[] radii) {
     if (radii == null) {
       Arrays.fill(mRadii, 0);
     } else {
@@ -132,7 +132,7 @@ public class RoundedCornersDrawable extends ForwardingDrawable implements Rounde
    *
    * @param overlayColor the color to filled outside the rounded corners
    */
-  public void setOverlayColor(int overlayColor) {
+  public void setOverlayColor(final int overlayColor) {
     mOverlayColor = overlayColor;
     invalidateSelf();
   }
@@ -149,7 +149,7 @@ public class RoundedCornersDrawable extends ForwardingDrawable implements Rounde
    * @param width of the border
    */
   @Override
-  public void setBorder(int color, float width) {
+  public void setBorder(final int color, final float width) {
     mBorderColor = color;
     mBorderWidth = width;
     updatePath();
@@ -169,7 +169,7 @@ public class RoundedCornersDrawable extends ForwardingDrawable implements Rounde
   }
 
   @Override
-  public void setPadding(float padding) {
+  public void setPadding(final float padding) {
     mPadding = padding;
     updatePath();
     invalidateSelf();
@@ -187,7 +187,7 @@ public class RoundedCornersDrawable extends ForwardingDrawable implements Rounde
    * @param scaleDownInsideBorders
    */
   @Override
-  public void setScaleDownInsideBorders(boolean scaleDownInsideBorders) {
+  public void setScaleDownInsideBorders(final boolean scaleDownInsideBorders) {
     mScaleDownInsideBorders = scaleDownInsideBorders;
     updatePath();
     invalidateSelf();
@@ -208,7 +208,7 @@ public class RoundedCornersDrawable extends ForwardingDrawable implements Rounde
    * @param paintFilterBitmap whether to set FILTER_BITMAP_FLAG flag to Paint.
    */
   @Override
-  public void setPaintFilterBitmap(boolean paintFilterBitmap) {
+  public void setPaintFilterBitmap(final boolean paintFilterBitmap) {
     if (mPaintFilterBitmap != paintFilterBitmap) {
       mPaintFilterBitmap = paintFilterBitmap;
       invalidateSelf();
@@ -222,7 +222,7 @@ public class RoundedCornersDrawable extends ForwardingDrawable implements Rounde
   }
 
   @Override
-  protected void onBoundsChange(Rect bounds) {
+  protected void onBoundsChange(final Rect bounds) {
     super.onBoundsChange(bounds);
     updatePath();
   }
@@ -262,7 +262,7 @@ public class RoundedCornersDrawable extends ForwardingDrawable implements Rounde
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     mBounds.set(getBounds());
     switch (mType) {
       case CLIPPING:

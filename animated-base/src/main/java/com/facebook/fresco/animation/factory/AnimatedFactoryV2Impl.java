@@ -57,10 +57,10 @@ public class AnimatedFactoryV2Impl implements AnimatedFactory {
 
   @DoNotStrip
   public AnimatedFactoryV2Impl(
-      PlatformBitmapFactory platformBitmapFactory,
-      ExecutorSupplier executorSupplier,
-      CountingMemoryCache<CacheKey, CloseableImage> backingCache,
-      boolean downscaleFrameToDrawableDimensions) {
+      final PlatformBitmapFactory platformBitmapFactory,
+      final ExecutorSupplier executorSupplier,
+      final CountingMemoryCache<CacheKey, CloseableImage> backingCache,
+      final boolean downscaleFrameToDrawableDimensions) {
     mPlatformBitmapFactory = platformBitmapFactory;
     mExecutorSupplier = executorSupplier;
     mBackingCache = backingCache;
@@ -69,7 +69,7 @@ public class AnimatedFactoryV2Impl implements AnimatedFactory {
 
   @Nullable
   @Override
-  public DrawableFactory getAnimatedDrawableFactory(Context context) {
+  public DrawableFactory getAnimatedDrawableFactory(final Context context) {
     if (mAnimatedDrawableFactory == null) {
       mAnimatedDrawableFactory = createDrawableFactory();
     }
@@ -81,10 +81,10 @@ public class AnimatedFactoryV2Impl implements AnimatedFactory {
     return new ImageDecoder() {
       @Override
       public CloseableImage decode(
-          EncodedImage encodedImage,
-          int length,
-          QualityInfo qualityInfo,
-          ImageDecodeOptions options) {
+          final EncodedImage encodedImage,
+          final int length,
+          final QualityInfo qualityInfo,
+          final ImageDecodeOptions options) {
         return getAnimatedImageFactory().decodeGif(encodedImage, options, bitmapConfig);
       }
     };
@@ -95,10 +95,10 @@ public class AnimatedFactoryV2Impl implements AnimatedFactory {
     return new ImageDecoder() {
       @Override
       public CloseableImage decode(
-          EncodedImage encodedImage,
-          int length,
-          QualityInfo qualityInfo,
-          ImageDecodeOptions options) {
+          final EncodedImage encodedImage,
+          final int length,
+          final QualityInfo qualityInfo,
+          final ImageDecodeOptions options) {
         return getAnimatedImageFactory().decodeWebP(encodedImage, options, bitmapConfig);
       }
     };
@@ -156,7 +156,7 @@ public class AnimatedFactoryV2Impl implements AnimatedFactory {
           new AnimatedDrawableBackendProvider() {
             @Override
             public AnimatedDrawableBackend get(
-                AnimatedImageResult animatedImageResult, Rect bounds) {
+                final AnimatedImageResult animatedImageResult, final Rect bounds) {
               return new AnimatedDrawableBackendImpl(
                   getAnimatedDrawableUtil(),
                   animatedImageResult,
@@ -172,7 +172,7 @@ public class AnimatedFactoryV2Impl implements AnimatedFactory {
     AnimatedDrawableBackendProvider animatedDrawableBackendProvider =
         new AnimatedDrawableBackendProvider() {
           @Override
-          public AnimatedDrawableBackend get(AnimatedImageResult imageResult, Rect bounds) {
+          public AnimatedDrawableBackend get(final AnimatedImageResult imageResult, final Rect bounds) {
             return new AnimatedDrawableBackendImpl(
                 getAnimatedDrawableUtil(),
                 imageResult,

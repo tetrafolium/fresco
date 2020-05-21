@@ -118,7 +118,7 @@ public class DiskStorageCacheTest {
   private static final long FILE_CACHE_MAX_SIZE_HIGH_LIMIT = 200;
   private static final long FILE_CACHE_MAX_SIZE_LOW_LIMIT = 200;
 
-  private static DiskStorage createDiskStorage(int version) {
+  private static DiskStorage createDiskStorage(final int version) {
     return new DiskStorageWithReadFailures(
         version,
         Suppliers.of(RuntimeEnvironment.application.getApplicationContext().getCacheDir()),
@@ -127,7 +127,7 @@ public class DiskStorageCacheTest {
   }
 
   private DiskStorageCache createDiskCache(
-      DiskStorage diskStorage, boolean indexPopulateAtStartupEnabled) {
+      final DiskStorage diskStorage, final boolean indexPopulateAtStartupEnabled) {
     DiskStorageCache.Params diskStorageCacheParams =
         new DiskStorageCache.Params(
             0, FILE_CACHE_MAX_SIZE_LOW_LIMIT, FILE_CACHE_MAX_SIZE_HIGH_LIMIT);
@@ -174,7 +174,7 @@ public class DiskStorageCacheTest {
     verifyNoMoreInteractions(mCacheEventListener);
   }
 
-  private BinaryResource getResource(DiskStorage storage, final CacheKey key) throws IOException {
+  private BinaryResource getResource(final DiskStorage storage, final CacheKey key) throws IOException {
     return storage.getResource(CacheKeyUtil.getFirstResourceId(key), key);
   }
 
@@ -182,7 +182,7 @@ public class DiskStorageCacheTest {
     return mStorage.getResource(CacheKeyUtil.getFirstResourceId(key), key);
   }
 
-  private byte[] getContents(BinaryResource resource) throws IOException {
+  private byte[] getContents(final BinaryResource resource) throws IOException {
     return ByteStreams.toByteArray(resource.openStream());
   }
 
@@ -330,7 +330,7 @@ public class DiskStorageCacheTest {
           key1,
           new WriterCallback() {
             @Override
-            public void write(OutputStream os) throws IOException {
+            public void write(final OutputStream os) throws IOException {
               throw writeException;
             }
           });
@@ -475,7 +475,7 @@ public class DiskStorageCacheTest {
     WriterCallback writerCallback =
         new WriterCallback() {
           @Override
-          public void write(OutputStream os) throws IOException {
+          public void write(final OutputStream os) throws IOException {
             try {
               // Both threads will need to hit this barrier. If writing is serialized,
               // the second thread will never reach here as the first will hold
@@ -658,7 +658,7 @@ public class DiskStorageCacheTest {
 
   @Test
   public void testTimeEvictionClearsIndex() throws Exception {
-    when(mClock.now()).thenReturn(5l);
+    when(mClock.now()).thenReturn(5L);
     CacheKey key = putOneThingInCache();
     mCache.clearOldEntries(4);
     assertFalse(mCache.hasKeySync(key));
@@ -669,7 +669,7 @@ public class DiskStorageCacheTest {
     return putOneThingInCache(mCache);
   }
 
-  private CacheKey putOneThingInCache(DiskStorageCache cache) throws IOException {
+  private CacheKey putOneThingInCache(final DiskStorageCache cache) throws IOException {
     CacheKey key = new SimpleCacheKey("foo");
     byte[] value1 = new byte[101];
     value1[80] = 'c';
@@ -677,7 +677,7 @@ public class DiskStorageCacheTest {
     return key;
   }
 
-  private void verifyListenerOnHit(CacheKey key, String resourceId) {
+  private void verifyListenerOnHit(final CacheKey key, final String resourceId) {
     ArgumentCaptor<CacheEvent> cacheEventCaptor = ArgumentCaptor.forClass(CacheEvent.class);
     mCacheEventListenerInOrder.verify(mCacheEventListener).onHit(cacheEventCaptor.capture());
 
@@ -686,7 +686,7 @@ public class DiskStorageCacheTest {
     }
   }
 
-  private void verifyListenerOnMiss(CacheKey key) {
+  private void verifyListenerOnMiss(final CacheKey key) {
     ArgumentCaptor<CacheEvent> cacheEventCaptor = ArgumentCaptor.forClass(CacheEvent.class);
     mCacheEventListenerInOrder.verify(mCacheEventListener).onMiss(cacheEventCaptor.capture());
 
@@ -695,7 +695,7 @@ public class DiskStorageCacheTest {
     }
   }
 
-  private void verifyListenerOnWriteAttempt(CacheKey key) {
+  private void verifyListenerOnWriteAttempt(final CacheKey key) {
     ArgumentCaptor<CacheEvent> cacheEventCaptor = ArgumentCaptor.forClass(CacheEvent.class);
     mCacheEventListenerInOrder
         .verify(mCacheEventListener)
@@ -704,7 +704,7 @@ public class DiskStorageCacheTest {
     CacheEventAssert.assertThat(cacheEventCaptor.getValue()).isNotNull().hasCacheKey(key);
   }
 
-  private String verifyListenerOnWriteSuccessAndGetResourceId(CacheKey key, long itemSize) {
+  private String verifyListenerOnWriteSuccessAndGetResourceId(final CacheKey key, final long itemSize) {
     ArgumentCaptor<CacheEvent> cacheEventCaptor = ArgumentCaptor.forClass(CacheEvent.class);
     mCacheEventListenerInOrder
         .verify(mCacheEventListener)
@@ -720,7 +720,7 @@ public class DiskStorageCacheTest {
     return cacheEvent.getResourceId();
   }
 
-  private void verifyListenerOnWriteException(CacheKey key, IOException exception) {
+  private void verifyListenerOnWriteException(final CacheKey key, final IOException exception) {
     ArgumentCaptor<CacheEvent> cacheEventCaptor = ArgumentCaptor.forClass(CacheEvent.class);
     mCacheEventListenerInOrder
         .verify(mCacheEventListener)
@@ -732,7 +732,7 @@ public class DiskStorageCacheTest {
         .hasException(exception);
   }
 
-  private void verifyListenerOnReadException(CacheKey key, IOException exception) {
+  private void verifyListenerOnReadException(final CacheKey key, final IOException exception) {
     ArgumentCaptor<CacheEvent> cacheEventCaptor = ArgumentCaptor.forClass(CacheEvent.class);
     mCacheEventListenerInOrder
         .verify(mCacheEventListener)
@@ -745,10 +745,10 @@ public class DiskStorageCacheTest {
   }
 
   private void verifyListenerOnEviction(
-      String[] resourceIds,
-      long[] itemSizes,
-      CacheEventListener.EvictionReason reason,
-      long cacheSizeBeforeEviction) {
+      final String[] resourceIds,
+      final long[] itemSizes,
+      final CacheEventListener.EvictionReason reason,
+      final long cacheSizeBeforeEviction) {
     int numberItems = resourceIds.length;
     ArgumentCaptor<CacheEvent> cacheEventCaptor = ArgumentCaptor.forClass(CacheEvent.class);
     mCacheEventListenerInOrder
@@ -789,19 +789,19 @@ public class DiskStorageCacheTest {
     private String mPoisonResourceId;
 
     public DiskStorageWithReadFailures(
-        int version,
-        Supplier<File> baseDirectoryPathSupplier,
-        String baseDirectoryName,
-        CacheErrorLogger cacheErrorLogger) {
+        final int version,
+        final Supplier<File> baseDirectoryPathSupplier,
+        final String baseDirectoryName,
+        final CacheErrorLogger cacheErrorLogger) {
       super(version, baseDirectoryPathSupplier, baseDirectoryName, cacheErrorLogger);
     }
 
-    public void setPoisonResourceId(String poisonResourceId) {
+    public void setPoisonResourceId(final String poisonResourceId) {
       mPoisonResourceId = poisonResourceId;
     }
 
     @Override
-    public BinaryResource getResource(String resourceId, Object debugInfo) throws IOException {
+    public BinaryResource getResource(final String resourceId, final Object debugInfo) throws IOException {
       if (resourceId.equals(mPoisonResourceId)) {
         throw POISON_EXCEPTION;
       }
@@ -809,7 +809,7 @@ public class DiskStorageCacheTest {
     }
 
     @Override
-    public boolean touch(String resourceId, Object debugInfo) throws IOException {
+    public boolean touch(final String resourceId, final Object debugInfo) throws IOException {
       if (resourceId.equals(mPoisonResourceId)) {
         throw POISON_EXCEPTION;
       }
@@ -826,42 +826,42 @@ public class DiskStorageCacheTest {
 
     private final CacheEventListener mRecipientListener;
 
-    public DuplicatingCacheEventListener(CacheEventListener recipientListener) {
+    public DuplicatingCacheEventListener(final CacheEventListener recipientListener) {
       mRecipientListener = recipientListener;
     }
 
     @Override
-    public void onHit(CacheEvent cacheEvent) {
+    public void onHit(final CacheEvent cacheEvent) {
       mRecipientListener.onHit(duplicateEvent(cacheEvent));
     }
 
     @Override
-    public void onMiss(CacheEvent cacheEvent) {
+    public void onMiss(final CacheEvent cacheEvent) {
       mRecipientListener.onMiss(duplicateEvent(cacheEvent));
     }
 
     @Override
-    public void onWriteAttempt(CacheEvent cacheEvent) {
+    public void onWriteAttempt(final CacheEvent cacheEvent) {
       mRecipientListener.onWriteAttempt(duplicateEvent(cacheEvent));
     }
 
     @Override
-    public void onWriteSuccess(CacheEvent cacheEvent) {
+    public void onWriteSuccess(final CacheEvent cacheEvent) {
       mRecipientListener.onWriteSuccess(duplicateEvent(cacheEvent));
     }
 
     @Override
-    public void onReadException(CacheEvent cacheEvent) {
+    public void onReadException(final CacheEvent cacheEvent) {
       mRecipientListener.onReadException(duplicateEvent(cacheEvent));
     }
 
     @Override
-    public void onWriteException(CacheEvent cacheEvent) {
+    public void onWriteException(final CacheEvent cacheEvent) {
       mRecipientListener.onWriteException(duplicateEvent(cacheEvent));
     }
 
     @Override
-    public void onEviction(CacheEvent cacheEvent) {
+    public void onEviction(final CacheEvent cacheEvent) {
       mRecipientListener.onEviction(duplicateEvent(cacheEvent));
     }
 
@@ -870,7 +870,7 @@ public class DiskStorageCacheTest {
       mRecipientListener.onCleared();
     }
 
-    private static CacheEvent duplicateEvent(CacheEvent cacheEvent) {
+    private static CacheEvent duplicateEvent(final CacheEvent cacheEvent) {
       SettableCacheEvent copyEvent = SettableCacheEvent.obtain();
       copyEvent.setCacheKey(cacheEvent.getCacheKey());
       copyEvent.setCacheLimit(cacheEvent.getCacheLimit());

@@ -22,10 +22,10 @@ public class LruBitmapPool implements BitmapPool {
   private int mCurrentSize;
 
   public LruBitmapPool(
-      int maxPoolSize,
-      int maxBitmapSize,
-      PoolStatsTracker poolStatsTracker,
-      @Nullable MemoryTrimmableRegistry memoryTrimmableRegistry) {
+      final int maxPoolSize,
+      final int maxBitmapSize,
+      final PoolStatsTracker poolStatsTracker,
+      final @Nullable MemoryTrimmableRegistry memoryTrimmableRegistry) {
     mMaxPoolSize = maxPoolSize;
     mMaxBitmapSize = maxBitmapSize;
     mPoolStatsTracker = poolStatsTracker;
@@ -35,11 +35,11 @@ public class LruBitmapPool implements BitmapPool {
   }
 
   @Override
-  public void trim(MemoryTrimType trimType) {
+  public void trim(final MemoryTrimType trimType) {
     trimTo((int) (mMaxPoolSize * (1f - trimType.getSuggestedTrimRatio())));
   }
 
-  private synchronized void trimTo(int maxSize) {
+  private synchronized void trimTo(final int maxSize) {
     while (mCurrentSize > maxSize) {
       Bitmap removed = mStrategy.pop();
       if (removed == null) {
@@ -68,7 +68,7 @@ public class LruBitmapPool implements BitmapPool {
   }
 
   @VisibleForTesting
-  private Bitmap alloc(int size) {
+  private Bitmap alloc(final int size) {
     mPoolStatsTracker.onAlloc(size);
     return Bitmap.createBitmap(1, size, Bitmap.Config.ALPHA_8);
   }

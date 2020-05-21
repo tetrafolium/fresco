@@ -52,7 +52,7 @@ public abstract class BasePostprocessor implements Postprocessor {
    */
   @Override
   public CloseableReference<Bitmap> process(
-      Bitmap sourceBitmap, PlatformBitmapFactory bitmapFactory) {
+      final Bitmap sourceBitmap, final PlatformBitmapFactory bitmapFactory) {
     final Bitmap.Config sourceBitmapConfig = sourceBitmap.getConfig();
     CloseableReference<Bitmap> destBitmapRef =
         bitmapFactory.createBitmapInternal(
@@ -82,7 +82,7 @@ public abstract class BasePostprocessor implements Postprocessor {
    * @param destBitmap the destination bitmap to be used as output
    * @param sourceBitmap the source bitmap to be used as input
    */
-  public void process(Bitmap destBitmap, Bitmap sourceBitmap) {
+  public void process(final Bitmap destBitmap, final Bitmap sourceBitmap) {
     internalCopyBitmap(destBitmap, sourceBitmap);
     process(destBitmap);
   }
@@ -95,7 +95,7 @@ public abstract class BasePostprocessor implements Postprocessor {
    *
    * @param bitmap the bitmap to be used both as input and as output
    */
-  public void process(Bitmap bitmap) {}
+  public void process(final Bitmap bitmap) { }
 
   /**
    * The default implementation of the CacheKey for a Postprocessor is null
@@ -113,7 +113,7 @@ public abstract class BasePostprocessor implements Postprocessor {
    * same width and height. If their {@link Bitmap.Config} are identical, the memory is directly
    * copied. Otherwise, the {@code sourceBitmap} is drawn into {@code destBitmap}.
    */
-  private static void internalCopyBitmap(Bitmap destBitmap, Bitmap sourceBitmap) {
+  private static void internalCopyBitmap(final Bitmap destBitmap, final Bitmap sourceBitmap) {
     if (NativeCodeSetup.getUseNativeCode() && destBitmap.getConfig() == sourceBitmap.getConfig()) {
       try {
         if (sCopyBitmap == null) {

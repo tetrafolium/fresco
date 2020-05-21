@@ -95,7 +95,7 @@ public class AnimatedRepeatedPostprocessorProducerTest {
     doAnswer(
             new Answer<Object>() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 mResults.add(
                     ((CloseableReference<CloseableImage>) invocation.getArguments()[0]).clone());
                 return null;
@@ -161,7 +161,7 @@ public class AnimatedRepeatedPostprocessorProducerTest {
     return captor.getValue();
   }
 
-  private void performNewResult(RepeatedPostprocessorConsumer postprocessorConsumer, boolean run) {
+  private void performNewResult(final RepeatedPostprocessorConsumer postprocessorConsumer, final boolean run) {
     setupNewSourceImage();
     setupNewDestinationImage();
     postprocessorConsumer.onNewResult(mSourceCloseableImageRef, Consumer.IS_LAST);
@@ -171,7 +171,7 @@ public class AnimatedRepeatedPostprocessorProducerTest {
     }
   }
 
-  private void performUpdate(RepeatedPostprocessorRunner repeatedPostprocessorRunner, boolean run) {
+  private void performUpdate(final RepeatedPostprocessorRunner repeatedPostprocessorRunner, final boolean run) {
     setupNewDestinationImage();
     repeatedPostprocessorRunner.update();
     if (run) {
@@ -184,7 +184,7 @@ public class AnimatedRepeatedPostprocessorProducerTest {
     doAnswer(
             new Answer<CloseableReference<Bitmap>>() {
               @Override
-              public CloseableReference<Bitmap> answer(InvocationOnMock invocation)
+              public CloseableReference<Bitmap> answer(final InvocationOnMock invocation)
                   throws Throwable {
                 CloseableReference<Bitmap> destBitmapRef = mDestinationCloseableBitmapRef;
                 performUpdate(repeatedPostprocessorRunner, false);
@@ -197,7 +197,7 @@ public class AnimatedRepeatedPostprocessorProducerTest {
         .process(mSourceBitmap, mPlatformBitmapFactory);
   }
 
-  private void performFailure(RepeatedPostprocessorRunner repeatedPostprocessorRunner) {
+  private void performFailure(final RepeatedPostprocessorRunner repeatedPostprocessorRunner) {
     setupNewDestinationImage();
     doThrow(new RuntimeException())
         .when(mPostprocessor)
@@ -221,11 +221,11 @@ public class AnimatedRepeatedPostprocessorProducerTest {
     mTestExecutorService.runUntilIdle();
   }
 
-  private void verifyNewResultProcessed(int index) {
+  private void verifyNewResultProcessed(final int index) {
     verifyNewResultProcessed(index, mDestinationBitmap);
   }
 
-  private void verifyNewResultProcessed(int index, Bitmap destBitmap) {
+  private void verifyNewResultProcessed(final int index, final Bitmap destBitmap) {
     mInOrder
         .verify(mProducerListener)
         .onProducerStart(mProducerContext, PostprocessorProducer.NAME);

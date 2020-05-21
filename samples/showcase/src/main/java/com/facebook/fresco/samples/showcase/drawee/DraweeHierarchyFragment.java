@@ -38,13 +38,13 @@ public class DraweeHierarchyFragment extends BaseShowcaseFragment {
 
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     return inflater.inflate(R.layout.fragment_drawee_hierarchy, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     final Uri uriSuccess =
         sampleUris()
             .createSampleUri(
@@ -73,7 +73,7 @@ public class DraweeHierarchyFragment extends BaseShowcaseFragment {
         .setOnClickListener(
             new View.OnClickListener() {
               @Override
-              public void onClick(View v) {
+              public void onClick(final View v) {
                 setUri(draweeView, uriSuccess, retrySwitch.isChecked());
               }
             });
@@ -82,7 +82,7 @@ public class DraweeHierarchyFragment extends BaseShowcaseFragment {
         .setOnClickListener(
             new View.OnClickListener() {
               @Override
-              public void onClick(View v) {
+              public void onClick(final View v) {
                 setUri(draweeView, uriFailure, retrySwitch.isChecked());
               }
             });
@@ -91,7 +91,7 @@ public class DraweeHierarchyFragment extends BaseShowcaseFragment {
         .setOnClickListener(
             new View.OnClickListener() {
               @Override
-              public void onClick(View v) {
+              public void onClick(final View v) {
                 draweeView.setController(null);
                 Fresco.getImagePipeline().evictFromCache(uriSuccess);
               }
@@ -101,7 +101,7 @@ public class DraweeHierarchyFragment extends BaseShowcaseFragment {
     roundCorners.setOnCheckedChangeListener(
         new CompoundButton.OnCheckedChangeListener() {
           @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+          public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             RoundingParams roundingParams =
                 new RoundingParams()
                     .setCornersRadius(
@@ -118,7 +118,7 @@ public class DraweeHierarchyFragment extends BaseShowcaseFragment {
     useNinePatch.setOnCheckedChangeListener(
         new CompoundButton.OnCheckedChangeListener() {
           @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+          public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             draweeView
                 .getHierarchy()
                 .setPlaceholderImage(
@@ -128,7 +128,7 @@ public class DraweeHierarchyFragment extends BaseShowcaseFragment {
         });
   }
 
-  private void setUri(SimpleDraweeView draweeView, Uri uri, boolean retryEnabled) {
+  private void setUri(final SimpleDraweeView draweeView, final Uri uri, final boolean retryEnabled) {
     draweeView.setController(
         Fresco.newDraweeControllerBuilder()
             .setOldController(draweeView.getController())

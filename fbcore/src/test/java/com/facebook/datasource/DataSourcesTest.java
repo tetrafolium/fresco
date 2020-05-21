@@ -69,7 +69,7 @@ public class DataSourcesTest {
     doAnswer(
             new Answer<Void>() {
               @Override
-              public Void answer(InvocationOnMock invocation) throws Throwable {
+              public Void answer(final InvocationOnMock invocation) throws Throwable {
                 final Object[] args = invocation.getArguments();
                 DataSubscriber dataSubscriber = (DataSubscriber) args[0];
                 dataSubscriber.onNewResult(mDataSource);
@@ -94,7 +94,7 @@ public class DataSourcesTest {
     doAnswer(
             new Answer<Void>() {
               @Override
-              public Void answer(InvocationOnMock invocation) throws Throwable {
+              public Void answer(final InvocationOnMock invocation) throws Throwable {
                 final Object[] args = invocation.getArguments();
                 DataSubscriber dataSubscriber = (DataSubscriber) args[0];
                 dataSubscriber.onNewResult(mDataSource);
@@ -117,7 +117,7 @@ public class DataSourcesTest {
     doAnswer(
             new Answer<Void>() {
               @Override
-              public Void answer(InvocationOnMock invocation) throws Throwable {
+              public Void answer(final InvocationOnMock invocation) throws Throwable {
                 final Object[] args = invocation.getArguments();
                 DataSubscriber dataSubscriber = (DataSubscriber) args[0];
                 dataSubscriber.onCancellation(mDataSource);
@@ -142,7 +142,7 @@ public class DataSourcesTest {
     doAnswer(
             new Answer<Void>() {
               @Override
-              public Void answer(InvocationOnMock invocation) throws Throwable {
+              public Void answer(final InvocationOnMock invocation) throws Throwable {
                 final Object[] args = invocation.getArguments();
                 DataSubscriber dataSubscriber = (DataSubscriber) args[0];
                 dataSubscriber.onFailure(mDataSource);

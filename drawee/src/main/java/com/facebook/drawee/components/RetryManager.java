@@ -39,11 +39,11 @@ public class RetryManager {
     return mTapToRetryEnabled;
   }
 
-  public void setTapToRetryEnabled(boolean tapToRetryEnabled) {
+  public void setTapToRetryEnabled(final boolean tapToRetryEnabled) {
     mTapToRetryEnabled = tapToRetryEnabled;
   }
 
-  public void setMaxTapToRetryAttemps(int maxTapToRetryAttemps) {
+  public void setMaxTapToRetryAttemps(final int maxTapToRetryAttemps) {
     this.mMaxTapToRetryAttempts = maxTapToRetryAttemps;
   }
 

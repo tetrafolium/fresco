@@ -40,7 +40,7 @@ public class LocalResourceSimpleAdapterTest extends AndroidTestCase {
     Assert.assertTrue(simpleAdapter.isLazy());
   }
 
-  private void checkSimpleAdapterData(SimpleAdapter<Uri> simpleAdapter, int requestedSize) {
+  private void checkSimpleAdapterData(final SimpleAdapter<Uri> simpleAdapter, final int requestedSize) {
     Assert.assertNotNull(simpleAdapter);
     Assert.assertEquals(10, requestedSize);
     Assert.assertEquals(simpleAdapter.getSize(), requestedSize);

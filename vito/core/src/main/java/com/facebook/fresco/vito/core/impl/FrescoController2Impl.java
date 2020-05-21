@@ -50,13 +50,13 @@ public class FrescoController2Impl implements DrawableDataSubscriber, FrescoCont
   private final DebugOverlayFactory2 mDebugOverlayFactory;
 
   public FrescoController2Impl(
-      FrescoVitoConfig config,
-      Hierarcher hierarcher,
-      Executor lightweightBackgroundThreadExecutor,
-      Executor uiThreadExecutor,
-      VitoImagePipeline imagePipeline,
-      @Nullable VitoImageRequestListener globalImageListener,
-      DebugOverlayFactory2 debugOverlayFactory) {
+      final FrescoVitoConfig config,
+      final Hierarcher hierarcher,
+      final Executor lightweightBackgroundThreadExecutor,
+      final Executor uiThreadExecutor,
+      final VitoImagePipeline imagePipeline,
+      final @Nullable VitoImageRequestListener globalImageListener,
+      final DebugOverlayFactory2 debugOverlayFactory) {
     mConfig = config;
     mHierarcher = hierarcher;
     mLightweightBackgroundThreadExecutor = lightweightBackgroundThreadExecutor;
@@ -183,11 +183,11 @@ public class FrescoController2Impl implements DrawableDataSubscriber, FrescoCont
   }
 
   private void setActualImage(
-      FrescoDrawable2 drawable,
-      VitoImageRequest imageRequest,
-      CloseableReference<CloseableImage> image,
-      boolean isImmediate,
-      @Nullable DataSource<CloseableReference<CloseableImage>> dataSource) {
+      final FrescoDrawable2 drawable,
+      final VitoImageRequest imageRequest,
+      final CloseableReference<CloseableImage> image,
+      final boolean isImmediate,
+      final @Nullable DataSource<CloseableReference<CloseableImage>> dataSource) {
     mHierarcher.setupActualImageWrapper(
         drawable.getActualImageWrapper(), imageRequest.imageOptions);
     Drawable actualDrawable =
@@ -214,9 +214,9 @@ public class FrescoController2Impl implements DrawableDataSubscriber, FrescoCont
 
   @Override
   public void onNewResult(
-      FrescoDrawable2 drawable,
-      VitoImageRequest imageRequest,
-      DataSource<CloseableReference<CloseableImage>> dataSource) {
+      final FrescoDrawable2 drawable,
+      final VitoImageRequest imageRequest,
+      final DataSource<CloseableReference<CloseableImage>> dataSource) {
     if (dataSource == null || !dataSource.hasResult()) {
       return;
     }
@@ -235,9 +235,9 @@ public class FrescoController2Impl implements DrawableDataSubscriber, FrescoCont
 
   @Override
   public void onFailure(
-      FrescoDrawable2 drawable,
-      VitoImageRequest imageRequest,
-      DataSource<CloseableReference<CloseableImage>> dataSource) {
+      final FrescoDrawable2 drawable,
+      final VitoImageRequest imageRequest,
+      final DataSource<CloseableReference<CloseableImage>> dataSource) {
     Drawable errorDrawable =
         mHierarcher.buildErrorDrawable(imageRequest.resources, imageRequest.imageOptions);
     drawable.setProgressDrawable(null);
@@ -254,16 +254,16 @@ public class FrescoController2Impl implements DrawableDataSubscriber, FrescoCont
 
   @Override
   public void onProgressUpdate(
-      FrescoDrawable2 drawable,
-      VitoImageRequest imageRequest,
-      DataSource<CloseableReference<CloseableImage>> dataSource) {
+      final FrescoDrawable2 drawable,
+      final VitoImageRequest imageRequest,
+      final DataSource<CloseableReference<CloseableImage>> dataSource) {
     // TODO: implement
   }
 
   private static Extras obtainExtras(
-      @Nullable DataSource<CloseableReference<CloseableImage>> dataSource,
-      CloseableReference<CloseableImage> image,
-      @Nullable Rect viewportDimensions) {
+      final @Nullable DataSource<CloseableReference<CloseableImage>> dataSource,
+      final CloseableReference<CloseableImage> image,
+      final @Nullable Rect viewportDimensions) {
     Map<String, Object> imageExtras = null;
     if (image != null && image.get() != null) {
       imageExtras = image.get().getAsExtras();

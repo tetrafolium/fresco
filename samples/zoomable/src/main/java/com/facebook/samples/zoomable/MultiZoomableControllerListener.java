@@ -20,31 +20,31 @@ public class MultiZoomableControllerListener implements ZoomableController.Liste
   private final List<ZoomableController.Listener> mListeners = new ArrayList<>();
 
   @Override
-  public synchronized void onTransformBegin(Matrix transform) {
+  public synchronized void onTransformBegin(final Matrix transform) {
     for (ZoomableController.Listener listener : mListeners) {
       listener.onTransformBegin(transform);
     }
   }
 
   @Override
-  public synchronized void onTransformChanged(Matrix transform) {
+  public synchronized void onTransformChanged(final Matrix transform) {
     for (ZoomableController.Listener listener : mListeners) {
       listener.onTransformChanged(transform);
     }
   }
 
   @Override
-  public synchronized void onTransformEnd(Matrix transform) {
+  public synchronized void onTransformEnd(final Matrix transform) {
     for (ZoomableController.Listener listener : mListeners) {
       listener.onTransformEnd(transform);
     }
   }
 
-  public synchronized void addListener(ZoomableController.Listener listener) {
+  public synchronized void addListener(final ZoomableController.Listener listener) {
     mListeners.add(listener);
   }
 
-  public synchronized void removeListener(ZoomableController.Listener listener) {
+  public synchronized void removeListener(final ZoomableController.Listener listener) {
     mListeners.remove(listener);
   }
 }

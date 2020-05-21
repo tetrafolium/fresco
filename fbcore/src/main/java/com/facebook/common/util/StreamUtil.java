@@ -31,7 +31,7 @@ public class StreamUtil {
    *
    * @param hint - size of inputStream's content in bytes
    */
-  public static byte[] getBytesFromStream(InputStream inputStream, int hint) throws IOException {
+  public static byte[] getBytesFromStream(final InputStream inputStream, final int hint) throws IOException {
     // Subclass ByteArrayOutputStream to avoid an extra byte[] allocation and copy
     ByteArrayOutputStream byteOutput =
         new ByteArrayOutputStream(hint) {

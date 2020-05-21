@@ -27,7 +27,7 @@ public class WriterCallbacks {
   public static WriterCallback from(final InputStream is) {
     return new WriterCallback() {
       @Override
-      public void write(OutputStream os) throws IOException {
+      public void write(final OutputStream os) throws IOException {
         ByteStreams.copy(is, os);
       }
     };
@@ -44,7 +44,7 @@ public class WriterCallbacks {
   public static WriterCallback from(final byte[] data) {
     return new WriterCallback() {
       @Override
-      public void write(OutputStream os) throws IOException {
+      public void write(final OutputStream os) throws IOException {
         os.write(data);
       }
     };

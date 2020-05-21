@@ -42,9 +42,9 @@ public class WebpTranscodeProducer implements Producer<EncodedImage> {
   private final Producer<EncodedImage> mInputProducer;
 
   public WebpTranscodeProducer(
-      Executor executor,
-      PooledByteBufferFactory pooledByteBufferFactory,
-      Producer<EncodedImage> inputProducer) {
+      final Executor executor,
+      final PooledByteBufferFactory pooledByteBufferFactory,
+      final Producer<EncodedImage> inputProducer) {
     mExecutor = Preconditions.checkNotNull(executor);
     mPooledByteBufferFactory = Preconditions.checkNotNull(pooledByteBufferFactory);
     mInputProducer = Preconditions.checkNotNull(inputProducer);
@@ -67,7 +67,7 @@ public class WebpTranscodeProducer implements Producer<EncodedImage> {
     }
 
     @Override
-    protected void onNewResultImpl(@Nullable EncodedImage newResult, @Status int status) {
+    protected void onNewResultImpl(final @Nullable EncodedImage newResult, final @Status int status) {
       // try to determine if the last result should be transformed
       if (mShouldTranscodeWhenFinished == TriState.UNSET && newResult != null) {
         mShouldTranscodeWhenFinished = shouldTranscode(newResult);
@@ -123,18 +123,18 @@ public class WebpTranscodeProducer implements Producer<EncodedImage> {
           }
 
           @Override
-          protected void disposeResult(EncodedImage result) {
+          protected void disposeResult(final EncodedImage result) {
             EncodedImage.closeSafely(result);
           }
 
           @Override
-          protected void onSuccess(EncodedImage result) {
+          protected void onSuccess(final EncodedImage result) {
             EncodedImage.closeSafely(encodedImageCopy);
             super.onSuccess(result);
           }
 
           @Override
-          protected void onFailure(Exception e) {
+          protected void onFailure(final Exception e) {
             EncodedImage.closeSafely(encodedImageCopy);
             super.onFailure(e);
           }

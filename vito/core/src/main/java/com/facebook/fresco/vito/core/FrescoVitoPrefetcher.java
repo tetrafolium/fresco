@@ -21,7 +21,7 @@ public class FrescoVitoPrefetcher {
 
   private final FrescoContext mFrescoContext;
 
-  public FrescoVitoPrefetcher(FrescoContext frescoContext) {
+  public FrescoVitoPrefetcher(final FrescoContext frescoContext) {
     mFrescoContext = frescoContext;
   }
 
@@ -38,7 +38,7 @@ public class FrescoVitoPrefetcher {
    * @return a DataSource that can safely be ignored.
    */
   public DataSource<Void> prefetch(
-      PrefetchTarget prefetchTarget,
+      final PrefetchTarget prefetchTarget,
       final Uri uri,
       final @Nullable ImageOptions imageOptions,
       final @Nullable Object callerContext) {

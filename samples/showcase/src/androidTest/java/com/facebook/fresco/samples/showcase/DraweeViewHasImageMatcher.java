@@ -17,12 +17,12 @@ class DraweeViewHasImageMatcher {
   static BoundedMatcher<View, SimpleDraweeView> hasImage() {
     return new BoundedMatcher<View, SimpleDraweeView>(SimpleDraweeView.class) {
       @Override
-      public void describeTo(Description description) {
+      public void describeTo(final Description description) {
         description.appendText("has image");
       }
 
       @Override
-      public boolean matchesSafely(SimpleDraweeView draweeView) {
+      public boolean matchesSafely(final SimpleDraweeView draweeView) {
         return draweeView.getHierarchy().hasImage();
       }
     };

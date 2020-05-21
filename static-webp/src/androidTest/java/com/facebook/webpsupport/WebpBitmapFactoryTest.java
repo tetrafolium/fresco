@@ -44,7 +44,7 @@ public class WebpBitmapFactoryTest extends TestCase {
     ImagePipelineFactory.initialize(configBuilder.build());
   }
 
-  private FileDescriptor getImageFileDescriptor(String path) {
+  private FileDescriptor getImageFileDescriptor(final String path) {
     try {
       File file = File.createTempFile("reqsquare", "tmp");
       byte[] data = ByteStreams.toByteArray(getTestImageInputStream(path));
@@ -57,7 +57,7 @@ public class WebpBitmapFactoryTest extends TestCase {
     }
   }
 
-  private InputStream getTestImageInputStream(String path) {
+  private InputStream getTestImageInputStream(final String path) {
     try {
       return mInstrumentation.getContext().getResources().getAssets().open(path);
     } catch (IOException e) {
@@ -263,7 +263,7 @@ public class WebpBitmapFactoryTest extends TestCase {
     testBitmapDefault(bitmap, 20, 20);
   }
 
-  private void testBitmapDefault(Bitmap bitmap, int width, int height) {
+  private void testBitmapDefault(final Bitmap bitmap, final int width, final int height) {
     assertNotNull("Bitmap should not be null", bitmap);
     assertEquals("Width should be set properly", width, bitmap.getWidth());
     assertEquals("Height should be set properly", height, bitmap.getHeight());

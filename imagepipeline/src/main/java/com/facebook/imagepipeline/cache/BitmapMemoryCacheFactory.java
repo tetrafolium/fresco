@@ -21,17 +21,17 @@ public class BitmapMemoryCacheFactory {
     MemoryCacheTracker memoryCacheTracker =
         new MemoryCacheTracker<CacheKey>() {
           @Override
-          public void onCacheHit(CacheKey cacheKey) {
+          public void onCacheHit(final CacheKey cacheKey) {
             imageCacheStatsTracker.onBitmapCacheHit(cacheKey);
           }
 
           @Override
-          public void onCacheMiss(CacheKey cacheKey) {
+          public void onCacheMiss(final CacheKey cacheKey) {
             imageCacheStatsTracker.onBitmapCacheMiss(cacheKey);
           }
 
           @Override
-          public void onCachePut(CacheKey cacheKey) {
+          public void onCachePut(final CacheKey cacheKey) {
             imageCacheStatsTracker.onBitmapCachePut(cacheKey);
           }
         };

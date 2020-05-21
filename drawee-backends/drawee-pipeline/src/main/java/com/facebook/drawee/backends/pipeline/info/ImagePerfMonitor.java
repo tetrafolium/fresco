@@ -44,9 +44,9 @@ public class ImagePerfMonitor implements ImagePerfNotifier {
   private boolean mEnabled;
 
   public ImagePerfMonitor(
-      MonotonicClock monotonicClock,
-      PipelineDraweeController pipelineDraweeController,
-      Supplier<Boolean> asyncLogging) {
+      final MonotonicClock monotonicClock,
+      final PipelineDraweeController pipelineDraweeController,
+      final Supplier<Boolean> asyncLogging) {
     mMonotonicClock = monotonicClock;
     mPipelineDraweeController = pipelineDraweeController;
     mImagePerfState = new ImagePerfState();
@@ -54,7 +54,7 @@ public class ImagePerfMonitor implements ImagePerfNotifier {
   }
 
   public void updateImageRequestData(
-      AbstractDraweeControllerBuilder<
+      final AbstractDraweeControllerBuilder<
               PipelineDraweeControllerBuilder,
               ImageRequest,
               CloseableReference<CloseableImage>,
@@ -66,7 +66,7 @@ public class ImagePerfMonitor implements ImagePerfNotifier {
         pipelineDraweeControllerBuilder.getFirstAvailableImageRequests());
   }
 
-  public void setEnabled(boolean enabled) {
+  public void setEnabled(final boolean enabled) {
     mEnabled = enabled;
     if (enabled) {
       setupListeners();
@@ -92,7 +92,7 @@ public class ImagePerfMonitor implements ImagePerfNotifier {
     }
   }
 
-  public void addImagePerfDataListener(@Nullable ImagePerfDataListener imagePerfDataListener) {
+  public void addImagePerfDataListener(final @Nullable ImagePerfDataListener imagePerfDataListener) {
     if (imagePerfDataListener == null) {
       return;
     }
@@ -102,7 +102,7 @@ public class ImagePerfMonitor implements ImagePerfNotifier {
     mImagePerfDataListeners.add(imagePerfDataListener);
   }
 
-  public void removeImagePerfDataListener(ImagePerfDataListener imagePerfDataListener) {
+  public void removeImagePerfDataListener(final ImagePerfDataListener imagePerfDataListener) {
     if (mImagePerfDataListeners == null) {
       return;
     }
@@ -116,7 +116,7 @@ public class ImagePerfMonitor implements ImagePerfNotifier {
   }
 
   @Override
-  public void notifyStatusUpdated(ImagePerfState state, @ImageLoadStatus int imageLoadStatus) {
+  public void notifyStatusUpdated(final ImagePerfState state, final @ImageLoadStatus int imageLoadStatus) {
     state.setImageLoadStatus(imageLoadStatus);
     if (!mEnabled || mImagePerfDataListeners == null || mImagePerfDataListeners.isEmpty()) {
       return;
@@ -132,7 +132,7 @@ public class ImagePerfMonitor implements ImagePerfNotifier {
 
   @Override
   public void notifyListenersOfVisibilityStateUpdate(
-      ImagePerfState state, @VisibilityState int visibilityState) {
+      final ImagePerfState state, final @VisibilityState int visibilityState) {
     if (!mEnabled || mImagePerfDataListeners == null || mImagePerfDataListeners.isEmpty()) {
       return;
     }

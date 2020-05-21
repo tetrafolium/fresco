@@ -27,7 +27,7 @@ public class BitmapDrawableFactory implements VitoDrawableFactory {
   private final FrescoExperiments mExperiments;
   private final RoundingUtils mRoundingUtils;
 
-  public BitmapDrawableFactory(Resources resources, FrescoExperiments frescoExperiments) {
+  public BitmapDrawableFactory(final Resources resources, final FrescoExperiments frescoExperiments) {
     mResources = resources;
     mExperiments = frescoExperiments;
     mRoundingUtils = new RoundingUtils();
@@ -35,7 +35,7 @@ public class BitmapDrawableFactory implements VitoDrawableFactory {
 
   @Override
   @Nullable
-  public Drawable createDrawable(CloseableImage closeableImage, ImageOptions imageOptions) {
+  public Drawable createDrawable(final CloseableImage closeableImage, final ImageOptions imageOptions) {
     try {
       if (FrescoSystrace.isTracing()) {
         FrescoSystrace.beginSection("BitmapDrawableFactory#createDrawable");
@@ -69,7 +69,7 @@ public class BitmapDrawableFactory implements VitoDrawableFactory {
    * @return the drawable to display
    */
   protected Drawable handleCloseableStaticBitmap(
-      CloseableStaticBitmap closeableStaticBitmap, ImageOptions imageOptions) {
+      final CloseableStaticBitmap closeableStaticBitmap, final ImageOptions imageOptions) {
     RoundingOptions roundingOptions = imageOptions.getRoundingOptions();
     BorderOptions borderOptions = imageOptions.getBorderOptions();
     mRoundingUtils.setAlreadyRounded(mExperiments.useNativeRounding());
@@ -84,7 +84,7 @@ public class BitmapDrawableFactory implements VitoDrawableFactory {
   }
 
   protected Drawable rotatedDrawable(
-      CloseableStaticBitmap closeableStaticBitmap, Drawable drawable) {
+      final CloseableStaticBitmap closeableStaticBitmap, final Drawable drawable) {
     if (!hasTransformableRotationAngle(closeableStaticBitmap)
         && !hasTransformableExifOrientation(closeableStaticBitmap)) {
       // Return the bitmap drawable directly as there's nothing to transform in it
@@ -99,14 +99,14 @@ public class BitmapDrawableFactory implements VitoDrawableFactory {
 
   /* Returns true if there is anything to rotate using the rotation angle */
   private static boolean hasTransformableRotationAngle(
-      CloseableStaticBitmap closeableStaticBitmap) {
+      final CloseableStaticBitmap closeableStaticBitmap) {
     return closeableStaticBitmap.getRotationAngle() != 0
         && closeableStaticBitmap.getRotationAngle() != EncodedImage.UNKNOWN_ROTATION_ANGLE;
   }
 
   /* Returns true if there is anything to rotate using the EXIF orientation */
   private static boolean hasTransformableExifOrientation(
-      CloseableStaticBitmap closeableStaticBitmap) {
+      final CloseableStaticBitmap closeableStaticBitmap) {
     return closeableStaticBitmap.getExifOrientation() != ExifInterface.ORIENTATION_NORMAL
         && closeableStaticBitmap.getExifOrientation() != ExifInterface.ORIENTATION_UNDEFINED;
   }

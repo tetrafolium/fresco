@@ -50,7 +50,7 @@ public class CountingMemoryCacheInspector<K, V> {
     public final List<DumpInfoEntry<K, V>> sharedEntries;
     public final Map<Bitmap, Object> otherEntries;
 
-    public DumpInfo(int size, int lruSize, MemoryCacheParams params) {
+    public DumpInfo(final int size, final int lruSize, final MemoryCacheParams params) {
       maxSize = params.maxCacheSize;
       maxEntriesCount = params.maxCacheEntries;
       maxEntrySize = params.maxCacheEntrySize;
@@ -75,7 +75,7 @@ public class CountingMemoryCacheInspector<K, V> {
 
   private final CountingMemoryCache<K, V> mCountingBitmapCache;
 
-  public CountingMemoryCacheInspector(CountingMemoryCache<K, V> countingBitmapCache) {
+  public CountingMemoryCacheInspector(final CountingMemoryCache<K, V> countingBitmapCache) {
     mCountingBitmapCache = countingBitmapCache;
   }
 

@@ -25,9 +25,9 @@ public class FrescoVitoLithoSectionsFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      @Nullable LayoutInflater inflater,
-      @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
+      final @Nullable LayoutInflater inflater,
+      final @Nullable ViewGroup container,
+      final @Nullable Bundle savedInstanceState) {
     final ComponentContext c = new ComponentContext(getContext());
     return LithoView.create(
         c,

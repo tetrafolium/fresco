@@ -65,7 +65,7 @@ public class ImageDecodeOptions {
    */
   public final @Nullable ColorSpace colorSpace;
 
-  public ImageDecodeOptions(ImageDecodeOptionsBuilder b) {
+  public ImageDecodeOptions(final ImageDecodeOptionsBuilder b) {
     this.minDecodeIntervalMs = b.getMinDecodeIntervalMs();
     this.maxDimensionPx = b.getMaxDimensionPx();
     this.decodePreviewFrame = b.getDecodePreviewFrame();
@@ -97,7 +97,7 @@ public class ImageDecodeOptions {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(final Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 

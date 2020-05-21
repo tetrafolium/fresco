@@ -32,7 +32,7 @@ public class MultiGestureListener extends GestureDetector.SimpleOnGestureListene
    *
    * @param listener the listener to be added
    */
-  public synchronized void addListener(GestureDetector.SimpleOnGestureListener listener) {
+  public synchronized void addListener(final GestureDetector.SimpleOnGestureListener listener) {
     mListeners.add(listener);
   }
 
@@ -43,12 +43,12 @@ public class MultiGestureListener extends GestureDetector.SimpleOnGestureListene
    *
    * @param listener the listener to remove
    */
-  public synchronized void removeListener(GestureDetector.SimpleOnGestureListener listener) {
+  public synchronized void removeListener(final GestureDetector.SimpleOnGestureListener listener) {
     mListeners.remove(listener);
   }
 
   @Override
-  public synchronized boolean onSingleTapUp(MotionEvent e) {
+  public synchronized boolean onSingleTapUp(final MotionEvent e) {
     final int size = mListeners.size();
     for (int i = 0; i < size; i++) {
       if (mListeners.get(i).onSingleTapUp(e)) {
@@ -59,7 +59,7 @@ public class MultiGestureListener extends GestureDetector.SimpleOnGestureListene
   }
 
   @Override
-  public synchronized void onLongPress(MotionEvent e) {
+  public synchronized void onLongPress(final MotionEvent e) {
     final int size = mListeners.size();
     for (int i = 0; i < size; i++) {
       mListeners.get(i).onLongPress(e);
@@ -68,7 +68,7 @@ public class MultiGestureListener extends GestureDetector.SimpleOnGestureListene
 
   @Override
   public synchronized boolean onScroll(
-      MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+      final MotionEvent e1, final MotionEvent e2, final float distanceX, final float distanceY) {
     final int size = mListeners.size();
     for (int i = 0; i < size; i++) {
       if (mListeners.get(i).onScroll(e1, e2, distanceX, distanceY)) {
@@ -80,7 +80,7 @@ public class MultiGestureListener extends GestureDetector.SimpleOnGestureListene
 
   @Override
   public synchronized boolean onFling(
-      MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+      final MotionEvent e1, final MotionEvent e2, final float velocityX, final float velocityY) {
     final int size = mListeners.size();
     for (int i = 0; i < size; i++) {
       if (mListeners.get(i).onFling(e1, e2, velocityX, velocityY)) {
@@ -91,7 +91,7 @@ public class MultiGestureListener extends GestureDetector.SimpleOnGestureListene
   }
 
   @Override
-  public synchronized void onShowPress(MotionEvent e) {
+  public synchronized void onShowPress(final MotionEvent e) {
     final int size = mListeners.size();
     for (int i = 0; i < size; i++) {
       mListeners.get(i).onShowPress(e);
@@ -99,7 +99,7 @@ public class MultiGestureListener extends GestureDetector.SimpleOnGestureListene
   }
 
   @Override
-  public synchronized boolean onDown(MotionEvent e) {
+  public synchronized boolean onDown(final MotionEvent e) {
     final int size = mListeners.size();
     for (int i = 0; i < size; i++) {
       if (mListeners.get(i).onDown(e)) {
@@ -110,7 +110,7 @@ public class MultiGestureListener extends GestureDetector.SimpleOnGestureListene
   }
 
   @Override
-  public synchronized boolean onDoubleTap(MotionEvent e) {
+  public synchronized boolean onDoubleTap(final MotionEvent e) {
     final int size = mListeners.size();
     for (int i = 0; i < size; i++) {
       if (mListeners.get(i).onDoubleTap(e)) {
@@ -121,7 +121,7 @@ public class MultiGestureListener extends GestureDetector.SimpleOnGestureListene
   }
 
   @Override
-  public synchronized boolean onDoubleTapEvent(MotionEvent e) {
+  public synchronized boolean onDoubleTapEvent(final MotionEvent e) {
     final int size = mListeners.size();
     for (int i = 0; i < size; i++) {
       if (mListeners.get(i).onDoubleTapEvent(e)) {
@@ -132,7 +132,7 @@ public class MultiGestureListener extends GestureDetector.SimpleOnGestureListene
   }
 
   @Override
-  public synchronized boolean onSingleTapConfirmed(MotionEvent e) {
+  public synchronized boolean onSingleTapConfirmed(final MotionEvent e) {
     final int size = mListeners.size();
     for (int i = 0; i < size; i++) {
       if (mListeners.get(i).onSingleTapConfirmed(e)) {
@@ -143,7 +143,7 @@ public class MultiGestureListener extends GestureDetector.SimpleOnGestureListene
   }
 
   @Override
-  public synchronized boolean onContextClick(MotionEvent e) {
+  public synchronized boolean onContextClick(final MotionEvent e) {
     final int size = mListeners.size();
     for (int i = 0; i < size; i++) {
       if (mListeners.get(i).onContextClick(e)) {

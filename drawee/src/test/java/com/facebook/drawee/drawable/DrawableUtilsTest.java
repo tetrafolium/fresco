@@ -33,9 +33,9 @@ public class DrawableUtilsTest {
   private final TransformCallback mTransformCallback = mock(TransformCallback.class);
 
   @Before
-  public void setup() {}
+  public void setup() { }
 
-  private void testCopyProperties(Drawable drawableFrom, Drawable drawableTo) {
+  private void testCopyProperties(final Drawable drawableFrom, final Drawable drawableTo) {
     when(drawableFrom.getBounds()).thenReturn(mBounds);
     when(drawableFrom.getChangingConfigurations()).thenReturn(mChangingConfigurations);
     when(drawableFrom.getLevel()).thenReturn(mLevel);

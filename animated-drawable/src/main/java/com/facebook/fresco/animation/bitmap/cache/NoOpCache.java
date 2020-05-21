@@ -18,25 +18,25 @@ public class NoOpCache implements BitmapFrameCache {
 
   @Nullable
   @Override
-  public CloseableReference<Bitmap> getCachedFrame(int frameNumber) {
+  public CloseableReference<Bitmap> getCachedFrame(final int frameNumber) {
     return null;
   }
 
   @Nullable
   @Override
-  public CloseableReference<Bitmap> getFallbackFrame(int frameNumber) {
+  public CloseableReference<Bitmap> getFallbackFrame(final int frameNumber) {
     return null;
   }
 
   @Nullable
   @Override
   public CloseableReference<Bitmap> getBitmapToReuseForFrame(
-      int frameNumber, int width, int height) {
+      final int frameNumber, final int width, final int height) {
     return null;
   }
 
   @Override
-  public boolean contains(int frameNumber) {
+  public boolean contains(final int frameNumber) {
     return false;
   }
 
@@ -52,22 +52,22 @@ public class NoOpCache implements BitmapFrameCache {
 
   @Override
   public void onFrameRendered(
-      int frameNumber,
-      CloseableReference<Bitmap> bitmapReference,
-      @BitmapAnimationBackend.FrameType int frameType) {
+      final int frameNumber,
+      final CloseableReference<Bitmap> bitmapReference,
+      final @BitmapAnimationBackend.FrameType int frameType) {
     // no-op
   }
 
   @Override
   public void onFramePrepared(
-      int frameNumber,
-      CloseableReference<Bitmap> bitmapReference,
-      @BitmapAnimationBackend.FrameType int frameType) {
+      final int frameNumber,
+      final CloseableReference<Bitmap> bitmapReference,
+      final @BitmapAnimationBackend.FrameType int frameType) {
     // Does not cache anything
   }
 
   @Override
-  public void setFrameCacheListener(FrameCacheListener frameCacheListener) {
+  public void setFrameCacheListener(final FrameCacheListener frameCacheListener) {
     // Does not cache anything
   }
 }

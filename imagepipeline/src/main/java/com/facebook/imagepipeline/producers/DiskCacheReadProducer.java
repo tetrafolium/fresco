@@ -46,10 +46,10 @@ public class DiskCacheReadProducer implements Producer<EncodedImage> {
   private final Producer<EncodedImage> mInputProducer;
 
   public DiskCacheReadProducer(
-      BufferedDiskCache defaultBufferedDiskCache,
-      BufferedDiskCache smallImageBufferedDiskCache,
-      CacheKeyFactory cacheKeyFactory,
-      Producer<EncodedImage> inputProducer) {
+      final BufferedDiskCache defaultBufferedDiskCache,
+      final BufferedDiskCache smallImageBufferedDiskCache,
+      final CacheKeyFactory cacheKeyFactory,
+      final Producer<EncodedImage> inputProducer) {
     mDefaultBufferedDiskCache = defaultBufferedDiskCache;
     mSmallImageBufferedDiskCache = smallImageBufferedDiskCache;
     mCacheKeyFactory = cacheKeyFactory;
@@ -84,7 +84,7 @@ public class DiskCacheReadProducer implements Producer<EncodedImage> {
     final ProducerListener2 listener = producerContext.getProducerListener();
     return new Continuation<EncodedImage, Void>() {
       @Override
-      public Void then(Task<EncodedImage> task) throws Exception {
+      public Void then(final Task<EncodedImage> task) throws Exception {
         if (isTaskCancelled(task)) {
           listener.onProducerFinishWithCancellation(producerContext, PRODUCER_NAME, null);
           consumer.onCancellation();
@@ -115,13 +115,13 @@ public class DiskCacheReadProducer implements Producer<EncodedImage> {
     };
   }
 
-  private static boolean isTaskCancelled(Task<?> task) {
+  private static boolean isTaskCancelled(final Task<?> task) {
     return task.isCancelled()
         || (task.isFaulted() && task.getError() instanceof CancellationException);
   }
 
   private void maybeStartInputProducer(
-      Consumer<EncodedImage> consumer, ProducerContext producerContext) {
+      final Consumer<EncodedImage> consumer, final ProducerContext producerContext) {
     if (producerContext.getLowestPermittedRequestLevel().getValue()
         >= ImageRequest.RequestLevel.DISK_CACHE.getValue()) {
       producerContext.putOriginExtra("disk", "nil-result_read");
@@ -153,7 +153,7 @@ public class DiskCacheReadProducer implements Producer<EncodedImage> {
   }
 
   private void subscribeTaskForRequestCancellation(
-      final AtomicBoolean isCancelled, ProducerContext producerContext) {
+      final AtomicBoolean isCancelled, final ProducerContext producerContext) {
     producerContext.addCallbacks(
         new BaseProducerContextCallbacks() {
           @Override

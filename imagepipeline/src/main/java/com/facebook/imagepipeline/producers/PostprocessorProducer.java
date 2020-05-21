@@ -39,9 +39,9 @@ public class PostprocessorProducer implements Producer<CloseableReference<Closea
   private final Executor mExecutor;
 
   public PostprocessorProducer(
-      Producer<CloseableReference<CloseableImage>> inputProducer,
-      PlatformBitmapFactory platformBitmapFactory,
-      Executor executor) {
+      final Producer<CloseableReference<CloseableImage>> inputProducer,
+      final PlatformBitmapFactory platformBitmapFactory,
+      final Executor executor) {
     mInputProducer = Preconditions.checkNotNull(inputProducer);
     mBitmapFactory = platformBitmapFactory;
     mExecutor = Preconditions.checkNotNull(executor);
@@ -49,7 +49,7 @@ public class PostprocessorProducer implements Producer<CloseableReference<Closea
 
   @Override
   public void produceResults(
-      final Consumer<CloseableReference<CloseableImage>> consumer, ProducerContext context) {
+      final Consumer<CloseableReference<CloseableImage>> consumer, final ProducerContext context) {
     final ProducerListener2 listener = context.getProducerListener();
     final Postprocessor postprocessor = context.getImageRequest().getPostprocessor();
     final PostprocessorConsumer basePostprocessorConsumer =
@@ -91,10 +91,10 @@ public class PostprocessorProducer implements Producer<CloseableReference<Closea
     private boolean mIsPostProcessingRunning = false;
 
     public PostprocessorConsumer(
-        Consumer<CloseableReference<CloseableImage>> consumer,
-        ProducerListener2 listener,
-        Postprocessor postprocessor,
-        ProducerContext producerContext) {
+        final Consumer<CloseableReference<CloseableImage>> consumer,
+        final ProducerListener2 listener,
+        final Postprocessor postprocessor,
+        final ProducerContext producerContext) {
       super(consumer);
       mListener = listener;
       mPostprocessor = postprocessor;
@@ -110,7 +110,7 @@ public class PostprocessorProducer implements Producer<CloseableReference<Closea
 
     @Override
     protected void onNewResultImpl(
-        CloseableReference<CloseableImage> newResult, @Status int status) {
+        final CloseableReference<CloseableImage> newResult, final @Status int status) {
       if (!CloseableReference.isValid(newResult)) {
         // try to propagate if the last result is invalid
         if (isLast(status)) {
@@ -123,7 +123,7 @@ public class PostprocessorProducer implements Producer<CloseableReference<Closea
     }
 
     @Override
-    protected void onFailureImpl(Throwable t) {
+    protected void onFailureImpl(final Throwable t) {
       maybeNotifyOnFailure(t);
     }
 
@@ -133,7 +133,7 @@ public class PostprocessorProducer implements Producer<CloseableReference<Closea
     }
 
     private void updateSourceImageRef(
-        @Nullable CloseableReference<CloseableImage> sourceImageRef, int status) {
+        final @Nullable CloseableReference<CloseableImage> sourceImageRef, final int status) {
       CloseableReference<CloseableImage> oldSourceImageRef;
       boolean shouldSubmit;
       synchronized (PostprocessorConsumer.this) {
@@ -201,7 +201,7 @@ public class PostprocessorProducer implements Producer<CloseableReference<Closea
       return false;
     }
 
-    private void doPostprocessing(CloseableReference<CloseableImage> sourceImageRef, int status) {
+    private void doPostprocessing(final CloseableReference<CloseableImage> sourceImageRef, final int status) {
       Preconditions.checkArgument(CloseableReference.isValid(sourceImageRef));
       if (!shouldPostprocess(sourceImageRef.get())) {
         maybeNotifyOnNewResult(sourceImageRef, status);
@@ -227,18 +227,18 @@ public class PostprocessorProducer implements Producer<CloseableReference<Closea
     }
 
     private @Nullable Map<String, String> getExtraMap(
-        ProducerListener2 listener, ProducerContext producerContext, Postprocessor postprocessor) {
+        final ProducerListener2 listener, final ProducerContext producerContext, final Postprocessor postprocessor) {
       if (!listener.requiresExtraMap(producerContext, NAME)) {
         return null;
       }
       return ImmutableMap.of(POSTPROCESSOR, postprocessor.getName());
     }
 
-    private boolean shouldPostprocess(CloseableImage sourceImage) {
+    private boolean shouldPostprocess(final CloseableImage sourceImage) {
       return (sourceImage instanceof CloseableStaticBitmap);
     }
 
-    private CloseableReference<CloseableImage> postprocessInternal(CloseableImage sourceImage) {
+    private CloseableReference<CloseableImage> postprocessInternal(final CloseableImage sourceImage) {
       CloseableStaticBitmap staticBitmap = (CloseableStaticBitmap) sourceImage;
       Bitmap sourceBitmap = staticBitmap.getUnderlyingBitmap();
       CloseableReference<Bitmap> bitmapRef = mPostprocessor.process(sourceBitmap, mBitmapFactory);
@@ -256,14 +256,14 @@ public class PostprocessorProducer implements Producer<CloseableReference<Closea
       }
     }
 
-    private void maybeNotifyOnNewResult(CloseableReference<CloseableImage> newRef, int status) {
+    private void maybeNotifyOnNewResult(final CloseableReference<CloseableImage> newRef, final int status) {
       boolean isLast = isLast(status);
       if ((!isLast && !isClosed()) || (isLast && close())) {
         getConsumer().onNewResult(newRef, status);
       }
     }
 
-    private void maybeNotifyOnFailure(Throwable throwable) {
+    private void maybeNotifyOnFailure(final Throwable throwable) {
       if (close()) {
         getConsumer().onFailure(throwable);
       }
@@ -299,13 +299,13 @@ public class PostprocessorProducer implements Producer<CloseableReference<Closea
       extends DelegatingConsumer<
           CloseableReference<CloseableImage>, CloseableReference<CloseableImage>> {
 
-    private SingleUsePostprocessorConsumer(PostprocessorConsumer postprocessorConsumer) {
+    private SingleUsePostprocessorConsumer(final PostprocessorConsumer postprocessorConsumer) {
       super(postprocessorConsumer);
     }
 
     @Override
     protected void onNewResultImpl(
-        final CloseableReference<CloseableImage> newResult, @Status int status) {
+        final CloseableReference<CloseableImage> newResult, final @Status int status) {
       // ignore intermediate results
       if (isNotLast(status)) {
         return;
@@ -336,9 +336,9 @@ public class PostprocessorProducer implements Producer<CloseableReference<Closea
     private CloseableReference<CloseableImage> mSourceImageRef = null;
 
     private RepeatedPostprocessorConsumer(
-        PostprocessorConsumer postprocessorConsumer,
-        RepeatedPostprocessor repeatedPostprocessor,
-        ProducerContext context) {
+        final PostprocessorConsumer postprocessorConsumer,
+        final RepeatedPostprocessor repeatedPostprocessor,
+        final ProducerContext context) {
       super(postprocessorConsumer);
       repeatedPostprocessor.setCallback(RepeatedPostprocessorConsumer.this);
       context.addCallbacks(
@@ -354,7 +354,7 @@ public class PostprocessorProducer implements Producer<CloseableReference<Closea
 
     @Override
     protected void onNewResultImpl(
-        CloseableReference<CloseableImage> newResult, @Status int status) {
+        final CloseableReference<CloseableImage> newResult, final @Status int status) {
       // ignore intermediate results
       if (isNotLast(status)) {
         return;
@@ -364,7 +364,7 @@ public class PostprocessorProducer implements Producer<CloseableReference<Closea
     }
 
     @Override
-    protected void onFailureImpl(Throwable throwable) {
+    protected void onFailureImpl(final Throwable throwable) {
       if (close()) {
         getConsumer().onFailure(throwable);
       }
@@ -397,7 +397,7 @@ public class PostprocessorProducer implements Producer<CloseableReference<Closea
       }
     }
 
-    private void setSourceImageRef(CloseableReference<CloseableImage> sourceImageRef) {
+    private void setSourceImageRef(final CloseableReference<CloseableImage> sourceImageRef) {
       CloseableReference<CloseableImage> oldSourceImageRef;
       synchronized (RepeatedPostprocessorConsumer.this) {
         if (mIsClosed) {

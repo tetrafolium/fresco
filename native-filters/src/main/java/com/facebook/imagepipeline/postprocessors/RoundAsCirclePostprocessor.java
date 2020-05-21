@@ -25,12 +25,12 @@ public class RoundAsCirclePostprocessor extends BasePostprocessor {
     this(ENABLE_ANTI_ALIASING);
   }
 
-  public RoundAsCirclePostprocessor(boolean enableAntiAliasing) {
+  public RoundAsCirclePostprocessor(final boolean enableAntiAliasing) {
     mEnableAntiAliasing = enableAntiAliasing;
   }
 
   @Override
-  public void process(Bitmap bitmap) {
+  public void process(final Bitmap bitmap) {
     NativeRoundingFilter.toCircleFast(bitmap, mEnableAntiAliasing);
   }
 

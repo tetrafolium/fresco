@@ -17,7 +17,7 @@ import com.facebook.imagepipeline.request.BasePostprocessor;
 public class FasterGreyScalePostprocessor extends BasePostprocessor {
 
   @Override
-  public void process(Bitmap bitmap) {
+  public void process(final Bitmap bitmap) {
     final int w = bitmap.getWidth();
     final int h = bitmap.getHeight();
     final int[] pixels = new int[w * h];

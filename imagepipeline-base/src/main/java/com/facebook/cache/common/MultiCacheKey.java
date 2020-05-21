@@ -27,7 +27,7 @@ public class MultiCacheKey implements CacheKey {
 
   final List<CacheKey> mCacheKeys;
 
-  public MultiCacheKey(List<CacheKey> cacheKeys) {
+  public MultiCacheKey(final List<CacheKey> cacheKeys) {
     mCacheKeys = Preconditions.checkNotNull(cacheKeys);
   }
 
@@ -41,7 +41,7 @@ public class MultiCacheKey implements CacheKey {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(final Object o) {
     if (o == this) {
       return true;
     }
@@ -58,7 +58,7 @@ public class MultiCacheKey implements CacheKey {
   }
 
   @Override
-  public boolean containsUri(Uri uri) {
+  public boolean containsUri(final Uri uri) {
     for (int i = 0; i < mCacheKeys.size(); i++) {
       if (mCacheKeys.get(i).containsUri(uri)) {
         return true;

@@ -115,7 +115,7 @@ public class ImagePerfState {
     mImageDrawTimeMs = UNSET;
   }
 
-  public void setImageLoadStatus(@ImageLoadStatus int imageLoadStatus) {
+  public void setImageLoadStatus(final @ImageLoadStatus int imageLoadStatus) {
     mImageLoadStatus = imageLoadStatus;
   }
 
@@ -124,104 +124,104 @@ public class ImagePerfState {
     return mImageLoadStatus;
   }
 
-  public void setControllerId(@Nullable String controllerId) {
+  public void setControllerId(final @Nullable String controllerId) {
     mControllerId = controllerId;
   }
 
-  public void setRequestId(@Nullable String requestId) {
+  public void setRequestId(final @Nullable String requestId) {
     mRequestId = requestId;
   }
 
-  public void setImageRequest(@Nullable ImageRequest imageRequest) {
+  public void setImageRequest(final @Nullable ImageRequest imageRequest) {
     mImageRequest = imageRequest;
   }
 
   public void setControllerImageRequests(
-      @Nullable ImageRequest imageRequest,
-      @Nullable ImageRequest lowResImageRequest,
-      @Nullable ImageRequest[] firstAvailableImageRequests) {
+      final @Nullable ImageRequest imageRequest,
+      final @Nullable ImageRequest lowResImageRequest,
+      final @Nullable ImageRequest[] firstAvailableImageRequests) {
     mControllerImageRequest = imageRequest;
     mControllerLowResImageRequest = lowResImageRequest;
     mControllerFirstAvailableImageRequests = firstAvailableImageRequests;
   }
 
-  public void setCallerContext(@Nullable Object callerContext) {
+  public void setCallerContext(final @Nullable Object callerContext) {
     mCallerContext = callerContext;
   }
 
-  public void setControllerSubmitTimeMs(long controllerSubmitTimeMs) {
+  public void setControllerSubmitTimeMs(final long controllerSubmitTimeMs) {
     mControllerSubmitTimeMs = controllerSubmitTimeMs;
   }
 
-  public void setControllerIntermediateImageSetTimeMs(long controllerIntermediateImageSetTimeMs) {
+  public void setControllerIntermediateImageSetTimeMs(final long controllerIntermediateImageSetTimeMs) {
     mControllerIntermediateImageSetTimeMs = controllerIntermediateImageSetTimeMs;
   }
 
-  public void setControllerFinalImageSetTimeMs(long controllerFinalImageSetTimeMs) {
+  public void setControllerFinalImageSetTimeMs(final long controllerFinalImageSetTimeMs) {
     mControllerFinalImageSetTimeMs = controllerFinalImageSetTimeMs;
   }
 
-  public void setControllerFailureTimeMs(long controllerFailureTimeMs) {
+  public void setControllerFailureTimeMs(final long controllerFailureTimeMs) {
     mControllerFailureTimeMs = controllerFailureTimeMs;
   }
 
-  public void setControllerCancelTimeMs(long controllerCancelTimeMs) {
+  public void setControllerCancelTimeMs(final long controllerCancelTimeMs) {
     mControllerCancelTimeMs = controllerCancelTimeMs;
   }
 
-  public void setImageRequestStartTimeMs(long imageRequestStartTimeMs) {
+  public void setImageRequestStartTimeMs(final long imageRequestStartTimeMs) {
     mImageRequestStartTimeMs = imageRequestStartTimeMs;
   }
 
-  public void setImageRequestEndTimeMs(long imageRequestEndTimeMs) {
+  public void setImageRequestEndTimeMs(final long imageRequestEndTimeMs) {
     mImageRequestEndTimeMs = imageRequestEndTimeMs;
   }
 
-  public void setVisibilityEventTimeMs(long visibilityEventTimeMs) {
+  public void setVisibilityEventTimeMs(final long visibilityEventTimeMs) {
     mVisibilityEventTimeMs = visibilityEventTimeMs;
   }
 
-  public void setInvisibilityEventTimeMs(long invisibilityEventTimeMs) {
+  public void setInvisibilityEventTimeMs(final long invisibilityEventTimeMs) {
     mInvisibilityEventTimeMs = invisibilityEventTimeMs;
   }
 
-  public void setImageOrigin(@ImageOrigin int imageOrigin) {
+  public void setImageOrigin(final @ImageOrigin int imageOrigin) {
     mImageOrigin = imageOrigin;
   }
 
-  public void setUltimateProducerName(@Nullable String ultimateProducerName) {
+  public void setUltimateProducerName(final @Nullable String ultimateProducerName) {
     mUltimateProducerName = ultimateProducerName;
   }
 
-  public void setPrefetch(boolean prefetch) {
+  public void setPrefetch(final boolean prefetch) {
     mIsPrefetch = prefetch;
   }
 
-  public void setImageInfo(@Nullable ImageInfo imageInfo) {
+  public void setImageInfo(final @Nullable ImageInfo imageInfo) {
     mImageInfo = imageInfo;
   }
 
-  public void setOnScreenWidth(int onScreenWidthPx) {
+  public void setOnScreenWidth(final int onScreenWidthPx) {
     mOnScreenWidthPx = onScreenWidthPx;
   }
 
-  public void setOnScreenHeight(int onScreenHeightPx) {
+  public void setOnScreenHeight(final int onScreenHeightPx) {
     mOnScreenHeightPx = onScreenHeightPx;
   }
 
-  public void setErrorThrowable(@Nullable Throwable errorThrowable) {
+  public void setErrorThrowable(final @Nullable Throwable errorThrowable) {
     mErrorThrowable = errorThrowable;
   }
 
-  public void setVisible(boolean visible) {
+  public void setVisible(final boolean visible) {
     mVisibilityState = visible ? VisibilityState.VISIBLE : VisibilityState.INVISIBLE;
   }
 
-  public void setComponentTag(@Nullable String componentTag) {
+  public void setComponentTag(final @Nullable String componentTag) {
     mComponentTag = componentTag;
   }
 
-  public void setImageDrawTimeMs(long imageDrawTimeMs) {
+  public void setImageDrawTimeMs(final long imageDrawTimeMs) {
     mImageDrawTimeMs = imageDrawTimeMs;
   }
 
@@ -261,7 +261,7 @@ public class ImagePerfState {
     return mImageDrawTimeMs;
   }
 
-  public void setDimensionsInfo(DimensionsInfo dimensionsInfo) {
+  public void setDimensionsInfo(final DimensionsInfo dimensionsInfo) {
     mDimensionsInfo = dimensionsInfo;
   }
 
@@ -269,7 +269,7 @@ public class ImagePerfState {
     return mDimensionsInfo;
   }
 
-  public void setExtraData(@Nullable Extras extraData) {
+  public void setExtraData(final @Nullable Extras extraData) {
     mExtraData = extraData;
   }
 

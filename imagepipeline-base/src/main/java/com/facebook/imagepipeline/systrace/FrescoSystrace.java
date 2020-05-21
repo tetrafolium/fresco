@@ -69,17 +69,17 @@ public class FrescoSystrace {
     ArgsBuilder arg(String key, double value);
   }
 
-  private FrescoSystrace() {}
+  private FrescoSystrace() { }
 
-  public static void provide(Systrace instance) {
+  public static void provide(final Systrace instance) {
     sInstance = instance;
   }
 
-  public static void beginSection(String name) {
+  public static void beginSection(final String name) {
     getInstance().beginSection(name);
   }
 
-  public static ArgsBuilder beginSectionWithArgs(String name) {
+  public static ArgsBuilder beginSectionWithArgs(final String name) {
     return getInstance().beginSectionWithArgs(name);
   }
 
@@ -105,25 +105,25 @@ public class FrescoSystrace {
   private static final class NoOpArgsBuilder implements ArgsBuilder {
 
     @Override
-    public void flush() {}
+    public void flush() { }
 
     @Override
-    public ArgsBuilder arg(String key, Object value) {
+    public ArgsBuilder arg(final String key, final Object value) {
       return this;
     }
 
     @Override
-    public ArgsBuilder arg(String key, int value) {
+    public ArgsBuilder arg(final String key, final int value) {
       return this;
     }
 
     @Override
-    public ArgsBuilder arg(String key, long value) {
+    public ArgsBuilder arg(final String key, final long value) {
       return this;
     }
 
     @Override
-    public ArgsBuilder arg(String key, double value) {
+    public ArgsBuilder arg(final String key, final double value) {
       return this;
     }
   }

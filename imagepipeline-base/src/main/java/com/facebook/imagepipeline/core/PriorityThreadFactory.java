@@ -26,11 +26,11 @@ public class PriorityThreadFactory implements ThreadFactory {
    * <p>This value should be set to a value compatible with {@link
    * android.os.Process#setThreadPriority}, not {@link Thread#setPriority}.
    */
-  public PriorityThreadFactory(int threadPriority) {
+  public PriorityThreadFactory(final int threadPriority) {
     this(threadPriority, "PriorityThreadFactory", true);
   }
 
-  public PriorityThreadFactory(int threadPriority, String prefix, boolean addThreadNumber) {
+  public PriorityThreadFactory(final int threadPriority, final String prefix, final boolean addThreadNumber) {
     mThreadPriority = threadPriority;
     this.mPrefix = prefix;
     this.mAddThreadNumber = addThreadNumber;

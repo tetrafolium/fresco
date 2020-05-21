@@ -18,24 +18,24 @@ import com.facebook.imagepipeline.image.EncodedImage;
 public class AddImageTransformMetaDataProducer implements Producer<EncodedImage> {
   private final Producer<EncodedImage> mInputProducer;
 
-  public AddImageTransformMetaDataProducer(Producer<EncodedImage> inputProducer) {
+  public AddImageTransformMetaDataProducer(final Producer<EncodedImage> inputProducer) {
     mInputProducer = inputProducer;
   }
 
   @Override
-  public void produceResults(Consumer<EncodedImage> consumer, ProducerContext context) {
+  public void produceResults(final Consumer<EncodedImage> consumer, final ProducerContext context) {
     mInputProducer.produceResults(new AddImageTransformMetaDataConsumer(consumer), context);
   }
 
   private static class AddImageTransformMetaDataConsumer
       extends DelegatingConsumer<EncodedImage, EncodedImage> {
 
-    private AddImageTransformMetaDataConsumer(Consumer<EncodedImage> consumer) {
+    private AddImageTransformMetaDataConsumer(final Consumer<EncodedImage> consumer) {
       super(consumer);
     }
 
     @Override
-    protected void onNewResultImpl(EncodedImage newResult, @Status int status) {
+    protected void onNewResultImpl(final EncodedImage newResult, final @Status int status) {
       if (newResult == null) {
         getConsumer().onNewResult(null, status);
         return;

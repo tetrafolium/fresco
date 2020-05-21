@@ -19,19 +19,19 @@ public class DiskStorageCacheFactory implements FileCacheFactory {
 
   private DiskStorageFactory mDiskStorageFactory;
 
-  public DiskStorageCacheFactory(DiskStorageFactory diskStorageFactory) {
+  public DiskStorageCacheFactory(final DiskStorageFactory diskStorageFactory) {
     mDiskStorageFactory = diskStorageFactory;
   }
 
   public static DiskStorageCache buildDiskStorageCache(
-      DiskCacheConfig diskCacheConfig, DiskStorage diskStorage) {
+      final DiskCacheConfig diskCacheConfig, final DiskStorage diskStorage) {
     return buildDiskStorageCache(diskCacheConfig, diskStorage, Executors.newSingleThreadExecutor());
   }
 
   public static DiskStorageCache buildDiskStorageCache(
-      DiskCacheConfig diskCacheConfig,
-      DiskStorage diskStorage,
-      Executor executorForBackgroundInit) {
+      final DiskCacheConfig diskCacheConfig,
+      final DiskStorage diskStorage,
+      final Executor executorForBackgroundInit) {
     DiskStorageCache.Params params =
         new DiskStorageCache.Params(
             diskCacheConfig.getMinimumSizeLimit(),
@@ -50,7 +50,7 @@ public class DiskStorageCacheFactory implements FileCacheFactory {
   }
 
   @Override
-  public FileCache get(DiskCacheConfig diskCacheConfig) {
+  public FileCache get(final DiskCacheConfig diskCacheConfig) {
     return buildDiskStorageCache(diskCacheConfig, mDiskStorageFactory.get(diskCacheConfig));
   }
 }

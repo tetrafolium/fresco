@@ -29,11 +29,11 @@ public class FakeClock implements MonotonicClock {
     now = 100000;
   }
 
-  public FakeClock(long now) {
+  public FakeClock(final long now) {
     this.now = now;
   }
 
-  public void incrementBy(long amountMs) {
+  public void incrementBy(final long amountMs) {
     synchronized (this) {
       now += amountMs;
     }
@@ -65,7 +65,7 @@ public class FakeClock implements MonotonicClock {
    * @param tickMs the amount to tick the clock at each step
    * @param totalMs the total amount of time to elapse during the call
    */
-  public void incrementInSteps(long tickMs, long totalMs) {
+  public void incrementInSteps(final long tickMs, final long totalMs) {
     long start = now;
     long end = start + totalMs;
     while (now < end) {
@@ -81,15 +81,15 @@ public class FakeClock implements MonotonicClock {
   /**
    * Add a clock that will get called before {@link #listeners}, in order to guarantee call order.
    */
-  public void addOtherClock(OnTickListener otherClock) {
+  public void addOtherClock(final OnTickListener otherClock) {
     otherClocks.put(otherClock, otherClock);
   }
 
-  public void addListener(OnTickListener listener) {
+  public void addListener(final OnTickListener listener) {
     listeners.put(listener, listener);
   }
 
-  public void removeListener(OnTickListener listener) {
+  public void removeListener(final OnTickListener listener) {
     listeners.remove(listener);
   }
 }

@@ -79,7 +79,7 @@ public class BranchOnSeparateImagesProducerTest {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 mFirstProducerConsumer = (Consumer<EncodedImage>) invocation.getArguments()[0];
                 return null;
               }
@@ -89,7 +89,7 @@ public class BranchOnSeparateImagesProducerTest {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 mSecondProducerConsumer = (Consumer<EncodedImage>) invocation.getArguments()[0];
                 return null;
               }

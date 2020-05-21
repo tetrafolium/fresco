@@ -13,12 +13,12 @@ public class DecodeException extends RuntimeException {
 
   private final EncodedImage mEncodedImage;
 
-  public DecodeException(String message, EncodedImage encodedImage) {
+  public DecodeException(final String message, final EncodedImage encodedImage) {
     super(message);
     mEncodedImage = encodedImage;
   }
 
-  public DecodeException(String message, Throwable t, EncodedImage encodedImage) {
+  public DecodeException(final String message, final Throwable t, final EncodedImage encodedImage) {
     super(message, t);
     mEncodedImage = encodedImage;
   }

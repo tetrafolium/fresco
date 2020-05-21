@@ -203,7 +203,7 @@ public class LocalContentUriThumbnailFetchProducerTest {
     assertConsumerReceivesNull();
   }
 
-  private void mockResizeOptions(int width, int height) {
+  private void mockResizeOptions(final int width, final int height) {
     ResizeOptions resizeOptions = new ResizeOptions(width, height);
     when(mImageRequest.getResizeOptions()).thenReturn(resizeOptions);
   }

@@ -33,7 +33,7 @@ public class UiThreadImmediateExecutorService extends HandlerExecutorServiceImpl
   }
 
   @Override
-  public void execute(Runnable command) {
+  public void execute(final Runnable command) {
     if (isHandlerThread()) {
       command.run();
     } else {

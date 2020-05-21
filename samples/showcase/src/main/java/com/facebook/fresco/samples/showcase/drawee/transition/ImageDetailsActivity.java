@@ -24,14 +24,14 @@ import com.facebook.fresco.samples.showcase.R;
 /** Image details activity */
 public class ImageDetailsActivity extends AppCompatActivity {
 
-  public static Intent getStartIntent(Context context, Uri imageUri) {
+  public static Intent getStartIntent(final Context context, final Uri imageUri) {
     Intent intent = new Intent(context, ImageDetailsActivity.class);
     intent.setData(imageUri);
     return intent;
   }
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_drawee_transition_detail);
 
@@ -65,7 +65,7 @@ public class ImageDetailsActivity extends AppCompatActivity {
   }
 
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
+  public boolean onOptionsItemSelected(final MenuItem item) {
     switch (item.getItemId()) {
         // Respond to the action bar's Up/Home button
       case android.R.id.home:

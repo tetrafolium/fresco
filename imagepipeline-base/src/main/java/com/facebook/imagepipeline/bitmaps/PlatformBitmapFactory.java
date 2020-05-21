@@ -33,7 +33,7 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      int width, int height, Bitmap.Config bitmapConfig) {
+      final int width, final int height, final Bitmap.Config bitmapConfig) {
     return createBitmap(width, height, bitmapConfig, null);
   }
 
@@ -47,7 +47,7 @@ public abstract class PlatformBitmapFactory {
    * @throws TooManyBitmapsException if the pool is full
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
-  public CloseableReference<Bitmap> createBitmap(int width, int height) {
+  public CloseableReference<Bitmap> createBitmap(final int width, final int height) {
     return createBitmap(width, height, Bitmap.Config.ARGB_8888);
   }
 
@@ -63,7 +63,7 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      int width, int height, Bitmap.Config bitmapConfig, @Nullable Object callerContext) {
+      final int width, final int height, final Bitmap.Config bitmapConfig, final @Nullable Object callerContext) {
     return createBitmapInternal(width, height, bitmapConfig);
   }
 
@@ -79,7 +79,7 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      int width, int height, @Nullable Object callerContext) {
+      final int width, final int height, final @Nullable Object callerContext) {
     return createBitmap(width, height, Bitmap.Config.ARGB_8888, callerContext);
   }
 
@@ -94,7 +94,7 @@ public abstract class PlatformBitmapFactory {
    * @throws TooManyBitmapsException if the pool is full
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
-  public CloseableReference<Bitmap> createBitmap(Bitmap source) {
+  public CloseableReference<Bitmap> createBitmap(final Bitmap source) {
     return createBitmap(source, null);
   }
 
@@ -110,7 +110,7 @@ public abstract class PlatformBitmapFactory {
    * @throws TooManyBitmapsException if the pool is full
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
-  public CloseableReference<Bitmap> createBitmap(Bitmap source, @Nullable Object callerContext) {
+  public CloseableReference<Bitmap> createBitmap(final Bitmap source, final @Nullable Object callerContext) {
     return createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), callerContext);
   }
 
@@ -130,7 +130,7 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      Bitmap source, int x, int y, int width, int height) {
+      final Bitmap source, final int x, final int y, final int width, final int height) {
     return createBitmap(source, x, y, width, height, null);
   }
 
@@ -151,7 +151,7 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      Bitmap source, int x, int y, int width, int height, @Nullable Object callerContext) {
+      final Bitmap source, final int x, final int y, final int width, final int height, final @Nullable Object callerContext) {
     return createBitmap(source, x, y, width, height, null, false, callerContext);
   }
 
@@ -174,7 +174,7 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      Bitmap source, int x, int y, int width, int height, @Nullable Matrix matrix, boolean filter) {
+      final Bitmap source, final int x, final int y, final int width, final int height, final @Nullable Matrix matrix, final boolean filter) {
     return createBitmap(source, x, y, width, height, matrix, filter, null);
   }
 
@@ -191,7 +191,7 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createScaledBitmap(
-      Bitmap source, int destinationWidth, int destinationHeight, boolean filter) {
+      final Bitmap source, final int destinationWidth, final int destinationHeight, final boolean filter) {
     return createScaledBitmap(source, destinationWidth, destinationHeight, filter, null);
   }
 
@@ -209,11 +209,11 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createScaledBitmap(
-      Bitmap source,
-      int destinationWidth,
-      int destinationHeight,
-      boolean filter,
-      @Nullable Object callerContext) {
+      final Bitmap source,
+      final int destinationWidth,
+      final int destinationHeight,
+      final boolean filter,
+      final @Nullable Object callerContext) {
     checkWidthHeight(destinationWidth, destinationHeight);
 
     Matrix matrix = new Matrix();
@@ -246,14 +246,14 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      Bitmap source,
-      int x,
-      int y,
-      int width,
-      int height,
-      @Nullable Matrix matrix,
-      boolean filter,
-      @Nullable Object callerContext) {
+      final Bitmap source,
+      final int x,
+      final int y,
+      final int width,
+      final int height,
+      final @Nullable Matrix matrix,
+      final boolean filter,
+      final @Nullable Object callerContext) {
     Preconditions.checkNotNull(source, "Source bitmap cannot be null");
     checkXYSign(x, y);
     checkWidthHeight(width, height);
@@ -323,7 +323,7 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      DisplayMetrics display, int width, int height, Bitmap.Config config) {
+      final DisplayMetrics display, final int width, final int height, final Bitmap.Config config) {
     return createBitmap(display, width, height, config, null);
   }
 
@@ -342,11 +342,11 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      DisplayMetrics display,
-      int width,
-      int height,
-      Bitmap.Config config,
-      @Nullable Object callerContext) {
+      final DisplayMetrics display,
+      final int width,
+      final int height,
+      final Bitmap.Config config,
+      final @Nullable Object callerContext) {
     return createBitmap(display, width, height, config, true, callerContext);
   }
 
@@ -364,7 +364,7 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   private CloseableReference<Bitmap> createBitmap(
-      int width, int height, Bitmap.Config config, boolean hasAlpha) {
+      final int width, final int height, final Bitmap.Config config, final boolean hasAlpha) {
     return createBitmap(width, height, config, hasAlpha, null);
   }
 
@@ -383,11 +383,11 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   private CloseableReference<Bitmap> createBitmap(
-      int width,
-      int height,
-      Bitmap.Config config,
-      boolean hasAlpha,
-      @Nullable Object callerContext) {
+      final int width,
+      final int height,
+      final Bitmap.Config config,
+      final boolean hasAlpha,
+      final @Nullable Object callerContext) {
     return createBitmap(null, width, height, config, hasAlpha, callerContext);
   }
 
@@ -407,7 +407,7 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   private CloseableReference<Bitmap> createBitmap(
-      DisplayMetrics display, int width, int height, Bitmap.Config config, boolean hasAlpha) {
+      final DisplayMetrics display, final int width, final int height, final Bitmap.Config config, final boolean hasAlpha) {
     return createBitmap(display, width, height, config, hasAlpha, null);
   }
 
@@ -428,12 +428,12 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   private CloseableReference<Bitmap> createBitmap(
-      DisplayMetrics display,
-      int width,
-      int height,
-      Bitmap.Config config,
-      boolean hasAlpha,
-      @Nullable Object callerContext) {
+      final DisplayMetrics display,
+      final int width,
+      final int height,
+      final Bitmap.Config config,
+      final boolean hasAlpha,
+      final @Nullable Object callerContext) {
     checkWidthHeight(width, height);
     CloseableReference<Bitmap> bitmapRef = createBitmapInternal(width, height, config);
 
@@ -466,7 +466,7 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      int[] colors, int width, int height, Bitmap.Config config) {
+      final int[] colors, final int width, final int height, final Bitmap.Config config) {
     return createBitmap(colors, width, height, config, null);
   }
 
@@ -484,7 +484,7 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      int[] colors, int width, int height, Bitmap.Config config, @Nullable Object callerContext) {
+      final int[] colors, final int width, final int height, final Bitmap.Config config, final @Nullable Object callerContext) {
     CloseableReference<Bitmap> bitmapRef = createBitmapInternal(width, height, config);
     Bitmap bitmap = bitmapRef.get();
     bitmap.setPixels(colors, 0, width, 0, 0, width, height);
@@ -506,7 +506,7 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      DisplayMetrics display, int[] colors, int width, int height, Bitmap.Config config) {
+      final DisplayMetrics display, final int[] colors, final int width, final int height, final Bitmap.Config config) {
     return createBitmap(display, colors, width, height, config, null);
   }
 
@@ -526,12 +526,12 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      DisplayMetrics display,
-      int[] colors,
-      int width,
-      int height,
-      Bitmap.Config config,
-      @Nullable Object callerContext) {
+      final DisplayMetrics display,
+      final int[] colors,
+      final int width,
+      final int height,
+      final Bitmap.Config config,
+      final @Nullable Object callerContext) {
     // Set the stride as the width of the image
     return createBitmap(display, colors, 0, width, width, height, config, callerContext);
   }
@@ -553,13 +553,13 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      DisplayMetrics display,
-      int[] colors,
-      int offset,
-      int stride,
-      int width,
-      int height,
-      Bitmap.Config config) {
+      final DisplayMetrics display,
+      final int[] colors,
+      final int offset,
+      final int stride,
+      final int width,
+      final int height,
+      final Bitmap.Config config) {
     return createBitmap(display, colors, offset, stride, width, height, config, null);
   }
 
@@ -581,14 +581,14 @@ public abstract class PlatformBitmapFactory {
    * @throws java.lang.OutOfMemoryError if the Bitmap cannot be allocated
    */
   public CloseableReference<Bitmap> createBitmap(
-      DisplayMetrics display,
-      int[] colors,
-      int offset,
-      int stride,
-      int width,
-      int height,
-      Bitmap.Config config,
-      @Nullable Object callerContext) {
+      final DisplayMetrics display,
+      final int[] colors,
+      final int offset,
+      final int stride,
+      final int width,
+      final int height,
+      final Bitmap.Config config,
+      final @Nullable Object callerContext) {
     CloseableReference<Bitmap> bitmapRef =
         createBitmap(display, width, height, config, callerContext);
     Bitmap bitmap = bitmapRef.get();
@@ -602,7 +602,7 @@ public abstract class PlatformBitmapFactory {
    * @param source the source Bitmap
    * @return the Bitmap Config for the new Bitmap
    */
-  private static Bitmap.Config getSuitableBitmapConfig(Bitmap source) {
+  private static Bitmap.Config getSuitableBitmapConfig(final Bitmap source) {
     Bitmap.Config finalConfig = Bitmap.Config.ARGB_8888;
     final Bitmap.Config sourceConfig = source.getConfig();
 
@@ -631,7 +631,7 @@ public abstract class PlatformBitmapFactory {
    * @param width width to ensure is > 0
    * @param height height to ensure is > 0
    */
-  private static void checkWidthHeight(int width, int height) {
+  private static void checkWidthHeight(final int width, final int height) {
     Preconditions.checkArgument(width > 0, "width must be > 0");
     Preconditions.checkArgument(height > 0, "height must be > 0");
   }
@@ -642,7 +642,7 @@ public abstract class PlatformBitmapFactory {
    * @param x x coordinate to ensure is >= 0
    * @param y y coordinate to ensure is >= 0
    */
-  private static void checkXYSign(int x, int y) {
+  private static void checkXYSign(final int x, final int y) {
     Preconditions.checkArgument(x >= 0, "x must be >= 0");
     Preconditions.checkArgument(y >= 0, "y must be >= 0");
   }
@@ -656,7 +656,7 @@ public abstract class PlatformBitmapFactory {
    * @param width width of the source image subset
    * @param height height of the source image subset
    */
-  private static void checkFinalImageBounds(Bitmap source, int x, int y, int width, int height) {
+  private static void checkFinalImageBounds(final Bitmap source, final int x, final int y, final int width, final int height) {
     Preconditions.checkArgument(
         x + width <= source.getWidth(), "x + width must be <= bitmap.width()");
     Preconditions.checkArgument(
@@ -669,7 +669,7 @@ public abstract class PlatformBitmapFactory {
    * @param source the source bitmap
    * @param destination the destination bitmap
    */
-  private static void setPropertyFromSourceBitmap(Bitmap source, Bitmap destination) {
+  private static void setPropertyFromSourceBitmap(final Bitmap source, final Bitmap destination) {
     // The new bitmap was created from a known bitmap source so assume that
     // they use the same density
     destination.setDensity(source.getDensity());

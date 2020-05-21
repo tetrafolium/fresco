@@ -16,7 +16,7 @@ public class FlipperCloseableReferenceLeakTracker implements CloseableReferenceL
 
   @Override
   public void trackCloseableReferenceLeak(
-      SharedReference<Object> reference, @Nullable Throwable stacktrace) {
+      final SharedReference<Object> reference, final @Nullable Throwable stacktrace) {
     if (mListener == null) {
       Log.w("FRESCO", "No Flipper listener registered to track CloseableReference leak.");
       return;
@@ -26,7 +26,7 @@ public class FlipperCloseableReferenceLeakTracker implements CloseableReferenceL
   }
 
   @Override
-  public void setListener(@Nullable Listener listener) {
+  public void setListener(final @Nullable Listener listener) {
     mListener = listener;
   }
 

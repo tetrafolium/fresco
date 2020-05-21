@@ -30,11 +30,11 @@ public class MemoryCacheParams {
    * @param maxCacheEntrySize The maximum size of a single cache entry.
    */
   public MemoryCacheParams(
-      int maxCacheSize,
-      int maxCacheEntries,
-      int maxEvictionQueueSize,
-      int maxEvictionQueueEntries,
-      int maxCacheEntrySize) {
+      final int maxCacheSize,
+      final int maxCacheEntries,
+      final int maxEvictionQueueSize,
+      final int maxEvictionQueueEntries,
+      final int maxCacheEntrySize) {
     this(
         maxCacheSize,
         maxCacheEntries,
@@ -56,12 +56,12 @@ public class MemoryCacheParams {
    * @param paramsCheckIntervalMs Interval between checking parameters for updated values in ms.
    */
   public MemoryCacheParams(
-      int maxCacheSize,
-      int maxCacheEntries,
-      int maxEvictionQueueSize,
-      int maxEvictionQueueEntries,
-      int maxCacheEntrySize,
-      long paramsCheckIntervalMs) {
+      final int maxCacheSize,
+      final int maxCacheEntries,
+      final int maxEvictionQueueSize,
+      final int maxEvictionQueueEntries,
+      final int maxCacheEntrySize,
+      final long paramsCheckIntervalMs) {
     this.maxCacheSize = maxCacheSize;
     this.maxCacheEntries = maxCacheEntries;
     this.maxEvictionQueueSize = maxEvictionQueueSize;

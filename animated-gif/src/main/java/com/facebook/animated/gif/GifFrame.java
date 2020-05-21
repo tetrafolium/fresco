@@ -27,7 +27,7 @@ public class GifFrame implements AnimatedImageFrame {
    * @param nativeContext the native pointer
    */
   @DoNotStrip
-  GifFrame(long nativeContext) {
+  GifFrame(final long nativeContext) {
     mNativeContext = nativeContext;
   }
 
@@ -42,7 +42,7 @@ public class GifFrame implements AnimatedImageFrame {
   }
 
   @Override
-  public void renderFrame(int width, int height, Bitmap bitmap) {
+  public void renderFrame(final int width, final int height, final Bitmap bitmap) {
     nativeRenderFrame(width, height, bitmap);
   }
 

@@ -47,18 +47,18 @@ public class ImageUrlsFetcher {
   public static void getImageUrls(final ImageUrlsRequest request, final Callback callback) {
     new AsyncTask<Void, Void, List<String>>() {
       @Override
-      protected List<String> doInBackground(Void... params) {
+      protected List<String> doInBackground(final Void... params) {
         return getImageUrls(request);
       }
 
       @Override
-      protected void onPostExecute(List<String> result) {
+      protected void onPostExecute(final List<String> result) {
         callback.onFinish(result);
       }
     }.execute();
   }
 
-  private static List<String> getImageUrls(ImageUrlsRequest request) {
+  private static List<String> getImageUrls(final ImageUrlsRequest request) {
     List<String> urls = new ArrayList<String>();
     try {
       String rawJson = downloadContentAsString(request.getEndpointUrl());
@@ -85,7 +85,7 @@ public class ImageUrlsFetcher {
   }
 
   @Nullable
-  private static String downloadContentAsString(String urlString) throws IOException {
+  private static String downloadContentAsString(final String urlString) throws IOException {
     InputStream is = null;
     try {
       URL url = new URL(urlString);
@@ -112,7 +112,7 @@ public class ImageUrlsFetcher {
   }
 
   /** Reads an InputStream and converts it to a String. */
-  private static String readAsString(InputStream stream) throws IOException {
+  private static String readAsString(final InputStream stream) throws IOException {
     StringWriter writer = new StringWriter();
     Reader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
     while (true) {

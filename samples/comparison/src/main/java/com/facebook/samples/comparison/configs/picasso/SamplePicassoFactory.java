@@ -18,7 +18,7 @@ public class SamplePicassoFactory {
 
   private static Picasso sPicasso;
 
-  public static Picasso getPicasso(Context context) {
+  public static Picasso getPicasso(final Context context) {
     if (sPicasso == null) {
       sPicasso =
           new Picasso.Builder(context)

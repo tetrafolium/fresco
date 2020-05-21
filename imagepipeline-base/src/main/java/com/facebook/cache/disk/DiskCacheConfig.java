@@ -38,7 +38,7 @@ public class DiskCacheConfig {
   private final Context mContext;
   private final boolean mIndexPopulateAtStartupEnabled;
 
-  protected DiskCacheConfig(Builder builder) {
+  protected DiskCacheConfig(final Builder builder) {
     mContext = builder.mContext;
     Preconditions.checkState(
         builder.mBaseDirectoryPathSupplier != null || mContext != null,
@@ -132,7 +132,7 @@ public class DiskCacheConfig {
    *     physically locate the cache.
    * @return
    */
-  public static Builder newBuilder(@Nullable Context context) {
+  public static Builder newBuilder(final @Nullable Context context) {
     return new Builder(context);
   }
 
@@ -153,7 +153,7 @@ public class DiskCacheConfig {
 
     private final @Nullable Context mContext;
 
-    private Builder(@Nullable Context context) {
+    private Builder(final @Nullable Context context) {
       mContext = context;
     }
 
@@ -162,13 +162,13 @@ public class DiskCacheConfig {
      *
      * <p>The cache lives in a subdirectory identified by this version.
      */
-    public Builder setVersion(int version) {
+    public Builder setVersion(final int version) {
       mVersion = version;
       return this;
     }
 
     /** Sets the name of the directory where the cache will be located. */
-    public Builder setBaseDirectoryName(String baseDirectoryName) {
+    public Builder setBaseDirectoryName(final String baseDirectoryName) {
       mBaseDirectoryName = baseDirectoryName;
       return this;
     }
@@ -184,13 +184,13 @@ public class DiskCacheConfig {
       return this;
     }
 
-    public Builder setBaseDirectoryPathSupplier(Supplier<File> baseDirectoryPathSupplier) {
+    public Builder setBaseDirectoryPathSupplier(final Supplier<File> baseDirectoryPathSupplier) {
       mBaseDirectoryPathSupplier = baseDirectoryPathSupplier;
       return this;
     }
 
     /** This is the default maximum size of the cache. */
-    public Builder setMaxCacheSize(long maxCacheSize) {
+    public Builder setMaxCacheSize(final long maxCacheSize) {
       mMaxCacheSize = maxCacheSize;
       return this;
     }
@@ -200,7 +200,7 @@ public class DiskCacheConfig {
      *
      * <p>See {@link DiskTrimmable#trimToMinimum()}.
      */
-    public Builder setMaxCacheSizeOnLowDiskSpace(long maxCacheSizeOnLowDiskSpace) {
+    public Builder setMaxCacheSizeOnLowDiskSpace(final long maxCacheSizeOnLowDiskSpace) {
       mMaxCacheSizeOnLowDiskSpace = maxCacheSizeOnLowDiskSpace;
       return this;
     }
@@ -210,25 +210,25 @@ public class DiskCacheConfig {
      *
      * <p>See {@link DiskTrimmable#trimToNothing()}.
      */
-    public Builder setMaxCacheSizeOnVeryLowDiskSpace(long maxCacheSizeOnVeryLowDiskSpace) {
+    public Builder setMaxCacheSizeOnVeryLowDiskSpace(final long maxCacheSizeOnVeryLowDiskSpace) {
       mMaxCacheSizeOnVeryLowDiskSpace = maxCacheSizeOnVeryLowDiskSpace;
       return this;
     }
 
     /** Provides the logic to determine the eviction order based on entry's access time and size */
-    public Builder setEntryEvictionComparatorSupplier(EntryEvictionComparatorSupplier supplier) {
+    public Builder setEntryEvictionComparatorSupplier(final EntryEvictionComparatorSupplier supplier) {
       mEntryEvictionComparatorSupplier = supplier;
       return this;
     }
 
     /** The logger that is used to log errors made by the cache. */
-    public Builder setCacheErrorLogger(CacheErrorLogger cacheErrorLogger) {
+    public Builder setCacheErrorLogger(final CacheErrorLogger cacheErrorLogger) {
       mCacheErrorLogger = cacheErrorLogger;
       return this;
     }
 
     /** The listener for cache events. */
-    public Builder setCacheEventListener(CacheEventListener cacheEventListener) {
+    public Builder setCacheEventListener(final CacheEventListener cacheEventListener) {
       mCacheEventListener = cacheEventListener;
       return this;
     }
@@ -238,12 +238,12 @@ public class DiskCacheConfig {
      *
      * <p>See {@link DiskTrimmableRegistry}.
      */
-    public Builder setDiskTrimmableRegistry(DiskTrimmableRegistry diskTrimmableRegistry) {
+    public Builder setDiskTrimmableRegistry(final DiskTrimmableRegistry diskTrimmableRegistry) {
       mDiskTrimmableRegistry = diskTrimmableRegistry;
       return this;
     }
 
-    public Builder setIndexPopulateAtStartupEnabled(boolean indexEnabled) {
+    public Builder setIndexPopulateAtStartupEnabled(final boolean indexEnabled) {
       mIndexPopulateAtStartupEnabled = indexEnabled;
       return this;
     }

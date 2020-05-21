@@ -50,23 +50,23 @@ public class NetworkFetchProducer implements Producer<EncodedImage> {
   private final NetworkFetcher mNetworkFetcher;
 
   public NetworkFetchProducer(
-      PooledByteBufferFactory pooledByteBufferFactory,
-      ByteArrayPool byteArrayPool,
-      NetworkFetcher networkFetcher) {
+      final PooledByteBufferFactory pooledByteBufferFactory,
+      final ByteArrayPool byteArrayPool,
+      final NetworkFetcher networkFetcher) {
     mPooledByteBufferFactory = pooledByteBufferFactory;
     mByteArrayPool = byteArrayPool;
     mNetworkFetcher = networkFetcher;
   }
 
   @Override
-  public void produceResults(Consumer<EncodedImage> consumer, ProducerContext context) {
+  public void produceResults(final Consumer<EncodedImage> consumer, final ProducerContext context) {
     context.getProducerListener().onProducerStart(context, PRODUCER_NAME);
     final FetchState fetchState = mNetworkFetcher.createFetchState(consumer, context);
     mNetworkFetcher.fetch(
         fetchState,
         new NetworkFetcher.Callback() {
           @Override
-          public void onResponse(InputStream response, int responseLength) throws IOException {
+          public void onResponse(final InputStream response, final int responseLength) throws IOException {
             if (FrescoSystrace.isTracing()) {
               FrescoSystrace.beginSection("NetworkFetcher->onResponse");
             }
@@ -77,7 +77,7 @@ public class NetworkFetchProducer implements Producer<EncodedImage> {
           }
 
           @Override
-          public void onFailure(Throwable throwable) {
+          public void onFailure(final Throwable throwable) {
             NetworkFetchProducer.this.onFailure(fetchState, throwable);
           }
 
@@ -89,7 +89,7 @@ public class NetworkFetchProducer implements Producer<EncodedImage> {
   }
 
   protected void onResponse(
-      FetchState fetchState, InputStream responseData, int responseContentLength)
+      final FetchState fetchState, final InputStream responseData, final int responseContentLength)
       throws IOException {
     final PooledByteBufferOutputStream pooledOutputStream;
     if (responseContentLength > 0) {
@@ -116,7 +116,7 @@ public class NetworkFetchProducer implements Producer<EncodedImage> {
     }
   }
 
-  protected static float calculateProgress(int downloaded, int total) {
+  protected static float calculateProgress(final int downloaded, final int total) {
     if (total > 0) {
       return (float) downloaded / total;
     } else {
@@ -136,7 +136,7 @@ public class NetworkFetchProducer implements Producer<EncodedImage> {
   }
 
   protected void maybeHandleIntermediateResult(
-      PooledByteBufferOutputStream pooledOutputStream, FetchState fetchState) {
+      final PooledByteBufferOutputStream pooledOutputStream, final FetchState fetchState) {
     final long nowMs = getSystemUptime();
     if (shouldPropagateIntermediateResults(fetchState)
         && nowMs - fetchState.getLastIntermediateResultTimeMs()
@@ -156,7 +156,7 @@ public class NetworkFetchProducer implements Producer<EncodedImage> {
   }
 
   protected void handleFinalResult(
-      PooledByteBufferOutputStream pooledOutputStream, FetchState fetchState) {
+      final PooledByteBufferOutputStream pooledOutputStream, final FetchState fetchState) {
     Map<String, String> extraMap = getExtraMap(fetchState, pooledOutputStream.size());
     ProducerListener2 listener = fetchState.getListener();
     listener.onProducerFinishWithSuccess(fetchState.getContext(), PRODUCER_NAME, extraMap);
@@ -171,11 +171,11 @@ public class NetworkFetchProducer implements Producer<EncodedImage> {
   }
 
   protected static void notifyConsumer(
-      PooledByteBufferOutputStream pooledOutputStream,
-      @Consumer.Status int status,
-      @Nullable BytesRange responseBytesRange,
-      Consumer<EncodedImage> consumer,
-      ProducerContext context) {
+      final PooledByteBufferOutputStream pooledOutputStream,
+      final @Consumer.Status int status,
+      final @Nullable BytesRange responseBytesRange,
+      final Consumer<EncodedImage> consumer,
+      final ProducerContext context) {
     CloseableReference<PooledByteBuffer> result =
         CloseableReference.of(pooledOutputStream.toByteBuffer());
     EncodedImage encodedImage = null;
@@ -191,7 +191,7 @@ public class NetworkFetchProducer implements Producer<EncodedImage> {
     }
   }
 
-  private void onFailure(FetchState fetchState, Throwable e) {
+  private void onFailure(final FetchState fetchState, final Throwable e) {
     fetchState
         .getListener()
         .onProducerFinishWithFailure(fetchState.getContext(), PRODUCER_NAME, e, null);
@@ -202,14 +202,14 @@ public class NetworkFetchProducer implements Producer<EncodedImage> {
     fetchState.getConsumer().onFailure(e);
   }
 
-  private void onCancellation(FetchState fetchState) {
+  private void onCancellation(final FetchState fetchState) {
     fetchState
         .getListener()
         .onProducerFinishWithCancellation(fetchState.getContext(), PRODUCER_NAME, null);
     fetchState.getConsumer().onCancellation();
   }
 
-  private boolean shouldPropagateIntermediateResults(FetchState fetchState) {
+  private boolean shouldPropagateIntermediateResults(final FetchState fetchState) {
     if (!fetchState.getContext().isIntermediateResultExpected()) {
       return false;
     }
@@ -217,7 +217,7 @@ public class NetworkFetchProducer implements Producer<EncodedImage> {
   }
 
   @Nullable
-  private Map<String, String> getExtraMap(FetchState fetchState, int byteSize) {
+  private Map<String, String> getExtraMap(final FetchState fetchState, final int byteSize) {
     if (!fetchState.getListener().requiresExtraMap(fetchState.getContext(), PRODUCER_NAME)) {
       return null;
     }

@@ -22,13 +22,13 @@ public class BenchmarkPostprocessorForDuplicatedBitmap
   private final BasePostprocessor mPostprocessor;
 
   public BenchmarkPostprocessorForDuplicatedBitmap(
-      DurationCallback durationCallback, BasePostprocessor postprocessor) {
+      final DurationCallback durationCallback, final BasePostprocessor postprocessor) {
     super(durationCallback);
     mPostprocessor = postprocessor;
   }
 
   @Override
-  public void process(Bitmap destBitmap, Bitmap sourceBitmap) {
+  public void process(final Bitmap destBitmap, final Bitmap sourceBitmap) {
     long startTime = System.nanoTime();
     mPostprocessor.process(destBitmap, sourceBitmap);
     showDuration(System.nanoTime() - startTime);

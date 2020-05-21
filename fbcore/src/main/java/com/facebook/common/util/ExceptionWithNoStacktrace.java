@@ -17,7 +17,7 @@ public class ExceptionWithNoStacktrace extends Exception {
     return this;
   }
 
-  public ExceptionWithNoStacktrace(String detailMessage) {
+  public ExceptionWithNoStacktrace(final String detailMessage) {
     super(detailMessage);
   }
 }

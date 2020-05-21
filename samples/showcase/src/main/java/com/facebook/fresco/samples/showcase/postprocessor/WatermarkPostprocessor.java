@@ -24,13 +24,13 @@ public class WatermarkPostprocessor extends BasePostprocessor {
   private final Random mRandom = new Random();
   private final Paint mPaint = new Paint();
 
-  public WatermarkPostprocessor(int count, String watermarkText) {
+  public WatermarkPostprocessor(final int count, final String watermarkText) {
     mCount = count;
     mWatermarkText = watermarkText;
   }
 
   @Override
-  public void process(Bitmap bitmap) {
+  public void process(final Bitmap bitmap) {
     final int w = bitmap.getWidth();
     final int h = bitmap.getHeight();
 

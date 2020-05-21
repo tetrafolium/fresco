@@ -40,7 +40,7 @@ public class ImageFormat {
   private final @Nullable String mFileExtension;
   private final String mName;
 
-  public ImageFormat(String name, @Nullable String fileExtension) {
+  public ImageFormat(final String name, final @Nullable String fileExtension) {
     mName = name;
     mFileExtension = fileExtension;
   }

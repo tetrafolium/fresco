@@ -14,26 +14,26 @@ package com.facebook.cache.common;
 public class BaseCacheEventListener implements CacheEventListener {
 
   @Override
-  public void onHit(CacheEvent cacheEvent) {}
+  public void onHit(final CacheEvent cacheEvent) { }
 
   @Override
-  public void onMiss(CacheEvent cacheEvent) {}
+  public void onMiss(final CacheEvent cacheEvent) { }
 
   @Override
-  public void onWriteAttempt(CacheEvent cacheEvent) {}
+  public void onWriteAttempt(final CacheEvent cacheEvent) { }
 
   @Override
-  public void onWriteSuccess(CacheEvent cacheEvent) {}
+  public void onWriteSuccess(final CacheEvent cacheEvent) { }
 
   @Override
-  public void onReadException(CacheEvent cacheEvent) {}
+  public void onReadException(final CacheEvent cacheEvent) { }
 
   @Override
-  public void onWriteException(CacheEvent cacheEvent) {}
+  public void onWriteException(final CacheEvent cacheEvent) { }
 
   @Override
-  public void onEviction(CacheEvent cacheEvent) {}
+  public void onEviction(final CacheEvent cacheEvent) { }
 
   @Override
-  public void onCleared() {}
+  public void onCleared() { }
 }

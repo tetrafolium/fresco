@@ -19,17 +19,17 @@ public class ImagePerfImageOriginListener implements ImageOriginListener {
   private final ImagePerfMonitor mImagePerfMonitor;
 
   public ImagePerfImageOriginListener(
-      ImagePerfState imagePerfState, ImagePerfMonitor imagePerfMonitor) {
+      final ImagePerfState imagePerfState, final ImagePerfMonitor imagePerfMonitor) {
     mImagePerfState = imagePerfState;
     mImagePerfMonitor = imagePerfMonitor;
   }
 
   @Override
   public void onImageLoaded(
-      String controllerId,
-      @ImageOrigin int imageOrigin,
-      boolean successful,
-      String ultimateProducerName) {
+      final String controllerId,
+      final @ImageOrigin int imageOrigin,
+      final boolean successful,
+      final String ultimateProducerName) {
     mImagePerfState.setImageOrigin(imageOrigin);
     mImagePerfState.setUltimateProducerName(ultimateProducerName);
     mImagePerfMonitor.notifyStatusUpdated(mImagePerfState, ImageLoadStatus.ORIGIN_AVAILABLE);

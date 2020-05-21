@@ -17,14 +17,14 @@ public class ImagePerfRequestListener extends BaseRequestListener {
   private final MonotonicClock mClock;
   private final ImagePerfState mImagePerfState;
 
-  public ImagePerfRequestListener(MonotonicClock monotonicClock, ImagePerfState imagePerfState) {
+  public ImagePerfRequestListener(final MonotonicClock monotonicClock, final ImagePerfState imagePerfState) {
     mClock = monotonicClock;
     mImagePerfState = imagePerfState;
   }
 
   @Override
   public void onRequestStart(
-      ImageRequest request, Object callerContext, String requestId, boolean isPrefetch) {
+      final ImageRequest request, final Object callerContext, final String requestId, final boolean isPrefetch) {
     mImagePerfState.setImageRequestStartTimeMs(mClock.now());
 
     mImagePerfState.setImageRequest(request);
@@ -34,7 +34,7 @@ public class ImagePerfRequestListener extends BaseRequestListener {
   }
 
   @Override
-  public void onRequestSuccess(ImageRequest request, String requestId, boolean isPrefetch) {
+  public void onRequestSuccess(final ImageRequest request, final String requestId, final boolean isPrefetch) {
     mImagePerfState.setImageRequestEndTimeMs(mClock.now());
 
     mImagePerfState.setImageRequest(request);
@@ -44,7 +44,7 @@ public class ImagePerfRequestListener extends BaseRequestListener {
 
   @Override
   public void onRequestFailure(
-      ImageRequest request, String requestId, Throwable throwable, boolean isPrefetch) {
+      final ImageRequest request, final String requestId, final Throwable throwable, final boolean isPrefetch) {
     mImagePerfState.setImageRequestEndTimeMs(mClock.now());
 
     mImagePerfState.setImageRequest(request);
@@ -53,7 +53,7 @@ public class ImagePerfRequestListener extends BaseRequestListener {
   }
 
   @Override
-  public void onRequestCancellation(String requestId) {
+  public void onRequestCancellation(final String requestId) {
     mImagePerfState.setImageRequestEndTimeMs(mClock.now());
 
     mImagePerfState.setRequestId(requestId);

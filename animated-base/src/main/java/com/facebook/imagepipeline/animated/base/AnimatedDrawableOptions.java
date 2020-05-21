@@ -32,7 +32,7 @@ public class AnimatedDrawableOptions {
   public final boolean enableDebugging;
 
   /** Creates {@link AnimatedDrawableOptions} with default options. */
-  public AnimatedDrawableOptions(AnimatedDrawableOptionsBuilder builder) {
+  public AnimatedDrawableOptions(final AnimatedDrawableOptionsBuilder builder) {
     this.forceKeepAllFramesInMemory = builder.getForceKeepAllFramesInMemory();
     this.allowPrefetching = builder.getAllowPrefetching();
     this.maximumBytes = builder.getMaximumBytes();

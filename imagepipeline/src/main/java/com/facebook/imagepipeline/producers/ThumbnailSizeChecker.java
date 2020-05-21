@@ -36,7 +36,7 @@ public final class ThumbnailSizeChecker {
    * @param height the desired height
    * @return true if the producer can meet these needs
    */
-  public static boolean isImageBigEnough(int width, int height, ResizeOptions resizeOptions) {
+  public static boolean isImageBigEnough(final int width, final int height, final ResizeOptions resizeOptions) {
     if (resizeOptions == null) {
       return getAcceptableSize(width) >= BitmapUtil.MAX_BITMAP_SIZE
           && getAcceptableSize(height) >= (int) BitmapUtil.MAX_BITMAP_SIZE;
@@ -46,7 +46,7 @@ public final class ThumbnailSizeChecker {
     }
   }
 
-  public static boolean isImageBigEnough(EncodedImage encodedImage, ResizeOptions resizeOptions) {
+  public static boolean isImageBigEnough(final EncodedImage encodedImage, final ResizeOptions resizeOptions) {
     if (encodedImage == null) {
       return false;
     }
@@ -61,7 +61,7 @@ public final class ThumbnailSizeChecker {
     }
   }
 
-  public static int getAcceptableSize(int size) {
+  public static int getAcceptableSize(final int size) {
     return (int) (size * ACCEPTABLE_REQUESTED_TO_ACTUAL_SIZE_RATIO);
   }
 }

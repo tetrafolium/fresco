@@ -108,7 +108,7 @@ public class ScrollTest extends ActivityInstrumentationTestCase2<MainActivity> {
   }
 
   /** Runs the test for given library. */
-  private void runScenario(int libraryIndex, int sourceIndex) throws Exception {
+  private void runScenario(final int libraryIndex, final int sourceIndex) throws Exception {
     disableAnimatedImages();
     selectFramework(libraryIndex);
     selectSource(sourceIndex);
@@ -174,7 +174,7 @@ public class ScrollTest extends ActivityInstrumentationTestCase2<MainActivity> {
   }
 
   /** Scrolls the list view given number of times. */
-  private void scrollMultipleTimes(int times) throws Exception {
+  private void scrollMultipleTimes(final int times) throws Exception {
     final int height = mActivity.getDisplayHeight();
     for (int i = 0; i < times; i++) {
       Thread.sleep(BEFORE_SCROLL_TIME_MS);

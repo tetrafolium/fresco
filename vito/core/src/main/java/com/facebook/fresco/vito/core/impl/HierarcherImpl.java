@@ -33,13 +33,13 @@ public class HierarcherImpl implements Hierarcher {
   private final VitoDrawableFactory mDrawableFactory;
   private final RoundingUtils mRoundingUtils;
 
-  public HierarcherImpl(VitoDrawableFactory drawableFactory) {
+  public HierarcherImpl(final VitoDrawableFactory drawableFactory) {
     mDrawableFactory = drawableFactory;
     mRoundingUtils = new RoundingUtils();
   }
 
   @Override
-  public Drawable buildPlaceholderDrawable(Resources resources, ImageOptions imageOptions) {
+  public Drawable buildPlaceholderDrawable(final Resources resources, final ImageOptions imageOptions) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("HierarcherImpl#buildPlaceholderDrawable");
     }
@@ -66,7 +66,7 @@ public class HierarcherImpl implements Hierarcher {
   }
 
   protected Drawable applyRoundingOptions(
-      Resources resources, Drawable placeholderDrawable, ImageOptions imageOptions) {
+      final Resources resources, final Drawable placeholderDrawable, final ImageOptions imageOptions) {
     RoundingOptions roundingOptions = imageOptions.getRoundingOptions();
     BorderOptions borderOptions = imageOptions.getBorderOptions();
 
@@ -75,7 +75,7 @@ public class HierarcherImpl implements Hierarcher {
   }
 
   @Override
-  public Drawable buildProgressDrawable(Resources resources, ImageOptions imageOptions) {
+  public Drawable buildProgressDrawable(final Resources resources, final ImageOptions imageOptions) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("HierarcherImpl#buildProgressDrawable");
     }
@@ -100,7 +100,7 @@ public class HierarcherImpl implements Hierarcher {
 
   @Override
   @Nullable
-  public Drawable buildErrorDrawable(Resources resources, ImageOptions imageOptions) {
+  public Drawable buildErrorDrawable(final Resources resources, final ImageOptions imageOptions) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("HierarcherImpl#buildErrorDrawable");
     }
@@ -122,7 +122,7 @@ public class HierarcherImpl implements Hierarcher {
   }
 
   @Override
-  public ForwardingDrawable buildActualImageWrapper(ImageOptions imageOptions) {
+  public ForwardingDrawable buildActualImageWrapper(final ImageOptions imageOptions) {
     ScaleTypeDrawable wrapper =
         new ScaleTypeDrawable(
             NOP_DRAWABLE,
@@ -137,7 +137,7 @@ public class HierarcherImpl implements Hierarcher {
 
   @Override
   public void setupActualImageWrapper(
-      ScaleTypeDrawable actualImageWrapper, ImageOptions imageOptions) {
+      final ScaleTypeDrawable actualImageWrapper, final ImageOptions imageOptions) {
     actualImageWrapper.setScaleType(imageOptions.getActualImageScaleType());
     actualImageWrapper.setFocusPoint(imageOptions.getActualImageFocusPoint());
     actualImageWrapper.setColorFilter(imageOptions.getActualImageColorFilter());
@@ -145,7 +145,7 @@ public class HierarcherImpl implements Hierarcher {
 
   @Override
   @Nullable
-  public Drawable buildOverlayDrawable(Resources resources, ImageOptions imageOptions) {
+  public Drawable buildOverlayDrawable(final Resources resources, final ImageOptions imageOptions) {
     int resId = imageOptions.getOverlayRes();
     return resId == 0 ? null : resources.getDrawable(imageOptions.getOverlayRes());
   }
@@ -153,13 +153,13 @@ public class HierarcherImpl implements Hierarcher {
   @Nullable
   @Override
   public Drawable setupActualImageDrawable(
-      BaseFrescoDrawable frescoDrawable,
-      Resources resources,
-      ImageOptions imageOptions,
-      CloseableReference<CloseableImage> closeableImage,
-      @Nullable ForwardingDrawable actualImageWrapperDrawable,
-      boolean wasImmediate,
-      InstrumentedDrawable.Listener instrumentedListener) {
+      final BaseFrescoDrawable frescoDrawable,
+      final Resources resources,
+      final ImageOptions imageOptions,
+      final CloseableReference<CloseableImage> closeableImage,
+      final @Nullable ForwardingDrawable actualImageWrapperDrawable,
+      final boolean wasImmediate,
+      final InstrumentedDrawable.Listener instrumentedListener) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("HierarcherImpl#setupActualImageDrawable");
     }
@@ -197,10 +197,10 @@ public class HierarcherImpl implements Hierarcher {
 
   @Override
   public void setupOverlayDrawable(
-      BaseFrescoDrawable frescoDrawable,
-      Resources resources,
-      ImageOptions imageOptions,
-      @Nullable Drawable cachedOverlayDrawable) {
+      final BaseFrescoDrawable frescoDrawable,
+      final Resources resources,
+      final ImageOptions imageOptions,
+      final @Nullable Drawable cachedOverlayDrawable) {
     if (cachedOverlayDrawable == null) {
       cachedOverlayDrawable = buildOverlayDrawable(resources, imageOptions);
     }
@@ -210,9 +210,9 @@ public class HierarcherImpl implements Hierarcher {
 
   @Override
   public void setupDebugOverlayDrawable(
-      BaseFrescoDrawable frescoDrawable,
-      @Nullable Drawable overlayDrawable,
-      @Nullable Drawable debugOverlayDrawable) {
+      final BaseFrescoDrawable frescoDrawable,
+      final @Nullable Drawable overlayDrawable,
+      final @Nullable Drawable debugOverlayDrawable) {
     if (debugOverlayDrawable == null) {
       return;
     }

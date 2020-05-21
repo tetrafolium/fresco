@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 public class AnimatedDrawable2ValueAnimatorHelper {
 
   public static @Nullable ValueAnimator createValueAnimator(
-      AnimatedDrawable2 animatedDrawable, int maxDurationMs) {
+      final AnimatedDrawable2 animatedDrawable, final int maxDurationMs) {
     ValueAnimator animator = createValueAnimator(animatedDrawable);
     if (animator == null) {
       return null;
@@ -29,7 +29,7 @@ public class AnimatedDrawable2ValueAnimatorHelper {
     return animator;
   }
 
-  public static ValueAnimator createValueAnimator(AnimatedDrawable2 animatedDrawable) {
+  public static ValueAnimator createValueAnimator(final AnimatedDrawable2 animatedDrawable) {
     int loopCount = animatedDrawable.getLoopCount();
     ValueAnimator animator = new ValueAnimator();
     animator.setIntValues(0, (int) animatedDrawable.getLoopDurationMs());
@@ -50,11 +50,11 @@ public class AnimatedDrawable2ValueAnimatorHelper {
     return new ValueAnimator.AnimatorUpdateListener() {
       @TargetApi(Build.VERSION_CODES.HONEYCOMB)
       @Override
-      public void onAnimationUpdate(ValueAnimator animation) {
+      public void onAnimationUpdate(final ValueAnimator animation) {
         drawable.setLevel((Integer) animation.getAnimatedValue());
       }
     };
   }
 
-  private AnimatedDrawable2ValueAnimatorHelper() {}
+  private AnimatedDrawable2ValueAnimatorHelper() { }
 }

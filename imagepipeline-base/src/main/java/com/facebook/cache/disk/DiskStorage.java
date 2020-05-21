@@ -29,7 +29,7 @@ public interface DiskStorage {
     public final float size;
     public final String firstBits;
 
-    protected DiskDumpInfoEntry(String id, String path, String type, float size, String firstBits) {
+    protected DiskDumpInfoEntry(final String id, final String path, final String type, final float size, final String firstBits) {
       this.id = id;
       this.path = path;
       this.type = type;

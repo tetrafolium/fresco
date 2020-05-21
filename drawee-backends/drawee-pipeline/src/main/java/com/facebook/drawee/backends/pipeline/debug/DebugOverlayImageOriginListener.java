@@ -16,7 +16,7 @@ public class DebugOverlayImageOriginListener implements ImageOriginListener {
 
   @Override
   public void onImageLoaded(
-      String controllerId, int imageOrigin, boolean successful, String ultimateProducerName) {
+      final String controllerId, final int imageOrigin, final boolean successful, final String ultimateProducerName) {
     mImageOrigin = imageOrigin;
   }
 

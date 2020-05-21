@@ -39,12 +39,12 @@ public class DraweeMediaPickerFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_drawee_media_picker, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     mSimpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.drawee_view);
     mImagePath = (TextView) view.findViewById(R.id.image_path);
 
@@ -54,7 +54,7 @@ public class DraweeMediaPickerFragment extends BaseShowcaseFragment {
     actionOpenDocumentButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
               Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
               intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -74,7 +74,7 @@ public class DraweeMediaPickerFragment extends BaseShowcaseFragment {
     actionGetContent.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("image/*");
             startActivityForResult(intent, REQUEST_CODE_PICK_MEDIA);
@@ -85,7 +85,7 @@ public class DraweeMediaPickerFragment extends BaseShowcaseFragment {
     actionPickButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             if (!ensureExternalStoragePermissionGranted()) {
               return;
             }
@@ -104,7 +104,7 @@ public class DraweeMediaPickerFragment extends BaseShowcaseFragment {
   }
 
   @Override
-  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+  public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
     if (requestCode == REQUEST_CODE_PICK_MEDIA) {
       if (resultCode != Activity.RESULT_OK) {
         mSimpleDraweeView.setImageURI((Uri) null);

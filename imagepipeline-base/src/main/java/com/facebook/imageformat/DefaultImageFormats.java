@@ -36,7 +36,7 @@ public final class DefaultImageFormats {
    * @param imageFormat the image format to check
    * @return true if WebP format
    */
-  public static boolean isWebpFormat(ImageFormat imageFormat) {
+  public static boolean isWebpFormat(final ImageFormat imageFormat) {
     return isStaticWebpFormat(imageFormat) || imageFormat == WEBP_ANIMATED;
   }
 
@@ -46,7 +46,7 @@ public final class DefaultImageFormats {
    * @param imageFormat the image format to check
    * @return true if static WebP
    */
-  public static boolean isStaticWebpFormat(ImageFormat imageFormat) {
+  public static boolean isStaticWebpFormat(final ImageFormat imageFormat) {
     return imageFormat == WEBP_SIMPLE
         || imageFormat == WEBP_LOSSLESS
         || imageFormat == WEBP_EXTENDED
@@ -77,5 +77,5 @@ public final class DefaultImageFormats {
     return sAllDefaultFormats;
   }
 
-  private DefaultImageFormats() {}
+  private DefaultImageFormats() { }
 }

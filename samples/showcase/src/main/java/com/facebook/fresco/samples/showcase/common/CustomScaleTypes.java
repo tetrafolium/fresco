@@ -21,14 +21,14 @@ public class CustomScaleTypes {
 
     @Override
     public void getTransformImpl(
-        Matrix outTransform,
-        Rect parentRect,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY,
-        float scaleX,
-        float scaleY) {
+        final Matrix outTransform,
+        final Rect parentRect,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY,
+        final float scaleX,
+        final float scaleY) {
       float scale, dx, dy;
       scale = scaleX;
       dx = parentRect.left;
@@ -42,14 +42,14 @@ public class CustomScaleTypes {
 
     @Override
     public void getTransformImpl(
-        Matrix outTransform,
-        Rect parentRect,
-        int childWidth,
-        int childHeight,
-        float focusX,
-        float focusY,
-        float scaleX,
-        float scaleY) {
+        final Matrix outTransform,
+        final Rect parentRect,
+        final int childWidth,
+        final int childHeight,
+        final float focusX,
+        final float focusY,
+        final float scaleX,
+        final float scaleY) {
       float scale, dx, dy;
       scale = scaleY;
       dx = parentRect.left + (parentRect.width() - childWidth * scale) * 0.5f;

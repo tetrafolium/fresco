@@ -37,13 +37,13 @@ public class ImagePipelineUtilsImpl implements ImagePipelineUtils {
   private @Nullable ImageDecodeOptions mCircularImageDecodeOptions;
   private @Nullable ImageDecodeOptions mCircularImageDecodeOptionsAntiAliased;
 
-  public ImagePipelineUtilsImpl(FrescoExperiments frescoExperiments) {
+  public ImagePipelineUtilsImpl(final FrescoExperiments frescoExperiments) {
     mExperiments = frescoExperiments;
   }
 
   @Override
   @Nullable
-  public ImageRequest buildImageRequest(@Nullable Uri uri, DecodedImageOptions imageOptions) {
+  public ImageRequest buildImageRequest(final @Nullable Uri uri, final DecodedImageOptions imageOptions) {
     ImageRequestBuilder builder = createDecodedImageRequestBuilder(uri, imageOptions);
     return builder != null ? builder.build() : null;
   }
@@ -51,14 +51,14 @@ public class ImagePipelineUtilsImpl implements ImagePipelineUtils {
   @Override
   @Nullable
   public ImageRequest buildEncodedImageRequest(
-      @Nullable Uri uri, EncodedImageOptions imageOptions) {
+      final @Nullable Uri uri, final EncodedImageOptions imageOptions) {
     ImageRequestBuilder builder = createEncodedImageRequestBuilder(uri, imageOptions);
     return builder != null ? builder.build() : null;
   }
 
   @Nullable
   protected ImageRequestBuilder createDecodedImageRequestBuilder(
-      @Nullable Uri uri, DecodedImageOptions imageOptions) {
+      final @Nullable Uri uri, final DecodedImageOptions imageOptions) {
     if (uri == null) {
       return null;
     }
@@ -115,7 +115,7 @@ public class ImagePipelineUtilsImpl implements ImagePipelineUtils {
 
   @Nullable
   protected ImageRequestBuilder createEncodedImageRequestBuilder(
-      @Nullable Uri uri, EncodedImageOptions imageOptions) {
+      final @Nullable Uri uri, final EncodedImageOptions imageOptions) {
     if (uri == null) {
       return null;
     }
@@ -125,7 +125,7 @@ public class ImagePipelineUtilsImpl implements ImagePipelineUtils {
 
   @VisibleForTesting
   protected void setupNativeRounding(
-      final ImageRequestBuilder imageRequestBuilder, @Nullable RoundingOptions roundingOptions) {
+      final ImageRequestBuilder imageRequestBuilder, final @Nullable RoundingOptions roundingOptions) {
     if (roundingOptions == null) {
       return;
     }
@@ -135,7 +135,7 @@ public class ImagePipelineUtilsImpl implements ImagePipelineUtils {
     }
   }
 
-  private synchronized ImageDecodeOptions getCircularImageDecodeOptions(boolean antiAliased) {
+  private synchronized ImageDecodeOptions getCircularImageDecodeOptions(final boolean antiAliased) {
     final boolean useFastNativeRounding = mExperiments.useFastNativeRounding();
     if (antiAliased) {
       if (mCircularImageDecodeOptionsAntiAliased == null) {

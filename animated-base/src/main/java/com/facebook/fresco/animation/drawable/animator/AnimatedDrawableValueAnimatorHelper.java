@@ -29,7 +29,7 @@ public class AnimatedDrawableValueAnimatorHelper {
    * @return the animator to use
    */
   @Nullable
-  public static ValueAnimator createValueAnimator(Drawable drawable, int maxDurationMs) {
+  public static ValueAnimator createValueAnimator(final Drawable drawable, final int maxDurationMs) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
       return null;
     }
@@ -48,7 +48,7 @@ public class AnimatedDrawableValueAnimatorHelper {
    * @return the animator to use
    */
   @Nullable
-  public static ValueAnimator createValueAnimator(Drawable drawable) {
+  public static ValueAnimator createValueAnimator(final Drawable drawable) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
       return null;
     }
@@ -79,5 +79,5 @@ public class AnimatedDrawableValueAnimatorHelper {
     return null;
   }
 
-  private AnimatedDrawableValueAnimatorHelper() {}
+  private AnimatedDrawableValueAnimatorHelper() { }
 }

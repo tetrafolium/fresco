@@ -383,23 +383,23 @@ public class DiskCacheReadProducerTest {
         .onUltimateProducerReached(eq(mProducerContext), anyString(), anyBoolean());
   }
 
-  private void setupDiskCacheGetWait(BufferedDiskCache bufferedDiskCache) {
+  private void setupDiskCacheGetWait(final BufferedDiskCache bufferedDiskCache) {
     mTaskCompletionSource = Task.create();
     when(bufferedDiskCache.get(eq(mCacheKey), mIsCancelled.capture()))
         .thenReturn(mTaskCompletionSource.getTask());
   }
 
-  private void setupDiskCacheGetSuccess(BufferedDiskCache bufferedDiskCache) {
+  private void setupDiskCacheGetSuccess(final BufferedDiskCache bufferedDiskCache) {
     when(bufferedDiskCache.get(eq(mCacheKey), any(AtomicBoolean.class)))
         .thenReturn(Task.forResult(mFinalEncodedImage));
   }
 
-  private void setupDiskCacheGetNotFound(BufferedDiskCache bufferedDiskCache) {
+  private void setupDiskCacheGetNotFound(final BufferedDiskCache bufferedDiskCache) {
     when(bufferedDiskCache.get(eq(mCacheKey), any(AtomicBoolean.class)))
         .thenReturn(Task.<EncodedImage>forResult(null));
   }
 
-  private void setupDiskCacheGetFailure(BufferedDiskCache bufferedDiskCache) {
+  private void setupDiskCacheGetFailure(final BufferedDiskCache bufferedDiskCache) {
     when(bufferedDiskCache.get(eq(mCacheKey), any(AtomicBoolean.class)))
         .thenReturn(Task.<EncodedImage>forError(mException));
   }
@@ -408,7 +408,7 @@ public class DiskCacheReadProducerTest {
     doAnswer(
             new Answer<Object>() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 Consumer consumer = (Consumer) invocation.getArguments()[0];
                 consumer.onNewResult(mIntermediateEncodedImage, Consumer.NO_FLAGS);
                 consumer.onNewResult(mFinalEncodedImage, Consumer.IS_LAST);
@@ -423,7 +423,7 @@ public class DiskCacheReadProducerTest {
     doAnswer(
             new Answer<Object>() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 Consumer consumer = (Consumer) invocation.getArguments()[0];
                 consumer.onFailure(mException);
                 return null;
@@ -437,7 +437,7 @@ public class DiskCacheReadProducerTest {
     doAnswer(
             new Answer<Object>() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 Consumer consumer = (Consumer) invocation.getArguments()[0];
                 consumer.onNewResult(null, Consumer.IS_LAST);
                 return null;

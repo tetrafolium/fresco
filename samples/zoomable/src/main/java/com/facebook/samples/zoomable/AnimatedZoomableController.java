@@ -33,7 +33,7 @@ public class AnimatedZoomableController extends AbstractAnimatedZoomableControll
   }
 
   @SuppressLint("NewApi")
-  public AnimatedZoomableController(TransformGestureDetector transformGestureDetector) {
+  public AnimatedZoomableController(final TransformGestureDetector transformGestureDetector) {
     super(transformGestureDetector);
     mValueAnimator = ValueAnimator.ofFloat(0, 1);
     mValueAnimator.setInterpolator(new DecelerateInterpolator());
@@ -42,7 +42,7 @@ public class AnimatedZoomableController extends AbstractAnimatedZoomableControll
   @SuppressLint("NewApi")
   @Override
   public void setTransformAnimated(
-      final Matrix newTransform, long durationMs, @Nullable final Runnable onAnimationComplete) {
+      final Matrix newTransform, final long durationMs, @Nullable final Runnable onAnimationComplete) {
     FLog.v(getLogTag(), "setTransformAnimated: duration %d ms", durationMs);
     stopAnimation();
     Preconditions.checkArgument(durationMs > 0);
@@ -54,7 +54,7 @@ public class AnimatedZoomableController extends AbstractAnimatedZoomableControll
     mValueAnimator.addUpdateListener(
         new ValueAnimator.AnimatorUpdateListener() {
           @Override
-          public void onAnimationUpdate(ValueAnimator valueAnimator) {
+          public void onAnimationUpdate(final ValueAnimator valueAnimator) {
             calculateInterpolation(getWorkingTransform(), (float) valueAnimator.getAnimatedValue());
             AnimatedZoomableController.super.setTransform(getWorkingTransform());
           }
@@ -62,13 +62,13 @@ public class AnimatedZoomableController extends AbstractAnimatedZoomableControll
     mValueAnimator.addListener(
         new AnimatorListenerAdapter() {
           @Override
-          public void onAnimationCancel(Animator animation) {
+          public void onAnimationCancel(final Animator animation) {
             FLog.v(getLogTag(), "setTransformAnimated: animation cancelled");
             onAnimationStopped();
           }
 
           @Override
-          public void onAnimationEnd(Animator animation) {
+          public void onAnimationEnd(final Animator animation) {
             FLog.v(getLogTag(), "setTransformAnimated: animation finished");
             onAnimationStopped();
           }

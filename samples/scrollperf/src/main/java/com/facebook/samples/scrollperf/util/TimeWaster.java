@@ -16,7 +16,7 @@ public final class TimeWaster {
    * @param n The position for the fibonacci sequence
    * @return The n-th fibonacci number
    */
-  public static long Fib(int n) {
+  public static long Fib(final int n) {
     if (n < 2) {
       return n;
     } else {

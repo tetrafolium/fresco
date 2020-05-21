@@ -35,7 +35,7 @@ public class DraweeScaleTypeFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     final View view = inflater.inflate(R.layout.fragment_drawee_scale_type, container, false);
 
     final ImageUriProvider imageUriProvider = sampleUris();
@@ -55,7 +55,7 @@ public class DraweeScaleTypeFragment extends BaseShowcaseFragment {
     mDraweeTop1.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             changeMainDraweeUri(uri1);
           }
         });
@@ -64,7 +64,7 @@ public class DraweeScaleTypeFragment extends BaseShowcaseFragment {
     mDraweeTop2.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             changeMainDraweeUri(uri2);
           }
         });
@@ -76,25 +76,25 @@ public class DraweeScaleTypeFragment extends BaseShowcaseFragment {
     mSpinner.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             final SimpleScaleTypeAdapter.Entry spinnerEntry =
                 (SimpleScaleTypeAdapter.Entry) adapter.getItem(position);
             changeMainDraweeScaleType(spinnerEntry.scaleType, spinnerEntry.focusPoint);
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
+          public void onNothingSelected(final AdapterView<?> parent) { }
         });
     mSpinner.setSelection(0);
 
     return view;
   }
 
-  private void changeMainDraweeUri(Uri uri) {
+  private void changeMainDraweeUri(final Uri uri) {
     mDraweeMain.setImageURI(uri);
   }
 
-  private void changeMainDraweeScaleType(ScaleType scaleType, @Nullable PointF focusPoint) {
+  private void changeMainDraweeScaleType(final ScaleType scaleType, final @Nullable PointF focusPoint) {
     final GenericDraweeHierarchy hierarchy = mDraweeMain.getHierarchy();
     hierarchy.setActualImageScaleType(scaleType);
     hierarchy.setActualImageFocusPoint(focusPoint != null ? focusPoint : new PointF(0.5f, 0.5f));

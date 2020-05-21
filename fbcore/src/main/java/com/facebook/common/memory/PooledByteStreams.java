@@ -24,12 +24,12 @@ public class PooledByteStreams {
   private final int mTempBufSize;
   private final ByteArrayPool mByteArrayPool;
 
-  public PooledByteStreams(ByteArrayPool byteArrayPool) {
+  public PooledByteStreams(final ByteArrayPool byteArrayPool) {
     this(byteArrayPool, DEFAULT_TEMP_BUF_SIZE);
   }
 
   @VisibleForTesting
-  public PooledByteStreams(ByteArrayPool byteArrayPool, int tempBufSize) {
+  public PooledByteStreams(final ByteArrayPool byteArrayPool, final int tempBufSize) {
     Preconditions.checkArgument(tempBufSize > 0);
     mTempBufSize = tempBufSize;
     mByteArrayPool = byteArrayPool;

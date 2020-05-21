@@ -50,7 +50,7 @@ public class SettableCacheEvent implements CacheEvent {
     return new SettableCacheEvent();
   }
 
-  private SettableCacheEvent() {}
+  private SettableCacheEvent() { }
 
   @Nullable
   @Override
@@ -58,7 +58,7 @@ public class SettableCacheEvent implements CacheEvent {
     return mCacheKey;
   }
 
-  public SettableCacheEvent setCacheKey(CacheKey cacheKey) {
+  public SettableCacheEvent setCacheKey(final CacheKey cacheKey) {
     mCacheKey = cacheKey;
     return this;
   }
@@ -69,7 +69,7 @@ public class SettableCacheEvent implements CacheEvent {
     return mResourceId;
   }
 
-  public SettableCacheEvent setResourceId(String resourceId) {
+  public SettableCacheEvent setResourceId(final String resourceId) {
     mResourceId = resourceId;
     return this;
   }
@@ -79,7 +79,7 @@ public class SettableCacheEvent implements CacheEvent {
     return mItemSize;
   }
 
-  public SettableCacheEvent setItemSize(long itemSize) {
+  public SettableCacheEvent setItemSize(final long itemSize) {
     mItemSize = itemSize;
     return this;
   }
@@ -89,7 +89,7 @@ public class SettableCacheEvent implements CacheEvent {
     return mCacheSize;
   }
 
-  public SettableCacheEvent setCacheSize(long cacheSize) {
+  public SettableCacheEvent setCacheSize(final long cacheSize) {
     mCacheSize = cacheSize;
     return this;
   }
@@ -99,7 +99,7 @@ public class SettableCacheEvent implements CacheEvent {
     return mCacheLimit;
   }
 
-  public SettableCacheEvent setCacheLimit(long cacheLimit) {
+  public SettableCacheEvent setCacheLimit(final long cacheLimit) {
     mCacheLimit = cacheLimit;
     return this;
   }
@@ -110,7 +110,7 @@ public class SettableCacheEvent implements CacheEvent {
     return mException;
   }
 
-  public SettableCacheEvent setException(IOException exception) {
+  public SettableCacheEvent setException(final IOException exception) {
     mException = exception;
     return this;
   }
@@ -121,7 +121,7 @@ public class SettableCacheEvent implements CacheEvent {
     return mEvictionReason;
   }
 
-  public SettableCacheEvent setEvictionReason(CacheEventListener.EvictionReason evictionReason) {
+  public SettableCacheEvent setEvictionReason(final CacheEventListener.EvictionReason evictionReason) {
     mEvictionReason = evictionReason;
     return this;
   }

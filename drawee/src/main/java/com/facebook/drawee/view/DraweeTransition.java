@@ -39,15 +39,15 @@ public class DraweeTransition extends Transition {
   private final @Nullable PointF mToFocusPoint;
 
   public static TransitionSet createTransitionSet(
-      ScalingUtils.ScaleType fromScale, ScalingUtils.ScaleType toScale) {
+      final ScalingUtils.ScaleType fromScale, final ScalingUtils.ScaleType toScale) {
     return createTransitionSet(fromScale, toScale, null, null);
   }
 
   public static TransitionSet createTransitionSet(
-      ScalingUtils.ScaleType fromScale,
-      ScalingUtils.ScaleType toScale,
-      @Nullable PointF fromFocusPoint,
-      @Nullable PointF toFocusPoint) {
+      final ScalingUtils.ScaleType fromScale,
+      final ScalingUtils.ScaleType toScale,
+      final @Nullable PointF fromFocusPoint,
+      final @Nullable PointF toFocusPoint) {
     TransitionSet transitionSet = new TransitionSet();
     transitionSet.addTransition(new ChangeBounds());
     transitionSet.addTransition(
@@ -56,33 +56,33 @@ public class DraweeTransition extends Transition {
   }
 
   public DraweeTransition(
-      ScalingUtils.ScaleType fromScale,
-      ScalingUtils.ScaleType toScale,
-      @Nullable PointF fromFocusPoint,
-      @Nullable PointF toFocusPoint) {
+      final ScalingUtils.ScaleType fromScale,
+      final ScalingUtils.ScaleType toScale,
+      final @Nullable PointF fromFocusPoint,
+      final @Nullable PointF toFocusPoint) {
     mFromScale = fromScale;
     mToScale = toScale;
     mFromFocusPoint = fromFocusPoint;
     mToFocusPoint = toFocusPoint;
   }
 
-  public DraweeTransition(ScalingUtils.ScaleType fromScale, ScalingUtils.ScaleType toScale) {
+  public DraweeTransition(final ScalingUtils.ScaleType fromScale, final ScalingUtils.ScaleType toScale) {
     this(fromScale, toScale, null, null);
   }
 
   @Override
-  public void captureStartValues(TransitionValues transitionValues) {
+  public void captureStartValues(final TransitionValues transitionValues) {
     captureValues(transitionValues);
   }
 
   @Override
-  public void captureEndValues(TransitionValues transitionValues) {
+  public void captureEndValues(final TransitionValues transitionValues) {
     captureValues(transitionValues);
   }
 
   @Override
   public @Nullable Animator createAnimator(
-      ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
+      final ViewGroup sceneRoot, final TransitionValues startValues, final TransitionValues endValues) {
     if (startValues == null || endValues == null) {
       return null;
     }
@@ -104,7 +104,7 @@ public class DraweeTransition extends Transition {
     animator.addUpdateListener(
         new ValueAnimator.AnimatorUpdateListener() {
           @Override
-          public void onAnimationUpdate(ValueAnimator animation) {
+          public void onAnimationUpdate(final ValueAnimator animation) {
             float fraction = (float) animation.getAnimatedValue();
             scaleType.setValue(fraction);
           }
@@ -112,7 +112,7 @@ public class DraweeTransition extends Transition {
     animator.addListener(
         new AnimatorListenerAdapter() {
           @Override
-          public void onAnimationEnd(Animator animation) {
+          public void onAnimationEnd(final Animator animation) {
             draweeView.getHierarchy().setActualImageScaleType(mToScale);
             if (mToFocusPoint != null) {
               draweeView.getHierarchy().setActualImageFocusPoint(mToFocusPoint);
@@ -123,7 +123,7 @@ public class DraweeTransition extends Transition {
     return animator;
   }
 
-  private void captureValues(TransitionValues transitionValues) {
+  private void captureValues(final TransitionValues transitionValues) {
     if (transitionValues.view instanceof GenericDraweeView) {
       transitionValues.values.put(
           PROPNAME_BOUNDS,

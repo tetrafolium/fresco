@@ -33,10 +33,10 @@ public class DefaultBitmapFramePreparer implements BitmapFramePreparer {
   private final SparseArray<Runnable> mPendingFrameDecodeJobs;
 
   public DefaultBitmapFramePreparer(
-      PlatformBitmapFactory platformBitmapFactory,
-      BitmapFrameRenderer bitmapFrameRenderer,
-      Bitmap.Config bitmapConfig,
-      ExecutorService executorService) {
+      final PlatformBitmapFactory platformBitmapFactory,
+      final BitmapFrameRenderer bitmapFrameRenderer,
+      final Bitmap.Config bitmapConfig,
+      final ExecutorService executorService) {
     mPlatformBitmapFactory = platformBitmapFactory;
     mBitmapFrameRenderer = bitmapFrameRenderer;
     mBitmapConfig = bitmapConfig;
@@ -46,7 +46,7 @@ public class DefaultBitmapFramePreparer implements BitmapFramePreparer {
 
   @Override
   public boolean prepareFrame(
-      BitmapFrameCache bitmapFrameCache, AnimationBackend animationBackend, int frameNumber) {
+      final BitmapFrameCache bitmapFrameCache, final AnimationBackend animationBackend, final int frameNumber) {
     // Create a unique ID to identify the frame for the given backend.
     int frameId = getUniqueId(animationBackend, frameNumber);
     synchronized (mPendingFrameDecodeJobs) {
@@ -68,7 +68,7 @@ public class DefaultBitmapFramePreparer implements BitmapFramePreparer {
     return true;
   }
 
-  private static int getUniqueId(AnimationBackend backend, int frameNumber) {
+  private static int getUniqueId(final AnimationBackend backend, final int frameNumber) {
     int result = backend.hashCode();
     result = 31 * result + frameNumber;
     return result;
@@ -82,10 +82,10 @@ public class DefaultBitmapFramePreparer implements BitmapFramePreparer {
     private final int mHashCode;
 
     public FrameDecodeRunnable(
-        AnimationBackend animationBackend,
-        BitmapFrameCache bitmapFrameCache,
-        int frameNumber,
-        int hashCode) {
+        final AnimationBackend animationBackend,
+        final BitmapFrameCache bitmapFrameCache,
+        final int frameNumber,
+        final int hashCode) {
       mAnimationBackend = animationBackend;
       mBitmapFrameCache = bitmapFrameCache;
       mFrameNumber = frameNumber;
@@ -115,7 +115,7 @@ public class DefaultBitmapFramePreparer implements BitmapFramePreparer {
     }
 
     private boolean prepareFrameAndCache(
-        int frameNumber, @BitmapAnimationBackend.FrameType int frameType) {
+        final int frameNumber, final @BitmapAnimationBackend.FrameType int frameType) {
       CloseableReference<Bitmap> bitmapReference = null;
       boolean created;
       int nextFrameType;
@@ -163,9 +163,9 @@ public class DefaultBitmapFramePreparer implements BitmapFramePreparer {
     }
 
     private boolean renderFrameAndCache(
-        int frameNumber,
-        CloseableReference<Bitmap> bitmapReference,
-        @BitmapAnimationBackend.FrameType int frameType) {
+        final int frameNumber,
+        final CloseableReference<Bitmap> bitmapReference,
+        final @BitmapAnimationBackend.FrameType int frameType) {
       // Check if the bitmap is valid
       if (!CloseableReference.isValid(bitmapReference)) {
         return false;

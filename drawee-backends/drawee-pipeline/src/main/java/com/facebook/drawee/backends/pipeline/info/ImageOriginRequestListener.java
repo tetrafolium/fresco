@@ -20,7 +20,7 @@ public class ImageOriginRequestListener extends BaseRequestListener {
   private final @Nullable ImageOriginListener mImageOriginLister;
 
   public ImageOriginRequestListener(
-      String controllerId, @Nullable ImageOriginListener imageOriginLister) {
+      final String controllerId, final @Nullable ImageOriginListener imageOriginLister) {
     mImageOriginLister = imageOriginLister;
     init(controllerId);
   }
@@ -30,13 +30,13 @@ public class ImageOriginRequestListener extends BaseRequestListener {
    *
    * @param controllerId the new controller ID
    */
-  public void init(String controllerId) {
+  public void init(final String controllerId) {
     mControllerId = controllerId;
   }
 
   @Override
   public void onUltimateProducerReached(
-      String requestId, String ultimateProducerName, boolean successful) {
+      final String requestId, final String ultimateProducerName, final boolean successful) {
     if (mImageOriginLister != null) {
       mImageOriginLister.onImageLoaded(
           mControllerId,

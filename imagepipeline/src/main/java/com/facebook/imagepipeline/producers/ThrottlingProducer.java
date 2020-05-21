@@ -33,7 +33,7 @@ public class ThrottlingProducer<T> implements Producer<T> {
   private final Executor mExecutor;
 
   public ThrottlingProducer(
-      int maxSimultaneousRequests, Executor executor, final Producer<T> inputProducer) {
+      final int maxSimultaneousRequests, final Executor executor, final Producer<T> inputProducer) {
     mMaxSimultaneousRequests = maxSimultaneousRequests;
     mExecutor = Preconditions.checkNotNull(executor);
     mInputProducer = Preconditions.checkNotNull(inputProducer);
@@ -62,7 +62,7 @@ public class ThrottlingProducer<T> implements Producer<T> {
     }
   }
 
-  void produceResultsInternal(Consumer<T> consumer, ProducerContext producerContext) {
+  void produceResultsInternal(final Consumer<T> consumer, final ProducerContext producerContext) {
     ProducerListener2 producerListener = producerContext.getProducerListener();
     producerListener.onProducerFinishWithSuccess(producerContext, PRODUCER_NAME, null);
     mInputProducer.produceResults(new ThrottlerConsumer(consumer), producerContext);
@@ -70,12 +70,12 @@ public class ThrottlingProducer<T> implements Producer<T> {
 
   private class ThrottlerConsumer extends DelegatingConsumer<T, T> {
 
-    private ThrottlerConsumer(Consumer<T> consumer) {
+    private ThrottlerConsumer(final Consumer<T> consumer) {
       super(consumer);
     }
 
     @Override
-    protected void onNewResultImpl(T newResult, @Status int status) {
+    protected void onNewResultImpl(final T newResult, final @Status int status) {
       getConsumer().onNewResult(newResult, status);
       if (isLast(status)) {
         onRequestFinished();
@@ -83,7 +83,7 @@ public class ThrottlingProducer<T> implements Producer<T> {
     }
 
     @Override
-    protected void onFailureImpl(Throwable t) {
+    protected void onFailureImpl(final Throwable t) {
       getConsumer().onFailure(t);
       onRequestFinished();
     }

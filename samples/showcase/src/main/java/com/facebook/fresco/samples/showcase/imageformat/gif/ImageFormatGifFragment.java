@@ -43,12 +43,12 @@ public class ImageFormatGifFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_format_gif, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
 
     mSpinnerEntries =
         new Entry[] {
@@ -69,7 +69,7 @@ public class ImageFormatGifFragment extends BaseShowcaseFragment {
     switchBackground.setOnCheckedChangeListener(
         new CompoundButton.OnCheckedChangeListener() {
           @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+          public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             mSimpleDraweeView
                 .getHierarchy()
                 .setBackgroundImage(isChecked ? new CheckerBoardDrawable(getResources()) : null);
@@ -80,7 +80,7 @@ public class ImageFormatGifFragment extends BaseShowcaseFragment {
     switchAspect.setOnCheckedChangeListener(
         new CompoundButton.OnCheckedChangeListener() {
           @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+          public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             ViewGroup.LayoutParams layoutParams = mSimpleDraweeView.getLayoutParams();
             layoutParams.height = layoutParams.width * (isChecked ? 2 : 1);
             mSimpleDraweeView.setLayoutParams(layoutParams);
@@ -92,12 +92,12 @@ public class ImageFormatGifFragment extends BaseShowcaseFragment {
     mSpinner.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             refreshAnimation();
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
+          public void onNothingSelected(final AdapterView<?> parent) { }
         });
     mSpinner.setSelection(0);
 
@@ -105,7 +105,7 @@ public class ImageFormatGifFragment extends BaseShowcaseFragment {
     decoderSpinner.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             switch (position) {
               case 0:
                 mGifDecoder = null;
@@ -120,7 +120,7 @@ public class ImageFormatGifFragment extends BaseShowcaseFragment {
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
+          public void onNothingSelected(final AdapterView<?> parent) { }
         });
     decoderSpinner.setSelection(0);
   }
@@ -130,7 +130,7 @@ public class ImageFormatGifFragment extends BaseShowcaseFragment {
     setAnimationUri(spinnerEntry.uri);
   }
 
-  private void setAnimationUri(Uri uri) {
+  private void setAnimationUri(final Uri uri) {
     final PipelineDraweeControllerBuilder controllerBuilder =
         Fresco.newDraweeControllerBuilder()
             .setAutoPlayAnimations(true)
@@ -162,17 +162,17 @@ public class ImageFormatGifFragment extends BaseShowcaseFragment {
     }
 
     @Override
-    public Entry getItem(int position) {
+    public Entry getItem(final int position) {
       return mSpinnerEntries[position];
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(final int position) {
       return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
       final LayoutInflater layoutInflater = getLayoutInflater(null);
 
       final View view =
@@ -193,7 +193,7 @@ public class ImageFormatGifFragment extends BaseShowcaseFragment {
     final int descriptionId;
     final Uri uri;
 
-    private Entry(int descriptionId, Uri uri) {
+    private Entry(final int descriptionId, final Uri uri) {
       this.descriptionId = descriptionId;
       this.uri = uri;
     }

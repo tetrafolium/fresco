@@ -19,12 +19,12 @@ public class DropFramesFrameScheduler implements FrameScheduler {
 
   private long mLoopDurationMs = UNSET;
 
-  public DropFramesFrameScheduler(AnimationInformation animationInformation) {
+  public DropFramesFrameScheduler(final AnimationInformation animationInformation) {
     mAnimationInformation = animationInformation;
   }
 
   @Override
-  public int getFrameNumberToRender(long animationTimeMs, long lastFrameTimeMs) {
+  public int getFrameNumberToRender(final long animationTimeMs, final long lastFrameTimeMs) {
     long loopDurationMs = getLoopDurationMs();
     if (loopDurationMs == 0) {
       return getFrameNumberWithinLoop(0);
@@ -54,7 +54,7 @@ public class DropFramesFrameScheduler implements FrameScheduler {
   }
 
   @Override
-  public long getTargetRenderTimeMs(int frameNumber) {
+  public long getTargetRenderTimeMs(final int frameNumber) {
     long targetRenderTimeMs = 0;
     for (int i = 0; i < frameNumber; i++) {
       targetRenderTimeMs += mAnimationInformation.getFrameDurationMs(frameNumber);
@@ -63,7 +63,7 @@ public class DropFramesFrameScheduler implements FrameScheduler {
   }
 
   @Override
-  public long getTargetRenderTimeForNextFrameMs(long animationTimeMs) {
+  public long getTargetRenderTimeForNextFrameMs(final long animationTimeMs) {
     long loopDurationMs = getLoopDurationMs();
     // Sanity check.
     if (loopDurationMs == 0) {
@@ -97,7 +97,7 @@ public class DropFramesFrameScheduler implements FrameScheduler {
   }
 
   @VisibleForTesting
-  int getFrameNumberWithinLoop(long timeInCurrentLoopMs) {
+  int getFrameNumberWithinLoop(final long timeInCurrentLoopMs) {
     int frame = 0;
     long currentDuration = 0;
     do {

@@ -25,18 +25,18 @@ public class AnimatedDrawable2DebugDrawListener implements AnimatedDrawable2.Dra
 
   @Override
   public void onDraw(
-      AnimatedDrawable2 animatedDrawable,
-      FrameScheduler frameScheduler,
-      int frameNumberToDraw,
-      boolean frameDrawn,
-      boolean isAnimationRunning,
-      long animationStartTimeMs,
-      long animationTimeMs,
-      long lastFrameAnimationTimeMs,
-      long actualRenderTimeStartMs,
-      long actualRenderTimeEndMs,
-      long startRenderTimeForNextFrameMs,
-      long scheduledRenderTimeForNextFrameMs) {
+      final AnimatedDrawable2 animatedDrawable,
+      final FrameScheduler frameScheduler,
+      final int frameNumberToDraw,
+      final boolean frameDrawn,
+      final boolean isAnimationRunning,
+      final long animationStartTimeMs,
+      final long animationTimeMs,
+      final long lastFrameAnimationTimeMs,
+      final long actualRenderTimeStartMs,
+      final long actualRenderTimeEndMs,
+      final long startRenderTimeForNextFrameMs,
+      final long scheduledRenderTimeForNextFrameMs) {
     if (animatedDrawable.getAnimationBackend() == null) {
       return;
     }

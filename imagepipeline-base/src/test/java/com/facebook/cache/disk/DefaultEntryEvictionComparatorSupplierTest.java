@@ -39,7 +39,7 @@ public class DefaultEntryEvictionComparatorSupplierTest {
     }
   }
 
-  private static DiskStorage.Entry createEntry(long time) {
+  private static DiskStorage.Entry createEntry(final long time) {
     DiskStorage.Entry entry = mock(DiskStorage.Entry.class);
     when(entry.getTimestamp()).thenReturn(time);
     return entry;

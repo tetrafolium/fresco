@@ -42,7 +42,7 @@ public class RootDrawable extends ForwardingDrawable implements VisibilityAwareD
 
   @Nullable private VisibilityCallback mVisibilityCallback;
 
-  public RootDrawable(Drawable drawable) {
+  public RootDrawable(final Drawable drawable) {
     super(drawable);
   }
 
@@ -57,12 +57,12 @@ public class RootDrawable extends ForwardingDrawable implements VisibilityAwareD
   }
 
   @Override
-  public void setVisibilityCallback(@Nullable VisibilityCallback visibilityCallback) {
+  public void setVisibilityCallback(final @Nullable VisibilityCallback visibilityCallback) {
     mVisibilityCallback = visibilityCallback;
   }
 
   @Override
-  public boolean setVisible(boolean visible, boolean restart) {
+  public boolean setVisible(final boolean visible, final boolean restart) {
     if (mVisibilityCallback != null) {
       mVisibilityCallback.onVisibilityChange(visible);
     }
@@ -71,7 +71,7 @@ public class RootDrawable extends ForwardingDrawable implements VisibilityAwareD
 
   @SuppressLint("WrongCall")
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     if (!isVisible()) {
       return;
     }
@@ -85,7 +85,7 @@ public class RootDrawable extends ForwardingDrawable implements VisibilityAwareD
     }
   }
 
-  public void setControllerOverlay(@Nullable Drawable controllerOverlay) {
+  public void setControllerOverlay(final @Nullable Drawable controllerOverlay) {
     mControllerOverlay = controllerOverlay;
     invalidateSelf();
   }

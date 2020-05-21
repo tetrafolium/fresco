@@ -66,12 +66,12 @@ public class ImagePipelinePostProcessorFragment extends BaseShowcaseFragment
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_imagepipeline_postprocessor, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     mSpinnerEntries = getSpinnerItems();
     mUri = sampleUris().createSampleUri(ImageUriProvider.ImageSize.L);
 
@@ -83,20 +83,20 @@ public class ImagePipelinePostProcessorFragment extends BaseShowcaseFragment
     mSpinner.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             final Entry spinnerEntry = mSpinnerEntries.get(position);
             setPostprocessor(spinnerEntry.postprocessor);
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
+          public void onNothingSelected(final AdapterView<?> parent) { }
         });
     mSpinner.setSelection(0);
 
     mButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             final Entry spinnerEntry = mSpinnerEntries.get(mSpinner.getSelectedItemPosition());
             setPostprocessor(spinnerEntry.postprocessor);
           }
@@ -109,7 +109,7 @@ public class ImagePipelinePostProcessorFragment extends BaseShowcaseFragment
   }
 
   @Override
-  public void showDuration(long startNs) {
+  public void showDuration(final long startNs) {
     final float deltaMs = startNs / 1e6f;
     final String message = String.format((Locale) null, "Duration: %.1f ms", deltaMs);
     getActivity()
@@ -122,7 +122,7 @@ public class ImagePipelinePostProcessorFragment extends BaseShowcaseFragment
             });
   }
 
-  private void setPostprocessor(Postprocessor postprocessor) {
+  private void setPostprocessor(final Postprocessor postprocessor) {
     final ImageRequest imageRequest =
         ImageRequestBuilder.newBuilderWithSource(mUri).setPostprocessor(postprocessor).build();
 
@@ -143,17 +143,17 @@ public class ImagePipelinePostProcessorFragment extends BaseShowcaseFragment
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(final int position) {
       return mSpinnerEntries.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(final int position) {
       return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
       final LayoutInflater layoutInflater = getLayoutInflater(null);
 
       final View view =
@@ -222,7 +222,7 @@ public class ImagePipelinePostProcessorFragment extends BaseShowcaseFragment
     final int descriptionId;
     final Postprocessor postprocessor;
 
-    Entry(int descriptionId, Postprocessor postprocessor) {
+    Entry(final int descriptionId, final Postprocessor postprocessor) {
       this.descriptionId = descriptionId;
       this.postprocessor = postprocessor;
     }

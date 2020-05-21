@@ -37,7 +37,7 @@ public class AutoRotateDrawable extends ForwardingDrawable implements Runnable, 
    * @param drawable underlying drawable to apply the rotation to
    * @param interval duration in milliseconds of one complete rotation
    */
-  public AutoRotateDrawable(Drawable drawable, int interval) {
+  public AutoRotateDrawable(final Drawable drawable, final int interval) {
     this(drawable, interval, true);
   }
 
@@ -48,7 +48,7 @@ public class AutoRotateDrawable extends ForwardingDrawable implements Runnable, 
    * @param interval duration in milliseconds of one complete rotation
    * @param clockwise defines whether the rotation is clockwise or not
    */
-  public AutoRotateDrawable(Drawable drawable, int interval, boolean clockwise) {
+  public AutoRotateDrawable(final Drawable drawable, final int interval, final boolean clockwise) {
     super(Preconditions.checkNotNull(drawable));
     mInterval = interval;
     mClockwise = clockwise;
@@ -63,12 +63,12 @@ public class AutoRotateDrawable extends ForwardingDrawable implements Runnable, 
   }
 
   /** Define whether the rotation is clockwise or not. By default is the rotation clockwise. */
-  public void setClockwise(boolean clockwise) {
+  public void setClockwise(final boolean clockwise) {
     mClockwise = clockwise;
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     int saveCount = canvas.save();
 
     Rect bounds = getBounds();

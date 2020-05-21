@@ -23,7 +23,7 @@ public class PlatformDecoderFactory {
    * @return The PlatformDecoder implementation
    */
   public static PlatformDecoder buildPlatformDecoder(
-      PoolFactory poolFactory, boolean gingerbreadDecoderEnabled) {
+      final PoolFactory poolFactory, final boolean gingerbreadDecoderEnabled) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       int maxNumThreads = poolFactory.getFlexByteArrayPoolMaxNumThreads();
       return new OreoDecoder(

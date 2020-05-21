@@ -38,17 +38,17 @@ public class DynamicDefaultDiskStorage implements DiskStorage {
     public final @Nullable File rootDirectory;
 
     @VisibleForTesting
-    State(@Nullable File rootDirectory, @Nullable DiskStorage delegate) {
+    State(final @Nullable File rootDirectory, final @Nullable DiskStorage delegate) {
       this.delegate = delegate;
       this.rootDirectory = rootDirectory;
     }
   }
 
   public DynamicDefaultDiskStorage(
-      int version,
-      Supplier<File> baseDirectoryPathSupplier,
-      String baseDirectoryName,
-      CacheErrorLogger cacheErrorLogger) {
+      final int version,
+      final Supplier<File> baseDirectoryPathSupplier,
+      final String baseDirectoryName,
+      final CacheErrorLogger cacheErrorLogger) {
     mVersion = version;
     mCacheErrorLogger = cacheErrorLogger;
     mBaseDirectoryPathSupplier = baseDirectoryPathSupplier;
@@ -84,17 +84,17 @@ public class DynamicDefaultDiskStorage implements DiskStorage {
   }
 
   @Override
-  public BinaryResource getResource(String resourceId, Object debugInfo) throws IOException {
+  public BinaryResource getResource(final String resourceId, final Object debugInfo) throws IOException {
     return get().getResource(resourceId, debugInfo);
   }
 
   @Override
-  public boolean contains(String resourceId, Object debugInfo) throws IOException {
+  public boolean contains(final String resourceId, final Object debugInfo) throws IOException {
     return get().contains(resourceId, debugInfo);
   }
 
   @Override
-  public boolean touch(String resourceId, Object debugInfo) throws IOException {
+  public boolean touch(final String resourceId, final Object debugInfo) throws IOException {
     return get().touch(resourceId, debugInfo);
   }
 
@@ -110,7 +110,7 @@ public class DynamicDefaultDiskStorage implements DiskStorage {
   }
 
   @Override
-  public Inserter insert(String resourceId, Object debugInfo) throws IOException {
+  public Inserter insert(final String resourceId, final Object debugInfo) throws IOException {
     return get().insert(resourceId, debugInfo);
   }
 
@@ -120,12 +120,12 @@ public class DynamicDefaultDiskStorage implements DiskStorage {
   }
 
   @Override
-  public long remove(Entry entry) throws IOException {
+  public long remove(final Entry entry) throws IOException {
     return get().remove(entry);
   }
 
   @Override
-  public long remove(String resourceId) throws IOException {
+  public long remove(final String resourceId) throws IOException {
     return get().remove(resourceId);
   }
 
@@ -180,7 +180,7 @@ public class DynamicDefaultDiskStorage implements DiskStorage {
   }
 
   @VisibleForTesting
-  void createRootDirectoryIfNecessary(File rootDirectory) throws IOException {
+  void createRootDirectoryIfNecessary(final File rootDirectory) throws IOException {
     try {
       FileUtils.mkdirs(rootDirectory);
     } catch (FileUtils.CreateDirectoryException cde) {

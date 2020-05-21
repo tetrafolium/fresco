@@ -19,7 +19,7 @@ public class DefaultCacheKeyFactory implements CacheKeyFactory {
 
   private static DefaultCacheKeyFactory sInstance = null;
 
-  protected DefaultCacheKeyFactory() {}
+  protected DefaultCacheKeyFactory() { }
 
   public static synchronized DefaultCacheKeyFactory getInstance() {
     if (sInstance == null) {
@@ -29,7 +29,7 @@ public class DefaultCacheKeyFactory implements CacheKeyFactory {
   }
 
   @Override
-  public CacheKey getBitmapCacheKey(ImageRequest request, Object callerContext) {
+  public CacheKey getBitmapCacheKey(final ImageRequest request, final Object callerContext) {
     return new BitmapMemoryCacheKey(
         getCacheKeySourceUri(request.getSourceUri()).toString(),
         request.getResizeOptions(),
@@ -41,7 +41,7 @@ public class DefaultCacheKeyFactory implements CacheKeyFactory {
   }
 
   @Override
-  public CacheKey getPostprocessedBitmapCacheKey(ImageRequest request, Object callerContext) {
+  public CacheKey getPostprocessedBitmapCacheKey(final ImageRequest request, final Object callerContext) {
     final Postprocessor postprocessor = request.getPostprocessor();
     final CacheKey postprocessorCacheKey;
     final String postprocessorName;
@@ -63,18 +63,18 @@ public class DefaultCacheKeyFactory implements CacheKeyFactory {
   }
 
   @Override
-  public CacheKey getEncodedCacheKey(ImageRequest request, @Nullable Object callerContext) {
+  public CacheKey getEncodedCacheKey(final ImageRequest request, final @Nullable Object callerContext) {
     return getEncodedCacheKey(request, request.getSourceUri(), callerContext);
   }
 
   @Override
   public CacheKey getEncodedCacheKey(
-      ImageRequest request, Uri sourceUri, @Nullable Object callerContext) {
+      final ImageRequest request, final Uri sourceUri, final @Nullable Object callerContext) {
     return new SimpleCacheKey(getCacheKeySourceUri(sourceUri).toString());
   }
 
   /** @return a {@link Uri} that unambiguously indicates the source of the image. */
-  protected Uri getCacheKeySourceUri(Uri sourceUri) {
+  protected Uri getCacheKeySourceUri(final Uri sourceUri) {
     return sourceUri;
   }
 }

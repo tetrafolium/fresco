@@ -16,30 +16,30 @@ import javax.annotation.Nullable;
 public class BaseImageListener implements ImageListener {
 
   @Override
-  public void onSubmit(long id, Object callerContext) {}
+  public void onSubmit(final long id, final Object callerContext) { }
 
   @Override
-  public void onPlaceholderSet(long id, @Nullable Drawable placeholder) {}
+  public void onPlaceholderSet(final long id, final @Nullable Drawable placeholder) { }
 
   @Override
   public void onFinalImageSet(
-      long id,
-      @ImageOrigin int imageOrigin,
-      @Nullable ImageInfo imageInfo,
-      @Nullable Drawable drawable) {}
+      final long id,
+      final @ImageOrigin int imageOrigin,
+      final @Nullable ImageInfo imageInfo,
+      final @Nullable Drawable drawable) { }
 
   @Override
-  public void onIntermediateImageSet(long id, @Nullable ImageInfo imageInfo) {}
+  public void onIntermediateImageSet(final long id, final @Nullable ImageInfo imageInfo) { }
 
   @Override
-  public void onIntermediateImageFailed(long id, Throwable throwable) {}
+  public void onIntermediateImageFailed(final long id, final Throwable throwable) { }
 
   @Override
-  public void onFailure(long id, @Nullable Drawable error, Throwable throwable) {}
+  public void onFailure(final long id, final @Nullable Drawable error, final Throwable throwable) { }
 
   @Override
-  public void onRelease(long id) {}
+  public void onRelease(final long id) { }
 
   @Override
-  public void onImageDrawn(String id, ImageInfo imageInfo, DimensionsInfo dimensionsInfo) {}
+  public void onImageDrawn(final String id, final ImageInfo imageInfo, final DimensionsInfo dimensionsInfo) { }
 }

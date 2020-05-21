@@ -26,7 +26,7 @@ public class DraweeSpan extends BetterImageSpan {
   private final DraweeHolder mDraweeHolder;
 
   public DraweeSpan(
-      DraweeHolder draweeHolder, @BetterImageSpan.BetterImageSpanAlignment int verticalAlignment) {
+      final DraweeHolder draweeHolder, final @BetterImageSpan.BetterImageSpanAlignment int verticalAlignment) {
     super(draweeHolder.getTopLevelDrawable(), verticalAlignment);
     mDraweeHolder = draweeHolder;
   }

@@ -19,17 +19,17 @@ public class VolleyHolder extends BaseViewHolder<InstrumentedNetworkImageView> {
   private final ImageLoader mImageLoader;
 
   public VolleyHolder(
-      Context context,
-      ImageLoader imageLoader,
-      View layoutView,
-      InstrumentedNetworkImageView view,
-      PerfListener perfListener) {
+      final Context context,
+      final ImageLoader imageLoader,
+      final View layoutView,
+      final InstrumentedNetworkImageView view,
+      final PerfListener perfListener) {
     super(context, layoutView, view, perfListener);
     mImageLoader = imageLoader;
   }
 
   @Override
-  protected void onBind(String uri) {
+  protected void onBind(final String uri) {
     mImageView.setImageUrl(uri, mImageLoader);
   }
 }

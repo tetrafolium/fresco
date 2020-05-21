@@ -25,7 +25,7 @@ public class DraweeConfig {
   private final Supplier<Boolean> mDebugOverlayEnabledSupplier;
   @Nullable private final ImagePerfDataListener mImagePerfDataListener;
 
-  private DraweeConfig(Builder builder) {
+  private DraweeConfig(final Builder builder) {
     mCustomDrawableFactories =
         builder.mCustomDrawableFactories != null
             ? ImmutableList.copyOf(builder.mCustomDrawableFactories)
@@ -75,7 +75,7 @@ public class DraweeConfig {
      * @param factory the factory to use
      * @return the builder
      */
-    public Builder addCustomDrawableFactory(DrawableFactory factory) {
+    public Builder addCustomDrawableFactory(final DrawableFactory factory) {
       if (mCustomDrawableFactories == null) {
         mCustomDrawableFactories = new ArrayList<>();
       }
@@ -90,7 +90,7 @@ public class DraweeConfig {
      * @param drawDebugOverlay <code>true</code> if the debug overlay should be drawn
      * @return the builder
      */
-    public Builder setDrawDebugOverlay(boolean drawDebugOverlay) {
+    public Builder setDrawDebugOverlay(final boolean drawDebugOverlay) {
       return setDebugOverlayEnabledSupplier(Suppliers.of(drawDebugOverlay));
     }
 
@@ -102,7 +102,7 @@ public class DraweeConfig {
      *     should be drawn
      * @return the builder
      */
-    public Builder setDebugOverlayEnabledSupplier(Supplier<Boolean> debugOverlayEnabledSupplier) {
+    public Builder setDebugOverlayEnabledSupplier(final Supplier<Boolean> debugOverlayEnabledSupplier) {
       Preconditions.checkNotNull(debugOverlayEnabledSupplier);
       mDebugOverlayEnabledSupplier = debugOverlayEnabledSupplier;
       return this;
@@ -114,12 +114,12 @@ public class DraweeConfig {
      * @param factory the PipelineDraweeControllerFactory to use
      * @return the builder
      */
-    public Builder setPipelineDraweeControllerFactory(PipelineDraweeControllerFactory factory) {
+    public Builder setPipelineDraweeControllerFactory(final PipelineDraweeControllerFactory factory) {
       mPipelineDraweeControllerFactory = factory;
       return this;
     }
 
-    public Builder setImagePerfDataListener(@Nullable ImagePerfDataListener imagePerfDataListener) {
+    public Builder setImagePerfDataListener(final @Nullable ImagePerfDataListener imagePerfDataListener) {
       mImagePerfDataListener = imagePerfDataListener;
       return this;
     }

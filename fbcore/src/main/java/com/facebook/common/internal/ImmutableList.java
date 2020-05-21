@@ -21,15 +21,15 @@ public class ImmutableList<E> extends ArrayList<E> {
     super(capacity);
   }
 
-  private ImmutableList(List<E> list) {
+  private ImmutableList(final List<E> list) {
     super(list);
   }
 
-  public static <E> ImmutableList<E> copyOf(List<E> list) {
+  public static <E> ImmutableList<E> copyOf(final List<E> list) {
     return new ImmutableList<>(list);
   }
 
-  public static <E> ImmutableList<E> of(E... elements) {
+  public static <E> ImmutableList<E> of(final E... elements) {
     final ImmutableList<E> list = new ImmutableList<>(elements.length);
     Collections.addAll(list, elements);
     return list;

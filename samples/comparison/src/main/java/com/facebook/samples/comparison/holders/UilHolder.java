@@ -19,17 +19,17 @@ public class UilHolder extends BaseViewHolder<InstrumentedImageView> {
   private final ImageLoader mImageLoader;
 
   public UilHolder(
-      Context context,
-      ImageLoader imageLoader,
-      View layoutView,
-      InstrumentedImageView view,
-      PerfListener perfListener) {
+      final Context context,
+      final ImageLoader imageLoader,
+      final View layoutView,
+      final InstrumentedImageView view,
+      final PerfListener perfListener) {
     super(context, layoutView, view, perfListener);
     this.mImageLoader = imageLoader;
   }
 
   @Override
-  protected void onBind(String uri) {
+  protected void onBind(final String uri) {
     mImageLoader.displayImage(uri, mImageView);
   }
 }

@@ -93,7 +93,7 @@ public class SharedReferenceTest {
   public static class Thing implements Closeable {
     private String mValue;
 
-    public Thing(String value) {
+    public Thing(final String value) {
       mValue = value;
     }
 
@@ -110,7 +110,7 @@ public class SharedReferenceTest {
   public static class Thing2 extends Thing {
     private String mValue;
 
-    public Thing2(String value) {
+    public Thing2(final String value) {
       super(value);
     }
 
@@ -122,7 +122,7 @@ public class SharedReferenceTest {
   public final ResourceReleaser<Thing> THING_RELEASER =
       new ResourceReleaser<Thing>() {
         @Override
-        public void release(Thing value) {
+        public void release(final Thing value) {
           try {
             Closeables.close(value, true);
           } catch (IOException ioe) {

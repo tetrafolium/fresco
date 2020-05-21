@@ -24,12 +24,12 @@ public class DummyTrackingInUseBitmapPool implements BitmapPool {
   }
 
   @Override
-  public void trim(MemoryTrimType trimType) {
+  public void trim(final MemoryTrimType trimType) {
     // nop
   }
 
   @Override
-  public Bitmap get(int size) {
+  public Bitmap get(final int size) {
     final Bitmap result =
         Bitmap.createBitmap(
             1,
@@ -40,7 +40,7 @@ public class DummyTrackingInUseBitmapPool implements BitmapPool {
   }
 
   @Override
-  public void release(Bitmap value) {
+  public void release(final Bitmap value) {
     Preconditions.checkNotNull(value);
     mInUseValues.remove(value);
     value.recycle();

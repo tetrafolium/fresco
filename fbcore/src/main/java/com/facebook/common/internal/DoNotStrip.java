@@ -20,4 +20,4 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.CONSTRUCTOR})
 @Retention(CLASS)
-public @interface DoNotStrip {}
+public @interface DoNotStrip { }

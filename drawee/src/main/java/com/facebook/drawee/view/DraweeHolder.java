@@ -55,21 +55,21 @@ public class DraweeHolder<DH extends DraweeHierarchy> implements VisibilityCallb
    * notifies it about activity's onStop and onStart callbacks.
    */
   public static <DH extends DraweeHierarchy> DraweeHolder<DH> create(
-      @Nullable DH hierarchy, Context context) {
+      final @Nullable DH hierarchy, final Context context) {
     DraweeHolder<DH> holder = new DraweeHolder<DH>(hierarchy);
     holder.registerWithContext(context);
     return holder;
   }
 
   /** For future use. */
-  public void registerWithContext(Context context) {}
+  public void registerWithContext(final Context context) { }
 
   /**
    * Creates a new instance of DraweeHolder.
    *
    * @param hierarchy
    */
-  public DraweeHolder(@Nullable DH hierarchy) {
+  public DraweeHolder(final @Nullable DH hierarchy) {
     if (hierarchy != null) {
       setHierarchy(hierarchy);
     }
@@ -116,7 +116,7 @@ public class DraweeHolder<DH extends DraweeHierarchy> implements VisibilityCallb
    * @param event touch event to handle
    * @return whether the event was handled or not
    */
-  public boolean onTouchEvent(MotionEvent event) {
+  public boolean onTouchEvent(final MotionEvent event) {
     if (!isControllerValid()) {
       return false;
     }
@@ -125,7 +125,7 @@ public class DraweeHolder<DH extends DraweeHierarchy> implements VisibilityCallb
 
   /** Callback used to notify about top-level-drawable's visibility changes. */
   @Override
-  public void onVisibilityChange(boolean isVisible) {
+  public void onVisibilityChange(final boolean isVisible) {
     if (mIsVisible == isVisible) {
       return;
     }
@@ -157,7 +157,7 @@ public class DraweeHolder<DH extends DraweeHierarchy> implements VisibilityCallb
   }
 
   /** Sets the visibility callback to the current top-level-drawable. */
-  private void setVisibilityCallback(@Nullable VisibilityCallback visibilityCallback) {
+  private void setVisibilityCallback(final @Nullable VisibilityCallback visibilityCallback) {
     Drawable drawable = getTopLevelDrawable();
     if (drawable instanceof VisibilityAwareDrawable) {
       ((VisibilityAwareDrawable) drawable).setVisibilityCallback(visibilityCallback);
@@ -165,7 +165,7 @@ public class DraweeHolder<DH extends DraweeHierarchy> implements VisibilityCallb
   }
 
   /** Sets a new controller. */
-  public void setController(@Nullable DraweeController draweeController) {
+  public void setController(final @Nullable DraweeController draweeController) {
     boolean wasAttached = mIsControllerAttached;
     if (wasAttached) {
       detachController();
@@ -196,7 +196,7 @@ public class DraweeHolder<DH extends DraweeHierarchy> implements VisibilityCallb
   }
 
   /** Sets the drawee hierarchy. */
-  public void setHierarchy(DH hierarchy) {
+  public void setHierarchy(final DH hierarchy) {
     mEventTracker.recordEvent(Event.ON_SET_HIERARCHY);
     final boolean isControllerValid = isControllerValid();
 

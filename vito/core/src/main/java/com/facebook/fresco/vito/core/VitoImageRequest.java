@@ -26,12 +26,12 @@ public class VitoImageRequest {
   public final CacheKey cacheKey;
 
   public VitoImageRequest(
-      Resources resources,
-      Uri uri,
-      MultiUri multiUri,
-      ImageOptions imageOptions,
-      ImageRequest imageRequest,
-      CacheKey cacheKey) {
+      final Resources resources,
+      final Uri uri,
+      final MultiUri multiUri,
+      final ImageOptions imageOptions,
+      final ImageRequest imageRequest,
+      final CacheKey cacheKey) {
     this.resources = resources;
     this.uri = uri;
     this.multiUri = multiUri;
@@ -41,7 +41,7 @@ public class VitoImageRequest {
   }
 
   @Override
-  public boolean equals(@Nullable Object obj) {
+  public boolean equals(final @Nullable Object obj) {
     if (this == obj) {
       return true;
     }

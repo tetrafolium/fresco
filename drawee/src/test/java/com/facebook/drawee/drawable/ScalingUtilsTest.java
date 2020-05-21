@@ -25,7 +25,7 @@ public class ScalingUtilsTest {
   private final Rect mParentBounds = new Rect(10, 15, 410, 315);
 
   @Before
-  public void setUp() {}
+  public void setUp() { }
 
   @Test
   public void testFitXY() {
@@ -185,29 +185,29 @@ public class ScalingUtilsTest {
 
   private void test(
       // expected
-      float scaleX,
-      float scaleY,
-      float translateX,
-      float translateY,
+      final float scaleX,
+      final float scaleY,
+      final float translateX,
+      final float translateY,
       // params
-      int childWidth,
-      int childHeight,
-      ScaleType scaleType) {
+      final int childWidth,
+      final int childHeight,
+      final ScaleType scaleType) {
     test(scaleX, scaleY, translateX, translateY, childWidth, childHeight, 0.5f, 0.5f, scaleType);
   }
 
   private void test(
       // expected
-      float scaleX,
-      float scaleY,
-      float translateX,
-      float translateY,
+      final float scaleX,
+      final float scaleY,
+      final float translateX,
+      final float translateY,
       // params
-      int childWidth,
-      int childHeight,
-      float focusX,
-      float focusY,
-      ScaleType scaleType) {
+      final int childWidth,
+      final int childHeight,
+      final float focusX,
+      final float focusY,
+      final ScaleType scaleType) {
 
     mExpectedMatrix.reset();
     if (scaleType == ScaleType.CENTER) {
@@ -225,7 +225,7 @@ public class ScalingUtilsTest {
   }
 
   private static Matrix createTransform(
-      Matrix transform, float scaleX, float scaleY, float translateX, float translateY) {
+      final Matrix transform, final float scaleX, final float scaleY, final float translateX, final float translateY) {
     transform.setScale(scaleX, scaleY);
     transform.postTranslate(translateX, translateY);
     return transform;

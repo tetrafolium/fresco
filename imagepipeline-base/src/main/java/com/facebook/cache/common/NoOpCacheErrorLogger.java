@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 public class NoOpCacheErrorLogger implements CacheErrorLogger {
   private static @Nullable NoOpCacheErrorLogger sInstance = null;
 
-  private NoOpCacheErrorLogger() {}
+  private NoOpCacheErrorLogger() { }
 
   public static synchronized NoOpCacheErrorLogger getInstance() {
     if (sInstance == null) {
@@ -32,5 +32,5 @@ public class NoOpCacheErrorLogger implements CacheErrorLogger {
    */
   @Override
   public void logError(
-      CacheErrorCategory category, Class<?> clazz, String message, @Nullable Throwable throwable) {}
+      final CacheErrorCategory category, final Class<?> clazz, final String message, final @Nullable Throwable throwable) { }
 }

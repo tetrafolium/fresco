@@ -27,12 +27,12 @@ public abstract class StatefulProducerRunnable<T> extends StatefulRunnable<T> {
   private final @Nullable String mOriginSubcategory;
 
   public StatefulProducerRunnable(
-      Consumer<T> consumer,
-      ProducerListener2 producerListener,
-      ProducerContext producerContext,
-      String producerName,
-      @Nullable String origin,
-      @Nullable String originSubcategory) {
+      final Consumer<T> consumer,
+      final ProducerListener2 producerListener,
+      final ProducerContext producerContext,
+      final String producerName,
+      final @Nullable String origin,
+      final @Nullable String originSubcategory) {
     mConsumer = consumer;
     mProducerListener = producerListener;
     mProducerName = producerName;
@@ -44,7 +44,7 @@ public abstract class StatefulProducerRunnable<T> extends StatefulRunnable<T> {
   }
 
   @Override
-  protected void onSuccess(T result) {
+  protected void onSuccess(final T result) {
     mProducerListener.onProducerFinishWithSuccess(
         mProducerContext,
         mProducerName,
@@ -56,7 +56,7 @@ public abstract class StatefulProducerRunnable<T> extends StatefulRunnable<T> {
   }
 
   @Override
-  protected void onFailure(Exception e) {
+  protected void onFailure(final Exception e) {
     mProducerListener.onProducerFinishWithFailure(
         mProducerContext,
         mProducerName,
@@ -81,12 +81,12 @@ public abstract class StatefulProducerRunnable<T> extends StatefulRunnable<T> {
   }
 
   /** Create extra map for result */
-  protected @Nullable Map<String, String> getExtraMapOnSuccess(T result) {
+  protected @Nullable Map<String, String> getExtraMapOnSuccess(final T result) {
     return null;
   }
 
   /** Create extra map for exception */
-  protected @Nullable Map<String, String> getExtraMapOnFailure(Exception exception) {
+  protected @Nullable Map<String, String> getExtraMapOnFailure(final Exception exception) {
     return null;
   }
 

@@ -29,5 +29,5 @@ public class Drawables {
   public static Drawable sPlaceholderDrawable;
   public static Drawable sErrorDrawable;
 
-  private Drawables() {}
+  private Drawables() { }
 }

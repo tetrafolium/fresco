@@ -53,7 +53,7 @@ class DeferredReleaserConcurrentImpl extends DeferredReleaser {
 
   @AnyThread
   @Override
-  public void scheduleDeferredRelease(Releasable releasable) {
+  public void scheduleDeferredRelease(final Releasable releasable) {
     if (!isOnUiThread()) {
       releasable.release();
       return;
@@ -77,7 +77,7 @@ class DeferredReleaserConcurrentImpl extends DeferredReleaser {
 
   @AnyThread
   @Override
-  public void cancelDeferredRelease(Releasable releasable) {
+  public void cancelDeferredRelease(final Releasable releasable) {
     // it's possible an releasable is scheduled from FG thread and then reused in BG thread (common
     // in Litho lifecycle)
     synchronized (mLock) {

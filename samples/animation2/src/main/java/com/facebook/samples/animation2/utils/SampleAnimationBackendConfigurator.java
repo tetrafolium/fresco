@@ -33,7 +33,7 @@ public class SampleAnimationBackendConfigurator {
   }
 
   public SampleAnimationBackendConfigurator(
-      Spinner spinner, BackendChangedListener backendChangedListener) {
+      final Spinner spinner, final BackendChangedListener backendChangedListener) {
     mSpinner = spinner;
     mBackendChangedListener = backendChangedListener;
 
@@ -110,16 +110,16 @@ public class SampleAnimationBackendConfigurator {
     mSpinner.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             updateAnimationBackend(mArrayAdapter.getItem(position).createBackend());
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> adapterView) {}
+          public void onNothingSelected(final AdapterView<?> adapterView) { }
         });
   }
 
-  private void updateAnimationBackend(AnimationBackend animationBackend) {
+  private void updateAnimationBackend(final AnimationBackend animationBackend) {
     mBackendChangedListener.onBackendChanged(animationBackend);
   }
 

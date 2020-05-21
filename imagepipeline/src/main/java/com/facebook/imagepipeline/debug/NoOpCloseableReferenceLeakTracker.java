@@ -14,10 +14,10 @@ public class NoOpCloseableReferenceLeakTracker implements CloseableReferenceLeak
 
   @Override
   public void trackCloseableReferenceLeak(
-      SharedReference<Object> reference, @Nullable Throwable stacktrace) {}
+      final SharedReference<Object> reference, final @Nullable Throwable stacktrace) { }
 
   @Override
-  public void setListener(@Nullable Listener listener) {}
+  public void setListener(final @Nullable Listener listener) { }
 
   @Override
   public boolean isSet() {

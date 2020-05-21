@@ -65,12 +65,12 @@ public class GenericDraweeHierarchyBuilder {
 
   private @Nullable RoundingParams mRoundingParams;
 
-  public GenericDraweeHierarchyBuilder(Resources resources) {
+  public GenericDraweeHierarchyBuilder(final Resources resources) {
     mResources = resources;
     init();
   }
 
-  public static GenericDraweeHierarchyBuilder newInstance(Resources resources) {
+  public static GenericDraweeHierarchyBuilder newInstance(final Resources resources) {
     return new GenericDraweeHierarchyBuilder(resources);
   }
 
@@ -131,7 +131,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param fadeDuration duration in milliseconds
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setFadeDuration(int fadeDuration) {
+  public GenericDraweeHierarchyBuilder setFadeDuration(final int fadeDuration) {
     mFadeDuration = fadeDuration;
     return this;
   }
@@ -150,7 +150,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param desiredAspectRatio the desired aspect ratio
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setDesiredAspectRatio(float desiredAspectRatio) {
+  public GenericDraweeHierarchyBuilder setDesiredAspectRatio(final float desiredAspectRatio) {
     mDesiredAspectRatio = desiredAspectRatio;
     return this;
   }
@@ -166,7 +166,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param placeholderDrawable drawable to be used as placeholder image
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setPlaceholderImage(@Nullable Drawable placeholderDrawable) {
+  public GenericDraweeHierarchyBuilder setPlaceholderImage(final @Nullable Drawable placeholderDrawable) {
     mPlaceholderImage = placeholderDrawable;
     return this;
   }
@@ -177,7 +177,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param resourceId an identifier of an Android drawable or color resource
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setPlaceholderImage(int resourceId) {
+  public GenericDraweeHierarchyBuilder setPlaceholderImage(final int resourceId) {
     mPlaceholderImage = mResources.getDrawable(resourceId);
     return this;
   }
@@ -196,7 +196,7 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setPlaceholderImageScaleType(
-      @Nullable ScalingUtils.ScaleType placeholderImageScaleType) {
+      final @Nullable ScalingUtils.ScaleType placeholderImageScaleType) {
     mPlaceholderImageScaleType = placeholderImageScaleType;
     return this;
   }
@@ -214,7 +214,7 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setPlaceholderImage(
-      Drawable placeholderDrawable, @Nullable ScalingUtils.ScaleType placeholderImageScaleType) {
+      final Drawable placeholderDrawable, final @Nullable ScalingUtils.ScaleType placeholderImageScaleType) {
     mPlaceholderImage = placeholderDrawable;
     mPlaceholderImageScaleType = placeholderImageScaleType;
     return this;
@@ -228,7 +228,7 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setPlaceholderImage(
-      int resourceId, @Nullable ScalingUtils.ScaleType placeholderImageScaleType) {
+      final int resourceId, final @Nullable ScalingUtils.ScaleType placeholderImageScaleType) {
     mPlaceholderImage = mResources.getDrawable(resourceId);
     mPlaceholderImageScaleType = placeholderImageScaleType;
     return this;
@@ -240,7 +240,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param retryDrawable drawable to be used as retry image
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setRetryImage(@Nullable Drawable retryDrawable) {
+  public GenericDraweeHierarchyBuilder setRetryImage(final @Nullable Drawable retryDrawable) {
     mRetryImage = retryDrawable;
     return this;
   }
@@ -251,7 +251,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param resourceId an identifier of an Android drawable or color resource
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setRetryImage(int resourceId) {
+  public GenericDraweeHierarchyBuilder setRetryImage(final int resourceId) {
     mRetryImage = mResources.getDrawable(resourceId);
     return this;
   }
@@ -270,7 +270,7 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setRetryImageScaleType(
-      @Nullable ScalingUtils.ScaleType retryImageScaleType) {
+      final @Nullable ScalingUtils.ScaleType retryImageScaleType) {
     mRetryImageScaleType = retryImageScaleType;
     return this;
   }
@@ -288,7 +288,7 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setRetryImage(
-      Drawable retryDrawable, @Nullable ScalingUtils.ScaleType retryImageScaleType) {
+      final Drawable retryDrawable, final @Nullable ScalingUtils.ScaleType retryImageScaleType) {
     mRetryImage = retryDrawable;
     mRetryImageScaleType = retryImageScaleType;
     return this;
@@ -302,7 +302,7 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setRetryImage(
-      int resourceId, @Nullable ScalingUtils.ScaleType retryImageScaleType) {
+      final int resourceId, final @Nullable ScalingUtils.ScaleType retryImageScaleType) {
     mRetryImage = mResources.getDrawable(resourceId);
     mRetryImageScaleType = retryImageScaleType;
     return this;
@@ -314,7 +314,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param failureDrawable drawable to be used as failure image
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setFailureImage(@Nullable Drawable failureDrawable) {
+  public GenericDraweeHierarchyBuilder setFailureImage(final @Nullable Drawable failureDrawable) {
     mFailureImage = failureDrawable;
     return this;
   }
@@ -325,7 +325,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param resourceId an identifier of an Android drawable or color resource
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setFailureImage(int resourceId) {
+  public GenericDraweeHierarchyBuilder setFailureImage(final int resourceId) {
     mFailureImage = mResources.getDrawable(resourceId);
     return this;
   }
@@ -344,7 +344,7 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setFailureImageScaleType(
-      @Nullable ScalingUtils.ScaleType failureImageScaleType) {
+      final @Nullable ScalingUtils.ScaleType failureImageScaleType) {
     mFailureImageScaleType = failureImageScaleType;
     return this;
   }
@@ -362,7 +362,7 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setFailureImage(
-      Drawable failureDrawable, @Nullable ScalingUtils.ScaleType failureImageScaleType) {
+      final Drawable failureDrawable, final @Nullable ScalingUtils.ScaleType failureImageScaleType) {
     mFailureImage = failureDrawable;
     mFailureImageScaleType = failureImageScaleType;
     return this;
@@ -376,7 +376,7 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setFailureImage(
-      int resourceId, @Nullable ScalingUtils.ScaleType failureImageScaleType) {
+      final int resourceId, final @Nullable ScalingUtils.ScaleType failureImageScaleType) {
     mFailureImage = mResources.getDrawable(resourceId);
     mFailureImageScaleType = failureImageScaleType;
     return this;
@@ -388,7 +388,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param progressBarDrawable drawable to be used as progress bar image
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setProgressBarImage(@Nullable Drawable progressBarDrawable) {
+  public GenericDraweeHierarchyBuilder setProgressBarImage(final @Nullable Drawable progressBarDrawable) {
     mProgressBarImage = progressBarDrawable;
     return this;
   }
@@ -399,7 +399,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param resourceId an identifier of an Android drawable or color resource
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setProgressBarImage(int resourceId) {
+  public GenericDraweeHierarchyBuilder setProgressBarImage(final int resourceId) {
     mProgressBarImage = mResources.getDrawable(resourceId);
     return this;
   }
@@ -418,7 +418,7 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setProgressBarImageScaleType(
-      @Nullable ScalingUtils.ScaleType progressBarImageScaleType) {
+      final @Nullable ScalingUtils.ScaleType progressBarImageScaleType) {
     mProgressBarImageScaleType = progressBarImageScaleType;
     return this;
   }
@@ -436,7 +436,7 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setProgressBarImage(
-      Drawable progressBarDrawable, @Nullable ScalingUtils.ScaleType progressBarImageScaleType) {
+      final Drawable progressBarDrawable, final @Nullable ScalingUtils.ScaleType progressBarImageScaleType) {
     mProgressBarImage = progressBarDrawable;
     mProgressBarImageScaleType = progressBarImageScaleType;
     return this;
@@ -450,7 +450,7 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setProgressBarImage(
-      int resourceId, @Nullable ScalingUtils.ScaleType progressBarImageScaleType) {
+      final int resourceId, final @Nullable ScalingUtils.ScaleType progressBarImageScaleType) {
     mProgressBarImage = mResources.getDrawable(resourceId);
     mProgressBarImageScaleType = progressBarImageScaleType;
     return this;
@@ -465,7 +465,7 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setActualImageScaleType(
-      @Nullable ScalingUtils.ScaleType actualImageScaleType) {
+      final @Nullable ScalingUtils.ScaleType actualImageScaleType) {
     mActualImageScaleType = actualImageScaleType;
     mActualImageMatrix = null;
     return this;
@@ -487,7 +487,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param focusPoint focus point of the image
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setActualImageFocusPoint(@Nullable PointF focusPoint) {
+  public GenericDraweeHierarchyBuilder setActualImageFocusPoint(final @Nullable PointF focusPoint) {
     mActualImageFocusPoint = focusPoint;
     return this;
   }
@@ -504,7 +504,7 @@ public class GenericDraweeHierarchyBuilder {
    * @return modified instance of this builder
    */
   public GenericDraweeHierarchyBuilder setActualImageColorFilter(
-      @Nullable ColorFilter colorFilter) {
+      final @Nullable ColorFilter colorFilter) {
     mActualImageColorFilter = colorFilter;
     return this;
   }
@@ -520,7 +520,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param background background drawable
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setBackground(@Nullable Drawable background) {
+  public GenericDraweeHierarchyBuilder setBackground(final @Nullable Drawable background) {
     mBackground = background;
     return this;
   }
@@ -539,7 +539,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param overlays overlay drawables
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setOverlays(@Nullable List<Drawable> overlays) {
+  public GenericDraweeHierarchyBuilder setOverlays(final @Nullable List<Drawable> overlays) {
     mOverlays = overlays;
     return this;
   }
@@ -550,7 +550,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param overlay overlay drawable
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setOverlay(@Nullable Drawable overlay) {
+  public GenericDraweeHierarchyBuilder setOverlay(final @Nullable Drawable overlay) {
     if (overlay == null) {
       mOverlays = null;
     } else {
@@ -570,7 +570,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param drawable for pressed state
    * @return
    */
-  public GenericDraweeHierarchyBuilder setPressedStateOverlay(@Nullable Drawable drawable) {
+  public GenericDraweeHierarchyBuilder setPressedStateOverlay(final @Nullable Drawable drawable) {
     if (drawable == null) {
       mPressedStateOverlay = null;
     } else {
@@ -592,7 +592,7 @@ public class GenericDraweeHierarchyBuilder {
    * @param roundingParams rounding params to be set
    * @return modified instance of this builder
    */
-  public GenericDraweeHierarchyBuilder setRoundingParams(@Nullable RoundingParams roundingParams) {
+  public GenericDraweeHierarchyBuilder setRoundingParams(final @Nullable RoundingParams roundingParams) {
     mRoundingParams = roundingParams;
     return this;
   }

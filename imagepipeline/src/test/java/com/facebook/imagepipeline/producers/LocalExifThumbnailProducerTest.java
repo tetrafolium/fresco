@@ -94,7 +94,7 @@ public class LocalExifThumbnailProducerTest {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 mCapturedEncodedImage =
                     EncodedImage.cloneOrNull((EncodedImage) invocation.getArguments()[0]);
                 return null;
@@ -135,14 +135,14 @@ public class LocalExifThumbnailProducerTest {
   private class TestLocalExifThumbnailProducer extends LocalExifThumbnailProducer {
 
     private TestLocalExifThumbnailProducer(
-        Executor executor,
-        PooledByteBufferFactory pooledByteBufferFactory,
-        ContentResolver contentResolver) {
+        final Executor executor,
+        final PooledByteBufferFactory pooledByteBufferFactory,
+        final ContentResolver contentResolver) {
       super(executor, pooledByteBufferFactory, contentResolver);
     }
 
     @Override
-    ExifInterface getExifInterface(Uri uri) {
+    ExifInterface getExifInterface(final Uri uri) {
       if (uri.equals(mUri)) {
         return mExifInterface;
       }

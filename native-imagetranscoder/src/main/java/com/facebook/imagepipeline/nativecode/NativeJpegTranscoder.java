@@ -60,9 +60,9 @@ public class NativeJpegTranscoder implements ImageTranscoder {
 
   @Override
   public boolean canResize(
-      EncodedImage encodedImage,
-      @Nullable RotationOptions rotationOptions,
-      @Nullable ResizeOptions resizeOptions) {
+      final EncodedImage encodedImage,
+      final @Nullable RotationOptions rotationOptions,
+      final @Nullable ResizeOptions resizeOptions) {
     if (rotationOptions == null) {
       rotationOptions = RotationOptions.autoRotate();
     }
@@ -72,7 +72,7 @@ public class NativeJpegTranscoder implements ImageTranscoder {
   }
 
   @Override
-  public boolean canTranscode(ImageFormat imageFormat) {
+  public boolean canTranscode(final ImageFormat imageFormat) {
     return imageFormat == DefaultImageFormats.JPEG;
   }
 
@@ -85,10 +85,10 @@ public class NativeJpegTranscoder implements ImageTranscoder {
   public ImageTranscodeResult transcode(
       final EncodedImage encodedImage,
       final OutputStream outputStream,
-      @Nullable RotationOptions rotationOptions,
+      final @Nullable RotationOptions rotationOptions,
       @Nullable final ResizeOptions resizeOptions,
-      @Nullable ImageFormat outputFormat,
-      @Nullable Integer quality)
+      final @Nullable ImageFormat outputFormat,
+      final @Nullable Integer quality)
       throws IOException {
     if (quality == null) {
       quality = DEFAULT_JPEG_QUALITY;

@@ -54,7 +54,7 @@ public class Hex {
    *
    * @param value int value.
    */
-  public static String byte2Hex(int value) {
+  public static String byte2Hex(final int value) {
     if (value > 255 || value < 0) {
       throw new IllegalArgumentException("The int converting to hex should be in range 0~255");
     }
@@ -66,7 +66,7 @@ public class Hex {
    *
    * @param array byte array, possibly zero-terminated.
    */
-  public static String encodeHex(byte[] array, boolean zeroTerminated) {
+  public static String encodeHex(final byte[] array, final boolean zeroTerminated) {
     char[] cArray = new char[array.length * 2];
 
     int j = 0;
@@ -84,7 +84,7 @@ public class Hex {
   }
 
   /** Quickly converts a hexadecimal string to a byte array. */
-  public static byte[] decodeHex(String hexString) {
+  public static byte[] decodeHex(final String hexString) {
     int length = hexString.length();
 
     if ((length & 0x01) != 0) {
@@ -128,7 +128,7 @@ public class Hex {
     return out;
   }
 
-  public static byte[] hexStringToByteArray(String s) {
+  public static byte[] hexStringToByteArray(final String s) {
     String noSpaceString = s.replaceAll(" ", "");
     byte[] data = decodeHex(noSpaceString);
     return data;

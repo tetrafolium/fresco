@@ -20,15 +20,15 @@ import com.facebook.samples.comparison.instrumentation.PerfListener;
 public class GlideHolder extends BaseViewHolder<InstrumentedImageView> {
 
   public GlideHolder(
-      Context context,
-      View layoutView,
-      InstrumentedImageView instrumentedImageView,
-      PerfListener perfListener) {
+      final Context context,
+      final View layoutView,
+      final InstrumentedImageView instrumentedImageView,
+      final PerfListener perfListener) {
     super(context, layoutView, instrumentedImageView, perfListener);
   }
 
   @Override
-  protected void onBind(String uri) {
+  protected void onBind(final String uri) {
     GlideApp.with(mImageView.getContext())
         .load(uri)
         .placeholder(Drawables.sPlaceholderDrawable)

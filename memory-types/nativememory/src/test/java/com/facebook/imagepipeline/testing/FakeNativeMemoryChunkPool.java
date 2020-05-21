@@ -22,12 +22,12 @@ public class FakeNativeMemoryChunkPool extends NativeMemoryChunkPool {
     this(new PoolParams(128, getBucketSizes()));
   }
 
-  public FakeNativeMemoryChunkPool(PoolParams poolParams) {
+  public FakeNativeMemoryChunkPool(final PoolParams poolParams) {
     super(mock(MemoryTrimmableRegistry.class), poolParams, mock(PoolStatsTracker.class));
   }
 
   @Override
-  protected NativeMemoryChunk alloc(int bucketedSize) {
+  protected NativeMemoryChunk alloc(final int bucketedSize) {
     return new FakeNativeMemoryChunk(bucketedSize);
   }
 

@@ -44,11 +44,11 @@ public class AspectRatioMeasure {
    * @param heightPadding view's top + bottom padding
    */
   public static void updateMeasureSpec(
-      Spec spec,
-      float aspectRatio,
-      @Nullable ViewGroup.LayoutParams layoutParams,
-      int widthPadding,
-      int heightPadding) {
+      final Spec spec,
+      final float aspectRatio,
+      final @Nullable ViewGroup.LayoutParams layoutParams,
+      final int widthPadding,
+      final int heightPadding) {
     if (aspectRatio <= 0 || layoutParams == null) {
       return;
     }
@@ -65,7 +65,7 @@ public class AspectRatioMeasure {
     }
   }
 
-  private static boolean shouldAdjust(int layoutDimension) {
+  private static boolean shouldAdjust(final int layoutDimension) {
     // Note: wrap_content is supported for backwards compatibility, but should not be used.
     return layoutDimension == 0 || layoutDimension == ViewGroup.LayoutParams.WRAP_CONTENT;
   }

@@ -16,7 +16,7 @@ public enum DistinctUriDecorator implements Decorator<Uri> {
   SINGLETON;
 
   @Override
-  public Uri decorate(SimpleAdapter<Uri> decoratee, int position) {
+  public Uri decorate(final SimpleAdapter<Uri> decoratee, final int position) {
     final int pos = position % decoratee.getSize();
     final Uri srcUri = decoratee.get(position);
     return Uri.parse(srcUri.toString() + "?param=" + pos);

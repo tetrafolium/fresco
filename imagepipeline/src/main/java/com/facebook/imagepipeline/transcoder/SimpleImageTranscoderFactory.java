@@ -19,7 +19,7 @@ public class SimpleImageTranscoderFactory implements ImageTranscoderFactory {
   }
 
   @Override
-  public ImageTranscoder createImageTranscoder(ImageFormat imageFormat, boolean isResizingEnabled) {
+  public ImageTranscoder createImageTranscoder(final ImageFormat imageFormat, final boolean isResizingEnabled) {
     return new SimpleImageTranscoder(isResizingEnabled, mMaxBitmapSize);
   }
 }

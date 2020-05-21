@@ -60,7 +60,7 @@ public class BitmapPrepareProducerTest {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 Object[] args = invocation.getArguments();
                 Consumer<CloseableReference<CloseableImage>> consumer =
                     (Consumer<CloseableReference<CloseableImage>>) args[0];
@@ -173,7 +173,7 @@ public class BitmapPrepareProducerTest {
     verify(mBitmap, never()).prepareToDraw();
   }
 
-  private void createBitmapPrepareProducer(boolean preparePrefetch) {
+  private void createBitmapPrepareProducer(final boolean preparePrefetch) {
     mBitmapPrepareProducer =
         new BitmapPrepareProducer(
             mInputProducer, MIN_BITMAP_SIZE_BYTES, MAX_BITMAP_SIZE_BYTES, preparePrefetch);

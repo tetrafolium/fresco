@@ -99,19 +99,19 @@ public class ImageRequest {
    */
   private final @Nullable Boolean mResizingAllowedOverride;
 
-  public static @Nullable ImageRequest fromFile(@Nullable File file) {
+  public static @Nullable ImageRequest fromFile(final @Nullable File file) {
     return (file == null) ? null : ImageRequest.fromUri(UriUtil.getUriForFile(file));
   }
 
-  public static @Nullable ImageRequest fromUri(@Nullable Uri uri) {
+  public static @Nullable ImageRequest fromUri(final @Nullable Uri uri) {
     return (uri == null) ? null : ImageRequestBuilder.newBuilderWithSource(uri).build();
   }
 
-  public static @Nullable ImageRequest fromUri(@Nullable String uriString) {
+  public static @Nullable ImageRequest fromUri(final @Nullable String uriString) {
     return (uriString == null || uriString.length() == 0) ? null : fromUri(Uri.parse(uriString));
   }
 
-  protected ImageRequest(ImageRequestBuilder builder) {
+  protected ImageRequest(final ImageRequestBuilder builder) {
     mCacheChoice = builder.getCacheChoice();
     mSourceUri = builder.getSourceUri();
     mSourceUriType = getSourceUriType(mSourceUri);
@@ -232,7 +232,7 @@ public class ImageRequest {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(final Object o) {
     if (!(o instanceof ImageRequest)) {
       return false;
     }
@@ -331,7 +331,7 @@ public class ImageRequest {
 
     private int mValue;
 
-    private RequestLevel(int value) {
+    private RequestLevel(final int value) {
       mValue = value;
     }
 
@@ -339,7 +339,7 @@ public class ImageRequest {
       return mValue;
     }
 
-    public static RequestLevel getMax(RequestLevel requestLevel1, RequestLevel requestLevel2) {
+    public static RequestLevel getMax(final RequestLevel requestLevel1, final RequestLevel requestLevel2) {
       return requestLevel1.getValue() > requestLevel2.getValue() ? requestLevel1 : requestLevel2;
     }
   }

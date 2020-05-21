@@ -36,7 +36,7 @@ public class ScoreBasedEvictionComparatorSupplierTest {
     Random random = new Random(RANDOM_SEED);
 
     PowerMockito.mockStatic(System.class);
-    when(System.currentTimeMillis()).thenReturn(0l);
+    when(System.currentTimeMillis()).thenReturn(0L);
 
     entries = new ArrayList<>();
     for (int i = 0; i < 100; i++) {
@@ -73,7 +73,7 @@ public class ScoreBasedEvictionComparatorSupplierTest {
     doTest(2f, 3f);
   }
 
-  private void doTest(float ageWeight, float sizeWeight) {
+  private void doTest(final float ageWeight, final float sizeWeight) {
     ScoreBasedEvictionComparatorSupplier supplier =
         new ScoreBasedEvictionComparatorSupplier(ageWeight, sizeWeight);
     Collections.sort(entries, supplier.get());

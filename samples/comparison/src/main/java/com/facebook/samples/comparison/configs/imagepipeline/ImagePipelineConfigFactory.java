@@ -30,7 +30,7 @@ public class ImagePipelineConfigFactory {
   private static ImagePipelineConfig sOkHttpImagePipelineConfig;
 
   /** Creates config using android http stack as network backend. */
-  public static ImagePipelineConfig getImagePipelineConfig(Context context) {
+  public static ImagePipelineConfig getImagePipelineConfig(final Context context) {
     if (sImagePipelineConfig == null) {
       ImagePipelineConfig.Builder configBuilder = ImagePipelineConfig.newBuilder(context);
       configureCaches(configBuilder, context);
@@ -42,7 +42,7 @@ public class ImagePipelineConfigFactory {
   }
 
   /** Creates config using OkHttp as network backed. */
-  public static ImagePipelineConfig getOkHttpImagePipelineConfig(Context context) {
+  public static ImagePipelineConfig getOkHttpImagePipelineConfig(final Context context) {
     if (sOkHttpImagePipelineConfig == null) {
       OkHttpClient okHttpClient =
           new OkHttpClient.Builder().addNetworkInterceptor(new StethoInterceptor()).build();
@@ -56,7 +56,7 @@ public class ImagePipelineConfigFactory {
   }
 
   /** Configures disk and memory cache not to exceed common limits */
-  private static void configureCaches(ImagePipelineConfig.Builder configBuilder, Context context) {
+  private static void configureCaches(final ImagePipelineConfig.Builder configBuilder, final Context context) {
     final MemoryCacheParams bitmapCacheParams =
         new MemoryCacheParams(
             ConfigConstants.MAX_MEMORY_CACHE_SIZE, // Max total size of elements in the cache
@@ -80,13 +80,13 @@ public class ImagePipelineConfigFactory {
                 .build());
   }
 
-  private static void configureLoggingListeners(ImagePipelineConfig.Builder configBuilder) {
+  private static void configureLoggingListeners(final ImagePipelineConfig.Builder configBuilder) {
     Set<RequestListener> requestListeners = new HashSet<>();
     requestListeners.add(new RequestLoggingListener());
     configBuilder.setRequestListeners(requestListeners);
   }
 
-  private static void configureOptions(ImagePipelineConfig.Builder configBuilder) {
+  private static void configureOptions(final ImagePipelineConfig.Builder configBuilder) {
     configBuilder.setDownsampleEnabled(true);
   }
 }

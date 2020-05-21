@@ -33,7 +33,7 @@ public class FlipperImageTracker implements DebugImageTracker, ImagePerfDataList
   }
 
   @Override
-  public synchronized void trackImage(ImageRequest imageRequest, CacheKey cacheKey) {
+  public synchronized void trackImage(final ImageRequest imageRequest, final CacheKey cacheKey) {
     ImageDebugData imageDebugData = mImageRequestDebugDataMap.get(imageRequest);
     if (imageDebugData == null) {
       imageDebugData = new ImageDebugData(imageRequest);
@@ -45,7 +45,7 @@ public class FlipperImageTracker implements DebugImageTracker, ImagePerfDataList
   }
 
   @Override
-  public synchronized void trackImageRequest(ImageRequest imageRequest, String requestId) {
+  public synchronized void trackImageRequest(final ImageRequest imageRequest, final String requestId) {
     ImageDebugData imageDebugData = mImageRequestDebugDataMap.get(imageRequest);
     if (imageDebugData == null) {
       imageDebugData = new ImageDebugData(imageRequest);
@@ -54,19 +54,19 @@ public class FlipperImageTracker implements DebugImageTracker, ImagePerfDataList
     imageDebugData.addRequestId(requestId);
   }
 
-  public synchronized ImageDebugData trackImage(String localPath, CacheKey key) {
+  public synchronized ImageDebugData trackImage(final String localPath, final CacheKey key) {
     ImageDebugData data = new ImageDebugData(localPath);
     mImageDebugDataMap.put(key, data);
     return data;
   }
 
-  public synchronized ImageDebugData trackImage(CacheKey key) {
+  public synchronized ImageDebugData trackImage(final CacheKey key) {
     ImageDebugData data = new ImageDebugData();
     mImageDebugDataMap.put(key, data);
     return data;
   }
 
-  public synchronized String getUriString(CacheKey key) {
+  public synchronized String getUriString(final CacheKey key) {
     ImageDebugData imageDebugData = getImageDebugData(key);
     if (imageDebugData != null) {
       ImageRequest imageRequest = imageDebugData.getImageRequest();
@@ -78,7 +78,7 @@ public class FlipperImageTracker implements DebugImageTracker, ImagePerfDataList
   }
 
   @Nullable
-  public synchronized String getLocalPath(CacheKey key) {
+  public synchronized String getLocalPath(final CacheKey key) {
     ImageDebugData imageDebugData = getImageDebugData(key);
     if (imageDebugData != null) {
       return imageDebugData.getLocalPath();
@@ -87,12 +87,12 @@ public class FlipperImageTracker implements DebugImageTracker, ImagePerfDataList
   }
 
   @Nullable
-  public synchronized ImageDebugData getImageDebugData(CacheKey key) {
+  public synchronized ImageDebugData getImageDebugData(final CacheKey key) {
     return mImageDebugDataMap.get(key);
   }
 
   @Nullable
-  public synchronized ImageDebugData getDebugDataForRequestId(String requestId) {
+  public synchronized ImageDebugData getDebugDataForRequestId(final String requestId) {
     for (ImageDebugData debugData : mImageRequestDebugDataMap.values()) {
       Set<String> requestIds = debugData.getRequestIds();
       if (requestIds != null && requestIds.contains(requestId)) {
@@ -103,7 +103,7 @@ public class FlipperImageTracker implements DebugImageTracker, ImagePerfDataList
   }
 
   @Nullable
-  public synchronized ImageDebugData getDebugDataForResourceId(String resourceId) {
+  public synchronized ImageDebugData getDebugDataForResourceId(final String resourceId) {
     for (ImageDebugData debugData : mImageRequestDebugDataMap.values()) {
       Set<String> ids = debugData.getResourceIds();
       if (ids != null && ids.contains(resourceId)) {
@@ -114,7 +114,7 @@ public class FlipperImageTracker implements DebugImageTracker, ImagePerfDataList
   }
 
   @Nullable
-  public synchronized CacheKey getCacheKey(String imageId) {
+  public synchronized CacheKey getCacheKey(final String imageId) {
     for (Map.Entry<CacheKey, ImageDebugData> entry : mImageDebugDataMap.entrySet()) {
       if (entry.getValue().getUniqueId().equals(imageId)) {
         return entry.getKey();
@@ -125,7 +125,7 @@ public class FlipperImageTracker implements DebugImageTracker, ImagePerfDataList
 
   @Override
   public synchronized void onImageLoadStatusUpdated(
-      ImagePerfData imagePerfData, @ImageLoadStatus int imageLoadStatus) {
+      final ImagePerfData imagePerfData, final @ImageLoadStatus int imageLoadStatus) {
     if (imagePerfData == null || imagePerfData.getImageRequest() == null) {
       return;
     }
@@ -143,7 +143,7 @@ public class FlipperImageTracker implements DebugImageTracker, ImagePerfDataList
 
   @Override
   public synchronized void onImageVisibilityUpdated(
-      ImagePerfData imagePerfData, @VisibilityState int visibilityState) {
+      final ImagePerfData imagePerfData, final @VisibilityState int visibilityState) {
     // ignore
   }
 
@@ -161,15 +161,15 @@ public class FlipperImageTracker implements DebugImageTracker, ImagePerfDataList
       this(null, null);
     }
 
-    public ImageDebugData(@Nullable ImageRequest imageRequest) {
+    public ImageDebugData(final @Nullable ImageRequest imageRequest) {
       this(imageRequest, null);
     }
 
-    public ImageDebugData(@Nullable String localPath) {
+    public ImageDebugData(final @Nullable String localPath) {
       this(null, localPath);
     }
 
-    public ImageDebugData(@Nullable ImageRequest imageRequest, @Nullable String localPath) {
+    public ImageDebugData(final @Nullable ImageRequest imageRequest, final @Nullable String localPath) {
       mImageRequest = imageRequest;
       mLocalPath = localPath;
     }
@@ -184,7 +184,7 @@ public class FlipperImageTracker implements DebugImageTracker, ImagePerfDataList
       return mCacheKeys;
     }
 
-    public void addCacheKey(CacheKey cacheKey) {
+    public void addCacheKey(final CacheKey cacheKey) {
       if (mCacheKeys == null) {
         mCacheKeys = new HashSet<>();
       }
@@ -200,14 +200,14 @@ public class FlipperImageTracker implements DebugImageTracker, ImagePerfDataList
       return Integer.toString(hashCode());
     }
 
-    public void addRequestId(String requestId) {
+    public void addRequestId(final String requestId) {
       if (mRequestIds == null) {
         mRequestIds = new HashSet<>();
       }
       mRequestIds.add(requestId);
     }
 
-    public void addResourceId(String resourceId) {
+    public void addResourceId(final String resourceId) {
       if (resourceId == null) {
         return;
       }
@@ -222,7 +222,7 @@ public class FlipperImageTracker implements DebugImageTracker, ImagePerfDataList
       return mImagePerfData;
     }
 
-    public void setImagePerfData(@Nullable ImagePerfData imagePerfData) {
+    public void setImagePerfData(final @Nullable ImagePerfData imagePerfData) {
       mImagePerfData = imagePerfData;
     }
 

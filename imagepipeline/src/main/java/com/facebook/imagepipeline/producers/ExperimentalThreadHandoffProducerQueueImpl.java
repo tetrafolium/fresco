@@ -13,12 +13,12 @@ import java.util.concurrent.Executor;
 public class ExperimentalThreadHandoffProducerQueueImpl implements ThreadHandoffProducerQueue {
   private final Executor mExecutor;
 
-  public ExperimentalThreadHandoffProducerQueueImpl(Executor executor) {
+  public ExperimentalThreadHandoffProducerQueueImpl(final Executor executor) {
     mExecutor = Preconditions.checkNotNull(executor);
   }
 
   @Override
-  public void addToQueueOrExecute(Runnable runnable) {
+  public void addToQueueOrExecute(final Runnable runnable) {
     mExecutor.execute(runnable);
   }
 
@@ -33,7 +33,7 @@ public class ExperimentalThreadHandoffProducerQueueImpl implements ThreadHandoff
   }
 
   @Override
-  public void remove(Runnable runnable) {
+  public void remove(final Runnable runnable) {
     // NOOP
   }
 

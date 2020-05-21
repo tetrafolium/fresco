@@ -356,10 +356,10 @@ public class PriorityNetworkFetcherTest {
   }
 
   private PriorityFetchState<FetchState> fetch(
-      PriorityNetworkFetcher<FetchState> fetcher,
-      String uri,
-      NetworkFetcher.Callback callback,
-      boolean isHiPri) {
+      final PriorityNetworkFetcher<FetchState> fetcher,
+      final String uri,
+      final NetworkFetcher.Callback callback,
+      final boolean isHiPri) {
     Consumer<EncodedImage> consumer = mock(Consumer.class);
     SettableProducerContext context =
         new SettableProducerContext(
@@ -380,12 +380,12 @@ public class PriorityNetworkFetcherTest {
   }
 
   @SafeVarargs
-  private static List<TestFetchState> toTestEntry(PriorityFetchState<FetchState>... fetchStates) {
+  private static List<TestFetchState> toTestEntry(final PriorityFetchState<FetchState>... fetchStates) {
     return toTestEntry(Arrays.asList(fetchStates));
   }
 
   private static List<TestFetchState> toTestEntry(
-      List<PriorityFetchState<FetchState>> fetchStates) {
+      final List<PriorityFetchState<FetchState>> fetchStates) {
     ArrayList<TestFetchState> result = new ArrayList<>();
     for (PriorityFetchState<FetchState> fetchState : fetchStates) {
       result.add(new TestFetchState(fetchState));
@@ -401,12 +401,12 @@ public class PriorityNetworkFetcherTest {
 
     private final PriorityFetchState<FetchState> fetchState;
 
-    public TestFetchState(PriorityFetchState<FetchState> fetchState) {
+    public TestFetchState(final PriorityFetchState<FetchState> fetchState) {
       this.fetchState = fetchState;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
       if (this == o) return true;
       if (o == null || getClass() != o.getClass()) return false;
       return fetchState.equals(((TestFetchState) o).fetchState);

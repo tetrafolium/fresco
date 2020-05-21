@@ -25,7 +25,7 @@ import com.facebook.imagepipeline.producers.QualifiedResourceFetchProducer;
 
 public class ImageOriginUtils {
 
-  public static String toString(@ImageOrigin int imageOrigin) {
+  public static String toString(final @ImageOrigin int imageOrigin) {
     switch (imageOrigin) {
       case ImageOrigin.NETWORK:
         return "network";
@@ -78,5 +78,5 @@ public class ImageOriginUtils {
     }
   }
 
-  private ImageOriginUtils() {}
+  private ImageOriginUtils() { }
 }

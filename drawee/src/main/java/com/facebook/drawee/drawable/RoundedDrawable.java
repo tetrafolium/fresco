@@ -34,7 +34,7 @@ public abstract class RoundedDrawable extends Drawable implements Rounded, Trans
    *
    * @param drawable drawable that this forwarding drawable will forward to
    */
-  RoundedDrawable(Drawable drawable) {
+  RoundedDrawable(final Drawable drawable) {
     mDelegate = drawable;
   }
 
@@ -81,7 +81,7 @@ public abstract class RoundedDrawable extends Drawable implements Rounded, Trans
    * @param isCircle whether or not to round as circle
    */
   @Override
-  public void setCircle(boolean isCircle) {
+  public void setCircle(final boolean isCircle) {
     mIsCircle = isCircle;
     mIsPathDirty = true;
     invalidateSelf();
@@ -100,7 +100,7 @@ public abstract class RoundedDrawable extends Drawable implements Rounded, Trans
    * @param radius the radius for the corners of the rectangle
    */
   @Override
-  public void setRadius(float radius) {
+  public void setRadius(final float radius) {
     Preconditions.checkState(radius >= 0);
     Arrays.fill(mCornerRadii, radius);
     mRadiiNonZero = (radius != 0);
@@ -115,7 +115,7 @@ public abstract class RoundedDrawable extends Drawable implements Rounded, Trans
    * @param radii the x and y radii of the corners
    */
   @Override
-  public void setRadii(float[] radii) {
+  public void setRadii(final float[] radii) {
     if (radii == null) {
       Arrays.fill(mCornerRadii, 0);
       mRadiiNonZero = false;
@@ -144,7 +144,7 @@ public abstract class RoundedDrawable extends Drawable implements Rounded, Trans
    * @param width of the border
    */
   @Override
-  public void setBorder(int color, float width) {
+  public void setBorder(final int color, final float width) {
     if (mBorderColor != color || mBorderWidth != width) {
       mBorderColor = color;
       mBorderWidth = width;
@@ -171,7 +171,7 @@ public abstract class RoundedDrawable extends Drawable implements Rounded, Trans
    * @param padding
    */
   @Override
-  public void setPadding(float padding) {
+  public void setPadding(final float padding) {
     if (mPadding != padding) {
       mPadding = padding;
       mIsPathDirty = true;
@@ -191,7 +191,7 @@ public abstract class RoundedDrawable extends Drawable implements Rounded, Trans
    * @param scaleDownInsideBorders
    */
   @Override
-  public void setScaleDownInsideBorders(boolean scaleDownInsideBorders) {
+  public void setScaleDownInsideBorders(final boolean scaleDownInsideBorders) {
     if (mScaleDownInsideBorders != scaleDownInsideBorders) {
       mScaleDownInsideBorders = scaleDownInsideBorders;
       mIsPathDirty = true;
@@ -214,7 +214,7 @@ public abstract class RoundedDrawable extends Drawable implements Rounded, Trans
    * @param paintFilterBitmap whether to set FILTER_BITMAP_FLAG flag to Paint.
    */
   @Override
-  public void setPaintFilterBitmap(boolean paintFilterBitmap) {
+  public void setPaintFilterBitmap(final boolean paintFilterBitmap) {
     if (mPaintFilterBitmap != paintFilterBitmap) {
       mPaintFilterBitmap = paintFilterBitmap;
       invalidateSelf();
@@ -229,7 +229,7 @@ public abstract class RoundedDrawable extends Drawable implements Rounded, Trans
 
   /** TransformAwareDrawable method */
   @Override
-  public void setTransformCallback(@Nullable TransformCallback transformCallback) {
+  public void setTransformCallback(final @Nullable TransformCallback transformCallback) {
     mTransformCallback = transformCallback;
   }
 
@@ -342,7 +342,7 @@ public abstract class RoundedDrawable extends Drawable implements Rounded, Trans
   }
 
   @Override
-  protected void onBoundsChange(Rect bounds) {
+  protected void onBoundsChange(final Rect bounds) {
     mDelegate.setBounds(bounds);
   }
 
@@ -362,12 +362,12 @@ public abstract class RoundedDrawable extends Drawable implements Rounded, Trans
   }
 
   @Override
-  public void setColorFilter(int color, @NonNull PorterDuff.Mode mode) {
+  public void setColorFilter(final int color, final @NonNull PorterDuff.Mode mode) {
     mDelegate.setColorFilter(color, mode);
   }
 
   @Override
-  public void setColorFilter(@Nullable ColorFilter colorFilter) {
+  public void setColorFilter(final @Nullable ColorFilter colorFilter) {
     mDelegate.setColorFilter(colorFilter);
   }
 
@@ -390,12 +390,12 @@ public abstract class RoundedDrawable extends Drawable implements Rounded, Trans
   }
 
   @Override
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     mDelegate.setAlpha(alpha);
   }
 
   @Override
-  public void draw(@NonNull Canvas canvas) {
+  public void draw(final @NonNull Canvas canvas) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("RoundedDrawable#draw");
     }

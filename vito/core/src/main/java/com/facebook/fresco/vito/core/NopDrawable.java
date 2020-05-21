@@ -20,17 +20,17 @@ public class NopDrawable extends Drawable {
   public static final NopDrawable INSTANCE = new NopDrawable();
 
   @Override
-  public void draw(@NonNull Canvas canvas) {
+  public void draw(final @NonNull Canvas canvas) {
     // nop
   }
 
   @Override
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     // nop
   }
 
   @Override
-  public void setColorFilter(@Nullable ColorFilter colorFilter) {
+  public void setColorFilter(final @Nullable ColorFilter colorFilter) {
     // nop
   }
 

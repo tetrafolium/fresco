@@ -32,12 +32,12 @@ public class BaseConsumerTest {
     mBaseConsumer =
         new BaseConsumer() {
           @Override
-          protected void onNewResultImpl(Object newResult, @Status int status) {
+          protected void onNewResultImpl(final Object newResult, final @Status int status) {
             mDelegatedConsumer.onNewResult(newResult, status);
           }
 
           @Override
-          protected void onFailureImpl(Throwable t) {
+          protected void onFailureImpl(final Throwable t) {
             mDelegatedConsumer.onFailure(t);
           }
 

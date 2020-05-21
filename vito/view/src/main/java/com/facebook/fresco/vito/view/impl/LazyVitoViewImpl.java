@@ -21,18 +21,18 @@ public abstract class LazyVitoViewImpl implements VitoView.Implementation {
   private final FrescoVitoProvider.Implementation mProvider;
   private @Nullable VitoView.Implementation mImplementation;
 
-  public LazyVitoViewImpl(FrescoVitoProvider.Implementation provider) {
+  public LazyVitoViewImpl(final FrescoVitoProvider.Implementation provider) {
     mProvider = provider;
   }
 
   @Override
   public void show(
-      Uri uri,
-      MultiUri multiUri,
-      ImageOptions imageOptions,
-      Object callerContext,
-      ImageListener imageListener,
-      View target) {
+      final Uri uri,
+      final MultiUri multiUri,
+      final ImageOptions imageOptions,
+      final Object callerContext,
+      final ImageListener imageListener,
+      final View target) {
     get().show(uri, multiUri, imageOptions, callerContext, imageListener, target);
   }
 

@@ -153,7 +153,7 @@ public class PooledByteArrayBufferedInputStreamTest {
    * @param firstByte
    */
   private static void assertFilledWithConsecutiveBytes(
-      final byte[] byteArray, final int startOffset, final int endOffset, int firstByte) {
+      final byte[] byteArray, final int startOffset, final int endOffset, final int firstByte) {
     for (int i = startOffset; i < endOffset; ++i) {
       assertEquals((byte) firstByte++, byteArray[i]);
     }

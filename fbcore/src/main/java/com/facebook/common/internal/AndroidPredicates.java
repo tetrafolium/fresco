@@ -10,12 +10,12 @@ package com.facebook.common.internal;
 /** Additional predicates. */
 public class AndroidPredicates {
 
-  private AndroidPredicates() {}
+  private AndroidPredicates() { }
 
   public static <T> Predicate<T> True() {
     return new Predicate<T>() {
       @Override
-      public boolean apply(T t) {
+      public boolean apply(final T t) {
         return true;
       }
     };
@@ -24,7 +24,7 @@ public class AndroidPredicates {
   public static <T> Predicate<T> False() {
     return new Predicate<T>() {
       @Override
-      public boolean apply(T t) {
+      public boolean apply(final T t) {
         return false;
       }
     };

@@ -41,7 +41,7 @@ public class VolleyNetworkFetcher
     long fetchCompleteTime;
 
     public VolleyNetworkFetchState(
-        Consumer<EncodedImage> consumer, ProducerContext producerContext) {
+        final Consumer<EncodedImage> consumer, final ProducerContext producerContext) {
       super(consumer, producerContext);
     }
   }
@@ -54,13 +54,13 @@ public class VolleyNetworkFetcher
   private final RequestQueue mRequestQueue;
 
   /** @param requestQueue The Volley {@link RequestQueue} to use */
-  public VolleyNetworkFetcher(RequestQueue requestQueue) {
+  public VolleyNetworkFetcher(final RequestQueue requestQueue) {
     mRequestQueue = requestQueue;
   }
 
   @Override
   public VolleyNetworkFetchState createFetchState(
-      Consumer<EncodedImage> consumer, ProducerContext context) {
+      final Consumer<EncodedImage> consumer, final ProducerContext context) {
     return new VolleyNetworkFetchState(consumer, context);
   }
 
@@ -73,7 +73,7 @@ public class VolleyNetworkFetcher
             fetchState.getUri().toString(),
             new Response.Listener<byte[]>() {
               @Override
-              public void onResponse(byte[] bytes) {
+              public void onResponse(final byte[] bytes) {
                 fetchState.responseTime = SystemClock.uptimeMillis();
 
                 try {
@@ -86,7 +86,7 @@ public class VolleyNetworkFetcher
             },
             new Response.ErrorListener() {
               @Override
-              public void onErrorResponse(VolleyError volleyError) {
+              public void onErrorResponse(final VolleyError volleyError) {
                 callback.onFailure(volleyError);
               }
             });
@@ -100,7 +100,7 @@ public class VolleyNetworkFetcher
                 mRequestQueue.cancelAll(
                     new RequestFilter() {
                       @Override
-                      public boolean apply(Request<?> candidate) {
+                      public boolean apply(final Request<?> candidate) {
                         return candidate != null
                             && request.getSequence() == candidate.getSequence();
                       }
@@ -112,12 +112,12 @@ public class VolleyNetworkFetcher
   }
 
   @Override
-  public void onFetchCompletion(VolleyNetworkFetchState fetchState, int byteSize) {
+  public void onFetchCompletion(final VolleyNetworkFetchState fetchState, final int byteSize) {
     fetchState.fetchCompleteTime = SystemClock.elapsedRealtime();
   }
 
   @Override
-  public Map<String, String> getExtraMap(VolleyNetworkFetchState fetchState, int byteSize) {
+  public Map<String, String> getExtraMap(final VolleyNetworkFetchState fetchState, final int byteSize) {
     Map<String, String> extraMap = new HashMap<>(4);
     extraMap.put(QUEUE_TIME, Long.toString(fetchState.responseTime - fetchState.submitTime));
     extraMap.put(FETCH_TIME, Long.toString(fetchState.fetchCompleteTime - fetchState.responseTime));

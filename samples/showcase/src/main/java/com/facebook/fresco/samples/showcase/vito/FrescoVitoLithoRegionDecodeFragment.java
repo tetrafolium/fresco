@@ -45,9 +45,9 @@ public class FrescoVitoLithoRegionDecodeFragment extends BaseShowcaseFragment {
       new BaseControllerListener<ImageInfo>() {
         @Override
         public void onFinalImageSet(
-            String id,
-            @javax.annotation.Nullable ImageInfo imageInfo,
-            @javax.annotation.Nullable Animatable animatable) {
+            final String id,
+            final @javax.annotation.Nullable ImageInfo imageInfo,
+            final @javax.annotation.Nullable Animatable animatable) {
           mImageInfo = imageInfo;
           mSelectedParentBounds.setUpdateMaximumDimensionOnNextSizeChange(true);
           mSelectedFocusPoint.setUpdateMaximumDimensionOnNextSizeChange(true);
@@ -62,7 +62,7 @@ public class FrescoVitoLithoRegionDecodeFragment extends BaseShowcaseFragment {
   private final ResizableFrameLayout.SizeChangedListener mSizeChangedListener =
       new ResizableFrameLayout.SizeChangedListener() {
         @Override
-        public void onSizeChanged(int widthPx, int heightPx) {
+        public void onSizeChanged(final int widthPx, final int heightPx) {
           updateRegion();
         }
       };
@@ -70,12 +70,12 @@ public class FrescoVitoLithoRegionDecodeFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_vito_litho_region_decoding, container, false);
   }
 
   @Override
-  public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     mUri =
         sampleUris()
             .createSampleUri(ImageUriProvider.ImageSize.L, ImageUriProvider.Orientation.LANDSCAPE);
@@ -99,7 +99,7 @@ public class FrescoVitoLithoRegionDecodeFragment extends BaseShowcaseFragment {
     mRegionDraweeView.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             updateRegion();
           }
         });

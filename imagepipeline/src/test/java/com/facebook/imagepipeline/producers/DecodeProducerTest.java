@@ -135,7 +135,7 @@ public class DecodeProducerTest {
     mEncodedImage.setExifOrientation(IMAGE_EXIF_ORIENTATION);
   }
 
-  private static EncodedImage mockEncodedJpeg(CloseableReference<PooledByteBuffer> ref) {
+  private static EncodedImage mockEncodedJpeg(final CloseableReference<PooledByteBuffer> ref) {
     final EncodedImage encodedImage = new EncodedImage(ref);
     encodedImage.setImageFormat(DefaultImageFormats.JPEG);
     encodedImage.setWidth(IMAGE_WIDTH);
@@ -425,7 +425,7 @@ public class DecodeProducerTest {
     assertEquals(mEncodedImage.getSampleSize(), EncodedImage.DEFAULT_SAMPLE_SIZE);
   }
 
-  private void setupImageRequest(String requestId, ImageRequest imageRequest) {
+  private void setupImageRequest(final String requestId, final ImageRequest imageRequest) {
     mImageRequest = imageRequest;
     mRequestId = requestId;
     mProducerContext =
@@ -445,7 +445,7 @@ public class DecodeProducerTest {
     setupNetworkUri(null);
   }
 
-  private void setupNetworkUri(@Nullable ResizeOptions resizeOptions) {
+  private void setupNetworkUri(final @Nullable ResizeOptions resizeOptions) {
     setupImageRequest(
         "networkRequest1",
         ImageRequestBuilder.newBuilderWithSource(Uri.parse("http://www.fb.com/image"))
@@ -459,7 +459,7 @@ public class DecodeProducerTest {
     setupLocalUri(null);
   }
 
-  private void setupLocalUri(@Nullable ResizeOptions resizeOptions) {
+  private void setupLocalUri(final @Nullable ResizeOptions resizeOptions) {
     setupImageRequest(
         "localRequest1",
         ImageRequestBuilder.newBuilderWithSource(Uri.parse("file://path/image"))
@@ -484,7 +484,7 @@ public class DecodeProducerTest {
     return runnableCaptor.getValue();
   }
 
-  private static PooledByteBuffer mockPooledByteBuffer(int size) {
+  private static PooledByteBuffer mockPooledByteBuffer(final int size) {
     PooledByteBuffer pooledByteBuffer = mock(PooledByteBuffer.class);
     when(pooledByteBuffer.size()).thenReturn(size);
     return pooledByteBuffer;

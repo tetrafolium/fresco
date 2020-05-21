@@ -21,7 +21,7 @@ import javax.annotation.concurrent.ThreadSafe;
 @ThreadSafe
 public class OreoDecoder extends DefaultDecoder {
 
-  public OreoDecoder(BitmapPool bitmapPool, int maxNumThreads, SynchronizedPool decodeBuffers) {
+  public OreoDecoder(final BitmapPool bitmapPool, final int maxNumThreads, final SynchronizedPool decodeBuffers) {
     super(bitmapPool, maxNumThreads, decodeBuffers);
   }
 

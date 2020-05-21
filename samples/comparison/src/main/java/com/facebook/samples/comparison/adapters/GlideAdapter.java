@@ -17,12 +17,12 @@ import com.facebook.samples.comparison.instrumentation.PerfListener;
 /** RecyclerView Adapter for Glide */
 public class GlideAdapter extends ImageListAdapter {
 
-  public GlideAdapter(Context context, PerfListener perfListener) {
+  public GlideAdapter(final Context context, final PerfListener perfListener) {
     super(context, perfListener);
   }
 
   @Override
-  public GlideHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public GlideHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
     final InstrumentedImageView instrumentedImageView = new InstrumentedImageView(getContext());
     return new GlideHolder(getContext(), parent, instrumentedImageView, getPerfListener());
   }

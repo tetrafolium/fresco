@@ -65,7 +65,7 @@ public abstract class CloseableImage implements Closeable, ImageInfo, HasImageMe
     return extras;
   }
 
-  public void setOriginalEncodedImageInfo(OriginalEncodedImageInfo originalEncodedImageInfo) {
+  public void setOriginalEncodedImageInfo(final OriginalEncodedImageInfo originalEncodedImageInfo) {
     mOriginalEncodedImageInfo = originalEncodedImageInfo;
   }
 

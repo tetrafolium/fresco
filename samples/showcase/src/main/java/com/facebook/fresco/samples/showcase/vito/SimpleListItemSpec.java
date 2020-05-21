@@ -37,7 +37,7 @@ public class SimpleListItemSpec {
 
   @OnCreateLayout
   static Component onCreateLayout(
-      ComponentContext c,
+      final ComponentContext c,
       @Prop final Uri profilePicture,
       @Prop final Uri mainPicture,
       @Prop final String title) {

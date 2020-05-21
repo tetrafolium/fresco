@@ -22,4 +22,4 @@ package com.facebook.common.internal;
  *
  * @author Johannes Henkel
  */
-public @interface VisibleForTesting {}
+public @interface VisibleForTesting { }

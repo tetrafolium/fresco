@@ -61,7 +61,7 @@ public class JobSchedulerTest {
       public final EncodedImage encodedImage;
       public final @Consumer.Status int status;
 
-      public Job(EncodedImage encodedImage, @Consumer.Status int status) {
+      public Job(final EncodedImage encodedImage, final @Consumer.Status int status) {
         this.encodedImage = EncodedImage.cloneOrNull(encodedImage);
         this.status = status;
       }
@@ -73,7 +73,7 @@ public class JobSchedulerTest {
     public final ArrayList<Job> jobs = new ArrayList<>();
 
     @Override
-    public void run(EncodedImage encodedImage, @Consumer.Status int status) {
+    public void run(final EncodedImage encodedImage, final @Consumer.Status int status) {
       running.set(true);
       try {
         waitForCondition(wait, false);
@@ -110,7 +110,7 @@ public class JobSchedulerTest {
         .thenAnswer(
             new Answer<Long>() {
               @Override
-              public Long answer(InvocationOnMock invocation) throws Throwable {
+              public Long answer(final InvocationOnMock invocation) throws Throwable {
                 return mFakeClockForTime.now();
               }
             });
@@ -396,12 +396,12 @@ public class JobSchedulerTest {
   }
 
   private static void assertJobsEqual(
-      TestJobRunnable.Job job, EncodedImage encodedImage, @Consumer.Status int status) {
+      final TestJobRunnable.Job job, final EncodedImage encodedImage, final @Consumer.Status int status) {
     assertReferencesEqual(encodedImage, job.encodedImage);
     assertEquals(status, job.status);
   }
 
-  private static void assertReferencesEqual(EncodedImage expected, EncodedImage actual) {
+  private static void assertReferencesEqual(final EncodedImage expected, final EncodedImage actual) {
     if (expected == null) {
       assertNull(actual);
     } else {
@@ -417,7 +417,7 @@ public class JobSchedulerTest {
     }
   }
 
-  private static void waitForCondition(AtomicBoolean wait, boolean value) {
+  private static void waitForCondition(final AtomicBoolean wait, final boolean value) {
     int cnt = 100;
     while (wait.get() != value) {
       try {

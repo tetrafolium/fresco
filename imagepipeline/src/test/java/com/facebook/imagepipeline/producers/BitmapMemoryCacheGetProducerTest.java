@@ -180,12 +180,12 @@ public class BitmapMemoryCacheGetProducerTest {
   private static class ProduceResultsNewResultAnswer implements Answer<Void> {
     private final CloseableReference<CloseableImage> mResult;
 
-    private ProduceResultsNewResultAnswer(CloseableReference<CloseableImage> result) {
+    private ProduceResultsNewResultAnswer(final CloseableReference<CloseableImage> result) {
       mResult = result;
     }
 
     @Override
-    public Void answer(InvocationOnMock invocation) throws Throwable {
+    public Void answer(final InvocationOnMock invocation) throws Throwable {
       Consumer consumer = (Consumer) invocation.getArguments()[0];
       consumer.onNewResult(mResult, Consumer.IS_LAST);
       return null;
@@ -194,7 +194,7 @@ public class BitmapMemoryCacheGetProducerTest {
 
   private class ProduceResultsFailureAnswer implements Answer<Void> {
     @Override
-    public Void answer(InvocationOnMock invocation) throws Throwable {
+    public Void answer(final InvocationOnMock invocation) throws Throwable {
       Consumer consumer = (Consumer) invocation.getArguments()[0];
       consumer.onFailure(mException);
       return null;

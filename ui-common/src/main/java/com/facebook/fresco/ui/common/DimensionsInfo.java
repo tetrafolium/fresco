@@ -20,13 +20,13 @@ public class DimensionsInfo {
   private final String mScaleType;
 
   public DimensionsInfo(
-      int viewportWidth,
-      int viewportHeight,
-      int encodedImageWidth,
-      int encodedImageHeight,
-      int decodedImageWidth,
-      int decodedImageHeight,
-      String scaleType) {
+      final int viewportWidth,
+      final int viewportHeight,
+      final int encodedImageWidth,
+      final int encodedImageHeight,
+      final int decodedImageWidth,
+      final int decodedImageHeight,
+      final String scaleType) {
     mViewportWidth = viewportWidth;
     mViewportHeight = viewportHeight;
     mEncodedImageWidth = encodedImageWidth;

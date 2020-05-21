@@ -18,7 +18,7 @@ import com.facebook.samples.scrollperf.util.SizeUtil;
 public class MainActivity extends AppCompatActivity {
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     SizeUtil.initSizeData(this);
     setContentView(R.layout.activity_main);
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
+  public boolean onOptionsItemSelected(final MenuItem item) {
     if (item.getItemId() == R.id.action_settings) {
       final SettingsFragment settingsFragment = new SettingsFragment();
       getSupportFragmentManager()

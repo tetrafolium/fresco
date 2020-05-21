@@ -31,7 +31,7 @@ public final class SizeUtil {
    * @param width The wanted width
    * @param height The wanted height
    */
-  public static void updateViewLayoutParams(View view, int width, int height) {
+  public static void updateViewLayoutParams(final View view, final int width, final int height) {
     ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
     if (layoutParams == null || layoutParams.height != width || layoutParams.width != height) {
       layoutParams = new AbsListView.LayoutParams(width, height);
@@ -47,7 +47,7 @@ public final class SizeUtil {
    * @param parentHeight The height of the Parent View
    * @return The desired size for the View
    */
-  public static int calcDesiredSize(Context context, int parentWidth, int parentHeight) {
+  public static int calcDesiredSize(final Context context, final int parentWidth, final int parentHeight) {
     int orientation = context.getResources().getConfiguration().orientation;
     int desiredSize =
         (orientation == Configuration.ORIENTATION_LANDSCAPE) ? parentWidth : parentHeight;
@@ -80,14 +80,14 @@ public final class SizeUtil {
    *
    * @param activity The Activity
    */
-  public static void initSizeData(Activity activity) {
+  public static void initSizeData(final Activity activity) {
     DisplayMetrics metrics = new DisplayMetrics();
     activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
     DISPLAY_WIDTH = metrics.widthPixels;
     DISPLAY_HEIGHT = metrics.heightPixels;
   }
 
-  public static int dpToPx(Context context, int dp) {
+  public static int dpToPx(final Context context, final int dp) {
     return (int)
         TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics());

@@ -109,7 +109,7 @@ public class ResizeAndRotateProducer implements Producer<EncodedImage> {
       JobScheduler.JobRunnable job =
           new JobScheduler.JobRunnable() {
             @Override
-            public void run(EncodedImage encodedImage, @Status int status) {
+            public void run(final EncodedImage encodedImage, final @Status int status) {
               doTransform(
                   encodedImage,
                   status,
@@ -140,7 +140,7 @@ public class ResizeAndRotateProducer implements Producer<EncodedImage> {
     }
 
     @Override
-    protected void onNewResultImpl(@Nullable EncodedImage newResult, @Status int status) {
+    protected void onNewResultImpl(final @Nullable EncodedImage newResult, final @Status int status) {
       if (mIsCancelled) {
         return;
       }
@@ -177,7 +177,7 @@ public class ResizeAndRotateProducer implements Producer<EncodedImage> {
     }
 
     private void forwardNewResult(
-        EncodedImage newResult, @Status int status, ImageFormat imageFormat) {
+        final EncodedImage newResult, final @Status int status, final ImageFormat imageFormat) {
       if (imageFormat == JPEG || imageFormat == HEIF) {
         newResult = getNewResultsForJpegOrHeif(newResult);
       } else {
@@ -186,7 +186,7 @@ public class ResizeAndRotateProducer implements Producer<EncodedImage> {
       getConsumer().onNewResult(newResult, status);
     }
 
-    private @Nullable EncodedImage getNewResultForImagesWithoutExifData(EncodedImage encodedImage) {
+    private @Nullable EncodedImage getNewResultForImagesWithoutExifData(final EncodedImage encodedImage) {
       RotationOptions options = mProducerContext.getImageRequest().getRotationOptions();
       if (!options.useImageMetadata() && options.rotationEnabled()) {
         encodedImage = getCloneWithRotationApplied(encodedImage, options.getForcedAngle());
@@ -194,7 +194,7 @@ public class ResizeAndRotateProducer implements Producer<EncodedImage> {
       return encodedImage;
     }
 
-    private @Nullable EncodedImage getNewResultsForJpegOrHeif(EncodedImage encodedImage) {
+    private @Nullable EncodedImage getNewResultsForJpegOrHeif(final EncodedImage encodedImage) {
       if (!mProducerContext.getImageRequest().getRotationOptions().canDeferUntilRendered()
           && encodedImage.getRotationAngle() != 0
           && encodedImage.getRotationAngle() != EncodedImage.UNKNOWN_ROTATION_ANGLE) {
@@ -204,7 +204,7 @@ public class ResizeAndRotateProducer implements Producer<EncodedImage> {
     }
 
     private @Nullable EncodedImage getCloneWithRotationApplied(
-        EncodedImage encodedImage, int angle) {
+        final EncodedImage encodedImage, final int angle) {
       EncodedImage newResult = EncodedImage.cloneOrNull(encodedImage); // for thread-safety sake
       if (newResult != null) {
         newResult.setRotationAngle(angle);
@@ -213,7 +213,7 @@ public class ResizeAndRotateProducer implements Producer<EncodedImage> {
     }
 
     private void doTransform(
-        EncodedImage encodedImage, @Status int status, ImageTranscoder imageTranscoder) {
+        final EncodedImage encodedImage, final @Status int status, final ImageTranscoder imageTranscoder) {
       mProducerContext.getProducerListener().onProducerStart(mProducerContext, PRODUCER_NAME);
       ImageRequest imageRequest = mProducerContext.getImageRequest();
       PooledByteBufferOutputStream outputStream = mPooledByteBufferFactory.newOutputStream();
@@ -274,10 +274,10 @@ public class ResizeAndRotateProducer implements Producer<EncodedImage> {
     }
 
     private @Nullable Map<String, String> getExtraMap(
-        EncodedImage encodedImage,
-        @Nullable ResizeOptions resizeOptions,
-        @Nullable ImageTranscodeResult transcodeResult,
-        @Nullable String transcoderId) {
+        final EncodedImage encodedImage,
+        final @Nullable ResizeOptions resizeOptions,
+        final @Nullable ImageTranscodeResult transcodeResult,
+        final @Nullable String transcoderId) {
       if (!mProducerContext
           .getProducerListener()
           .requiresExtraMap(mProducerContext, PRODUCER_NAME)) {
@@ -304,7 +304,7 @@ public class ResizeAndRotateProducer implements Producer<EncodedImage> {
   }
 
   private static TriState shouldTransform(
-      ImageRequest request, EncodedImage encodedImage, ImageTranscoder imageTranscoder) {
+      final ImageRequest request, final EncodedImage encodedImage, final ImageTranscoder imageTranscoder) {
     if (encodedImage == null || encodedImage.getImageFormat() == ImageFormat.UNKNOWN) {
       return TriState.UNSET;
     }
@@ -319,14 +319,14 @@ public class ResizeAndRotateProducer implements Producer<EncodedImage> {
                 encodedImage, request.getRotationOptions(), request.getResizeOptions()));
   }
 
-  private static boolean shouldRotate(RotationOptions rotationOptions, EncodedImage encodedImage) {
+  private static boolean shouldRotate(final RotationOptions rotationOptions, final EncodedImage encodedImage) {
     return !rotationOptions.canDeferUntilRendered()
         && (JpegTranscoderUtils.getRotationAngle(rotationOptions, encodedImage) != 0
             || shouldRotateUsingExifOrientation(rotationOptions, encodedImage));
   }
 
   private static boolean shouldRotateUsingExifOrientation(
-      RotationOptions rotationOptions, EncodedImage encodedImage) {
+      final RotationOptions rotationOptions, final EncodedImage encodedImage) {
     if (!rotationOptions.rotationEnabled() || rotationOptions.canDeferUntilRendered()) {
       encodedImage.setExifOrientation(ExifInterface.ORIENTATION_UNDEFINED);
       return false;

@@ -17,12 +17,12 @@ public class AnimationFrameCacheKey implements CacheKey {
 
   private final String mAnimationUriString;
 
-  public AnimationFrameCacheKey(int imageId) {
+  public AnimationFrameCacheKey(final int imageId) {
     mAnimationUriString = URI_PREFIX + imageId;
   }
 
   @Override
-  public boolean containsUri(Uri uri) {
+  public boolean containsUri(final Uri uri) {
     return uri.toString().startsWith(mAnimationUriString);
   }
 

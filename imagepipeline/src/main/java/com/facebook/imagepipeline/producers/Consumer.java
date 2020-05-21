@@ -49,7 +49,7 @@ public interface Consumer<T> {
         IS_PARTIAL_RESULT,
         IS_RESIZING_DONE,
       })
-  @interface Status {}
+  @interface Status { }
 
   /**
    * Convenience constant for a status with no flags set. The absence of {@link #IS_LAST} means this

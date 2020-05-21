@@ -14,7 +14,7 @@ public class IntPair {
   public final int a;
   public final int b;
 
-  public IntPair(int a, int b) {
+  public IntPair(final int a, final int b) {
     this.a = a;
     this.b = b;
   }
@@ -25,7 +25,7 @@ public class IntPair {
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(final Object other) {
     if (other instanceof IntPair) {
       IntPair that = (IntPair) other;
       return this.a == that.a && this.b == that.b;

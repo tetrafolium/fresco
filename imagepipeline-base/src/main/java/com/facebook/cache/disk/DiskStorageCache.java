@@ -103,13 +103,13 @@ public class DiskStorageCache implements FileCache, DiskTrimmable {
       mSize = UNINITIALIZED;
     }
 
-    public synchronized void set(long size, long count) {
+    public synchronized void set(final long size, final long count) {
       mCount = count;
       mSize = size;
       mInitialized = true;
     }
 
-    public synchronized void increment(long sizeIncrement, long countIncrement) {
+    public synchronized void increment(final long sizeIncrement, final long countIncrement) {
       if (mInitialized) {
         mSize += sizeIncrement;
         mCount += countIncrement;
@@ -131,7 +131,7 @@ public class DiskStorageCache implements FileCache, DiskTrimmable {
     public final long mDefaultCacheSizeLimit;
 
     public Params(
-        long cacheSizeLimitMinimum, long lowDiskSpaceCacheSizeLimit, long defaultCacheSizeLimit) {
+        final long cacheSizeLimitMinimum, final long lowDiskSpaceCacheSizeLimit, final long defaultCacheSizeLimit) {
       mCacheSizeLimitMinimum = cacheSizeLimitMinimum;
       mLowDiskSpaceCacheSizeLimit = lowDiskSpaceCacheSizeLimit;
       mDefaultCacheSizeLimit = defaultCacheSizeLimit;
@@ -139,14 +139,14 @@ public class DiskStorageCache implements FileCache, DiskTrimmable {
   }
 
   public DiskStorageCache(
-      DiskStorage diskStorage,
-      EntryEvictionComparatorSupplier entryEvictionComparatorSupplier,
-      Params params,
-      CacheEventListener cacheEventListener,
-      CacheErrorLogger cacheErrorLogger,
-      @Nullable DiskTrimmableRegistry diskTrimmableRegistry,
+      final DiskStorage diskStorage,
+      final EntryEvictionComparatorSupplier entryEvictionComparatorSupplier,
+      final Params params,
+      final CacheEventListener cacheEventListener,
+      final CacheErrorLogger cacheErrorLogger,
+      final @Nullable DiskTrimmableRegistry diskTrimmableRegistry,
       final Executor executorForBackgrountInit,
-      boolean indexPopulateAtStartupEnabled) {
+      final boolean indexPopulateAtStartupEnabled) {
     this.mLowDiskSpaceCacheSizeLimit = params.mLowDiskSpaceCacheSizeLimit;
     this.mDefaultCacheSizeLimit = params.mDefaultCacheSizeLimit;
     this.mCacheSizeLimit = params.mDefaultCacheSizeLimit;
@@ -317,7 +317,7 @@ public class DiskStorageCache implements FileCache, DiskTrimmable {
    * convention.
    */
   private BinaryResource endInsert(
-      final DiskStorage.Inserter inserter, final CacheKey key, String resourceId)
+      final DiskStorage.Inserter inserter, final CacheKey key, final String resourceId)
       throws IOException {
     synchronized (mLock) {
       BinaryResource resource = inserter.commit(key);
@@ -328,7 +328,7 @@ public class DiskStorageCache implements FileCache, DiskTrimmable {
   }
 
   @Override
-  public BinaryResource insert(CacheKey key, WriterCallback callback) throws IOException {
+  public BinaryResource insert(final CacheKey key, final WriterCallback callback) throws IOException {
     // Write to a temp file, then move it into place. This allows more parallelism
     // when writing files.
     SettableCacheEvent cacheEvent = SettableCacheEvent.obtain().setCacheKey(key);
@@ -365,7 +365,7 @@ public class DiskStorageCache implements FileCache, DiskTrimmable {
   }
 
   @Override
-  public void remove(CacheKey key) {
+  public void remove(final CacheKey key) {
     synchronized (mLock) {
       try {
         String resourceId = null;
@@ -389,7 +389,7 @@ public class DiskStorageCache implements FileCache, DiskTrimmable {
    * @return the age in ms of the oldest file remaining in the cache.
    */
   @Override
-  public long clearOldEntries(long cacheExpirationMs) {
+  public long clearOldEntries(final long cacheExpirationMs) {
     long oldestRemainingEntryAgeMs = 0L;
     synchronized (mLock) {
       try {
@@ -466,7 +466,7 @@ public class DiskStorageCache implements FileCache, DiskTrimmable {
   }
 
   @GuardedBy("mLock")
-  private void evictAboveSize(long desiredSize, CacheEventListener.EvictionReason reason)
+  private void evictAboveSize(final long desiredSize, final CacheEventListener.EvictionReason reason)
       throws IOException {
     Collection<DiskStorage.Entry> entries;
     try {
@@ -515,7 +515,7 @@ public class DiskStorageCache implements FileCache, DiskTrimmable {
    * check in case we get files that are written with a future timestamp. We are adding a small
    * delta (this constant) to account for network time changes, timezone changes, etc.
    */
-  private Collection<DiskStorage.Entry> getSortedEntries(Collection<DiskStorage.Entry> allEntries) {
+  private Collection<DiskStorage.Entry> getSortedEntries(final Collection<DiskStorage.Entry> allEntries) {
     final long threshold = mClock.now() + DiskStorageCache.FUTURE_TIMESTAMP_THRESHOLD_MS;
     ArrayList<DiskStorage.Entry> sortedList = new ArrayList<>(allEntries.size());
     ArrayList<DiskStorage.Entry> listToSort = new ArrayList<>(allEntries.size());
@@ -575,7 +575,7 @@ public class DiskStorageCache implements FileCache, DiskTrimmable {
   }
 
   @Override
-  public boolean hasKeySync(CacheKey key) {
+  public boolean hasKeySync(final CacheKey key) {
     synchronized (mLock) {
       String resourceId = null;
       List<String> resourceIds = CacheKeyUtil.getResourceIds(key);

@@ -19,20 +19,20 @@ public class NativeRoundingFilter {
     NativeFiltersLoader.load();
   }
 
-  public static void toCircle(Bitmap bitmap) {
+  public static void toCircle(final Bitmap bitmap) {
     toCircle(bitmap, false);
   }
 
-  public static void toCircleFast(Bitmap bitmap) {
+  public static void toCircleFast(final Bitmap bitmap) {
     toCircleFast(bitmap, false);
   }
 
   public static void addRoundedCorners(
-      Bitmap bitmap,
-      int radiusTopLeft,
-      int radiusTopRight,
-      int radiusBottomRight,
-      int radiusBottomLeft) {
+      final Bitmap bitmap,
+      final int radiusTopLeft,
+      final int radiusTopRight,
+      final int radiusBottomRight,
+      final int radiusBottomLeft) {
     nativeAddRoundedCornersFilter(
         bitmap, radiusTopLeft, radiusTopRight, radiusBottomRight, radiusBottomLeft);
   }
@@ -47,19 +47,19 @@ public class NativeRoundingFilter {
    * @param bitmap the bitmap to modify
    */
   @DoNotStrip
-  public static void toCircle(Bitmap bitmap, boolean antiAliased) {
+  public static void toCircle(final Bitmap bitmap, final boolean antiAliased) {
     Preconditions.checkNotNull(bitmap);
     nativeToCircleFilter(bitmap, antiAliased);
   }
 
   @DoNotStrip
-  public static void toCircleFast(Bitmap bitmap, boolean antiAliased) {
+  public static void toCircleFast(final Bitmap bitmap, final boolean antiAliased) {
     Preconditions.checkNotNull(bitmap);
     nativeToCircleFastFilter(bitmap, antiAliased);
   }
 
   public static void toCircleWithBorder(
-      Bitmap bitmap, int colorARGB, int borderWidthPx, boolean antiAliased) {
+      final Bitmap bitmap, final int colorARGB, final int borderWidthPx, final boolean antiAliased) {
     Preconditions.checkNotNull(bitmap);
     nativeToCircleWithBorderFilter(bitmap, colorARGB, borderWidthPx, antiAliased);
   }

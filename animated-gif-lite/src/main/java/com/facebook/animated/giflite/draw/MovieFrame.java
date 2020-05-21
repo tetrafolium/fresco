@@ -25,12 +25,12 @@ public class MovieFrame implements AnimatedImageFrame {
   private final AnimatedDrawableFrameInfo.DisposalMethod mDisposalMethod;
 
   public MovieFrame(
-      MovieDrawer movieDrawer,
-      int frameStart,
-      int frameDuration,
-      int frameWidth,
-      int frameHeight,
-      AnimatedDrawableFrameInfo.DisposalMethod disposalMode) {
+      final MovieDrawer movieDrawer,
+      final int frameStart,
+      final int frameDuration,
+      final int frameWidth,
+      final int frameHeight,
+      final AnimatedDrawableFrameInfo.DisposalMethod disposalMode) {
     mMovieDrawer = movieDrawer;
     mFrameStart = frameStart;
     mFrameDuration = frameDuration;
@@ -40,10 +40,10 @@ public class MovieFrame implements AnimatedImageFrame {
   }
 
   @Override
-  public void dispose() {}
+  public void dispose() { }
 
   @Override
-  public void renderFrame(int w, int h, Bitmap bitmap) {
+  public void renderFrame(final int w, final int h, final Bitmap bitmap) {
     mMovieDrawer.drawFrame(mFrameStart, w, h, bitmap);
   }
 

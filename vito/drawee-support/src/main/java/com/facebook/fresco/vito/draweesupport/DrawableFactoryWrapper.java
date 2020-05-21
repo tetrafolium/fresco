@@ -18,13 +18,13 @@ public class DrawableFactoryWrapper implements VitoDrawableFactory {
 
   private final DrawableFactory mDrawableFactory;
 
-  public DrawableFactoryWrapper(DrawableFactory drawableFactory) {
+  public DrawableFactoryWrapper(final DrawableFactory drawableFactory) {
     mDrawableFactory = drawableFactory;
   }
 
   @Nullable
   @Override
-  public Drawable createDrawable(CloseableImage closeableImage, ImageOptions imageOptions) {
+  public Drawable createDrawable(final CloseableImage closeableImage, final ImageOptions imageOptions) {
     if (mDrawableFactory.supportsImageType(closeableImage)) {
       return mDrawableFactory.createDrawable(closeableImage);
     }

@@ -27,23 +27,23 @@ public class CombinedImageListenerImpl implements CombinedImageListener {
       ImagePerfControllerListener2.getNoOpListener();
 
   @Override
-  public void setImageListener(@Nullable ImageListener imageListener) {
+  public void setImageListener(final @Nullable ImageListener imageListener) {
     mImageListener = imageListener;
   }
 
   @Override
   public void setVitoImageRequestListener(
-      @Nullable VitoImageRequestListener vitoImageRequestListener) {
+      final @Nullable VitoImageRequestListener vitoImageRequestListener) {
     mVitoImageRequestListener = vitoImageRequestListener;
   }
 
   @Override
-  public void setControllerListener2(ControllerListener2<ImageInfo> controllerListener2) {
+  public void setControllerListener2(final ControllerListener2<ImageInfo> controllerListener2) {
     mControllerListener2 = controllerListener2;
   }
 
   @Override
-  public void onSubmit(long id, VitoImageRequest imageRequest, @Nullable Object callerContext) {
+  public void onSubmit(final long id, final VitoImageRequest imageRequest, final @Nullable Object callerContext) {
     if (mVitoImageRequestListener != null) {
       mVitoImageRequestListener.onSubmit(id, imageRequest, callerContext);
     }
@@ -55,7 +55,7 @@ public class CombinedImageListenerImpl implements CombinedImageListener {
 
   @Override
   public void onPlaceholderSet(
-      long id, VitoImageRequest imageRequest, @Nullable Drawable placeholder) {
+      final long id, final VitoImageRequest imageRequest, final @Nullable Drawable placeholder) {
     if (mVitoImageRequestListener != null) {
       mVitoImageRequestListener.onPlaceholderSet(id, imageRequest, placeholder);
     }
@@ -66,12 +66,12 @@ public class CombinedImageListenerImpl implements CombinedImageListener {
 
   @Override
   public void onFinalImageSet(
-      long id,
-      VitoImageRequest imageRequest,
-      @ImageOrigin int imageOrigin,
-      @Nullable ImageInfo imageInfo,
-      @Nullable ControllerListener2.Extras extras,
-      @Nullable Drawable drawable) {
+      final long id,
+      final VitoImageRequest imageRequest,
+      final @ImageOrigin int imageOrigin,
+      final @Nullable ImageInfo imageInfo,
+      final @Nullable ControllerListener2.Extras extras,
+      final @Nullable Drawable drawable) {
     if (mVitoImageRequestListener != null) {
       mVitoImageRequestListener.onFinalImageSet(
           id, imageRequest, imageOrigin, imageInfo, extras, drawable);
@@ -84,7 +84,7 @@ public class CombinedImageListenerImpl implements CombinedImageListener {
 
   @Override
   public void onIntermediateImageSet(
-      long id, VitoImageRequest imageRequest, @Nullable ImageInfo imageInfo) {
+      final long id, final VitoImageRequest imageRequest, final @Nullable ImageInfo imageInfo) {
     if (mVitoImageRequestListener != null) {
       mVitoImageRequestListener.onIntermediateImageSet(id, imageRequest, imageInfo);
     }
@@ -96,7 +96,7 @@ public class CombinedImageListenerImpl implements CombinedImageListener {
 
   @Override
   public void onIntermediateImageFailed(
-      long id, VitoImageRequest imageRequest, Throwable throwable) {
+      final long id, final VitoImageRequest imageRequest, final Throwable throwable) {
     if (mVitoImageRequestListener != null) {
       mVitoImageRequestListener.onIntermediateImageFailed(id, imageRequest, throwable);
     }
@@ -108,10 +108,10 @@ public class CombinedImageListenerImpl implements CombinedImageListener {
 
   @Override
   public void onFailure(
-      long id,
-      VitoImageRequest imageRequest,
-      @Nullable Drawable error,
-      @Nullable Throwable throwable) {
+      final long id,
+      final VitoImageRequest imageRequest,
+      final @Nullable Drawable error,
+      final @Nullable Throwable throwable) {
     if (mVitoImageRequestListener != null) {
       mVitoImageRequestListener.onFailure(id, imageRequest, error, throwable);
     }
@@ -122,7 +122,7 @@ public class CombinedImageListenerImpl implements CombinedImageListener {
   }
 
   @Override
-  public void onRelease(long id, VitoImageRequest imageRequest) {
+  public void onRelease(final long id, final VitoImageRequest imageRequest) {
     if (mVitoImageRequestListener != null) {
       mVitoImageRequestListener.onRelease(id, imageRequest);
     }

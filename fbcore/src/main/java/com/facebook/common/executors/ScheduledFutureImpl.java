@@ -24,23 +24,23 @@ public class ScheduledFutureImpl<V> implements RunnableFuture<V>, ScheduledFutur
   private final Handler mHandler;
   private final FutureTask<V> mListenableFuture;
 
-  public ScheduledFutureImpl(Handler handler, Callable<V> callable) {
+  public ScheduledFutureImpl(final Handler handler, final Callable<V> callable) {
     mHandler = handler;
     mListenableFuture = new FutureTask<V>(callable);
   }
 
-  public ScheduledFutureImpl(Handler handler, Runnable runnable, @Nullable V result) {
+  public ScheduledFutureImpl(final Handler handler, final Runnable runnable, final @Nullable V result) {
     mHandler = handler;
     mListenableFuture = new FutureTask<V>(runnable, result);
   }
 
   @Override
-  public long getDelay(TimeUnit unit) {
+  public long getDelay(final TimeUnit unit) {
     throw new UnsupportedOperationException();
   }
 
   @Override
-  public int compareTo(Delayed other) {
+  public int compareTo(final Delayed other) {
     throw new UnsupportedOperationException();
   }
 
@@ -50,7 +50,7 @@ public class ScheduledFutureImpl<V> implements RunnableFuture<V>, ScheduledFutur
   }
 
   @Override
-  public boolean cancel(boolean mayInterruptIfRunning) {
+  public boolean cancel(final boolean mayInterruptIfRunning) {
     return mListenableFuture.cancel(mayInterruptIfRunning);
   }
 
@@ -70,7 +70,7 @@ public class ScheduledFutureImpl<V> implements RunnableFuture<V>, ScheduledFutur
   }
 
   @Override
-  public V get(long timeout, TimeUnit unit)
+  public V get(final long timeout, final TimeUnit unit)
       throws InterruptedException, ExecutionException, TimeoutException {
     return mListenableFuture.get(timeout, unit);
   }

@@ -93,7 +93,7 @@ public class DeferredReleaserStressTest {
 
     final AtomicInteger mReleaseCalls;
 
-    public Noop(AtomicInteger releaseCalls) {
+    public Noop(final AtomicInteger releaseCalls) {
       mReleaseCalls = releaseCalls;
     }
 

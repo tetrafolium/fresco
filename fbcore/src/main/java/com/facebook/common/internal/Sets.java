@@ -28,7 +28,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 /** Static utility methods pertaining to {@link Set} instances. */
 public final class Sets {
-  private Sets() {}
+  private Sets() { }
 
   /**
    * Creates a <i>mutable</i>, empty {@code HashSet} instance.
@@ -46,7 +46,7 @@ public final class Sets {
    * @param elements the elements that the set should contain
    * @return a new {@code HashSet} containing those elements (minus duplicates)
    */
-  public static <E> HashSet<E> newHashSet(E... elements) {
+  public static <E> HashSet<E> newHashSet(final E... elements) {
     HashSet<E> set = newHashSetWithCapacity(elements.length);
     Collections.addAll(set, elements);
     return set;
@@ -63,7 +63,7 @@ public final class Sets {
    *     without resizing
    * @throws IllegalArgumentException if {@code expectedSize} is negative
    */
-  public static <E> HashSet<E> newHashSetWithCapacity(int capacity) {
+  public static <E> HashSet<E> newHashSetWithCapacity(final int capacity) {
     return new HashSet<E>(capacity);
   }
 
@@ -74,7 +74,7 @@ public final class Sets {
    * @param elements the elements that the set should contain
    * @return a new {@code HashSet} containing those elements (minus duplicates)
    */
-  public static <E> HashSet<E> newHashSet(Iterable<? extends E> elements) {
+  public static <E> HashSet<E> newHashSet(final Iterable<? extends E> elements) {
     return (elements instanceof Collection)
         ? new HashSet<E>((Collection<E>) elements)
         : newHashSet(elements.iterator());
@@ -87,7 +87,7 @@ public final class Sets {
    * @param elements the elements that the set should contain
    * @return a new {@code HashSet} containing those elements (minus duplicates)
    */
-  public static <E> HashSet<E> newHashSet(Iterator<? extends E> elements) {
+  public static <E> HashSet<E> newHashSet(final Iterator<? extends E> elements) {
     HashSet<E> set = newHashSet();
     while (elements.hasNext()) {
       set.add(elements.next());
@@ -135,7 +135,7 @@ public final class Sets {
    * @return the set backed by the map
    * @throws IllegalArgumentException if {@code map} is not empty
    */
-  public static <E> Set<E> newSetFromMap(Map<E, Boolean> map) {
+  public static <E> Set<E> newSetFromMap(final Map<E, Boolean> map) {
     return Collections.newSetFromMap(map);
   }
 

@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
   private boolean mUrlsLocal = false;
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     mRecyclerView = (RecyclerView) findViewById(R.id.image_grid);
@@ -141,12 +141,12 @@ public class MainActivity extends AppCompatActivity {
     mLoaderSelect.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             setLoaderAdapter(position);
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
+          public void onNothingSelected(final AdapterView<?> parent) { }
         });
     mLoaderSelect.setSelection(mCurrentLoaderAdapterIndex);
 
@@ -154,12 +154,12 @@ public class MainActivity extends AppCompatActivity {
     mSourceSelect.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             setSourceAdapter(position);
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
+          public void onNothingSelected(final AdapterView<?> parent) { }
         });
     mSourceSelect.setSelection(mCurrentSourceAdapterIndex);
     mHasStoragePermissions =
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   @Override
-  protected void onSaveInstanceState(Bundle outState) {
+  protected void onSaveInstanceState(final Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putBoolean(EXTRA_ALLOW_ANIMATIONS, mAllowAnimations);
     outState.putInt(EXTRA_CURRENT_ADAPTER_INDEX, mCurrentLoaderAdapterIndex);
@@ -176,19 +176,19 @@ public class MainActivity extends AppCompatActivity {
   }
 
   @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
+  public boolean onCreateOptionsMenu(final Menu menu) {
     getMenuInflater().inflate(R.menu.menu_main, menu);
     return true;
   }
 
   @Override
-  public boolean onPrepareOptionsMenu(Menu menu) {
+  public boolean onPrepareOptionsMenu(final Menu menu) {
     menu.findItem(R.id.allow_animations).setChecked(mAllowAnimations);
     return super.onPrepareOptionsMenu(menu);
   }
 
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
+  public boolean onOptionsItemSelected(final MenuItem item) {
     int id = item.getItemId();
 
     if (id == R.id.allow_animations) {
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   @VisibleForTesting
-  public void setAllowAnimations(boolean allowAnimations) {
+  public void setAllowAnimations(final boolean allowAnimations) {
     mAllowAnimations = allowAnimations;
     supportInvalidateOptionsMenu();
     updateAdapter(null);
@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   public void onRequestPermissionsResult(
-      int requestCode, String[] permissions, int[] grantResults) {
+      final int requestCode, final String[] permissions, final int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     for (int i = 0; i < permissions.length; ++i) {
       if (permissions[i].equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  private void setLoaderAdapter(int index) {
+  private void setLoaderAdapter(final int index) {
     FLog.v(TAG, "onImageLoaderSelect: %d", index);
     resetAdapter();
     mCurrentLoaderAdapterIndex = index;
@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
     updateStats();
   }
 
-  private void setSourceAdapter(int index) {
+  private void setSourceAdapter(final int index) {
     FLog.v(TAG, "onImageSourceSelect: %d", index);
 
     mCurrentSourceAdapterIndex = index;
@@ -340,7 +340,7 @@ public class MainActivity extends AppCompatActivity {
     mHandler.removeCallbacks(mStatsClockTickRunnable);
   }
 
-  public static int calcDesiredSize(Context context, int parentWidth, int parentHeight) {
+  public static int calcDesiredSize(final Context context, final int parentWidth, final int parentHeight) {
     int orientation = context.getResources().getConfiguration().orientation;
     int desiredSize =
         (orientation == Configuration.ORIENTATION_LANDSCAPE) ? parentHeight / 2 : parentHeight / 3;
@@ -382,7 +382,7 @@ public class MainActivity extends AppCompatActivity {
         builder.build(),
         new ImageUrlsFetcher.Callback() {
           @Override
-          public void onFinish(List<String> result) {
+          public void onFinish(final List<String> result) {
             // If the user changes to local images before the call comes back, then this should
             // be ignored
             if (!mUrlsLocal) {
@@ -418,7 +418,7 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  private void updateAdapter(List<String> urls) {
+  private void updateAdapter(final List<String> urls) {
     if (mCurrentAdapter != null) {
       mCurrentAdapter.clear();
       if (urls != null) {
@@ -448,20 +448,20 @@ public class MainActivity extends AppCompatActivity {
     FLog.i(TAG, message);
   }
 
-  private static void appendSize(StringBuilder sb, long bytes) {
+  private static void appendSize(final StringBuilder sb, final long bytes) {
     String value = String.format(Locale.getDefault(), "%.1f MB", (float) bytes / BYTES_IN_MEGABYTE);
     sb.append(value);
   }
 
-  private static void appendTime(StringBuilder sb, String prefix, long timeMs, String suffix) {
+  private static void appendTime(final StringBuilder sb, final String prefix, final long timeMs, final String suffix) {
     appendValue(sb, prefix, timeMs + " ms", suffix);
   }
 
-  private static void appendNumber(StringBuilder sb, String prefix, long number, String suffix) {
+  private static void appendNumber(final StringBuilder sb, final String prefix, final long number, final String suffix) {
     appendValue(sb, prefix, number + "", suffix);
   }
 
-  private static void appendValue(StringBuilder sb, String prefix, String value, String suffix) {
+  private static void appendValue(final StringBuilder sb, final String prefix, final String value, final String suffix) {
     sb.append(prefix).append(value).append(suffix);
   }
 

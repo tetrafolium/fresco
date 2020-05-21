@@ -19,52 +19,52 @@ public class GestureListenerWrapper extends GestureDetector.SimpleOnGestureListe
     mDelegate = new GestureDetector.SimpleOnGestureListener();
   }
 
-  public void setListener(GestureDetector.SimpleOnGestureListener listener) {
+  public void setListener(final GestureDetector.SimpleOnGestureListener listener) {
     mDelegate = listener;
   }
 
   @Override
-  public void onLongPress(MotionEvent e) {
+  public void onLongPress(final MotionEvent e) {
     mDelegate.onLongPress(e);
   }
 
   @Override
-  public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+  public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX, final float distanceY) {
     return mDelegate.onScroll(e1, e2, distanceX, distanceY);
   }
 
   @Override
-  public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+  public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX, final float velocityY) {
     return mDelegate.onFling(e1, e2, velocityX, velocityY);
   }
 
   @Override
-  public void onShowPress(MotionEvent e) {
+  public void onShowPress(final MotionEvent e) {
     mDelegate.onShowPress(e);
   }
 
   @Override
-  public boolean onDown(MotionEvent e) {
+  public boolean onDown(final MotionEvent e) {
     return mDelegate.onDown(e);
   }
 
   @Override
-  public boolean onDoubleTap(MotionEvent e) {
+  public boolean onDoubleTap(final MotionEvent e) {
     return mDelegate.onDoubleTap(e);
   }
 
   @Override
-  public boolean onDoubleTapEvent(MotionEvent e) {
+  public boolean onDoubleTapEvent(final MotionEvent e) {
     return mDelegate.onDoubleTapEvent(e);
   }
 
   @Override
-  public boolean onSingleTapConfirmed(MotionEvent e) {
+  public boolean onSingleTapConfirmed(final MotionEvent e) {
     return mDelegate.onSingleTapConfirmed(e);
   }
 
   @Override
-  public boolean onSingleTapUp(MotionEvent e) {
+  public boolean onSingleTapUp(final MotionEvent e) {
     return mDelegate.onSingleTapUp(e);
   }
 }

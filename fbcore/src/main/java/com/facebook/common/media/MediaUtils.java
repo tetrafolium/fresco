@@ -19,19 +19,19 @@ public class MediaUtils {
   public static final Map<String, String> ADDITIONAL_ALLOWED_MIME_TYPES =
       ImmutableMap.of("mkv", "video/x-matroska", "glb", "model/gltf-binary");
 
-  public static boolean isPhoto(@Nullable String mimeType) {
+  public static boolean isPhoto(final @Nullable String mimeType) {
     return mimeType != null && mimeType.startsWith("image/");
   }
 
-  public static boolean isVideo(@Nullable String mimeType) {
+  public static boolean isVideo(final @Nullable String mimeType) {
     return mimeType != null && mimeType.startsWith("video/");
   }
 
-  public static boolean isThreeD(@Nullable String mimeType) {
+  public static boolean isThreeD(final @Nullable String mimeType) {
     return mimeType != null && mimeType.equals("model/gltf-binary");
   }
 
-  public @Nullable static String extractMime(String path) {
+  public @Nullable static String extractMime(final String path) {
     String extension = extractExtension(path);
     if (extension == null) {
       return null;
@@ -48,7 +48,7 @@ public class MediaUtils {
     return mimeType;
   }
 
-  private @Nullable static String extractExtension(String path) {
+  private @Nullable static String extractExtension(final String path) {
     int pos = path.lastIndexOf('.');
     if (pos < 0 || pos == path.length() - 1) {
       return null;
@@ -60,7 +60,7 @@ public class MediaUtils {
    * @return true if the mime type is one of our whitelisted mimetypes that we support beyond what
    *     the native platform supports.
    */
-  public static boolean isNonNativeSupportedMimeType(String mimeType) {
+  public static boolean isNonNativeSupportedMimeType(final String mimeType) {
     return ADDITIONAL_ALLOWED_MIME_TYPES.containsValue(mimeType);
   }
 }

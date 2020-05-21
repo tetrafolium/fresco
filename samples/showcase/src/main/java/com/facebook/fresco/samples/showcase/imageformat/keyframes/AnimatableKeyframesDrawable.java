@@ -22,7 +22,7 @@ class AnimatableKeyframesDrawable extends ForwardingDrawable implements Animatab
   private final KeyframesDrawable mDrawable;
   private boolean mAnimating;
 
-  AnimatableKeyframesDrawable(KeyframesDrawable drawable) {
+  AnimatableKeyframesDrawable(final KeyframesDrawable drawable) {
     super(drawable);
     mDrawable = drawable;
   }

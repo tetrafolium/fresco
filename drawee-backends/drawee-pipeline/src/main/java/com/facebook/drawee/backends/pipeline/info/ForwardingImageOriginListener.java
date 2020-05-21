@@ -19,26 +19,26 @@ public class ForwardingImageOriginListener implements ImageOriginListener {
 
   private final List<ImageOriginListener> mImageOriginListeners;
 
-  public ForwardingImageOriginListener(Set<ImageOriginListener> imageOriginListeners) {
+  public ForwardingImageOriginListener(final Set<ImageOriginListener> imageOriginListeners) {
     mImageOriginListeners = new ArrayList<>(imageOriginListeners);
   }
 
-  public ForwardingImageOriginListener(ImageOriginListener... imageOriginListeners) {
+  public ForwardingImageOriginListener(final ImageOriginListener... imageOriginListeners) {
     mImageOriginListeners = new ArrayList<>(imageOriginListeners.length);
     Collections.addAll(mImageOriginListeners, imageOriginListeners);
   }
 
-  public synchronized void addImageOriginListener(ImageOriginListener listener) {
+  public synchronized void addImageOriginListener(final ImageOriginListener listener) {
     mImageOriginListeners.add(listener);
   }
 
-  public synchronized void removeImageOriginListener(ImageOriginListener listener) {
+  public synchronized void removeImageOriginListener(final ImageOriginListener listener) {
     mImageOriginListeners.remove(listener);
   }
 
   @Override
   public synchronized void onImageLoaded(
-      String controllerId, int imageOrigin, boolean successful, String ultimateProducerName) {
+      final String controllerId, final int imageOrigin, final boolean successful, final String ultimateProducerName) {
     final int numberOfListeners = mImageOriginListeners.size();
     for (int i = 0; i < numberOfListeners; i++) {
       ImageOriginListener listener = mImageOriginListeners.get(i);

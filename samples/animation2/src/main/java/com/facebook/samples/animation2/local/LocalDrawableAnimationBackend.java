@@ -31,7 +31,7 @@ public class LocalDrawableAnimationBackend implements AnimationBackend {
 
   private Rect mBounds;
 
-  private LocalDrawableAnimationBackend(Builder builder) {
+  private LocalDrawableAnimationBackend(final Builder builder) {
     mResources = builder.mResources;
     mDrawableResourceIds = builder.mResourceIds;
     mLoopCount = builder.mLoopCount;
@@ -44,7 +44,7 @@ public class LocalDrawableAnimationBackend implements AnimationBackend {
   }
 
   @Override
-  public int getFrameDurationMs(int frameNumber) {
+  public int getFrameDurationMs(final int frameNumber) {
     return mFrameDurationMs;
   }
 
@@ -54,14 +54,14 @@ public class LocalDrawableAnimationBackend implements AnimationBackend {
   }
 
   @Override
-  public boolean drawFrame(Drawable parent, Canvas canvas, int frameNumber) {
+  public boolean drawFrame(final Drawable parent, final Canvas canvas, final int frameNumber) {
     Drawable drawable = getDrawable(mDrawableResourceIds.get(frameNumber));
     drawable.setBounds(mBounds != null ? mBounds : parent.getBounds());
     drawable.draw(canvas);
     return true;
   }
 
-  private Drawable getDrawable(int drawableResId) {
+  private Drawable getDrawable(final int drawableResId) {
     Drawable drawable = mCache.get(drawableResId);
     if (drawable == null) {
       drawable = mResources.getDrawable(drawableResId);
@@ -71,17 +71,17 @@ public class LocalDrawableAnimationBackend implements AnimationBackend {
   }
 
   @Override
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     mPaint.setAlpha(alpha);
   }
 
   @Override
-  public void setColorFilter(ColorFilter colorFilter) {
+  public void setColorFilter(final ColorFilter colorFilter) {
     mPaint.setColorFilter(colorFilter);
   }
 
   @Override
-  public void setBounds(Rect bounds) {
+  public void setBounds(final Rect bounds) {
     mBounds = bounds;
   }
 
@@ -112,26 +112,26 @@ public class LocalDrawableAnimationBackend implements AnimationBackend {
     private int mLoopCount = LOOP_COUNT_INFINITE;
     private int mFrameDurationMs = 100;
 
-    public Builder(Resources resources) {
+    public Builder(final Resources resources) {
       this(resources, new ArrayList<Integer>());
     }
 
-    public Builder(Resources resources, List<Integer> resourceIds) {
+    public Builder(final Resources resources, final List<Integer> resourceIds) {
       mResourceIds = resourceIds;
       mResources = resources;
     }
 
-    public Builder addDrawableFrame(int drawableResId) {
+    public Builder addDrawableFrame(final int drawableResId) {
       mResourceIds.add(drawableResId);
       return this;
     }
 
-    public Builder loopCount(int loopCount) {
+    public Builder loopCount(final int loopCount) {
       mLoopCount = loopCount;
       return this;
     }
 
-    public Builder frameDurationMs(int frameDurationMs) {
+    public Builder frameDurationMs(final int frameDurationMs) {
       mFrameDurationMs = frameDurationMs;
       return this;
     }

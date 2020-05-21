@@ -19,7 +19,7 @@ public class RoundedCornersPostprocessor extends BasePostprocessor {
   private @Nullable CacheKey mCacheKey;
 
   @Override
-  public void process(Bitmap bitmap) {
+  public void process(final Bitmap bitmap) {
     int radius = Math.min(bitmap.getHeight(), bitmap.getWidth());
     NativeRoundingFilter.addRoundedCorners(bitmap, radius / 2, radius / 3, radius / 4, radius / 5);
   }

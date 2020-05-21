@@ -111,7 +111,7 @@ public class ArtDecoderTest {
     mBitmapFactoryDefaultAnswer =
         new Answer<Bitmap>() {
           @Override
-          public Bitmap answer(InvocationOnMock invocation) throws Throwable {
+          public Bitmap answer(final InvocationOnMock invocation) throws Throwable {
             final BitmapFactory.Options options =
                 (BitmapFactory.Options) invocation.getArguments()[2];
             options.outWidth = MockBitmapFactory.DEFAULT_BITMAP_WIDTH;
@@ -241,7 +241,7 @@ public class ArtDecoderTest {
     verify(mBitmapRegionDecoder).recycle();
   }
 
-  private void jpegTestCase(boolean complete, int dataLength) {
+  private void jpegTestCase(final boolean complete, final int dataLength) {
     if (complete) {
       mEncodedBytes[dataLength - 2] = (byte) JfifUtil.MARKER_FIRST_BYTE;
       mEncodedBytes[dataLength - 1] = (byte) JfifUtil.MARKER_EOI;
@@ -271,7 +271,7 @@ public class ArtDecoderTest {
     return baos.toByteArray();
   }
 
-  private void verifyBitmapFactoryOptions(BitmapFactory.Options options) {
+  private void verifyBitmapFactoryOptions(final BitmapFactory.Options options) {
     if (!options.inJustDecodeBounds) {
       assertTrue(options.inDither);
       assertTrue(options.inMutable);
@@ -296,13 +296,13 @@ public class ArtDecoderTest {
     return when(BitmapRegionDecoder.newInstance(any(InputStream.class), anyBoolean()));
   }
 
-  private void closeAndVerifyClosed(CloseableReference<Bitmap> closeableImage) {
+  private void closeAndVerifyClosed(final CloseableReference<Bitmap> closeableImage) {
     verify(mBitmapPool, never()).release(mBitmap);
     closeableImage.close();
     verify(mBitmapPool).release(mBitmap);
   }
 
-  private void closeAndVerifyClosed(CloseableReference<Bitmap> closeableImage, Bitmap bitmap) {
+  private void closeAndVerifyClosed(final CloseableReference<Bitmap> closeableImage, final Bitmap bitmap) {
     verify(mBitmapPool, never()).release(bitmap);
     closeableImage.close();
     verify(mBitmapPool).release(bitmap);
@@ -318,7 +318,7 @@ public class ArtDecoderTest {
         (ByteArrayInputStream) anyObject(), isNull(Rect.class), any(BitmapFactory.Options.class));
   }
 
-  private void verifyDecodedBytes(boolean complete, int length) {
+  private void verifyDecodedBytes(final boolean complete, final int length) {
     byte[] decodedBytes = getDecodedBytes();
     assertArrayEquals(
         Arrays.copyOfRange(mEncodedBytes, 0, length), Arrays.copyOfRange(decodedBytes, 0, length));

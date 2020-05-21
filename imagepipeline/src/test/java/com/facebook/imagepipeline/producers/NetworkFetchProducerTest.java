@@ -109,7 +109,7 @@ public class NetworkFetchProducerTest {
 
   @Test(timeout = 5000)
   public void testNoIntermediateResults() throws Exception {
-    long currentTime = 86400l;
+    long currentTime = 86400L;
     mNetworkFetchProducer.setSystemUptime(currentTime);
     NetworkFetcher.Callback callback = performFetch();
 
@@ -148,7 +148,7 @@ public class NetworkFetchProducerTest {
 
   @Test(timeout = 5000)
   public void testDownloadHandler() throws Exception {
-    long currentTime = 86400l;
+    long currentTime = 86400L;
     mNetworkFetchProducer.setSystemUptime(currentTime);
     NetworkFetcher.Callback callback = performFetch();
 
@@ -235,7 +235,7 @@ public class NetworkFetchProducerTest {
     }
   }
 
-  private void verifyPooledByteBufferUsed(int times) {
+  private void verifyPooledByteBufferUsed(final int times) {
     verify(mPooledByteBufferOutputStream, times(times)).toByteBuffer();
     verify(mPooledByteBuffer, times(times)).close();
   }
@@ -278,7 +278,7 @@ public class NetworkFetchProducerTest {
     }
 
     @Override
-    public synchronized int read(byte[] buffer, int offset, int length) throws IOException {
+    public synchronized int read(final byte[] buffer, final int offset, final int length) throws IOException {
       while (true) {
         if (mBytesLeft > 0) {
           final int bytesToRead = Math.min(mBytesLeft, length);
@@ -300,7 +300,7 @@ public class NetworkFetchProducerTest {
       }
     }
 
-    public synchronized void increaseBytesToRead(int n) {
+    public synchronized void increaseBytesToRead(final int n) {
       mBytesLeft += n;
       notify();
     }
@@ -326,13 +326,13 @@ public class NetworkFetchProducerTest {
     private long mSystemUptime;
 
     public TestNetworkFetchProducer(
-        PooledByteBufferFactory pooledByteBufferFactory,
-        ByteArrayPool byteArrayPool,
-        NetworkFetcher networkFetcher) {
+        final PooledByteBufferFactory pooledByteBufferFactory,
+        final ByteArrayPool byteArrayPool,
+        final NetworkFetcher networkFetcher) {
       super(pooledByteBufferFactory, byteArrayPool, networkFetcher);
     }
 
-    public void setSystemUptime(long systemUptime) {
+    public void setSystemUptime(final long systemUptime) {
       mSystemUptime = systemUptime;
     }
 

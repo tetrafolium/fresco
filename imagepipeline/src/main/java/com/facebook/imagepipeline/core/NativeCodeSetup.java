@@ -12,14 +12,14 @@ public class NativeCodeSetup {
 
   private static boolean sUseNativeCode = true;
 
-  private NativeCodeSetup() {}
+  private NativeCodeSetup() { }
 
   /**
    * Setter for useNativeCode option
    *
    * @param useNativeCode true, if you want to use native code
    */
-  public static void setUseNativeCode(boolean useNativeCode) {
+  public static void setUseNativeCode(final boolean useNativeCode) {
     sUseNativeCode = useNativeCode;
   }
 

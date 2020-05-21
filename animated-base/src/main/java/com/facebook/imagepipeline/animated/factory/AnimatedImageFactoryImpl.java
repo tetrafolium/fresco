@@ -54,8 +54,8 @@ public class AnimatedImageFactoryImpl implements AnimatedImageFactory {
   }
 
   public AnimatedImageFactoryImpl(
-      AnimatedDrawableBackendProvider animatedDrawableBackendProvider,
-      PlatformBitmapFactory bitmapFactory) {
+      final AnimatedDrawableBackendProvider animatedDrawableBackendProvider,
+      final PlatformBitmapFactory bitmapFactory) {
     mAnimatedDrawableBackendProvider = animatedDrawableBackendProvider;
     mBitmapFactory = bitmapFactory;
   }
@@ -129,7 +129,7 @@ public class AnimatedImageFactoryImpl implements AnimatedImageFactory {
   }
 
   private CloseableImage getCloseableImage(
-      ImageDecodeOptions options, AnimatedImage image, Bitmap.Config bitmapConfig) {
+      final ImageDecodeOptions options, final AnimatedImage image, final Bitmap.Config bitmapConfig) {
     List<CloseableReference<Bitmap>> decodedFrames = null;
     CloseableReference<Bitmap> previewBitmap = null;
     try {
@@ -164,7 +164,7 @@ public class AnimatedImageFactoryImpl implements AnimatedImageFactory {
   }
 
   private CloseableReference<Bitmap> createPreviewBitmap(
-      AnimatedImage image, Bitmap.Config bitmapConfig, int frameForPreview) {
+      final AnimatedImage image, final Bitmap.Config bitmapConfig, final int frameForPreview) {
     CloseableReference<Bitmap> bitmap =
         createBitmap(image.getWidth(), image.getHeight(), bitmapConfig);
     AnimatedImageResult tempResult = AnimatedImageResult.forAnimatedImage(image);
@@ -175,12 +175,12 @@ public class AnimatedImageFactoryImpl implements AnimatedImageFactory {
             drawableBackend,
             new AnimatedImageCompositor.Callback() {
               @Override
-              public void onIntermediateResult(int frameNumber, Bitmap bitmap) {
+              public void onIntermediateResult(final int frameNumber, final Bitmap bitmap) {
                 // Don't care.
               }
 
               @Override
-              public @Nullable CloseableReference<Bitmap> getCachedBitmap(int frameNumber) {
+              public @Nullable CloseableReference<Bitmap> getCachedBitmap(final int frameNumber) {
                 return null;
               }
             });
@@ -189,7 +189,7 @@ public class AnimatedImageFactoryImpl implements AnimatedImageFactory {
   }
 
   private List<CloseableReference<Bitmap>> decodeAllFrames(
-      AnimatedImage image, Bitmap.Config bitmapConfig) {
+      final AnimatedImage image, final Bitmap.Config bitmapConfig) {
     AnimatedImageResult tempResult = AnimatedImageResult.forAnimatedImage(image);
     AnimatedDrawableBackend drawableBackend =
         mAnimatedDrawableBackendProvider.get(tempResult, null);
@@ -200,12 +200,12 @@ public class AnimatedImageFactoryImpl implements AnimatedImageFactory {
             drawableBackend,
             new AnimatedImageCompositor.Callback() {
               @Override
-              public void onIntermediateResult(int frameNumber, Bitmap bitmap) {
+              public void onIntermediateResult(final int frameNumber, final Bitmap bitmap) {
                 // Don't care.
               }
 
               @Override
-              public CloseableReference<Bitmap> getCachedBitmap(int frameNumber) {
+              public CloseableReference<Bitmap> getCachedBitmap(final int frameNumber) {
                 return CloseableReference.cloneOrNull(bitmaps.get(frameNumber));
               }
             });
@@ -220,7 +220,7 @@ public class AnimatedImageFactoryImpl implements AnimatedImageFactory {
 
   @SuppressLint("NewApi")
   private CloseableReference<Bitmap> createBitmap(
-      int width, int height, Bitmap.Config bitmapConfig) {
+      final int width, final int height, final Bitmap.Config bitmapConfig) {
     CloseableReference<Bitmap> bitmap =
         mBitmapFactory.createBitmapInternal(width, height, bitmapConfig);
     bitmap.get().eraseColor(Color.TRANSPARENT);

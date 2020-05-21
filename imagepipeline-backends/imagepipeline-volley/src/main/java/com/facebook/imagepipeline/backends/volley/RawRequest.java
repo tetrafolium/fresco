@@ -22,19 +22,19 @@ public class RawRequest extends Request<byte[]> {
 
   private final Listener<byte[]> mListener;
 
-  public RawRequest(String url, Listener<byte[]> listener, ErrorListener errorListener) {
+  public RawRequest(final String url, final Listener<byte[]> listener, final ErrorListener errorListener) {
     super(0, url, errorListener);
     this.mListener = listener;
     setShouldCache(false);
   }
 
   @Override
-  protected Response<byte[]> parseNetworkResponse(NetworkResponse response) {
+  protected Response<byte[]> parseNetworkResponse(final NetworkResponse response) {
     return Response.success(response.data, HttpHeaderParser.parseCacheHeaders(response));
   }
 
   @Override
-  protected void deliverResponse(byte[] bytes) {
+  protected void deliverResponse(final byte[] bytes) {
     mListener.onResponse(bytes);
   }
 }

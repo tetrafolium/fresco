@@ -24,7 +24,7 @@ public class AnimatedDrawableUtil {
    *
    * @param frameDurationMs the frame duration array
    */
-  public void fixFrameDurations(int[] frameDurationMs) {
+  public void fixFrameDurations(final int[] frameDurationMs) {
     // We follow Chrome's behavior which comes from Firefox.
     // Comment from Chrome's ImageSource.cpp follows:
     // We follow Firefox's behavior and use a duration of 100 ms for any frames that specify
@@ -43,7 +43,7 @@ public class AnimatedDrawableUtil {
    * @param frameDurationMs the frame duration array
    * @return the total duration in milliseconds
    */
-  public int getTotalDurationFromFrameDurations(int[] frameDurationMs) {
+  public int getTotalDurationFromFrameDurations(final int[] frameDurationMs) {
     int totalMs = 0;
     for (int i = 0; i < frameDurationMs.length; i++) {
       totalMs += frameDurationMs[i];
@@ -58,7 +58,7 @@ public class AnimatedDrawableUtil {
    * @param frameDurationsMs an array of frame durations
    * @return an array of timestamps
    */
-  public int[] getFrameTimeStampsFromDurations(int[] frameDurationsMs) {
+  public int[] getFrameTimeStampsFromDurations(final int[] frameDurationsMs) {
     int[] frameTimestampsMs = new int[frameDurationsMs.length];
     int accumulatedDurationMs = 0;
     for (int i = 0; i < frameDurationsMs.length; i++) {
@@ -76,7 +76,7 @@ public class AnimatedDrawableUtil {
    * @return the frame index for the timestamp or the last frame number if the timestamp is outside
    *     the duration of the entire animation
    */
-  public int getFrameForTimestampMs(int frameTimestampsMs[], int timestampMs) {
+  public int getFrameForTimestampMs(final int frameTimestampsMs[], final int timestampMs) {
     int index = Arrays.binarySearch(frameTimestampsMs, timestampMs);
     if (index < 0) {
       return -index - 1 - 1;
@@ -86,7 +86,7 @@ public class AnimatedDrawableUtil {
   }
 
   @SuppressLint("NewApi")
-  public int getSizeOfBitmap(Bitmap bitmap) {
+  public int getSizeOfBitmap(final Bitmap bitmap) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       return bitmap.getAllocationByteCount();
     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {
@@ -108,7 +108,7 @@ public class AnimatedDrawableUtil {
    * @param frameNumber the frame number
    * @return whether the frame is outside the range of [start, end]
    */
-  public static boolean isOutsideRange(int startFrame, int endFrame, int frameNumber) {
+  public static boolean isOutsideRange(final int startFrame, final int endFrame, final int frameNumber) {
     if (startFrame == -1 || endFrame == -1) {
       // This means nothing should pass.
       return true;

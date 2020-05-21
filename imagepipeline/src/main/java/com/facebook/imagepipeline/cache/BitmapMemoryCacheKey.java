@@ -35,13 +35,13 @@ public class BitmapMemoryCacheKey implements CacheKey {
   private final long mCacheTime;
 
   public BitmapMemoryCacheKey(
-      String sourceString,
-      @Nullable ResizeOptions resizeOptions,
-      RotationOptions rotationOptions,
-      ImageDecodeOptions imageDecodeOptions,
-      @Nullable CacheKey postprocessorCacheKey,
-      @Nullable String postprocessorName,
-      Object callerContext) {
+      final String sourceString,
+      final @Nullable ResizeOptions resizeOptions,
+      final RotationOptions rotationOptions,
+      final ImageDecodeOptions imageDecodeOptions,
+      final @Nullable CacheKey postprocessorCacheKey,
+      final @Nullable String postprocessorName,
+      final Object callerContext) {
     mSourceString = Preconditions.checkNotNull(sourceString);
     mResizeOptions = resizeOptions;
     mRotationOptions = rotationOptions;
@@ -61,7 +61,7 @@ public class BitmapMemoryCacheKey implements CacheKey {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(final Object o) {
     if (!(o instanceof BitmapMemoryCacheKey)) {
       return false;
     }
@@ -81,7 +81,7 @@ public class BitmapMemoryCacheKey implements CacheKey {
   }
 
   @Override
-  public boolean containsUri(Uri uri) {
+  public boolean containsUri(final Uri uri) {
     return getUriString().contains(uri.toString());
   }
 

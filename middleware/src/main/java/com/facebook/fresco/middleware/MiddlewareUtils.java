@@ -10,11 +10,11 @@ import javax.annotation.Nullable;
 public class MiddlewareUtils {
 
   public static Extras obtainExtras(
-      Map<String, Object> componentAttribution,
-      Map<String, Object> shortcutAttribution,
-      @Nullable DataSource<?> dataSource,
-      @Nullable Rect viewportDimensions,
-      @Nullable Map<String, Object> imageExtras) {
+      final Map<String, Object> componentAttribution,
+      final Map<String, Object> shortcutAttribution,
+      final @Nullable DataSource<?> dataSource,
+      final @Nullable Rect viewportDimensions,
+      final @Nullable Map<String, Object> imageExtras) {
     final Extras extras = new Extras();
     extras.view = new HashMap<>();
 

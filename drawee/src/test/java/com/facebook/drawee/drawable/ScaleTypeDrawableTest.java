@@ -76,7 +76,7 @@ public class ScaleTypeDrawableTest {
     testConfigureBounds_NoIntrinsicDimensions(ScaleType.FOCUS_CROP, mViewBounds);
   }
 
-  private void testConfigureBounds_NoIntrinsicDimensions(ScaleType scaleType, Rect viewBounds) {
+  private void testConfigureBounds_NoIntrinsicDimensions(final ScaleType scaleType, final Rect viewBounds) {
     mScaleTypeDrawable.setScaleType(scaleType);
     mScaleTypeDrawable.setBounds(viewBounds);
     reset(mUnderlyingDrawable);
@@ -102,7 +102,7 @@ public class ScaleTypeDrawableTest {
     testConfigureBounds_SameAsView(ScaleType.FOCUS_CROP, mViewBounds);
   }
 
-  private void testConfigureBounds_SameAsView(ScaleType scaleType, Rect viewBounds) {
+  private void testConfigureBounds_SameAsView(final ScaleType scaleType, final Rect viewBounds) {
     mScaleTypeDrawable.setScaleType(scaleType);
     mScaleTypeDrawable.setBounds(viewBounds);
     reset(mUnderlyingDrawable);
@@ -279,12 +279,12 @@ public class ScaleTypeDrawableTest {
   }
 
   private void testConfigureBounds(
-      Rect viewBounds,
-      int underlyingWidth,
-      int underlyingHeight,
-      ScaleType scaleType,
-      PointF focusPoint,
-      Matrix expectedMatrix) {
+      final Rect viewBounds,
+      final int underlyingWidth,
+      final int underlyingHeight,
+      final ScaleType scaleType,
+      final PointF focusPoint,
+      final Matrix expectedMatrix) {
     mScaleTypeDrawable.setScaleType(scaleType);
     if (focusPoint != null) {
       mScaleTypeDrawable.setFocusPoint(focusPoint);
@@ -301,7 +301,7 @@ public class ScaleTypeDrawableTest {
     verifyNoMoreInteractions(mUnderlyingDrawable);
   }
 
-  private void testActualImageBounds(RectF expectedActualImageBounds) {
+  private void testActualImageBounds(final RectF expectedActualImageBounds) {
     // TODO(5469563): enable this once we have a decent implementation of ShadowMatrix
     // RectF actualImageBounds = new RectF();
     // mScaleTypeDrawable.getTransformedBounds(actualImageBounds);

@@ -171,7 +171,7 @@ public class ImagePipelineTest {
   }
 
   private void verifyPrefetchToDiskCache(
-      DataSource<Void> dataSource, Producer<Void> prefetchProducerSequence, Priority priority) {
+      final DataSource<Void> dataSource, final Producer<Void> prefetchProducerSequence, final Priority priority) {
     assertFalse(dataSource.isFinished());
     verify(mRequestListener1).onRequestStart(mImageRequest, mCallerContext, "0", true);
     verify(mRequestListener2).onRequestStart(mImageRequest, mCallerContext, "0", true);

@@ -24,7 +24,7 @@ public class WebpUtil {
   /** Header for WebP enhanced */
   private static final String VP8X_HEADER = "VP8X";
 
-  private WebpUtil() {}
+  private WebpUtil() { }
 
   /**
    * This method checks for the dimension of the WebP image from the given InputStream. We don't
@@ -34,7 +34,7 @@ public class WebpUtil {
    * @return The Size of the WebP image if any or null if the size is not available
    */
   @Nullable
-  public static Pair<Integer, Integer> getSize(InputStream is) {
+  public static Pair<Integer, Integer> getSize(final InputStream is) {
     // Here we have to parse the WebP data skipping all the information which are not
     // the size
     Pair<Integer, Integer> result = null;
@@ -147,7 +147,7 @@ public class WebpUtil {
    * @param with The string those bytes should contains
    * @return True if they match and false otherwise
    */
-  private static boolean compare(byte[] what, String with) {
+  private static boolean compare(final byte[] what, final String with) {
     if (what.length != with.length()) {
       return false;
     }
@@ -159,7 +159,7 @@ public class WebpUtil {
     return true;
   }
 
-  private static String getHeader(byte[] header) {
+  private static String getHeader(final byte[] header) {
     StringBuilder str = new StringBuilder();
     for (int i = 0; i < header.length; i++) {
       str.append((char) header[i]);
@@ -167,7 +167,7 @@ public class WebpUtil {
     return str.toString();
   }
 
-  private static int getInt(InputStream is) throws IOException {
+  private static int getInt(final InputStream is) throws IOException {
     byte byte1 = (byte) is.read();
     byte byte2 = (byte) is.read();
     byte byte3 = (byte) is.read();
@@ -178,13 +178,13 @@ public class WebpUtil {
         | (byte1) & 0xFF;
   }
 
-  public static int get2BytesAsInt(InputStream is) throws IOException {
+  public static int get2BytesAsInt(final InputStream is) throws IOException {
     byte byte1 = (byte) is.read();
     byte byte2 = (byte) is.read();
     return (byte2 << 8 & 0xFF00) | (byte1 & 0xFF);
   }
 
-  private static int read3Bytes(InputStream is) throws IOException {
+  private static int read3Bytes(final InputStream is) throws IOException {
     byte byte1 = getByte(is);
     byte byte2 = getByte(is);
     byte byte3 = getByte(is);
@@ -193,15 +193,15 @@ public class WebpUtil {
         | (((int) byte1) & 0xFF);
   }
 
-  private static short getShort(InputStream is) throws IOException {
+  private static short getShort(final InputStream is) throws IOException {
     return (short) (is.read() & 0xFF);
   }
 
-  private static byte getByte(InputStream is) throws IOException {
+  private static byte getByte(final InputStream is) throws IOException {
     return (byte) (is.read() & 0xFF);
   }
 
-  private static boolean isBitOne(byte input, int bitIndex) {
+  private static boolean isBitOne(final byte input, final int bitIndex) {
     return ((input >> (bitIndex % 8)) & 1) == 1;
   }
 }

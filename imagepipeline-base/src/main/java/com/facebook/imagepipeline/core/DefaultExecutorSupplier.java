@@ -27,7 +27,7 @@ public class DefaultExecutorSupplier implements ExecutorSupplier {
   private final Executor mBackgroundExecutor;
   private final Executor mLightWeightBackgroundExecutor;
 
-  public DefaultExecutorSupplier(int numCpuBoundThreads) {
+  public DefaultExecutorSupplier(final int numCpuBoundThreads) {
     mIoBoundExecutor =
         Executors.newFixedThreadPool(
             NUM_IO_BOUND_THREADS,

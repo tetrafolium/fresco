@@ -30,13 +30,13 @@ public class PipelineDraweeControllerFactory {
   @Nullable private Supplier<Boolean> mDebugOverlayEnabledSupplier;
 
   public void init(
-      Resources resources,
-      DeferredReleaser deferredReleaser,
-      DrawableFactory animatedDrawableFactory,
-      Executor uiThreadExecutor,
-      MemoryCache<CacheKey, CloseableImage> memoryCache,
-      @Nullable ImmutableList<DrawableFactory> drawableFactories,
-      @Nullable Supplier<Boolean> debugOverlayEnabledSupplier) {
+      final Resources resources,
+      final DeferredReleaser deferredReleaser,
+      final DrawableFactory animatedDrawableFactory,
+      final Executor uiThreadExecutor,
+      final MemoryCache<CacheKey, CloseableImage> memoryCache,
+      final @Nullable ImmutableList<DrawableFactory> drawableFactories,
+      final @Nullable Supplier<Boolean> debugOverlayEnabledSupplier) {
     mResources = resources;
     mDeferredReleaser = deferredReleaser;
     mAnimatedDrawableFactory = animatedDrawableFactory;
@@ -62,12 +62,12 @@ public class PipelineDraweeControllerFactory {
   }
 
   protected PipelineDraweeController internalCreateController(
-      Resources resources,
-      DeferredReleaser deferredReleaser,
-      DrawableFactory animatedDrawableFactory,
-      Executor uiThreadExecutor,
-      MemoryCache<CacheKey, CloseableImage> memoryCache,
-      @Nullable ImmutableList<DrawableFactory> drawableFactories) {
+      final Resources resources,
+      final DeferredReleaser deferredReleaser,
+      final DrawableFactory animatedDrawableFactory,
+      final Executor uiThreadExecutor,
+      final MemoryCache<CacheKey, CloseableImage> memoryCache,
+      final @Nullable ImmutableList<DrawableFactory> drawableFactories) {
     return new PipelineDraweeController(
         resources,
         deferredReleaser,

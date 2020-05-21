@@ -57,7 +57,7 @@ public class ShowcaseRunTest {
     onView(withId(R.id.drawee_view)).check(matches(hasImage()));
   }
 
-  private void openScreenFromMenu(int title) {
+  private void openScreenFromMenu(final int title) {
     onView(withContentDescription(R.string.navigation_drawer_open)).perform(click());
     onView(allOf(withParent(isAssignableFrom(NavigationMenuItemView.class)), withText(title)))
         .perform(click());
@@ -76,7 +76,7 @@ public class ShowcaseRunTest {
       }
 
       @Override
-      public void perform(UiController uiController, final View view) {
+      public void perform(final UiController uiController, final View view) {
         uiController.loopMainThreadForAtLeast(millis);
       }
     };

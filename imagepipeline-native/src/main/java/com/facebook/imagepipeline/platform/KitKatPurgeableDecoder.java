@@ -34,7 +34,7 @@ public class KitKatPurgeableDecoder extends DalvikPurgeableDecoder {
   private final FlexByteArrayPool mFlexByteArrayPool;
 
   @DoNotStrip
-  public KitKatPurgeableDecoder(FlexByteArrayPool flexByteArrayPool) {
+  public KitKatPurgeableDecoder(final FlexByteArrayPool flexByteArrayPool) {
     mFlexByteArrayPool = flexByteArrayPool;
   }
 
@@ -46,7 +46,7 @@ public class KitKatPurgeableDecoder extends DalvikPurgeableDecoder {
    */
   @Override
   protected Bitmap decodeByteArrayAsPurgeable(
-      CloseableReference<PooledByteBuffer> bytesRef, BitmapFactory.Options options) {
+      final CloseableReference<PooledByteBuffer> bytesRef, final BitmapFactory.Options options) {
     final PooledByteBuffer pooledByteBuffer = bytesRef.get();
     final int length = pooledByteBuffer.size();
     final CloseableReference<byte[]> encodedBytesArrayRef = mFlexByteArrayPool.get(length);
@@ -70,7 +70,7 @@ public class KitKatPurgeableDecoder extends DalvikPurgeableDecoder {
    */
   @Override
   protected Bitmap decodeJPEGByteArrayAsPurgeable(
-      CloseableReference<PooledByteBuffer> bytesRef, int length, BitmapFactory.Options options) {
+      final CloseableReference<PooledByteBuffer> bytesRef, final int length, final BitmapFactory.Options options) {
     byte[] suffix = endsWithEOI(bytesRef, length) ? null : EOI;
     final PooledByteBuffer pooledByteBuffer = bytesRef.get();
     Preconditions.checkArgument(length <= pooledByteBuffer.size());
@@ -90,7 +90,7 @@ public class KitKatPurgeableDecoder extends DalvikPurgeableDecoder {
     }
   }
 
-  private static void putEOI(byte[] imageBytes, int offset) {
+  private static void putEOI(final byte[] imageBytes, final int offset) {
     // TODO 5884402: remove dependency on JfifUtil
     imageBytes[offset] = (byte) JfifUtil.MARKER_FIRST_BYTE;
     imageBytes[offset + 1] = (byte) JfifUtil.MARKER_EOI;

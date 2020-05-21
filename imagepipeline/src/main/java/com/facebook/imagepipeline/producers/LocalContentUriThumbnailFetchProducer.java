@@ -47,21 +47,21 @@ public class LocalContentUriThumbnailFetchProducer extends LocalFetchProducer
   private final ContentResolver mContentResolver;
 
   public LocalContentUriThumbnailFetchProducer(
-      Executor executor,
-      PooledByteBufferFactory pooledByteBufferFactory,
-      ContentResolver contentResolver) {
+      final Executor executor,
+      final PooledByteBufferFactory pooledByteBufferFactory,
+      final ContentResolver contentResolver) {
     super(executor, pooledByteBufferFactory);
     mContentResolver = contentResolver;
   }
 
   @Override
-  public boolean canProvideImageForSize(ResizeOptions resizeOptions) {
+  public boolean canProvideImageForSize(final ResizeOptions resizeOptions) {
     return ThumbnailSizeChecker.isImageBigEnough(
         MINI_THUMBNAIL_DIMENSIONS.width(), MINI_THUMBNAIL_DIMENSIONS.height(), resizeOptions);
   }
 
   @Override
-  protected @Nullable EncodedImage getEncodedImage(ImageRequest imageRequest) throws IOException {
+  protected @Nullable EncodedImage getEncodedImage(final ImageRequest imageRequest) throws IOException {
     Uri uri = imageRequest.getSourceUri();
 
     if (UriUtil.isLocalCameraUri(uri)) {
@@ -71,7 +71,7 @@ public class LocalContentUriThumbnailFetchProducer extends LocalFetchProducer
     return null;
   }
 
-  private @Nullable EncodedImage getCameraImage(Uri uri, @Nullable ResizeOptions resizeOptions)
+  private @Nullable EncodedImage getCameraImage(final Uri uri, final @Nullable ResizeOptions resizeOptions)
       throws IOException {
     if (resizeOptions == null) {
       return null;
@@ -101,7 +101,7 @@ public class LocalContentUriThumbnailFetchProducer extends LocalFetchProducer
   // Gets the smallest possible thumbnail that is bigger than the requested size in the resize
   // options or null if either the thumbnails are smaller than the requested size or there are no
   // stored thumbnails.
-  private @Nullable EncodedImage getThumbnail(ResizeOptions resizeOptions, long imageId)
+  private @Nullable EncodedImage getThumbnail(final ResizeOptions resizeOptions, final long imageId)
       throws IOException {
     int thumbnailKind = getThumbnailKind(resizeOptions);
     if (thumbnailKind == NO_THUMBNAIL) {
@@ -133,7 +133,7 @@ public class LocalContentUriThumbnailFetchProducer extends LocalFetchProducer
   // options requested size is smaller than 4/3 its size).
   // We can add a small interval of acceptance over the size of the thumbnail since the quality lost
   // when scaling it to fit a view will not be significant.
-  private static int getThumbnailKind(ResizeOptions resizeOptions) {
+  private static int getThumbnailKind(final ResizeOptions resizeOptions) {
     if (ThumbnailSizeChecker.isImageBigEnough(
         MICRO_THUMBNAIL_DIMENSIONS.width(), MICRO_THUMBNAIL_DIMENSIONS.height(), resizeOptions)) {
       return MediaStore.Images.Thumbnails.MICRO_KIND;
@@ -145,7 +145,7 @@ public class LocalContentUriThumbnailFetchProducer extends LocalFetchProducer
     }
   }
 
-  private static int getLength(String pathname) {
+  private static int getLength(final String pathname) {
     return pathname == null ? -1 : (int) new File(pathname).length();
   }
 
@@ -154,7 +154,7 @@ public class LocalContentUriThumbnailFetchProducer extends LocalFetchProducer
     return PRODUCER_NAME;
   }
 
-  private static int getRotationAngle(String pathname) {
+  private static int getRotationAngle(final String pathname) {
     if (pathname != null) {
       try {
         ExifInterface exif = new ExifInterface(pathname);

@@ -34,7 +34,7 @@ public class GifMetadataDecoder {
   private boolean mDecoded = false;
   private int mCurrentOffset = 0;
 
-  public static GifMetadataDecoder create(InputStream is, @Nullable OutputStream os)
+  public static GifMetadataDecoder create(final InputStream is, final @Nullable OutputStream os)
       throws IOException {
     GifMetadataDecoder decoder = new GifMetadataDecoder(is, os);
     decoder.decode();
@@ -45,7 +45,7 @@ public class GifMetadataDecoder {
    * @param is InputStream to decode
    * @param os OutputStream to write fixed version of gif, if needed. (optional)
    */
-  private GifMetadataDecoder(InputStream is, @Nullable OutputStream os) {
+  private GifMetadataDecoder(final InputStream is, final @Nullable OutputStream os) {
     mInputStream = is;
     mOutputStream = os;
   }
@@ -72,14 +72,14 @@ public class GifMetadataDecoder {
     return mLoopCount;
   }
 
-  public int getFrameDisposal(int frameNumber) {
+  public int getFrameDisposal(final int frameNumber) {
     if (!mDecoded) {
       throw new IllegalStateException("getFrameDisposal called before decode");
     }
     return mFrameControls.get(frameNumber)[CONTROL_INDEX_DISPOSE];
   }
 
-  public int getFrameDurationMs(int frameNumber) {
+  public int getFrameDurationMs(final int frameNumber) {
     if (!mDecoded) {
       throw new IllegalStateException("getFrameDurationMs called before decode");
     }
@@ -138,7 +138,7 @@ public class GifMetadataDecoder {
     }
   }
 
-  private void addFrame(int[] control) {
+  private void addFrame(final int[] control) {
     mFrameControls.add(Arrays.copyOf(control, control.length));
   }
 
@@ -168,7 +168,7 @@ public class GifMetadataDecoder {
     }
   }
 
-  private void ignoreColorTable(int numColors) throws IOException {
+  private void ignoreColorTable(final int numColors) throws IOException {
     skipAndWriteBytes(3 * numColors);
   }
 
@@ -226,7 +226,7 @@ public class GifMetadataDecoder {
     } while (size > 0);
   }
 
-  private void readGraphicsControlExtension(int[] control) throws IOException {
+  private void readGraphicsControlExtension(final int[] control) throws IOException {
     skipAndWriteBytes(1);
     int flags = readAndWriteNextByte();
     control[CONTROL_INDEX_DISPOSE] = (flags & 0x1c) >> 2; // dispose
@@ -252,7 +252,7 @@ public class GifMetadataDecoder {
     return readNextByte() | (readNextByte() << 8);
   }
 
-  private int readIntoBlock(int offset, int length) throws IOException {
+  private int readIntoBlock(final int offset, final int length) throws IOException {
     int count = mInputStream.read(block, offset, length);
     mCurrentOffset += length;
     if (shouldFixStream) {
@@ -270,18 +270,18 @@ public class GifMetadataDecoder {
     return read;
   }
 
-  private void writeNextByte(int b) throws IOException {
+  private void writeNextByte(final int b) throws IOException {
     if (shouldFixStream) {
       mOutputStream.write(b);
     }
   }
 
-  private void writeTwoByteInt(int content) throws IOException {
+  private void writeTwoByteInt(final int content) throws IOException {
     writeNextByte(content);
     writeNextByte(content >> 8);
   }
 
-  private void skipAndWriteBytes(int length) throws IOException {
+  private void skipAndWriteBytes(final int length) throws IOException {
     if (shouldFixStream) {
       copyFromIsToOs(mInputStream, mOutputStream, length);
     } else {
@@ -300,7 +300,7 @@ public class GifMetadataDecoder {
     mInputStream.skip(2);
   }
 
-  private void copyFromIsToOs(InputStream in, OutputStream out, int length) throws IOException {
+  private void copyFromIsToOs(final InputStream in, final OutputStream out, final int length) throws IOException {
     while (length > 0) {
       int bytesRead = in.read(block, 0, Math.min(MAX_BLOCK_SIZE, length));
       length -= MAX_BLOCK_SIZE;

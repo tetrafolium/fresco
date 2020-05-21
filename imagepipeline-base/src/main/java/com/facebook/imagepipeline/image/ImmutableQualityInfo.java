@@ -17,7 +17,7 @@ public class ImmutableQualityInfo implements QualityInfo {
   boolean mIsOfFullQuality;
 
   private ImmutableQualityInfo(
-      int quality, boolean isOfGoodEnoughQuality, boolean isOfFullQuality) {
+      final int quality, final boolean isOfGoodEnoughQuality, final boolean isOfFullQuality) {
     mQuality = quality;
     mIsOfGoodEnoughQuality = isOfGoodEnoughQuality;
     mIsOfFullQuality = isOfFullQuality;
@@ -44,7 +44,7 @@ public class ImmutableQualityInfo implements QualityInfo {
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(final Object other) {
     if (other == this) {
       return true;
     }
@@ -58,7 +58,7 @@ public class ImmutableQualityInfo implements QualityInfo {
   }
 
   public static QualityInfo of(
-      int quality, boolean isOfGoodEnoughQuality, boolean isOfFullQuality) {
+      final int quality, final boolean isOfGoodEnoughQuality, final boolean isOfFullQuality) {
     return new ImmutableQualityInfo(quality, isOfGoodEnoughQuality, isOfFullQuality);
   }
 }

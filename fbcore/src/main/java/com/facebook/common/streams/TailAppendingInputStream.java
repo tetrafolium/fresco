@@ -19,7 +19,7 @@ public class TailAppendingInputStream extends FilterInputStream {
   private int mTailOffset;
   private int mMarkedTailOffset;
 
-  public TailAppendingInputStream(InputStream inputStream, byte[] tail) {
+  public TailAppendingInputStream(final InputStream inputStream, final byte[] tail) {
     super(inputStream);
     if (inputStream == null) {
       throw new NullPointerException();
@@ -40,12 +40,12 @@ public class TailAppendingInputStream extends FilterInputStream {
   }
 
   @Override
-  public int read(byte[] buffer) throws IOException {
+  public int read(final byte[] buffer) throws IOException {
     return read(buffer, 0, buffer.length);
   }
 
   @Override
-  public int read(byte[] buffer, int offset, int count) throws IOException {
+  public int read(final byte[] buffer, final int offset, final int count) throws IOException {
     final int readResult = in.read(buffer, offset, count);
     if (readResult != -1) {
       return readResult;
@@ -78,7 +78,7 @@ public class TailAppendingInputStream extends FilterInputStream {
   }
 
   @Override
-  public void mark(int readLimit) {
+  public void mark(final int readLimit) {
     if (in.markSupported()) {
       super.mark(readLimit);
       mMarkedTailOffset = mTailOffset;

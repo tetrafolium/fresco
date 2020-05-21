@@ -28,12 +28,12 @@ public class RoundPostprocessor extends BasePostprocessor {
     this(ENABLE_ANTI_ALIASING);
   }
 
-  public RoundPostprocessor(boolean enableAntiAliasing) {
+  public RoundPostprocessor(final boolean enableAntiAliasing) {
     mEnableAntiAliasing = enableAntiAliasing;
   }
 
   @Override
-  public void process(Bitmap destBitmap, Bitmap sourceBitmap) {
+  public void process(final Bitmap destBitmap, final Bitmap sourceBitmap) {
     Preconditions.checkNotNull(destBitmap);
     Preconditions.checkNotNull(sourceBitmap);
     if (canUseXferRoundFilter) {
@@ -44,7 +44,7 @@ public class RoundPostprocessor extends BasePostprocessor {
   }
 
   @Override
-  public void process(Bitmap bitmap) {
+  public void process(final Bitmap bitmap) {
     InPlaceRoundFilter.roundBitmapInPlace(bitmap);
   }
 

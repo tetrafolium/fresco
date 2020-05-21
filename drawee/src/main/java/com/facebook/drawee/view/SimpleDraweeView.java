@@ -38,7 +38,7 @@ public class SimpleDraweeView extends GenericDraweeView {
 
   /** Initializes {@link SimpleDraweeView} with supplier of Drawee controller builders. */
   public static void initialize(
-      Supplier<? extends AbstractDraweeControllerBuilder> draweeControllerBuilderSupplier) {
+      final Supplier<? extends AbstractDraweeControllerBuilder> draweeControllerBuilderSupplier) {
     sDraweecontrollerbuildersupplier = draweeControllerBuilderSupplier;
   }
 
@@ -49,33 +49,33 @@ public class SimpleDraweeView extends GenericDraweeView {
 
   private AbstractDraweeControllerBuilder mControllerBuilder;
 
-  public SimpleDraweeView(Context context, GenericDraweeHierarchy hierarchy) {
+  public SimpleDraweeView(final Context context, final GenericDraweeHierarchy hierarchy) {
     super(context, hierarchy);
     init(context, null);
   }
 
-  public SimpleDraweeView(Context context) {
+  public SimpleDraweeView(final Context context) {
     super(context);
     init(context, null);
   }
 
-  public SimpleDraweeView(Context context, AttributeSet attrs) {
+  public SimpleDraweeView(final Context context, final AttributeSet attrs) {
     super(context, attrs);
     init(context, attrs);
   }
 
-  public SimpleDraweeView(Context context, AttributeSet attrs, int defStyle) {
+  public SimpleDraweeView(final Context context, final AttributeSet attrs, final int defStyle) {
     super(context, attrs, defStyle);
     init(context, attrs);
   }
 
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  public SimpleDraweeView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+  public SimpleDraweeView(final Context context, final AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
     super(context, attrs, defStyleAttr, defStyleRes);
     init(context, attrs);
   }
 
-  private void init(Context context, @Nullable AttributeSet attrs) {
+  private void init(final Context context, final @Nullable AttributeSet attrs) {
     try {
       if (FrescoSystrace.isTracing()) {
         FrescoSystrace.beginSection("SimpleDraweeView#init");
@@ -126,7 +126,7 @@ public class SimpleDraweeView extends GenericDraweeView {
    *
    * @param request Image Request
    */
-  public void setImageRequest(ImageRequest request) {
+  public void setImageRequest(final ImageRequest request) {
     AbstractDraweeControllerBuilder controllerBuilder = mControllerBuilder;
     DraweeController controller =
         controllerBuilder.setImageRequest(request).setOldController(getController()).build();
@@ -140,7 +140,7 @@ public class SimpleDraweeView extends GenericDraweeView {
    * @undeprecate
    */
   @Override
-  public void setImageURI(Uri uri) {
+  public void setImageURI(final Uri uri) {
     setImageURI(uri, null);
   }
 
@@ -149,7 +149,7 @@ public class SimpleDraweeView extends GenericDraweeView {
    *
    * @param uriString uri string of the image
    */
-  public void setImageURI(@Nullable String uriString) {
+  public void setImageURI(final @Nullable String uriString) {
     setImageURI(uriString, null);
   }
 
@@ -159,7 +159,7 @@ public class SimpleDraweeView extends GenericDraweeView {
    * @param uri uri of the image
    * @param callerContext caller context
    */
-  public void setImageURI(Uri uri, @Nullable Object callerContext) {
+  public void setImageURI(final Uri uri, final @Nullable Object callerContext) {
     DraweeController controller =
         mControllerBuilder
             .setCallerContext(callerContext)
@@ -175,7 +175,7 @@ public class SimpleDraweeView extends GenericDraweeView {
    * @param uriString uri string of the image
    * @param callerContext caller context
    */
-  public void setImageURI(@Nullable String uriString, @Nullable Object callerContext) {
+  public void setImageURI(final @Nullable String uriString, final @Nullable Object callerContext) {
     Uri uri = (uriString != null) ? Uri.parse(uriString) : null;
     setImageURI(uri, callerContext);
   }
@@ -190,7 +190,7 @@ public class SimpleDraweeView extends GenericDraweeView {
    *
    * @param resourceId the resource ID to use.
    */
-  public void setActualImageResource(@DrawableRes int resourceId) {
+  public void setActualImageResource(final @DrawableRes int resourceId) {
     setActualImageResource(resourceId, null);
   }
 
@@ -205,7 +205,7 @@ public class SimpleDraweeView extends GenericDraweeView {
    * @param resourceId the resource ID to use.
    * @param callerContext caller context
    */
-  public void setActualImageResource(@DrawableRes int resourceId, @Nullable Object callerContext) {
+  public void setActualImageResource(final @DrawableRes int resourceId, final @Nullable Object callerContext) {
     setImageURI(UriUtil.getUriForResourceId(resourceId), callerContext);
   }
 
@@ -217,7 +217,7 @@ public class SimpleDraweeView extends GenericDraweeView {
    * @param resId the resource ID
    */
   @Override
-  public void setImageResource(int resId) {
+  public void setImageResource(final int resId) {
     super.setImageResource(resId);
   }
 }

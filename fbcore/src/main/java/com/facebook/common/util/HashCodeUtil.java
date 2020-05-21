@@ -26,15 +26,15 @@ public class HashCodeUtil {
    */
   private static final int X = 31;
 
-  public static int hashCode(@Nullable Object o1) {
+  public static int hashCode(final @Nullable Object o1) {
     return hashCode(o1 == null ? 0 : o1.hashCode());
   }
 
-  public static int hashCode(@Nullable Object o1, @Nullable Object o2) {
+  public static int hashCode(final @Nullable Object o1, final @Nullable Object o2) {
     return hashCode(o1 == null ? 0 : o1.hashCode(), o2 == null ? 0 : o2.hashCode());
   }
 
-  public static int hashCode(@Nullable Object o1, @Nullable Object o2, @Nullable Object o3) {
+  public static int hashCode(final @Nullable Object o1, final @Nullable Object o2, final @Nullable Object o3) {
     return hashCode(
         o1 == null ? 0 : o1.hashCode(),
         o2 == null ? 0 : o2.hashCode(),
@@ -42,7 +42,7 @@ public class HashCodeUtil {
   }
 
   public static int hashCode(
-      @Nullable Object o1, @Nullable Object o2, @Nullable Object o3, @Nullable Object o4) {
+      final @Nullable Object o1, final @Nullable Object o2, final @Nullable Object o3, final @Nullable Object o4) {
     return hashCode(
         o1 == null ? 0 : o1.hashCode(),
         o2 == null ? 0 : o2.hashCode(),
@@ -51,11 +51,11 @@ public class HashCodeUtil {
   }
 
   public static int hashCode(
-      @Nullable Object o1,
-      @Nullable Object o2,
-      @Nullable Object o3,
-      @Nullable Object o4,
-      @Nullable Object o5) {
+      final @Nullable Object o1,
+      final @Nullable Object o2,
+      final @Nullable Object o3,
+      final @Nullable Object o4,
+      final @Nullable Object o5) {
     return hashCode(
         o1 == null ? 0 : o1.hashCode(),
         o2 == null ? 0 : o2.hashCode(),
@@ -65,12 +65,12 @@ public class HashCodeUtil {
   }
 
   public static int hashCode(
-      @Nullable Object o1,
-      @Nullable Object o2,
-      @Nullable Object o3,
-      @Nullable Object o4,
-      @Nullable Object o5,
-      @Nullable Object o6) {
+      final @Nullable Object o1,
+      final @Nullable Object o2,
+      final @Nullable Object o3,
+      final @Nullable Object o4,
+      final @Nullable Object o5,
+      final @Nullable Object o6) {
     return hashCode(
         o1 == null ? 0 : o1.hashCode(),
         o2 == null ? 0 : o2.hashCode(),
@@ -80,25 +80,25 @@ public class HashCodeUtil {
         o6 == null ? 0 : o6.hashCode());
   }
 
-  public static int hashCode(int i1) {
+  public static int hashCode(final int i1) {
     int acc = X + i1;
     return acc;
   }
 
-  public static int hashCode(int i1, int i2) {
+  public static int hashCode(final int i1, final int i2) {
     int acc = X + i1;
     acc = X * acc + i2;
     return acc;
   }
 
-  public static int hashCode(int i1, int i2, int i3) {
+  public static int hashCode(final int i1, final int i2, final int i3) {
     int acc = X + i1;
     acc = X * acc + i2;
     acc = X * acc + i3;
     return acc;
   }
 
-  public static int hashCode(int i1, int i2, int i3, int i4) {
+  public static int hashCode(final int i1, final int i2, final int i3, final int i4) {
     int acc = X + i1;
     acc = X * acc + i2;
     acc = X * acc + i3;
@@ -106,7 +106,7 @@ public class HashCodeUtil {
     return acc;
   }
 
-  public static int hashCode(int i1, int i2, int i3, int i4, int i5) {
+  public static int hashCode(final int i1, final int i2, final int i3, final int i4, final int i5) {
     int acc = X + i1;
     acc = X * acc + i2;
     acc = X * acc + i3;
@@ -115,7 +115,7 @@ public class HashCodeUtil {
     return acc;
   }
 
-  public static int hashCode(int i1, int i2, int i3, int i4, int i5, int i6) {
+  public static int hashCode(final int i1, final int i2, final int i3, final int i4, final int i5, final int i6) {
     int acc = X + i1;
     acc = X * acc + i2;
     acc = X * acc + i3;

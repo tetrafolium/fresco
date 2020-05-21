@@ -24,7 +24,7 @@ public class CustomImageFormatConfigurator {
   private static final String IMAGE_FORMAT_SVG_KEY = "svg";
 
   @Nullable
-  public static ImageDecoderConfig createImageDecoderConfig(Context context) {
+  public static ImageDecoderConfig createImageDecoderConfig(final Context context) {
     ImageDecoderConfig.Builder config = ImageDecoderConfig.newBuilder();
     if (isGlobalColorDecoderEnabled(context)) {
       config.addDecodingCapability(
@@ -48,7 +48,7 @@ public class CustomImageFormatConfigurator {
   }
 
   public static void addCustomDrawableFactories(
-      Context context, DraweeConfig.Builder draweeConfigBuilder) {
+      final Context context, final DraweeConfig.Builder draweeConfigBuilder) {
     // We always add the color drawable factory so that it can be used for image decoder overrides,
     // see ImageFormatOverrideExample.
     draweeConfigBuilder.addCustomDrawableFactory(ColorImageExample.createDrawableFactory());
@@ -60,19 +60,19 @@ public class CustomImageFormatConfigurator {
     }
   }
 
-  public static boolean isGlobalColorDecoderEnabled(Context context) {
+  public static boolean isGlobalColorDecoderEnabled(final Context context) {
     return getBoolean(context, IMAGE_FORMAT_COLOR_KEY, false);
   }
 
-  public static void setGlobalColorDecoderEnabled(Context context, boolean colorEnabled) {
+  public static void setGlobalColorDecoderEnabled(final Context context, final boolean colorEnabled) {
     setBoolean(context, IMAGE_FORMAT_COLOR_KEY, colorEnabled);
   }
 
-  public static boolean isSvgEnabled(Context context) {
+  public static boolean isSvgEnabled(final Context context) {
     return getBoolean(context, IMAGE_FORMAT_SVG_KEY, false);
   }
 
-  public static void setSvgEnabled(Context context, boolean svgEnabled) {
+  public static void setSvgEnabled(final Context context, final boolean svgEnabled) {
     setBoolean(context, IMAGE_FORMAT_SVG_KEY, svgEnabled);
   }
 
@@ -80,13 +80,13 @@ public class CustomImageFormatConfigurator {
     return Build.VERSION.SDK_INT >= 15;
   }
 
-  private static boolean getBoolean(Context context, String key, boolean defaultValue) {
+  private static boolean getBoolean(final Context context, final String key, final boolean defaultValue) {
     return context
         .getSharedPreferences(IMAGE_FORMAT_PREFS, Context.MODE_PRIVATE)
         .getBoolean(key, defaultValue);
   }
 
-  private static void setBoolean(Context context, String key, boolean value) {
+  private static void setBoolean(final Context context, final String key, final boolean value) {
     context
         .getSharedPreferences(IMAGE_FORMAT_PREFS, Context.MODE_PRIVATE)
         .edit()

@@ -20,12 +20,12 @@ public class ToggleAnimationClickListener implements View.OnClickListener {
 
   private final GenericDraweeView mDraweeView;
 
-  public ToggleAnimationClickListener(GenericDraweeView draweeView) {
+  public ToggleAnimationClickListener(final GenericDraweeView draweeView) {
     mDraweeView = draweeView;
   }
 
   @Override
-  public void onClick(View v) {
+  public void onClick(final View v) {
     DraweeController controller = mDraweeView.getController();
     if (controller == null) {
       return;

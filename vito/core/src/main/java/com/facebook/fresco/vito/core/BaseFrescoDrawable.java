@@ -39,30 +39,30 @@ public class BaseFrescoDrawable extends FadeDrawable implements Closeable {
   }
 
   public @Nullable Drawable setImage(
-      @Nullable Drawable imageDrawable,
-      @Nullable CloseableReference<CloseableImage> imageReference) {
+      final @Nullable Drawable imageDrawable,
+      final @Nullable CloseableReference<CloseableImage> imageReference) {
     CloseableReference.closeSafely(mImageReference);
     mImageReference = CloseableReference.cloneOrNull(imageReference);
     return setDrawable(IMAGE_DRAWABLE_INDEX, imageDrawable);
   }
 
-  public @Nullable Drawable setImageDrawable(@Nullable Drawable newDrawable) {
+  public @Nullable Drawable setImageDrawable(final @Nullable Drawable newDrawable) {
     return setImage(newDrawable, null);
   }
 
-  public Drawable setOverlayDrawable(@Nullable Drawable drawable) {
+  public Drawable setOverlayDrawable(final @Nullable Drawable drawable) {
     return setDrawable(OVERLAY_DRAWABLE_INDEX, drawable);
   }
 
-  public @Nullable Drawable setProgressDrawable(@Nullable Drawable drawable) {
+  public @Nullable Drawable setProgressDrawable(final @Nullable Drawable drawable) {
     return setDrawable(PROGRESS_DRAWABLE_INDEX, drawable);
   }
 
-  public @Nullable Drawable setPlaceholderDrawable(@Nullable Drawable drawable) {
+  public @Nullable Drawable setPlaceholderDrawable(final @Nullable Drawable drawable) {
     return setDrawable(PLACEHOLDER_DRAWABLE_INDEX, drawable);
   }
 
-  public void fadeInImage(int durationMs) {
+  public void fadeInImage(final int durationMs) {
     setTransitionDuration(durationMs);
     beginBatchMode();
     fadeOutLayer(PLACEHOLDER_DRAWABLE_INDEX);
@@ -90,14 +90,14 @@ public class BaseFrescoDrawable extends FadeDrawable implements Closeable {
   }
 
   @Override
-  public boolean setVisible(boolean visible, boolean restart) {
+  public boolean setVisible(final boolean visible, final boolean restart) {
     if (mVisibilityCallback != null) {
       mVisibilityCallback.onVisibilityChange(visible);
     }
     return super.setVisible(visible, restart);
   }
 
-  public void setVisibilityCallback(@Nullable VisibilityCallback visibilityCallback) {
+  public void setVisibilityCallback(final @Nullable VisibilityCallback visibilityCallback) {
     mVisibilityCallback = visibilityCallback;
   }
 
@@ -110,7 +110,7 @@ public class BaseFrescoDrawable extends FadeDrawable implements Closeable {
     return mViewportDimensions;
   }
 
-  public void setViewportDimensions(@Nullable Rect viewportDimensions) {
+  public void setViewportDimensions(final @Nullable Rect viewportDimensions) {
     mViewportDimensions = viewportDimensions;
   }
 }

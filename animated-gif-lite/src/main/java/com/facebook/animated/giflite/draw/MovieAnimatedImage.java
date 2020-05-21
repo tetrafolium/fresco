@@ -21,7 +21,7 @@ public class MovieAnimatedImage implements AnimatedImage {
   private final int mLoopCount;
   private final int[] mFrameDurations;
 
-  public MovieAnimatedImage(MovieFrame[] frames, int sizeInBytes, int duration, int loopCount) {
+  public MovieAnimatedImage(final MovieFrame[] frames, final int sizeInBytes, final int duration, final int loopCount) {
     mFrames = frames;
     mSizeInBytes = sizeInBytes;
     mDuration = duration;
@@ -33,7 +33,7 @@ public class MovieAnimatedImage implements AnimatedImage {
   }
 
   @Override
-  public void dispose() {}
+  public void dispose() { }
 
   @Override
   public int getWidth() {
@@ -66,7 +66,7 @@ public class MovieAnimatedImage implements AnimatedImage {
   }
 
   @Override
-  public AnimatedImageFrame getFrame(int frameNumber) {
+  public AnimatedImageFrame getFrame(final int frameNumber) {
     return mFrames[frameNumber];
   }
 
@@ -81,7 +81,7 @@ public class MovieAnimatedImage implements AnimatedImage {
   }
 
   @Override
-  public AnimatedDrawableFrameInfo getFrameInfo(int frameNumber) {
+  public AnimatedDrawableFrameInfo getFrameInfo(final int frameNumber) {
     MovieFrame frame = mFrames[frameNumber];
     return new AnimatedDrawableFrameInfo(
         frameNumber,

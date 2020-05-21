@@ -50,13 +50,13 @@ public class BitmapAnimationDebugFragment extends Fragment {
   private final BitmapAnimationBackend.FrameListener mFrameListener =
       new BitmapAnimationBackend.FrameListener() {
         @Override
-        public void onDrawFrameStart(BitmapAnimationBackend backend, int frameNumber) {}
+        public void onDrawFrameStart(final BitmapAnimationBackend backend, final int frameNumber) { }
 
         @Override
         public void onFrameDrawn(
-            BitmapAnimationBackend backend,
-            int frameNumber,
-            @BitmapAnimationBackend.FrameType int frameType) {
+            final BitmapAnimationBackend backend,
+            final int frameNumber,
+            final @BitmapAnimationBackend.FrameType int frameType) {
           FrameInformationHolder previousFrame = mFrameInfoMap.get(mActiveFrameNumber);
           if (previousFrame != null) {
             previousFrame.setFrameType(false, frameType);
@@ -69,7 +69,7 @@ public class BitmapAnimationDebugFragment extends Fragment {
         }
 
         @Override
-        public void onFrameDropped(BitmapAnimationBackend backend, int frameNumber) {
+        public void onFrameDropped(final BitmapAnimationBackend backend, final int frameNumber) {
           // The frame could not be drawn for some reason.
           // We don't care about this since caching is independent of rendering.
         }
@@ -78,7 +78,7 @@ public class BitmapAnimationDebugFragment extends Fragment {
   private final BitmapFrameCache.FrameCacheListener mFrameCacheListener =
       new BitmapFrameCache.FrameCacheListener() {
         @Override
-        public void onFrameCached(BitmapFrameCache bitmapFrameCache, int frameNumber) {
+        public void onFrameCached(final BitmapFrameCache bitmapFrameCache, final int frameNumber) {
           FrameInformationHolder frameInfo = mFrameInfoMap.get(frameNumber);
           if (frameInfo != null) {
             frameInfo.setCached(true);
@@ -86,7 +86,7 @@ public class BitmapAnimationDebugFragment extends Fragment {
         }
 
         @Override
-        public void onFrameEvicted(BitmapFrameCache bitmapFrameCache, int frameNumber) {
+        public void onFrameEvicted(final BitmapFrameCache bitmapFrameCache, final int frameNumber) {
           FrameInformationHolder frameInfo = mFrameInfoMap.get(frameNumber);
           if (frameInfo != null) {
             frameInfo.setCached(false);
@@ -98,7 +98,7 @@ public class BitmapAnimationDebugFragment extends Fragment {
       mBitmapFrameCacheChangedListener =
           new BitmapAnimationCacheSelectorConfigurator.BitmapFrameCacheChangedListener() {
             @Override
-            public void onBitmapFrameCacheChanged(BitmapFrameCache bitmapFrameCache) {
+            public void onBitmapFrameCacheChanged(final BitmapFrameCache bitmapFrameCache) {
               updateBitmapFrameCache(bitmapFrameCache);
             }
           };
@@ -106,12 +106,12 @@ public class BitmapAnimationDebugFragment extends Fragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_debug_bitmap, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
 
     // Get the animation container
     final ImageView imageView = (ImageView) view.findViewById(R.id.animation_container);
@@ -125,7 +125,7 @@ public class BitmapAnimationDebugFragment extends Fragment {
         .setOnClickListener(
             new View.OnClickListener() {
               @Override
-              public void onClick(View v) {
+              public void onClick(final View v) {
                 imageView.invalidate();
               }
             });
@@ -145,7 +145,7 @@ public class BitmapAnimationDebugFragment extends Fragment {
     imageView.setImageDrawable(mAnimatedDrawable);
   }
 
-  private void updateBitmapFrameCache(BitmapFrameCache bitmapFrameCache) {
+  private void updateBitmapFrameCache(final BitmapFrameCache bitmapFrameCache) {
     mActiveFrameNumber = -1;
     mBitmapAnimationBackend =
         ExampleBitmapAnimationFactory.createColorBitmapAnimationBackend(
@@ -161,7 +161,7 @@ public class BitmapAnimationDebugFragment extends Fragment {
     mAnimatedDrawable.invalidateSelf();
   }
 
-  private void setupFrameInformationContainer(BitmapAnimationBackend bitmapAnimationBackend) {
+  private void setupFrameInformationContainer(final BitmapAnimationBackend bitmapAnimationBackend) {
     mFrameInformationContainer.removeAllViews();
     LayoutInflater layoutInflater = LayoutInflater.from(getContext());
     for (int i = 0; i < bitmapAnimationBackend.getFrameCount(); i++) {
@@ -172,7 +172,7 @@ public class BitmapAnimationDebugFragment extends Fragment {
     bitmapAnimationBackend.setFrameListener(mFrameListener);
   }
 
-  private FrameInformationHolder createFrameInformation(LayoutInflater inflater, int frameNumber) {
+  private FrameInformationHolder createFrameInformation(final LayoutInflater inflater, final int frameNumber) {
     View layout = inflater.inflate(R.layout.frame_info, mFrameInformationContainer, false);
     return new FrameInformationHolder(layout, frameNumber);
   }
@@ -191,7 +191,7 @@ public class BitmapAnimationDebugFragment extends Fragment {
     private final int mFrameUnknownColor;
     private final int mDisabledColor;
 
-    private FrameInformationHolder(View view, int frameNumber) {
+    private FrameInformationHolder(final View view, final int frameNumber) {
       mView = view;
       mFrameNumber = (TextView) view.findViewById(R.id.frame_number);
       mFrameType = (TextView) view.findViewById(R.id.frame_type);
@@ -206,16 +206,16 @@ public class BitmapAnimationDebugFragment extends Fragment {
       mDisabledColor = view.getResources().getColor(android.R.color.transparent);
     }
 
-    public void setFrameNumber(int frameNumber) {
+    public void setFrameNumber(final int frameNumber) {
       mFrameNumber.setText(String.format("#%2d", frameNumber));
     }
 
-    public void setCached(boolean cached) {
+    public void setCached(final boolean cached) {
       mCached.setBackgroundColor(cached ? mFrameCachedColor : mDisabledColor);
       mCached.setText(cached ? "cached" : "");
     }
 
-    public void setFrameType(boolean active, @BitmapAnimationBackend.FrameType int frameType) {
+    public void setFrameType(final boolean active, final @BitmapAnimationBackend.FrameType int frameType) {
       if (!active) {
         mFrameType.setText("");
         mFrameType.setBackgroundColor(mDisabledColor);

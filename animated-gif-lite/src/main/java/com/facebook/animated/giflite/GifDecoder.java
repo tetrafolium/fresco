@@ -31,9 +31,9 @@ public class GifDecoder implements ImageDecoder {
   @Override
   public CloseableImage decode(
       final EncodedImage encodedImage,
-      int length,
-      QualityInfo qualityInfo,
-      ImageDecodeOptions options) {
+      final int length,
+      final QualityInfo qualityInfo,
+      final ImageDecodeOptions options) {
     InputStream is = encodedImage.getInputStream();
     try {
       ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -81,7 +81,7 @@ public class GifDecoder implements ImageDecoder {
     }
   }
 
-  private static AnimatedDrawableFrameInfo.DisposalMethod translateFrameDisposal(int raw) {
+  private static AnimatedDrawableFrameInfo.DisposalMethod translateFrameDisposal(final int raw) {
     switch (raw) {
       case 2: // restore to background
         return AnimatedDrawableFrameInfo.DisposalMethod.DISPOSE_TO_BACKGROUND;

@@ -38,7 +38,7 @@ public class JfifUtilTest {
     testGetOrientation_WithEndian(true);
   }
 
-  private void testGetOrientation_WithEndian(boolean littleEnd) {
+  private void testGetOrientation_WithEndian(final boolean littleEnd) {
     final String IFD_ENTRY_1 = makeIfdEntry(IFD_ENTRY_TAG_1, TYPE_SHORT, 1, 255, 2, littleEnd);
     final String IFD_ENTRY_2 = makeIfdEntry(IFD_ENTRY_TAG_2, TYPE_SHORT, 1, 255, 2, littleEnd);
     final String IFD_ENTRY_3 = makeIfdEntry(IFD_ENTRY_TAG_3, TYPE_SHORT, 1, 255, 2, littleEnd);
@@ -94,7 +94,7 @@ public class JfifUtilTest {
     testGetOrientation_VariousAPP1Location(APP1_3, 3);
   }
 
-  private void testGetOrientation_VariousAPP1Location(String APP1, int expectOri) {
+  private void testGetOrientation_VariousAPP1Location(final String APP1, final int expectOri) {
     final String IMAGE_WITH_STRUCT_1 = SOI + APP1 + DQT + DHT + SOF + SOS + EOI;
     final String IMAGE_WITH_STRUCT_2 = SOI + DQT + APP1 + DHT + SOF + SOS + EOI;
     final String IMAGE_WITH_STRUCT_3 = SOI + DQT + DHT + APP1 + DRI + SOF + SOS + EOI;

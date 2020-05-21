@@ -15,7 +15,7 @@ public class ScoreBasedEvictionComparatorSupplier implements EntryEvictionCompar
   private final float mAgeWeight;
   private final float mSizeWeight;
 
-  public ScoreBasedEvictionComparatorSupplier(float ageWeight, float sizeWeight) {
+  public ScoreBasedEvictionComparatorSupplier(final float ageWeight, final float sizeWeight) {
     mAgeWeight = ageWeight;
     mSizeWeight = sizeWeight;
   }
@@ -28,7 +28,7 @@ public class ScoreBasedEvictionComparatorSupplier implements EntryEvictionCompar
 
       /** Return <0 if lhs should be evicted before rhs. */
       @Override
-      public int compare(DiskStorage.Entry lhs, DiskStorage.Entry rhs) {
+      public int compare(final DiskStorage.Entry lhs, final DiskStorage.Entry rhs) {
         float score1 = calculateScore(lhs, now);
         float score2 = calculateScore(rhs, now);
         return score1 < score2 ? 1 : ((score2 == score1) ? 0 : -1);
@@ -42,7 +42,7 @@ public class ScoreBasedEvictionComparatorSupplier implements EntryEvictionCompar
    * <p>Entries with a higher eviction score should be evicted first.
    */
   @VisibleForTesting
-  float calculateScore(DiskStorage.Entry entry, long now) {
+  float calculateScore(final DiskStorage.Entry entry, final long now) {
     long ageMs = now - entry.getTimestamp();
     long bytes = entry.getSize();
     return mAgeWeight * ageMs + mSizeWeight * bytes;

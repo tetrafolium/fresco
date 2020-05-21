@@ -35,7 +35,7 @@ public class CountingOutputStream extends FilterOutputStream {
    *
    * @param out the target stream that this stream writes to.
    */
-  public CountingOutputStream(OutputStream out) {
+  public CountingOutputStream(final OutputStream out) {
     super(out);
     mCount = 0;
   }
@@ -46,13 +46,13 @@ public class CountingOutputStream extends FilterOutputStream {
   }
 
   @Override
-  public void write(byte[] b, int off, int len) throws IOException {
+  public void write(final byte[] b, final int off, final int len) throws IOException {
     out.write(b, off, len);
     mCount += len;
   }
 
   @Override
-  public void write(int b) throws IOException {
+  public void write(final int b) throws IOException {
     out.write(b);
     mCount++;
   }

@@ -36,7 +36,7 @@ public class RetainingDataSourceSupplierFragment extends BaseShowcaseFragment {
       new BaseControllerListener<ImageInfo>() {
         @Override
         public void onFinalImageSet(
-            String id, @Nullable ImageInfo imageInfo, @Nullable Animatable anim) {
+            final String id, final @Nullable ImageInfo imageInfo, final @Nullable Animatable anim) {
           if (anim != null) {
             // app-specific logic to enable animation starting
             anim.start();
@@ -45,7 +45,7 @@ public class RetainingDataSourceSupplierFragment extends BaseShowcaseFragment {
       };
 
   @Override
-  public void onCreate(@Nullable Bundle savedInstanceState) {
+  public void onCreate(final @Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
     mSampleUris = sampleUris().getSampleGifUris();
@@ -54,12 +54,12 @@ public class RetainingDataSourceSupplierFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_drawee_retaining_supplier, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     final SimpleDraweeView simpleDraweeView = view.findViewById(R.id.drawee_view);
     final RetainingDataSourceSupplier<CloseableReference<CloseableImage>> retainingSupplier =
         new RetainingDataSourceSupplier<>();
@@ -72,7 +72,7 @@ public class RetainingDataSourceSupplierFragment extends BaseShowcaseFragment {
     simpleDraweeView.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View view) {
+          public void onClick(final View view) {
             replaceImage(retainingSupplier);
           }
         });
@@ -84,7 +84,7 @@ public class RetainingDataSourceSupplierFragment extends BaseShowcaseFragment {
   }
 
   private void replaceImage(
-      RetainingDataSourceSupplier<CloseableReference<CloseableImage>> retainingSupplier) {
+      final RetainingDataSourceSupplier<CloseableReference<CloseableImage>> retainingSupplier) {
 
     retainingSupplier.replaceSupplier(
         Fresco.getImagePipeline()

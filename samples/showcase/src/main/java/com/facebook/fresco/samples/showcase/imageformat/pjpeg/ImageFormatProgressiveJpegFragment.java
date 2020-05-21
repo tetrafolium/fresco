@@ -56,12 +56,12 @@ public class ImageFormatProgressiveJpegFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_format_progressive_jpeg, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
 
     mSpinnerEntries =
         new Entry[] {
@@ -93,7 +93,7 @@ public class ImageFormatProgressiveJpegFragment extends BaseShowcaseFragment {
     switchProgressiveRenderingEnabled.setOnCheckedChangeListener(
         new CompoundButton.OnCheckedChangeListener() {
           @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+          public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             mProgressiveRenderingEnabled = isChecked;
           }
         });
@@ -105,18 +105,18 @@ public class ImageFormatProgressiveJpegFragment extends BaseShowcaseFragment {
     spinner.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             final Entry spinnerEntry = mSpinnerEntries[spinner.getSelectedItemPosition()];
             setImageUri(spinnerEntry.uri);
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
+          public void onNothingSelected(final AdapterView<?> parent) { }
         });
     spinner.setSelection(0);
   }
 
-  private void setImageUri(Uri uri) {
+  private void setImageUri(final Uri uri) {
     mDebugOutput.setText("");
     ImageRequest request =
         ImageRequestBuilder.newBuilderWithSource(uri)
@@ -131,9 +131,9 @@ public class ImageFormatProgressiveJpegFragment extends BaseShowcaseFragment {
                 new BaseControllerListener<ImageInfo>() {
                   @Override
                   public void onFinalImageSet(
-                      String id,
-                      @javax.annotation.Nullable ImageInfo imageInfo,
-                      @javax.annotation.Nullable Animatable animatable) {
+                      final String id,
+                      final @javax.annotation.Nullable ImageInfo imageInfo,
+                      final @javax.annotation.Nullable Animatable animatable) {
                     if (imageInfo != null) {
                       QualityInfo qualityInfo = imageInfo.getQualityInfo();
                       logScan(qualityInfo, true);
@@ -142,7 +142,7 @@ public class ImageFormatProgressiveJpegFragment extends BaseShowcaseFragment {
 
                   @Override
                   public void onIntermediateImageSet(
-                      String id, @javax.annotation.Nullable ImageInfo imageInfo) {
+                      final String id, final @javax.annotation.Nullable ImageInfo imageInfo) {
                     if (imageInfo != null) {
                       QualityInfo qualityInfo = imageInfo.getQualityInfo();
                       logScan(qualityInfo, false);
@@ -150,7 +150,7 @@ public class ImageFormatProgressiveJpegFragment extends BaseShowcaseFragment {
                   }
 
                   @Override
-                  public void onIntermediateImageFailed(String id, Throwable throwable) {
+                  public void onIntermediateImageFailed(final String id, final Throwable throwable) {
                     mDebugOutput.append(
                         String.format(
                             Locale.getDefault(),
@@ -162,7 +162,7 @@ public class ImageFormatProgressiveJpegFragment extends BaseShowcaseFragment {
     mSimpleDraweeView.setController(controller);
   }
 
-  private void logScan(QualityInfo qualityInfo, boolean isFinalImage) {
+  private void logScan(final QualityInfo qualityInfo, final boolean isFinalImage) {
     mDebugOutput.append(
         String.format(
             Locale.getDefault(),
@@ -195,17 +195,17 @@ public class ImageFormatProgressiveJpegFragment extends BaseShowcaseFragment {
     }
 
     @Override
-    public Entry getItem(int position) {
+    public Entry getItem(final int position) {
       return mSpinnerEntries[position];
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(final int position) {
       return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
       final LayoutInflater layoutInflater = getLayoutInflater(null);
 
       final View view =
@@ -226,7 +226,7 @@ public class ImageFormatProgressiveJpegFragment extends BaseShowcaseFragment {
     final int descriptionId;
     final Uri uri;
 
-    private Entry(int descriptionId, Uri uri) {
+    private Entry(final int descriptionId, final Uri uri) {
       this.descriptionId = descriptionId;
       this.uri = uri;
     }

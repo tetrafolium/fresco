@@ -51,16 +51,16 @@ public class DebugOverlayDrawable extends Drawable {
     this("");
   }
 
-  public DebugOverlayDrawable(String identifier) {
+  public DebugOverlayDrawable(final String identifier) {
     mIdentifier = identifier;
     reset();
   }
 
-  public void addDebugData(String key, String value) {
+  public void addDebugData(final String key, final String value) {
     addDebugData(key, value, TEXT_COLOR);
   }
 
-  public void addDebugData(String key, String value, Integer color) {
+  public void addDebugData(final String key, final String value, final Integer color) {
     mDebugData.put(key, new Pair<>(value, color));
     mMaxLineLength = Math.max(value.length(), mMaxLineLength);
     prepareDebugTextParameters(getBounds());
@@ -72,7 +72,7 @@ public class DebugOverlayDrawable extends Drawable {
     invalidateSelf();
   }
 
-  public void setBackgroundColor(@ColorInt int overlayColor) {
+  public void setBackgroundColor(final @ColorInt int overlayColor) {
     mBackgroundColor = overlayColor;
   }
 
@@ -82,18 +82,18 @@ public class DebugOverlayDrawable extends Drawable {
    * @see Gravity
    * @param textGravity the gravity to use
    */
-  public void setTextGravity(int textGravity) {
+  public void setTextGravity(final int textGravity) {
     mTextGravity = textGravity;
   }
 
   @Override
-  protected void onBoundsChange(Rect bounds) {
+  protected void onBoundsChange(final Rect bounds) {
     super.onBoundsChange(bounds);
     prepareDebugTextParameters(bounds);
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     Rect bounds = getBounds();
 
     // Draw bounding box
@@ -128,17 +128,17 @@ public class DebugOverlayDrawable extends Drawable {
   }
 
   @Override
-  public void setAlpha(int alpha) {}
+  public void setAlpha(final int alpha) { }
 
   @Override
-  public void setColorFilter(ColorFilter cf) {}
+  public void setColorFilter(final ColorFilter cf) { }
 
   @Override
   public int getOpacity() {
     return PixelFormat.TRANSLUCENT;
   }
 
-  private void prepareDebugTextParameters(Rect bounds) {
+  private void prepareDebugTextParameters(final Rect bounds) {
     if (mDebugData.isEmpty() || mMaxLineLength <= 0) {
       return;
     }
@@ -157,7 +157,7 @@ public class DebugOverlayDrawable extends Drawable {
             : bounds.top + TEXT_PADDING_PX + MIN_TEXT_SIZE_PX;
   }
 
-  protected void addDebugText(Canvas canvas, String label, String value, Integer color) {
+  protected void addDebugText(final Canvas canvas, final String label, final String value, final Integer color) {
     final String labelColon = label + ": ";
     final float labelColonWidth = mPaint.measureText(labelColon);
     final float valueWidth = mPaint.measureText(value);

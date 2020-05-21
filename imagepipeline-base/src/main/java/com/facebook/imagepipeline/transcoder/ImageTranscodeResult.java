@@ -14,7 +14,7 @@ public class ImageTranscodeResult {
 
   private @TranscodeStatus final int mTranscodeStatus;
 
-  public ImageTranscodeResult(@TranscodeStatus int transcodeStatus) {
+  public ImageTranscodeResult(final @TranscodeStatus int transcodeStatus) {
     mTranscodeStatus = transcodeStatus;
   }
 

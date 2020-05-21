@@ -142,7 +142,7 @@ public class MultiplexProducerTest {
     doAnswer(
             new Answer() {
               @Override
-              public Void answer(InvocationOnMock invocation) throws Throwable {
+              public Void answer(final InvocationOnMock invocation) throws Throwable {
                 if (mForwardingConsumer1 == null) {
                   mForwardingConsumer1 = (Consumer) invocation.getArguments()[0];
                   mMultiplexedContext1 = (BaseProducerContext) invocation.getArguments()[1];

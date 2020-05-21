@@ -21,7 +21,7 @@ public class BorderOptions {
    * @param width The width of the border, in pixels
    * @return BorderOptions
    */
-  public static BorderOptions create(@ColorInt int color, float width) {
+  public static BorderOptions create(final @ColorInt int color, final float width) {
     return new BorderOptions(color, width);
   }
 
@@ -34,7 +34,7 @@ public class BorderOptions {
    * @param padding The width around the edge of the image that will get chopped, in pixels
    * @return BorderOptions
    */
-  public static BorderOptions create(@ColorInt int color, float width, float padding) {
+  public static BorderOptions create(final @ColorInt int color, final float width, final float padding) {
     return new BorderOptions(color, width, padding);
   }
 
@@ -49,7 +49,7 @@ public class BorderOptions {
    * @return BorderOptions
    */
   public static BorderOptions create(
-      @ColorInt int color, float width, float padding, boolean scaleDownInsideBorders) {
+      final @ColorInt int color, final float width, final float padding, final boolean scaleDownInsideBorders) {
     return new BorderOptions(color, width, padding, scaleDownInsideBorders);
   }
 
@@ -58,16 +58,16 @@ public class BorderOptions {
   public final float padding;
   public final boolean scaleDownInsideBorders;
 
-  public BorderOptions(@ColorInt int color, float width) {
+  public BorderOptions(final @ColorInt int color, final float width) {
     this(color, width, 0, false);
   }
 
-  public BorderOptions(@ColorInt int color, float width, float padding) {
+  public BorderOptions(final @ColorInt int color, final float width, final float padding) {
     this(color, width, padding, false);
   }
 
   public BorderOptions(
-      @ColorInt int color, float width, float padding, boolean scaleDownInsideBorders) {
+      final @ColorInt int color, final float width, final float padding, final boolean scaleDownInsideBorders) {
     this.color = color;
     this.width = width;
     this.padding = padding;
@@ -75,7 +75,7 @@ public class BorderOptions {
   }
 
   @Override
-  public boolean equals(@Nullable Object obj) {
+  public boolean equals(final @Nullable Object obj) {
     if (this == obj) {
       return true;
     }

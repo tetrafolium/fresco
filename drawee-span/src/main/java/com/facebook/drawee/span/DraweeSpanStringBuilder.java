@@ -62,21 +62,21 @@ public class DraweeSpanStringBuilder extends SpannableStringBuilder
     super();
   }
 
-  public DraweeSpanStringBuilder(CharSequence text) {
+  public DraweeSpanStringBuilder(final CharSequence text) {
     super(text);
   }
 
-  public DraweeSpanStringBuilder(CharSequence text, int start, int end) {
+  public DraweeSpanStringBuilder(final CharSequence text, final int start, final int end) {
     super(text, start, end);
   }
 
   public void setImageSpan(
-      DraweeHolder draweeHolder,
-      int index,
+      final DraweeHolder draweeHolder,
+      final int index,
       final int drawableWidthPx,
       final int drawableHeightPx,
-      boolean enableResizing,
-      @BetterImageSpan.BetterImageSpanAlignment int verticalAlignment) {
+      final boolean enableResizing,
+      final @BetterImageSpan.BetterImageSpanAlignment int verticalAlignment) {
     setImageSpan(
         draweeHolder,
         index,
@@ -88,13 +88,13 @@ public class DraweeSpanStringBuilder extends SpannableStringBuilder
   }
 
   public void setImageSpan(
-      DraweeHolder draweeHolder,
-      int startIndex,
-      int endIndex,
+      final DraweeHolder draweeHolder,
+      final int startIndex,
+      final int endIndex,
       final int drawableWidthPx,
       final int drawableHeightPx,
-      boolean enableResizing,
-      @BetterImageSpan.BetterImageSpanAlignment int verticalAlignment) {
+      final boolean enableResizing,
+      final @BetterImageSpan.BetterImageSpanAlignment int verticalAlignment) {
     if (endIndex >= length()) {
       // Unfortunately, some callers use this wrong. The original implementation also swallows
       // an exception if this happens (e.g. if you tap on a video that has a minutiae as well.
@@ -120,14 +120,14 @@ public class DraweeSpanStringBuilder extends SpannableStringBuilder
   }
 
   public void setImageSpan(
-      Context context,
-      DraweeHierarchy draweeHierarchy,
-      DraweeController draweeController,
-      int index,
+      final Context context,
+      final DraweeHierarchy draweeHierarchy,
+      final DraweeController draweeController,
+      final int index,
       final int drawableWidthPx,
       final int drawableHeightPx,
-      boolean enableResizing,
-      @BetterImageSpan.BetterImageSpanAlignment int verticalAlignment) {
+      final boolean enableResizing,
+      final @BetterImageSpan.BetterImageSpanAlignment int verticalAlignment) {
     setImageSpan(
         context,
         draweeHierarchy,
@@ -141,15 +141,15 @@ public class DraweeSpanStringBuilder extends SpannableStringBuilder
   }
 
   public void setImageSpan(
-      Context context,
-      DraweeHierarchy draweeHierarchy,
-      DraweeController draweeController,
-      int startIndex,
-      int endIndex,
+      final Context context,
+      final DraweeHierarchy draweeHierarchy,
+      final DraweeController draweeController,
+      final int startIndex,
+      final int endIndex,
       final int drawableWidthPx,
       final int drawableHeightPx,
-      boolean enableResizing,
-      @BetterImageSpan.BetterImageSpanAlignment int verticalAlignment) {
+      final boolean enableResizing,
+      final @BetterImageSpan.BetterImageSpanAlignment int verticalAlignment) {
     DraweeHolder draweeHolder = DraweeHolder.create(draweeHierarchy, context);
     draweeHolder.setController(draweeController);
     setImageSpan(
@@ -162,7 +162,7 @@ public class DraweeSpanStringBuilder extends SpannableStringBuilder
         verticalAlignment);
   }
 
-  public void setDraweeSpanChangedListener(DraweeSpanChangedListener draweeSpanChangedListener) {
+  public void setDraweeSpanChangedListener(final DraweeSpanChangedListener draweeSpanChangedListener) {
     mDraweeSpanChangedListener = draweeSpanChangedListener;
   }
 
@@ -171,13 +171,13 @@ public class DraweeSpanStringBuilder extends SpannableStringBuilder
   }
 
   @Override
-  public void onAttachToView(View view) {
+  public void onAttachToView(final View view) {
     bindToView(view);
     onAttach();
   }
 
   @Override
-  public void onDetachFromView(View view) {
+  public void onDetachFromView(final View view) {
     unbindFromView(view);
     onDetach();
   }
@@ -201,24 +201,24 @@ public class DraweeSpanStringBuilder extends SpannableStringBuilder
     return mDraweeSpans;
   }
 
-  protected void bindToView(View view) {
+  protected void bindToView(final View view) {
     unbindFromPreviousComponent();
     mBoundView = view;
   }
 
-  protected void bindToDrawable(Drawable drawable) {
+  protected void bindToDrawable(final Drawable drawable) {
     unbindFromPreviousComponent();
     mBoundDrawable = drawable;
   }
 
-  protected void unbindFromView(View view) {
+  protected void unbindFromView(final View view) {
     if (view != mBoundView) {
       return; // we are bound to a different view already
     }
     mBoundView = null;
   }
 
-  protected void unbindFromDrawable(Drawable drawable) {
+  protected void unbindFromDrawable(final Drawable drawable) {
     if (drawable != mBoundDrawable) {
       return; // we are bound to a different view already
     }
@@ -237,7 +237,7 @@ public class DraweeSpanStringBuilder extends SpannableStringBuilder
   private class DrawableCallback implements Drawable.Callback {
 
     @Override
-    public void invalidateDrawable(Drawable who) {
+    public void invalidateDrawable(final Drawable who) {
       if (mBoundView != null) {
         // invalidateDrawable might not work correctly since we don't know the exact location
         // of the drawable and invalidateDrawable could mark the wrong rect as dirty
@@ -248,7 +248,7 @@ public class DraweeSpanStringBuilder extends SpannableStringBuilder
     }
 
     @Override
-    public void scheduleDrawable(Drawable who, Runnable what, long when) {
+    public void scheduleDrawable(final Drawable who, final Runnable what, final long when) {
       if (mBoundView != null) {
         // 'mBoundView.scheduleDrawable(who, what, when)' wouldn't work because
         // it cannot determine the 'who' drawable with 'verifyDrawable(who)'.
@@ -261,7 +261,7 @@ public class DraweeSpanStringBuilder extends SpannableStringBuilder
     }
 
     @Override
-    public void unscheduleDrawable(Drawable who, Runnable what) {
+    public void unscheduleDrawable(final Drawable who, final Runnable what) {
       if (mBoundView != null) {
         mBoundView.removeCallbacks(what);
       } else if (mBoundDrawable != null) {
@@ -278,11 +278,11 @@ public class DraweeSpanStringBuilder extends SpannableStringBuilder
 
     private final int mFixedHeight;
 
-    public DrawableChangedListener(DraweeSpan draweeSpan) {
+    public DrawableChangedListener(final DraweeSpan draweeSpan) {
       this(draweeSpan, false);
     }
 
-    public DrawableChangedListener(DraweeSpan draweeSpan, boolean enableResizing) {
+    public DrawableChangedListener(final DraweeSpan draweeSpan, final boolean enableResizing) {
       this(draweeSpan, enableResizing, UNSET_SIZE);
     }
 
@@ -296,7 +296,7 @@ public class DraweeSpanStringBuilder extends SpannableStringBuilder
      * @param enableResizing if true, the drawable will be resized according to the final image size
      * @param fixedHeight use a fixed height even if resizing is enabled {@link #UNSET_SIZE}
      */
-    public DrawableChangedListener(DraweeSpan draweeSpan, boolean enableResizing, int fixedHeight) {
+    public DrawableChangedListener(final DraweeSpan draweeSpan, final boolean enableResizing, final int fixedHeight) {
       Preconditions.checkNotNull(draweeSpan);
       mDraweeSpan = draweeSpan;
       mEnableResizing = enableResizing;
@@ -304,7 +304,7 @@ public class DraweeSpanStringBuilder extends SpannableStringBuilder
     }
 
     @Override
-    public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
+    public void onFinalImageSet(final String id, final ImageInfo imageInfo, final Animatable animatable) {
       if (mEnableResizing
           && imageInfo != null
           && mDraweeSpan.getDraweeHolder().getTopLevelDrawable() != null) {

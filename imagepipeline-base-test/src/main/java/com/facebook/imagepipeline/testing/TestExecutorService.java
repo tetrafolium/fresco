@@ -20,7 +20,7 @@ public class TestExecutorService extends AbstractExecutorService implements Seri
   protected final ScheduledQueue scheduledQueue;
   private final FakeClock fakeClock;
 
-  public TestExecutorService(FakeClock fakeClock) {
+  public TestExecutorService(final FakeClock fakeClock) {
     this.fakeClock = fakeClock;
     this.scheduledQueue = new ScheduledQueue(fakeClock);
   }
@@ -39,7 +39,7 @@ public class TestExecutorService extends AbstractExecutorService implements Seri
   }
 
   @Override
-  public void shutdown() {}
+  public void shutdown() { }
 
   @Override
   public List<Runnable> shutdownNow() {
@@ -57,22 +57,22 @@ public class TestExecutorService extends AbstractExecutorService implements Seri
   }
 
   @Override
-  public boolean awaitTermination(long l, TimeUnit timeUnit) throws InterruptedException {
+  public boolean awaitTermination(final long l, final TimeUnit timeUnit) throws InterruptedException {
     throw new RuntimeException();
   }
 
   @Override
-  public void execute(Runnable runnable) {
+  public void execute(final Runnable runnable) {
     scheduledQueue.add(runnable);
   }
 
   @Override
-  protected <T> RunnableFuture<T> newTaskFor(Runnable runnable, T value) {
+  protected <T> RunnableFuture<T> newTaskFor(final Runnable runnable, final T value) {
     return super.newTaskFor(runnable, value);
   }
 
   @Override
-  protected <T> RunnableFuture<T> newTaskFor(Callable<T> callable) {
+  protected <T> RunnableFuture<T> newTaskFor(final Callable<T> callable) {
     return super.newTaskFor(callable);
   }
 

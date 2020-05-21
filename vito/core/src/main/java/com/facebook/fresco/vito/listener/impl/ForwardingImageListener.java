@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 public class ForwardingImageListener implements ImageListener {
 
   @Nullable
-  public static ImageListener create(@Nullable ImageListener a, @Nullable ImageListener b) {
+  public static ImageListener create(final @Nullable ImageListener a, final @Nullable ImageListener b) {
     if (a == null) {
       return b;
     }
@@ -29,7 +29,7 @@ public class ForwardingImageListener implements ImageListener {
 
   @Nullable
   public static ImageListener create(
-      @Nullable ImageListener a, @Nullable ImageListener b, @Nullable ImageListener c) {
+      final @Nullable ImageListener a, final @Nullable ImageListener b, final @Nullable ImageListener c) {
     if (a == null) {
       return create(b, c);
     }
@@ -44,12 +44,12 @@ public class ForwardingImageListener implements ImageListener {
 
   private final ImageListener[] mListeners;
 
-  public ForwardingImageListener(ImageListener... listeners) {
+  public ForwardingImageListener(final ImageListener... listeners) {
     mListeners = listeners;
   }
 
   @Override
-  public void onSubmit(long id, Object callerContext) {
+  public void onSubmit(final long id, final Object callerContext) {
     for (int i = 0; i < mListeners.length; i++) {
       if (mListeners[i] != null) {
         mListeners[i].onSubmit(id, callerContext);
@@ -58,7 +58,7 @@ public class ForwardingImageListener implements ImageListener {
   }
 
   @Override
-  public void onPlaceholderSet(long id, @Nullable Drawable placeholder) {
+  public void onPlaceholderSet(final long id, final @Nullable Drawable placeholder) {
     for (int i = 0; i < mListeners.length; i++) {
       if (mListeners[i] != null) {
         mListeners[i].onPlaceholderSet(id, placeholder);
@@ -68,10 +68,10 @@ public class ForwardingImageListener implements ImageListener {
 
   @Override
   public void onFinalImageSet(
-      long id,
-      @ImageOrigin int imageOrigin,
-      @Nullable ImageInfo imageInfo,
-      @Nullable Drawable drawable) {
+      final long id,
+      final @ImageOrigin int imageOrigin,
+      final @Nullable ImageInfo imageInfo,
+      final @Nullable Drawable drawable) {
     for (int i = 0; i < mListeners.length; i++) {
       if (mListeners[i] != null) {
         mListeners[i].onFinalImageSet(id, imageOrigin, imageInfo, drawable);
@@ -80,7 +80,7 @@ public class ForwardingImageListener implements ImageListener {
   }
 
   @Override
-  public void onIntermediateImageSet(long id, @Nullable ImageInfo imageInfo) {
+  public void onIntermediateImageSet(final long id, final @Nullable ImageInfo imageInfo) {
     for (int i = 0; i < mListeners.length; i++) {
       if (mListeners[i] != null) {
         mListeners[i].onIntermediateImageSet(id, imageInfo);
@@ -89,7 +89,7 @@ public class ForwardingImageListener implements ImageListener {
   }
 
   @Override
-  public void onIntermediateImageFailed(long id, Throwable throwable) {
+  public void onIntermediateImageFailed(final long id, final Throwable throwable) {
     for (int i = 0; i < mListeners.length; i++) {
       if (mListeners[i] != null) {
         mListeners[i].onIntermediateImageFailed(id, throwable);
@@ -98,7 +98,7 @@ public class ForwardingImageListener implements ImageListener {
   }
 
   @Override
-  public void onFailure(long id, @Nullable Drawable error, @Nullable Throwable throwable) {
+  public void onFailure(final long id, final @Nullable Drawable error, final @Nullable Throwable throwable) {
     for (int i = 0; i < mListeners.length; i++) {
       if (mListeners[i] != null) {
         mListeners[i].onFailure(id, error, throwable);
@@ -107,7 +107,7 @@ public class ForwardingImageListener implements ImageListener {
   }
 
   @Override
-  public void onRelease(long id) {
+  public void onRelease(final long id) {
     for (int i = 0; i < mListeners.length; i++) {
       if (mListeners[i] != null) {
         mListeners[i].onRelease(id);
@@ -116,7 +116,7 @@ public class ForwardingImageListener implements ImageListener {
   }
 
   @Override
-  public void onImageDrawn(String id, ImageInfo imageInfo, DimensionsInfo dimensionsInfo) {
+  public void onImageDrawn(final String id, final ImageInfo imageInfo, final DimensionsInfo dimensionsInfo) {
     for (int i = 0; i < mListeners.length; i++) {
       if (mListeners[i] != null) {
         mListeners[i].onImageDrawn(id, imageInfo, dimensionsInfo);

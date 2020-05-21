@@ -85,13 +85,13 @@ public class ImagePipelinePrefetchFragment extends BaseShowcaseFragment {
     private int mFailed = 0;
 
     @Override
-    protected void onNewResultImpl(DataSource<Void> dataSource) {
+    protected void onNewResultImpl(final DataSource<Void> dataSource) {
       mSuccessful++;
       updateDisplay();
     }
 
     @Override
-    protected void onFailureImpl(DataSource<Void> dataSource) {
+    protected void onFailureImpl(final DataSource<Void> dataSource) {
       mFailed++;
       updateDisplay();
     }
@@ -113,12 +113,12 @@ public class ImagePipelinePrefetchFragment extends BaseShowcaseFragment {
 
   @Override
   public @Nullable View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_imagepipeline_prefetch, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
     mUris =
@@ -131,7 +131,7 @@ public class ImagePipelinePrefetchFragment extends BaseShowcaseFragment {
     clearCacheButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             for (Uri uri : mUris) {
               Fresco.getImagePipeline().evictFromCache(uri);
             }
@@ -143,7 +143,7 @@ public class ImagePipelinePrefetchFragment extends BaseShowcaseFragment {
     mPrefetchDiskButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             mPrefetchDiskButton.setEnabled(false);
             final PrefetchSubscriber subscriber = new PrefetchSubscriber();
             for (Uri uri : mUris) {
@@ -158,7 +158,7 @@ public class ImagePipelinePrefetchFragment extends BaseShowcaseFragment {
     mPrefetchEncodedButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             mPrefetchEncodedButton.setEnabled(false);
             final PrefetchSubscriber subscriber = new PrefetchSubscriber();
             for (Uri uri : mUris) {
@@ -173,7 +173,7 @@ public class ImagePipelinePrefetchFragment extends BaseShowcaseFragment {
     mPrefetchBitmapButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             mPrefetchBitmapButton.setEnabled(false);
             final PrefetchSubscriber subscriber = new PrefetchSubscriber();
             for (Uri uri : mUris) {
@@ -191,7 +191,7 @@ public class ImagePipelinePrefetchFragment extends BaseShowcaseFragment {
           private boolean mShowing = false;
 
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             if (!mShowing) {
               for (int i = 0; i < mDraweesHolder.getChildCount(); i++) {
                 SimpleDraweeView draweeView = (SimpleDraweeView) mDraweesHolder.getChildAt(i);

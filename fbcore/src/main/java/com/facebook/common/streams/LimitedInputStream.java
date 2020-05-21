@@ -16,7 +16,7 @@ public class LimitedInputStream extends FilterInputStream {
   private int mBytesToRead;
   private int mBytesToReadWhenMarked;
 
-  public LimitedInputStream(InputStream inputStream, int limit) {
+  public LimitedInputStream(final InputStream inputStream, final int limit) {
     super(inputStream);
     if (inputStream == null) {
       throw new NullPointerException();
@@ -43,7 +43,7 @@ public class LimitedInputStream extends FilterInputStream {
   }
 
   @Override
-  public int read(byte[] buffer, int byteOffset, int byteCount) throws IOException {
+  public int read(final byte[] buffer, final int byteOffset, final int byteCount) throws IOException {
     if (mBytesToRead == 0) {
       return -1;
     }
@@ -58,7 +58,7 @@ public class LimitedInputStream extends FilterInputStream {
   }
 
   @Override
-  public long skip(long byteCount) throws IOException {
+  public long skip(final long byteCount) throws IOException {
     final long maxBytesToSkip = Math.min(byteCount, mBytesToRead);
     final long bytesSkipped = in.skip(maxBytesToSkip);
     mBytesToRead -= bytesSkipped;
@@ -71,7 +71,7 @@ public class LimitedInputStream extends FilterInputStream {
   }
 
   @Override
-  public void mark(int readLimit) {
+  public void mark(final int readLimit) {
     if (in.markSupported()) {
       in.mark(readLimit);
       mBytesToReadWhenMarked = mBytesToRead;

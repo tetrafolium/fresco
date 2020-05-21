@@ -35,12 +35,12 @@ public class ImageFormatWebpFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_format_webp, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     final SimpleDraweeView draweeWebpStatic = view.findViewById(R.id.drawee_view_webp_static);
     draweeWebpStatic.setImageURI(sampleUris().createWebpStaticUri());
 
@@ -52,7 +52,7 @@ public class ImageFormatWebpFragment extends BaseShowcaseFragment {
     switchBackground.setOnCheckedChangeListener(
         new CompoundButton.OnCheckedChangeListener() {
           @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+          public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             draweeWebpTranslucent
                 .getHierarchy()
                 .setBackgroundImage(isChecked ? new CheckerBoardDrawable(getResources()) : null);

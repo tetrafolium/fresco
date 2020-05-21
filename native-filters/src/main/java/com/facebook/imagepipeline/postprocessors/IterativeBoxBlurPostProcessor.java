@@ -29,11 +29,11 @@ public class IterativeBoxBlurPostProcessor extends BasePostprocessor {
 
   private CacheKey mCacheKey;
 
-  public IterativeBoxBlurPostProcessor(int blurRadius) {
+  public IterativeBoxBlurPostProcessor(final int blurRadius) {
     this(DEFAULT_ITERATIONS, blurRadius);
   }
 
-  public IterativeBoxBlurPostProcessor(int iterations, int blurRadius) {
+  public IterativeBoxBlurPostProcessor(final int iterations, final int blurRadius) {
     Preconditions.checkArgument(iterations > 0);
     Preconditions.checkArgument(blurRadius > 0);
     mIterations = iterations;
@@ -41,7 +41,7 @@ public class IterativeBoxBlurPostProcessor extends BasePostprocessor {
   }
 
   @Override
-  public void process(Bitmap bitmap) {
+  public void process(final Bitmap bitmap) {
     NativeBlurFilter.iterativeBoxBlur(bitmap, mIterations, mBlurRadius);
   }
 

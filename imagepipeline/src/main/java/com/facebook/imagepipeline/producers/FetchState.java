@@ -27,7 +27,7 @@ public class FetchState {
   private int mOnNewResultStatusFlags;
   private @Nullable BytesRange mResponseBytesRange;
 
-  public FetchState(Consumer<EncodedImage> consumer, ProducerContext context) {
+  public FetchState(final Consumer<EncodedImage> consumer, final ProducerContext context) {
     mConsumer = consumer;
     mContext = context;
     mLastIntermediateResultTimeMs = 0;
@@ -57,7 +57,7 @@ public class FetchState {
     return mLastIntermediateResultTimeMs;
   }
 
-  public void setLastIntermediateResultTimeMs(long lastIntermediateResultTimeMs) {
+  public void setLastIntermediateResultTimeMs(final long lastIntermediateResultTimeMs) {
     mLastIntermediateResultTimeMs = lastIntermediateResultTimeMs;
   }
 
@@ -70,7 +70,7 @@ public class FetchState {
    * EXPERIMENTAL: Allows the fetcher to set extra status flags to be included in calls to {@link
    * Consumer#onNewResult(Object, int)}.
    */
-  public void setOnNewResultStatusFlags(@Consumer.Status int onNewResultStatusFlags) {
+  public void setOnNewResultStatusFlags(final @Consumer.Status int onNewResultStatusFlags) {
     mOnNewResultStatusFlags = onNewResultStatusFlags;
   }
 
@@ -83,7 +83,7 @@ public class FetchState {
    * EXPERIMENTAL: Allows the fetcher to identify that the reponse is for an imcomplete portion of
    * the whole image by defining the range of bytes being provided.
    */
-  public void setResponseBytesRange(BytesRange bytesRange) {
+  public void setResponseBytesRange(final BytesRange bytesRange) {
     mResponseBytesRange = bytesRange;
   }
 }

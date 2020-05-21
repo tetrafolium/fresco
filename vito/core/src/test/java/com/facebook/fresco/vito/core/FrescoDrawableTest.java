@@ -40,7 +40,7 @@ public class FrescoDrawableTest {
             mCloseableImage,
             new ResourceReleaser<CloseableImage>() {
               @Override
-              public void release(CloseableImage value) {
+              public void release(final CloseableImage value) {
                 value.close();
                 mLatch.countDown();
               }

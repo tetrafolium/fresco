@@ -84,7 +84,7 @@ public class FrescoControllerImplTest {
     mLightweightBackgroundThreadExecutor =
         new Executor() {
           @Override
-          public void execute(Runnable command) {
+          public void execute(final Runnable command) {
             command.run();
           }
         };
@@ -325,5 +325,5 @@ public class FrescoControllerImplTest {
     return requestListener;
   }
 
-  public interface MockProducer extends Producer<CloseableReference<CloseableImage>> {}
+  public interface MockProducer extends Producer<CloseableReference<CloseableImage>> { }
 }

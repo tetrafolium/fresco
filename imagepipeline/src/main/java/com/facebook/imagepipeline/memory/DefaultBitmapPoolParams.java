@@ -15,7 +15,7 @@ public class DefaultBitmapPoolParams {
   /** We are not reusing Bitmaps and want to free them as soon as possible. */
   private static final int MAX_SIZE_SOFT_CAP = 0;
 
-  private DefaultBitmapPoolParams() {}
+  private DefaultBitmapPoolParams() { }
 
   /**
    * Our Bitmaps live in ashmem, meaning that they are pinned in androids' shared native memory.

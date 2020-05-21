@@ -59,7 +59,7 @@ public class MainFragment extends Fragment {
   private PerfListener mPerfListener;
 
   @Override
-  public void onCreate(@Nullable Bundle savedInstanceState) {
+  public void onCreate(final @Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setHasOptionsMenu(true);
     mPerfListener = new PerfListener();
@@ -67,7 +67,7 @@ public class MainFragment extends Fragment {
 
   @Override
   public View onCreateView(
-      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+      final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
     mConfig = Config.load(getContext());
     // Initialize the SimpleAdapter
     mSimpleAdapter = initializeSimpleAdapter(mConfig);
@@ -94,7 +94,7 @@ public class MainFragment extends Fragment {
   }
 
   @Override
-  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+  public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
     inflater.inflate(R.menu.menu, menu);
     super.onCreateOptionsMenu(menu, inflater);
   }
@@ -195,7 +195,7 @@ public class MainFragment extends Fragment {
 
   @Override
   public void onRequestPermissionsResult(
-      int requestCode, String[] permissions, int[] grantResults) {
+      final int requestCode, final String[] permissions, final int[] grantResults) {
     if (requestCode == REQUEST_READ_EXTERNAL_ID
         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
       mSimpleAdapter = ContentProviderSimpleAdapter.getExternalPhotoSimpleAdapter(getActivity());

@@ -95,7 +95,7 @@ public class FixedNumberBitmapFramePreparationStrategyTest {
     verifyPrepareCalledForFramesInOrder(1, 2);
   }
 
-  private void verifyPrepareCalledForFramesInOrder(int... frameNumbers) {
+  private void verifyPrepareCalledForFramesInOrder(final int... frameNumbers) {
     InOrder inOrderBitmapFramePreparer = inOrder(mBitmapFramePreparer);
     for (int frameNumber : frameNumbers) {
       inOrderBitmapFramePreparer

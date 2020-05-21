@@ -48,7 +48,7 @@ public class BytesRange {
    */
   public final int to;
 
-  public BytesRange(int from, int to) {
+  public BytesRange(final int from, final int to) {
     this.from = from;
     this.to = to;
   }
@@ -62,7 +62,7 @@ public class BytesRange {
    *
    * @return true if the provided range is within this one, false if given null
    */
-  public boolean contains(@Nullable BytesRange compare) {
+  public boolean contains(final @Nullable BytesRange compare) {
     if (compare == null) {
       return false;
     }
@@ -75,7 +75,7 @@ public class BytesRange {
     return String.format((Locale) null, "%s-%s", valueOrEmpty(from), valueOrEmpty(to));
   }
 
-  private static String valueOrEmpty(int n) {
+  private static String valueOrEmpty(final int n) {
     if (n == TO_END_OF_CONTENT) {
       return "";
     }
@@ -83,7 +83,7 @@ public class BytesRange {
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(final Object other) {
     if (other == this) {
       return true;
     }
@@ -105,7 +105,7 @@ public class BytesRange {
    *
    * @param from the first byte to request, must be positive or zero
    */
-  public static BytesRange from(int from) {
+  public static BytesRange from(final int from) {
     Preconditions.checkArgument(from >= 0);
     return new BytesRange(from, TO_END_OF_CONTENT);
   }
@@ -116,7 +116,7 @@ public class BytesRange {
    *
    * @param to the maximum byte to be requested, must be positive
    */
-  public static BytesRange toMax(int to) {
+  public static BytesRange toMax(final int to) {
     Preconditions.checkArgument(to > 0);
     return new BytesRange(0, to);
   }
@@ -136,7 +136,7 @@ public class BytesRange {
    * @return the parsed range
    */
   @Nullable
-  public static BytesRange fromContentRangeHeader(@Nullable String header)
+  public static BytesRange fromContentRangeHeader(final @Nullable String header)
       throws IllegalArgumentException {
     if (header == null) {
       return null;

@@ -57,7 +57,7 @@ public class RoundingParams {
    * @param roundAsCircle whether or not to round as circle
    * @return modified instance
    */
-  public RoundingParams setRoundAsCircle(boolean roundAsCircle) {
+  public RoundingParams setRoundAsCircle(final boolean roundAsCircle) {
     mRoundAsCircle = roundAsCircle;
     return this;
   }
@@ -73,7 +73,7 @@ public class RoundingParams {
    * @param radius corner radius in pixels
    * @return modified instance
    */
-  public RoundingParams setCornersRadius(float radius) {
+  public RoundingParams setCornersRadius(final float radius) {
     Arrays.fill(getOrCreateRoundedCornersRadii(), radius);
     return this;
   }
@@ -88,7 +88,7 @@ public class RoundingParams {
    * @return modified instance
    */
   public RoundingParams setCornersRadii(
-      float topLeft, float topRight, float bottomRight, float bottomLeft) {
+      final float topLeft, final float topRight, final float bottomRight, final float bottomLeft) {
     float[] radii = getOrCreateRoundedCornersRadii();
     radii[0] = radii[1] = topLeft;
     radii[2] = radii[3] = topRight;
@@ -104,7 +104,7 @@ public class RoundingParams {
    *     The corners are ordered top-left, top-right, bottom-right, bottom-left.
    * @return modified instance
    */
-  public RoundingParams setCornersRadii(float[] radii) {
+  public RoundingParams setCornersRadii(final float[] radii) {
     Preconditions.checkNotNull(radii);
     Preconditions.checkArgument(radii.length == 8, "radii should have exactly 8 values");
     System.arraycopy(radii, 0, getOrCreateRoundedCornersRadii(), 0, 8);
@@ -127,7 +127,7 @@ public class RoundingParams {
    * @param roundingMethod method of rounding
    * @return modified instance
    */
-  public RoundingParams setRoundingMethod(RoundingMethod roundingMethod) {
+  public RoundingParams setRoundingMethod(final RoundingMethod roundingMethod) {
     mRoundingMethod = roundingMethod;
     return this;
   }
@@ -142,7 +142,7 @@ public class RoundingParams {
    *
    * @param overlayColor overlay color
    */
-  public RoundingParams setOverlayColor(@ColorInt int overlayColor) {
+  public RoundingParams setOverlayColor(final @ColorInt int overlayColor) {
     mOverlayColor = overlayColor;
     mRoundingMethod = RoundingMethod.OVERLAY_COLOR;
     return this;
@@ -166,18 +166,18 @@ public class RoundingParams {
   }
 
   /** Factory method that creates new RoundingParams with the specified corners radius. */
-  public static RoundingParams fromCornersRadius(float radius) {
+  public static RoundingParams fromCornersRadius(final float radius) {
     return (new RoundingParams()).setCornersRadius(radius);
   }
 
   /** Factory method that creates new RoundingParams with the specified corners radii. */
   public static RoundingParams fromCornersRadii(
-      float topLeft, float topRight, float bottomRight, float bottomLeft) {
+      final float topLeft, final float topRight, final float bottomRight, final float bottomLeft) {
     return (new RoundingParams()).setCornersRadii(topLeft, topRight, bottomRight, bottomLeft);
   }
 
   /** Factory method that creates new RoundingParams with the specified corners radii. */
-  public static RoundingParams fromCornersRadii(float[] radii) {
+  public static RoundingParams fromCornersRadii(final float[] radii) {
     return (new RoundingParams()).setCornersRadii(radii);
   }
 
@@ -186,7 +186,7 @@ public class RoundingParams {
    *
    * @param width of the width
    */
-  public RoundingParams setBorderWidth(float width) {
+  public RoundingParams setBorderWidth(final float width) {
     Preconditions.checkArgument(width >= 0, "the border width cannot be < 0");
     mBorderWidth = width;
     return this;
@@ -202,7 +202,7 @@ public class RoundingParams {
    *
    * @param color of the border
    */
-  public RoundingParams setBorderColor(@ColorInt int color) {
+  public RoundingParams setBorderColor(final @ColorInt int color) {
     mBorderColor = color;
     return this;
   }
@@ -218,7 +218,7 @@ public class RoundingParams {
    * @param color of the border
    * @param width of the width
    */
-  public RoundingParams setBorder(@ColorInt int color, float width) {
+  public RoundingParams setBorder(final @ColorInt int color, final float width) {
     Preconditions.checkArgument(width >= 0, "the border width cannot be < 0");
     mBorderWidth = width;
     mBorderColor = color;
@@ -230,7 +230,7 @@ public class RoundingParams {
    *
    * @param padding the padding in pixels
    */
-  public RoundingParams setPadding(float padding) {
+  public RoundingParams setPadding(final float padding) {
     Preconditions.checkArgument(padding >= 0, "the padding cannot be < 0");
     mPadding = padding;
     return this;
@@ -248,7 +248,7 @@ public class RoundingParams {
    *     will be drawn over image
    * @return modified instance
    */
-  public RoundingParams setScaleDownInsideBorders(boolean scaleDownInsideBorders) {
+  public RoundingParams setScaleDownInsideBorders(final boolean scaleDownInsideBorders) {
     mScaleDownInsideBorders = scaleDownInsideBorders;
     return this;
   }
@@ -267,7 +267,7 @@ public class RoundingParams {
    * @param paintFilterBitmap whether to set FILTER_BITMAP_FLAG flag to Paint.
    * @return modified instance
    */
-  public RoundingParams setPaintFilterBitmap(boolean paintFilterBitmap) {
+  public RoundingParams setPaintFilterBitmap(final boolean paintFilterBitmap) {
     mPaintFilterBitmap = paintFilterBitmap;
     return this;
   }
@@ -278,7 +278,7 @@ public class RoundingParams {
   }
 
   @Override
-  public boolean equals(@Nullable Object o) {
+  public boolean equals(final @Nullable Object o) {
     if (this == o) {
       return true;
     }

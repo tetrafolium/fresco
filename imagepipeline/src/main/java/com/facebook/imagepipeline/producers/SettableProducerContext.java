@@ -17,7 +17,7 @@ import javax.annotation.concurrent.ThreadSafe;
 @ThreadSafe
 public class SettableProducerContext extends BaseProducerContext {
 
-  public SettableProducerContext(ProducerContext context) {
+  public SettableProducerContext(final ProducerContext context) {
     this(
         context.getImageRequest(),
         context.getId(),
@@ -31,7 +31,7 @@ public class SettableProducerContext extends BaseProducerContext {
         context.getImagePipelineConfig());
   }
 
-  public SettableProducerContext(ImageRequest overrideRequest, ProducerContext context) {
+  public SettableProducerContext(final ImageRequest overrideRequest, final ProducerContext context) {
     this(
         overrideRequest,
         context.getId(),
@@ -46,15 +46,15 @@ public class SettableProducerContext extends BaseProducerContext {
   }
 
   public SettableProducerContext(
-      ImageRequest imageRequest,
-      String id,
-      ProducerListener2 producerListener,
-      Object callerContext,
-      ImageRequest.RequestLevel lowestPermittedRequestLevel,
-      boolean isPrefetch,
-      boolean isIntermediateResultExpected,
-      Priority priority,
-      ImagePipelineConfig imagePipelineConfig) {
+      final ImageRequest imageRequest,
+      final String id,
+      final ProducerListener2 producerListener,
+      final Object callerContext,
+      final ImageRequest.RequestLevel lowestPermittedRequestLevel,
+      final boolean isPrefetch,
+      final boolean isIntermediateResultExpected,
+      final Priority priority,
+      final ImagePipelineConfig imagePipelineConfig) {
     super(
         imageRequest,
         id,
@@ -68,16 +68,16 @@ public class SettableProducerContext extends BaseProducerContext {
   }
 
   public SettableProducerContext(
-      ImageRequest imageRequest,
-      String id,
-      @Nullable String uiComponentId,
-      ProducerListener2 producerListener,
-      Object callerContext,
-      ImageRequest.RequestLevel lowestPermittedRequestLevel,
-      boolean isPrefetch,
-      boolean isIntermediateResultExpected,
-      Priority priority,
-      ImagePipelineConfig imagePipelineConfig) {
+      final ImageRequest imageRequest,
+      final String id,
+      final @Nullable String uiComponentId,
+      final ProducerListener2 producerListener,
+      final Object callerContext,
+      final ImageRequest.RequestLevel lowestPermittedRequestLevel,
+      final boolean isPrefetch,
+      final boolean isIntermediateResultExpected,
+      final Priority priority,
+      final ImagePipelineConfig imagePipelineConfig) {
     super(
         imageRequest,
         id,
@@ -96,7 +96,7 @@ public class SettableProducerContext extends BaseProducerContext {
    *
    * @param isPrefetch
    */
-  public void setIsPrefetch(boolean isPrefetch) {
+  public void setIsPrefetch(final boolean isPrefetch) {
     BaseProducerContext.callOnIsPrefetchChanged(setIsPrefetchNoCallbacks(isPrefetch));
   }
 
@@ -105,7 +105,7 @@ public class SettableProducerContext extends BaseProducerContext {
    *
    * @param isIntermediateResultExpected
    */
-  public void setIsIntermediateResultExpected(boolean isIntermediateResultExpected) {
+  public void setIsIntermediateResultExpected(final boolean isIntermediateResultExpected) {
     BaseProducerContext.callOnIsIntermediateResultExpectedChanged(
         setIsIntermediateResultExpectedNoCallbacks(isIntermediateResultExpected));
   }
@@ -115,7 +115,7 @@ public class SettableProducerContext extends BaseProducerContext {
    *
    * @param priority
    */
-  public void setPriority(Priority priority) {
+  public void setPriority(final Priority priority) {
     BaseProducerContext.callOnPriorityChanged(setPriorityNoCallbacks(priority));
   }
 }

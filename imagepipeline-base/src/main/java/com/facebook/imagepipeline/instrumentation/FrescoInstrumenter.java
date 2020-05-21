@@ -82,7 +82,7 @@ public final class FrescoInstrumenter {
    *
    * @param instrumenter to be notified or null to reset.
    */
-  public static void provide(@Nullable Instrumenter instrumenter) {
+  public static void provide(final @Nullable Instrumenter instrumenter) {
     sInstance = instrumenter;
   }
 
@@ -95,7 +95,7 @@ public final class FrescoInstrumenter {
   }
 
   @Nullable
-  public static Object onBeforeSubmitWork(@Nullable String tag) {
+  public static Object onBeforeSubmitWork(final @Nullable String tag) {
     final Instrumenter instrumenter = sInstance;
     if (instrumenter == null || tag == null) {
       return null;
@@ -104,7 +104,7 @@ public final class FrescoInstrumenter {
   }
 
   @Nullable
-  public static Object onBeginWork(@Nullable Object token, @Nullable String tag) {
+  public static Object onBeginWork(final @Nullable Object token, final @Nullable String tag) {
     final Instrumenter instrumenter = sInstance;
     if (instrumenter == null || token == null) {
       return null;
@@ -112,7 +112,7 @@ public final class FrescoInstrumenter {
     return instrumenter.onBeginWork(token, tag);
   }
 
-  public static void onEndWork(@Nullable Object token) {
+  public static void onEndWork(final @Nullable Object token) {
     final Instrumenter instrumenter = sInstance;
     if (instrumenter == null || token == null) {
       return;
@@ -120,7 +120,7 @@ public final class FrescoInstrumenter {
     instrumenter.onEndWork(token);
   }
 
-  public static void markFailure(@Nullable Object token, Throwable th) {
+  public static void markFailure(final @Nullable Object token, final Throwable th) {
     final Instrumenter instrumenter = sInstance;
     if (instrumenter == null || token == null) {
       return;
@@ -129,7 +129,7 @@ public final class FrescoInstrumenter {
   }
 
   @Nullable
-  public static Runnable decorateRunnable(@Nullable Runnable runnable, @Nullable String tag) {
+  public static Runnable decorateRunnable(final @Nullable Runnable runnable, final @Nullable String tag) {
     final Instrumenter instrumenter = sInstance;
     if (instrumenter == null || runnable == null || tag == null) {
       return runnable;

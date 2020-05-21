@@ -53,7 +53,7 @@ public class ThrottlingProducerTest {
       doAnswer(
               new Answer() {
                 @Override
-                public Object answer(InvocationOnMock invocation) throws Throwable {
+                public Object answer(final InvocationOnMock invocation) throws Throwable {
                   mThrottlerConsumers[iFinal] = (Consumer<Object>) invocation.getArguments()[0];
                   return null;
                 }

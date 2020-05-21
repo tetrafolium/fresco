@@ -26,7 +26,7 @@ public class AnimatedImageResult {
   private @Nullable List<CloseableReference<Bitmap>> mDecodedFrames;
   private @Nullable BitmapTransformation mBitmapTransformation;
 
-  AnimatedImageResult(AnimatedImageResultBuilder builder) {
+  AnimatedImageResult(final AnimatedImageResultBuilder builder) {
     mImage = Preconditions.checkNotNull(builder.getImage());
     mFrameForPreview = builder.getFrameForPreview();
     mPreviewBitmap = builder.getPreviewBitmap();
@@ -34,7 +34,7 @@ public class AnimatedImageResult {
     mBitmapTransformation = builder.getBitmapTransformation();
   }
 
-  private AnimatedImageResult(AnimatedImage image) {
+  private AnimatedImageResult(final AnimatedImage image) {
     mImage = Preconditions.checkNotNull(image);
     mFrameForPreview = 0;
   }
@@ -45,7 +45,7 @@ public class AnimatedImageResult {
    * @param image the image
    * @return the result
    */
-  public static AnimatedImageResult forAnimatedImage(AnimatedImage image) {
+  public static AnimatedImageResult forAnimatedImage(final AnimatedImage image) {
     return new AnimatedImageResult(image);
   }
 
@@ -55,7 +55,7 @@ public class AnimatedImageResult {
    * @param image the image
    * @return the builder
    */
-  public static AnimatedImageResultBuilder newBuilder(AnimatedImage image) {
+  public static AnimatedImageResultBuilder newBuilder(final AnimatedImage image) {
     return new AnimatedImageResultBuilder(image);
   }
 
@@ -86,7 +86,7 @@ public class AnimatedImageResult {
    * @return a reference to the preview bitmap which must be released by the caller when done or
    *     null if there is no preview bitmap set
    */
-  public synchronized @Nullable CloseableReference<Bitmap> getDecodedFrame(int index) {
+  public synchronized @Nullable CloseableReference<Bitmap> getDecodedFrame(final int index) {
     if (mDecodedFrames != null) {
       return CloseableReference.cloneOrNull(mDecodedFrames.get(index));
     }
@@ -100,7 +100,7 @@ public class AnimatedImageResult {
    * @param index the index of the frame to get
    * @return true if the result has the decoded frame
    */
-  public synchronized boolean hasDecodedFrame(int index) {
+  public synchronized boolean hasDecodedFrame(final int index) {
     return mDecodedFrames != null && mDecodedFrames.get(index) != null;
   }
 

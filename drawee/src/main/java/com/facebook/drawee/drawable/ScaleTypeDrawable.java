@@ -50,7 +50,7 @@ public class ScaleTypeDrawable extends ForwardingDrawable {
    * @param drawable underlying drawable to apply scale type on
    * @param scaleType scale type to be applied
    */
-  public ScaleTypeDrawable(Drawable drawable, ScaleType scaleType) {
+  public ScaleTypeDrawable(final Drawable drawable, final ScaleType scaleType) {
     super(Preconditions.checkNotNull(drawable));
     mScaleType = scaleType;
   }
@@ -62,14 +62,14 @@ public class ScaleTypeDrawable extends ForwardingDrawable {
    * @param scaleType scale type to be applied
    * @param focusPoint focus point of the image
    */
-  public ScaleTypeDrawable(Drawable drawable, ScaleType scaleType, @Nullable PointF focusPoint) {
+  public ScaleTypeDrawable(final Drawable drawable, final ScaleType scaleType, final @Nullable PointF focusPoint) {
     super(Preconditions.checkNotNull(drawable));
     mScaleType = scaleType;
     mFocusPoint = focusPoint;
   }
 
   @Override
-  public Drawable setCurrent(Drawable newDelegate) {
+  public Drawable setCurrent(final Drawable newDelegate) {
     final Drawable previousDelegate = super.setCurrent(newDelegate);
     configureBounds();
 
@@ -90,7 +90,7 @@ public class ScaleTypeDrawable extends ForwardingDrawable {
    *
    * @param scaleType scale type to set
    */
-  public void setScaleType(ScaleType scaleType) {
+  public void setScaleType(final ScaleType scaleType) {
     if (Objects.equal(mScaleType, scaleType)) {
       return;
     }
@@ -119,7 +119,7 @@ public class ScaleTypeDrawable extends ForwardingDrawable {
    *
    * @param focusPoint focus point of the image
    */
-  public void setFocusPoint(@Nullable PointF focusPoint) {
+  public void setFocusPoint(final @Nullable PointF focusPoint) {
     if (Objects.equal(mFocusPoint, focusPoint)) {
       return;
     }
@@ -136,7 +136,7 @@ public class ScaleTypeDrawable extends ForwardingDrawable {
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     configureBoundsIfUnderlyingChanged();
     if (mDrawMatrix != null) {
       int saveCount = canvas.save();
@@ -151,7 +151,7 @@ public class ScaleTypeDrawable extends ForwardingDrawable {
   }
 
   @Override
-  protected void onBoundsChange(Rect bounds) {
+  protected void onBoundsChange(final Rect bounds) {
     configureBounds();
   }
 
@@ -223,7 +223,7 @@ public class ScaleTypeDrawable extends ForwardingDrawable {
    * @param transform
    */
   @Override
-  public void getTransform(Matrix transform) {
+  public void getTransform(final Matrix transform) {
     getParentTransform(transform);
     // IMPORTANT: {@code configureBounds} should be called after {@code getParentTransform},
     // because the parent may have to change our bounds.

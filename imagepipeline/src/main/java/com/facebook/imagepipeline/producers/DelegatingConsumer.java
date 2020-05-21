@@ -12,7 +12,7 @@ public abstract class DelegatingConsumer<I, O> extends BaseConsumer<I> {
 
   private final Consumer<O> mConsumer;
 
-  public DelegatingConsumer(Consumer<O> consumer) {
+  public DelegatingConsumer(final Consumer<O> consumer) {
     mConsumer = consumer;
   }
 
@@ -21,7 +21,7 @@ public abstract class DelegatingConsumer<I, O> extends BaseConsumer<I> {
   }
 
   @Override
-  protected void onFailureImpl(Throwable t) {
+  protected void onFailureImpl(final Throwable t) {
     mConsumer.onFailure(t);
   }
 
@@ -31,7 +31,7 @@ public abstract class DelegatingConsumer<I, O> extends BaseConsumer<I> {
   }
 
   @Override
-  protected void onProgressUpdateImpl(float progress) {
+  protected void onProgressUpdateImpl(final float progress) {
     mConsumer.onProgressUpdate(progress);
   }
 }

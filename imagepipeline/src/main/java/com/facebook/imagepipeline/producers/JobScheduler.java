@@ -79,7 +79,7 @@ public class JobScheduler {
   @VisibleForTesting
   long mJobStartTime;
 
-  public JobScheduler(Executor executor, JobRunnable jobRunnable, int minimumJobIntervalMs) {
+  public JobScheduler(final Executor executor, final JobRunnable jobRunnable, final int minimumJobIntervalMs) {
     mExecutor = executor;
     mJobRunnable = jobRunnable;
     mMinimumJobIntervalMs = minimumJobIntervalMs;
@@ -129,7 +129,7 @@ public class JobScheduler {
    *
    * @return whether the job was successfully updated.
    */
-  public boolean updateJob(EncodedImage encodedImage, @Consumer.Status int status) {
+  public boolean updateJob(final EncodedImage encodedImage, final @Consumer.Status int status) {
     if (!shouldProcess(encodedImage, status)) {
       return false;
     }
@@ -187,7 +187,7 @@ public class JobScheduler {
     return true;
   }
 
-  private void enqueueJob(long delay) {
+  private void enqueueJob(final long delay) {
     // If we make mExecutor be a {@link ScheduledexecutorService}, we could just have
     // `mExecutor.schedule(mDoJobRunnable, delay)` and avoid mSubmitJobRunnable and
     // JobStartExecutorSupplier altogether. That would require some refactoring though.
@@ -248,7 +248,7 @@ public class JobScheduler {
     }
   }
 
-  private static boolean shouldProcess(EncodedImage encodedImage, @Consumer.Status int status) {
+  private static boolean shouldProcess(final EncodedImage encodedImage, final @Consumer.Status int status) {
     // the last result should always be processed, whereas
     // an intermediate result should be processed only if valid
     return BaseConsumer.isLast(status)

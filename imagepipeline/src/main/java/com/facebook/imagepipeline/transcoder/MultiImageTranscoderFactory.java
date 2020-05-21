@@ -41,7 +41,7 @@ public class MultiImageTranscoderFactory implements ImageTranscoderFactory {
   }
 
   @Override
-  public ImageTranscoder createImageTranscoder(ImageFormat imageFormat, boolean isResizingEnabled) {
+  public ImageTranscoder createImageTranscoder(final ImageFormat imageFormat, final boolean isResizingEnabled) {
     // Use custom ImageTranscoder, if any
     ImageTranscoder imageTranscoder = getCustomImageTranscoder(imageFormat, isResizingEnabled);
     // Use ImageTranscoder based on type passed, if any
@@ -61,7 +61,7 @@ public class MultiImageTranscoderFactory implements ImageTranscoderFactory {
 
   @Nullable
   private ImageTranscoder getCustomImageTranscoder(
-      ImageFormat imageFormat, boolean isResizingEnabled) {
+      final ImageFormat imageFormat, final boolean isResizingEnabled) {
     if (mPrimaryImageTranscoderFactory == null) {
       return null;
     }
@@ -70,21 +70,21 @@ public class MultiImageTranscoderFactory implements ImageTranscoderFactory {
 
   @Nullable
   private ImageTranscoder getNativeImageTranscoder(
-      ImageFormat imageFormat, boolean isResizingEnabled) {
+      final ImageFormat imageFormat, final boolean isResizingEnabled) {
     return NativeImageTranscoderFactory.getNativeImageTranscoderFactory(
             mMaxBitmapSize, mUseDownSamplingRatio, mEnsureTranscoderLibraryLoaded)
         .createImageTranscoder(imageFormat, isResizingEnabled);
   }
 
   private ImageTranscoder getSimpleImageTranscoder(
-      ImageFormat imageFormat, boolean isResizingEnabled) {
+      final ImageFormat imageFormat, final boolean isResizingEnabled) {
     return new SimpleImageTranscoderFactory(mMaxBitmapSize)
         .createImageTranscoder(imageFormat, isResizingEnabled);
   }
 
   @Nullable
   private ImageTranscoder getImageTranscoderWithType(
-      ImageFormat imageFormat, boolean isResizingEnabled) {
+      final ImageFormat imageFormat, final boolean isResizingEnabled) {
     if (mImageTranscoderType == null) {
       return null;
     }

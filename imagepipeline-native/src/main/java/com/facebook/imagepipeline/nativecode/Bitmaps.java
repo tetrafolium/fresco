@@ -41,7 +41,7 @@ public class Bitmaps {
    * @param src Bitmap to copy out of
    */
   @DoNotStrip
-  public static void copyBitmap(Bitmap dest, Bitmap src) {
+  public static void copyBitmap(final Bitmap dest, final Bitmap src) {
     Preconditions.checkArgument(src.getConfig() == dest.getConfig());
     Preconditions.checkArgument(dest.isMutable());
     Preconditions.checkArgument(dest.getWidth() == src.getWidth());

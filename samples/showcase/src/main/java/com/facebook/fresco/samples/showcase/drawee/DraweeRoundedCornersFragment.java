@@ -65,12 +65,12 @@ public class DraweeRoundedCornersFragment extends BaseShowcaseFragment {
 
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_drawee_rounded_corners, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
     findDrawees(view);
@@ -89,7 +89,7 @@ public class DraweeRoundedCornersFragment extends BaseShowcaseFragment {
     scaleType.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             final SimpleScaleTypeAdapter.Entry spinnerEntry =
                 (SimpleScaleTypeAdapter.Entry) scaleTypeAdapter.getItem(position);
             final ScaleType scaleType = spinnerEntry.scaleType;
@@ -119,14 +119,14 @@ public class DraweeRoundedCornersFragment extends BaseShowcaseFragment {
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
+          public void onNothingSelected(final AdapterView<?> parent) { }
         });
 
     mShowBordersCheck = view.findViewById(R.id.borders);
     mShowBordersCheck.setOnCheckedChangeListener(
         new CompoundButton.OnCheckedChangeListener() {
           @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+          public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             updateRounding();
           }
         });
@@ -135,7 +135,7 @@ public class DraweeRoundedCornersFragment extends BaseShowcaseFragment {
     mScaleInsideBordersCheck.setOnCheckedChangeListener(
         new CompoundButton.OnCheckedChangeListener() {
           @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+          public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             updateRounding();
           }
         });
@@ -150,7 +150,7 @@ public class DraweeRoundedCornersFragment extends BaseShowcaseFragment {
     mDraweeFancy.getHierarchy().setRoundingParams(fancyRoundingParams);
   }
 
-  private void findDrawees(View view) {
+  private void findDrawees(final View view) {
     mDraweeRound = (SimpleDraweeView) view.findViewById(R.id.drawee_round);
     mDraweeRadius = (SimpleDraweeView) view.findViewById(R.id.drawee_radius);
     mDraweeSome = (SimpleDraweeView) view.findViewById(R.id.drawee_some);
@@ -174,7 +174,7 @@ public class DraweeRoundedCornersFragment extends BaseShowcaseFragment {
   }
 
   private void changeDraweeViewScaleType(
-      SimpleDraweeView draweeView, ScaleType scaleType, @Nullable PointF focusPoint) {
+      final SimpleDraweeView draweeView, final ScaleType scaleType, final @Nullable PointF focusPoint) {
     final GenericDraweeHierarchy hierarchy = draweeView.getHierarchy();
     hierarchy.setActualImageScaleType(scaleType);
     hierarchy.setActualImageFocusPoint(focusPoint != null ? focusPoint : new PointF(0.5f, 0.5f));
@@ -198,7 +198,7 @@ public class DraweeRoundedCornersFragment extends BaseShowcaseFragment {
     setShowBorder(mDraweeFancy, showBorder, scaleInsideBorder);
   }
 
-  private void setShowBorder(SimpleDraweeView draweeView, boolean show, boolean scaleInside) {
+  private void setShowBorder(final SimpleDraweeView draweeView, final boolean show, final boolean scaleInside) {
     final RoundingParams roundingParams =
         Preconditions.checkNotNull(draweeView.getHierarchy().getRoundingParams());
     if (show) {

@@ -41,12 +41,12 @@ public class SimpleProgressiveJpegConfig implements ProgressiveJpegConfig {
     this(new DefaultDynamicValueConfig());
   }
 
-  public SimpleProgressiveJpegConfig(DynamicValueConfig dynamicValueConfig) {
+  public SimpleProgressiveJpegConfig(final DynamicValueConfig dynamicValueConfig) {
     mDynamicValueConfig = Preconditions.checkNotNull(dynamicValueConfig);
   }
 
   @Override
-  public int getNextScanNumberToDecode(int scanNumber) {
+  public int getNextScanNumberToDecode(final int scanNumber) {
     final List<Integer> scansToDecode = mDynamicValueConfig.getScansToDecode();
     if (scansToDecode == null || scansToDecode.isEmpty()) {
       return scanNumber + 1;
@@ -61,7 +61,7 @@ public class SimpleProgressiveJpegConfig implements ProgressiveJpegConfig {
   }
 
   @Override
-  public QualityInfo getQualityInfo(int scanNumber) {
+  public QualityInfo getQualityInfo(final int scanNumber) {
     return ImmutableQualityInfo.of(
         scanNumber,
         /* isOfGoodEnoughQuality */ scanNumber >= mDynamicValueConfig.getGoodEnoughScanNumber(),

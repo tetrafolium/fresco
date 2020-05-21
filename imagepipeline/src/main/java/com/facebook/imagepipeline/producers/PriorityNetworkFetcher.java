@@ -67,10 +67,10 @@ public class PriorityNetworkFetcher<FETCH_STATE extends FetchState>
    *     Otherwise, they're dequeued in reverse order.
    */
   public PriorityNetworkFetcher(
-      NetworkFetcher<FETCH_STATE> delegate,
-      boolean isHiPriFifo,
-      int maxOutstandingHiPri,
-      int maxOutstandingLowPri) {
+      final NetworkFetcher<FETCH_STATE> delegate,
+      final boolean isHiPriFifo,
+      final int maxOutstandingHiPri,
+      final int maxOutstandingLowPri) {
     this(
         delegate,
         isHiPriFifo,
@@ -81,11 +81,11 @@ public class PriorityNetworkFetcher<FETCH_STATE extends FetchState>
 
   @VisibleForTesting
   public PriorityNetworkFetcher(
-      NetworkFetcher<FETCH_STATE> delegate,
-      boolean isHiPriFifo,
-      int maxOutstandingHiPri,
-      int maxOutstandingLowPri,
-      MonotonicClock clock) {
+      final NetworkFetcher<FETCH_STATE> delegate,
+      final boolean isHiPriFifo,
+      final int maxOutstandingHiPri,
+      final int maxOutstandingLowPri,
+      final MonotonicClock clock) {
     mDelegate = delegate;
     mIsHiPriFifo = isHiPriFifo;
 
@@ -133,13 +133,13 @@ public class PriorityNetworkFetcher<FETCH_STATE extends FetchState>
 
   @Override
   public void onFetchCompletion(
-      PriorityNetworkFetcher.PriorityFetchState<FETCH_STATE> fetchState, int byteSize) {
+      final PriorityNetworkFetcher.PriorityFetchState<FETCH_STATE> fetchState, final int byteSize) {
     removeFromQueue(fetchState, "SUCCESS");
     mDelegate.onFetchCompletion(fetchState.delegatedState, byteSize);
   }
 
   private void removeFromQueue(
-      PriorityNetworkFetcher.PriorityFetchState<FETCH_STATE> fetchState, String reasonForLogging) {
+      final PriorityNetworkFetcher.PriorityFetchState<FETCH_STATE> fetchState, final String reasonForLogging) {
     synchronized (mLock) {
       FLog.v(TAG, "remove: %s %s", reasonForLogging, fetchState.getUri());
       mCurrentlyFetching.remove(fetchState);
@@ -186,12 +186,12 @@ public class PriorityNetworkFetcher<FETCH_STATE extends FetchState>
       NetworkFetcher.Callback callbackWrapper =
           new NetworkFetcher.Callback() {
             @Override
-            public void onResponse(InputStream response, int responseLength) throws IOException {
+            public void onResponse(final InputStream response, final int responseLength) throws IOException {
               fetchState.callback.onResponse(response, responseLength);
             }
 
             @Override
-            public void onFailure(Throwable throwable) {
+            public void onFailure(final Throwable throwable) {
               removeFromQueue(fetchState, "FAIL");
               fetchState.callback.onFailure(throwable);
             }
@@ -209,7 +209,7 @@ public class PriorityNetworkFetcher<FETCH_STATE extends FetchState>
   }
 
   private void changePriority(
-      PriorityNetworkFetcher.PriorityFetchState<FETCH_STATE> fetchState, boolean isNewHiPri) {
+      final PriorityNetworkFetcher.PriorityFetchState<FETCH_STATE> fetchState, final boolean isNewHiPri) {
     synchronized (mLock) {
       boolean existed =
           isNewHiPri ? mLowPriQueue.remove(fetchState) : mHiPriQueue.remove(fetchState);
@@ -225,7 +225,7 @@ public class PriorityNetworkFetcher<FETCH_STATE extends FetchState>
   }
 
   private void putInQueue(
-      PriorityNetworkFetcher.PriorityFetchState<FETCH_STATE> entry, boolean isHiPri) {
+      final PriorityNetworkFetcher.PriorityFetchState<FETCH_STATE> entry, final boolean isHiPri) {
     if (isHiPri) {
       if (mIsHiPriFifo) {
         mHiPriQueue.addLast(entry);
@@ -266,12 +266,12 @@ public class PriorityNetworkFetcher<FETCH_STATE extends FetchState>
     long dequeuedTimestamp;
 
     private PriorityFetchState(
-        Consumer<EncodedImage> consumer,
-        ProducerContext producerContext,
-        FETCH_STATE delegatedState,
-        long enqueuedTimestamp,
-        int hiPriCountWhenCreated,
-        int lowPriCountWhenCreated) {
+        final Consumer<EncodedImage> consumer,
+        final ProducerContext producerContext,
+        final FETCH_STATE delegatedState,
+        final long enqueuedTimestamp,
+        final int hiPriCountWhenCreated,
+        final int lowPriCountWhenCreated) {
       super(consumer, producerContext);
       this.delegatedState = delegatedState;
       this.enqueuedTimestamp = enqueuedTimestamp;
@@ -282,7 +282,7 @@ public class PriorityNetworkFetcher<FETCH_STATE extends FetchState>
 
   @Override
   public PriorityNetworkFetcher.PriorityFetchState<FETCH_STATE> createFetchState(
-      Consumer<EncodedImage> consumer, ProducerContext producerContext) {
+      final Consumer<EncodedImage> consumer, final ProducerContext producerContext) {
     return new PriorityFetchState<>(
         consumer,
         producerContext,
@@ -294,14 +294,14 @@ public class PriorityNetworkFetcher<FETCH_STATE extends FetchState>
 
   @Override
   public boolean shouldPropagate(
-      PriorityNetworkFetcher.PriorityFetchState<FETCH_STATE> fetchState) {
+      final PriorityNetworkFetcher.PriorityFetchState<FETCH_STATE> fetchState) {
     return mDelegate.shouldPropagate(fetchState.delegatedState);
   }
 
   @Nullable
   @Override
   public Map<String, String> getExtraMap(
-      PriorityNetworkFetcher.PriorityFetchState<FETCH_STATE> fetchState, int byteSize) {
+      final PriorityNetworkFetcher.PriorityFetchState<FETCH_STATE> fetchState, final int byteSize) {
     Map<String, String> delegateExtras = mDelegate.getExtraMap(fetchState.delegatedState, byteSize);
     HashMap<String, String> extras =
         delegateExtras != null ? new HashMap<>(delegateExtras) : new HashMap<String, String>();

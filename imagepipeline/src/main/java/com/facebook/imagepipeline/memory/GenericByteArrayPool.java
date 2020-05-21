@@ -32,9 +32,9 @@ public class GenericByteArrayPool extends BasePool<byte[]> implements ByteArrayP
    * @param poolStatsTracker
    */
   public GenericByteArrayPool(
-      MemoryTrimmableRegistry memoryTrimmableRegistry,
-      PoolParams poolParams,
-      PoolStatsTracker poolStatsTracker) {
+      final MemoryTrimmableRegistry memoryTrimmableRegistry,
+      final PoolParams poolParams,
+      final PoolStatsTracker poolStatsTracker) {
     super(memoryTrimmableRegistry, poolParams, poolStatsTracker);
     final SparseIntArray bucketSizes = poolParams.bucketSizes;
     mBucketSizes = new int[bucketSizes.size()];
@@ -60,7 +60,7 @@ public class GenericByteArrayPool extends BasePool<byte[]> implements ByteArrayP
    * @return a byte array of the specified or larger size. Null if the size is invalid
    */
   @Override
-  protected byte[] alloc(int bucketedSize) {
+  protected byte[] alloc(final int bucketedSize) {
     return new byte[bucketedSize];
   }
 
@@ -70,7 +70,7 @@ public class GenericByteArrayPool extends BasePool<byte[]> implements ByteArrayP
    * @param value the value to free
    */
   @Override
-  protected void free(byte[] value) {
+  protected void free(final byte[] value) {
     Preconditions.checkNotNull(value);
     // do nothing. Let the GC take care of this
   }
@@ -82,7 +82,7 @@ public class GenericByteArrayPool extends BasePool<byte[]> implements ByteArrayP
    * @return size in bytes
    */
   @Override
-  protected int getSizeInBytes(int bucketedSize) {
+  protected int getSizeInBytes(final int bucketedSize) {
     return bucketedSize;
   }
 
@@ -97,7 +97,7 @@ public class GenericByteArrayPool extends BasePool<byte[]> implements ByteArrayP
    * @throws InvalidSizeException, if the requested size was invalid
    */
   @Override
-  protected int getBucketedSize(int requestSize) {
+  protected int getBucketedSize(final int requestSize) {
     int intRequestSize = requestSize;
     if (intRequestSize <= 0) {
       throw new InvalidSizeException(requestSize);
@@ -122,7 +122,7 @@ public class GenericByteArrayPool extends BasePool<byte[]> implements ByteArrayP
    * @return just the length of the value
    */
   @Override
-  protected int getBucketedSizeForValue(byte[] value) {
+  protected int getBucketedSizeForValue(final byte[] value) {
     Preconditions.checkNotNull(value);
     return value.length;
   }

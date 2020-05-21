@@ -28,7 +28,7 @@ class TiffUtil {
    * @param orientation orientation information read from APP1 EXIF (TIFF) block.
    * @return orientation: 1/3/6/8 -> 0/180/90/270. Returns 0 for inverted orientations (2/4/5/7).
    */
-  public static int getAutoRotateAngleFromOrientation(int orientation) {
+  public static int getAutoRotateAngleFromOrientation(final int orientation) {
     switch (orientation) {
       case ExifInterface.ORIENTATION_NORMAL:
       case ExifInterface.ORIENTATION_UNDEFINED:
@@ -50,7 +50,7 @@ class TiffUtil {
    * @param length length of the TIFF data
    * @return orientation information (1/3/6/8 on success, 0 if not found)
    */
-  public static int readOrientationFromTIFF(InputStream is, int length) throws IOException {
+  public static int readOrientationFromTIFF(final InputStream is, final int length) throws IOException {
     // read tiff header
     TiffHeader tiffHeader = new TiffHeader();
     length = readTiffHeader(is, length, tiffHeader);
@@ -87,7 +87,7 @@ class TiffUtil {
    * @return remaining length of the data on success, 0 on failure
    * @throws IOException
    */
-  private static int readTiffHeader(InputStream is, int length, TiffHeader tiffHeader)
+  private static int readTiffHeader(final InputStream is, final int length, final TiffHeader tiffHeader)
       throws IOException {
     if (length <= 8) {
       return 0;
@@ -124,7 +124,7 @@ class TiffUtil {
    * @return remaining length of the data on success, 0 on failure
    */
   private static int moveToTiffEntryWithTag(
-      InputStream is, int length, boolean isLittleEndian, int tagToFind) throws IOException {
+      final InputStream is, final int length, final boolean isLittleEndian, final int tagToFind) throws IOException {
     if (length < 14) {
       return 0;
     }
@@ -153,7 +153,7 @@ class TiffUtil {
    * @param isLittleEndian whether the TIFF data is stored in little or big endian format
    * @return Orientation value in TIFF IFD entry.
    */
-  private static int getOrientationFromTiffEntry(InputStream is, int length, boolean isLittleEndian)
+  private static int getOrientationFromTiffEntry(final InputStream is, final int length, final boolean isLittleEndian)
       throws IOException {
     if (length < 10) {
       return 0;

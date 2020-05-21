@@ -40,7 +40,7 @@ public class HashCodeUtilTest {
     testCase(1, null, 3, 4, 5, 6);
   }
 
-  private void testCase(Object o1, Object o2, Object o3, Object o4, Object o5, Object o6) {
+  private void testCase(final Object o1, final Object o2, final Object o3, final Object o4, final Object o5, final Object o6) {
     assertEquals(Objects.hashCode(o1), HashCodeUtil.hashCode(o1));
     assertEquals(Objects.hashCode(o1, o2), HashCodeUtil.hashCode(o1, o2));
     assertEquals(Objects.hashCode(o1, o2, o3), HashCodeUtil.hashCode(o1, o2, o3));

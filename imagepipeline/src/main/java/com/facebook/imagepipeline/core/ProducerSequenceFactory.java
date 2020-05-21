@@ -111,19 +111,19 @@ public class ProducerSequenceFactory {
       mBitmapPrepareSequences;
 
   public ProducerSequenceFactory(
-      ContentResolver contentResolver,
-      ProducerFactory producerFactory,
-      NetworkFetcher networkFetcher,
-      boolean resizeAndRotateEnabledForNetwork,
-      boolean webpSupportEnabled,
-      ThreadHandoffProducerQueue threadHandoffProducerQueue,
-      boolean downSampleEnabled,
-      boolean useBitmapPrepareToDraw,
-      boolean partialImageCachingEnabled,
-      boolean diskCacheEnabled,
-      ImageTranscoderFactory imageTranscoderFactory,
-      boolean isEncodedMemoryCacheProbingEnabled,
-      boolean isDiskCacheProbingEnabled) {
+      final ContentResolver contentResolver,
+      final ProducerFactory producerFactory,
+      final NetworkFetcher networkFetcher,
+      final boolean resizeAndRotateEnabledForNetwork,
+      final boolean webpSupportEnabled,
+      final ThreadHandoffProducerQueue threadHandoffProducerQueue,
+      final boolean downSampleEnabled,
+      final boolean useBitmapPrepareToDraw,
+      final boolean partialImageCachingEnabled,
+      final boolean diskCacheEnabled,
+      final ImageTranscoderFactory imageTranscoderFactory,
+      final boolean isEncodedMemoryCacheProbingEnabled,
+      final boolean isDiskCacheProbingEnabled) {
     mContentResolver = contentResolver;
     mProducerFactory = producerFactory;
     mNetworkFetcher = networkFetcher;
@@ -150,7 +150,7 @@ public class ProducerSequenceFactory {
    * @return the sequence that should be used to process the request
    */
   public Producer<CloseableReference<PooledByteBuffer>> getEncodedImageProducerSequence(
-      ImageRequest imageRequest) {
+      final ImageRequest imageRequest) {
     try {
       if (FrescoSystrace.isTracing()) {
         FrescoSystrace.beginSection("ProducerSequenceFactory#getEncodedImageProducerSequence");
@@ -271,7 +271,7 @@ public class ProducerSequenceFactory {
    * @param imageRequest the request that will be submitted
    * @return the sequence that should be used to process the request
    */
-  public Producer<Void> getEncodedImagePrefetchProducerSequence(ImageRequest imageRequest) {
+  public Producer<Void> getEncodedImagePrefetchProducerSequence(final ImageRequest imageRequest) {
     validateEncodedImageRequest(imageRequest);
 
     switch (imageRequest.getSourceUriType()) {
@@ -288,7 +288,7 @@ public class ProducerSequenceFactory {
     }
   }
 
-  private static void validateEncodedImageRequest(ImageRequest imageRequest) {
+  private static void validateEncodedImageRequest(final ImageRequest imageRequest) {
     Preconditions.checkNotNull(imageRequest);
     Preconditions.checkArgument(
         imageRequest.getLowestPermittedRequestLevel().getValue()
@@ -302,7 +302,7 @@ public class ProducerSequenceFactory {
    * @return the sequence that should be used to process the request
    */
   public Producer<CloseableReference<CloseableImage>> getDecodedImageProducerSequence(
-      ImageRequest imageRequest) {
+      final ImageRequest imageRequest) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("ProducerSequenceFactory#getDecodedImageProducerSequence");
     }
@@ -328,7 +328,7 @@ public class ProducerSequenceFactory {
    * @param imageRequest the request that will be submitted
    * @return the sequence that should be used to process the request
    */
-  public Producer<Void> getDecodedImagePrefetchProducerSequence(ImageRequest imageRequest) {
+  public Producer<Void> getDecodedImagePrefetchProducerSequence(final ImageRequest imageRequest) {
     Producer<CloseableReference<CloseableImage>> inputProducer =
         getBasicDecodedImageSequence(imageRequest);
 
@@ -340,7 +340,7 @@ public class ProducerSequenceFactory {
   }
 
   private Producer<CloseableReference<CloseableImage>> getBasicDecodedImageSequence(
-      ImageRequest imageRequest) {
+      final ImageRequest imageRequest) {
     try {
       if (FrescoSystrace.isTracing()) {
         FrescoSystrace.beginSection("ProducerSequenceFactory#getBasicDecodedImageSequence");
@@ -713,7 +713,7 @@ public class ProducerSequenceFactory {
    * @return the new sequence
    */
   private Producer<CloseableReference<CloseableImage>> newBitmapCacheGetToLocalTransformSequence(
-      Producer<EncodedImage> inputProducer) {
+      final Producer<EncodedImage> inputProducer) {
     ThumbnailProducer<EncodedImage>[] defaultThumbnailProducers = new ThumbnailProducer[1];
     defaultThumbnailProducers[0] = mProducerFactory.newLocalExifThumbnailProducer();
     return newBitmapCacheGetToLocalTransformSequence(inputProducer, defaultThumbnailProducers);
@@ -728,7 +728,7 @@ public class ProducerSequenceFactory {
    * @return the new sequence
    */
   private Producer<CloseableReference<CloseableImage>> newBitmapCacheGetToLocalTransformSequence(
-      Producer<EncodedImage> inputProducer, ThumbnailProducer<EncodedImage>[] thumbnailProducers) {
+      final Producer<EncodedImage> inputProducer, final ThumbnailProducer<EncodedImage>[] thumbnailProducers) {
     inputProducer = newEncodedCacheMultiplexToTranscodeSequence(inputProducer);
     Producer<EncodedImage> inputProducerAfterDecode =
         newLocalTransformationsSequence(inputProducer, thumbnailProducers);
@@ -742,7 +742,7 @@ public class ProducerSequenceFactory {
    * @return bitmap cache get to decode sequence
    */
   private Producer<CloseableReference<CloseableImage>> newBitmapCacheGetToDecodeSequence(
-      Producer<EncodedImage> inputProducer) {
+      final Producer<EncodedImage> inputProducer) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("ProducerSequenceFactory#newBitmapCacheGetToDecodeSequence");
     }
@@ -762,7 +762,7 @@ public class ProducerSequenceFactory {
    * @return encoded cache multiplex to webp transcode sequence
    */
   private Producer<EncodedImage> newEncodedCacheMultiplexToTranscodeSequence(
-      Producer<EncodedImage> inputProducer) {
+      final Producer<EncodedImage> inputProducer) {
     if (WebpSupportStatus.sIsWebpSupportRequired
         && (!mWebpSupportEnabled || WebpSupportStatus.sWebpBitmapFactory == null)) {
       inputProducer = mProducerFactory.newWebpTranscodeProducer(inputProducer);
@@ -780,7 +780,7 @@ public class ProducerSequenceFactory {
     return mProducerFactory.newEncodedCacheKeyMultiplexProducer(encodedMemoryCacheProducer);
   }
 
-  private Producer<EncodedImage> newDiskCacheSequence(Producer<EncodedImage> inputProducer) {
+  private Producer<EncodedImage> newDiskCacheSequence(final Producer<EncodedImage> inputProducer) {
     Producer<EncodedImage> cacheWriteProducer;
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("ProducerSequenceFactory#newDiskCacheSequence");
@@ -806,7 +806,7 @@ public class ProducerSequenceFactory {
    * @return bitmap cache get to bitmap cache sequence
    */
   private Producer<CloseableReference<CloseableImage>> newBitmapCacheGetToBitmapCacheSequence(
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     BitmapMemoryCacheProducer bitmapMemoryCacheProducer =
         mProducerFactory.newBitmapMemoryCacheProducer(inputProducer);
     BitmapMemoryCacheKeyMultiplexProducer bitmapKeyMultiplexProducer =
@@ -832,7 +832,7 @@ public class ProducerSequenceFactory {
    * @return local transformations sequence
    */
   private Producer<EncodedImage> newLocalTransformationsSequence(
-      Producer<EncodedImage> inputProducer, ThumbnailProducer<EncodedImage>[] thumbnailProducers) {
+      final Producer<EncodedImage> inputProducer, final ThumbnailProducer<EncodedImage>[] thumbnailProducers) {
     Producer<EncodedImage> localImageProducer =
         ProducerFactory.newAddImageTransformMetaDataProducer(inputProducer);
     localImageProducer =
@@ -845,7 +845,7 @@ public class ProducerSequenceFactory {
   }
 
   private Producer<EncodedImage> newLocalThumbnailProducer(
-      ThumbnailProducer<EncodedImage>[] thumbnailProducers) {
+      final ThumbnailProducer<EncodedImage>[] thumbnailProducers) {
     ThumbnailBranchProducer thumbnailBranchProducer =
         mProducerFactory.newThumbnailBranchProducer(thumbnailProducers);
     return mProducerFactory.newResizeAndRotateProducer(
@@ -854,7 +854,7 @@ public class ProducerSequenceFactory {
 
   /** post-processor producer -> copy producer -> inputProducer */
   private synchronized Producer<CloseableReference<CloseableImage>> getPostprocessorSequence(
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     if (!mPostprocessorSequences.containsKey(inputProducer)) {
       PostprocessorProducer postprocessorProducer =
           mProducerFactory.newPostprocessorProducer(inputProducer);
@@ -867,7 +867,7 @@ public class ProducerSequenceFactory {
 
   /** swallow result producer -> inputProducer */
   private synchronized Producer<Void> getDecodedImagePrefetchSequence(
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     if (!mCloseableImagePrefetchSequences.containsKey(inputProducer)) {
       SwallowResultProducer<CloseableReference<CloseableImage>> swallowResultProducer =
           mProducerFactory.newSwallowResultProducer(inputProducer);
@@ -878,7 +878,7 @@ public class ProducerSequenceFactory {
 
   /** bitmap prepare producer -> inputProducer */
   private synchronized Producer<CloseableReference<CloseableImage>> getBitmapPrepareSequence(
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     Producer<CloseableReference<CloseableImage>> bitmapPrepareProducer =
         mBitmapPrepareSequences.get(inputProducer);
 
@@ -890,7 +890,7 @@ public class ProducerSequenceFactory {
     return bitmapPrepareProducer;
   }
 
-  private static String getShortenedUriString(Uri uri) {
+  private static String getShortenedUriString(final Uri uri) {
     final String uriString = String.valueOf(uri);
     return uriString.length() > 30 ? uriString.substring(0, 30) + "..." : uriString;
   }

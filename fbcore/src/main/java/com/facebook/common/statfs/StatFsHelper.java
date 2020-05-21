@@ -115,7 +115,7 @@ public class StatFsHelper {
    * @return whether free space is lower than the input freeSpaceThreshold, returns true if disk
    *     information is not available
    */
-  public boolean testLowDiskSpace(StorageType storageType, long freeSpaceThreshold) {
+  public boolean testLowDiskSpace(final StorageType storageType, final long freeSpaceThreshold) {
     ensureInitialized();
 
     long availableStorageSpace = getAvailableStorageSpace(storageType);
@@ -133,7 +133,7 @@ public class StatFsHelper {
    * @return available space in bytes, -1 if no information is available
    */
   @SuppressLint("DeprecatedMethod")
-  public long getFreeStorageSpace(StorageType storageType) {
+  public long getFreeStorageSpace(final StorageType storageType) {
     ensureInitialized();
 
     maybeUpdateStats();
@@ -161,7 +161,7 @@ public class StatFsHelper {
    * @return available space in bytes, -1 if no information is available
    */
   @SuppressLint("DeprecatedMethod")
-  public long getTotalStorageSpace(StorageType storageType) {
+  public long getTotalStorageSpace(final StorageType storageType) {
     ensureInitialized();
 
     maybeUpdateStats();
@@ -189,7 +189,7 @@ public class StatFsHelper {
    * @return available space in bytes, 0 if no information is available
    */
   @SuppressLint("DeprecatedMethod")
-  public long getAvailableStorageSpace(StorageType storageType) {
+  public long getAvailableStorageSpace(final StorageType storageType) {
     ensureInitialized();
 
     maybeUpdateStats();
@@ -278,7 +278,7 @@ public class StatFsHelper {
    * directory does not exist or the StatFs restat() or constructor fails (throws), a null StatFs
    * object is returned.
    */
-  private @Nullable StatFs updateStatsHelper(@Nullable StatFs statfs, @Nullable File dir) {
+  private @Nullable StatFs updateStatsHelper(final @Nullable StatFs statfs, final @Nullable File dir) {
     if (dir == null || !dir.exists()) {
       // The path does not exist, do not track stats for it.
       return null;
@@ -309,7 +309,7 @@ public class StatFsHelper {
     return statfs;
   }
 
-  protected static StatFs createStatFs(String path) {
+  protected static StatFs createStatFs(final String path) {
     return new StatFs(path);
   }
 }

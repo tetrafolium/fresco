@@ -14,7 +14,7 @@ public class DefaultEntryEvictionComparatorSupplier implements EntryEvictionComp
   public EntryEvictionComparator get() {
     return new EntryEvictionComparator() {
       @Override
-      public int compare(DiskStorage.Entry e1, DiskStorage.Entry e2) {
+      public int compare(final DiskStorage.Entry e1, final DiskStorage.Entry e2) {
         long time1 = e1.getTimestamp();
         long time2 = e2.getTimestamp();
         return time1 < time2 ? -1 : ((time2 == time1) ? 0 : 1);

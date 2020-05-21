@@ -23,9 +23,9 @@ public class PlatformBitmapFactoryProvider {
    * @return The PlatformBitmapFactory implementation
    */
   public static PlatformBitmapFactory buildPlatformBitmapFactory(
-      PoolFactory poolFactory,
-      PlatformDecoder platformDecoder,
-      CloseableReferenceFactory closeableReferenceFactory) {
+      final PoolFactory poolFactory,
+      final PlatformDecoder platformDecoder,
+      final CloseableReferenceFactory closeableReferenceFactory) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       return new ArtBitmapFactory(poolFactory.getBitmapPool(), closeableReferenceFactory);
     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {

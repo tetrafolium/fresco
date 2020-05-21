@@ -15,7 +15,7 @@ public enum TriState {
   YES,
   NO,
   UNSET,
-  ;
+;
 
   /** @return whether this value is set; that is, whether it is YES or NO. */
   @Functional
@@ -37,12 +37,12 @@ public enum TriState {
    * </ol>
    */
   @Functional
-  public static TriState valueOf(boolean bool) {
+  public static TriState valueOf(final boolean bool) {
     return bool ? YES : NO;
   }
 
   @Functional
-  public static TriState valueOf(Boolean bool) {
+  public static TriState valueOf(final Boolean bool) {
     return bool != null ? valueOf(bool.booleanValue()) : TriState.UNSET;
   }
 
@@ -75,7 +75,7 @@ public enum TriState {
    *     is {@link TriState#NO} or {@code defaultValue} if {@code this} is {@link TriState#UNSET}.
    */
   @Functional
-  public boolean asBoolean(boolean defaultValue) {
+  public boolean asBoolean(final boolean defaultValue) {
     switch (this) {
       case YES:
         return true;
@@ -123,7 +123,7 @@ public enum TriState {
   }
 
   @Functional
-  public static TriState fromDbValue(int value) {
+  public static TriState fromDbValue(final int value) {
     switch (value) {
       case 1:
         return YES;

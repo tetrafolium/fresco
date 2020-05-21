@@ -46,7 +46,7 @@ public class LocalVideoThumbnailProducer implements Producer<CloseableReference<
   private final Executor mExecutor;
   private final ContentResolver mContentResolver;
 
-  public LocalVideoThumbnailProducer(Executor executor, ContentResolver contentResolver) {
+  public LocalVideoThumbnailProducer(final Executor executor, final ContentResolver contentResolver) {
     mExecutor = executor;
     mContentResolver = contentResolver;
   }
@@ -62,14 +62,14 @@ public class LocalVideoThumbnailProducer implements Producer<CloseableReference<
         new StatefulProducerRunnable<CloseableReference<CloseableImage>>(
             consumer, listener, producerContext, PRODUCER_NAME, "local", "video") {
           @Override
-          protected void onSuccess(CloseableReference<CloseableImage> result) {
+          protected void onSuccess(final CloseableReference<CloseableImage> result) {
             super.onSuccess(result);
             listener.onUltimateProducerReached(producerContext, PRODUCER_NAME, result != null);
             producerContext.putOriginExtra("local");
           }
 
           @Override
-          protected void onFailure(Exception e) {
+          protected void onFailure(final Exception e) {
             super.onFailure(e);
             listener.onUltimateProducerReached(producerContext, PRODUCER_NAME, false);
             producerContext.putOriginExtra("local");
@@ -118,7 +118,7 @@ public class LocalVideoThumbnailProducer implements Producer<CloseableReference<
           }
 
           @Override
-          protected void disposeResult(CloseableReference<CloseableImage> result) {
+          protected void disposeResult(final CloseableReference<CloseableImage> result) {
             CloseableReference.closeSafely(result);
           }
         };
@@ -132,7 +132,7 @@ public class LocalVideoThumbnailProducer implements Producer<CloseableReference<
     mExecutor.execute(cancellableProducerRunnable);
   }
 
-  private static int calculateKind(ImageRequest imageRequest) {
+  private static int calculateKind(final ImageRequest imageRequest) {
     if (imageRequest.getPreferredWidth() > 96 || imageRequest.getPreferredHeight() > 96) {
       return MediaStore.Images.Thumbnails.MINI_KIND;
     }
@@ -140,7 +140,7 @@ public class LocalVideoThumbnailProducer implements Producer<CloseableReference<
   }
 
   @Nullable
-  private String getLocalFilePath(ImageRequest imageRequest) {
+  private String getLocalFilePath(final ImageRequest imageRequest) {
     Uri uri = imageRequest.getSourceUri();
     if (UriUtil.isLocalFileUri(uri)) {
       return imageRequest.getSourceFile().getPath();
@@ -172,7 +172,7 @@ public class LocalVideoThumbnailProducer implements Producer<CloseableReference<
 
   @Nullable
   private static Bitmap createThumbnailFromContentProvider(
-      ContentResolver contentResolver, Uri uri) {
+      final ContentResolver contentResolver, final Uri uri) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD_MR1) {
       try {
         ParcelFileDescriptor videoFile = contentResolver.openFileDescriptor(uri, "r");

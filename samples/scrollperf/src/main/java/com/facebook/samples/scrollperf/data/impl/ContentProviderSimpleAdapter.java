@@ -18,7 +18,7 @@ public class ContentProviderSimpleAdapter implements SimpleAdapter<Uri> {
 
   private final Uri[] mUris;
 
-  private ContentProviderSimpleAdapter(final Uri baseProvider, Context context) {
+  private ContentProviderSimpleAdapter(final Uri baseProvider, final Context context) {
     String[] projection = {MediaStore.Images.Media._ID};
     Cursor cursor = context.getContentResolver().query(baseProvider, projection, null, null, null);
     final int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID);
@@ -37,7 +37,7 @@ public class ContentProviderSimpleAdapter implements SimpleAdapter<Uri> {
    * @param context The Context
    * @return The SimpleAdapter for local photo
    */
-  public static ContentProviderSimpleAdapter getInternalPhotoSimpleAdapter(Context context) {
+  public static ContentProviderSimpleAdapter getInternalPhotoSimpleAdapter(final Context context) {
     return new ContentProviderSimpleAdapter(MediaStore.Images.Media.INTERNAL_CONTENT_URI, context);
   }
 
@@ -47,7 +47,7 @@ public class ContentProviderSimpleAdapter implements SimpleAdapter<Uri> {
    * @param context The Context
    * @return The SimpleAdapter for local photo
    */
-  public static ContentProviderSimpleAdapter getExternalPhotoSimpleAdapter(Context context) {
+  public static ContentProviderSimpleAdapter getExternalPhotoSimpleAdapter(final Context context) {
     return new ContentProviderSimpleAdapter(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, context);
   }
 
@@ -57,7 +57,7 @@ public class ContentProviderSimpleAdapter implements SimpleAdapter<Uri> {
   }
 
   @Override
-  public Uri get(int position) {
+  public Uri get(final int position) {
     return mUris[position];
   }
 

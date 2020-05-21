@@ -48,9 +48,9 @@ public class ImagePipelineRegionDecodingFragment extends BaseShowcaseFragment {
       new BaseControllerListener<ImageInfo>() {
         @Override
         public void onFinalImageSet(
-            String id,
-            @javax.annotation.Nullable ImageInfo imageInfo,
-            @javax.annotation.Nullable Animatable animatable) {
+            final String id,
+            final @javax.annotation.Nullable ImageInfo imageInfo,
+            final @javax.annotation.Nullable Animatable animatable) {
           mImageInfo = imageInfo;
           mSelectedRegion.setUpdateMaximumDimensionOnNextSizeChange(true);
           if (imageInfo != null) {
@@ -64,7 +64,7 @@ public class ImagePipelineRegionDecodingFragment extends BaseShowcaseFragment {
   private final ResizableFrameLayout.SizeChangedListener mSizeChangedListener =
       new ResizableFrameLayout.SizeChangedListener() {
         @Override
-        public void onSizeChanged(int widthPx, int heightPx) {
+        public void onSizeChanged(final int widthPx, final int heightPx) {
           updateRegion();
         }
       };
@@ -72,12 +72,12 @@ public class ImagePipelineRegionDecodingFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_imagepipeline_region_decoding, container, false);
   }
 
   @Override
-  public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     mUri =
         sampleUris()
             .createSampleUri(ImageUriProvider.ImageSize.L, ImageUriProvider.Orientation.LANDSCAPE);
@@ -97,7 +97,7 @@ public class ImagePipelineRegionDecodingFragment extends BaseShowcaseFragment {
     mRegionDraweeView.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             updateRegion();
           }
         });
@@ -136,7 +136,7 @@ public class ImagePipelineRegionDecodingFragment extends BaseShowcaseFragment {
     return R.string.imagepipeline_region_decoding_title;
   }
 
-  private ImageDecoder createRegionDecoder(int left, int top, int right, int bottom) {
+  private ImageDecoder createRegionDecoder(final int left, final int top, final int right, final int bottom) {
     return new RegionDecoder(
         Fresco.getImagePipelineFactory().getPlatformDecoder(), new Rect(left, top, right, bottom));
   }
@@ -146,17 +146,17 @@ public class ImagePipelineRegionDecodingFragment extends BaseShowcaseFragment {
     private final PlatformDecoder mPlatformDecoder;
     private final Rect mRegion;
 
-    public RegionDecoder(PlatformDecoder platformDecoder, Rect region) {
+    public RegionDecoder(final PlatformDecoder platformDecoder, final Rect region) {
       mPlatformDecoder = platformDecoder;
       mRegion = region;
     }
 
     @Override
     public CloseableImage decode(
-        EncodedImage encodedImage,
-        int length,
-        QualityInfo qualityInfo,
-        ImageDecodeOptions options) {
+        final EncodedImage encodedImage,
+        final int length,
+        final QualityInfo qualityInfo,
+        final ImageDecodeOptions options) {
       CloseableReference<Bitmap> decodedBitmapReference =
           mPlatformDecoder.decodeJPEGFromEncodedImageWithColorSpace(
               encodedImage, options.bitmapConfig, mRegion, length, options.colorSpace);

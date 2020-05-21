@@ -15,31 +15,31 @@ import java.util.concurrent.TimeUnit;
 public class TestScheduledExecutorService extends TestExecutorService
     implements ScheduledExecutorService {
 
-  public TestScheduledExecutorService(FakeClock fakeClock) {
+  public TestScheduledExecutorService(final FakeClock fakeClock) {
     super(fakeClock);
   }
 
   @Override
-  public ScheduledFuture<?> schedule(final Runnable runnable, long delay, TimeUnit timeUnit) {
+  public ScheduledFuture<?> schedule(final Runnable runnable, final long delay, final TimeUnit timeUnit) {
     return new TestScheduledFuture(
         getFakeClock(), scheduledQueue, TimeUnit.MILLISECONDS.convert(delay, timeUnit), runnable);
   }
 
   @Override
-  public <V> ScheduledFuture<V> schedule(Callable<V> callable, long delay, TimeUnit timeUnit) {
+  public <V> ScheduledFuture<V> schedule(final Callable<V> callable, final long delay, final TimeUnit timeUnit) {
     return new TestScheduledFuture<V>(
         getFakeClock(), scheduledQueue, TimeUnit.MILLISECONDS.convert(delay, timeUnit), callable);
   }
 
   @Override
   public ScheduledFuture<?> scheduleAtFixedRate(
-      Runnable runnable, long initialDelay, long period, TimeUnit timeUnit) {
+      final Runnable runnable, final long initialDelay, final long period, final TimeUnit timeUnit) {
     throw new UnsupportedOperationException();
   }
 
   @Override
   public ScheduledFuture<?> scheduleWithFixedDelay(
-      Runnable runnable, long initialDelay, long delay, TimeUnit timeUnit) {
+      final Runnable runnable, final long initialDelay, final long delay, final TimeUnit timeUnit) {
     throw new UnsupportedOperationException();
   }
 }

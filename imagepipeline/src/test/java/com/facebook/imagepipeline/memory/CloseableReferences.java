@@ -21,12 +21,12 @@ public class CloseableReferences {
 
     private final CloseableReference<T> mCloseableReference;
 
-    public CloseableReferenceMatcher(CloseableReference<T> closeableReference) {
+    public CloseableReferenceMatcher(final CloseableReference<T> closeableReference) {
       mCloseableReference = closeableReference;
     }
 
     @Override
-    public boolean matches(CloseableReference argument) {
+    public boolean matches(final CloseableReference argument) {
       return mCloseableReference.getUnderlyingReferenceTestOnly()
           == argument.getUnderlyingReferenceTestOnly();
     }
@@ -37,7 +37,7 @@ public class CloseableReferences {
    * SharedReference}
    */
   public static <T extends Closeable> CloseableReference<T> eqUnderlying(
-      CloseableReference<T> closeableReference) {
+      final CloseableReference<T> closeableReference) {
     return argThat(new CloseableReferenceMatcher<T>(closeableReference));
   }
 }

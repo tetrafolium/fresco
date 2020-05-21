@@ -26,12 +26,12 @@ public class DoubleTapGestureListener extends GestureDetector.SimpleOnGestureLis
   private float mDoubleTapScale = 1;
   private boolean mDoubleTapScroll = false;
 
-  public DoubleTapGestureListener(ZoomableDraweeView zoomableDraweeView) {
+  public DoubleTapGestureListener(final ZoomableDraweeView zoomableDraweeView) {
     mDraweeView = zoomableDraweeView;
   }
 
   @Override
-  public boolean onDoubleTapEvent(MotionEvent e) {
+  public boolean onDoubleTapEvent(final MotionEvent e) {
     AbstractAnimatedZoomableController zc =
         (AbstractAnimatedZoomableController) mDraweeView.getZoomableController();
     PointF vp = new PointF(e.getX(), e.getY());
@@ -70,13 +70,13 @@ public class DoubleTapGestureListener extends GestureDetector.SimpleOnGestureLis
     return true;
   }
 
-  private boolean shouldStartDoubleTapScroll(PointF viewPoint) {
+  private boolean shouldStartDoubleTapScroll(final PointF viewPoint) {
     double dist =
         Math.hypot(viewPoint.x - mDoubleTapViewPoint.x, viewPoint.y - mDoubleTapViewPoint.y);
     return dist > DOUBLE_TAP_SCROLL_THRESHOLD;
   }
 
-  private float calcScale(PointF currentViewPoint) {
+  private float calcScale(final PointF currentViewPoint) {
     float dy = (currentViewPoint.y - mDoubleTapViewPoint.y);
     float t = 1 + Math.abs(dy) * 0.001f;
     return (dy < 0) ? mDoubleTapScale / t : mDoubleTapScale * t;

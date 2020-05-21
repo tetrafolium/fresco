@@ -25,7 +25,7 @@ public class TestAnimatedDrawableBackend implements AnimatedDrawableBackend {
 
   private int mDropCachesCallCount;
 
-  public TestAnimatedDrawableBackend(int width, int height, int[] frameDurations) {
+  public TestAnimatedDrawableBackend(final int width, final int height, final int[] frameDurations) {
     mWidth = width;
     mHeight = height;
     mFrameDurations = frameDurations;
@@ -37,7 +37,7 @@ public class TestAnimatedDrawableBackend implements AnimatedDrawableBackend {
     }
   }
 
-  public static int pixelValue(int frameNumber, int x, int y) {
+  public static int pixelValue(final int frameNumber, final int x, final int y) {
     return ((frameNumber & 0xff) << 16) | ((x & 0xff) << 8) | ((y & 0xff));
   }
 
@@ -82,7 +82,7 @@ public class TestAnimatedDrawableBackend implements AnimatedDrawableBackend {
   }
 
   @Override
-  public AnimatedDrawableFrameInfo getFrameInfo(int frameNumber) {
+  public AnimatedDrawableFrameInfo getFrameInfo(final int frameNumber) {
     return new AnimatedDrawableFrameInfo(
         frameNumber,
         0,
@@ -94,7 +94,7 @@ public class TestAnimatedDrawableBackend implements AnimatedDrawableBackend {
   }
 
   @Override
-  public void renderFrame(int frameNumber, Canvas canvas) {
+  public void renderFrame(final int frameNumber, final Canvas canvas) {
     int[] pixels = new int[mWidth * mHeight];
     for (int i = 0; i < pixels.length; i++) {
       // We store the frame number in the R, the x in the G, and the y in the B.
@@ -107,7 +107,7 @@ public class TestAnimatedDrawableBackend implements AnimatedDrawableBackend {
   }
 
   @Override
-  public int getFrameForTimestampMs(int timestampMs) {
+  public int getFrameForTimestampMs(final int timestampMs) {
     int accumulator = 0;
     for (int i = 0; i < mFrameDurations.length; i++) {
       if (timestampMs < accumulator + mFrameDurations[i]) {
@@ -119,12 +119,12 @@ public class TestAnimatedDrawableBackend implements AnimatedDrawableBackend {
   }
 
   @Override
-  public int getTimestampMsForFrame(int frameNumber) {
+  public int getTimestampMsForFrame(final int frameNumber) {
     return frameNumber == 0 ? 0 : mAccumulatedDurationsMs[frameNumber - 1];
   }
 
   @Override
-  public int getDurationMsForFrame(int frameNumber) {
+  public int getDurationMsForFrame(final int frameNumber) {
     return mFrameDurations[frameNumber];
   }
 
@@ -134,7 +134,7 @@ public class TestAnimatedDrawableBackend implements AnimatedDrawableBackend {
   }
 
   @Override
-  public AnimatedDrawableBackend forNewBounds(Rect bounds) {
+  public AnimatedDrawableBackend forNewBounds(final Rect bounds) {
     return this;
   }
 
@@ -144,12 +144,12 @@ public class TestAnimatedDrawableBackend implements AnimatedDrawableBackend {
   }
 
   @Override
-  public CloseableReference<Bitmap> getPreDecodedFrame(int frameNumber) {
+  public CloseableReference<Bitmap> getPreDecodedFrame(final int frameNumber) {
     return null;
   }
 
   @Override
-  public boolean hasPreDecodedFrame(int frameNumber) {
+  public boolean hasPreDecodedFrame(final int frameNumber) {
     return false;
   }
 

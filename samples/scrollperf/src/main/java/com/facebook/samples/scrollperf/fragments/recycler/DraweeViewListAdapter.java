@@ -38,7 +38,7 @@ public class DraweeViewListAdapter extends BaseAdapter {
   private final PerfListener mPerfListener;
 
   public DraweeViewListAdapter(
-      Context context, SimpleAdapter<Uri> simpleAdapter, Config config, PerfListener perfListener) {
+      final Context context, final SimpleAdapter<Uri> simpleAdapter, final Config config, final PerfListener perfListener) {
     this.mSimpleAdapter = simpleAdapter;
     this.mConfig = config;
     this.mPaddingPx = context.getResources().getDimensionPixelSize(R.dimen.drawee_padding);
@@ -51,17 +51,17 @@ public class DraweeViewListAdapter extends BaseAdapter {
   }
 
   @Override
-  public Uri getItem(int position) {
+  public Uri getItem(final int position) {
     return mSimpleAdapter.get(position);
   }
 
   @Override
-  public long getItemId(int position) {
+  public long getItemId(final int position) {
     return position;
   }
 
   @Override
-  public View getView(int position, View convertView, ViewGroup parent) {
+  public View getView(final int position, final View convertView, final ViewGroup parent) {
     InstrumentedDraweeView draweeView;
     if (convertView == null) {
       final Context context = parent.getContext();

@@ -23,7 +23,7 @@ public class BitmapMemoryCacheTrimStrategy implements CountingMemoryCache.CacheT
   private static final String TAG = "BitmapMemoryCacheTrimStrategy";
 
   @Override
-  public double getTrimRatio(MemoryTrimType trimType) {
+  public double getTrimRatio(final MemoryTrimType trimType) {
     switch (trimType) {
       case OnCloseToDalvikHeapLimit:
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

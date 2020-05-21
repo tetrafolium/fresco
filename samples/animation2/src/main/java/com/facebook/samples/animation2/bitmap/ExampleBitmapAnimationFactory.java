@@ -69,7 +69,7 @@ public class ExampleBitmapAnimationFactory {
     private final int[] mColors;
     private final int mAnimationDurationMs;
 
-    public ColorListAnimationInformation(int[] colors, int animationDurationMs) {
+    public ColorListAnimationInformation(final int[] colors, final int animationDurationMs) {
       mColors = colors;
       mAnimationDurationMs = animationDurationMs;
     }
@@ -80,7 +80,7 @@ public class ExampleBitmapAnimationFactory {
     }
 
     @Override
-    public int getFrameDurationMs(int frameNumber) {
+    public int getFrameDurationMs(final int frameNumber) {
       return mAnimationDurationMs;
     }
 
@@ -97,13 +97,13 @@ public class ExampleBitmapAnimationFactory {
 
     private final int[] mColors;
 
-    public ColorAndFrameNumberRenderer(int[] colors) {
+    public ColorAndFrameNumberRenderer(final int[] colors) {
       mColors = colors;
       mTextPaint.setColor(Color.WHITE);
     }
 
     @Override
-    public boolean renderFrame(int frameNumber, Bitmap targetBitmap) {
+    public boolean renderFrame(final int frameNumber, final Bitmap targetBitmap) {
       Canvas canvas = new Canvas(targetBitmap);
       canvas.drawColor(mColors[frameNumber]);
       int textSize = targetBitmap.getWidth() / 4;
@@ -123,7 +123,7 @@ public class ExampleBitmapAnimationFactory {
     }
 
     @Override
-    public void setBounds(@Nullable Rect bounds) {
+    public void setBounds(final @Nullable Rect bounds) {
       // we always use the full bitmap
     }
 

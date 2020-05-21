@@ -63,7 +63,7 @@ public class PooledByteStreamsTest {
           mIs,
           new OutputStream() {
             @Override
-            public void write(int oneByte) throws IOException {
+            public void write(final int oneByte) throws IOException {
               throw new IOException();
             }
           });
@@ -88,7 +88,7 @@ public class PooledByteStreamsTest {
           mIs,
           new OutputStream() {
             @Override
-            public void write(int oneByte) throws IOException {
+            public void write(final int oneByte) throws IOException {
               throw new IOException();
             }
           },

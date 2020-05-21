@@ -31,11 +31,11 @@ public class ImageOptions extends DecodedImageOptions {
     return sDefaultImageOptions;
   }
 
-  public static void setDefaults(ImageOptions imageOptions) {
+  public static void setDefaults(final ImageOptions imageOptions) {
     sDefaultImageOptions = imageOptions;
   }
 
-  public static Builder extend(ImageOptions imageOptions) {
+  public static Builder extend(final ImageOptions imageOptions) {
     return new Builder(imageOptions);
   }
 
@@ -72,7 +72,7 @@ public class ImageOptions extends DecodedImageOptions {
 
   private final boolean mAutoPlay;
 
-  public ImageOptions(Builder builder) {
+  public ImageOptions(final Builder builder) {
     super(builder);
     mPlaceholderRes = builder.mPlaceholderRes;
     mPlaceholderDrawable = builder.mPlaceholderDrawable;
@@ -168,7 +168,7 @@ public class ImageOptions extends DecodedImageOptions {
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (this == obj) {
       return true;
     }
@@ -273,7 +273,7 @@ public class ImageOptions extends DecodedImageOptions {
       super();
     }
 
-    private Builder(ImageOptions defaultOptions) {
+    private Builder(final ImageOptions defaultOptions) {
       super(defaultOptions);
       mPlaceholderRes = defaultOptions.getPlaceholderRes();
       mPlaceholderDrawable = defaultOptions.getPlaceholderDrawable();
@@ -298,98 +298,98 @@ public class ImageOptions extends DecodedImageOptions {
       mFadeDurationMs = defaultOptions.getFadeDurationMs();
     }
 
-    public Builder placeholder(@Nullable Drawable placeholder) {
+    public Builder placeholder(final @Nullable Drawable placeholder) {
       mPlaceholderDrawable = placeholder;
       mPlaceholderRes = 0;
       return getThis();
     }
 
     public Builder placeholder(
-        @Nullable Drawable placeholder, @Nullable ScalingUtils.ScaleType placeholderScaleType) {
+        final @Nullable Drawable placeholder, final @Nullable ScalingUtils.ScaleType placeholderScaleType) {
       mPlaceholderDrawable = placeholder;
       mPlaceholderScaleType = placeholderScaleType;
       mPlaceholderRes = 0;
       return getThis();
     }
 
-    public Builder placeholderRes(@DrawableRes int placeholderRes) {
+    public Builder placeholderRes(final @DrawableRes int placeholderRes) {
       mPlaceholderRes = placeholderRes;
       mPlaceholderDrawable = null;
       return getThis();
     }
 
     public Builder placeholderRes(
-        @DrawableRes int placeholderRes, @Nullable ScalingUtils.ScaleType placeholderScaleType) {
+        final @DrawableRes int placeholderRes, final @Nullable ScalingUtils.ScaleType placeholderScaleType) {
       mPlaceholderRes = placeholderRes;
       mPlaceholderScaleType = placeholderScaleType;
       mPlaceholderDrawable = null;
       return getThis();
     }
 
-    public Builder placeholderScaleType(@Nullable ScalingUtils.ScaleType placeholderScaleType) {
+    public Builder placeholderScaleType(final @Nullable ScalingUtils.ScaleType placeholderScaleType) {
       mPlaceholderScaleType = placeholderScaleType;
       return getThis();
     }
 
-    public Builder placeholderFocusPoint(@Nullable PointF placeholderFocusPoint) {
+    public Builder placeholderFocusPoint(final @Nullable PointF placeholderFocusPoint) {
       mPlaceholderFocusPoint = placeholderFocusPoint;
       return getThis();
     }
 
-    public Builder placeholderApplyRoundingOptions(boolean placeholderApplyRoundingOptions) {
+    public Builder placeholderApplyRoundingOptions(final boolean placeholderApplyRoundingOptions) {
       mPlaceholderApplyRoundingOptions = placeholderApplyRoundingOptions;
       return getThis();
     }
 
-    public Builder errorRes(@DrawableRes int errorRes) {
+    public Builder errorRes(final @DrawableRes int errorRes) {
       mErrorRes = errorRes;
       return getThis();
     }
 
-    public Builder errorScaleType(@Nullable ScalingUtils.ScaleType errorScaleType) {
+    public Builder errorScaleType(final @Nullable ScalingUtils.ScaleType errorScaleType) {
       mErrorScaleType = errorScaleType;
       return getThis();
     }
 
-    public Builder errorFocusPoint(@Nullable PointF errorFocusPoint) {
+    public Builder errorFocusPoint(final @Nullable PointF errorFocusPoint) {
       mErrorFocusPoint = errorFocusPoint;
       return getThis();
     }
 
-    public Builder progress(@Nullable Drawable progress) {
+    public Builder progress(final @Nullable Drawable progress) {
       mProgressDrawable = progress;
       return getThis();
     }
 
-    public Builder progress(Drawable progress, @Nullable ScalingUtils.ScaleType progressScaleType) {
+    public Builder progress(final Drawable progress, final @Nullable ScalingUtils.ScaleType progressScaleType) {
       mProgressDrawable = progress;
       mProgressScaleType = progressScaleType;
       return getThis();
     }
 
-    public Builder progressRes(@DrawableRes int progressRes) {
+    public Builder progressRes(final @DrawableRes int progressRes) {
       mProgressRes = progressRes;
       return getThis();
     }
 
     public Builder progressRes(
-        @DrawableRes int progressRes, @Nullable ScalingUtils.ScaleType progressScaleType) {
+        final @DrawableRes int progressRes, final @Nullable ScalingUtils.ScaleType progressScaleType) {
       mProgressRes = progressRes;
       mProgressScaleType = progressScaleType;
       return getThis();
     }
 
-    public Builder progressScaleType(@Nullable ScalingUtils.ScaleType progressScaleType) {
+    public Builder progressScaleType(final @Nullable ScalingUtils.ScaleType progressScaleType) {
       mProgressScaleType = progressScaleType;
       return getThis();
     }
 
-    public Builder overlayRes(@DrawableRes int overlayRes) {
+    public Builder overlayRes(final @DrawableRes int overlayRes) {
       mOverlayRes = overlayRes;
       return getThis();
     }
 
-    public Builder colorFilter(@Nullable ColorFilter colorFilter) {
+    public Builder colorFilter(final @Nullable ColorFilter colorFilter) {
       mActualImageColorFilter = colorFilter;
       return getThis();
     }
@@ -411,7 +411,7 @@ public class ImageOptions extends DecodedImageOptions {
      *
      * @param resizeToViewport whether to enable this optimization
      */
-    public Builder resizeToViewport(boolean resizeToViewport) {
+    public Builder resizeToViewport(final boolean resizeToViewport) {
       mResizeToViewport = resizeToViewport;
       return getThis();
     }
@@ -421,7 +421,7 @@ public class ImageOptions extends DecodedImageOptions {
      *
      * @param fadeInDurationMs
      */
-    public Builder fadeDurationMs(int fadeInDurationMs) {
+    public Builder fadeDurationMs(final int fadeInDurationMs) {
       mFadeDurationMs = fadeInDurationMs;
       return getThis();
     }

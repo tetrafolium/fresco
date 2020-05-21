@@ -21,11 +21,11 @@ public class CloseableAnimatedImage extends CloseableImage {
 
   private boolean mIsStateful;
 
-  public CloseableAnimatedImage(AnimatedImageResult imageResult) {
+  public CloseableAnimatedImage(final AnimatedImageResult imageResult) {
     this(imageResult, true);
   }
 
-  public CloseableAnimatedImage(AnimatedImageResult imageResult, boolean isStateful) {
+  public CloseableAnimatedImage(final AnimatedImageResult imageResult, final boolean isStateful) {
     mImageResult = imageResult;
     mIsStateful = isStateful;
   }

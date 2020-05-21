@@ -33,33 +33,33 @@ public class Fresco {
   private static PipelineDraweeControllerBuilderSupplier sDraweeControllerBuilderSupplier;
   private static volatile boolean sIsInitialized = false;
 
-  private Fresco() {}
+  private Fresco() { }
 
   /** Initializes Fresco with the default config. */
-  public static void initialize(Context context) {
+  public static void initialize(final Context context) {
     initialize(context, null, null);
   }
 
   /** Initializes Fresco with the default Drawee config. */
   public static void initialize(
-      Context context, @Nullable ImagePipelineConfig imagePipelineConfig) {
+      final Context context, final @Nullable ImagePipelineConfig imagePipelineConfig) {
     initialize(context, imagePipelineConfig, null);
   }
 
   /** Initializes Fresco with the specified config and native code enabled. */
   public static void initialize(
-      Context context,
-      @Nullable ImagePipelineConfig imagePipelineConfig,
-      @Nullable DraweeConfig draweeConfig) {
+      final Context context,
+      final @Nullable ImagePipelineConfig imagePipelineConfig,
+      final @Nullable DraweeConfig draweeConfig) {
     initialize(context, imagePipelineConfig, draweeConfig, true);
   }
 
   /** Initializes Fresco with the specified config. */
   public static void initialize(
-      Context context,
-      @Nullable ImagePipelineConfig imagePipelineConfig,
-      @Nullable DraweeConfig draweeConfig,
-      boolean useNativeCode) {
+      final Context context,
+      final @Nullable ImagePipelineConfig imagePipelineConfig,
+      final @Nullable DraweeConfig draweeConfig,
+      final boolean useNativeCode) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("Fresco#initialize");
     }
@@ -114,7 +114,7 @@ public class Fresco {
   }
 
   /** Initializes Drawee with the specified config. */
-  private static void initializeDrawee(Context context, @Nullable DraweeConfig draweeConfig) {
+  private static void initializeDrawee(final Context context, final @Nullable DraweeConfig draweeConfig) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("Fresco.initializeDrawee");
     }

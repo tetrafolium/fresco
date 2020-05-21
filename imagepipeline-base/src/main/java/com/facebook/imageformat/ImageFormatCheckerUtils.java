@@ -20,7 +20,7 @@ public class ImageFormatCheckerUtils {
    * @param value the string to use
    * @return byte array representing ascii encoded value
    */
-  public static byte[] asciiBytes(String value) {
+  public static byte[] asciiBytes(final String value) {
     Preconditions.checkNotNull(value);
     try {
       return value.getBytes("ASCII");
@@ -50,7 +50,7 @@ public class ImageFormatCheckerUtils {
    * @param pattern the pattern to check
    * @return true if byteArray starts with pattern
    */
-  public static boolean hasPatternAt(final byte[] byteArray, final byte[] pattern, int offset) {
+  public static boolean hasPatternAt(final byte[] byteArray, final byte[] pattern, final int offset) {
     Preconditions.checkNotNull(byteArray);
     Preconditions.checkNotNull(pattern);
     if (offset + pattern.length > byteArray.length) {
@@ -87,14 +87,14 @@ public class ImageFormatCheckerUtils {
     for (int i = 0; i <= max; i++) {
       // Look for first byte
       if (byteArray[i] != first) {
-        while (++i <= max && byteArray[i] != first) {}
+        while (++i <= max && byteArray[i] != first) { }
       }
 
       // Found first byte, now look for the rest
       if (i <= max) {
         int j = i + 1;
         int end = j + patternLen - 1;
-        for (int k = 1; j < end && byteArray[j] == pattern[k]; j++, k++) {}
+        for (int k = 1; j < end && byteArray[j] == pattern[k]; j++, k++) { }
 
         if (j == end) {
           // found whole pattern
@@ -105,5 +105,5 @@ public class ImageFormatCheckerUtils {
     return -1;
   }
 
-  private ImageFormatCheckerUtils() {}
+  private ImageFormatCheckerUtils() { }
 }

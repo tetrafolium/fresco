@@ -58,12 +58,12 @@ public class AnimatedDrawableBackendImplTest {
   }
 
   private void testBasic(
-      int canvasWidth,
-      int canvasHeight,
-      int frameOriginalWidth,
-      int frameOriginalHeight,
-      int frameExpectedRenderedWidth,
-      int frameExpectedRenderedHeight) {
+      final int canvasWidth,
+      final int canvasHeight,
+      final int frameOriginalWidth,
+      final int frameOriginalHeight,
+      final int frameExpectedRenderedWidth,
+      final int frameExpectedRenderedHeight) {
     when(mCanvas.getWidth()).thenReturn(canvasWidth);
     when(mCanvas.getHeight()).thenReturn(canvasHeight);
     when(mFrame.getWidth()).thenReturn(frameOriginalWidth);

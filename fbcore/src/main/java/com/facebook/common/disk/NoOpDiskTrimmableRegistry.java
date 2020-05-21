@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 public class NoOpDiskTrimmableRegistry implements DiskTrimmableRegistry {
   private static @Nullable NoOpDiskTrimmableRegistry sInstance = null;
 
-  private NoOpDiskTrimmableRegistry() {}
+  private NoOpDiskTrimmableRegistry() { }
 
   public static synchronized NoOpDiskTrimmableRegistry getInstance() {
     if (sInstance == null) {
@@ -23,8 +23,8 @@ public class NoOpDiskTrimmableRegistry implements DiskTrimmableRegistry {
   }
 
   @Override
-  public void registerDiskTrimmable(DiskTrimmable trimmable) {}
+  public void registerDiskTrimmable(final DiskTrimmable trimmable) { }
 
   @Override
-  public void unregisterDiskTrimmable(DiskTrimmable trimmable) {}
+  public void unregisterDiskTrimmable(final DiskTrimmable trimmable) { }
 }

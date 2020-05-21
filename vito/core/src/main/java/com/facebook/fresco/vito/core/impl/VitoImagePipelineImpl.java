@@ -30,18 +30,18 @@ public class VitoImagePipelineImpl implements VitoImagePipeline {
   private final ImagePipeline mImagePipeline;
   private final ImagePipelineUtils mImagePipelineUtils;
 
-  public VitoImagePipelineImpl(ImagePipeline imagePipeline, ImagePipelineUtils imagePipelineUtils) {
+  public VitoImagePipelineImpl(final ImagePipeline imagePipeline, final ImagePipelineUtils imagePipelineUtils) {
     mImagePipeline = imagePipeline;
     mImagePipelineUtils = imagePipelineUtils;
   }
 
   @Override
   public VitoImageRequest createImageRequest(
-      Resources resources,
-      @Nullable Uri uri,
-      @Nullable MultiUri multiUri,
-      @Nullable ImageOptions options,
-      @Nullable Object callerContext) {
+      final Resources resources,
+      final @Nullable Uri uri,
+      final @Nullable MultiUri multiUri,
+      final @Nullable ImageOptions options,
+      final @Nullable Object callerContext) {
     if (options == null) {
       options = ImageOptions.defaults();
     }
@@ -57,7 +57,7 @@ public class VitoImagePipelineImpl implements VitoImagePipeline {
 
   @Override
   @Nullable
-  public CloseableReference<CloseableImage> getCachedImage(VitoImageRequest imageRequest) {
+  public CloseableReference<CloseableImage> getCachedImage(final VitoImageRequest imageRequest) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("VitoImagePipeline#getCachedImage");
     }
@@ -77,10 +77,10 @@ public class VitoImagePipelineImpl implements VitoImagePipeline {
 
   @Override
   public DataSource<CloseableReference<CloseableImage>> fetchDecodedImage(
-      VitoImageRequest imageRequest,
-      @Nullable Object callerContext,
-      @Nullable RequestListener requestListener,
-      @Nullable long uiComponentId) {
+      final VitoImageRequest imageRequest,
+      final @Nullable Object callerContext,
+      final @Nullable RequestListener requestListener,
+      final @Nullable long uiComponentId) {
     return mImagePipeline.fetchDecodedImage(
         imageRequest.imageRequest,
         callerContext,

@@ -13,13 +13,13 @@ public class ForwardingImagePerfDataListener implements ImagePerfDataListener {
 
   private final Collection<ImagePerfDataListener> mListeners;
 
-  public ForwardingImagePerfDataListener(Collection<ImagePerfDataListener> listeners) {
+  public ForwardingImagePerfDataListener(final Collection<ImagePerfDataListener> listeners) {
     mListeners = listeners;
   }
 
   @Override
   public void onImageLoadStatusUpdated(
-      ImagePerfData imagePerfData, @ImageLoadStatus int imageLoadStatus) {
+      final ImagePerfData imagePerfData, final @ImageLoadStatus int imageLoadStatus) {
     for (ImagePerfDataListener listener : mListeners) {
       listener.onImageLoadStatusUpdated(imagePerfData, imageLoadStatus);
     }
@@ -27,7 +27,7 @@ public class ForwardingImagePerfDataListener implements ImagePerfDataListener {
 
   @Override
   public void onImageVisibilityUpdated(
-      ImagePerfData imagePerfData, @VisibilityState int visibilityState) {
+      final ImagePerfData imagePerfData, final @VisibilityState int visibilityState) {
     for (ImagePerfDataListener listener : mListeners) {
       listener.onImageVisibilityUpdated(imagePerfData, visibilityState);
     }

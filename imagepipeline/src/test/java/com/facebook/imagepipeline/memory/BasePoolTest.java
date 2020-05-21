@@ -41,7 +41,7 @@ public class BasePoolTest {
   }
 
   @Test
-  public void testFree() throws Exception {}
+  public void testFree() throws Exception { }
 
   // tests out the getBucketedSize method
   @Test
@@ -449,11 +449,11 @@ public class BasePoolTest {
   public static class TestPool extends BasePool<byte[]> {
     public boolean mIsReusable;
 
-    public TestPool(int maxPoolSizeSoftCap, int maxPoolSizeHardCap) {
+    public TestPool(final int maxPoolSizeSoftCap, final int maxPoolSizeHardCap) {
       this(maxPoolSizeSoftCap, maxPoolSizeHardCap, null);
     }
 
-    public TestPool(int maxPoolSizeSoftCap, int maxPoolSizeHardCap, SparseIntArray bucketSizes) {
+    public TestPool(final int maxPoolSizeSoftCap, final int maxPoolSizeHardCap, final SparseIntArray bucketSizes) {
       super(
           mock(MemoryTrimmableRegistry.class),
           new PoolParams(maxPoolSizeSoftCap, maxPoolSizeHardCap, bucketSizes),
@@ -463,15 +463,15 @@ public class BasePoolTest {
     }
 
     @Override
-    protected byte[] alloc(int bucketedSize) {
+    protected byte[] alloc(final int bucketedSize) {
       return new byte[bucketedSize];
     }
 
     @Override
-    protected void free(byte[] value) {}
+    protected void free(final byte[] value) { }
 
     @Override
-    protected boolean isReusable(byte[] value) {
+    protected boolean isReusable(final byte[] value) {
       return mIsReusable;
     }
 
@@ -482,7 +482,7 @@ public class BasePoolTest {
      * @return the slightly higher size
      */
     @Override
-    protected int getBucketedSize(int requestSize) {
+    protected int getBucketedSize(final int requestSize) {
       if (requestSize <= 0) {
         throw new InvalidSizeException(requestSize);
       }
@@ -491,17 +491,17 @@ public class BasePoolTest {
     }
 
     @Override
-    protected int getBucketedSizeForValue(byte[] value) {
+    protected int getBucketedSizeForValue(final byte[] value) {
       return value.length;
     }
 
     @Override
-    protected int getSizeInBytes(int bucketedSize) {
+    protected int getSizeInBytes(final int bucketedSize) {
       return bucketedSize;
     }
   }
 
-  private static SparseIntArray makeBucketSizeArray(int... params) {
+  private static SparseIntArray makeBucketSizeArray(final int... params) {
     Preconditions.checkArgument(params.length % 2 == 0);
     final SparseIntArray bucketSizes = new SparseIntArray();
     for (int i = 0; i < params.length; i += 2) {

@@ -156,7 +156,7 @@ public class StagingArea {
   }
 
   /** Determine if an valid entry for the key exists in the staging area. */
-  public synchronized boolean containsKey(CacheKey key) {
+  public synchronized boolean containsKey(final CacheKey key) {
     Preconditions.checkNotNull(key);
     if (!mMap.containsKey(key)) {
       return false;

@@ -37,10 +37,10 @@ public class CallerThreadExecutor extends AbstractExecutorService {
     return sInstance;
   }
 
-  private CallerThreadExecutor() {}
+  private CallerThreadExecutor() { }
 
   @Override
-  public void execute(Runnable command) {
+  public void execute(final Runnable command) {
     command.run();
   }
 
@@ -66,7 +66,7 @@ public class CallerThreadExecutor extends AbstractExecutorService {
   }
 
   @Override
-  public boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException {
+  public boolean awaitTermination(final long timeout, final TimeUnit unit) throws InterruptedException {
     return true;
   }
 }

@@ -22,10 +22,10 @@ public class SimpleBitmapReleaser implements ResourceReleaser<Bitmap> {
     return sInstance;
   }
 
-  private SimpleBitmapReleaser() {}
+  private SimpleBitmapReleaser() { }
 
   @Override
-  public void release(Bitmap value) {
+  public void release(final Bitmap value) {
     value.recycle();
   }
 }

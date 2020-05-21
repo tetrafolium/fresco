@@ -11,7 +11,7 @@ package com.facebook.common.memory;
 public class NoOpMemoryTrimmableRegistry implements MemoryTrimmableRegistry {
   private static NoOpMemoryTrimmableRegistry sInstance = null;
 
-  public NoOpMemoryTrimmableRegistry() {}
+  public NoOpMemoryTrimmableRegistry() { }
 
   public static synchronized NoOpMemoryTrimmableRegistry getInstance() {
     if (sInstance == null) {
@@ -21,8 +21,8 @@ public class NoOpMemoryTrimmableRegistry implements MemoryTrimmableRegistry {
   }
 
   /** Register an object. */
-  public void registerMemoryTrimmable(MemoryTrimmable trimmable) {}
+  public void registerMemoryTrimmable(final MemoryTrimmable trimmable) { }
 
   /** Unregister an object. */
-  public void unregisterMemoryTrimmable(MemoryTrimmable trimmable) {}
+  public void unregisterMemoryTrimmable(final MemoryTrimmable trimmable) { }
 }

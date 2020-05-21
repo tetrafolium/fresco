@@ -28,22 +28,22 @@ public class AbstractDataSourceTest {
 
   private static class FakeAbstractDataSource extends AbstractDataSource<Value> {
     @Override
-    public boolean setResult(@Nullable Value value, boolean isLast) {
+    public boolean setResult(final @Nullable Value value, final boolean isLast) {
       return super.setResult(value, isLast);
     }
 
     @Override
-    public boolean setFailure(Throwable throwable) {
+    public boolean setFailure(final Throwable throwable) {
       return super.setFailure(throwable);
     }
 
     @Override
-    public boolean setProgress(float progress) {
+    public boolean setProgress(final float progress) {
       return super.setProgress(progress);
     }
 
     @Override
-    public void closeResult(Value result) {
+    public void closeResult(final Value result) {
       result.close();
     }
   }
@@ -63,7 +63,7 @@ public class AbstractDataSourceTest {
     mDataSource = new FakeAbstractDataSource();
   }
 
-  private void verifyExecutor(Executor executor) {
+  private void verifyExecutor(final Executor executor) {
     ArgumentCaptor<Runnable> captor = ArgumentCaptor.forClass(Runnable.class);
     verify(executor).execute(captor.capture());
     Runnable runnable = captor.getValue();
@@ -71,7 +71,7 @@ public class AbstractDataSourceTest {
     runnable.run();
   }
 
-  private void verifySubscribers(int expected) {
+  private void verifySubscribers(final int expected) {
     switch (expected) {
       case NO_INTERACTIONS:
         verifyZeroInteractions(mExecutor1, mDataSubscriber1);

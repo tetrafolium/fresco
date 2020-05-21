@@ -20,7 +20,7 @@ import javax.annotation.concurrent.ThreadSafe;
 @ThreadSafe
 public class ArtDecoder extends DefaultDecoder {
 
-  public ArtDecoder(BitmapPool bitmapPool, int maxNumThreads, SynchronizedPool decodeBuffers) {
+  public ArtDecoder(final BitmapPool bitmapPool, final int maxNumThreads, final SynchronizedPool decodeBuffers) {
     super(bitmapPool, maxNumThreads, decodeBuffers);
   }
 

@@ -34,7 +34,7 @@ public class DecodedImageOptions extends EncodedImageOptions {
   private final boolean mLocalThumbnailPreviewsEnabled;
   private final @Nullable Bitmap.Config mBitmapConfig;
 
-  public DecodedImageOptions(Builder builder) {
+  public DecodedImageOptions(final Builder builder) {
     super(builder);
     mResizeOptions = builder.mResizeOptions;
     mRotationOptions = builder.mRotationOptions;
@@ -89,7 +89,7 @@ public class DecodedImageOptions extends EncodedImageOptions {
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (this == obj) {
       return true;
     }
@@ -98,7 +98,7 @@ public class DecodedImageOptions extends EncodedImageOptions {
     return equalDecodedOptions(other);
   }
 
-  protected boolean equalDecodedOptions(DecodedImageOptions other) {
+  protected boolean equalDecodedOptions(final DecodedImageOptions other) {
     if (!Objects.equal(mResizeOptions, other.mResizeOptions)
         || !Objects.equal(mRotationOptions, other.mRotationOptions)
         || !Objects.equal(mPostprocessor, other.mPostprocessor)
@@ -167,7 +167,7 @@ public class DecodedImageOptions extends EncodedImageOptions {
       super();
     }
 
-    protected Builder(ImageOptions defaultOptions) {
+    protected Builder(final ImageOptions defaultOptions) {
       super(defaultOptions);
       mResizeOptions = defaultOptions.getResizeOptions();
       mRotationOptions = defaultOptions.getRotationOptions();
@@ -181,22 +181,22 @@ public class DecodedImageOptions extends EncodedImageOptions {
       mBitmapConfig = defaultOptions.getBitmapConfig();
     }
 
-    public T resize(@Nullable ResizeOptions resizeOptions) {
+    public T resize(final @Nullable ResizeOptions resizeOptions) {
       mResizeOptions = resizeOptions;
       return getThis();
     }
 
-    public T rotate(@Nullable RotationOptions rotationOptions) {
+    public T rotate(final @Nullable RotationOptions rotationOptions) {
       mRotationOptions = rotationOptions;
       return getThis();
     }
 
-    public T postprocess(@Nullable Postprocessor postprocessor) {
+    public T postprocess(final @Nullable Postprocessor postprocessor) {
       mPostprocessor = postprocessor;
       return getThis();
     }
 
-    public T imageDecodeOptions(@Nullable ImageDecodeOptions imageDecodeOptions) {
+    public T imageDecodeOptions(final @Nullable ImageDecodeOptions imageDecodeOptions) {
       mImageDecodeOptions = imageDecodeOptions;
       return getThis();
     }
@@ -207,22 +207,22 @@ public class DecodedImageOptions extends EncodedImageOptions {
      * @param roundingOptions the rounding options to use
      * @return the builder
      */
-    public T round(@Nullable RoundingOptions roundingOptions) {
+    public T round(final @Nullable RoundingOptions roundingOptions) {
       mRoundingOptions = roundingOptions;
       return getThis();
     }
 
-    public T borders(@Nullable BorderOptions borderOptions) {
+    public T borders(final @Nullable BorderOptions borderOptions) {
       mBorderOptions = borderOptions;
       return getThis();
     }
 
-    public T scale(@Nullable ScalingUtils.ScaleType actualImageScaleType) {
+    public T scale(final @Nullable ScalingUtils.ScaleType actualImageScaleType) {
       mActualImageScaleType = actualImageScaleType;
       return getThis();
     }
 
-    public T focusPoint(@Nullable PointF focusPoint) {
+    public T focusPoint(final @Nullable PointF focusPoint) {
       mActualFocusPoint = focusPoint;
       return getThis();
     }
@@ -233,12 +233,12 @@ public class DecodedImageOptions extends EncodedImageOptions {
      * @param localThumbnailPreviewsEnabled true if thumbnails should be displayed
      * @return the builder
      */
-    public T localThumbnailPreviewsEnabled(boolean localThumbnailPreviewsEnabled) {
+    public T localThumbnailPreviewsEnabled(final boolean localThumbnailPreviewsEnabled) {
       mLocalThumbnailPreviewsEnabled = localThumbnailPreviewsEnabled;
       return getThis();
     }
 
-    public T bitmapConfig(@Nullable Bitmap.Config bitmapConfig) {
+    public T bitmapConfig(final @Nullable Bitmap.Config bitmapConfig) {
       mBitmapConfig = bitmapConfig;
       return getThis();
     }

@@ -13,7 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 /** Returns the native {@link ImageTranscoderFactory} if it is instantiable via reflection */
 public final class NativeImageTranscoderFactory {
 
-  private NativeImageTranscoderFactory() {}
+  private NativeImageTranscoderFactory() { }
 
   public static ImageTranscoderFactory getNativeImageTranscoderFactory(
       final int maxBitmapSize,

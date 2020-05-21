@@ -37,15 +37,15 @@ public class LocalContentUriFetchProducer extends LocalFetchProducer {
   private final ContentResolver mContentResolver;
 
   public LocalContentUriFetchProducer(
-      Executor executor,
-      PooledByteBufferFactory pooledByteBufferFactory,
-      ContentResolver contentResolver) {
+      final Executor executor,
+      final PooledByteBufferFactory pooledByteBufferFactory,
+      final ContentResolver contentResolver) {
     super(executor, pooledByteBufferFactory);
     mContentResolver = contentResolver;
   }
 
   @Override
-  protected EncodedImage getEncodedImage(ImageRequest imageRequest) throws IOException {
+  protected EncodedImage getEncodedImage(final ImageRequest imageRequest) throws IOException {
     Uri uri = imageRequest.getSourceUri();
     if (UriUtil.isLocalContactUri(uri)) {
       final InputStream inputStream;
@@ -78,7 +78,7 @@ public class LocalContentUriFetchProducer extends LocalFetchProducer {
     return getEncodedImage(mContentResolver.openInputStream(uri), EncodedImage.UNKNOWN_STREAM_SIZE);
   }
 
-  private @Nullable EncodedImage getCameraImage(Uri uri) throws IOException {
+  private @Nullable EncodedImage getCameraImage(final Uri uri) throws IOException {
     Cursor cursor = mContentResolver.query(uri, PROJECTION, null, null, null);
     if (cursor == null) {
       return null;
@@ -101,7 +101,7 @@ public class LocalContentUriFetchProducer extends LocalFetchProducer {
     return null;
   }
 
-  private static int getLength(String pathname) {
+  private static int getLength(final String pathname) {
     return pathname == null ? -1 : (int) new File(pathname).length();
   }
 

@@ -58,7 +58,7 @@ public class KeyframesDecoderExample {
      */
     @Nullable
     @Override
-    public ImageFormat determineFormat(byte[] headerBytes, int headerSize) {
+    public ImageFormat determineFormat(final byte[] headerBytes, final int headerSize) {
       // JSON files must start with a opening curly brace
       if (!ImageFormatCheckerUtils.startsWithPattern(headerBytes, JSON_OBJECT_FIRST_BYTE)) {
         return null;
@@ -78,10 +78,10 @@ public class KeyframesDecoderExample {
 
     @Override
     public CloseableImage decode(
-        EncodedImage encodedImage,
-        int length,
-        QualityInfo qualityInfo,
-        ImageDecodeOptions options) {
+        final EncodedImage encodedImage,
+        final int length,
+        final QualityInfo qualityInfo,
+        final ImageDecodeOptions options) {
       InputStream encodedInputStream = null;
       try {
         encodedInputStream = encodedImage.getInputStream();
@@ -100,7 +100,7 @@ public class KeyframesDecoderExample {
     private boolean mClosed;
     private final KFImage mImage;
 
-    CloseableKeyframesImage(KFImage image) {
+    CloseableKeyframesImage(final KFImage image) {
       mImage = image;
     }
 
@@ -142,13 +142,13 @@ public class KeyframesDecoderExample {
   private static class KeyframesDrawableFactory implements DrawableFactory {
 
     @Override
-    public boolean supportsImageType(CloseableImage image) {
+    public boolean supportsImageType(final CloseableImage image) {
       return image instanceof CloseableKeyframesImage;
     }
 
     @Nullable
     @Override
-    public Drawable createDrawable(CloseableImage image) {
+    public Drawable createDrawable(final CloseableImage image) {
       KFImage kfImage = ((CloseableKeyframesImage) image).getImage();
       return new AnimatableKeyframesDrawable(
           new KeyframesDrawableBuilder().withImage(kfImage).build());

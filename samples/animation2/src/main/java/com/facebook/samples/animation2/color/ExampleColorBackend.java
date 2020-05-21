@@ -26,7 +26,7 @@ public class ExampleColorBackend implements AnimationBackend {
    *
    * @return the backend to use
    */
-  public static AnimationBackend createSampleColorAnimationBackend(Resources resources) {
+  public static AnimationBackend createSampleColorAnimationBackend(final Resources resources) {
     // Get the animation duration in ms for each color frame
     int frameDurationMs = resources.getInteger(android.R.integer.config_mediumAnimTime);
     // Create and return the backend
@@ -39,7 +39,7 @@ public class ExampleColorBackend implements AnimationBackend {
 
   private Rect mBounds;
 
-  private ExampleColorBackend(int[] colors, int frameDurationMs) {
+  private ExampleColorBackend(final int[] colors, final int frameDurationMs) {
     mColors = colors;
     mFrameDurationMs = frameDurationMs;
   }
@@ -50,7 +50,7 @@ public class ExampleColorBackend implements AnimationBackend {
   }
 
   @Override
-  public int getFrameDurationMs(int frameNumber) {
+  public int getFrameDurationMs(final int frameNumber) {
     return mFrameDurationMs;
   }
 
@@ -60,7 +60,7 @@ public class ExampleColorBackend implements AnimationBackend {
   }
 
   @Override
-  public boolean drawFrame(Drawable parent, Canvas canvas, int frameNumber) {
+  public boolean drawFrame(final Drawable parent, final Canvas canvas, final int frameNumber) {
     if (mBounds == null) {
       return false;
     }
@@ -70,17 +70,17 @@ public class ExampleColorBackend implements AnimationBackend {
   }
 
   @Override
-  public void setAlpha(@IntRange(from = 0, to = 255) int alpha) {
+  public void setAlpha(final @IntRange(from = 0, to = 255) int alpha) {
     mPaint.setAlpha(alpha);
   }
 
   @Override
-  public void setColorFilter(@Nullable ColorFilter colorFilter) {
+  public void setColorFilter(final @Nullable ColorFilter colorFilter) {
     mPaint.setColorFilter(colorFilter);
   }
 
   @Override
-  public void setBounds(Rect bounds) {
+  public void setBounds(final Rect bounds) {
     mBounds = bounds;
   }
 
@@ -90,7 +90,7 @@ public class ExampleColorBackend implements AnimationBackend {
   }
 
   @Override
-  public void clear() {}
+  public void clear() { }
 
   @Override
   public int getIntrinsicWidth() {

@@ -26,7 +26,7 @@ public class MemoryPooledByteBuffer implements PooledByteBuffer {
   @VisibleForTesting
   CloseableReference<MemoryChunk> mBufRef;
 
-  public MemoryPooledByteBuffer(CloseableReference<MemoryChunk> bufRef, int size) {
+  public MemoryPooledByteBuffer(final CloseableReference<MemoryChunk> bufRef, final int size) {
     Preconditions.checkNotNull(bufRef);
     Preconditions.checkArgument(size >= 0 && size <= bufRef.get().getSize());
     mBufRef = bufRef.clone();
@@ -46,7 +46,7 @@ public class MemoryPooledByteBuffer implements PooledByteBuffer {
   }
 
   @Override
-  public synchronized byte read(int offset) {
+  public synchronized byte read(final int offset) {
     ensureValid();
     Preconditions.checkArgument(offset >= 0);
     Preconditions.checkArgument(offset < mSize);
@@ -54,7 +54,7 @@ public class MemoryPooledByteBuffer implements PooledByteBuffer {
   }
 
   @Override
-  public synchronized int read(int offset, byte[] buffer, int bufferOffset, int length) {
+  public synchronized int read(final int offset, final byte[] buffer, final int bufferOffset, final int length) {
     ensureValid();
     // We need to make sure that PooledByteBuffer's length is preserved.
     // Al the other bounds checks will be performed by NativeMemoryChunk.read method.

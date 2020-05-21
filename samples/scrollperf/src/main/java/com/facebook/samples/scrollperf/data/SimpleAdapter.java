@@ -30,7 +30,7 @@ public interface SimpleAdapter<E> {
           }
 
           @Override
-          public Object get(int position) {
+          public Object get(final int position) {
             return null;
           }
 
@@ -58,7 +58,7 @@ public interface SimpleAdapter<E> {
         }
 
         @Override
-        public E get(int position) {
+        public E get(final int position) {
           return srcAdapter.get(position % srcAdapter.getSize());
         }
 
@@ -86,7 +86,7 @@ public interface SimpleAdapter<E> {
         }
 
         @Override
-        public E get(int position) {
+        public E get(final int position) {
           return decorator.decorate(adaptee, position);
         }
 

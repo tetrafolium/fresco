@@ -16,12 +16,12 @@ public class FlipperCacheKeyFactory extends DefaultCacheKeyFactory {
 
   private final @Nullable DebugImageTracker mDebugImageTracker;
 
-  public FlipperCacheKeyFactory(@Nullable DebugImageTracker debugImageTracker) {
+  public FlipperCacheKeyFactory(final @Nullable DebugImageTracker debugImageTracker) {
     mDebugImageTracker = debugImageTracker;
   }
 
   @Override
-  public CacheKey getBitmapCacheKey(ImageRequest request, Object callerContext) {
+  public CacheKey getBitmapCacheKey(final ImageRequest request, final Object callerContext) {
     CacheKey bitmapCacheKey = super.getBitmapCacheKey(request, callerContext);
     if (mDebugImageTracker != null) {
       mDebugImageTracker.trackImage(request, bitmapCacheKey);

@@ -50,33 +50,33 @@ public class DraweeView<DH extends DraweeHierarchy> extends ImageView {
   private static boolean sGlobalLegacyVisibilityHandlingEnabled = false;
 
   public static void setGlobalLegacyVisibilityHandlingEnabled(
-      boolean legacyVisibilityHandlingEnabled) {
+      final boolean legacyVisibilityHandlingEnabled) {
     sGlobalLegacyVisibilityHandlingEnabled = legacyVisibilityHandlingEnabled;
   }
 
-  public DraweeView(Context context) {
+  public DraweeView(final Context context) {
     super(context);
     init(context);
   }
 
-  public DraweeView(Context context, AttributeSet attrs) {
+  public DraweeView(final Context context, final AttributeSet attrs) {
     super(context, attrs);
     init(context);
   }
 
-  public DraweeView(Context context, AttributeSet attrs, int defStyle) {
+  public DraweeView(final Context context, final AttributeSet attrs, final int defStyle) {
     super(context, attrs, defStyle);
     init(context);
   }
 
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  public DraweeView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+  public DraweeView(final Context context, final AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
     super(context, attrs, defStyleAttr, defStyleRes);
     init(context);
   }
 
   /** This method is idempotent so it only has effect the first time it's called */
-  private void init(Context context) {
+  private void init(final Context context) {
     try {
       if (FrescoSystrace.isTracing()) {
         FrescoSystrace.beginSection("DraweeView#init");
@@ -106,7 +106,7 @@ public class DraweeView<DH extends DraweeHierarchy> extends ImageView {
   }
 
   /** Sets the hierarchy. */
-  public void setHierarchy(DH hierarchy) {
+  public void setHierarchy(final DH hierarchy) {
     mDraweeHolder.setHierarchy(hierarchy);
     super.setImageDrawable(mDraweeHolder.getTopLevelDrawable());
   }
@@ -128,7 +128,7 @@ public class DraweeView<DH extends DraweeHierarchy> extends ImageView {
   }
 
   /** Sets the controller. */
-  public void setController(@Nullable DraweeController draweeController) {
+  public void setController(final @Nullable DraweeController draweeController) {
     mDraweeHolder.setController(draweeController);
     super.setImageDrawable(mDraweeHolder.getTopLevelDrawable());
   }
@@ -201,7 +201,7 @@ public class DraweeView<DH extends DraweeHierarchy> extends ImageView {
   }
 
   @Override
-  public boolean onTouchEvent(MotionEvent event) {
+  public boolean onTouchEvent(final MotionEvent event) {
     if (mDraweeHolder.onTouchEvent(event)) {
       return true;
     }
@@ -215,7 +215,7 @@ public class DraweeView<DH extends DraweeHierarchy> extends ImageView {
    */
   @Override
   @Deprecated
-  public void setImageDrawable(Drawable drawable) {
+  public void setImageDrawable(final Drawable drawable) {
     init(getContext());
     mDraweeHolder.setController(null);
     super.setImageDrawable(drawable);
@@ -228,7 +228,7 @@ public class DraweeView<DH extends DraweeHierarchy> extends ImageView {
    */
   @Override
   @Deprecated
-  public void setImageBitmap(Bitmap bm) {
+  public void setImageBitmap(final Bitmap bm) {
     init(getContext());
     mDraweeHolder.setController(null);
     super.setImageBitmap(bm);
@@ -241,7 +241,7 @@ public class DraweeView<DH extends DraweeHierarchy> extends ImageView {
    */
   @Override
   @Deprecated
-  public void setImageResource(int resId) {
+  public void setImageResource(final int resId) {
     init(getContext());
     mDraweeHolder.setController(null);
     super.setImageResource(resId);
@@ -254,14 +254,14 @@ public class DraweeView<DH extends DraweeHierarchy> extends ImageView {
    */
   @Override
   @Deprecated
-  public void setImageURI(Uri uri) {
+  public void setImageURI(final Uri uri) {
     init(getContext());
     mDraweeHolder.setController(null);
     super.setImageURI(uri);
   }
 
   /** Sets the desired aspect ratio (w/h). */
-  public void setAspectRatio(float aspectRatio) {
+  public void setAspectRatio(final float aspectRatio) {
     if (aspectRatio == mAspectRatio) {
       return;
     }
@@ -274,12 +274,12 @@ public class DraweeView<DH extends DraweeHierarchy> extends ImageView {
     return mAspectRatio;
   }
 
-  public void setLegacyVisibilityHandlingEnabled(boolean legacyVisibilityHandlingEnabled) {
+  public void setLegacyVisibilityHandlingEnabled(final boolean legacyVisibilityHandlingEnabled) {
     mLegacyVisibilityHandlingEnabled = legacyVisibilityHandlingEnabled;
   }
 
   @Override
-  protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+  protected void onMeasure(final int widthMeasureSpec, final int heightMeasureSpec) {
     mMeasureSpec.width = widthMeasureSpec;
     mMeasureSpec.height = heightMeasureSpec;
     AspectRatioMeasure.updateMeasureSpec(
@@ -292,7 +292,7 @@ public class DraweeView<DH extends DraweeHierarchy> extends ImageView {
   }
 
   @Override
-  protected void onVisibilityChanged(View changedView, int visibility) {
+  protected void onVisibilityChanged(final View changedView, final int visibility) {
     super.onVisibilityChanged(changedView, visibility);
     maybeOverrideVisibilityHandling();
   }

@@ -63,7 +63,7 @@ public class FrescoDrawable2Impl extends FrescoDrawable2 {
       new BaseRequestListener() {
         @Override
         public void onUltimateProducerReached(
-            String requestId, String producerName, boolean successful) {
+            final String requestId, final String producerName, final boolean successful) {
           mImageOrigin = ImageOriginUtils.mapProducerNameToImageOrigin(producerName);
         }
       };
@@ -72,8 +72,8 @@ public class FrescoDrawable2Impl extends FrescoDrawable2 {
 
   @Override
   public @Nullable Drawable setImage(
-      @Nullable Drawable imageDrawable,
-      @Nullable CloseableReference<CloseableImage> imageReference) {
+      final @Nullable Drawable imageDrawable,
+      final @Nullable CloseableReference<CloseableImage> imageReference) {
     cancelReleaseNextFrame();
     cancelReleaseDelayed();
     if (imageDrawable != mActualImageWrapper) {
@@ -88,12 +88,12 @@ public class FrescoDrawable2Impl extends FrescoDrawable2 {
   }
 
   @Override
-  public void setDataSource(@Nullable DataSource<CloseableReference<CloseableImage>> dataSource) {
+  public void setDataSource(final @Nullable DataSource<CloseableReference<CloseableImage>> dataSource) {
     mDataSource = dataSource;
   }
 
   @Override
-  public void setFetchSubmitted(boolean fetchSubmitted) {
+  public void setFetchSubmitted(final boolean fetchSubmitted) {
     mFetchSubmitted = fetchSubmitted;
   }
 
@@ -103,7 +103,7 @@ public class FrescoDrawable2Impl extends FrescoDrawable2 {
   }
 
   @Override
-  public void setDrawableDataSubscriber(@Nullable DrawableDataSubscriber drawableDataSubscriber) {
+  public void setDrawableDataSubscriber(final @Nullable DrawableDataSubscriber drawableDataSubscriber) {
     mDrawableDataSubscriber = drawableDataSubscriber;
   }
 
@@ -114,12 +114,12 @@ public class FrescoDrawable2Impl extends FrescoDrawable2 {
   }
 
   @Override
-  public void setImageRequest(@Nullable VitoImageRequest imageRequest) {
+  public void setImageRequest(final @Nullable VitoImageRequest imageRequest) {
     mImageRequest = imageRequest;
   }
 
   @Override
-  public void setCallerContext(@Nullable Object callerContext) {
+  public void setCallerContext(final @Nullable Object callerContext) {
     mCallerContext = callerContext;
   }
 
@@ -130,12 +130,12 @@ public class FrescoDrawable2Impl extends FrescoDrawable2 {
   }
 
   @Override
-  public void setImageListener(@Nullable ImageListener imageListener) {
+  public void setImageListener(final @Nullable ImageListener imageListener) {
     mImageListener.setImageListener(imageListener);
   }
 
   @Override
-  public void setVitoImageRequestListener(@Nullable VitoImageRequestListener listener) {
+  public void setVitoImageRequestListener(final @Nullable VitoImageRequestListener listener) {
     mImageListener.setVitoImageRequestListener(listener);
   }
 
@@ -156,7 +156,7 @@ public class FrescoDrawable2Impl extends FrescoDrawable2 {
   }
 
   @Override
-  public void setImageId(long imageId) {
+  public void setImageId(final long imageId) {
     mImageId = imageId;
   }
 
@@ -166,7 +166,7 @@ public class FrescoDrawable2Impl extends FrescoDrawable2 {
   }
 
   @Override
-  public void setImageOrigin(@ImageOrigin int imageOrigin) {
+  public void setImageOrigin(final @ImageOrigin int imageOrigin) {
     mImageOrigin = imageOrigin;
   }
 
@@ -232,7 +232,7 @@ public class FrescoDrawable2Impl extends FrescoDrawable2 {
   }
 
   @Override
-  public void onNewResult(@Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
+  public void onNewResult(final @Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
     if (dataSource != mDataSource || mImageRequest == null || mDrawableDataSubscriber == null) {
       return; // We don't care
     }
@@ -240,7 +240,7 @@ public class FrescoDrawable2Impl extends FrescoDrawable2 {
   }
 
   @Override
-  public void onFailure(@Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
+  public void onFailure(final @Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
     if (dataSource != mDataSource || mImageRequest == null || mDrawableDataSubscriber == null) {
       return; // wrong image
     }
@@ -248,12 +248,12 @@ public class FrescoDrawable2Impl extends FrescoDrawable2 {
   }
 
   @Override
-  public void onCancellation(@Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
+  public void onCancellation(final @Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
     // no-op
   }
 
   @Override
-  public void onProgressUpdate(@Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
+  public void onProgressUpdate(final @Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
     if (dataSource != mDataSource || mImageRequest == null || mDrawableDataSubscriber == null) {
       return; // wrong image
     }

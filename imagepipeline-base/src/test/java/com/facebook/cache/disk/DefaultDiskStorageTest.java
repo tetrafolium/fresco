@@ -299,7 +299,7 @@ public class DefaultDiskStorageTest {
         entries,
         new Comparator<DiskStorage.Entry>() {
           @Override
-          public int compare(DiskStorage.Entry lhs, DiskStorage.Entry rhs) {
+          public int compare(final DiskStorage.Entry lhs, final DiskStorage.Entry rhs) {
             return lhs.getId().compareTo(rhs.getId());
           }
         });
@@ -532,11 +532,11 @@ public class DefaultDiskStorageTest {
   }
 
   private static File writeFileToStorage(
-      DefaultDiskStorage storage, String resourceId, byte[] value) throws IOException {
+      final DefaultDiskStorage storage, final String resourceId, final byte[] value) throws IOException {
     return writeToStorage(storage, resourceId, value).getFile();
   }
 
-  private static File write(DefaultDiskStorage storage, String resourceId, byte[] content)
+  private static File write(final DefaultDiskStorage storage, final String resourceId, final byte[] content)
       throws IOException {
     DiskStorage.Inserter inserter = storage.insert(resourceId, null);
     File file = ((DefaultDiskStorage.InserterImpl) inserter).mTemporaryFile;
@@ -549,30 +549,30 @@ public class DefaultDiskStorageTest {
     return ((FileBinaryResource) inserter.commit(null)).getFile();
   }
 
-  private static void writeToResource(DiskStorage.Inserter inserter, final byte[] content)
+  private static void writeToResource(final DiskStorage.Inserter inserter, final byte[] content)
       throws IOException {
     inserter.writeData(
         new WriterCallback() {
           @Override
-          public void write(OutputStream os) throws IOException {
+          public void write(final OutputStream os) throws IOException {
             os.write(content);
           }
         },
         null);
   }
 
-  private void purgeUnexpectedFiles(DefaultDiskStorage storage) throws IOException {
+  private void purgeUnexpectedFiles(final DefaultDiskStorage storage) throws IOException {
     storage.purgeUnexpectedResources();
   }
 
-  private List<File> findNewFiles(File directory, Set<File> existing, boolean recurse) {
+  private List<File> findNewFiles(final File directory, final Set<File> existing, final boolean recurse) {
     List<File> result = new ArrayList<>();
     findNewFiles(directory, existing, recurse, result);
     return result;
   }
 
   private void findNewFiles(
-      File directory, Set<File> existing, boolean recurse, List<File> result) {
+      final File directory, final Set<File> existing, final boolean recurse, final List<File> result) {
     File[] files = directory.listFiles();
     if (files != null) {
       for (File file : files) {
@@ -591,7 +591,7 @@ public class DefaultDiskStorageTest {
    *
    * @param storage
    */
-  private static List<DefaultDiskStorage.EntryImpl> retrieveEntries(DefaultDiskStorage storage)
+  private static List<DefaultDiskStorage.EntryImpl> retrieveEntries(final DefaultDiskStorage storage)
       throws IOException {
     List<DiskStorage.Entry> entries = new ArrayList<>(storage.getEntries());
 
@@ -599,7 +599,7 @@ public class DefaultDiskStorageTest {
         entries,
         new Comparator<DiskStorage.Entry>() {
           @Override
-          public int compare(DefaultDiskStorage.Entry a, DefaultDiskStorage.Entry b) {
+          public int compare(final DefaultDiskStorage.Entry a, final DefaultDiskStorage.Entry b) {
             long al = a.getTimestamp();
             long bl = b.getTimestamp();
             return (al < bl) ? -1 : ((al > bl) ? 1 : 0);

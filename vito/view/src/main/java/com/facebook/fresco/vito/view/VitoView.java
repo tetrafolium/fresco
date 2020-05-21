@@ -34,9 +34,9 @@ public class VitoView {
 
   private static Implementation sImplementation;
 
-  private VitoView() {}
+  private VitoView() { }
 
-  public static void init(Implementation implementation) {
+  public static void init(final Implementation implementation) {
     if (sIsInitialized) {
       FLog.w(TAG, "VitoView has already been initialized!");
       return;
@@ -49,14 +49,14 @@ public class VitoView {
   /*
    * Display an image with default options
    */
-  public static void show(@Nullable Uri uri, View target) {
+  public static void show(final @Nullable Uri uri, final View target) {
     sImplementation.show(uri, null, ImageOptions.defaults(), null, null, target);
   }
 
   /*
    * Display an image
    */
-  public static void show(@Nullable Uri uri, ImageOptions imageOptions, final View target) {
+  public static void show(final @Nullable Uri uri, final ImageOptions imageOptions, final View target) {
     sImplementation.show(uri, null, imageOptions, null, null, target);
   }
 
@@ -64,10 +64,10 @@ public class VitoView {
    * Display an image
    */
   public static void show(
-      @Nullable Uri uri,
-      ImageOptions imageOptions,
-      @Nullable Object callerContext,
-      @Nullable ImageListener imageListener,
+      final @Nullable Uri uri,
+      final ImageOptions imageOptions,
+      final @Nullable Object callerContext,
+      final @Nullable ImageListener imageListener,
       final View target) {
     sImplementation.show(uri, null, imageOptions, callerContext, imageListener, target);
   }
@@ -75,7 +75,7 @@ public class VitoView {
   /*
    * Display an image with default options
    */
-  public static void show(@Nullable MultiUri multiUri, final View target) {
+  public static void show(final @Nullable MultiUri multiUri, final View target) {
     sImplementation.show(null, multiUri, ImageOptions.defaults(), null, null, target);
   }
 
@@ -83,7 +83,7 @@ public class VitoView {
    * Display an image
    */
   public static void show(
-      @Nullable MultiUri multiUri, ImageOptions imageOptions, final View target) {
+      final @Nullable MultiUri multiUri, final ImageOptions imageOptions, final View target) {
     sImplementation.show(null, multiUri, imageOptions, null, null, target);
   }
 }

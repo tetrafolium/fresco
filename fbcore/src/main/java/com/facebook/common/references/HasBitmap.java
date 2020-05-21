@@ -8,4 +8,4 @@
 package com.facebook.common.references;
 
 /** Marker interface for closeable references containing a bitmap */
-public interface HasBitmap {}
+public interface HasBitmap { }

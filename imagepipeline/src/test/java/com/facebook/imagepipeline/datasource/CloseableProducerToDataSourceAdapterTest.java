@@ -86,12 +86,12 @@ public class CloseableProducerToDataSourceAdapterTest {
 
   /* reference assertions */
 
-  private static <T> void assertReferenceCount(int expectedCount, CloseableReference<T> ref) {
+  private static <T> void assertReferenceCount(final int expectedCount, final CloseableReference<T> ref) {
     assertEquals(expectedCount, ref.getUnderlyingReferenceTestOnly().getRefCountTestOnly());
   }
 
   private static <T> void assertReferencesSame(
-      String errorMessage, CloseableReference<T> expectedRef, CloseableReference<T> actualRef) {
+      final String errorMessage, final CloseableReference<T> expectedRef, final CloseableReference<T> actualRef) {
     if (expectedRef == null) {
       assertNull(errorMessage, actualRef);
     } else {
@@ -102,11 +102,11 @@ public class CloseableProducerToDataSourceAdapterTest {
   /* verification helpers */
 
   private void verifyState(
-      boolean isFinished,
-      boolean hasResult,
-      CloseableReference<Object> resultRef,
-      boolean hasFailed,
-      Throwable failureCause) {
+      final boolean isFinished,
+      final boolean hasResult,
+      final CloseableReference<Object> resultRef,
+      final boolean hasFailed,
+      final Throwable failureCause) {
     DataSource<CloseableReference<Object>> dataSource = mDataSource;
     assertEquals("isFinished", isFinished, dataSource.isFinished());
     assertEquals("hasResult", hasResult, dataSource.hasResult());
@@ -122,7 +122,7 @@ public class CloseableProducerToDataSourceAdapterTest {
     }
   }
 
-  private void verifyReferenceCount(CloseableReference<Object> resultRef) {
+  private void verifyReferenceCount(final CloseableReference<Object> resultRef) {
     // this unit test class keeps references alive, so their ref count must be 1;
     // except for the result which have ref count of 2 because it's also kept by data source
     assertReferenceCount((resultRef == mResultRef1) ? 2 : 1, mResultRef1);
@@ -143,19 +143,19 @@ public class CloseableProducerToDataSourceAdapterTest {
     verifyNoMoreInteractionsAndReset();
   }
 
-  private void verifyWithResult(CloseableReference<Object> resultRef, boolean isLast) {
+  private void verifyWithResult(final CloseableReference<Object> resultRef, final boolean isLast) {
     verifyState(isLast, resultRef != null, resultRef, NOT_FAILED, null);
     verifyReferenceCount(resultRef);
     verifyNoMoreInteractionsAndReset();
   }
 
-  private void verifyFailed(CloseableReference<Object> resultRef, Throwable throwable) {
+  private void verifyFailed(final CloseableReference<Object> resultRef, final Throwable throwable) {
     verifyState(FINISHED, resultRef != null, resultRef, FAILED, throwable);
     verifyReferenceCount(resultRef);
     verifyNoMoreInteractionsAndReset();
   }
 
-  private void verifyClosed(boolean isFinished, Throwable throwable) {
+  private void verifyClosed(final boolean isFinished, final Throwable throwable) {
     verifyState(isFinished, WITHOUT_RESULT, null, throwable != null, throwable);
     verifyReferenceCount(null);
     verifyNoMoreInteractionsAndReset();
@@ -163,7 +163,7 @@ public class CloseableProducerToDataSourceAdapterTest {
 
   /* event testing helpers */
 
-  private void testSubscribe(int expected) {
+  private void testSubscribe(final int expected) {
     mDataSource.subscribe(mDataSubscriber2, CallerThreadExecutor.getInstance());
     switch (expected) {
       case NO_INTERACTIONS:
@@ -179,7 +179,7 @@ public class CloseableProducerToDataSourceAdapterTest {
   }
 
   private void testNewResult(
-      CloseableReference<Object> resultRef, boolean isLast, int numSubscribers) {
+      final CloseableReference<Object> resultRef, final boolean isLast, final int numSubscribers) {
     mInternalConsumer.onNewResult(resultRef, BaseConsumer.simpleStatusForIsLast(isLast));
     if (isLast) {
       verify(mRequestListener).onRequestSuccess(mSettableProducerContext);
@@ -193,7 +193,7 @@ public class CloseableProducerToDataSourceAdapterTest {
     verifyWithResult(resultRef, isLast);
   }
 
-  private void testFailure(CloseableReference<Object> resultRef, int numSubscribers) {
+  private void testFailure(final CloseableReference<Object> resultRef, final int numSubscribers) {
     mInternalConsumer.onFailure(mException);
     verify(mRequestListener).onRequestFailure(mSettableProducerContext, mException);
     if (numSubscribers >= 1) {
@@ -205,12 +205,12 @@ public class CloseableProducerToDataSourceAdapterTest {
     verifyFailed(resultRef, mException);
   }
 
-  private void testClose(Throwable throwable) {
+  private void testClose(final Throwable throwable) {
     mDataSource.close();
     verifyClosed(FINISHED, throwable);
   }
 
-  private void testClose(boolean isFinished, int numSubscribers) {
+  private void testClose(final boolean isFinished, final int numSubscribers) {
     mDataSource.close();
     if (!isFinished) {
       verify(mRequestListener).onRequestCancellation(mSettableProducerContext);

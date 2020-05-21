@@ -34,8 +34,8 @@ public abstract class FrescoDrawable2 extends BaseFrescoDrawable
   @Override
   @Nullable
   public Drawable setImage(
-      @Nullable Drawable imageDrawable,
-      @Nullable CloseableReference<CloseableImage> imageReference) {
+      final @Nullable Drawable imageDrawable,
+      final @Nullable CloseableReference<CloseableImage> imageReference) {
     return super.setImage(imageDrawable, imageReference);
   }
 

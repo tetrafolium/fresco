@@ -35,12 +35,12 @@ public class DraweeRotationFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_drawee_rotation, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     mUri = sampleUris().createSampleUri(ImageUriProvider.ImageSize.M);
 
     mSimpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.drawee_view);
@@ -52,14 +52,14 @@ public class DraweeRotationFragment extends BaseShowcaseFragment {
     spinner.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             final SimpleRotationOptionsAdapter.Entry spinnerEntry =
                 (SimpleRotationOptionsAdapter.Entry) adapter.getItem(position);
             setRotationOptions(spinnerEntry.rotationOptions);
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
+          public void onNothingSelected(final AdapterView<?> parent) { }
         });
     spinner.setSelection(0);
   }
@@ -69,7 +69,7 @@ public class DraweeRotationFragment extends BaseShowcaseFragment {
     return R.string.drawee_rotation_title;
   }
 
-  private void setRotationOptions(RotationOptions rotationOptions) {
+  private void setRotationOptions(final RotationOptions rotationOptions) {
     ImageRequest imageRequest =
         ImageRequestBuilder.newBuilderWithSource(mUri)
             .setRotationOptions(rotationOptions)
@@ -97,17 +97,17 @@ public class DraweeRotationFragment extends BaseShowcaseFragment {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(final int position) {
       return SPINNER_ENTRIES[position];
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(final int position) {
       return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
       final LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
       final View view =
@@ -127,7 +127,7 @@ public class DraweeRotationFragment extends BaseShowcaseFragment {
       final RotationOptions rotationOptions;
       final String description;
 
-      private Entry(RotationOptions rotationOptions, String description) {
+      private Entry(final RotationOptions rotationOptions, final String description) {
         this.rotationOptions = rotationOptions;
         this.description = description;
       }

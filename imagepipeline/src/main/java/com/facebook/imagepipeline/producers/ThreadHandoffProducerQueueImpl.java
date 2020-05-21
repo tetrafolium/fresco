@@ -17,13 +17,13 @@ public class ThreadHandoffProducerQueueImpl implements ThreadHandoffProducerQueu
   private final Deque<Runnable> mRunnableList;
   private final Executor mExecutor;
 
-  public ThreadHandoffProducerQueueImpl(Executor executor) {
+  public ThreadHandoffProducerQueueImpl(final Executor executor) {
     mExecutor = Preconditions.checkNotNull(executor);
     mRunnableList = new ArrayDeque<>();
   }
 
   @Override
-  public synchronized void addToQueueOrExecute(Runnable runnable) {
+  public synchronized void addToQueueOrExecute(final Runnable runnable) {
     if (mQueueing) {
       mRunnableList.add(runnable);
     } else {
@@ -50,7 +50,7 @@ public class ThreadHandoffProducerQueueImpl implements ThreadHandoffProducerQueu
   }
 
   @Override
-  public synchronized void remove(Runnable runnable) {
+  public synchronized void remove(final Runnable runnable) {
     mRunnableList.remove(runnable);
   }
 

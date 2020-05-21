@@ -16,7 +16,7 @@ public class ImageMetaData {
   private final @Nullable Pair<Integer, Integer> mDimensions;
   private final @Nullable ColorSpace mColorSpace;
 
-  public ImageMetaData(int width, int height, @Nullable ColorSpace colorSpace) {
+  public ImageMetaData(final int width, final int height, final @Nullable ColorSpace colorSpace) {
     mDimensions = (width == -1 || height == -1) ? null : new Pair<>(width, height);
     mColorSpace = colorSpace;
   }

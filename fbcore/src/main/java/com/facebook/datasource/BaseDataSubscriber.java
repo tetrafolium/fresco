@@ -39,7 +39,7 @@ import javax.annotation.Nonnull;
 public abstract class BaseDataSubscriber<T> implements DataSubscriber<T> {
 
   @Override
-  public void onNewResult(@Nonnull DataSource<T> dataSource) {
+  public void onNewResult(final @Nonnull DataSource<T> dataSource) {
     // isFinished() should be checked before calling onNewResultImpl(), otherwise
     // there would be a race condition: the final data source result might be ready before
     // we call isFinished() here, which would lead to the loss of the final result
@@ -55,7 +55,7 @@ public abstract class BaseDataSubscriber<T> implements DataSubscriber<T> {
   }
 
   @Override
-  public void onFailure(@Nonnull DataSource<T> dataSource) {
+  public void onFailure(final @Nonnull DataSource<T> dataSource) {
     try {
       onFailureImpl(dataSource);
     } finally {
@@ -64,10 +64,10 @@ public abstract class BaseDataSubscriber<T> implements DataSubscriber<T> {
   }
 
   @Override
-  public void onCancellation(@Nonnull DataSource<T> dataSource) {}
+  public void onCancellation(final @Nonnull DataSource<T> dataSource) { }
 
   @Override
-  public void onProgressUpdate(@Nonnull DataSource<T> dataSource) {}
+  public void onProgressUpdate(final @Nonnull DataSource<T> dataSource) { }
 
   protected abstract void onNewResultImpl(@Nonnull DataSource<T> dataSource);
 

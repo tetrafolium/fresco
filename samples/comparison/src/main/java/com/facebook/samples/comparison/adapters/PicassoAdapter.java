@@ -20,13 +20,13 @@ public class PicassoAdapter extends ImageListAdapter {
 
   private final Picasso mPicasso;
 
-  public PicassoAdapter(Context context, PerfListener perfListener) {
+  public PicassoAdapter(final Context context, final PerfListener perfListener) {
     super(context, perfListener);
     mPicasso = SamplePicassoFactory.getPicasso(context);
   }
 
   @Override
-  public PicassoHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public PicassoHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
     final InstrumentedImageView instrImageView = new InstrumentedImageView(getContext());
     return new PicassoHolder(getContext(), mPicasso, parent, instrImageView, getPerfListener());
   }

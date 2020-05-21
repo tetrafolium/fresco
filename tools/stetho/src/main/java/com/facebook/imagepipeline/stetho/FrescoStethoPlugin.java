@@ -17,7 +17,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
  */
 public class FrescoStethoPlugin extends BaseFrescoStethoPlugin {
 
-  public FrescoStethoPlugin() {}
+  public FrescoStethoPlugin() { }
 
   protected void ensureInitialized() {
     if (!mInitialized) {

@@ -21,7 +21,7 @@ public final class UI {
    * @param viewId The id of the View we want to get a reference
    * @return The View with the given id and type
    */
-  public static <T extends View> T findViewById(Activity act, int viewId) {
+  public static <T extends View> T findViewById(final Activity act, final int viewId) {
     View containerView = act.getWindow().getDecorView();
     return findViewById(containerView, viewId);
   }
@@ -34,7 +34,7 @@ public final class UI {
    * @return The View with the given id and type
    */
   @SuppressWarnings("unchecked")
-  public static <T extends View> T findViewById(View containerView, int viewId) {
+  public static <T extends View> T findViewById(final View containerView, final int viewId) {
     View foundView = containerView.findViewById(viewId);
     return (T) foundView;
   }

@@ -124,7 +124,7 @@ public class ProgressiveJpegParserTest {
    * @param bestScanEndOffset offset of expected best scan found so far
    */
   private void testFirstNBytes(
-      byte[] byteArray, int n, boolean foundNewScan, int expectedBestScan, int bestScanEndOffset) {
+      final byte[] byteArray, final int n, final boolean foundNewScan, final int expectedBestScan, final int bestScanEndOffset) {
     assertEquals(
         foundNewScan,
         mProgressiveJpegParser.parseMoreData(
@@ -134,7 +134,7 @@ public class ProgressiveJpegParserTest {
     assertEquals(bestScanEndOffset, mProgressiveJpegParser.getBestScanEndOffset());
   }
 
-  private static EncodedImage buildEncodedImage(TrivialPooledByteBuffer byteBuffer) {
+  private static EncodedImage buildEncodedImage(final TrivialPooledByteBuffer byteBuffer) {
     return new EncodedImage(CloseableReference.<PooledByteBuffer>of(byteBuffer));
   }
 }

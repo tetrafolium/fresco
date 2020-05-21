@@ -27,12 +27,12 @@ public class TestScheduledFuture<V> implements ScheduledFuture<V> {
   private Throwable mResultThrowable;
 
   TestScheduledFuture(
-      FakeClock fakeClock, ScheduledQueue scheduledQueue, long delay, final Runnable runnable) {
+      final FakeClock fakeClock, final ScheduledQueue scheduledQueue, final long delay, final Runnable runnable) {
     this(fakeClock, scheduledQueue, delay, Executors.<V>callable(runnable, null));
   }
 
   TestScheduledFuture(
-      FakeClock fakeClock, ScheduledQueue scheduledQueue, long delay, final Callable<V> callable) {
+      final FakeClock fakeClock, final ScheduledQueue scheduledQueue, final long delay, final Callable<V> callable) {
     mFakeClock = fakeClock;
     mScheduledQueue = scheduledQueue;
     mScheduledTime = mFakeClock.now() + delay;
@@ -52,12 +52,12 @@ public class TestScheduledFuture<V> implements ScheduledFuture<V> {
   }
 
   @Override
-  public long getDelay(TimeUnit timeUnit) {
+  public long getDelay(final TimeUnit timeUnit) {
     return timeUnit.convert(mFakeClock.now() - mScheduledTime, TimeUnit.MILLISECONDS);
   }
 
   @Override
-  public int compareTo(Delayed delayed) {
+  public int compareTo(final Delayed delayed) {
     long me = getDelay(TimeUnit.MILLISECONDS);
     long other = delayed.getDelay(TimeUnit.MILLISECONDS);
     if (me < other) {
@@ -71,7 +71,7 @@ public class TestScheduledFuture<V> implements ScheduledFuture<V> {
   }
 
   @Override
-  public boolean cancel(boolean b) {
+  public boolean cancel(final boolean b) {
     mIsCanceled = mScheduledQueue.remove(mWrap);
     return mIsCanceled;
   }
@@ -99,7 +99,7 @@ public class TestScheduledFuture<V> implements ScheduledFuture<V> {
   }
 
   @Override
-  public V get(long l, TimeUnit timeUnit)
+  public V get(final long l, final TimeUnit timeUnit)
       throws InterruptedException, ExecutionException, TimeoutException {
     return get();
   }

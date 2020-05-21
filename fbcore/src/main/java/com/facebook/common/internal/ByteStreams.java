@@ -37,7 +37,7 @@ public final class ByteStreams {
 
   private static final int BUF_SIZE = 0x1000; // 4K
 
-  private ByteStreams() {}
+  private ByteStreams() { }
 
   /**
    * Copies all bytes from the input stream to the output stream. Does not close or flush either
@@ -48,7 +48,7 @@ public final class ByteStreams {
    * @return the number of bytes copied
    * @throws IOException if an I/O error occurs
    */
-  public static long copy(InputStream from, OutputStream to) throws IOException {
+  public static long copy(final InputStream from, final OutputStream to) throws IOException {
     checkNotNull(from);
     checkNotNull(to);
     byte[] buf = new byte[BUF_SIZE];
@@ -86,7 +86,7 @@ public final class ByteStreams {
    * @return the number of bytes read
    * @throws IOException if an I/O error occurs
    */
-  public static int read(InputStream in, byte[] b, int off, int len) throws IOException {
+  public static int read(final InputStream in, final byte[] b, final int off, final int len) throws IOException {
     checkNotNull(in);
     checkNotNull(b);
     if (len < 0) {
@@ -110,7 +110,7 @@ public final class ByteStreams {
    * @return a byte array containing all the bytes from the stream
    * @throws IOException if an I/O error occurs
    */
-  public static byte[] toByteArray(InputStream in) throws IOException {
+  public static byte[] toByteArray(final InputStream in) throws IOException {
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     copy(in, out);
     return out.toByteArray();
@@ -121,7 +121,7 @@ public final class ByteStreams {
    * create an initial byte array, but if the actual number of bytes read from the stream differs,
    * the correct result will be returned anyway.
    */
-  public static byte[] toByteArray(InputStream in, int expectedSize) throws IOException {
+  public static byte[] toByteArray(final InputStream in, final int expectedSize) throws IOException {
     byte[] bytes = new byte[expectedSize];
     int remaining = expectedSize;
 
@@ -159,7 +159,7 @@ public final class ByteStreams {
      * Writes the contents of the internal buffer to the given array starting at the given offset.
      * Assumes the array has space to hold count bytes.
      */
-    void writeTo(byte[] b, int off) {
+    void writeTo(final byte[] b, final int off) {
       System.arraycopy(buf, 0, b, off, count);
     }
   }
@@ -176,7 +176,7 @@ public final class ByteStreams {
    * @throws EOFException if this stream reaches the end before reading all the bytes.
    * @throws IOException if an I/O error occurs.
    */
-  public static void readFully(InputStream in, byte[] b, int off, int len) throws IOException {
+  public static void readFully(final InputStream in, final byte[] b, final int off, final int len) throws IOException {
     int read = read(in, b, off, len);
     if (read != len) {
       throw new EOFException(

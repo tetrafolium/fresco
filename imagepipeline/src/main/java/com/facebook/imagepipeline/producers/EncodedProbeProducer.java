@@ -29,12 +29,12 @@ public class EncodedProbeProducer implements Producer<EncodedImage> {
   private final BoundedLinkedHashSet<CacheKey> mDiskCacheHistory;
 
   public EncodedProbeProducer(
-      BufferedDiskCache defaultBufferedDiskCache,
-      BufferedDiskCache smallImageBufferedDiskCache,
-      CacheKeyFactory cacheKeyFactory,
-      BoundedLinkedHashSet encodedMemoryCacheHistory,
-      BoundedLinkedHashSet diskCacheHistory,
-      Producer<EncodedImage> inputProducer) {
+      final BufferedDiskCache defaultBufferedDiskCache,
+      final BufferedDiskCache smallImageBufferedDiskCache,
+      final CacheKeyFactory cacheKeyFactory,
+      final BoundedLinkedHashSet encodedMemoryCacheHistory,
+      final BoundedLinkedHashSet diskCacheHistory,
+      final Producer<EncodedImage> inputProducer) {
     mDefaultBufferedDiskCache = defaultBufferedDiskCache;
     mSmallImageBufferedDiskCache = smallImageBufferedDiskCache;
     mCacheKeyFactory = cacheKeyFactory;
@@ -87,13 +87,13 @@ public class EncodedProbeProducer implements Producer<EncodedImage> {
     private final BoundedLinkedHashSet<CacheKey> mDiskCacheHistory;
 
     public ProbeConsumer(
-        Consumer<EncodedImage> consumer,
-        ProducerContext producerContext,
-        BufferedDiskCache defaultBufferedDiskCache,
-        BufferedDiskCache smallImageBufferedDiskCache,
-        CacheKeyFactory cacheKeyFactory,
-        BoundedLinkedHashSet<CacheKey> encodedMemoryCacheHistory,
-        BoundedLinkedHashSet<CacheKey> diskCacheHistory) {
+        final Consumer<EncodedImage> consumer,
+        final ProducerContext producerContext,
+        final BufferedDiskCache defaultBufferedDiskCache,
+        final BufferedDiskCache smallImageBufferedDiskCache,
+        final CacheKeyFactory cacheKeyFactory,
+        final BoundedLinkedHashSet<CacheKey> encodedMemoryCacheHistory,
+        final BoundedLinkedHashSet<CacheKey> diskCacheHistory) {
       super(consumer);
       mProducerContext = producerContext;
       mDefaultBufferedDiskCache = defaultBufferedDiskCache;
@@ -104,7 +104,7 @@ public class EncodedProbeProducer implements Producer<EncodedImage> {
     }
 
     @Override
-    public void onNewResultImpl(EncodedImage newResult, @Status int status) {
+    public void onNewResultImpl(final EncodedImage newResult, final @Status int status) {
       try {
         if (FrescoSystrace.isTracing()) {
           FrescoSystrace.beginSection("EncodedProbeProducer#onNewResultImpl");

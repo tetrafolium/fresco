@@ -53,7 +53,7 @@ public class WebpSupportStatus {
    * @param value bytes value
    * @return byte array representing ascii encoded value
    */
-  private static byte[] asciiBytes(String value) {
+  private static byte[] asciiBytes(final String value) {
     try {
       return value.getBytes("ASCII");
     } catch (UnsupportedEncodingException uee) {

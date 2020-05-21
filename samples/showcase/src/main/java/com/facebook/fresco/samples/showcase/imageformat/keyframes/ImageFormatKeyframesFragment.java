@@ -32,12 +32,12 @@ public class ImageFormatKeyframesFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_format_keyframes, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     if (CustomImageFormatConfigurator.isKeyframesEnabled()) {
       initAnimation(view);
     }
@@ -49,7 +49,7 @@ public class ImageFormatKeyframesFragment extends BaseShowcaseFragment {
   }
 
   @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
-  private void initAnimation(View view) {
+  private void initAnimation(final View view) {
     mSimpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.drawee_view);
     mSimpleDraweeView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
     DraweeController controller =
@@ -64,7 +64,7 @@ public class ImageFormatKeyframesFragment extends BaseShowcaseFragment {
     switchBackground.setOnCheckedChangeListener(
         new CompoundButton.OnCheckedChangeListener() {
           @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+          public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             mSimpleDraweeView
                 .getHierarchy()
                 .setBackgroundImage(isChecked ? new CheckerBoardDrawable(getResources()) : null);

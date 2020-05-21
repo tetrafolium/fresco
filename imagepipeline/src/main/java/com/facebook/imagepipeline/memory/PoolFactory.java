@@ -40,7 +40,7 @@ public class PoolFactory {
   private SharedByteArray mSharedByteArray;
   private ByteArrayPool mSmallByteArrayPool;
 
-  public PoolFactory(PoolConfig config) {
+  public PoolFactory(final PoolConfig config) {
     mConfig = Preconditions.checkNotNull(config);
   }
 
@@ -199,7 +199,7 @@ public class PoolFactory {
     return getPooledByteBufferFactory(NATIVE_MEMORY);
   }
 
-  public PooledByteBufferFactory getPooledByteBufferFactory(@MemoryChunkType int memoryChunkType) {
+  public PooledByteBufferFactory getPooledByteBufferFactory(final @MemoryChunkType int memoryChunkType) {
     if (mPooledByteBufferFactory == null) {
       MemoryChunkPool memoryChunkPool = getMemoryChunkPool(memoryChunkType);
       Preconditions.checkNotNull(
@@ -239,7 +239,7 @@ public class PoolFactory {
   }
 
   @Nullable
-  private MemoryChunkPool getMemoryChunkPool(@MemoryChunkType int memoryChunkType) {
+  private MemoryChunkPool getMemoryChunkPool(final @MemoryChunkType int memoryChunkType) {
     switch (memoryChunkType) {
       case NATIVE_MEMORY:
         return getNativeMemoryChunkPool();

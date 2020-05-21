@@ -24,7 +24,7 @@ public class SimpleCacheKey implements CacheKey {
     this(key, false);
   }
 
-  public SimpleCacheKey(final String key, boolean isResourceIdForDebugging) {
+  public SimpleCacheKey(final String key, final boolean isResourceIdForDebugging) {
     mKey = Preconditions.checkNotNull(key);
     mIsResourceIdForDebugging = isResourceIdForDebugging;
   }
@@ -35,7 +35,7 @@ public class SimpleCacheKey implements CacheKey {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(final Object o) {
     if (o == this) {
       return true;
     }
@@ -52,7 +52,7 @@ public class SimpleCacheKey implements CacheKey {
   }
 
   @Override
-  public boolean containsUri(Uri uri) {
+  public boolean containsUri(final Uri uri) {
     return mKey.contains(uri.toString());
   }
 

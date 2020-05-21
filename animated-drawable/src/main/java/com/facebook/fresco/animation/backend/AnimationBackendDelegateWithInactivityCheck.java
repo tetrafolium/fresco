@@ -41,17 +41,17 @@ public class AnimationBackendDelegateWithInactivityCheck<T extends AnimationBack
           T extends
               AnimationBackend & AnimationBackendDelegateWithInactivityCheck.InactivityListener>
       AnimationBackendDelegate<T> createForBackend(
-          T backend,
-          MonotonicClock monotonicClock,
-          ScheduledExecutorService scheduledExecutorServiceForUiThread) {
+          final T backend,
+          final MonotonicClock monotonicClock,
+          final ScheduledExecutorService scheduledExecutorServiceForUiThread) {
     return createForBackend(backend, backend, monotonicClock, scheduledExecutorServiceForUiThread);
   }
 
   public static <T extends AnimationBackend> AnimationBackendDelegate<T> createForBackend(
-      T backend,
-      InactivityListener inactivityListener,
-      MonotonicClock monotonicClock,
-      ScheduledExecutorService scheduledExecutorServiceForUiThread) {
+      final T backend,
+      final InactivityListener inactivityListener,
+      final MonotonicClock monotonicClock,
+      final ScheduledExecutorService scheduledExecutorServiceForUiThread) {
     return new AnimationBackendDelegateWithInactivityCheck<>(
         backend, inactivityListener, monotonicClock, scheduledExecutorServiceForUiThread);
   }
@@ -89,10 +89,10 @@ public class AnimationBackendDelegateWithInactivityCheck<T extends AnimationBack
       };
 
   private AnimationBackendDelegateWithInactivityCheck(
-      @Nullable T animationBackend,
-      @Nullable InactivityListener inactivityListener,
-      MonotonicClock monotonicClock,
-      ScheduledExecutorService scheduledExecutorServiceForUiThread) {
+      final @Nullable T animationBackend,
+      final @Nullable InactivityListener inactivityListener,
+      final MonotonicClock monotonicClock,
+      final ScheduledExecutorService scheduledExecutorServiceForUiThread) {
     super(animationBackend);
     mInactivityListener = inactivityListener;
     mMonotonicClock = monotonicClock;
@@ -100,14 +100,14 @@ public class AnimationBackendDelegateWithInactivityCheck<T extends AnimationBack
   }
 
   @Override
-  public boolean drawFrame(Drawable parent, Canvas canvas, int frameNumber) {
+  public boolean drawFrame(final Drawable parent, final Canvas canvas, final int frameNumber) {
     mLastDrawnTimeMs = mMonotonicClock.now();
     boolean result = super.drawFrame(parent, canvas, frameNumber);
     maybeScheduleInactivityCheck();
     return result;
   }
 
-  public void setInactivityListener(@Nullable InactivityListener inactivityListener) {
+  public void setInactivityListener(final @Nullable InactivityListener inactivityListener) {
     mInactivityListener = inactivityListener;
   }
 
@@ -115,7 +115,7 @@ public class AnimationBackendDelegateWithInactivityCheck<T extends AnimationBack
     return mInactivityCheckPollingTimeMs;
   }
 
-  public void setInactivityCheckPollingTimeMs(long inactivityCheckPollingTimeMs) {
+  public void setInactivityCheckPollingTimeMs(final long inactivityCheckPollingTimeMs) {
     mInactivityCheckPollingTimeMs = inactivityCheckPollingTimeMs;
   }
 
@@ -123,7 +123,7 @@ public class AnimationBackendDelegateWithInactivityCheck<T extends AnimationBack
     return mInactivityThresholdMs;
   }
 
-  public void setInactivityThresholdMs(long inactivityThresholdMs) {
+  public void setInactivityThresholdMs(final long inactivityThresholdMs) {
     mInactivityThresholdMs = inactivityThresholdMs;
   }
 

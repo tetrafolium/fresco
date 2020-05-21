@@ -51,7 +51,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
   private ImageUriProvider mImageUriProvider;
 
   @Override
-  public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+  public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
     if (!isAdded()) {
       return;
     }
@@ -62,7 +62,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
   }
 
   @Override
-  public boolean onPreferenceTreeClick(Preference preference) {
+  public boolean onPreferenceTreeClick(final Preference preference) {
     switch (preference.getKey()) {
       case KEY_CLEAR_DISK_CACHE:
         onClearDiskCachePreferenceClicked();
@@ -76,7 +76,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
   }
 
   @Override
-  public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+  public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
     mImageUriProvider = ShowcaseApplication.Companion.getImageUriProvider();
     addPreferencesFromResource(R.xml.preferences);
     getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
@@ -143,7 +143,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
     preferenceDeviceName.setSummary(deviceName);
   }
 
-  private void showToastText(String text) {
+  private void showToastText(final String text) {
     Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
   }
 
@@ -167,7 +167,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
     private SharedPreferences mSharedPreferences;
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
       mImageUriProvider = ShowcaseApplication.Companion.getImageUriProvider();
       mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
@@ -190,7 +190,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
         historyTextView.setOnClickListener(
             new View.OnClickListener() {
               @Override
-              public void onClick(View view) {
+              public void onClick(final View view) {
                 mEditText.setText(historyUri);
               }
             });
@@ -208,7 +208,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
     }
 
     @Override
-    public void onClick(DialogInterface dialog, int which) {
+    public void onClick(final DialogInterface dialog, final int which) {
       final String oldUri = mImageUriProvider.getUriOverride();
       final String newUri = mEditText.getText().toString();
       switch (which) {

@@ -367,14 +367,14 @@ public class BitmapAnimationBackendTest {
     verify(mFrameListener).onFrameDropped(mBitmapAnimationBackend, 4);
   }
 
-  private void verifyFramePreparationStrategyCalled(int frameNumber) {
+  private void verifyFramePreparationStrategyCalled(final int frameNumber) {
     verify(mBitmapFramePreparationStrategy)
         .prepareFrames(
             mBitmapFramePreparer, mBitmapFrameCache, mBitmapAnimationBackend, frameNumber);
   }
 
   private void verifyListenersAndCacheNotified(
-      int frameNumber, @BitmapAnimationBackend.FrameType int frameType) {
+      final int frameNumber, final @BitmapAnimationBackend.FrameType int frameType) {
     // Verify cache callback
     verify(mBitmapFrameCache)
         .onFrameRendered(eq(frameNumber), mCapturedBitmapReference.capture(), eq(frameType));
@@ -385,7 +385,7 @@ public class BitmapAnimationBackendTest {
   }
 
   private void verifyListenersNotifiedWithoutCache(
-      int frameNumber, @BitmapAnimationBackend.FrameType int frameType) {
+      final int frameNumber, final @BitmapAnimationBackend.FrameType int frameType) {
     // Verify cache callback
     verify(mBitmapFrameCache, never())
         .onFrameRendered(anyInt(), mCapturedBitmapReference.capture(), eq(frameType));
@@ -399,7 +399,7 @@ public class BitmapAnimationBackendTest {
   }
 
   private void setupBoundsAndRendererDimensions(
-      int boundsWidth, int boundsHeight, int backendIntrinsicWidth, int backendIntrinsicHeight) {
+      final int boundsWidth, final int boundsHeight, final int backendIntrinsicWidth, final int backendIntrinsicHeight) {
     when(mBounds.width()).thenReturn(boundsWidth);
     when(mBounds.height()).thenReturn(boundsHeight);
 

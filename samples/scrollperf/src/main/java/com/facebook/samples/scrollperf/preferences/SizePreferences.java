@@ -32,25 +32,25 @@ public class SizePreferences extends Preference implements SeekBar.OnSeekBarChan
 
   private int mMaxValue;
 
-  public SizePreferences(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+  public SizePreferences(final Context context, final AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
     super(context, attrs, defStyleAttr, defStyleRes);
     setLayoutResource(R.layout.size_preference);
   }
 
-  public SizePreferences(Context context, AttributeSet attrs, int defStyleAttr) {
+  public SizePreferences(final Context context, final AttributeSet attrs, final int defStyleAttr) {
     this(context, attrs, defStyleAttr, 0);
   }
 
-  public SizePreferences(Context context, AttributeSet attrs) {
+  public SizePreferences(final Context context, final AttributeSet attrs) {
     this(context, attrs, 0);
   }
 
-  public void setSeekBarMaxValue(int maxValue) {
+  public void setSeekBarMaxValue(final int maxValue) {
     mMaxValue = maxValue;
   }
 
   @Override
-  public void onBindViewHolder(PreferenceViewHolder holder) {
+  public void onBindViewHolder(final PreferenceViewHolder holder) {
     super.onBindViewHolder(holder);
     // We get the reference to the mSeekBar
     mSeekBar = (SeekBar) holder.findViewById(R.id.size_seek_bar);
@@ -65,18 +65,18 @@ public class SizePreferences extends Preference implements SeekBar.OnSeekBarChan
   }
 
   @Override
-  public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+  public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser) {
     updateCurrentValue(progress);
   }
 
   @Override
-  public void onStartTrackingTouch(SeekBar seekBar) {}
+  public void onStartTrackingTouch(final SeekBar seekBar) { }
 
   @Override
-  public void onStopTrackingTouch(SeekBar seekBar) {}
+  public void onStopTrackingTouch(final SeekBar seekBar) { }
 
   @Override
-  protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
+  protected void onSetInitialValue(final boolean restorePersistedValue, final Object defaultValue) {
     super.onSetInitialValue(restorePersistedValue, defaultValue);
     final int valueToDisplay;
     if (restorePersistedValue) {
@@ -88,11 +88,11 @@ public class SizePreferences extends Preference implements SeekBar.OnSeekBarChan
   }
 
   @Override
-  protected Object onGetDefaultValue(TypedArray a, int index) {
+  protected Object onGetDefaultValue(final TypedArray a, final int index) {
     return a.getInt(index, 0);
   }
 
-  public void updateCurrentValue(int progress) {
+  public void updateCurrentValue(final int progress) {
     if (shouldPersist()) {
       persistInt(progress);
     }

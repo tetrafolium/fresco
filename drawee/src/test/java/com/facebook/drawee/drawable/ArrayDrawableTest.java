@@ -111,7 +111,7 @@ public class ArrayDrawableTest {
     testSetDither(false);
   }
 
-  private void testSetDither(boolean dither) {
+  private void testSetDither(final boolean dither) {
     reset(mUnderlyingDrawable0, mUnderlyingDrawable1, mUnderlyingDrawable2);
     mArrayDrawable.setDither(dither);
     verify(mUnderlyingDrawable0).setDither(dither);
@@ -125,7 +125,7 @@ public class ArrayDrawableTest {
     testSetFilterBitmap(false);
   }
 
-  private void testSetFilterBitmap(boolean filterBitmap) {
+  private void testSetFilterBitmap(final boolean filterBitmap) {
     mArrayDrawable.setFilterBitmap(filterBitmap);
     verify(mUnderlyingDrawable0).setFilterBitmap(filterBitmap);
     verify(mUnderlyingDrawable1).setFilterBitmap(filterBitmap);
@@ -140,7 +140,7 @@ public class ArrayDrawableTest {
     testSetVisible(false, false);
   }
 
-  private void testSetVisible(boolean visible, boolean restart) {
+  private void testSetVisible(final boolean visible, final boolean restart) {
     mArrayDrawable.setVisible(visible, restart);
     verify(mUnderlyingDrawable0).setVisible(visible, restart);
     verify(mUnderlyingDrawable1).setVisible(visible, restart);

@@ -19,7 +19,7 @@ public class AutoPlayImageListener extends BaseImageListener {
 
   private static @Nullable AutoPlayImageListener INSTANCE;
 
-  private AutoPlayImageListener() {}
+  private AutoPlayImageListener() { }
 
   public static AutoPlayImageListener getInstance() {
     if (INSTANCE == null) {
@@ -29,30 +29,30 @@ public class AutoPlayImageListener extends BaseImageListener {
   }
 
   @Override
-  public void onSubmit(long id, Object callerContext) {}
+  public void onSubmit(final long id, final Object callerContext) { }
 
   @Override
-  public void onPlaceholderSet(long id, @Nullable Drawable placeholder) {}
+  public void onPlaceholderSet(final long id, final @Nullable Drawable placeholder) { }
 
   public void onFinalImageSet(
-      long id,
-      @ImageOrigin int imageOrigin,
-      @Nullable ImageInfo imageInfo,
-      @Nullable Drawable drawable) {
+      final long id,
+      final @ImageOrigin int imageOrigin,
+      final @Nullable ImageInfo imageInfo,
+      final @Nullable Drawable drawable) {
     if (drawable instanceof AnimatedDrawable2) {
       ((AnimatedDrawable2) drawable).start();
     }
   }
 
   @Override
-  public void onIntermediateImageSet(long id, @Nullable ImageInfo imageInfo) {}
+  public void onIntermediateImageSet(final long id, final @Nullable ImageInfo imageInfo) { }
 
   @Override
-  public void onIntermediateImageFailed(long id, Throwable throwable) {}
+  public void onIntermediateImageFailed(final long id, final Throwable throwable) { }
 
   @Override
-  public void onFailure(long id, @Nullable Drawable error, Throwable throwable) {}
+  public void onFailure(final long id, final @Nullable Drawable error, final Throwable throwable) { }
 
   @Override
-  public void onRelease(long id) {}
+  public void onRelease(final long id) { }
 }

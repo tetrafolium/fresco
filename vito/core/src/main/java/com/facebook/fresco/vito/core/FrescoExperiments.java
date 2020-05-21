@@ -86,7 +86,7 @@ public class FrescoExperiments {
     return false;
   }
 
-  public void setupPropDiffingExperiment() {}
+  public void setupPropDiffingExperiment() { }
 
   public boolean enablePropDiffing() {
     return true;

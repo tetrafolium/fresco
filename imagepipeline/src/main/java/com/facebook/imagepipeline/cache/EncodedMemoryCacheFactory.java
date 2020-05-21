@@ -21,17 +21,17 @@ public class EncodedMemoryCacheFactory {
     MemoryCacheTracker memoryCacheTracker =
         new MemoryCacheTracker<CacheKey>() {
           @Override
-          public void onCacheHit(CacheKey cacheKey) {
+          public void onCacheHit(final CacheKey cacheKey) {
             imageCacheStatsTracker.onMemoryCacheHit(cacheKey);
           }
 
           @Override
-          public void onCacheMiss(CacheKey cacheKey) {
+          public void onCacheMiss(final CacheKey cacheKey) {
             imageCacheStatsTracker.onMemoryCacheMiss(cacheKey);
           }
 
           @Override
-          public void onCachePut(CacheKey cacheKey) {
+          public void onCachePut(final CacheKey cacheKey) {
             imageCacheStatsTracker.onMemoryCachePut(cacheKey);
           }
         };

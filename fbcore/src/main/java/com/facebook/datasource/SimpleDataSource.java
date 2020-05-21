@@ -13,7 +13,7 @@ import java.util.Map;
 /** Settable {@link DataSource}. */
 public class SimpleDataSource<T> extends AbstractDataSource<T> {
 
-  private SimpleDataSource() {}
+  private SimpleDataSource() { }
 
   /** Creates a new {@link SimpleDataSource}. */
   public static <T> SimpleDataSource<T> create() {
@@ -36,7 +36,7 @@ public class SimpleDataSource<T> extends AbstractDataSource<T> {
    * @return true if the value was successfully set.
    */
   @Override
-  public boolean setResult(T value, boolean isLast, Map<String, Object> extras) {
+  public boolean setResult(final T value, final boolean isLast, final Map<String, Object> extras) {
     return super.setResult(Preconditions.checkNotNull(value), isLast, extras);
   }
 
@@ -45,7 +45,7 @@ public class SimpleDataSource<T> extends AbstractDataSource<T> {
    *
    * <p>See {@link #setResult(T value, boolean isLast)}.
    */
-  public boolean setResult(T value) {
+  public boolean setResult(final T value) {
     return super.setResult(Preconditions.checkNotNull(value), /* isLast */ true, null);
   }
 
@@ -64,7 +64,7 @@ public class SimpleDataSource<T> extends AbstractDataSource<T> {
    * @return true if the failure was successfully set.
    */
   @Override
-  public boolean setFailure(Throwable throwable) {
+  public boolean setFailure(final Throwable throwable) {
     return super.setFailure(Preconditions.checkNotNull(throwable));
   }
 
@@ -75,7 +75,7 @@ public class SimpleDataSource<T> extends AbstractDataSource<T> {
    * @return true if the progress was successfully set.
    */
   @Override
-  public boolean setProgress(float progress) {
+  public boolean setProgress(final float progress) {
     return super.setProgress(progress);
   }
 }

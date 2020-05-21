@@ -56,7 +56,7 @@ public class WebPUtilTest {
     checkImage("webps/1_webp_anim.webp", 322, 477);
   }
 
-  private InputStream getResourceStream(String name) throws IOException {
+  private InputStream getResourceStream(final String name) throws IOException {
     InputStream is = WebPUtilTest.class.getResourceAsStream(name);
     assertNotNull("failed to read resource: " + name, is);
     return is;
@@ -70,7 +70,7 @@ public class WebPUtilTest {
    * @param expectedHeight The expected height
    * @throws IOException In case of errors
    */
-  private void checkImage(final String imagePath, int expectedWidth, int expectedHeight)
+  private void checkImage(final String imagePath, final int expectedWidth, final int expectedHeight)
       throws IOException {
     Pair<Integer, Integer> size = WebpUtil.getSize(getResourceStream(imagePath));
     assertNotNull("Something went wrong during parsing WebP! " + imagePath, size);

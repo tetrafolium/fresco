@@ -15,16 +15,16 @@ package com.facebook.imagepipeline.producers;
 public class SwallowResultProducer<T> implements Producer<Void> {
   private final Producer<T> mInputProducer;
 
-  public SwallowResultProducer(Producer<T> inputProducer) {
+  public SwallowResultProducer(final Producer<T> inputProducer) {
     mInputProducer = inputProducer;
   }
 
   @Override
-  public void produceResults(Consumer<Void> consumer, ProducerContext producerContext) {
+  public void produceResults(final Consumer<Void> consumer, final ProducerContext producerContext) {
     DelegatingConsumer<T, Void> swallowResultConsumer =
         new DelegatingConsumer<T, Void>(consumer) {
           @Override
-          protected void onNewResultImpl(T newResult, @Status int status) {
+          protected void onNewResultImpl(final T newResult, final @Status int status) {
             if (isLast(status)) {
               getConsumer().onNewResult(null, status);
             }

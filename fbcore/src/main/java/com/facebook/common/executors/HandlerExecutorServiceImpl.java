@@ -21,7 +21,7 @@ public class HandlerExecutorServiceImpl extends AbstractExecutorService
 
   private final Handler mHandler;
 
-  public HandlerExecutorServiceImpl(Handler handler) {
+  public HandlerExecutorServiceImpl(final Handler handler) {
     mHandler = handler;
   }
 
@@ -46,32 +46,32 @@ public class HandlerExecutorServiceImpl extends AbstractExecutorService
   }
 
   @Override
-  public boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException {
+  public boolean awaitTermination(final long timeout, final TimeUnit unit) throws InterruptedException {
     throw new UnsupportedOperationException();
   }
 
   @Override
-  public void execute(Runnable command) {
+  public void execute(final Runnable command) {
     mHandler.post(command);
   }
 
   @Override
-  protected <T> ScheduledFutureImpl<T> newTaskFor(Runnable runnable, @Nullable T value) {
+  protected <T> ScheduledFutureImpl<T> newTaskFor(final Runnable runnable, final @Nullable T value) {
     return new ScheduledFutureImpl<T>(mHandler, runnable, value);
   }
 
   @Override
-  protected <T> ScheduledFutureImpl<T> newTaskFor(Callable<T> callable) {
+  protected <T> ScheduledFutureImpl<T> newTaskFor(final Callable<T> callable) {
     return new ScheduledFutureImpl<T>(mHandler, callable);
   }
 
   @Override
-  public ScheduledFuture<?> submit(Runnable task) {
+  public ScheduledFuture<?> submit(final Runnable task) {
     return submit(task, (Void) null);
   }
 
   @Override
-  public <T> ScheduledFuture<T> submit(Runnable task, @Nullable T result) {
+  public <T> ScheduledFuture<T> submit(final Runnable task, final @Nullable T result) {
     if (task == null) throw new NullPointerException();
     ScheduledFutureImpl<T> future = newTaskFor(task, result);
     execute(future);
@@ -79,7 +79,7 @@ public class HandlerExecutorServiceImpl extends AbstractExecutorService
   }
 
   @Override
-  public <T> ScheduledFuture<T> submit(Callable<T> task) {
+  public <T> ScheduledFuture<T> submit(final Callable<T> task) {
     if (task == null) throw new NullPointerException();
     ScheduledFutureImpl<T> future = newTaskFor(task);
     execute(future);
@@ -87,14 +87,14 @@ public class HandlerExecutorServiceImpl extends AbstractExecutorService
   }
 
   @Override
-  public ScheduledFuture<?> schedule(Runnable command, long delay, TimeUnit unit) {
+  public ScheduledFuture<?> schedule(final Runnable command, final long delay, final TimeUnit unit) {
     ScheduledFutureImpl<?> future = newTaskFor(command, null);
     mHandler.postDelayed(future, unit.toMillis(delay));
     return future;
   }
 
   @Override
-  public <V> ScheduledFuture<V> schedule(Callable<V> callable, long delay, TimeUnit unit) {
+  public <V> ScheduledFuture<V> schedule(final Callable<V> callable, final long delay, final TimeUnit unit) {
     ScheduledFutureImpl<V> future = newTaskFor(callable);
     mHandler.postDelayed(future, unit.toMillis(delay));
     return future;
@@ -102,13 +102,13 @@ public class HandlerExecutorServiceImpl extends AbstractExecutorService
 
   @Override
   public ScheduledFuture<?> scheduleAtFixedRate(
-      Runnable command, long initialDelay, long period, TimeUnit unit) {
+      final Runnable command, final long initialDelay, final long period, final TimeUnit unit) {
     throw new UnsupportedOperationException();
   }
 
   @Override
   public ScheduledFuture<?> scheduleWithFixedDelay(
-      Runnable command, long initialDelay, long delay, TimeUnit unit) {
+      final Runnable command, final long initialDelay, final long delay, final TimeUnit unit) {
     throw new UnsupportedOperationException();
   }
 

@@ -12,5 +12,5 @@ import com.facebook.fresco.vito.core.FrescoDrawable2;
 public class NoOpDebugOverlayFactory2 implements DebugOverlayFactory2 {
 
   @Override
-  public void update(FrescoDrawable2 drawable) {}
+  public void update(final FrescoDrawable2 drawable) { }
 }

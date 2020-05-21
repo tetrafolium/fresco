@@ -43,7 +43,7 @@ public class FrescoVitoProvider {
     return getImplementation().getConfig();
   }
 
-  public static synchronized void setImplementation(Implementation implementation) {
+  public static synchronized void setImplementation(final Implementation implementation) {
     sImplementation = implementation;
   }
 

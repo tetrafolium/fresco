@@ -82,7 +82,7 @@ public class FrescoStateImpl implements FrescoState {
       new BaseRequestListener() {
         @Override
         public void onUltimateProducerReached(
-            String requestId, String producerName, boolean successful) {
+            final String requestId, final String producerName, final boolean successful) {
           mImageOrigin = ImageOriginUtils.mapProducerNameToImageOrigin(producerName);
         }
       };
@@ -92,19 +92,19 @@ public class FrescoStateImpl implements FrescoState {
   private @Nullable Runnable mDetachRunnable;
 
   public FrescoStateImpl(
-      long id,
-      FrescoContext frescoContext,
-      @Nullable Uri uri,
-      @Nullable MultiUri multiUri,
-      ImageOptions imageOptions,
-      @Nullable Object callerContext,
-      @Nullable ImageRequest imageRequest,
-      @Nullable CacheKey cacheKey,
-      @Nullable CloseableReference<CloseableImage> cachedImage,
-      Resources resources,
-      @Nullable ImageListener imageListener,
-      @Nullable ImageListener otherListeners,
-      @Nullable ImageStateListener imageStateListener) {
+      final long id,
+      final FrescoContext frescoContext,
+      final @Nullable Uri uri,
+      final @Nullable MultiUri multiUri,
+      final ImageOptions imageOptions,
+      final @Nullable Object callerContext,
+      final @Nullable ImageRequest imageRequest,
+      final @Nullable CacheKey cacheKey,
+      final @Nullable CloseableReference<CloseableImage> cachedImage,
+      final Resources resources,
+      final @Nullable ImageListener imageListener,
+      final @Nullable ImageListener otherListeners,
+      final @Nullable ImageStateListener imageStateListener) {
     mId = id;
     mFrescoContext = frescoContext;
     mUri = uri;
@@ -134,7 +134,7 @@ public class FrescoStateImpl implements FrescoState {
 
   @Override
   @UiThread
-  public void setFrescoDrawable(@Nullable FrescoDrawable frescoDrawable) {
+  public void setFrescoDrawable(final @Nullable FrescoDrawable frescoDrawable) {
     mFrescoDrawable = frescoDrawable;
   }
 
@@ -146,7 +146,7 @@ public class FrescoStateImpl implements FrescoState {
 
   @Override
   @UiThread
-  public synchronized void setAttached(boolean isAttached) {
+  public synchronized void setAttached(final boolean isAttached) {
     mIsAttached = isAttached;
   }
 
@@ -175,7 +175,7 @@ public class FrescoStateImpl implements FrescoState {
 
   @Override
   @UiThread
-  public void setImageFetched(boolean imageFetched) {
+  public void setImageFetched(final boolean imageFetched) {
     mImageFetched = imageFetched;
   }
 
@@ -187,7 +187,7 @@ public class FrescoStateImpl implements FrescoState {
 
   @Override
   public synchronized void setCachedImage(
-      @Nullable CloseableReference<CloseableImage> cachedImage) {
+      final @Nullable CloseableReference<CloseableImage> cachedImage) {
     CloseableReference.closeSafely(mCachedImage);
     mCachedImage = CloseableReference.cloneOrNull(cachedImage);
   }
@@ -217,7 +217,7 @@ public class FrescoStateImpl implements FrescoState {
 
   @Override
   public void setProducerSequence(
-      @Nullable Producer<CloseableReference<CloseableImage>> producerSequence) {
+      final @Nullable Producer<CloseableReference<CloseableImage>> producerSequence) {
     mProducerSequence = producerSequence;
   }
 
@@ -229,7 +229,7 @@ public class FrescoStateImpl implements FrescoState {
 
   @Override
   public void setSettableProducerContext(
-      @Nullable SettableProducerContext settableProducerContext) {
+      final @Nullable SettableProducerContext settableProducerContext) {
     mSettableProducerContext = settableProducerContext;
   }
 
@@ -240,7 +240,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void setRequestListener(@Nullable RequestListener requestListener) {
+  public void setRequestListener(final @Nullable RequestListener requestListener) {
     mRequestListener = requestListener;
   }
 
@@ -263,7 +263,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void setActualImageWrapper(@Nullable ForwardingDrawable actualImageWrapper) {
+  public void setActualImageWrapper(final @Nullable ForwardingDrawable actualImageWrapper) {
     mActualImageWrapper = actualImageWrapper;
   }
 
@@ -274,12 +274,12 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void setOverlayDrawable(@Nullable Drawable overlayDrawable) {
+  public void setOverlayDrawable(final @Nullable Drawable overlayDrawable) {
     mOverlayDrawable = overlayDrawable;
   }
 
   @Override
-  public void setPlaceholderDrawable(@Nullable Drawable placeholderDrawable) {
+  public void setPlaceholderDrawable(final @Nullable Drawable placeholderDrawable) {
     mPlaceholderDrawable = placeholderDrawable;
   }
 
@@ -296,7 +296,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void setImageOrigin(@ImageOrigin int imageOrigin) {
+  public void setImageOrigin(final @ImageOrigin int imageOrigin) {
     mImageOrigin = imageOrigin;
   }
 
@@ -309,32 +309,32 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public synchronized void setDetachRunnable(@Nullable Runnable detachRunnable) {
+  public synchronized void setDetachRunnable(final @Nullable Runnable detachRunnable) {
     mDetachRunnable = detachRunnable;
   }
 
   @Override
-  public void onNewResult(@Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
+  public void onNewResult(final @Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
     mFrescoContext.getController().onNewResult(this, dataSource);
   }
 
   @Override
-  public void onFailure(@Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
+  public void onFailure(final @Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
     mFrescoContext.getController().onFailure(this, dataSource);
   }
 
   @Override
-  public void onCancellation(@Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
+  public void onCancellation(final @Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
     mFrescoContext.getController().onCancellation(this, dataSource);
   }
 
   @Override
-  public void onProgressUpdate(@Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
+  public void onProgressUpdate(final @Nonnull DataSource<CloseableReference<CloseableImage>> dataSource) {
     mFrescoContext.getController().onProgressUpdate(this, dataSource);
   }
 
   @Override
-  public void onSubmit(long id, Object callerContext) {
+  public void onSubmit(final long id, final Object callerContext) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("FrescoState#onSubmit");
     }
@@ -353,7 +353,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void onPlaceholderSet(long id, @Nullable Drawable placeholder) {
+  public void onPlaceholderSet(final long id, final @Nullable Drawable placeholder) {
     if (mImageListener != null) {
       mImageListener.onPlaceholderSet(id, placeholder);
     }
@@ -367,10 +367,10 @@ public class FrescoStateImpl implements FrescoState {
 
   @Override
   public void onFinalImageSet(
-      long id,
-      @ImageOrigin int imageOrigin,
-      @Nullable ImageInfo imageInfo,
-      @Nullable Drawable drawable) {
+      final long id,
+      final @ImageOrigin int imageOrigin,
+      final @Nullable ImageInfo imageInfo,
+      final @Nullable Drawable drawable) {
     if (mImageListener != null) {
       mImageListener.onFinalImageSet(id, imageOrigin, imageInfo, drawable);
     }
@@ -383,7 +383,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void onIntermediateImageSet(long id, @Nullable ImageInfo imageInfo) {
+  public void onIntermediateImageSet(final long id, final @Nullable ImageInfo imageInfo) {
     if (mImageListener != null) {
       mImageListener.onIntermediateImageSet(id, imageInfo);
     }
@@ -396,7 +396,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void onIntermediateImageFailed(long id, Throwable throwable) {
+  public void onIntermediateImageFailed(final long id, final Throwable throwable) {
     if (mImageListener != null) {
       mImageListener.onIntermediateImageFailed(id, throwable);
     }
@@ -409,7 +409,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void onFailure(long id, @Nullable Drawable error, @Nullable Throwable throwable) {
+  public void onFailure(final long id, final @Nullable Drawable error, final @Nullable Throwable throwable) {
     if (mImageListener != null) {
       mImageListener.onFailure(id, error, throwable);
     }
@@ -422,7 +422,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void onRelease(long id) {
+  public void onRelease(final long id) {
     if (mImageListener != null) {
       mImageListener.onRelease(id);
     }
@@ -440,7 +440,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void setTargetWidthPx(@Px int targetWidthPx) {
+  public void setTargetWidthPx(final @Px int targetWidthPx) {
     mTargetWidthPx = targetWidthPx;
   }
 
@@ -450,7 +450,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void setTargetHeightPx(@Px int targetHeightPx) {
+  public void setTargetHeightPx(final @Px int targetHeightPx) {
     mTargetHeightPx = targetHeightPx;
   }
 
@@ -460,7 +460,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void setImageListener(@Nullable ImageListener imageListener) {
+  public void setImageListener(final @Nullable ImageListener imageListener) {
     mImageListener = imageListener;
   }
 
@@ -497,7 +497,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void setPrefetchDatasource(@Nullable DataSource prefetchDatasource) {
+  public void setPrefetchDatasource(final @Nullable DataSource prefetchDatasource) {
     if (mPrefetchDatasource != null) {
       mPrefetchDatasource.close();
     }
@@ -506,7 +506,7 @@ public class FrescoStateImpl implements FrescoState {
 
   @Override
   public void setMainFetchDatasource(
-      @Nullable DataSource<CloseableReference<CloseableImage>> mainFetchDatasource) {
+      final @Nullable DataSource<CloseableReference<CloseableImage>> mainFetchDatasource) {
     if (mMainFetchDatasource != null) {
       mMainFetchDatasource.close();
     }
@@ -534,7 +534,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void setImageRequest(@Nullable ImageRequest imageRequest) {
+  public void setImageRequest(final @Nullable ImageRequest imageRequest) {
     mImageRequest = imageRequest;
   }
 
@@ -544,7 +544,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void setExtras(@Nullable Object extras) {
+  public void setExtras(final @Nullable Object extras) {
     mExtras = extras;
   }
 
@@ -554,7 +554,7 @@ public class FrescoStateImpl implements FrescoState {
   }
 
   @Override
-  public void onImageDrawn(String id, ImageInfo imageInfo, DimensionsInfo dimensionsInfo) {
+  public void onImageDrawn(final String id, final ImageInfo imageInfo, final DimensionsInfo dimensionsInfo) {
     if (mImageListener != null) {
       mImageListener.onImageDrawn(id, imageInfo, dimensionsInfo);
     }

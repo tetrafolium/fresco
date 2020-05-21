@@ -20,7 +20,7 @@ public class DownsampleUtil {
   public static final int DEFAULT_SAMPLE_SIZE = 1;
   private static final float INTERVAL_ROUNDING = 1.0f / 3;
 
-  private DownsampleUtil() {}
+  private DownsampleUtil() { }
 
   /**
    * Get the factor between the dimensions of the encodedImage (actual image) and the ones of the

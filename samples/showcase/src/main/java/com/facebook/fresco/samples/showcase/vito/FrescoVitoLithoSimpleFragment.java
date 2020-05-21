@@ -39,14 +39,14 @@ public class FrescoVitoLithoSimpleFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      @Nullable LayoutInflater inflater,
-      @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
+      final @Nullable LayoutInflater inflater,
+      final @Nullable ViewGroup container,
+      final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_vito_simple, container, false);
   }
 
   @Override
-  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
     final ComponentContext componentContext = new ComponentContext(getContext());
 
     FrameLayout container = view.findViewById(R.id.container);
@@ -58,7 +58,7 @@ public class FrescoVitoLithoSimpleFragment extends BaseShowcaseFragment {
     return R.string.vito_litho_simple;
   }
 
-  public Component createComponent(ComponentContext c) {
+  public Component createComponent(final ComponentContext c) {
     Uri uri0 = Uri.parse("http://sample.com/invalid");
     Uri uri1 = sampleUris().createSampleUri(ImageUriProvider.ImageSize.XXL);
     Uri uri2 = Uri.parse("http://sample.com/invalid");

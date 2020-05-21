@@ -28,15 +28,15 @@ public class SimpleDraweeSpanTextView extends TextView {
   private DraweeSpanStringBuilder mDraweeStringBuilder;
   private boolean mIsAttached = false;
 
-  public SimpleDraweeSpanTextView(Context context) {
+  public SimpleDraweeSpanTextView(final Context context) {
     super(context);
   }
 
-  public SimpleDraweeSpanTextView(Context context, @Nullable AttributeSet attrs) {
+  public SimpleDraweeSpanTextView(final Context context, final @Nullable AttributeSet attrs) {
     super(context, attrs);
   }
 
-  public SimpleDraweeSpanTextView(Context context, @Nullable AttributeSet attrs, int defStyle) {
+  public SimpleDraweeSpanTextView(final Context context, final @Nullable AttributeSet attrs, final int defStyle) {
     super(context, attrs, defStyle);
   }
 
@@ -81,7 +81,7 @@ public class SimpleDraweeSpanTextView extends TextView {
    *
    * @param draweeSpanStringBuilder the builder to attach to
    */
-  public void setDraweeSpanStringBuilder(DraweeSpanStringBuilder draweeSpanStringBuilder) {
+  public void setDraweeSpanStringBuilder(final DraweeSpanStringBuilder draweeSpanStringBuilder) {
     // setText will trigger onTextChanged, which will clean up the old draweeSpanStringBuilder
     // if necessary
     setText(draweeSpanStringBuilder, BufferType.SPANNABLE);
@@ -103,7 +103,7 @@ public class SimpleDraweeSpanTextView extends TextView {
   }
 
   @Override
-  public void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
+  public void onTextChanged(final CharSequence text, final int start, final int lengthBefore, final int lengthAfter) {
     super.onTextChanged(text, start, lengthBefore, lengthAfter);
     // The text changed, so we might not have a DraweeSpanStringBuilder any more
     // (or a different one). Since all setText methods in TextView are final, we cannot directly

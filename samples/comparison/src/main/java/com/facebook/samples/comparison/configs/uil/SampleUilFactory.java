@@ -21,7 +21,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 public class SampleUilFactory {
   private static ImageLoader sImageLoader;
 
-  public static ImageLoader getImageLoader(Context context) {
+  public static ImageLoader getImageLoader(final Context context) {
     if (sImageLoader == null) {
       DisplayImageOptions displayImageOptions =
           new DisplayImageOptions.Builder()

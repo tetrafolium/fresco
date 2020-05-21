@@ -34,12 +34,12 @@ public class DataFetchProducer extends LocalFetchProducer {
 
   public static final String PRODUCER_NAME = "DataFetchProducer";
 
-  public DataFetchProducer(PooledByteBufferFactory pooledByteBufferFactory) {
+  public DataFetchProducer(final PooledByteBufferFactory pooledByteBufferFactory) {
     super(CallerThreadExecutor.getInstance(), pooledByteBufferFactory);
   }
 
   @Override
-  protected EncodedImage getEncodedImage(ImageRequest imageRequest) throws IOException {
+  protected EncodedImage getEncodedImage(final ImageRequest imageRequest) throws IOException {
     byte[] data = getData(imageRequest.getSourceUri().toString());
     return getByteBufferBackedEncodedImage(new ByteArrayInputStream(data), data.length);
   }
@@ -50,7 +50,7 @@ public class DataFetchProducer extends LocalFetchProducer {
   }
 
   @VisibleForTesting
-  static byte[] getData(String uri) {
+  static byte[] getData(final String uri) {
     /*
      * Format of a data URL:
      * data:mime/type;param=value;param=value;base64,actual_data
@@ -71,7 +71,7 @@ public class DataFetchProducer extends LocalFetchProducer {
   }
 
   @VisibleForTesting
-  static boolean isBase64(String prefix) {
+  static boolean isBase64(final String prefix) {
     if (!prefix.contains(";")) {
       return false;
     }

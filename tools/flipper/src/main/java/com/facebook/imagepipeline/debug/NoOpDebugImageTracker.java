@@ -14,12 +14,12 @@ import com.facebook.imagepipeline.request.ImageRequest;
 public class NoOpDebugImageTracker implements DebugImageTracker {
 
   @Override
-  public void trackImage(ImageRequest imageRequest, CacheKey cacheKey) {
+  public void trackImage(final ImageRequest imageRequest, final CacheKey cacheKey) {
     // no-op
   }
 
   @Override
-  public void trackImageRequest(ImageRequest imageRequest, String requestId) {
+  public void trackImageRequest(final ImageRequest imageRequest, final String requestId) {
     // no-op
   }
 }

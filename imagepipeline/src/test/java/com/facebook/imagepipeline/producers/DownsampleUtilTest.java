@@ -269,11 +269,11 @@ public class DownsampleUtilTest {
     assertEquals(8, DownsampleUtil.roundToPowerOfTwo(8));
   }
 
-  private void whenImageWidthAndHeight(int width, int height) {
+  private void whenImageWidthAndHeight(final int width, final int height) {
     whenImageWidthHeightAndRotation(width, height, 0);
   }
 
-  private void whenImageWidthHeightAndRotation(int width, int height, int rotationAngle) {
+  private void whenImageWidthHeightAndRotation(final int width, final int height, final int rotationAngle) {
     mEncodedImage = new EncodedImage(CloseableReference.of(mock(PooledByteBuffer.class)));
     mEncodedImage.setWidth(width);
     mEncodedImage.setHeight(height);
@@ -281,12 +281,12 @@ public class DownsampleUtilTest {
     mEncodedImage.setExifOrientation(ExifInterface.ORIENTATION_NORMAL);
   }
 
-  private void whenRequestResizeWidthAndHeightWithExifRotation(int width, int height) {
+  private void whenRequestResizeWidthAndHeightWithExifRotation(final int width, final int height) {
     whenRequestResizeWidthHeightAndForcedRotation(width, height, -1);
   }
 
   private void whenRequestResizeWidthHeightAndForcedRotation(
-      int width, int height, int rotationAngle) {
+      final int width, final int height, final int rotationAngle) {
     when(mImageRequest.getPreferredWidth()).thenReturn(width);
     when(mImageRequest.getPreferredHeight()).thenReturn(height);
     when(mImageRequest.getResizeOptions()).thenReturn(new ResizeOptions(width, height));
@@ -295,7 +295,7 @@ public class DownsampleUtilTest {
   }
 
   private void whenRequestResizeWidthHeightAndMaxBitmapSize(
-      int width, int height, float maxBitmapSize) {
+      final int width, final int height, final float maxBitmapSize) {
     when(mImageRequest.getPreferredWidth()).thenReturn(width);
     when(mImageRequest.getPreferredHeight()).thenReturn(height);
     when(mImageRequest.getResizeOptions())

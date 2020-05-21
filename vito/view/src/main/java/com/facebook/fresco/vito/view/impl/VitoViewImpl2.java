@@ -33,7 +33,7 @@ public class VitoViewImpl2 implements VitoView.Implementation {
   private final View.OnAttachStateChangeListener sOnAttachStateChangeListenerCallback =
       new View.OnAttachStateChangeListener() {
         @Override
-        public void onViewAttachedToWindow(View view) {
+        public void onViewAttachedToWindow(final View view) {
           FrescoDrawable2 current = getDrawable(view);
           if (current != null) {
             onAttach(current);
@@ -41,7 +41,7 @@ public class VitoViewImpl2 implements VitoView.Implementation {
         }
 
         @Override
-        public void onViewDetachedFromWindow(View view) {
+        public void onViewDetachedFromWindow(final View view) {
           FrescoDrawable2 current = getDrawable(view);
           if (current != null) {
             onDetach(current);
@@ -52,7 +52,7 @@ public class VitoViewImpl2 implements VitoView.Implementation {
   private final FrescoController2 mController;
   private final VitoImagePipeline mVitoImagePipeline;
 
-  public VitoViewImpl2(FrescoController2 controller, VitoImagePipeline vitoImagePipeline) {
+  public VitoViewImpl2(final FrescoController2 controller, final VitoImagePipeline vitoImagePipeline) {
     mController = controller;
     mVitoImagePipeline = vitoImagePipeline;
   }
@@ -111,7 +111,7 @@ public class VitoViewImpl2 implements VitoView.Implementation {
     }
   }
 
-  private void onDetach(FrescoDrawable2 drawable) {
+  private void onDetach(final FrescoDrawable2 drawable) {
     drawable.scheduleReleaseNextFrame();
   }
 
@@ -155,7 +155,7 @@ public class VitoViewImpl2 implements VitoView.Implementation {
     frescoDrawable.setVisibilityCallback(
         new VisibilityCallback() {
           @Override
-          public void onVisibilityChange(boolean visible) {
+          public void onVisibilityChange(final boolean visible) {
             if (!visible) {
               onDetach(frescoDrawable);
             } else {

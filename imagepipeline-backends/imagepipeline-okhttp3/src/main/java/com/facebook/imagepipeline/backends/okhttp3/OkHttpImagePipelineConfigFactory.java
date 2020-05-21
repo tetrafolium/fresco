@@ -17,7 +17,7 @@ import okhttp3.OkHttpClient;
  */
 public class OkHttpImagePipelineConfigFactory {
 
-  public static ImagePipelineConfig.Builder newBuilder(Context context, OkHttpClient okHttpClient) {
+  public static ImagePipelineConfig.Builder newBuilder(final Context context, final OkHttpClient okHttpClient) {
     return ImagePipelineConfig.newBuilder(context)
         .setNetworkFetcher(new OkHttpNetworkFetcher(okHttpClient));
   }

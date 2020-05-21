@@ -35,13 +35,13 @@ public class SettingsFragment extends PreferenceFragmentCompat
   private ShowRestartMessageDialog mShowRestartMessageDialog;
 
   @Override
-  public void onCreate(@Nullable Bundle savedInstanceState) {
+  public void onCreate(final @Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setHasOptionsMenu(false);
   }
 
   @Override
-  public void onCreatePreferences(Bundle bundle, String s) {
+  public void onCreatePreferences(final Bundle bundle, final String s) {
     addPreferencesFromResource(R.xml.preferences);
     getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
     // Update summaries
@@ -87,7 +87,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
   }
 
   @Override
-  public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+  public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
     Preference preference = findPreference(key);
     switch (key) {
       case Const.DATA_SOURCE_KEY:
@@ -276,10 +276,10 @@ public class SettingsFragment extends PreferenceFragmentCompat
   }
 
   private static boolean updateCheckBoxPreference(
-      Resources resources,
-      CheckBoxPreference preference,
-      int checkedSummaryRes,
-      int uncheckedSummaryRes) {
+      final Resources resources,
+      final CheckBoxPreference preference,
+      final int checkedSummaryRes,
+      final int uncheckedSummaryRes) {
     final boolean checkboxState = preference.isChecked();
     if (checkboxState) {
       preference.setSummary(resources.getString(checkedSummaryRes));
@@ -290,7 +290,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
   }
 
   private static void updateListPreference(
-      Resources resources, ListPreference preference, int arrayValuesId) {
+      final Resources resources, final ListPreference preference, final int arrayValuesId) {
     final int valueIndex = preference.findIndexOfValue(preference.getValue());
     final String summary = resources.getStringArray(arrayValuesId)[valueIndex];
     preference.setSummary(summary);
@@ -378,7 +378,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
   public static class ShowRestartMessageDialog extends DialogFragment {
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
       // Use the Builder class for convenient dialog construction
       AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
       builder
@@ -388,7 +388,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
               R.string.message_restart_now,
               new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(final DialogInterface dialog, final int which) {
                   System.exit(0);
                 }
               });

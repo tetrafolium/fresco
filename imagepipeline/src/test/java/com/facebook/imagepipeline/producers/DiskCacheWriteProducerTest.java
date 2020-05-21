@@ -264,7 +264,7 @@ public class DiskCacheWriteProducerTest {
     doAnswer(
             new Answer<Object>() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 Consumer consumer = (Consumer) invocation.getArguments()[0];
                 consumer.onNewResult(mIntermediateEncodedImage, Consumer.NO_FLAGS | statusFlags);
                 consumer.onNewResult(finalEncodedImage, Consumer.IS_LAST | statusFlags);
@@ -279,7 +279,7 @@ public class DiskCacheWriteProducerTest {
     doAnswer(
             new Answer<Object>() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 Consumer consumer = (Consumer) invocation.getArguments()[0];
                 consumer.onFailure(mException);
                 return null;
@@ -293,7 +293,7 @@ public class DiskCacheWriteProducerTest {
     doAnswer(
             new Answer<Object>() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 Consumer consumer = (Consumer) invocation.getArguments()[0];
                 consumer.onNewResult(null, Consumer.IS_LAST);
                 return null;

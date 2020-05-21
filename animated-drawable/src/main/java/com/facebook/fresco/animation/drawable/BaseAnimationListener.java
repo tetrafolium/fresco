@@ -16,17 +16,17 @@ package com.facebook.fresco.animation.drawable;
 public class BaseAnimationListener implements AnimationListener {
 
   @Override
-  public void onAnimationStart(AnimatedDrawable2 drawable) {}
+  public void onAnimationStart(final AnimatedDrawable2 drawable) { }
 
   @Override
-  public void onAnimationStop(AnimatedDrawable2 drawable) {}
+  public void onAnimationStop(final AnimatedDrawable2 drawable) { }
 
   @Override
-  public void onAnimationReset(AnimatedDrawable2 drawable) {}
+  public void onAnimationReset(final AnimatedDrawable2 drawable) { }
 
   @Override
-  public void onAnimationRepeat(AnimatedDrawable2 drawable) {}
+  public void onAnimationRepeat(final AnimatedDrawable2 drawable) { }
 
   @Override
-  public void onAnimationFrame(AnimatedDrawable2 drawable, int frameNumber) {}
+  public void onAnimationFrame(final AnimatedDrawable2 drawable, final int frameNumber) { }
 }

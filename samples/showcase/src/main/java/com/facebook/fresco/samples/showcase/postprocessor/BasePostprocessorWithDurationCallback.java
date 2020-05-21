@@ -18,11 +18,11 @@ abstract class BasePostprocessorWithDurationCallback extends BasePostprocessor {
 
   private final DurationCallback mDurationCallback;
 
-  BasePostprocessorWithDurationCallback(DurationCallback durationCallback) {
+  BasePostprocessorWithDurationCallback(final DurationCallback durationCallback) {
     mDurationCallback = durationCallback;
   }
 
-  void showDuration(long startNs) {
+  void showDuration(final long startNs) {
     if (mDurationCallback != null) {
       mDurationCallback.showDuration(startNs);
     }

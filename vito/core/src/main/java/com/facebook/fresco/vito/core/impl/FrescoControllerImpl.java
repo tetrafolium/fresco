@@ -66,10 +66,10 @@ public class FrescoControllerImpl implements FrescoController {
   private final ControllerListener2<ImageInfo> mControllerListener2;
 
   public FrescoControllerImpl(
-      FrescoContext frescoContext,
-      DebugOverlayFactory debugOverlayFactory,
-      boolean shouldInstrumentDrawable,
-      @Nullable ControllerListener2<ImageInfo> controllerListener2) {
+      final FrescoContext frescoContext,
+      final DebugOverlayFactory debugOverlayFactory,
+      final boolean shouldInstrumentDrawable,
+      final @Nullable ControllerListener2<ImageInfo> controllerListener2) {
     mFrescoContext = frescoContext;
     mDebugOverlayFactory = debugOverlayFactory;
     mShouldInstrumentDrawable = shouldInstrumentDrawable;
@@ -225,12 +225,12 @@ public class FrescoControllerImpl implements FrescoController {
     }
   }
 
-  private void validateUris(@Nullable Uri uri, @Nullable MultiUri multiUri) {
+  private void validateUris(final @Nullable Uri uri, final @Nullable MultiUri multiUri) {
     Preconditions.checkState(
         (uri == null) || (multiUri == null), "Cannot specify both uri and multiUri props!");
   }
 
-  private void prepareActualImageInBackground(FrescoState frescoState) {
+  private void prepareActualImageInBackground(final FrescoState frescoState) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("FrescoControllerImpl#prepareActualImageInBackground");
     }
@@ -247,7 +247,7 @@ public class FrescoControllerImpl implements FrescoController {
   /** Creates imagepipeline components and sets them to frescoState */
   @VisibleForTesting
   void prepareImagePipelineComponents(
-      FrescoState frescoState, ImageRequest imageRequest, @Nullable Object callerContext) {
+      final FrescoState frescoState, final ImageRequest imageRequest, final @Nullable Object callerContext) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("FrescoControllerImpl#prepareImagePipelineComponents");
     }
@@ -287,7 +287,7 @@ public class FrescoControllerImpl implements FrescoController {
   }
 
   @Override
-  public void onAttach(final FrescoState frescoState, @Nullable ImageListener imageListener) {
+  public void onAttach(final FrescoState frescoState, final @Nullable ImageListener imageListener) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("FrescoControllerImpl#onAttach");
     }
@@ -452,7 +452,7 @@ public class FrescoControllerImpl implements FrescoController {
     }
   }
 
-  private DataSource<CloseableReference<CloseableImage>> createDataSource(FrescoState frescoState) {
+  private DataSource<CloseableReference<CloseableImage>> createDataSource(final FrescoState frescoState) {
     if (frescoState.getUri() != null) {
       return fireOffRequest(frescoState);
     } else {
@@ -467,7 +467,7 @@ public class FrescoControllerImpl implements FrescoController {
     }
   }
 
-  protected DataSource<CloseableReference<CloseableImage>> fireOffRequest(FrescoState frescoState) {
+  protected DataSource<CloseableReference<CloseableImage>> fireOffRequest(final FrescoState frescoState) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("FrescoControllerImpl#fireOffRequest");
     }
@@ -499,7 +499,7 @@ public class FrescoControllerImpl implements FrescoController {
   }
 
   @Override
-  public void onDetach(FrescoState frescoState) {
+  public void onDetach(final FrescoState frescoState) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("FrescoControllerImpl#onDetach");
     }
@@ -523,7 +523,7 @@ public class FrescoControllerImpl implements FrescoController {
 
   @Override
   public void onNewResult(
-      FrescoState frescoState, DataSource<CloseableReference<CloseableImage>> dataSource) {
+      final FrescoState frescoState, final DataSource<CloseableReference<CloseableImage>> dataSource) {
     if (dataSource != null && !dataSource.isClosed()) {
       final boolean shouldClose =
           mFrescoContext.getExperiments().closeDatasourceOnNewResult() && dataSource.isFinished();
@@ -544,7 +544,7 @@ public class FrescoControllerImpl implements FrescoController {
 
   @Override
   public void onFailure(
-      FrescoState frescoState, DataSource<CloseableReference<CloseableImage>> dataSource) {
+      final FrescoState frescoState, final DataSource<CloseableReference<CloseableImage>> dataSource) {
     Drawable errorDrawable =
         mFrescoContext
             .getHierarcher()
@@ -555,14 +555,14 @@ public class FrescoControllerImpl implements FrescoController {
 
   @Override
   public void onCancellation(
-      FrescoState frescoState, DataSource<CloseableReference<CloseableImage>> dataSource) {}
+      final FrescoState frescoState, final DataSource<CloseableReference<CloseableImage>> dataSource) { }
 
   @Override
   public void onProgressUpdate(
-      FrescoState frescoState, DataSource<CloseableReference<CloseableImage>> dataSource) {}
+      final FrescoState frescoState, final DataSource<CloseableReference<CloseableImage>> dataSource) { }
 
   @Nullable
-  private CloseableReference<CloseableImage> getCachedImage(@Nullable CacheKey cacheKey) {
+  private CloseableReference<CloseableImage> getCachedImage(final @Nullable CacheKey cacheKey) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("FrescoControllerImpl#getCachedImage");
     }
@@ -581,7 +581,7 @@ public class FrescoControllerImpl implements FrescoController {
   }
 
   @VisibleForTesting
-  void displayErrorImage(FrescoState frescoState, @Nullable Drawable errorDrawable) {
+  void displayErrorImage(final FrescoState frescoState, final @Nullable Drawable errorDrawable) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("FrescoControllerImpl#displayErrorImage");
     }
@@ -603,10 +603,10 @@ public class FrescoControllerImpl implements FrescoController {
 
   @VisibleForTesting
   void displayResultOrError(
-      FrescoState frescoState,
-      @Nullable CloseableReference<CloseableImage> result,
-      boolean wasImmediate,
-      @Nullable DataSource<CloseableReference<CloseableImage>> dataSource) {
+      final FrescoState frescoState,
+      final @Nullable CloseableReference<CloseableImage> result,
+      final boolean wasImmediate,
+      final @Nullable DataSource<CloseableReference<CloseableImage>> dataSource) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("FrescoControllerImpl#displayResultOrError");
     }
@@ -670,7 +670,7 @@ public class FrescoControllerImpl implements FrescoController {
   }
 
   private @Nullable InstrumentedDrawable.Listener maybeGetInstrumentedListener(
-      FrescoState frescoState, CloseableReference<CloseableImage> result) {
+      final FrescoState frescoState, final CloseableReference<CloseableImage> result) {
     InstrumentedDrawable.Listener instrumentedListener = null;
     if (mShouldInstrumentDrawable) {
       ImageInfo imageInfo = result.get();
@@ -679,7 +679,7 @@ public class FrescoControllerImpl implements FrescoController {
     return instrumentedListener;
   }
 
-  private void setupRequestListener(FrescoState frescoState, ImageRequest imageRequest) {
+  private void setupRequestListener(final FrescoState frescoState, final ImageRequest imageRequest) {
     // TODO(T35949558): Add support for external request listeners
     if (imageRequest == null) {
       return;
@@ -699,13 +699,13 @@ public class FrescoControllerImpl implements FrescoController {
 
       @Override
       public void track(
-          int viewWidth,
-          int viewHeight,
-          int imageWidth,
-          int imageHeight,
-          int scaledWidth,
-          int scaledHeight,
-          String scaleType) {
+          final int viewWidth,
+          final int viewHeight,
+          final int imageWidth,
+          final int imageHeight,
+          final int scaledWidth,
+          final int scaledHeight,
+          final String scaleType) {
         if (imageListener != null) {
           if (!(info instanceof HasImageMetadata)) {
             FLog.wtf(TAG, "mInfo does not implement HasImageMetadata: " + info);
@@ -738,9 +738,9 @@ public class FrescoControllerImpl implements FrescoController {
   }
 
   private static Extras obtainExtras(
-      @Nullable DataSource<CloseableReference<CloseableImage>> dataSource,
-      CloseableImage closeableImage,
-      @Nullable Rect viewportDimensions) {
+      final @Nullable DataSource<CloseableReference<CloseableImage>> dataSource,
+      final CloseableImage closeableImage,
+      final @Nullable Rect viewportDimensions) {
     return MiddlewareUtils.obtainExtras(
         COMPONENT_EXTRAS,
         SHORTCUT_EXTRAS,

@@ -9,7 +9,7 @@ package com.facebook.drawee.backends.pipeline.info;
 
 public class ImagePerfUtils {
 
-  public static String toString(@ImageLoadStatus int imageLoadStatus) {
+  public static String toString(final @ImageLoadStatus int imageLoadStatus) {
     switch (imageLoadStatus) {
       case ImageLoadStatus.REQUESTED:
         return "requested";
@@ -28,5 +28,5 @@ public class ImagePerfUtils {
     }
   }
 
-  private ImagePerfUtils() {}
+  private ImagePerfUtils() { }
 }

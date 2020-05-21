@@ -12,16 +12,16 @@ import android.app.Activity;
 public class BaseActivityListener implements ActivityListener {
 
   @Override
-  public void onActivityCreate(Activity activity) {}
+  public void onActivityCreate(final Activity activity) { }
 
   @Override
-  public void onStop(Activity activity) {}
+  public void onStop(final Activity activity) { }
 
   @Override
-  public void onStart(Activity activity) {}
+  public void onStart(final Activity activity) { }
 
   @Override
-  public void onDestroy(Activity activity) {}
+  public void onDestroy(final Activity activity) { }
 
   @Override
   public int getPriority() {
@@ -29,8 +29,8 @@ public class BaseActivityListener implements ActivityListener {
   }
 
   @Override
-  public void onPause(Activity activity) {}
+  public void onPause(final Activity activity) { }
 
   @Override
-  public void onResume(Activity activity) {}
+  public void onResume(final Activity activity) { }
 }

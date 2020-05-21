@@ -55,7 +55,7 @@ public class StatefulProducerRunnableTest {
         new StatefulProducerRunnable<Closeable>(
             mConsumer, mProducerListener, mProducerContext, PRODUCER_NAME, null, null) {
           @Override
-          protected void disposeResult(Closeable result) {
+          protected void disposeResult(final Closeable result) {
             try {
               result.close();
             } catch (IOException ioe) {
@@ -74,12 +74,12 @@ public class StatefulProducerRunnableTest {
           }
 
           @Override
-          protected Map<String, String> getExtraMapOnFailure(Exception exception) {
+          protected Map<String, String> getExtraMapOnFailure(final Exception exception) {
             return mFailureMap;
           }
 
           @Override
-          protected Map<String, String> getExtraMapOnSuccess(Closeable result) {
+          protected Map<String, String> getExtraMapOnSuccess(final Closeable result) {
             return mSuccessMap;
           }
         };

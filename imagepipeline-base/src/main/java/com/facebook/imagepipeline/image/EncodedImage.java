@@ -69,19 +69,19 @@ public class EncodedImage implements Closeable {
   private @Nullable BytesRange mBytesRange;
   private @Nullable ColorSpace mColorSpace;
 
-  public EncodedImage(CloseableReference<PooledByteBuffer> pooledByteBufferRef) {
+  public EncodedImage(final CloseableReference<PooledByteBuffer> pooledByteBufferRef) {
     Preconditions.checkArgument(CloseableReference.isValid(pooledByteBufferRef));
     this.mPooledByteBufferRef = pooledByteBufferRef.clone();
     this.mInputStreamSupplier = null;
   }
 
-  public EncodedImage(Supplier<FileInputStream> inputStreamSupplier) {
+  public EncodedImage(final Supplier<FileInputStream> inputStreamSupplier) {
     Preconditions.checkNotNull(inputStreamSupplier);
     this.mPooledByteBufferRef = null;
     this.mInputStreamSupplier = inputStreamSupplier;
   }
 
-  public EncodedImage(Supplier<FileInputStream> inputStreamSupplier, int streamSize) {
+  public EncodedImage(final Supplier<FileInputStream> inputStreamSupplier, final int streamSize) {
     this(inputStreamSupplier);
     this.mStreamSize = streamSize;
   }
@@ -91,7 +91,7 @@ public class EncodedImage implements Closeable {
    *
    * @param encodedImage the EncodedImage to clone
    */
-  public static @Nullable EncodedImage cloneOrNull(EncodedImage encodedImage) {
+  public static @Nullable EncodedImage cloneOrNull(final EncodedImage encodedImage) {
     return encodedImage != null ? encodedImage.cloneOrNull() : null;
   }
 
@@ -161,32 +161,32 @@ public class EncodedImage implements Closeable {
   }
 
   /** Sets the image format */
-  public void setImageFormat(ImageFormat imageFormat) {
+  public void setImageFormat(final ImageFormat imageFormat) {
     this.mImageFormat = imageFormat;
   }
 
   /** Sets the image height */
-  public void setHeight(int height) {
+  public void setHeight(final int height) {
     this.mHeight = height;
   }
 
   /** Sets the image width */
-  public void setWidth(int width) {
+  public void setWidth(final int width) {
     this.mWidth = width;
   }
 
   /** Sets the image rotation angle */
-  public void setRotationAngle(int rotationAngle) {
+  public void setRotationAngle(final int rotationAngle) {
     this.mRotationAngle = rotationAngle;
   }
 
   /** Sets the exif orientation */
-  public void setExifOrientation(int exifOrientation) {
+  public void setExifOrientation(final int exifOrientation) {
     this.mExifOrientation = exifOrientation;
   }
 
   /** Sets the image sample size */
-  public void setSampleSize(int sampleSize) {
+  public void setSampleSize(final int sampleSize) {
     this.mSampleSize = sampleSize;
   }
 
@@ -195,11 +195,11 @@ public class EncodedImage implements Closeable {
    *
    * <p>Ignored if backed by a ByteBuffer
    */
-  public void setStreamSize(int streamSize) {
+  public void setStreamSize(final int streamSize) {
     this.mStreamSize = streamSize;
   }
 
-  public void setBytesRange(@Nullable BytesRange bytesRange) {
+  public void setBytesRange(final @Nullable BytesRange bytesRange) {
     mBytesRange = bytesRange;
   }
 
@@ -264,7 +264,7 @@ public class EncodedImage implements Closeable {
    * Returns true if the image is a JPEG or DNG and its data is already complete at the specified
    * length, false otherwise.
    */
-  public boolean isCompleteAt(int length) {
+  public boolean isCompleteAt(final int length) {
     if (mImageFormat != DefaultImageFormats.JPEG && mImageFormat != DefaultImageFormats.DNG) {
       return true;
     }
@@ -297,7 +297,7 @@ public class EncodedImage implements Closeable {
    *
    * @param length the number of bytes to return
    */
-  public String getFirstBytesAsHexString(int length) {
+  public String getFirstBytesAsHexString(final int length) {
     CloseableReference<PooledByteBuffer> imageBuffer = getByteBufferRef();
     if (imageBuffer == null) {
       return "";
@@ -396,7 +396,7 @@ public class EncodedImage implements Closeable {
    *
    * @param encodedImage the EncodedImage to copy the meta data from.
    */
-  public void copyMetaDataFrom(EncodedImage encodedImage) {
+  public void copyMetaDataFrom(final EncodedImage encodedImage) {
     mImageFormat = encodedImage.getImageFormat();
     mWidth = encodedImage.getWidth();
     mHeight = encodedImage.getHeight();
@@ -409,7 +409,7 @@ public class EncodedImage implements Closeable {
   }
 
   /** Returns true if all the image information has loaded, false otherwise. */
-  public static boolean isMetaDataAvailable(EncodedImage encodedImage) {
+  public static boolean isMetaDataAvailable(final EncodedImage encodedImage) {
     return encodedImage.mRotationAngle >= 0
         && encodedImage.mWidth >= 0
         && encodedImage.mHeight >= 0;
@@ -420,7 +420,7 @@ public class EncodedImage implements Closeable {
    *
    * @param encodedImage the encoded image to close.
    */
-  public static void closeSafely(@Nullable EncodedImage encodedImage) {
+  public static void closeSafely(final @Nullable EncodedImage encodedImage) {
     if (encodedImage != null) {
       encodedImage.close();
     }
@@ -431,7 +431,7 @@ public class EncodedImage implements Closeable {
    *
    * @return true if the encoded image is valid
    */
-  public static boolean isValid(@Nullable EncodedImage encodedImage) {
+  public static boolean isValid(final @Nullable EncodedImage encodedImage) {
     return encodedImage != null && encodedImage.isValid();
   }
 

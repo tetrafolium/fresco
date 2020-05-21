@@ -19,7 +19,7 @@ public abstract class DelegatingAnimatedDrawableBackend implements AnimatedDrawa
 
   private final AnimatedDrawableBackend mAnimatedDrawableBackend;
 
-  public DelegatingAnimatedDrawableBackend(AnimatedDrawableBackend animatedDrawableBackend) {
+  public DelegatingAnimatedDrawableBackend(final AnimatedDrawableBackend animatedDrawableBackend) {
     mAnimatedDrawableBackend = animatedDrawableBackend;
   }
 
@@ -68,27 +68,27 @@ public abstract class DelegatingAnimatedDrawableBackend implements AnimatedDrawa
   }
 
   @Override
-  public AnimatedDrawableFrameInfo getFrameInfo(int frameNumber) {
+  public AnimatedDrawableFrameInfo getFrameInfo(final int frameNumber) {
     return mAnimatedDrawableBackend.getFrameInfo(frameNumber);
   }
 
   @Override
-  public void renderFrame(int frameNumber, Canvas canvas) {
+  public void renderFrame(final int frameNumber, final Canvas canvas) {
     mAnimatedDrawableBackend.renderFrame(frameNumber, canvas);
   }
 
   @Override
-  public int getFrameForTimestampMs(int timestampMs) {
+  public int getFrameForTimestampMs(final int timestampMs) {
     return mAnimatedDrawableBackend.getFrameForTimestampMs(timestampMs);
   }
 
   @Override
-  public int getTimestampMsForFrame(int frameNumber) {
+  public int getTimestampMsForFrame(final int frameNumber) {
     return mAnimatedDrawableBackend.getTimestampMsForFrame(frameNumber);
   }
 
   @Override
-  public int getDurationMsForFrame(int frameNumber) {
+  public int getDurationMsForFrame(final int frameNumber) {
     return mAnimatedDrawableBackend.getDurationMsForFrame(frameNumber);
   }
 
@@ -103,12 +103,12 @@ public abstract class DelegatingAnimatedDrawableBackend implements AnimatedDrawa
   }
 
   @Override
-  public CloseableReference<Bitmap> getPreDecodedFrame(int frameNumber) {
+  public CloseableReference<Bitmap> getPreDecodedFrame(final int frameNumber) {
     return mAnimatedDrawableBackend.getPreDecodedFrame(frameNumber);
   }
 
   @Override
-  public boolean hasPreDecodedFrame(int frameNumber) {
+  public boolean hasPreDecodedFrame(final int frameNumber) {
     return mAnimatedDrawableBackend.hasPreDecodedFrame(frameNumber);
   }
 

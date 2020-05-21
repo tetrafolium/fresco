@@ -34,7 +34,7 @@ public class OrientedDrawable extends ForwardingDrawable {
    *
    * @param rotationAngle multiples of 90 or -1 if the angle is unknown
    */
-  public OrientedDrawable(Drawable drawable, int rotationAngle) {
+  public OrientedDrawable(final Drawable drawable, final int rotationAngle) {
     this(drawable, rotationAngle, ExifInterface.ORIENTATION_UNDEFINED);
   }
 
@@ -44,7 +44,7 @@ public class OrientedDrawable extends ForwardingDrawable {
    * @param rotationAngle multiples of 90. Invalid value is clamped to a closest multiple of 90.
    * @param exifOrientation EXIF values (1-8), or 0 if unknown. Invalid value is replaced with 0.
    */
-  public OrientedDrawable(Drawable drawable, int rotationAngle, int exifOrientation) {
+  public OrientedDrawable(final Drawable drawable, final int rotationAngle, final int exifOrientation) {
     super(drawable);
     mRotationMatrix = new Matrix();
     mRotationAngle = rotationAngle - rotationAngle % 90;
@@ -55,7 +55,7 @@ public class OrientedDrawable extends ForwardingDrawable {
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     if (mRotationAngle <= 0
         && (mExifOrientation == ExifInterface.ORIENTATION_UNDEFINED
             || mExifOrientation == ExifInterface.ORIENTATION_NORMAL)) {
@@ -91,7 +91,7 @@ public class OrientedDrawable extends ForwardingDrawable {
   }
 
   @Override
-  protected void onBoundsChange(Rect bounds) {
+  protected void onBoundsChange(final Rect bounds) {
     Drawable underlyingDrawable = getCurrent();
     if (mRotationAngle > 0
         || (mExifOrientation != ExifInterface.ORIENTATION_UNDEFINED
@@ -132,7 +132,7 @@ public class OrientedDrawable extends ForwardingDrawable {
   }
 
   @Override
-  public void getTransform(Matrix transform) {
+  public void getTransform(final Matrix transform) {
     getParentTransform(transform);
     if (!mRotationMatrix.isIdentity()) {
       transform.preConcat(mRotationMatrix);

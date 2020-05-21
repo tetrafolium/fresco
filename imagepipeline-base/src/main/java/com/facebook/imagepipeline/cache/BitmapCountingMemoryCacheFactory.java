@@ -16,9 +16,9 @@ import javax.annotation.Nullable;
 public class BitmapCountingMemoryCacheFactory {
 
   public static CountingMemoryCache<CacheKey, CloseableImage> get(
-      Supplier<MemoryCacheParams> bitmapMemoryCacheParamsSupplier,
-      MemoryTrimmableRegistry memoryTrimmableRegistry,
-      @Nullable CountingMemoryCache.EntryStateObserver<CacheKey> observer) {
+      final Supplier<MemoryCacheParams> bitmapMemoryCacheParamsSupplier,
+      final MemoryTrimmableRegistry memoryTrimmableRegistry,
+      final @Nullable CountingMemoryCache.EntryStateObserver<CacheKey> observer) {
     return get(
         bitmapMemoryCacheParamsSupplier,
         memoryTrimmableRegistry,
@@ -27,15 +27,15 @@ public class BitmapCountingMemoryCacheFactory {
   }
 
   public static CountingMemoryCache<CacheKey, CloseableImage> get(
-      Supplier<MemoryCacheParams> bitmapMemoryCacheParamsSupplier,
-      MemoryTrimmableRegistry memoryTrimmableRegistry,
-      CountingMemoryCache.CacheTrimStrategy trimStrategy,
-      @Nullable CountingMemoryCache.EntryStateObserver<CacheKey> observer) {
+      final Supplier<MemoryCacheParams> bitmapMemoryCacheParamsSupplier,
+      final MemoryTrimmableRegistry memoryTrimmableRegistry,
+      final CountingMemoryCache.CacheTrimStrategy trimStrategy,
+      final @Nullable CountingMemoryCache.EntryStateObserver<CacheKey> observer) {
 
     ValueDescriptor<CloseableImage> valueDescriptor =
         new ValueDescriptor<CloseableImage>() {
           @Override
-          public int getSizeInBytes(CloseableImage value) {
+          public int getSizeInBytes(final CloseableImage value) {
             return value.getSizeInBytes();
           }
         };

@@ -31,7 +31,7 @@ public class ProgressBarDrawable extends Drawable implements CloneableDrawable {
   private boolean mIsVertical = false;
 
   /** Sets the progress bar color. */
-  public void setColor(int color) {
+  public void setColor(final int color) {
     if (mColor != color) {
       mColor = color;
       invalidateSelf();
@@ -44,7 +44,7 @@ public class ProgressBarDrawable extends Drawable implements CloneableDrawable {
   }
 
   /** Sets the progress bar background color. */
-  public void setBackgroundColor(int backgroundColor) {
+  public void setBackgroundColor(final int backgroundColor) {
     if (mBackgroundColor != backgroundColor) {
       mBackgroundColor = backgroundColor;
       invalidateSelf();
@@ -57,7 +57,7 @@ public class ProgressBarDrawable extends Drawable implements CloneableDrawable {
   }
 
   /** Sets the progress bar padding. */
-  public void setPadding(int padding) {
+  public void setPadding(final int padding) {
     if (mPadding != padding) {
       mPadding = padding;
       invalidateSelf();
@@ -66,13 +66,13 @@ public class ProgressBarDrawable extends Drawable implements CloneableDrawable {
 
   /** Gets the progress bar padding. */
   @Override
-  public boolean getPadding(Rect padding) {
+  public boolean getPadding(final Rect padding) {
     padding.set(mPadding, mPadding, mPadding, mPadding);
     return mPadding != 0;
   }
 
   /** Sets the progress bar width. */
-  public void setBarWidth(int barWidth) {
+  public void setBarWidth(final int barWidth) {
     if (mBarWidth != barWidth) {
       mBarWidth = barWidth;
       invalidateSelf();
@@ -85,7 +85,7 @@ public class ProgressBarDrawable extends Drawable implements CloneableDrawable {
   }
 
   /** Sets whether the progress bar should be hidden when the progress is 0. */
-  public void setHideWhenZero(boolean hideWhenZero) {
+  public void setHideWhenZero(final boolean hideWhenZero) {
     mHideWhenZero = hideWhenZero;
   }
 
@@ -95,7 +95,7 @@ public class ProgressBarDrawable extends Drawable implements CloneableDrawable {
   }
 
   /** The progress bar will be displayed as a rounded corner rectangle, sets the radius here. */
-  public void setRadius(int radius) {
+  public void setRadius(final int radius) {
     if (mRadius != radius) {
       mRadius = radius;
       invalidateSelf();
@@ -108,7 +108,7 @@ public class ProgressBarDrawable extends Drawable implements CloneableDrawable {
   }
 
   /** Sets if the progress bar should be vertical. */
-  public void setIsVertical(boolean isVertical) {
+  public void setIsVertical(final boolean isVertical) {
     if (mIsVertical != isVertical) {
       mIsVertical = isVertical;
       invalidateSelf();
@@ -121,19 +121,19 @@ public class ProgressBarDrawable extends Drawable implements CloneableDrawable {
   }
 
   @Override
-  protected boolean onLevelChange(int level) {
+  protected boolean onLevelChange(final int level) {
     mLevel = level;
     invalidateSelf();
     return true;
   }
 
   @Override
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     mPaint.setAlpha(alpha);
   }
 
   @Override
-  public void setColorFilter(ColorFilter cf) {
+  public void setColorFilter(final ColorFilter cf) {
     mPaint.setColorFilter(cf);
   }
 
@@ -143,7 +143,7 @@ public class ProgressBarDrawable extends Drawable implements CloneableDrawable {
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     if (mHideWhenZero && mLevel == 0) {
       return;
     }
@@ -170,7 +170,7 @@ public class ProgressBarDrawable extends Drawable implements CloneableDrawable {
     return copy;
   }
 
-  private void drawHorizontalBar(Canvas canvas, int level, int color) {
+  private void drawHorizontalBar(final Canvas canvas, final int level, final int color) {
     Rect bounds = getBounds();
     int length = (bounds.width() - 2 * mPadding) * level / 10000;
     int xpos = bounds.left + mPadding;
@@ -179,7 +179,7 @@ public class ProgressBarDrawable extends Drawable implements CloneableDrawable {
     drawBar(canvas, color);
   }
 
-  private void drawVerticalBar(Canvas canvas, int level, int color) {
+  private void drawVerticalBar(final Canvas canvas, final int level, final int color) {
     Rect bounds = getBounds();
     int length = (bounds.height() - 2 * mPadding) * level / 10000;
     int xpos = bounds.left + mPadding;
@@ -188,7 +188,7 @@ public class ProgressBarDrawable extends Drawable implements CloneableDrawable {
     drawBar(canvas, color);
   }
 
-  private void drawBar(Canvas canvas, int color) {
+  private void drawBar(final Canvas canvas, final int color) {
     mPaint.setColor(color);
     mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
     mPath.reset();

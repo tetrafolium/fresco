@@ -15,12 +15,12 @@ import com.facebook.imageutils.BitmapUtil;
 public class DummyBitmapPool implements BitmapPool {
 
   @Override
-  public void trim(MemoryTrimType trimType) {
+  public void trim(final MemoryTrimType trimType) {
     // nop
   }
 
   @Override
-  public Bitmap get(int size) {
+  public Bitmap get(final int size) {
     return Bitmap.createBitmap(
         1,
         (int) Math.ceil(size / (double) BitmapUtil.RGB_565_BYTES_PER_PIXEL),
@@ -28,7 +28,7 @@ public class DummyBitmapPool implements BitmapPool {
   }
 
   @Override
-  public void release(Bitmap value) {
+  public void release(final Bitmap value) {
     Preconditions.checkNotNull(value);
     value.recycle();
   }

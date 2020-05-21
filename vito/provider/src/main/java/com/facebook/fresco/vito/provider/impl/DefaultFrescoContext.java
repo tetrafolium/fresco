@@ -29,7 +29,7 @@ public class DefaultFrescoContext {
   private static @Nullable FrescoContext sInstance;
   private static @Nullable Supplier<Boolean> sDebugOverlayEnabledSupplier;
 
-  public static synchronized FrescoContext get(Resources resources) {
+  public static synchronized FrescoContext get(final Resources resources) {
     if (sInstance == null) {
       initialize(resources, null);
     }
@@ -43,7 +43,7 @@ public class DefaultFrescoContext {
     return sInstance;
   }
 
-  public static synchronized void set(FrescoContext context) {
+  public static synchronized void set(final FrescoContext context) {
     if (sInstance != null) {
       throw new RuntimeException("Fresco has already been initialized!");
     }
@@ -51,7 +51,7 @@ public class DefaultFrescoContext {
   }
 
   public static synchronized void initialize(
-      Resources resources, @Nullable FrescoExperiments frescoExperiments) {
+      final Resources resources, final @Nullable FrescoExperiments frescoExperiments) {
     set(createDefaultContext(resources, frescoExperiments));
   }
 
@@ -63,7 +63,7 @@ public class DefaultFrescoContext {
   }
 
   public static synchronized void setDebugOverlayEnabledSupplier(
-      @Nullable Supplier<Boolean> debugOverlayEnabledSupplier) {
+      final @Nullable Supplier<Boolean> debugOverlayEnabledSupplier) {
     sDebugOverlayEnabledSupplier = debugOverlayEnabledSupplier;
   }
 
@@ -77,7 +77,7 @@ public class DefaultFrescoContext {
   }
 
   private static synchronized FrescoContext createDefaultContext(
-      Resources resources, @Nullable FrescoExperiments frescoExperiments) {
+      final Resources resources, final @Nullable FrescoExperiments frescoExperiments) {
     FrescoExperiments actualFrescoExperiments =
         frescoExperiments != null ? frescoExperiments : new FrescoExperiments();
     return new FrescoContextImpl(
@@ -95,7 +95,7 @@ public class DefaultFrescoContext {
   }
 
   private static VitoDrawableFactory createDefaultDrawableFactory(
-      Resources resources, FrescoExperiments frescoExperiments) {
+      final Resources resources, final FrescoExperiments frescoExperiments) {
     return new ArrayVitoDrawableFactory(
         new BitmapDrawableFactory(resources, frescoExperiments),
         new DrawableFactoryWrapper(
@@ -105,7 +105,7 @@ public class DefaultFrescoContext {
   private static class NoOpCallerContextVerifier implements CallerContextVerifier {
 
     @Override
-    public void verifyCallerContext(@Nullable Object callerContext, boolean isPrefetch) {
+    public void verifyCallerContext(final @Nullable Object callerContext, final boolean isPrefetch) {
       // No-op
     }
   }

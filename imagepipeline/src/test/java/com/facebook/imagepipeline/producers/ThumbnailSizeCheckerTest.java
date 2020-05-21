@@ -46,7 +46,7 @@ public class ThumbnailSizeCheckerTest {
   }
 
   private static void testWithWidthAndHeightNotBigEnoughForResizeOptions(
-      int additionalRequestWidth, int additionalRequestHeight) {
+      final int additionalRequestWidth, final int additionalRequestHeight) {
     for (int i = 0; i < TEST_COUNT; i++) {
       ResizeOptions resizeOptions =
           new ResizeOptions(
@@ -93,7 +93,7 @@ public class ThumbnailSizeCheckerTest {
   }
 
   private static void testWithImageBigEnoughForResizeOptions(
-      int[] imageWidths, int[] imageHeights, int startRotation) {
+      final int[] imageWidths, final int[] imageHeights, final int startRotation) {
     for (int rotation = startRotation; rotation < 360; rotation += 180) {
       for (int i = 0; i < TEST_COUNT; i++) {
         EncodedImage encodedImage = mockImage(imageWidths[i], imageHeights[i], rotation);
@@ -124,11 +124,11 @@ public class ThumbnailSizeCheckerTest {
   }
 
   private static void testWithImageNotBigEnoughForResizeOptions(
-      int[] imageWidths,
-      int[] imageHeights,
-      int startRotation,
-      int additionalRequestWidth,
-      int additionalRequestHeight) {
+      final int[] imageWidths,
+      final int[] imageHeights,
+      final int startRotation,
+      final int additionalRequestWidth,
+      final int additionalRequestHeight) {
     for (int rotation = startRotation; rotation < 360; rotation += 180) {
       for (int i = 0; i < TEST_COUNT; i++) {
         ResizeOptions resizeOptions =
@@ -178,7 +178,7 @@ public class ThumbnailSizeCheckerTest {
     }
   }
 
-  private static EncodedImage mockImage(int width, int height, int rotation) {
+  private static EncodedImage mockImage(final int width, final int height, final int rotation) {
     EncodedImage image = mock(EncodedImage.class);
     when(image.getWidth()).thenReturn(width);
     when(image.getHeight()).thenReturn(height);

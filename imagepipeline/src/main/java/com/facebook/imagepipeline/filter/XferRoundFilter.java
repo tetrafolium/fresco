@@ -25,10 +25,10 @@ import com.facebook.common.internal.Preconditions;
  */
 public final class XferRoundFilter {
 
-  private XferRoundFilter() {}
+  private XferRoundFilter() { }
 
   @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB_MR1)
-  public static void xferRoundBitmap(Bitmap output, Bitmap source, boolean enableAntiAliasing) {
+  public static void xferRoundBitmap(final Bitmap output, final Bitmap source, final boolean enableAntiAliasing) {
     Preconditions.checkNotNull(source);
     Preconditions.checkNotNull(output);
     output.setHasAlpha(true);

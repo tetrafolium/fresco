@@ -31,7 +31,7 @@ public class InstrumentedImageView extends ImageView implements Instrumented {
   }
 
   @Override
-  public void initInstrumentation(final String tag, PerfListener perfListener) {
+  public void initInstrumentation(final String tag, final PerfListener perfListener) {
     mInstrumentation.init(tag, perfListener);
     // we don't have a better estimate on when to call onStart, so do it here.
     mInstrumentation.onStart();
@@ -60,13 +60,13 @@ public class InstrumentedImageView extends ImageView implements Instrumented {
 
   /** Throws UnsupportedOperationException */
   @Override
-  public void setImageResource(int resourceId) {
+  public void setImageResource(final int resourceId) {
     throw new UnsupportedOperationException();
   }
 
   /** Throws UnsupportedOperationException */
   @Override
-  public void setImageURI(Uri uri) {
+  public void setImageURI(final Uri uri) {
     throw new UnsupportedOperationException();
   }
 }

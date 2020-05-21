@@ -34,7 +34,7 @@ public class NativeJpegTranscoderFactory implements ImageTranscoderFactory {
   @DoNotStrip
   @Override
   @Nullable
-  public ImageTranscoder createImageTranscoder(ImageFormat imageFormat, boolean isResizingEnabled) {
+  public ImageTranscoder createImageTranscoder(final ImageFormat imageFormat, final boolean isResizingEnabled) {
     if (imageFormat != DefaultImageFormats.JPEG) {
       return null;
     }

@@ -27,9 +27,9 @@ public class QualifiedResourceFetchProducer extends LocalFetchProducer {
   private final ContentResolver mContentResolver;
 
   public QualifiedResourceFetchProducer(
-      Executor executor,
-      PooledByteBufferFactory pooledByteBufferFactory,
-      ContentResolver contentResolver) {
+      final Executor executor,
+      final PooledByteBufferFactory pooledByteBufferFactory,
+      final ContentResolver contentResolver) {
     super(executor, pooledByteBufferFactory);
     mContentResolver = contentResolver;
   }

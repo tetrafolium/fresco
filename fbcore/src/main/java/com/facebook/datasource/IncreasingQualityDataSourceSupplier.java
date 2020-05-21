@@ -38,7 +38,7 @@ public class IncreasingQualityDataSourceSupplier<T> implements Supplier<DataSour
   private final boolean mDataSourceLazy;
 
   private IncreasingQualityDataSourceSupplier(
-      List<Supplier<DataSource<T>>> dataSourceSuppliers, boolean dataSourceLazy) {
+      final List<Supplier<DataSource<T>>> dataSourceSuppliers, final boolean dataSourceLazy) {
     Preconditions.checkArgument(!dataSourceSuppliers.isEmpty(), "List of suppliers is empty!");
     mDataSourceSuppliers = dataSourceSuppliers;
     mDataSourceLazy = dataSourceLazy;
@@ -53,7 +53,7 @@ public class IncreasingQualityDataSourceSupplier<T> implements Supplier<DataSour
    * @param dataSourceSuppliers list of underlying suppliers
    */
   public static <T> IncreasingQualityDataSourceSupplier<T> create(
-      List<Supplier<DataSource<T>>> dataSourceSuppliers) {
+      final List<Supplier<DataSource<T>>> dataSourceSuppliers) {
     return create(dataSourceSuppliers, false);
   }
 
@@ -68,7 +68,7 @@ public class IncreasingQualityDataSourceSupplier<T> implements Supplier<DataSour
    * @param dataSourceLazy if true, the state of data source would be created only if necessary
    */
   public static <T> IncreasingQualityDataSourceSupplier<T> create(
-      List<Supplier<DataSource<T>>> dataSourceSuppliers, boolean dataSourceLazy) {
+      final List<Supplier<DataSource<T>>> dataSourceSuppliers, final boolean dataSourceLazy) {
     return new IncreasingQualityDataSourceSupplier<T>(dataSourceSuppliers, dataSourceLazy);
   }
 
@@ -83,7 +83,7 @@ public class IncreasingQualityDataSourceSupplier<T> implements Supplier<DataSour
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(final Object other) {
     if (other == this) {
       return true;
     }
@@ -145,12 +145,12 @@ public class IncreasingQualityDataSourceSupplier<T> implements Supplier<DataSour
     }
 
     @Nullable
-    private synchronized DataSource<T> getDataSource(int i) {
+    private synchronized DataSource<T> getDataSource(final int i) {
       return (mDataSources != null && i < mDataSources.size()) ? mDataSources.get(i) : null;
     }
 
     @Nullable
-    private synchronized DataSource<T> getAndClearDataSource(int i) {
+    private synchronized DataSource<T> getAndClearDataSource(final int i) {
       return (mDataSources != null && i < mDataSources.size()) ? mDataSources.set(i, null) : null;
     }
 
@@ -204,7 +204,7 @@ public class IncreasingQualityDataSourceSupplier<T> implements Supplier<DataSour
       return true;
     }
 
-    private void onDataSourceNewResult(int index, DataSource<T> dataSource) {
+    private void onDataSourceNewResult(final int index, final DataSource<T> dataSource) {
       maybeSetIndexOfDataSourceWithResult(index, dataSource, dataSource.isFinished());
       // If the data source with the new result is our {@code mIndexOfDataSourceWithResult},
       // we have to notify our subscribers about the new result.
@@ -214,7 +214,7 @@ public class IncreasingQualityDataSourceSupplier<T> implements Supplier<DataSour
       maybeSetFailure();
     }
 
-    private void onDataSourceFailed(int index, DataSource<T> dataSource) {
+    private void onDataSourceFailed(final int index, final DataSource<T> dataSource) {
       closeSafely(tryGetAndClearDataSource(index, dataSource));
       if (index == 0) {
         mDelayedError = dataSource.getFailureCause();
@@ -230,7 +230,7 @@ public class IncreasingQualityDataSourceSupplier<T> implements Supplier<DataSour
     }
 
     private void maybeSetIndexOfDataSourceWithResult(
-        int index, DataSource<T> dataSource, boolean isFinished) {
+        final int index, final DataSource<T> dataSource, final boolean isFinished) {
       int oldIndexOfDataSourceWithResult;
       int newIndexOfDataSourceWithResult;
       synchronized (IncreasingQualityDataSource.this) {
@@ -257,7 +257,7 @@ public class IncreasingQualityDataSourceSupplier<T> implements Supplier<DataSour
     }
 
     @Nullable
-    private synchronized DataSource<T> tryGetAndClearDataSource(int i, DataSource<T> dataSource) {
+    private synchronized DataSource<T> tryGetAndClearDataSource(final int i, final DataSource<T> dataSource) {
       if (dataSource == getDataSourceWithResult()) {
         return null;
       }
@@ -267,7 +267,7 @@ public class IncreasingQualityDataSourceSupplier<T> implements Supplier<DataSour
       return dataSource;
     }
 
-    private void closeSafely(DataSource<T> dataSource) {
+    private void closeSafely(final DataSource<T> dataSource) {
       if (dataSource != null) {
         dataSource.close();
       }
@@ -276,12 +276,12 @@ public class IncreasingQualityDataSourceSupplier<T> implements Supplier<DataSour
     private class InternalDataSubscriber implements DataSubscriber<T> {
       private int mIndex;
 
-      public InternalDataSubscriber(int index) {
+      public InternalDataSubscriber(final int index) {
         mIndex = index;
       }
 
       @Override
-      public void onNewResult(DataSource<T> dataSource) {
+      public void onNewResult(final DataSource<T> dataSource) {
         if (dataSource.hasResult()) {
           IncreasingQualityDataSource.this.onDataSourceNewResult(mIndex, dataSource);
         } else if (dataSource.isFinished()) {
@@ -290,15 +290,15 @@ public class IncreasingQualityDataSourceSupplier<T> implements Supplier<DataSour
       }
 
       @Override
-      public void onFailure(DataSource<T> dataSource) {
+      public void onFailure(final DataSource<T> dataSource) {
         IncreasingQualityDataSource.this.onDataSourceFailed(mIndex, dataSource);
       }
 
       @Override
-      public void onCancellation(DataSource<T> dataSource) {}
+      public void onCancellation(final DataSource<T> dataSource) { }
 
       @Override
-      public void onProgressUpdate(DataSource<T> dataSource) {
+      public void onProgressUpdate(final DataSource<T> dataSource) {
         if (mIndex == 0) {
           IncreasingQualityDataSource.this.setProgress(dataSource.getProgress());
         }

@@ -43,12 +43,12 @@ public class DraweeMocks {
    *
    * @param controller controller to stub methods of
    */
-  public static void stubGetAndSetHierarchy(DraweeController controller) {
+  public static void stubGetAndSetHierarchy(final DraweeController controller) {
     final DraweeHierarchy[] dhHolder = new DraweeHierarchy[1];
     doAnswer(
             new Answer<Object>() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 return dhHolder[0];
               }
             })
@@ -57,7 +57,7 @@ public class DraweeMocks {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 return dhHolder[0] = (DraweeHierarchy) invocation.getArguments()[0];
               }
             })
@@ -70,12 +70,12 @@ public class DraweeMocks {
    *
    * @param controller controller to stub methods of
    */
-  public static void stubGetAndSetContentDescription(DraweeController controller) {
+  public static void stubGetAndSetContentDescription(final DraweeController controller) {
     final String[] contentDescriptionHolder = new String[1];
     doAnswer(
             new Answer<Object>() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 return contentDescriptionHolder[0];
               }
             })
@@ -84,7 +84,7 @@ public class DraweeMocks {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 return contentDescriptionHolder[0] = (String) invocation.getArguments()[0];
               }
             })
@@ -107,7 +107,7 @@ public class DraweeMocks {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 forwardingListener.addListener((ControllerListener) invocation.getArguments()[0]);
                 return null;
               }
@@ -123,7 +123,7 @@ public class DraweeMocks {
    * @param topLevelDrawable drawable to return on {@code getTopLevelDrawable()}
    * @return mock GenericDraweeHierarchy
    */
-  public static GenericDraweeHierarchy mockDraweeHierarchyOf(Drawable topLevelDrawable) {
+  public static GenericDraweeHierarchy mockDraweeHierarchyOf(final Drawable topLevelDrawable) {
     GenericDraweeHierarchy gdh = mock(GenericDraweeHierarchy.class);
     when(gdh.getTopLevelDrawable()).thenReturn(topLevelDrawable);
     return gdh;
@@ -149,7 +149,7 @@ public class DraweeMocks {
     doAnswer(
             new Answer<Object>() {
               @Override
-              public DraweeHierarchy answer(InvocationOnMock invocation) throws Throwable {
+              public DraweeHierarchy answer(final InvocationOnMock invocation) throws Throwable {
                 return mockDraweeHierarchy();
               }
             })
@@ -165,14 +165,14 @@ public class DraweeMocks {
    * @return mock GenericDraweeHierarchyBuilder
    */
   public static GenericDraweeHierarchyBuilder mockBuilderOf(
-      GenericDraweeHierarchy... drawableHierarchies) {
+      final GenericDraweeHierarchy... drawableHierarchies) {
     GenericDraweeHierarchyBuilder builder =
         mock(GenericDraweeHierarchyBuilder.class, CALLS_REAL_METHODS);
     final Supplier<GenericDraweeHierarchy> gdhProvider = supplierOf(drawableHierarchies);
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 return gdhProvider.get();
               }
             })

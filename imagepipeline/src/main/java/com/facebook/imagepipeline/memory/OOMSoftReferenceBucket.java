@@ -17,7 +17,7 @@ class OOMSoftReferenceBucket<V> extends Bucket<V> {
 
   private LinkedList<OOMSoftReference<V>> mSpareReferences;
 
-  public OOMSoftReferenceBucket(int itemSize, int maxLength, int inUseLength) {
+  public OOMSoftReferenceBucket(final int itemSize, final int maxLength, final int inUseLength) {
     super(itemSize, maxLength, inUseLength, false);
     mSpareReferences = new LinkedList<>();
   }
@@ -32,7 +32,7 @@ class OOMSoftReferenceBucket<V> extends Bucket<V> {
   }
 
   @Override
-  void addToFreeList(V value) {
+  void addToFreeList(final V value) {
     OOMSoftReference<V> ref = mSpareReferences.poll();
     if (ref == null) {
       ref = new OOMSoftReference<>();

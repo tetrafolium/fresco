@@ -31,7 +31,7 @@ public class AnimatedDrawableOptionsBuilder {
    * @return this builder
    */
   public AnimatedDrawableOptionsBuilder setForceKeepAllFramesInMemory(
-      boolean forceKeepAllFramesInMemory) {
+      final boolean forceKeepAllFramesInMemory) {
     mForceKeepAllFramesInMemory = forceKeepAllFramesInMemory;
     return this;
   }
@@ -51,7 +51,7 @@ public class AnimatedDrawableOptionsBuilder {
    * @param allowPrefetching whether the backend can use worker threads to prefetch frames
    * @return this builder
    */
-  public AnimatedDrawableOptionsBuilder setAllowPrefetching(boolean allowPrefetching) {
+  public AnimatedDrawableOptionsBuilder setAllowPrefetching(final boolean allowPrefetching) {
     mAllowPrefetching = allowPrefetching;
     return this;
   }
@@ -73,7 +73,7 @@ public class AnimatedDrawableOptionsBuilder {
    *     -1 to use the default
    * @return this builder
    */
-  public AnimatedDrawableOptionsBuilder setMaximumBytes(int maximumBytes) {
+  public AnimatedDrawableOptionsBuilder setMaximumBytes(final int maximumBytes) {
     mMaximumBytes = maximumBytes;
     return this;
   }
@@ -93,7 +93,7 @@ public class AnimatedDrawableOptionsBuilder {
    * @param enableDebugging whether to enable additional verbose debugging diagnostics
    * @return this builder
    */
-  public AnimatedDrawableOptionsBuilder setEnableDebugging(boolean enableDebugging) {
+  public AnimatedDrawableOptionsBuilder setEnableDebugging(final boolean enableDebugging) {
     mEnableDebugging = enableDebugging;
     return this;
   }

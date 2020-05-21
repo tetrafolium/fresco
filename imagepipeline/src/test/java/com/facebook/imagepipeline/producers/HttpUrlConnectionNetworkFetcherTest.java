@@ -85,7 +85,7 @@ public class HttpUrlConnectionNetworkFetcherTest {
         .then(
             new Answer<URLConnection>() {
               @Override
-              public URLConnection answer(InvocationOnMock invocation) throws Throwable {
+              public URLConnection answer(final InvocationOnMock invocation) throws Throwable {
                 return mConnectionsQueue.poll();
               }
             });
@@ -97,7 +97,7 @@ public class HttpUrlConnectionNetworkFetcherTest {
         .then(
             new Answer<Uri>() {
               @Override
-              public Uri answer(InvocationOnMock invocation) throws Throwable {
+              public Uri answer(final InvocationOnMock invocation) throws Throwable {
                 return mockUri((String) invocation.getArguments()[0]);
               }
             });
@@ -108,7 +108,7 @@ public class HttpUrlConnectionNetworkFetcherTest {
         .then(
             new Answer<Uri>() {
               @Override
-              public Uri answer(InvocationOnMock invocation) throws Throwable {
+              public Uri answer(final InvocationOnMock invocation) throws Throwable {
                 return (Uri) invocation.getArguments()[0];
               }
             });
@@ -121,7 +121,7 @@ public class HttpUrlConnectionNetworkFetcherTest {
         .then(
             new Answer<String>() {
               @Override
-              public String answer(InvocationOnMock invocation) throws Throwable {
+              public String answer(final InvocationOnMock invocation) throws Throwable {
                 return url.substring(0, url.indexOf(':'));
               }
             });
@@ -134,7 +134,7 @@ public class HttpUrlConnectionNetworkFetcherTest {
         .then(
             new Answer<Uri>() {
               @Override
-              public Uri answer(InvocationOnMock invocation) throws Throwable {
+              public Uri answer(final InvocationOnMock invocation) throws Throwable {
                 return mockUri(INITIAL_TEST_URL);
               }
             });
@@ -245,7 +245,7 @@ public class HttpUrlConnectionNetworkFetcherTest {
     return mockSuccessWithStream(mock(InputStream.class));
   }
 
-  private HttpURLConnection mockSuccessWithStream(InputStream is) throws IOException {
+  private HttpURLConnection mockSuccessWithStream(final InputStream is) throws IOException {
     HttpURLConnection mockResponse = mock(HttpURLConnection.class);
     when(mockResponse.getResponseCode()).thenReturn(200);
     when(mockResponse.getInputStream()).thenReturn(is);
@@ -264,7 +264,7 @@ public class HttpUrlConnectionNetworkFetcherTest {
     return mockResponse;
   }
 
-  private HttpURLConnection mockRedirectTo(String redirectUrl) throws IOException {
+  private HttpURLConnection mockRedirectTo(final String redirectUrl) throws IOException {
     HttpURLConnection mockResponse = mock(HttpURLConnection.class);
     when(mockResponse.getResponseCode()).thenReturn(301);
     when(mockResponse.getHeaderField("Location")).thenReturn(redirectUrl);
@@ -274,7 +274,7 @@ public class HttpUrlConnectionNetworkFetcherTest {
     return mockResponse;
   }
 
-  private void queueConnection(HttpURLConnection connection) {
+  private void queueConnection(final HttpURLConnection connection) {
     mConnectionsQueue.add(connection);
   }
 

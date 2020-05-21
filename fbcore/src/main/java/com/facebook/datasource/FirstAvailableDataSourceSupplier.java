@@ -27,13 +27,13 @@ public class FirstAvailableDataSourceSupplier<T> implements Supplier<DataSource<
 
   private final List<Supplier<DataSource<T>>> mDataSourceSuppliers;
 
-  private FirstAvailableDataSourceSupplier(List<Supplier<DataSource<T>>> dataSourceSuppliers) {
+  private FirstAvailableDataSourceSupplier(final List<Supplier<DataSource<T>>> dataSourceSuppliers) {
     Preconditions.checkArgument(!dataSourceSuppliers.isEmpty(), "List of suppliers is empty!");
     mDataSourceSuppliers = dataSourceSuppliers;
   }
 
   public static <T> FirstAvailableDataSourceSupplier<T> create(
-      List<Supplier<DataSource<T>>> dataSourceSuppliers) {
+      final List<Supplier<DataSource<T>>> dataSourceSuppliers) {
     return new FirstAvailableDataSourceSupplier<T>(dataSourceSuppliers);
   }
 
@@ -48,7 +48,7 @@ public class FirstAvailableDataSourceSupplier<T> implements Supplier<DataSource<
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(final Object other) {
     if (other == this) {
       return true;
     }
@@ -130,7 +130,7 @@ public class FirstAvailableDataSourceSupplier<T> implements Supplier<DataSource<
       return null;
     }
 
-    private synchronized boolean setCurrentDataSource(DataSource<T> dataSource) {
+    private synchronized boolean setCurrentDataSource(final DataSource<T> dataSource) {
       if (isClosed()) {
         return false;
       }
@@ -138,7 +138,7 @@ public class FirstAvailableDataSourceSupplier<T> implements Supplier<DataSource<
       return true;
     }
 
-    private synchronized boolean clearCurrentDataSource(DataSource<T> dataSource) {
+    private synchronized boolean clearCurrentDataSource(final DataSource<T> dataSource) {
       if (isClosed() || dataSource != mCurrentDataSource) {
         return false;
       }
@@ -151,7 +151,7 @@ public class FirstAvailableDataSourceSupplier<T> implements Supplier<DataSource<
       return mDataSourceWithResult;
     }
 
-    private void maybeSetDataSourceWithResult(DataSource<T> dataSource, boolean isFinished) {
+    private void maybeSetDataSourceWithResult(final DataSource<T> dataSource, final boolean isFinished) {
       DataSource<T> oldDataSource = null;
       synchronized (FirstAvailableDataSource.this) {
         if (dataSource != mCurrentDataSource || dataSource == mDataSourceWithResult) {
@@ -170,7 +170,7 @@ public class FirstAvailableDataSourceSupplier<T> implements Supplier<DataSource<
       closeSafely(oldDataSource);
     }
 
-    private void onDataSourceFailed(DataSource<T> dataSource) {
+    private void onDataSourceFailed(final DataSource<T> dataSource) {
       if (!clearCurrentDataSource(dataSource)) {
         return;
       }
@@ -182,7 +182,7 @@ public class FirstAvailableDataSourceSupplier<T> implements Supplier<DataSource<
       }
     }
 
-    private void onDataSourceNewResult(DataSource<T> dataSource) {
+    private void onDataSourceNewResult(final DataSource<T> dataSource) {
       maybeSetDataSourceWithResult(dataSource, dataSource.isFinished());
       // If the data source with the new result is our {@code mDataSourceWithResult},
       // we have to notify our subscribers about the new result.
@@ -191,7 +191,7 @@ public class FirstAvailableDataSourceSupplier<T> implements Supplier<DataSource<
       }
     }
 
-    private void closeSafely(DataSource<T> dataSource) {
+    private void closeSafely(final DataSource<T> dataSource) {
       if (dataSource != null) {
         dataSource.close();
       }
@@ -200,15 +200,15 @@ public class FirstAvailableDataSourceSupplier<T> implements Supplier<DataSource<
     private class InternalDataSubscriber implements DataSubscriber<T> {
 
       @Override
-      public void onFailure(DataSource<T> dataSource) {
+      public void onFailure(final DataSource<T> dataSource) {
         FirstAvailableDataSource.this.onDataSourceFailed(dataSource);
       }
 
       @Override
-      public void onCancellation(DataSource<T> dataSource) {}
+      public void onCancellation(final DataSource<T> dataSource) { }
 
       @Override
-      public void onNewResult(DataSource<T> dataSource) {
+      public void onNewResult(final DataSource<T> dataSource) {
         if (dataSource.hasResult()) {
           FirstAvailableDataSource.this.onDataSourceNewResult(dataSource);
         } else if (dataSource.isFinished()) {
@@ -217,7 +217,7 @@ public class FirstAvailableDataSourceSupplier<T> implements Supplier<DataSource<
       }
 
       @Override
-      public void onProgressUpdate(DataSource<T> dataSource) {
+      public void onProgressUpdate(final DataSource<T> dataSource) {
         float oldProgress = FirstAvailableDataSource.this.getProgress();
         FirstAvailableDataSource.this.setProgress(Math.max(oldProgress, dataSource.getProgress()));
       }

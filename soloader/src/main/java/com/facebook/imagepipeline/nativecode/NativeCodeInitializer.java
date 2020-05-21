@@ -18,7 +18,7 @@ public class NativeCodeInitializer {
 
   /** Initialize NativeLoader and SoLoader */
   @DoNotStrip
-  public static void init(Context context) throws IOException {
+  public static void init(final Context context) throws IOException {
     SoLoader.init(context, 0);
   }
 }

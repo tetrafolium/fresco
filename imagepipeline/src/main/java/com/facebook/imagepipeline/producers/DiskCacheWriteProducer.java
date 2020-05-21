@@ -37,10 +37,10 @@ public class DiskCacheWriteProducer implements Producer<EncodedImage> {
   private final Producer<EncodedImage> mInputProducer;
 
   public DiskCacheWriteProducer(
-      BufferedDiskCache defaultBufferedDiskCache,
-      BufferedDiskCache smallImageBufferedDiskCache,
-      CacheKeyFactory cacheKeyFactory,
-      Producer<EncodedImage> inputProducer) {
+      final BufferedDiskCache defaultBufferedDiskCache,
+      final BufferedDiskCache smallImageBufferedDiskCache,
+      final CacheKeyFactory cacheKeyFactory,
+      final Producer<EncodedImage> inputProducer) {
     mDefaultBufferedDiskCache = defaultBufferedDiskCache;
     mSmallImageBufferedDiskCache = smallImageBufferedDiskCache;
     mCacheKeyFactory = cacheKeyFactory;
@@ -53,7 +53,7 @@ public class DiskCacheWriteProducer implements Producer<EncodedImage> {
   }
 
   private void maybeStartInputProducer(
-      Consumer<EncodedImage> consumerOfDiskCacheWriteProducer, ProducerContext producerContext) {
+      final Consumer<EncodedImage> consumerOfDiskCacheWriteProducer, final ProducerContext producerContext) {
     if (producerContext.getLowestPermittedRequestLevel().getValue()
         >= ImageRequest.RequestLevel.DISK_CACHE.getValue()) {
       producerContext.putOriginExtra("disk", "nil-result_write");
@@ -104,7 +104,7 @@ public class DiskCacheWriteProducer implements Producer<EncodedImage> {
     }
 
     @Override
-    public void onNewResultImpl(EncodedImage newResult, @Status int status) {
+    public void onNewResultImpl(final EncodedImage newResult, final @Status int status) {
       mProducerContext.getProducerListener().onProducerStart(mProducerContext, PRODUCER_NAME);
       // intermediate, null or uncacheable results are not cached, so we just forward them
       // as well as the images with unknown format which could be html response from the server

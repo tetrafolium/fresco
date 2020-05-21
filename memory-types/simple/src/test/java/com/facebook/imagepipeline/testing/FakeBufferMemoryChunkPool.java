@@ -24,7 +24,7 @@ public class FakeBufferMemoryChunkPool extends BufferMemoryChunkPool {
     this(new PoolParams(128, getBucketSizes()));
   }
 
-  public FakeBufferMemoryChunkPool(PoolParams poolParams) {
+  public FakeBufferMemoryChunkPool(final PoolParams poolParams) {
     super(
         Mockito.mock(MemoryTrimmableRegistry.class),
         poolParams,
@@ -32,7 +32,7 @@ public class FakeBufferMemoryChunkPool extends BufferMemoryChunkPool {
   }
 
   @Override
-  protected BufferMemoryChunk alloc(int bucketedSize) {
+  protected BufferMemoryChunk alloc(final int bucketedSize) {
     return new BufferMemoryChunk(bucketedSize);
   }
 

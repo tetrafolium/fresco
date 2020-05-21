@@ -53,16 +53,16 @@ public abstract class DalvikPurgeableDecoder implements PlatformDecoder {
 
   @Override
   public CloseableReference<Bitmap> decodeFromEncodedImage(
-      EncodedImage encodedImage, Bitmap.Config bitmapConfig, @Nullable Rect regionToDecode) {
+      final EncodedImage encodedImage, final Bitmap.Config bitmapConfig, final @Nullable Rect regionToDecode) {
     return decodeFromEncodedImageWithColorSpace(encodedImage, bitmapConfig, regionToDecode, null);
   }
 
   @Override
   public CloseableReference<Bitmap> decodeJPEGFromEncodedImage(
-      EncodedImage encodedImage,
-      Bitmap.Config bitmapConfig,
-      @Nullable Rect regionToDecode,
-      int length) {
+      final EncodedImage encodedImage,
+      final Bitmap.Config bitmapConfig,
+      final @Nullable Rect regionToDecode,
+      final int length) {
     return decodeJPEGFromEncodedImageWithColorSpace(
         encodedImage, bitmapConfig, regionToDecode, length, null);
   }
@@ -84,8 +84,8 @@ public abstract class DalvikPurgeableDecoder implements PlatformDecoder {
   @Override
   public CloseableReference<Bitmap> decodeFromEncodedImageWithColorSpace(
       final EncodedImage encodedImage,
-      Bitmap.Config bitmapConfig,
-      @Nullable Rect regionToDecode,
+      final Bitmap.Config bitmapConfig,
+      final @Nullable Rect regionToDecode,
       @Nullable final ColorSpace colorSpace) {
     BitmapFactory.Options options =
         getBitmapFactoryOptions(encodedImage.getSampleSize(), bitmapConfig);
@@ -120,9 +120,9 @@ public abstract class DalvikPurgeableDecoder implements PlatformDecoder {
   @Override
   public CloseableReference<Bitmap> decodeJPEGFromEncodedImageWithColorSpace(
       final EncodedImage encodedImage,
-      Bitmap.Config bitmapConfig,
-      @Nullable Rect regionToDecode,
-      int length,
+      final Bitmap.Config bitmapConfig,
+      final @Nullable Rect regionToDecode,
+      final int length,
       @Nullable final ColorSpace colorSpace) {
     BitmapFactory.Options options =
         getBitmapFactoryOptions(encodedImage.getSampleSize(), bitmapConfig);
@@ -164,7 +164,7 @@ public abstract class DalvikPurgeableDecoder implements PlatformDecoder {
 
   @VisibleForTesting
   public static BitmapFactory.Options getBitmapFactoryOptions(
-      int sampleSize, Bitmap.Config bitmapConfig) {
+      final int sampleSize, final Bitmap.Config bitmapConfig) {
     BitmapFactory.Options options = new BitmapFactory.Options();
     options.inDither = true; // known to improve picture quality at low cost
     options.inPreferredConfig = bitmapConfig;
@@ -181,7 +181,7 @@ public abstract class DalvikPurgeableDecoder implements PlatformDecoder {
   }
 
   @VisibleForTesting
-  public static boolean endsWithEOI(CloseableReference<PooledByteBuffer> bytesRef, int length) {
+  public static boolean endsWithEOI(final CloseableReference<PooledByteBuffer> bytesRef, final int length) {
     PooledByteBuffer buffer = bytesRef.get();
     return length >= 2
         && buffer.read(length - 2) == (byte) JfifUtil.MARKER_FIRST_BYTE
@@ -191,7 +191,7 @@ public abstract class DalvikPurgeableDecoder implements PlatformDecoder {
   @DoNotOptimize
   private static class OreoUtils {
     @TargetApi(Build.VERSION_CODES.O)
-    static void setColorSpace(BitmapFactory.Options options, @Nullable ColorSpace colorSpace) {
+    static void setColorSpace(final BitmapFactory.Options options, final @Nullable ColorSpace colorSpace) {
       options.inPreferredColorSpace =
           colorSpace == null ? ColorSpace.get(ColorSpace.Named.SRGB) : colorSpace;
     }
@@ -205,7 +205,7 @@ public abstract class DalvikPurgeableDecoder implements PlatformDecoder {
    *
    * @param bitmap the purgeable bitmap to pin
    */
-  public CloseableReference<Bitmap> pinBitmap(Bitmap bitmap) {
+  public CloseableReference<Bitmap> pinBitmap(final Bitmap bitmap) {
     Preconditions.checkNotNull(bitmap);
     try {
       // Real decoding happens here - if the image was corrupted, this will throw an exception

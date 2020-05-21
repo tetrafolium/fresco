@@ -31,7 +31,7 @@ public class ScalingBlurPostprocessor extends BasePostprocessor {
    */
   private final int mScaleRatio;
 
-  public ScalingBlurPostprocessor(int iterations, int blurRadius, int scaleRatio) {
+  public ScalingBlurPostprocessor(final int iterations, final int blurRadius, final int scaleRatio) {
     Preconditions.checkArgument(scaleRatio > 0);
 
     mIterations = iterations;
@@ -41,7 +41,7 @@ public class ScalingBlurPostprocessor extends BasePostprocessor {
 
   @Override
   public CloseableReference<Bitmap> process(
-      Bitmap sourceBitmap, PlatformBitmapFactory bitmapFactory) {
+      final Bitmap sourceBitmap, final PlatformBitmapFactory bitmapFactory) {
     final CloseableReference<Bitmap> bitmapRef =
         bitmapFactory.createBitmap(
             sourceBitmap.getWidth() / mScaleRatio, sourceBitmap.getHeight() / mScaleRatio);

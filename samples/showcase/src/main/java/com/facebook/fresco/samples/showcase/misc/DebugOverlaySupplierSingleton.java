@@ -21,11 +21,11 @@ public class DebugOverlaySupplierSingleton implements Supplier<Boolean> {
 
   private final SharedPreferences mSharedPreferences;
 
-  private DebugOverlaySupplierSingleton(Context context) {
+  private DebugOverlaySupplierSingleton(final Context context) {
     mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
   }
 
-  public static DebugOverlaySupplierSingleton getInstance(Context context) {
+  public static DebugOverlaySupplierSingleton getInstance(final Context context) {
     synchronized (DebugOverlaySupplierSingleton.class) {
       if (sInstance == null) {
         sInstance = new DebugOverlaySupplierSingleton(context.getApplicationContext());

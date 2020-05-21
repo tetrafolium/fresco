@@ -346,7 +346,7 @@ public class BitmapMemoryCacheProducerTest {
   }
 
   private void setupBitmapMemoryCacheGetSuccessOnSecondRead(
-      CloseableReference<CloseableImage> closeableImageRef) {
+      final CloseableReference<CloseableImage> closeableImageRef) {
     when(mMemoryCache.get(mBitmapMemoryCacheKey)).thenReturn(null).thenReturn(closeableImageRef);
   }
 
@@ -384,13 +384,13 @@ public class BitmapMemoryCacheProducerTest {
     private final List<CloseableReference<CloseableImage>> mResults;
 
     private ProduceResultsNewResultAnswer(
-        final @Consumer.Status int statusFlags, List<CloseableReference<CloseableImage>> results) {
+        final @Consumer.Status int statusFlags, final List<CloseableReference<CloseableImage>> results) {
       mStatusFlags = statusFlags;
       mResults = results;
     }
 
     @Override
-    public Void answer(InvocationOnMock invocation) throws Throwable {
+    public Void answer(final InvocationOnMock invocation) throws Throwable {
       Consumer consumer = (Consumer) invocation.getArguments()[0];
       Iterator<CloseableReference<CloseableImage>> iterator = mResults.iterator();
       while (iterator.hasNext()) {
@@ -404,7 +404,7 @@ public class BitmapMemoryCacheProducerTest {
 
   private class ProduceResultsFailureAnswer implements Answer<Void> {
     @Override
-    public Void answer(InvocationOnMock invocation) throws Throwable {
+    public Void answer(final InvocationOnMock invocation) throws Throwable {
       Consumer consumer = (Consumer) invocation.getArguments()[0];
       consumer.onFailure(mException);
       return null;

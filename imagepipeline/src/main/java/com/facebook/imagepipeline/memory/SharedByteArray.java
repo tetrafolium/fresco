@@ -50,7 +50,7 @@ public class SharedByteArray implements MemoryTrimmable {
 
   private final ResourceReleaser<byte[]> mResourceReleaser;
 
-  public SharedByteArray(MemoryTrimmableRegistry memoryTrimmableRegistry, PoolParams params) {
+  public SharedByteArray(final MemoryTrimmableRegistry memoryTrimmableRegistry, final PoolParams params) {
     Preconditions.checkNotNull(memoryTrimmableRegistry);
     Preconditions.checkArgument(params.minBucketSize > 0);
     Preconditions.checkArgument(params.maxBucketSize >= params.minBucketSize);
@@ -62,7 +62,7 @@ public class SharedByteArray implements MemoryTrimmable {
     mResourceReleaser =
         new ResourceReleaser<byte[]>() {
           @Override
-          public void release(byte[] unused) {
+          public void release(final byte[] unused) {
             mSemaphore.release();
           }
         };
@@ -76,7 +76,7 @@ public class SharedByteArray implements MemoryTrimmable {
    * <p>Under the hood this method acquires an exclusive lock that is released when the returned
    * reference is closed.
    */
-  public CloseableReference<byte[]> get(int size) {
+  public CloseableReference<byte[]> get(final int size) {
     Preconditions.checkArgument(size > 0, "Size must be greater than zero");
     Preconditions.checkArgument(size <= mMaxByteArraySize, "Requested size is too big");
     mSemaphore.acquireUninterruptibly();
@@ -89,7 +89,7 @@ public class SharedByteArray implements MemoryTrimmable {
     }
   }
 
-  private byte[] getByteArray(int requestedSize) {
+  private byte[] getByteArray(final int requestedSize) {
     final int bucketedSize = getBucketedSize(requestedSize);
     byte[] byteArray = mByteArraySoftRef.get();
     if (byteArray == null || byteArray.length < bucketedSize) {
@@ -105,7 +105,7 @@ public class SharedByteArray implements MemoryTrimmable {
    * @param trimType kind of trimming to perform (ignored)
    */
   @Override
-  public void trim(MemoryTrimType trimType) {
+  public void trim(final MemoryTrimType trimType) {
     if (!mSemaphore.tryAcquire()) {
       return;
     }
@@ -117,12 +117,12 @@ public class SharedByteArray implements MemoryTrimmable {
   }
 
   @VisibleForTesting
-  int getBucketedSize(int size) {
+  int getBucketedSize(final int size) {
     size = Math.max(size, mMinByteArraySize);
     return Integer.highestOneBit(size - 1) * 2;
   }
 
-  private synchronized byte[] allocateByteArray(int size) {
+  private synchronized byte[] allocateByteArray(final int size) {
     // Start with clearing reference and releasing currently owned byte array
     mByteArraySoftRef.clear();
     byte[] byteArray = new byte[size];

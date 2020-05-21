@@ -54,15 +54,15 @@ public class BaseProducerContext implements ProducerContext {
   private EncodedImageOrigin mEncodedImageOrigin = EncodedImageOrigin.NOT_SET;
 
   public BaseProducerContext(
-      ImageRequest imageRequest,
-      String id,
-      ProducerListener2 producerListener,
-      Object callerContext,
-      ImageRequest.RequestLevel lowestPermittedRequestLevel,
-      boolean isPrefetch,
-      boolean isIntermediateResultExpected,
-      Priority priority,
-      ImagePipelineConfig imagePipelineConfig) {
+      final ImageRequest imageRequest,
+      final String id,
+      final ProducerListener2 producerListener,
+      final Object callerContext,
+      final ImageRequest.RequestLevel lowestPermittedRequestLevel,
+      final boolean isPrefetch,
+      final boolean isIntermediateResultExpected,
+      final Priority priority,
+      final ImagePipelineConfig imagePipelineConfig) {
     this(
         imageRequest,
         id,
@@ -77,16 +77,16 @@ public class BaseProducerContext implements ProducerContext {
   }
 
   public BaseProducerContext(
-      ImageRequest imageRequest,
-      String id,
-      @Nullable String uiComponentId,
-      ProducerListener2 producerListener,
-      Object callerContext,
-      ImageRequest.RequestLevel lowestPermittedRequestLevel,
-      boolean isPrefetch,
-      boolean isIntermediateResultExpected,
-      Priority priority,
-      ImagePipelineConfig imagePipelineConfig) {
+      final ImageRequest imageRequest,
+      final String id,
+      final @Nullable String uiComponentId,
+      final ProducerListener2 producerListener,
+      final Object callerContext,
+      final ImageRequest.RequestLevel lowestPermittedRequestLevel,
+      final boolean isPrefetch,
+      final boolean isIntermediateResultExpected,
+      final Priority priority,
+      final ImagePipelineConfig imagePipelineConfig) {
     mImageRequest = imageRequest;
     mId = id;
     mUiComponentId = uiComponentId;
@@ -154,7 +154,7 @@ public class BaseProducerContext implements ProducerContext {
   }
 
   @Override
-  public void addCallbacks(ProducerContextCallbacks callbacks) {
+  public void addCallbacks(final ProducerContextCallbacks callbacks) {
     boolean cancelImmediately = false;
     synchronized (this) {
       mCallbacks.add(callbacks);
@@ -178,7 +178,7 @@ public class BaseProducerContext implements ProducerContext {
     return mEncodedImageOrigin;
   }
 
-  public void setEncodedImageOrigin(EncodedImageOrigin encodedImageOrigin) {
+  public void setEncodedImageOrigin(final EncodedImageOrigin encodedImageOrigin) {
     mEncodedImageOrigin = encodedImageOrigin;
   }
 
@@ -197,7 +197,7 @@ public class BaseProducerContext implements ProducerContext {
    * @return list of callbacks if the value actually changes, null otherwise
    */
   @Nullable
-  public synchronized List<ProducerContextCallbacks> setIsPrefetchNoCallbacks(boolean isPrefetch) {
+  public synchronized List<ProducerContextCallbacks> setIsPrefetchNoCallbacks(final boolean isPrefetch) {
     if (isPrefetch == mIsPrefetch) {
       return null;
     }
@@ -215,7 +215,7 @@ public class BaseProducerContext implements ProducerContext {
    * @return list of callbacks if the value actually changes, null otherwise
    */
   @Nullable
-  public synchronized List<ProducerContextCallbacks> setPriorityNoCallbacks(Priority priority) {
+  public synchronized List<ProducerContextCallbacks> setPriorityNoCallbacks(final Priority priority) {
     if (priority == mPriority) {
       return null;
     }
@@ -234,7 +234,7 @@ public class BaseProducerContext implements ProducerContext {
    */
   @Nullable
   public synchronized List<ProducerContextCallbacks> setIsIntermediateResultExpectedNoCallbacks(
-      boolean isIntermediateResultExpected) {
+      final boolean isIntermediateResultExpected) {
     if (isIntermediateResultExpected == mIsIntermediateResultExpected) {
       return null;
     }
@@ -264,7 +264,7 @@ public class BaseProducerContext implements ProducerContext {
    * Calls {@code onCancellationRequested} on each element of the list. Does nothing if list == null
    */
   public static void callOnCancellationRequested(
-      @Nullable List<ProducerContextCallbacks> callbacks) {
+      final @Nullable List<ProducerContextCallbacks> callbacks) {
     if (callbacks == null) {
       return;
     }
@@ -274,7 +274,7 @@ public class BaseProducerContext implements ProducerContext {
   }
 
   /** Calls {@code onIsPrefetchChanged} on each element of the list. Does nothing if list == null */
-  public static void callOnIsPrefetchChanged(@Nullable List<ProducerContextCallbacks> callbacks) {
+  public static void callOnIsPrefetchChanged(final @Nullable List<ProducerContextCallbacks> callbacks) {
     if (callbacks == null) {
       return;
     }
@@ -288,7 +288,7 @@ public class BaseProducerContext implements ProducerContext {
    * == null
    */
   public static void callOnIsIntermediateResultExpectedChanged(
-      @Nullable List<ProducerContextCallbacks> callbacks) {
+      final @Nullable List<ProducerContextCallbacks> callbacks) {
     if (callbacks == null) {
       return;
     }
@@ -298,7 +298,7 @@ public class BaseProducerContext implements ProducerContext {
   }
 
   /** Calls {@code onPriorityChanged} on each element of the list. Does nothing if list == null */
-  public static void callOnPriorityChanged(@Nullable List<ProducerContextCallbacks> callbacks) {
+  public static void callOnPriorityChanged(final @Nullable List<ProducerContextCallbacks> callbacks) {
     if (callbacks == null) {
       return;
     }
@@ -308,12 +308,12 @@ public class BaseProducerContext implements ProducerContext {
   }
 
   @Override
-  public void setExtra(String key, @Nullable Object value) {
+  public void setExtra(final String key, final @Nullable Object value) {
     mExtras.put(key, value);
   }
 
   @Override
-  public void putExtras(@Nullable Map<String, ?> extras) {
+  public void putExtras(final @Nullable Map<String, ?> extras) {
     if (extras != null) {
       mExtras.putAll(extras);
     }
@@ -321,14 +321,14 @@ public class BaseProducerContext implements ProducerContext {
 
   @Nullable
   @Override
-  public <T> T getExtra(String key) {
+  public <T> T getExtra(final String key) {
     //noinspection unchecked
     return (T) mExtras.get(key);
   }
 
   @Nullable
   @Override
-  public <E> E getExtra(String key, E valueIfNotFound) {
+  public <E> E getExtra(final String key, final E valueIfNotFound) {
     Object maybeValue = mExtras.get(key);
     if (maybeValue == null) {
       return valueIfNotFound;
@@ -343,13 +343,13 @@ public class BaseProducerContext implements ProducerContext {
   }
 
   @Override
-  public void putOriginExtra(@Nullable String origin, @Nullable String subcategory) {
+  public void putOriginExtra(final @Nullable String origin, final @Nullable String subcategory) {
     mExtras.put(ExtraKeys.ORIGIN, origin);
     mExtras.put(ExtraKeys.ORIGIN_SUBCATEGORY, subcategory);
   }
 
   @Override
-  public void putOriginExtra(@Nullable String origin) {
+  public void putOriginExtra(final @Nullable String origin) {
     mExtras.put(ExtraKeys.ORIGIN, origin);
     mExtras.put(ExtraKeys.ORIGIN_SUBCATEGORY, ORIGIN_SUBCATEGORY_DEFAULT);
   }

@@ -30,7 +30,7 @@ public class GifAnimationBackend implements AnimationBackend {
   private float mMidX;
   private float mMidY;
 
-  public static GifAnimationBackend create(String filePath) throws IOException {
+  public static GifAnimationBackend create(final String filePath) throws IOException {
     InputStream is = null;
     try {
       is = new BufferedInputStream(new FileInputStream(filePath));
@@ -46,31 +46,31 @@ public class GifAnimationBackend implements AnimationBackend {
     }
   }
 
-  private GifAnimationBackend(GifMetadataDecoder decoder, Movie movie) {
+  private GifAnimationBackend(final GifMetadataDecoder decoder, final Movie movie) {
     mGifDecoder = decoder;
     mMovie = movie;
     mFrameStartTimes = new int[decoder.getFrameCount()];
   }
 
   @Override
-  public boolean drawFrame(Drawable parent, Canvas canvas, int frameNumber) {
+  public boolean drawFrame(final Drawable parent, final Canvas canvas, final int frameNumber) {
     mMovie.setTime(getFrameStartTime(frameNumber));
     mMovie.draw(canvas, mMidX, mMidY);
     return true;
   }
 
   @Override
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     // unimplemented
   }
 
   @Override
-  public void setColorFilter(ColorFilter colorFilter) {
+  public void setColorFilter(final ColorFilter colorFilter) {
     // unimplemented
   }
 
   @Override
-  public void setBounds(Rect bounds) {
+  public void setBounds(final Rect bounds) {
     scale(
         bounds.right - bounds.left /* viewPortWidth */,
         bounds.bottom - bounds.top /* viewPortHeight */,
@@ -104,7 +104,7 @@ public class GifAnimationBackend implements AnimationBackend {
   }
 
   @Override
-  public int getFrameDurationMs(int frameNumber) {
+  public int getFrameDurationMs(final int frameNumber) {
     return mGifDecoder.getFrameDurationMs(frameNumber);
   }
 
@@ -113,7 +113,7 @@ public class GifAnimationBackend implements AnimationBackend {
     return mGifDecoder.getLoopCount();
   }
 
-  private int getFrameStartTime(int frameNumber) {
+  private int getFrameStartTime(final int frameNumber) {
     if (frameNumber == 0 || frameNumber >= mFrameStartTimes.length) {
       return 0;
     }
@@ -137,7 +137,7 @@ public class GifAnimationBackend implements AnimationBackend {
    * @param sourceWidth the width of the video
    * @param sourceHeight the height of the video
    */
-  private void scale(int viewPortWidth, int viewPortHeight, int sourceWidth, int sourceHeight) {
+  private void scale(final int viewPortWidth, final int viewPortHeight, final int sourceWidth, final int sourceHeight) {
 
     float inputRatio = ((float) sourceWidth) / sourceHeight;
     float outputRatio = ((float) viewPortWidth) / viewPortHeight;
@@ -159,7 +159,7 @@ public class GifAnimationBackend implements AnimationBackend {
     mMidY = ((viewPortHeight - scaledHeight) / 2f) / scale;
   }
 
-  private static void closeSilently(@Nullable Closeable closeable) {
+  private static void closeSilently(final @Nullable Closeable closeable) {
     if (closeable == null) {
       return;
     }

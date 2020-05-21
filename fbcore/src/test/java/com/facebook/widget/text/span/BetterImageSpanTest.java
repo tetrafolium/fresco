@@ -131,17 +131,17 @@ public class BetterImageSpanTest {
   }
 
   public BetterImageSpanTest(
-      String description,
-      int alignment,
-      int drawableHeight,
-      int fontAscent,
-      int fontDescent,
-      int expectedAscent,
-      int expectedDescent,
-      int fontTop,
-      int fontBottom,
-      int expectedTop,
-      int expectedBottom) {
+      final String description,
+      final int alignment,
+      final int drawableHeight,
+      final int fontAscent,
+      final int fontDescent,
+      final int expectedAscent,
+      final int expectedDescent,
+      final int fontTop,
+      final int fontBottom,
+      final int expectedTop,
+      final int expectedBottom) {
     mDescription = description;
     mAlignment = alignment;
     mDrawableHeight = drawableHeight;

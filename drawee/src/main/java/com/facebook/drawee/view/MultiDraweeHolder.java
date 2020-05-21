@@ -66,7 +66,7 @@ public class MultiDraweeHolder<DH extends DraweeHierarchy> {
     }
   }
 
-  public boolean onTouchEvent(MotionEvent event) {
+  public boolean onTouchEvent(final MotionEvent event) {
     for (int i = 0; i < mHolders.size(); ++i) {
       if (mHolders.get(i).onTouchEvent(event)) {
         return true;
@@ -84,11 +84,11 @@ public class MultiDraweeHolder<DH extends DraweeHierarchy> {
     mHolders.clear();
   }
 
-  public void add(DraweeHolder<DH> holder) {
+  public void add(final DraweeHolder<DH> holder) {
     add(mHolders.size(), holder);
   }
 
-  public void add(int index, DraweeHolder<DH> holder) {
+  public void add(final int index, final DraweeHolder<DH> holder) {
     Preconditions.checkNotNull(holder);
     Preconditions.checkElementIndex(index, mHolders.size() + 1);
     mHolders.add(index, holder);
@@ -97,7 +97,7 @@ public class MultiDraweeHolder<DH extends DraweeHierarchy> {
     }
   }
 
-  public void remove(int index) {
+  public void remove(final int index) {
     DraweeHolder<DH> holder = mHolders.get(index);
     if (mIsAttached) {
       holder.onDetach();
@@ -105,7 +105,7 @@ public class MultiDraweeHolder<DH extends DraweeHierarchy> {
     mHolders.remove(index);
   }
 
-  public DraweeHolder<DH> get(int index) {
+  public DraweeHolder<DH> get(final int index) {
     return mHolders.get(index);
   }
 
@@ -114,7 +114,7 @@ public class MultiDraweeHolder<DH extends DraweeHierarchy> {
   }
 
   /** Convenience method to draw all the top-level drawables in this holder. */
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     for (int i = 0; i < mHolders.size(); ++i) {
       Drawable drawable = get(i).getTopLevelDrawable();
       if (drawable != null) {
@@ -124,7 +124,7 @@ public class MultiDraweeHolder<DH extends DraweeHierarchy> {
   }
 
   /** Returns true if the argument is a top-level Drawable in this holder. */
-  public boolean verifyDrawable(Drawable who) {
+  public boolean verifyDrawable(final Drawable who) {
     for (int i = 0; i < mHolders.size(); ++i) {
       if (who == get(i).getTopLevelDrawable()) {
         return true;

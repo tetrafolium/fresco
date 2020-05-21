@@ -20,10 +20,10 @@ import com.facebook.common.memory.MemoryTrimType;
 public class NativeMemoryCacheTrimStrategy implements CountingMemoryCache.CacheTrimStrategy {
   private static final String TAG = "NativeMemoryCacheTrimStrategy";
 
-  public NativeMemoryCacheTrimStrategy() {}
+  public NativeMemoryCacheTrimStrategy() { }
 
   @Override
-  public double getTrimRatio(MemoryTrimType trimType) {
+  public double getTrimRatio(final MemoryTrimType trimType) {
     switch (trimType) {
       case OnCloseToDalvikHeapLimit:
         // Resources cached on native heap do not consume Dalvik heap, so no trimming here.

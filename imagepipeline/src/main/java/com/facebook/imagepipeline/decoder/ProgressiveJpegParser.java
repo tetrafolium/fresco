@@ -80,7 +80,7 @@ public class ProgressiveJpegParser {
 
   private final ByteArrayPool mByteArrayPool;
 
-  public ProgressiveJpegParser(ByteArrayPool byteArrayPool) {
+  public ProgressiveJpegParser(final ByteArrayPool byteArrayPool) {
     mByteArrayPool = Preconditions.checkNotNull(byteArrayPool);
     mBytesParsed = 0;
     mLastByteRead = 0;
@@ -226,7 +226,7 @@ public class ProgressiveJpegParser {
   }
 
   /** Not every marker is followed by associated segment */
-  private static boolean doesMarkerStartSegment(int markerSecondByte) {
+  private static boolean doesMarkerStartSegment(final int markerSecondByte) {
     if (markerSecondByte == JfifUtil.MARKER_TEM) {
       return false;
     }
@@ -238,7 +238,7 @@ public class ProgressiveJpegParser {
     return markerSecondByte != JfifUtil.MARKER_EOI && markerSecondByte != JfifUtil.MARKER_SOI;
   }
 
-  private void newScanOrImageEndFound(int offset) {
+  private void newScanOrImageEndFound(final int offset) {
     if (mNextFullScanNumber > 0) {
       mBestScanEndOffset = offset;
     }

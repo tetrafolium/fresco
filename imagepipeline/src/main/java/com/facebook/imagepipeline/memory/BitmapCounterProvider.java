@@ -36,7 +36,7 @@ public class BitmapCounterProvider {
     }
   }
 
-  public static void initialize(BitmapCounterConfig bitmapCounterConfig) {
+  public static void initialize(final BitmapCounterConfig bitmapCounterConfig) {
     if (sBitmapCounter != null) {
       throw new IllegalStateException(
           "BitmapCounter has already been created! `BitmapCounterProvider.initialize(...)` should only be called before `BitmapCounterProvider.get()` or not at all!");

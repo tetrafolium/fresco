@@ -105,7 +105,7 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
     this(null);
   }
 
-  public AnimatedDrawable2(@Nullable AnimationBackend animationBackend) {
+  public AnimatedDrawable2(final @Nullable AnimationBackend animationBackend) {
     mAnimationBackend = animationBackend;
     mFrameScheduler = createSchedulerForBackendAndDelayMethod(mAnimationBackend);
   }
@@ -176,7 +176,7 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
   }
 
   @Override
-  protected void onBoundsChange(Rect bounds) {
+  protected void onBoundsChange(final Rect bounds) {
     super.onBoundsChange(bounds);
     if (mAnimationBackend != null) {
       mAnimationBackend.setBounds(bounds);
@@ -184,7 +184,7 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     if (mAnimationBackend == null || mFrameScheduler == null) {
       return;
     }
@@ -260,7 +260,7 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
   }
 
   @Override
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     if (mDrawableProperties == null) {
       mDrawableProperties = new DrawableProperties();
     }
@@ -271,7 +271,7 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
   }
 
   @Override
-  public void setColorFilter(ColorFilter colorFilter) {
+  public void setColorFilter(final ColorFilter colorFilter) {
     if (mDrawableProperties == null) {
       mDrawableProperties = new DrawableProperties();
     }
@@ -292,7 +292,7 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
    *
    * @param animationBackend the animation backend to be used or null
    */
-  public void setAnimationBackend(@Nullable AnimationBackend animationBackend) {
+  public void setAnimationBackend(final @Nullable AnimationBackend animationBackend) {
     mAnimationBackend = animationBackend;
     if (mAnimationBackend != null) {
       mFrameScheduler = new DropFramesFrameScheduler(mAnimationBackend);
@@ -329,7 +329,7 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
    *
    * @param targetFrameNumber the frame number to jump to
    */
-  public void jumpToFrame(int targetFrameNumber) {
+  public void jumpToFrame(final int targetFrameNumber) {
     if (mAnimationBackend == null || mFrameScheduler == null) {
       return;
     }
@@ -387,7 +387,7 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
    *
    * @param frameSchedulingDelayMs the delay to use in ms
    */
-  public void setFrameSchedulingDelayMs(long frameSchedulingDelayMs) {
+  public void setFrameSchedulingDelayMs(final long frameSchedulingDelayMs) {
     mFrameSchedulingDelayMs = frameSchedulingDelayMs;
   }
 
@@ -398,7 +398,7 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
    *
    * @param frameSchedulingOffsetMs the offset to use in ms
    */
-  public void setFrameSchedulingOffsetMs(long frameSchedulingOffsetMs) {
+  public void setFrameSchedulingOffsetMs(final long frameSchedulingOffsetMs) {
     mFrameSchedulingOffsetMs = frameSchedulingOffsetMs;
   }
 
@@ -407,7 +407,7 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
    *
    * @param animationListener the listener to use
    */
-  public void setAnimationListener(@Nullable AnimationListener animationListener) {
+  public void setAnimationListener(final @Nullable AnimationListener animationListener) {
     mAnimationListener = animationListener != null ? animationListener : NO_OP_LISTENER;
   }
 
@@ -416,7 +416,7 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
    *
    * @param drawListener the listener to use
    */
-  public void setDrawListener(@Nullable DrawListener drawListener) {
+  public void setDrawListener(final @Nullable DrawListener drawListener) {
     mDrawListener = drawListener;
   }
 
@@ -425,7 +425,7 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
    *
    * @param targetAnimationTimeMs the time in ms to update the frame
    */
-  private void scheduleNextFrame(long targetAnimationTimeMs) {
+  private void scheduleNextFrame(final long targetAnimationTimeMs) {
     mExpectedRenderTimeMs = mStartTimeMs + targetAnimationTimeMs;
     scheduleSelf(mInvalidateRunnable, mExpectedRenderTimeMs);
   }
@@ -447,7 +447,7 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
 
   @Nullable
   private static FrameScheduler createSchedulerForBackendAndDelayMethod(
-      @Nullable AnimationBackend animationBackend) {
+      final @Nullable AnimationBackend animationBackend) {
     if (animationBackend == null) {
       return null;
     }
@@ -466,7 +466,7 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
    * @return true if the level change could be performed
    */
   @Override
-  protected boolean onLevelChange(int level) {
+  protected boolean onLevelChange(final int level) {
     if (mIsRunning) {
       // If the client called start on us, they expect us to run the animation. In that case,
       // we ignore level changes.

@@ -34,13 +34,13 @@ public class MatrixDrawable extends ForwardingDrawable {
    * @param drawable underlying drawable to apply the matrix to
    * @param matrix matrix to be applied to the drawable
    */
-  public MatrixDrawable(Drawable drawable, Matrix matrix) {
+  public MatrixDrawable(final Drawable drawable, final Matrix matrix) {
     super(Preconditions.checkNotNull(drawable));
     mMatrix = matrix;
   }
 
   @Override
-  public Drawable setCurrent(Drawable newDelegate) {
+  public Drawable setCurrent(final Drawable newDelegate) {
     final Drawable previousDelegate = super.setCurrent(newDelegate);
     configureBounds();
 
@@ -61,14 +61,14 @@ public class MatrixDrawable extends ForwardingDrawable {
    *
    * @param matrix matrix to set
    */
-  public void setMatrix(Matrix matrix) {
+  public void setMatrix(final Matrix matrix) {
     mMatrix = matrix;
     configureBounds();
     invalidateSelf();
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     configureBoundsIfUnderlyingChanged();
     if (mDrawMatrix != null) {
       int saveCount = canvas.save();
@@ -83,7 +83,7 @@ public class MatrixDrawable extends ForwardingDrawable {
   }
 
   @Override
-  protected void onBoundsChange(Rect bounds) {
+  protected void onBoundsChange(final Rect bounds) {
     super.onBoundsChange(bounds);
     configureBounds();
   }
@@ -120,7 +120,7 @@ public class MatrixDrawable extends ForwardingDrawable {
    * @param transform
    */
   @Override
-  public void getTransform(Matrix transform) {
+  public void getTransform(final Matrix transform) {
     super.getTransform(transform);
     if (mDrawMatrix != null) {
       transform.preConcat(mDrawMatrix);

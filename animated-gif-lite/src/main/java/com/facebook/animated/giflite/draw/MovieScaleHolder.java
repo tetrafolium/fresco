@@ -17,7 +17,7 @@ class MovieScaleHolder {
   private float mLeft = 0;
   private float mTop = 0;
 
-  public MovieScaleHolder(int movieWidth, int movieHeight) {
+  public MovieScaleHolder(final int movieWidth, final int movieHeight) {
     mMovieWidth = movieWidth;
     mMovieHeight = movieHeight;
   }
@@ -34,7 +34,7 @@ class MovieScaleHolder {
     return mTop;
   }
 
-  public synchronized void updateViewPort(int viewPortWidth, int viewPortHeight) {
+  public synchronized void updateViewPort(final int viewPortWidth, final int viewPortHeight) {
     if (mViewPortWidth == viewPortWidth && mViewPortHeight == viewPortHeight) {
       return;
     }

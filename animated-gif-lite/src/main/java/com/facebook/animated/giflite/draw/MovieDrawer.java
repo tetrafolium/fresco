@@ -26,13 +26,13 @@ public class MovieDrawer {
 
   private @Nullable Bitmap mPreviousBitmap;
 
-  public MovieDrawer(Movie movie) {
+  public MovieDrawer(final Movie movie) {
     mMovie = movie;
     mScaleHolder = new MovieScaleHolder(movie.width(), movie.height());
     mCanvas = new Canvas();
   }
 
-  public synchronized void drawFrame(int movieTime, int w, int h, Bitmap bitmap) {
+  public synchronized void drawFrame(final int movieTime, final int w, final int h, final Bitmap bitmap) {
     mMovie.setTime(movieTime);
 
     if (mPreviousBitmap != null && mPreviousBitmap.isRecycled()) {

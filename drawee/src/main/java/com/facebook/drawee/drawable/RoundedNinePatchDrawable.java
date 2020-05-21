@@ -13,12 +13,12 @@ import com.facebook.imagepipeline.systrace.FrescoSystrace;
 
 public class RoundedNinePatchDrawable extends RoundedDrawable {
 
-  public RoundedNinePatchDrawable(NinePatchDrawable ninePatchDrawable) {
+  public RoundedNinePatchDrawable(final NinePatchDrawable ninePatchDrawable) {
     super(ninePatchDrawable);
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("RoundedNinePatchDrawable#draw");
     }

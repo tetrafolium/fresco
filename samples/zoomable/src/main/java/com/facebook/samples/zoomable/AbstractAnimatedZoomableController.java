@@ -26,7 +26,7 @@ public abstract class AbstractAnimatedZoomableController extends DefaultZoomable
   private final Matrix mNewTransform = new Matrix();
   private final Matrix mWorkingTransform = new Matrix();
 
-  public AbstractAnimatedZoomableController(TransformGestureDetector transformGestureDetector) {
+  public AbstractAnimatedZoomableController(final TransformGestureDetector transformGestureDetector) {
     super(transformGestureDetector);
   }
 
@@ -57,7 +57,7 @@ public abstract class AbstractAnimatedZoomableController extends DefaultZoomable
    * @param viewPoint 2D point in view's absolute coordinate system
    */
   @Override
-  public void zoomToPoint(float scale, PointF imagePoint, PointF viewPoint) {
+  public void zoomToPoint(final float scale, final PointF imagePoint, final PointF viewPoint) {
     zoomToPoint(scale, imagePoint, viewPoint, LIMIT_ALL, 0, null);
   }
 
@@ -76,12 +76,12 @@ public abstract class AbstractAnimatedZoomableController extends DefaultZoomable
    * @param onAnimationComplete code to run when the animation completes. Ignored if durationMs=0
    */
   public void zoomToPoint(
-      float scale,
-      PointF imagePoint,
-      PointF viewPoint,
-      @LimitFlag int limitFlags,
-      long durationMs,
-      @Nullable Runnable onAnimationComplete) {
+      final float scale,
+      final PointF imagePoint,
+      final PointF viewPoint,
+      final @LimitFlag int limitFlags,
+      final long durationMs,
+      final @Nullable Runnable onAnimationComplete) {
     FLog.v(getLogTag(), "zoomToPoint: duration %d ms", durationMs);
     calculateZoomToPointTransform(mNewTransform, scale, imagePoint, viewPoint, limitFlags);
     setTransform(mNewTransform, durationMs, onAnimationComplete);
@@ -98,7 +98,7 @@ public abstract class AbstractAnimatedZoomableController extends DefaultZoomable
    * @param onAnimationComplete code to run when the animation completes. Ignored if durationMs=0
    */
   public void setTransform(
-      Matrix newTransform, long durationMs, @Nullable Runnable onAnimationComplete) {
+      final Matrix newTransform, final long durationMs, final @Nullable Runnable onAnimationComplete) {
     FLog.v(getLogTag(), "setTransform: duration %d ms", durationMs);
     if (durationMs <= 0) {
       setTransformImmediate(newTransform);
@@ -119,7 +119,7 @@ public abstract class AbstractAnimatedZoomableController extends DefaultZoomable
     return mIsAnimating;
   }
 
-  protected void setAnimating(boolean isAnimating) {
+  protected void setAnimating(final boolean isAnimating) {
     mIsAnimating = isAnimating;
   }
 
@@ -136,14 +136,14 @@ public abstract class AbstractAnimatedZoomableController extends DefaultZoomable
   }
 
   @Override
-  public void onGestureBegin(TransformGestureDetector detector) {
+  public void onGestureBegin(final TransformGestureDetector detector) {
     FLog.v(getLogTag(), "onGestureBegin");
     stopAnimation();
     super.onGestureBegin(detector);
   }
 
   @Override
-  public void onGestureUpdate(TransformGestureDetector detector) {
+  public void onGestureUpdate(final TransformGestureDetector detector) {
     FLog.v(getLogTag(), "onGestureUpdate %s", isAnimating() ? "(ignored)" : "");
     if (isAnimating()) {
       return;
@@ -151,7 +151,7 @@ public abstract class AbstractAnimatedZoomableController extends DefaultZoomable
     super.onGestureUpdate(detector);
   }
 
-  protected void calculateInterpolation(Matrix outMatrix, float fraction) {
+  protected void calculateInterpolation(final Matrix outMatrix, final float fraction) {
     for (int i = 0; i < 9; i++) {
       mCurrentValues[i] = (1 - fraction) * mStartValues[i] + fraction * mStopValues[i];
     }

@@ -28,21 +28,21 @@ public class AnimationControlsManager {
   private AnimationListener mAnimationListener =
       new BaseAnimationListener() {
         @Override
-        public void onAnimationStart(AnimatedDrawable2 drawable) {
+        public void onAnimationStart(final AnimatedDrawable2 drawable) {
           if (mPlayPauseToggleButton != null) {
             mPlayPauseToggleButton.setChecked(true);
           }
         }
 
         @Override
-        public void onAnimationStop(AnimatedDrawable2 drawable) {
+        public void onAnimationStop(final AnimatedDrawable2 drawable) {
           if (mPlayPauseToggleButton != null) {
             mPlayPauseToggleButton.setChecked(false);
           }
         }
 
         @Override
-        public void onAnimationFrame(AnimatedDrawable2 drawable, int frameNumber) {
+        public void onAnimationFrame(final AnimatedDrawable2 drawable, final int frameNumber) {
           if (mSeekBar != null) {
             mSeekBar.setProgress(frameNumber);
           }
@@ -50,10 +50,10 @@ public class AnimationControlsManager {
       };
 
   public AnimationControlsManager(
-      AnimatedDrawable2 animatedDrawable,
-      @Nullable SeekBar seekBar,
-      @Nullable ToggleButton playPauseToggleButton,
-      @Nullable View resetButton) {
+      final AnimatedDrawable2 animatedDrawable,
+      final @Nullable SeekBar seekBar,
+      final @Nullable ToggleButton playPauseToggleButton,
+      final @Nullable View resetButton) {
     mAnimatedDrawable = animatedDrawable;
     mSeekBar = seekBar;
     mPlayPauseToggleButton = playPauseToggleButton;
@@ -67,7 +67,7 @@ public class AnimationControlsManager {
     updateBackendData(mAnimatedDrawable.getAnimationBackend());
   }
 
-  public void updateBackendData(@Nullable AnimationBackend newBackend) {
+  public void updateBackendData(final @Nullable AnimationBackend newBackend) {
     if (mSeekBar == null) {
       return;
     }
@@ -85,7 +85,7 @@ public class AnimationControlsManager {
     mResetButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View view) {
+          public void onClick(final View view) {
             mAnimatedDrawable.stop();
             mAnimatedDrawable.jumpToFrame(0);
           }
@@ -99,7 +99,7 @@ public class AnimationControlsManager {
     mPlayPauseToggleButton.setOnCheckedChangeListener(
         new CompoundButton.OnCheckedChangeListener() {
           @Override
-          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+          public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
             if (isChecked) {
               mAnimatedDrawable.start();
             } else {
@@ -116,17 +116,17 @@ public class AnimationControlsManager {
     mSeekBar.setOnSeekBarChangeListener(
         new SeekBar.OnSeekBarChangeListener() {
           @Override
-          public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+          public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser) {
             if (fromUser) {
               mAnimatedDrawable.jumpToFrame(progress);
             }
           }
 
           @Override
-          public void onStartTrackingTouch(SeekBar seekBar) {}
+          public void onStartTrackingTouch(final SeekBar seekBar) { }
 
           @Override
-          public void onStopTrackingTouch(SeekBar seekBar) {}
+          public void onStopTrackingTouch(final SeekBar seekBar) { }
         });
   }
 }

@@ -22,7 +22,7 @@ public class AnimatedImageResultBuilder {
   private int mFrameForPreview;
   private @Nullable BitmapTransformation mBitmapTransformation;
 
-  AnimatedImageResultBuilder(AnimatedImage image) {
+  AnimatedImageResultBuilder(final AnimatedImage image) {
     mImage = image;
   }
 
@@ -51,7 +51,7 @@ public class AnimatedImageResultBuilder {
    * @param previewBitmap the preview. The method clones the reference.
    * @return this builder
    */
-  public AnimatedImageResultBuilder setPreviewBitmap(CloseableReference<Bitmap> previewBitmap) {
+  public AnimatedImageResultBuilder setPreviewBitmap(final CloseableReference<Bitmap> previewBitmap) {
     mPreviewBitmap = CloseableReference.cloneOrNull(previewBitmap);
     return this;
   }
@@ -72,7 +72,7 @@ public class AnimatedImageResultBuilder {
    *
    * @return the frame that should be used for the preview image
    */
-  public AnimatedImageResultBuilder setFrameForPreview(int frameForPreview) {
+  public AnimatedImageResultBuilder setFrameForPreview(final int frameForPreview) {
     mFrameForPreview = frameForPreview;
     return this;
   }
@@ -95,7 +95,7 @@ public class AnimatedImageResultBuilder {
    * @param decodedFrames the decoded frames. The method clones the references.
    */
   public AnimatedImageResultBuilder setDecodedFrames(
-      List<CloseableReference<Bitmap>> decodedFrames) {
+      final List<CloseableReference<Bitmap>> decodedFrames) {
     mDecodedFrames = CloseableReference.cloneOrNull(decodedFrames);
     return this;
   }
@@ -116,7 +116,7 @@ public class AnimatedImageResultBuilder {
    * @param bitmapTransformation the transformation that is to be applied to the image
    */
   public AnimatedImageResultBuilder setBitmapTransformation(
-      @Nullable BitmapTransformation bitmapTransformation) {
+      final @Nullable BitmapTransformation bitmapTransformation) {
     mBitmapTransformation = bitmapTransformation;
     return this;
   }

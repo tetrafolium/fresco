@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 public class FileBinaryResource implements BinaryResource {
   private final File mFile;
 
-  private FileBinaryResource(File file) {
+  private FileBinaryResource(final File file) {
     mFile = Preconditions.checkNotNull(file);
   }
 
@@ -45,7 +45,7 @@ public class FileBinaryResource implements BinaryResource {
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (obj == null || !(obj instanceof FileBinaryResource)) {
       return false;
     }
@@ -62,7 +62,7 @@ public class FileBinaryResource implements BinaryResource {
    * Factory method to create a wrapping BinaryResource without explicitly taking care of null.
    * If the supplied file is null, instead of BinaryResource, null is returned.
    */
-  public static @Nullable FileBinaryResource createOrNull(File file) {
+  public static @Nullable FileBinaryResource createOrNull(final File file) {
     return (file != null) ? new FileBinaryResource(file) : null;
   }
 }

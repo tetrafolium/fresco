@@ -76,7 +76,7 @@ public class BitmapAnimationBackend
     FRAME_TYPE_CREATED,
     FRAME_TYPE_FALLBACK,
   })
-  public @interface FrameType {}
+  public @interface FrameType { }
 
   public static final int FRAME_TYPE_UNKNOWN = -1;
   public static final int FRAME_TYPE_CACHED = 0;
@@ -101,12 +101,12 @@ public class BitmapAnimationBackend
   @Nullable private FrameListener mFrameListener;
 
   public BitmapAnimationBackend(
-      PlatformBitmapFactory platformBitmapFactory,
-      BitmapFrameCache bitmapFrameCache,
-      AnimationInformation animationInformation,
-      BitmapFrameRenderer bitmapFrameRenderer,
-      @Nullable BitmapFramePreparationStrategy bitmapFramePreparationStrategy,
-      @Nullable BitmapFramePreparer bitmapFramePreparer) {
+      final PlatformBitmapFactory platformBitmapFactory,
+      final BitmapFrameCache bitmapFrameCache,
+      final AnimationInformation animationInformation,
+      final BitmapFrameRenderer bitmapFrameRenderer,
+      final @Nullable BitmapFramePreparationStrategy bitmapFramePreparationStrategy,
+      final @Nullable BitmapFramePreparer bitmapFramePreparer) {
     mPlatformBitmapFactory = platformBitmapFactory;
     mBitmapFrameCache = bitmapFrameCache;
     mAnimationInformation = animationInformation;
@@ -123,11 +123,11 @@ public class BitmapAnimationBackend
    *
    * @param bitmapConfig the bitmap config to be used
    */
-  public void setBitmapConfig(Bitmap.Config bitmapConfig) {
+  public void setBitmapConfig(final Bitmap.Config bitmapConfig) {
     mBitmapConfig = bitmapConfig;
   }
 
-  public void setFrameListener(@Nullable FrameListener frameListener) {
+  public void setFrameListener(final @Nullable FrameListener frameListener) {
     mFrameListener = frameListener;
   }
 
@@ -137,7 +137,7 @@ public class BitmapAnimationBackend
   }
 
   @Override
-  public int getFrameDurationMs(int frameNumber) {
+  public int getFrameDurationMs(final int frameNumber) {
     return mAnimationInformation.getFrameDurationMs(frameNumber);
   }
 
@@ -147,7 +147,7 @@ public class BitmapAnimationBackend
   }
 
   @Override
-  public boolean drawFrame(Drawable parent, Canvas canvas, int frameNumber) {
+  public boolean drawFrame(final Drawable parent, final Canvas canvas, final int frameNumber) {
     if (mFrameListener != null) {
       mFrameListener.onDrawFrameStart(this, frameNumber);
     }
@@ -168,7 +168,7 @@ public class BitmapAnimationBackend
     return drawn;
   }
 
-  private boolean drawFrameOrFallback(Canvas canvas, int frameNumber, @FrameType int frameType) {
+  private boolean drawFrameOrFallback(final Canvas canvas, final int frameNumber, final @FrameType int frameType) {
     CloseableReference<Bitmap> bitmapReference = null;
     boolean drawn = false;
     int nextFrameType = FRAME_TYPE_UNKNOWN;
@@ -228,17 +228,17 @@ public class BitmapAnimationBackend
   }
 
   @Override
-  public void setAlpha(@IntRange(from = 0, to = 255) int alpha) {
+  public void setAlpha(final @IntRange(from = 0, to = 255) int alpha) {
     mPaint.setAlpha(alpha);
   }
 
   @Override
-  public void setColorFilter(@Nullable ColorFilter colorFilter) {
+  public void setColorFilter(final @Nullable ColorFilter colorFilter) {
     mPaint.setColorFilter(colorFilter);
   }
 
   @Override
-  public void setBounds(@Nullable Rect bounds) {
+  public void setBounds(final @Nullable Rect bounds) {
     mBounds = bounds;
     mBitmapFrameRenderer.setBounds(bounds);
     updateBitmapDimensions();
@@ -292,7 +292,7 @@ public class BitmapAnimationBackend
    * @return true if rendering successful
    */
   private boolean renderFrameInBitmap(
-      int frameNumber, @Nullable CloseableReference<Bitmap> targetBitmap) {
+      final int frameNumber, final @Nullable CloseableReference<Bitmap> targetBitmap) {
     if (!CloseableReference.isValid(targetBitmap)) {
       return false;
     }
@@ -317,10 +317,10 @@ public class BitmapAnimationBackend
    * @return true if the bitmap has been drawn
    */
   private boolean drawBitmapAndCache(
-      int frameNumber,
-      @Nullable CloseableReference<Bitmap> bitmapReference,
-      Canvas canvas,
-      @FrameType int frameType) {
+      final int frameNumber,
+      final @Nullable CloseableReference<Bitmap> bitmapReference,
+      final Canvas canvas,
+      final @FrameType int frameType) {
     if (!CloseableReference.isValid(bitmapReference)) {
       return false;
     }

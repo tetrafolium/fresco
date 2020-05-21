@@ -69,7 +69,7 @@ public class AddImageTransformMetaDataProducerTest {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 mAddMetaDataConsumer = (Consumer<EncodedImage>) invocation.getArguments()[0];
                 return null;
               }

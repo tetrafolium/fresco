@@ -20,7 +20,7 @@ public class ForwardingRequestListener implements RequestListener {
 
   private final List<RequestListener> mRequestListeners;
 
-  public ForwardingRequestListener(Set<RequestListener> requestListeners) {
+  public ForwardingRequestListener(final Set<RequestListener> requestListeners) {
     mRequestListeners = new ArrayList<>(requestListeners.size());
     for (RequestListener requestListener : requestListeners) {
       if (requestListener != null) {
@@ -29,7 +29,7 @@ public class ForwardingRequestListener implements RequestListener {
     }
   }
 
-  public ForwardingRequestListener(RequestListener... requestListeners) {
+  public ForwardingRequestListener(final RequestListener... requestListeners) {
     mRequestListeners = new ArrayList<>(requestListeners.length);
     for (RequestListener requestListener : requestListeners) {
       if (requestListener != null) {
@@ -38,13 +38,13 @@ public class ForwardingRequestListener implements RequestListener {
     }
   }
 
-  public void addRequestListener(RequestListener requestListener) {
+  public void addRequestListener(final RequestListener requestListener) {
     mRequestListeners.add(requestListener);
   }
 
   @Override
   public void onRequestStart(
-      ImageRequest request, Object callerContext, String requestId, boolean isPrefetch) {
+      final ImageRequest request, final Object callerContext, final String requestId, final boolean isPrefetch) {
     final int numberOfListeners = mRequestListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       RequestListener listener = mRequestListeners.get(i);
@@ -58,7 +58,7 @@ public class ForwardingRequestListener implements RequestListener {
   }
 
   @Override
-  public void onProducerStart(String requestId, String producerName) {
+  public void onProducerStart(final String requestId, final String producerName) {
     final int numberOfListeners = mRequestListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       RequestListener listener = mRequestListeners.get(i);
@@ -73,7 +73,7 @@ public class ForwardingRequestListener implements RequestListener {
 
   @Override
   public void onProducerFinishWithSuccess(
-      String requestId, String producerName, @Nullable Map<String, String> extraMap) {
+      final String requestId, final String producerName, final @Nullable Map<String, String> extraMap) {
     final int numberOfListeners = mRequestListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       RequestListener listener = mRequestListeners.get(i);
@@ -88,7 +88,7 @@ public class ForwardingRequestListener implements RequestListener {
 
   @Override
   public void onProducerFinishWithFailure(
-      String requestId, String producerName, Throwable t, @Nullable Map<String, String> extraMap) {
+      final String requestId, final String producerName, final Throwable t, final @Nullable Map<String, String> extraMap) {
     final int numberOfListeners = mRequestListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       RequestListener listener = mRequestListeners.get(i);
@@ -103,7 +103,7 @@ public class ForwardingRequestListener implements RequestListener {
 
   @Override
   public void onProducerFinishWithCancellation(
-      String requestId, String producerName, @Nullable Map<String, String> extraMap) {
+      final String requestId, final String producerName, final @Nullable Map<String, String> extraMap) {
     final int numberOfListeners = mRequestListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       RequestListener listener = mRequestListeners.get(i);
@@ -117,7 +117,7 @@ public class ForwardingRequestListener implements RequestListener {
   }
 
   @Override
-  public void onProducerEvent(String requestId, String producerName, String producerEventName) {
+  public void onProducerEvent(final String requestId, final String producerName, final String producerEventName) {
     final int numberOfListeners = mRequestListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       RequestListener listener = mRequestListeners.get(i);
@@ -131,7 +131,7 @@ public class ForwardingRequestListener implements RequestListener {
   }
 
   @Override
-  public void onUltimateProducerReached(String requestId, String producerName, boolean successful) {
+  public void onUltimateProducerReached(final String requestId, final String producerName, final boolean successful) {
     final int numberOfListeners = mRequestListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       RequestListener listener = mRequestListeners.get(i);
@@ -145,7 +145,7 @@ public class ForwardingRequestListener implements RequestListener {
   }
 
   @Override
-  public void onRequestSuccess(ImageRequest request, String requestId, boolean isPrefetch) {
+  public void onRequestSuccess(final ImageRequest request, final String requestId, final boolean isPrefetch) {
     final int numberOfListeners = mRequestListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       RequestListener listener = mRequestListeners.get(i);
@@ -160,7 +160,7 @@ public class ForwardingRequestListener implements RequestListener {
 
   @Override
   public void onRequestFailure(
-      ImageRequest request, String requestId, Throwable throwable, boolean isPrefetch) {
+      final ImageRequest request, final String requestId, final Throwable throwable, final boolean isPrefetch) {
     final int numberOfListeners = mRequestListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       RequestListener listener = mRequestListeners.get(i);
@@ -174,7 +174,7 @@ public class ForwardingRequestListener implements RequestListener {
   }
 
   @Override
-  public void onRequestCancellation(String requestId) {
+  public void onRequestCancellation(final String requestId) {
     final int numberOfListeners = mRequestListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       RequestListener listener = mRequestListeners.get(i);
@@ -188,7 +188,7 @@ public class ForwardingRequestListener implements RequestListener {
   }
 
   @Override
-  public boolean requiresExtraMap(String id) {
+  public boolean requiresExtraMap(final String id) {
     final int numberOfListeners = mRequestListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       if (mRequestListeners.get(i).requiresExtraMap(id)) {
@@ -198,7 +198,7 @@ public class ForwardingRequestListener implements RequestListener {
     return false;
   }
 
-  private void onException(String message, Throwable t) {
+  private void onException(final String message, final Throwable t) {
     FLog.e(TAG, message, t);
   }
 }

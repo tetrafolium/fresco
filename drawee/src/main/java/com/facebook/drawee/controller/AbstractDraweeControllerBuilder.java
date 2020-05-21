@@ -39,7 +39,7 @@ public abstract class AbstractDraweeControllerBuilder<
   private static final ControllerListener<Object> sAutoPlayAnimationsListener =
       new BaseControllerListener<Object>() {
         @Override
-        public void onFinalImageSet(String id, @Nullable Object info, @Nullable Animatable anim) {
+        public void onFinalImageSet(final String id, final @Nullable Object info, final @Nullable Animatable anim) {
           if (anim != null) {
             anim.start();
           }
@@ -73,7 +73,7 @@ public abstract class AbstractDraweeControllerBuilder<
   private static final AtomicLong sIdCounter = new AtomicLong();
 
   protected AbstractDraweeControllerBuilder(
-      Context context, Set<ControllerListener> boundControllerListeners) {
+      final Context context, final Set<ControllerListener> boundControllerListeners) {
     mContext = context;
     mBoundControllerListeners = boundControllerListeners;
     init();
@@ -103,7 +103,7 @@ public abstract class AbstractDraweeControllerBuilder<
 
   /** Sets the caller context. */
   @Override
-  public BUILDER setCallerContext(Object callerContext) {
+  public BUILDER setCallerContext(final Object callerContext) {
     mCallerContext = callerContext;
     return getThis();
   }
@@ -115,7 +115,7 @@ public abstract class AbstractDraweeControllerBuilder<
   }
 
   /** Sets the image request. */
-  public BUILDER setImageRequest(REQUEST imageRequest) {
+  public BUILDER setImageRequest(final REQUEST imageRequest) {
     mImageRequest = imageRequest;
     return getThis();
   }
@@ -127,7 +127,7 @@ public abstract class AbstractDraweeControllerBuilder<
   }
 
   /** Sets the low-res image request. */
-  public BUILDER setLowResImageRequest(REQUEST lowResImageRequest) {
+  public BUILDER setLowResImageRequest(final REQUEST lowResImageRequest) {
     mLowResImageRequest = lowResImageRequest;
     return getThis();
   }
@@ -144,7 +144,7 @@ public abstract class AbstractDraweeControllerBuilder<
    * <p>For performance reasons, the array is not deep-copied, but only stored by reference. Please
    * don't modify once submitted.
    */
-  public BUILDER setFirstAvailableImageRequests(REQUEST[] firstAvailableImageRequests) {
+  public BUILDER setFirstAvailableImageRequests(final REQUEST[] firstAvailableImageRequests) {
     return setFirstAvailableImageRequests(firstAvailableImageRequests, true);
   }
 
@@ -158,7 +158,7 @@ public abstract class AbstractDraweeControllerBuilder<
    *     supplied requests.
    */
   public BUILDER setFirstAvailableImageRequests(
-      REQUEST[] firstAvailableImageRequests, boolean tryCacheOnlyFirst) {
+      final REQUEST[] firstAvailableImageRequests, final boolean tryCacheOnlyFirst) {
     Preconditions.checkArgument(
         firstAvailableImageRequests == null || firstAvailableImageRequests.length > 0,
         "No requests specified!");
@@ -183,7 +183,7 @@ public abstract class AbstractDraweeControllerBuilder<
    *
    * <p>Note: This is mutually exclusive with other image request setters.
    */
-  public BUILDER setDataSourceSupplier(@Nullable Supplier<DataSource<IMAGE>> dataSourceSupplier) {
+  public BUILDER setDataSourceSupplier(final @Nullable Supplier<DataSource<IMAGE>> dataSourceSupplier) {
     mDataSourceSupplier = dataSourceSupplier;
     return getThis();
   }
@@ -200,7 +200,7 @@ public abstract class AbstractDraweeControllerBuilder<
   }
 
   /** Sets whether tap-to-retry is enabled. */
-  public BUILDER setTapToRetryEnabled(boolean enabled) {
+  public BUILDER setTapToRetryEnabled(final boolean enabled) {
     mTapToRetryEnabled = enabled;
     return getThis();
   }
@@ -211,7 +211,7 @@ public abstract class AbstractDraweeControllerBuilder<
   }
 
   /** Sets whether to display last available image in case of failure. */
-  public BUILDER setRetainImageOnFailure(boolean enabled) {
+  public BUILDER setRetainImageOnFailure(final boolean enabled) {
     mRetainImageOnFailure = enabled;
     return getThis();
   }
@@ -222,7 +222,7 @@ public abstract class AbstractDraweeControllerBuilder<
   }
 
   /** Sets whether to auto play animations. */
-  public BUILDER setAutoPlayAnimations(boolean enabled) {
+  public BUILDER setAutoPlayAnimations(final boolean enabled) {
     mAutoPlayAnimations = enabled;
     return getThis();
   }
@@ -234,12 +234,12 @@ public abstract class AbstractDraweeControllerBuilder<
 
   /** Sets the controller listener. */
   public BUILDER setControllerListener(
-      @Nullable ControllerListener<? super INFO> controllerListener) {
+      final @Nullable ControllerListener<? super INFO> controllerListener) {
     mControllerListener = controllerListener;
     return getThis();
   }
 
-  public BUILDER setLoggingListener(@Nullable LoggingListener loggingListener) {
+  public BUILDER setLoggingListener(final @Nullable LoggingListener loggingListener) {
     mLoggingListener = loggingListener;
     return getThis();
   }
@@ -257,7 +257,7 @@ public abstract class AbstractDraweeControllerBuilder<
 
   /** Sets the controller viewport visibility listener. */
   public BUILDER setControllerViewportVisibilityListener(
-      @Nullable ControllerViewportVisibilityListener controllerViewportVisibilityListener) {
+      final @Nullable ControllerViewportVisibilityListener controllerViewportVisibilityListener) {
     mControllerViewportVisibilityListener = controllerViewportVisibilityListener;
     return getThis();
   }
@@ -269,7 +269,7 @@ public abstract class AbstractDraweeControllerBuilder<
   }
 
   /** Sets the accessibility content description. */
-  public BUILDER setContentDescription(String contentDescription) {
+  public BUILDER setContentDescription(final String contentDescription) {
     mContentDescription = contentDescription;
     return getThis();
   }
@@ -282,7 +282,7 @@ public abstract class AbstractDraweeControllerBuilder<
 
   /** Sets the old controller to be reused if possible. */
   @Override
-  public BUILDER setOldController(@Nullable DraweeController oldController) {
+  public BUILDER setOldController(final @Nullable DraweeController oldController) {
     mOldController = oldController;
     return getThis();
   }
@@ -378,9 +378,9 @@ public abstract class AbstractDraweeControllerBuilder<
 
   protected Supplier<DataSource<IMAGE>> getFirstAvailableDataSourceSupplier(
       final DraweeController controller,
-      String controllerId,
-      REQUEST[] imageRequests,
-      boolean tryBitmapCacheOnlyFirst) {
+      final String controllerId,
+      final REQUEST[] imageRequests,
+      final boolean tryBitmapCacheOnlyFirst) {
     List<Supplier<DataSource<IMAGE>>> suppliers = new ArrayList<>(imageRequests.length * 2);
     if (tryBitmapCacheOnlyFirst) {
       // we first add bitmap-cache-only suppliers, then the full-fetch ones
@@ -398,7 +398,7 @@ public abstract class AbstractDraweeControllerBuilder<
 
   /** Creates a data source supplier for the given image request. */
   protected Supplier<DataSource<IMAGE>> getDataSourceSupplierForRequest(
-      final DraweeController controller, String controllerId, REQUEST imageRequest) {
+      final DraweeController controller, final String controllerId, final REQUEST imageRequest) {
     return getDataSourceSupplierForRequest(
         controller, controllerId, imageRequest, CacheLevel.FULL_FETCH);
   }
@@ -425,7 +425,7 @@ public abstract class AbstractDraweeControllerBuilder<
   }
 
   /** Attaches listeners (if specified) to the given controller. */
-  protected void maybeAttachListeners(AbstractDraweeController controller) {
+  protected void maybeAttachListeners(final AbstractDraweeController controller) {
     if (mBoundControllerListeners != null) {
       for (ControllerListener<? super INFO> listener : mBoundControllerListeners) {
         controller.addControllerListener(listener);
@@ -440,7 +440,7 @@ public abstract class AbstractDraweeControllerBuilder<
   }
 
   /** Installs a retry manager (if specified) to the given controller. */
-  protected void maybeBuildAndSetRetryManager(AbstractDraweeController controller) {
+  protected void maybeBuildAndSetRetryManager(final AbstractDraweeController controller) {
     if (!mTapToRetryEnabled) {
       return;
     }
@@ -449,7 +449,7 @@ public abstract class AbstractDraweeControllerBuilder<
   }
 
   /** Installs a gesture detector to the given controller. */
-  protected void maybeBuildAndSetGestureDetector(AbstractDraweeController controller) {
+  protected void maybeBuildAndSetGestureDetector(final AbstractDraweeController controller) {
     GestureDetector gestureDetector = controller.getGestureDetector();
     if (gestureDetector == null) {
       gestureDetector = GestureDetector.newInstance(mContext);

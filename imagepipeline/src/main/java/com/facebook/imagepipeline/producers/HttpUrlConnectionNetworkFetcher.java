@@ -41,7 +41,7 @@ public class HttpUrlConnectionNetworkFetcher
     private long fetchCompleteTime;
 
     public HttpUrlConnectionNetworkFetchState(
-        Consumer<EncodedImage> consumer, ProducerContext producerContext) {
+        final Consumer<EncodedImage> consumer, final ProducerContext producerContext) {
       super(consumer, producerContext);
     }
   }
@@ -69,18 +69,18 @@ public class HttpUrlConnectionNetworkFetcher
     this(null, RealtimeSinceBootClock.get());
   }
 
-  public HttpUrlConnectionNetworkFetcher(int httpConnectionTimeout) {
+  public HttpUrlConnectionNetworkFetcher(final int httpConnectionTimeout) {
     this(null, RealtimeSinceBootClock.get());
     mHttpConnectionTimeout = httpConnectionTimeout;
   }
 
-  public HttpUrlConnectionNetworkFetcher(String userAgent, int httpConnectionTimeout) {
+  public HttpUrlConnectionNetworkFetcher(final String userAgent, final int httpConnectionTimeout) {
     this(userAgent, RealtimeSinceBootClock.get());
     mHttpConnectionTimeout = httpConnectionTimeout;
   }
 
   @VisibleForTesting
-  HttpUrlConnectionNetworkFetcher(@Nullable String userAgent, MonotonicClock monotonicClock) {
+  HttpUrlConnectionNetworkFetcher(final @Nullable String userAgent, final MonotonicClock monotonicClock) {
     mExecutorService = Executors.newFixedThreadPool(NUM_NETWORK_THREADS);
     mMonotonicClock = monotonicClock;
     mUserAgent = userAgent;
@@ -88,7 +88,7 @@ public class HttpUrlConnectionNetworkFetcher
 
   @Override
   public HttpUrlConnectionNetworkFetchState createFetchState(
-      Consumer<EncodedImage> consumer, ProducerContext context) {
+      final Consumer<EncodedImage> consumer, final ProducerContext context) {
     return new HttpUrlConnectionNetworkFetchState(consumer, context);
   }
 
@@ -117,7 +117,7 @@ public class HttpUrlConnectionNetworkFetcher
   }
 
   @VisibleForTesting
-  void fetchSync(HttpUrlConnectionNetworkFetchState fetchState, Callback callback) {
+  void fetchSync(final HttpUrlConnectionNetworkFetchState fetchState, final Callback callback) {
     HttpURLConnection connection = null;
     InputStream is = null;
     try {
@@ -144,7 +144,7 @@ public class HttpUrlConnectionNetworkFetcher
     }
   }
 
-  private HttpURLConnection downloadFrom(Uri uri, int maxRedirects) throws IOException {
+  private HttpURLConnection downloadFrom(final Uri uri, final int maxRedirects) throws IOException {
     HttpURLConnection connection = openConnectionTo(uri);
     if (mUserAgent != null) {
       connection.setRequestProperty("User-Agent", mUserAgent);
@@ -181,22 +181,22 @@ public class HttpUrlConnectionNetworkFetcher
   }
 
   @VisibleForTesting
-  static HttpURLConnection openConnectionTo(Uri uri) throws IOException {
+  static HttpURLConnection openConnectionTo(final Uri uri) throws IOException {
     URL url = UriUtil.uriToUrl(uri);
     return (HttpURLConnection) url.openConnection();
   }
 
   @Override
-  public void onFetchCompletion(HttpUrlConnectionNetworkFetchState fetchState, int byteSize) {
+  public void onFetchCompletion(final HttpUrlConnectionNetworkFetchState fetchState, final int byteSize) {
     fetchState.fetchCompleteTime = mMonotonicClock.now();
   }
 
-  private static boolean isHttpSuccess(int responseCode) {
+  private static boolean isHttpSuccess(final int responseCode) {
     return (responseCode >= HttpURLConnection.HTTP_OK
         && responseCode < HttpURLConnection.HTTP_MULT_CHOICE);
   }
 
-  private static boolean isHttpRedirect(int responseCode) {
+  private static boolean isHttpRedirect(final int responseCode) {
     switch (responseCode) {
       case HttpURLConnection.HTTP_MULT_CHOICE:
       case HttpURLConnection.HTTP_MOVED_PERM:
@@ -210,13 +210,13 @@ public class HttpUrlConnectionNetworkFetcher
     }
   }
 
-  private static String error(String format, Object... args) {
+  private static String error(final String format, final Object... args) {
     return String.format(Locale.getDefault(), format, args);
   }
 
   @Override
   public Map<String, String> getExtraMap(
-      HttpUrlConnectionNetworkFetchState fetchState, int byteSize) {
+      final HttpUrlConnectionNetworkFetchState fetchState, final int byteSize) {
     Map<String, String> extraMap = new HashMap<>(4);
     extraMap.put(QUEUE_TIME, Long.toString(fetchState.responseTime - fetchState.submitTime));
     extraMap.put(FETCH_TIME, Long.toString(fetchState.fetchCompleteTime - fetchState.responseTime));

@@ -113,7 +113,7 @@ public class ImagePipelineConfig {
   private static DefaultImageRequestConfig sDefaultImageRequestConfig =
       new DefaultImageRequestConfig();
 
-  private ImagePipelineConfig(Builder builder) {
+  private ImagePipelineConfig(final Builder builder) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("ImagePipelineConfig()");
     }
@@ -407,7 +407,7 @@ public class ImagePipelineConfig {
     return mCloseableReferenceLeakTracker;
   }
 
-  public static Builder newBuilder(Context context) {
+  public static Builder newBuilder(final Context context) {
     return new Builder(context);
   }
 
@@ -456,9 +456,9 @@ public class ImagePipelineConfig {
 
     private boolean mProgressiveRenderingEnabled = false;
 
-    private DefaultImageRequestConfig() {}
+    private DefaultImageRequestConfig() { }
 
-    public void setProgressiveRenderingEnabled(boolean progressiveRenderingEnabled) {
+    public void setProgressiveRenderingEnabled(final boolean progressiveRenderingEnabled) {
       this.mProgressiveRenderingEnabled = progressiveRenderingEnabled;
     }
 
@@ -506,45 +506,45 @@ public class ImagePipelineConfig {
     @Nullable private MemoryCache<CacheKey, CloseableImage> mBitmapMemoryCache;
     @Nullable private MemoryCache<CacheKey, PooledByteBuffer> mEncodedMemoryCache;
 
-    private Builder(Context context) {
+    private Builder(final Context context) {
       // Doesn't use a setter as always required.
       mContext = Preconditions.checkNotNull(context);
     }
 
-    public Builder setBitmapsConfig(Bitmap.Config config) {
+    public Builder setBitmapsConfig(final Bitmap.Config config) {
       mBitmapConfig = config;
       return this;
     }
 
     public Builder setBitmapMemoryCacheParamsSupplier(
-        Supplier<MemoryCacheParams> bitmapMemoryCacheParamsSupplier) {
+        final Supplier<MemoryCacheParams> bitmapMemoryCacheParamsSupplier) {
       mBitmapMemoryCacheParamsSupplier =
           Preconditions.checkNotNull(bitmapMemoryCacheParamsSupplier);
       return this;
     }
 
     public Builder setBitmapMemoryCacheEntryStateObserver(
-        CountingMemoryCache.EntryStateObserver<CacheKey> bitmapMemoryCacheEntryStateObserver) {
+        final CountingMemoryCache.EntryStateObserver<CacheKey> bitmapMemoryCacheEntryStateObserver) {
       mBitmapMemoryCacheEntryStateObserver = bitmapMemoryCacheEntryStateObserver;
       return this;
     }
 
-    public Builder setBitmapMemoryCacheTrimStrategy(MemoryCache.CacheTrimStrategy trimStrategy) {
+    public Builder setBitmapMemoryCacheTrimStrategy(final MemoryCache.CacheTrimStrategy trimStrategy) {
       mBitmapMemoryCacheTrimStrategy = trimStrategy;
       return this;
     }
 
-    public Builder setCacheKeyFactory(CacheKeyFactory cacheKeyFactory) {
+    public Builder setCacheKeyFactory(final CacheKeyFactory cacheKeyFactory) {
       mCacheKeyFactory = cacheKeyFactory;
       return this;
     }
 
-    public Builder setHttpConnectionTimeout(int httpConnectionTimeoutMs) {
+    public Builder setHttpConnectionTimeout(final int httpConnectionTimeoutMs) {
       mHttpConnectionTimeout = httpConnectionTimeoutMs;
       return this;
     }
 
-    public Builder setFileCacheFactory(FileCacheFactory fileCacheFactory) {
+    public Builder setFileCacheFactory(final FileCacheFactory fileCacheFactory) {
       mFileCacheFactory = fileCacheFactory;
       return this;
     }
@@ -553,7 +553,7 @@ public class ImagePipelineConfig {
       return mDownsampleEnabled;
     }
 
-    public Builder setDownsampleEnabled(boolean downsampleEnabled) {
+    public Builder setDownsampleEnabled(final boolean downsampleEnabled) {
       mDownsampleEnabled = downsampleEnabled;
       return this;
     }
@@ -562,29 +562,29 @@ public class ImagePipelineConfig {
       return mDiskCacheEnabled;
     }
 
-    public Builder setDiskCacheEnabled(boolean diskCacheEnabled) {
+    public Builder setDiskCacheEnabled(final boolean diskCacheEnabled) {
       mDiskCacheEnabled = diskCacheEnabled;
       return this;
     }
 
     public Builder setEncodedMemoryCacheParamsSupplier(
-        Supplier<MemoryCacheParams> encodedMemoryCacheParamsSupplier) {
+        final Supplier<MemoryCacheParams> encodedMemoryCacheParamsSupplier) {
       mEncodedMemoryCacheParamsSupplier =
           Preconditions.checkNotNull(encodedMemoryCacheParamsSupplier);
       return this;
     }
 
-    public Builder setExecutorSupplier(ExecutorSupplier executorSupplier) {
+    public Builder setExecutorSupplier(final ExecutorSupplier executorSupplier) {
       mExecutorSupplier = executorSupplier;
       return this;
     }
 
-    public Builder setImageCacheStatsTracker(ImageCacheStatsTracker imageCacheStatsTracker) {
+    public Builder setImageCacheStatsTracker(final ImageCacheStatsTracker imageCacheStatsTracker) {
       mImageCacheStatsTracker = imageCacheStatsTracker;
       return this;
     }
 
-    public Builder setImageDecoder(ImageDecoder imageDecoder) {
+    public Builder setImageDecoder(final ImageDecoder imageDecoder) {
       mImageDecoder = imageDecoder;
       return this;
     }
@@ -595,27 +595,27 @@ public class ImagePipelineConfig {
       return mImageTranscoderType;
     }
 
-    public Builder setImageTranscoderType(@ImageTranscoderType int imageTranscoderType) {
+    public Builder setImageTranscoderType(final @ImageTranscoderType int imageTranscoderType) {
       mImageTranscoderType = imageTranscoderType;
       return this;
     }
 
-    public Builder setImageTranscoderFactory(ImageTranscoderFactory imageTranscoderFactory) {
+    public Builder setImageTranscoderFactory(final ImageTranscoderFactory imageTranscoderFactory) {
       mImageTranscoderFactory = imageTranscoderFactory;
       return this;
     }
 
-    public Builder setIsPrefetchEnabledSupplier(Supplier<Boolean> isPrefetchEnabledSupplier) {
+    public Builder setIsPrefetchEnabledSupplier(final Supplier<Boolean> isPrefetchEnabledSupplier) {
       mIsPrefetchEnabledSupplier = isPrefetchEnabledSupplier;
       return this;
     }
 
-    public Builder setMainDiskCacheConfig(DiskCacheConfig mainDiskCacheConfig) {
+    public Builder setMainDiskCacheConfig(final DiskCacheConfig mainDiskCacheConfig) {
       mMainDiskCacheConfig = mainDiskCacheConfig;
       return this;
     }
 
-    public Builder setMemoryTrimmableRegistry(MemoryTrimmableRegistry memoryTrimmableRegistry) {
+    public Builder setMemoryTrimmableRegistry(final MemoryTrimmableRegistry memoryTrimmableRegistry) {
       mMemoryTrimmableRegistry = memoryTrimmableRegistry;
       return this;
     }
@@ -626,75 +626,75 @@ public class ImagePipelineConfig {
       return mMemoryChunkType;
     }
 
-    public Builder setMemoryChunkType(@MemoryChunkType int memoryChunkType) {
+    public Builder setMemoryChunkType(final @MemoryChunkType int memoryChunkType) {
       mMemoryChunkType = memoryChunkType;
       return this;
     }
 
-    public Builder setNetworkFetcher(NetworkFetcher networkFetcher) {
+    public Builder setNetworkFetcher(final NetworkFetcher networkFetcher) {
       mNetworkFetcher = networkFetcher;
       return this;
     }
 
-    public Builder setPlatformBitmapFactory(PlatformBitmapFactory platformBitmapFactory) {
+    public Builder setPlatformBitmapFactory(final PlatformBitmapFactory platformBitmapFactory) {
       mPlatformBitmapFactory = platformBitmapFactory;
       return this;
     }
 
-    public Builder setPoolFactory(PoolFactory poolFactory) {
+    public Builder setPoolFactory(final PoolFactory poolFactory) {
       mPoolFactory = poolFactory;
       return this;
     }
 
-    public Builder setProgressiveJpegConfig(ProgressiveJpegConfig progressiveJpegConfig) {
+    public Builder setProgressiveJpegConfig(final ProgressiveJpegConfig progressiveJpegConfig) {
       mProgressiveJpegConfig = progressiveJpegConfig;
       return this;
     }
 
-    public Builder setRequestListeners(Set<RequestListener> requestListeners) {
+    public Builder setRequestListeners(final Set<RequestListener> requestListeners) {
       mRequestListeners = requestListeners;
       return this;
     }
 
-    public Builder setRequestListener2s(Set<RequestListener2> requestListeners) {
+    public Builder setRequestListener2s(final Set<RequestListener2> requestListeners) {
       mRequestListener2s = requestListeners;
       return this;
     }
 
-    public Builder setResizeAndRotateEnabledForNetwork(boolean resizeAndRotateEnabledForNetwork) {
+    public Builder setResizeAndRotateEnabledForNetwork(final boolean resizeAndRotateEnabledForNetwork) {
       mResizeAndRotateEnabledForNetwork = resizeAndRotateEnabledForNetwork;
       return this;
     }
 
-    public Builder setSmallImageDiskCacheConfig(DiskCacheConfig smallImageDiskCacheConfig) {
+    public Builder setSmallImageDiskCacheConfig(final DiskCacheConfig smallImageDiskCacheConfig) {
       mSmallImageDiskCacheConfig = smallImageDiskCacheConfig;
       return this;
     }
 
-    public Builder setImageDecoderConfig(ImageDecoderConfig imageDecoderConfig) {
+    public Builder setImageDecoderConfig(final ImageDecoderConfig imageDecoderConfig) {
       mImageDecoderConfig = imageDecoderConfig;
       return this;
     }
 
-    public Builder setCallerContextVerifier(CallerContextVerifier callerContextVerifier) {
+    public Builder setCallerContextVerifier(final CallerContextVerifier callerContextVerifier) {
       mCallerContextVerifier = callerContextVerifier;
       return this;
     }
 
     public Builder setCloseableReferenceLeakTracker(
-        CloseableReferenceLeakTracker closeableReferenceLeakTracker) {
+        final CloseableReferenceLeakTracker closeableReferenceLeakTracker) {
       mCloseableReferenceLeakTracker = closeableReferenceLeakTracker;
       return this;
     }
 
     public Builder setBitmapMemoryCache(
-        @Nullable MemoryCache<CacheKey, CloseableImage> bitmapMemoryCache) {
+        final @Nullable MemoryCache<CacheKey, CloseableImage> bitmapMemoryCache) {
       mBitmapMemoryCache = bitmapMemoryCache;
       return this;
     }
 
     public Builder setEncodedMemoryCache(
-        @Nullable MemoryCache<CacheKey, PooledByteBuffer> encodedMemoryCache) {
+        final @Nullable MemoryCache<CacheKey, PooledByteBuffer> encodedMemoryCache) {
       mEncodedMemoryCache = encodedMemoryCache;
       return this;
     }

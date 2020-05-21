@@ -28,14 +28,14 @@ public class ImagePerfControllerListener extends BaseControllerListener<ImageInf
   private final ImagePerfMonitor mImagePerfMonitor;
 
   public ImagePerfControllerListener(
-      MonotonicClock clock, ImagePerfState imagePerfState, ImagePerfMonitor imagePerfMonitor) {
+      final MonotonicClock clock, final ImagePerfState imagePerfState, final ImagePerfMonitor imagePerfMonitor) {
     mClock = clock;
     mImagePerfState = imagePerfState;
     mImagePerfMonitor = imagePerfMonitor;
   }
 
   @Override
-  public void onSubmit(String id, Object callerContext) {
+  public void onSubmit(final String id, final Object callerContext) {
     final long now = mClock.now();
 
     mImagePerfState.resetPointsTimestamps();
@@ -49,7 +49,7 @@ public class ImagePerfControllerListener extends BaseControllerListener<ImageInf
   }
 
   @Override
-  public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
+  public void onIntermediateImageSet(final String id, final @Nullable ImageInfo imageInfo) {
     final long now = mClock.now();
 
     mImagePerfState.setControllerIntermediateImageSetTimeMs(now);
@@ -61,7 +61,7 @@ public class ImagePerfControllerListener extends BaseControllerListener<ImageInf
 
   @Override
   public void onFinalImageSet(
-      String id, @Nullable ImageInfo imageInfo, @Nullable Animatable animatable) {
+      final String id, final @Nullable ImageInfo imageInfo, final @Nullable Animatable animatable) {
     final long now = mClock.now();
 
     mImagePerfState.setControllerFinalImageSetTimeMs(now);
@@ -73,7 +73,7 @@ public class ImagePerfControllerListener extends BaseControllerListener<ImageInf
   }
 
   @Override
-  public void onFailure(String id, Throwable throwable) {
+  public void onFailure(final String id, final Throwable throwable) {
     final long now = mClock.now();
 
     mImagePerfState.setControllerFailureTimeMs(now);
@@ -86,7 +86,7 @@ public class ImagePerfControllerListener extends BaseControllerListener<ImageInf
   }
 
   @Override
-  public void onRelease(String id) {
+  public void onRelease(final String id) {
     super.onRelease(id);
     final long now = mClock.now();
 
@@ -104,14 +104,14 @@ public class ImagePerfControllerListener extends BaseControllerListener<ImageInf
   }
 
   @Override
-  public void onImageDrawn(String id, ImageInfo info, DimensionsInfo dimensionsInfo) {
+  public void onImageDrawn(final String id, final ImageInfo info, final DimensionsInfo dimensionsInfo) {
     mImagePerfState.setImageDrawTimeMs(mClock.now());
     mImagePerfState.setDimensionsInfo(dimensionsInfo);
     mImagePerfMonitor.notifyStatusUpdated(mImagePerfState, ImageLoadStatus.DRAW);
   }
 
   @VisibleForTesting
-  public void reportViewVisible(long now) {
+  public void reportViewVisible(final long now) {
     mImagePerfState.setVisible(true);
     mImagePerfState.setVisibilityEventTimeMs(now);
 
@@ -120,7 +120,7 @@ public class ImagePerfControllerListener extends BaseControllerListener<ImageInf
   }
 
   @VisibleForTesting
-  private void reportViewInvisible(long time) {
+  private void reportViewInvisible(final long time) {
     mImagePerfState.setVisible(false);
     mImagePerfState.setInvisibilityEventTimeMs(time);
 

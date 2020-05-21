@@ -21,7 +21,7 @@ public class LogcatImagePerfDataListener implements ImagePerfDataListener {
 
   @Override
   public void onImageLoadStatusUpdated(
-      ImagePerfData imagePerfData, @ImageLoadStatus int imageLoadStatus) {
+      final ImagePerfData imagePerfData, final @ImageLoadStatus int imageLoadStatus) {
     Log.d(
         TAG,
         String.format(
@@ -33,7 +33,7 @@ public class LogcatImagePerfDataListener implements ImagePerfDataListener {
 
   @Override
   public void onImageVisibilityUpdated(
-      ImagePerfData imagePerfData, @VisibilityState int visibility) {
+      final ImagePerfData imagePerfData, final @VisibilityState int visibility) {
     Log.d(
         TAG,
         String.format(

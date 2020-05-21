@@ -82,7 +82,7 @@ public class SingleUsePostprocessorProducerTest {
     doAnswer(
             new Answer<Object>() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 mResults.add(
                     ((CloseableReference<CloseableImage>) invocation.getArguments()[0]).clone());
                 return null;

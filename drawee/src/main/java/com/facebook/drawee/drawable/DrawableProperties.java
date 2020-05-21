@@ -25,25 +25,25 @@ public class DrawableProperties {
   private int mDither = UNSET;
   private int mFilterBitmap = UNSET;
 
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     mAlpha = alpha;
   }
 
-  public void setColorFilter(ColorFilter colorFilter) {
+  public void setColorFilter(final ColorFilter colorFilter) {
     mColorFilter = colorFilter;
     mIsSetColorFilter = true;
   }
 
-  public void setDither(boolean dither) {
+  public void setDither(final boolean dither) {
     mDither = dither ? 1 : 0;
   }
 
-  public void setFilterBitmap(boolean filterBitmap) {
+  public void setFilterBitmap(final boolean filterBitmap) {
     mFilterBitmap = filterBitmap ? 1 : 0;
   }
 
   @SuppressLint("Range")
-  public void applyTo(Drawable drawable) {
+  public void applyTo(final Drawable drawable) {
     if (drawable == null) {
       return;
     }

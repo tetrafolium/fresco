@@ -28,7 +28,7 @@ public class PooledByteBufferInputStream extends InputStream {
    *
    * @param pooledByteBuffer the buffer to read from
    */
-  public PooledByteBufferInputStream(PooledByteBuffer pooledByteBuffer) {
+  public PooledByteBufferInputStream(final PooledByteBuffer pooledByteBuffer) {
     super();
     Preconditions.checkArgument(!pooledByteBuffer.isClosed());
     mPooledByteBuffer = Preconditions.checkNotNull(pooledByteBuffer);
@@ -49,7 +49,7 @@ public class PooledByteBufferInputStream extends InputStream {
    * @param readlimit ignored.
    */
   @Override
-  public void mark(int readlimit) {
+  public void mark(final int readlimit) {
     mMark = mOffset;
   }
 
@@ -70,7 +70,7 @@ public class PooledByteBufferInputStream extends InputStream {
   }
 
   @Override
-  public int read(byte[] buffer) {
+  public int read(final byte[] buffer) {
     return read(buffer, 0, buffer.length);
   }
 
@@ -84,7 +84,7 @@ public class PooledByteBufferInputStream extends InputStream {
    * @return number of bytes read
    */
   @Override
-  public int read(byte[] buffer, int offset, int length) {
+  public int read(final byte[] buffer, final int offset, final int length) {
     if (offset < 0 || length < 0 || offset + length > buffer.length) {
       throw new ArrayIndexOutOfBoundsException(
           "length=" + buffer.length + "; regionStart=" + offset + "; regionLength=" + length);
@@ -122,7 +122,7 @@ public class PooledByteBufferInputStream extends InputStream {
    * @return number of bytes actually skipped
    */
   @Override
-  public long skip(long byteCount) {
+  public long skip(final long byteCount) {
     Preconditions.checkArgument(byteCount >= 0);
     int skipped = Math.min((int) byteCount, available());
     mOffset += skipped;

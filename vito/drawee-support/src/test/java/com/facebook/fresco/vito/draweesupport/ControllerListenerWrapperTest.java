@@ -140,5 +140,5 @@ public class ControllerListenerWrapperTest {
     assertThat(wrapper).isNull();
   }
 
-  public abstract static class AnimatedDrawable extends Drawable implements Animatable {}
+  public abstract static class AnimatedDrawable extends Drawable implements Animatable { }
 }

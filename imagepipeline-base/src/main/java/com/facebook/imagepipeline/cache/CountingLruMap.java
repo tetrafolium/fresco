@@ -28,7 +28,7 @@ public class CountingLruMap<K, V> {
   @GuardedBy("this")
   private int mSizeInBytes = 0;
 
-  public CountingLruMap(ValueDescriptor<V> valueDescriptor) {
+  public CountingLruMap(final ValueDescriptor<V> valueDescriptor) {
     mValueDescriptor = valueDescriptor;
   }
 
@@ -60,7 +60,7 @@ public class CountingLruMap<K, V> {
 
   /** Gets the all matching elements. */
   public synchronized ArrayList<LinkedHashMap.Entry<K, V>> getMatchingEntries(
-      @Nullable Predicate<K> predicate) {
+      final @Nullable Predicate<K> predicate) {
     ArrayList<LinkedHashMap.Entry<K, V>> matchingEntries = new ArrayList<>(mMap.entrySet().size());
     for (LinkedHashMap.Entry<K, V> entry : mMap.entrySet()) {
       if (predicate == null || predicate.apply(entry.getKey())) {
@@ -71,19 +71,19 @@ public class CountingLruMap<K, V> {
   }
 
   /** Returns whether the map contains an element with the given key. */
-  public synchronized boolean contains(K key) {
+  public synchronized boolean contains(final K key) {
     return mMap.containsKey(key);
   }
 
   /** Gets the element from the map. */
   @Nullable
-  public synchronized V get(K key) {
+  public synchronized V get(final K key) {
     return mMap.get(key);
   }
 
   /** Adds the element to the map, and removes the old element with the same key if any. */
   @Nullable
-  public synchronized V put(K key, V value) {
+  public synchronized V put(final K key, final V value) {
     // We do remove and insert instead of just replace, in order to cause a structural change
     // to the map, as we always want the latest inserted element to be last in the queue.
     V oldValue = mMap.remove(key);
@@ -95,14 +95,14 @@ public class CountingLruMap<K, V> {
 
   /** Removes the element from the map. */
   @Nullable
-  public synchronized V remove(K key) {
+  public synchronized V remove(final K key) {
     V oldValue = mMap.remove(key);
     mSizeInBytes -= getValueSizeInBytes(oldValue);
     return oldValue;
   }
 
   /** Removes all the matching elements from the map. */
-  public synchronized ArrayList<V> removeAll(@Nullable Predicate<K> predicate) {
+  public synchronized ArrayList<V> removeAll(final @Nullable Predicate<K> predicate) {
     ArrayList<V> oldValues = new ArrayList<>();
     Iterator<LinkedHashMap.Entry<K, V>> iterator = mMap.entrySet().iterator();
     while (iterator.hasNext()) {
@@ -124,7 +124,7 @@ public class CountingLruMap<K, V> {
     return oldValues;
   }
 
-  private int getValueSizeInBytes(V value) {
+  private int getValueSizeInBytes(final V value) {
     return (value == null) ? 0 : mValueDescriptor.getSizeInBytes(value);
   }
 }

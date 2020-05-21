@@ -20,7 +20,7 @@ public class ImageDecoderConfig {
 
   private final List<ImageFormat.FormatChecker> mCustomImageFormats;
 
-  private ImageDecoderConfig(Builder builder) {
+  private ImageDecoderConfig(final Builder builder) {
     mCustomImageDecoders = builder.mCustomImageDecoders;
     mCustomImageFormats = builder.mCustomImageFormats;
   }
@@ -50,9 +50,9 @@ public class ImageDecoderConfig {
      * @return the builder
      */
     public Builder addDecodingCapability(
-        ImageFormat imageFormat,
-        ImageFormat.FormatChecker imageFormatChecker,
-        ImageDecoder decoder) {
+        final ImageFormat imageFormat,
+        final ImageFormat.FormatChecker imageFormatChecker,
+        final ImageDecoder decoder) {
       if (mCustomImageFormats == null) {
         mCustomImageFormats = new ArrayList<>();
       }
@@ -69,7 +69,7 @@ public class ImageDecoderConfig {
      * @param decoder the decoder to use
      * @return the builder
      */
-    public Builder overrideDecoder(ImageFormat imageFormat, ImageDecoder decoder) {
+    public Builder overrideDecoder(final ImageFormat imageFormat, final ImageDecoder decoder) {
       if (mCustomImageDecoders == null) {
         mCustomImageDecoders = new HashMap<>();
       }

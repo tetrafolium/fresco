@@ -20,7 +20,7 @@ public class DrawableUtils {
    * @param drawable the drawable to clone.
    * @return a clone of the drawable or null if the drawable cannot be cloned.
    */
-  public static @Nullable Drawable cloneDrawable(Drawable drawable) {
+  public static @Nullable Drawable cloneDrawable(final Drawable drawable) {
     if (drawable instanceof CloneableDrawable) {
       return ((CloneableDrawable) drawable).cloneDrawable();
     }
@@ -35,7 +35,7 @@ public class DrawableUtils {
    * @param to drawable to copy properties to
    * @param from drawable to copy properties from
    */
-  public static void copyProperties(@Nullable Drawable to, @Nullable Drawable from) {
+  public static void copyProperties(final @Nullable Drawable to, final @Nullable Drawable from) {
     if (from == null || to == null || to == from) {
       return;
     }
@@ -54,7 +54,7 @@ public class DrawableUtils {
    * @param properties wrapper around mValue values to set on the drawable
    */
   public static void setDrawableProperties(
-      @Nullable Drawable drawable, @Nullable DrawableProperties properties) {
+      final @Nullable Drawable drawable, final @Nullable DrawableProperties properties) {
     if (drawable == null || properties == null) {
       return;
     }
@@ -69,9 +69,9 @@ public class DrawableUtils {
    * @param transformCallback TransformCallback used by TransformAwareDrawables
    */
   public static void setCallbacks(
-      @Nullable Drawable drawable,
-      @Nullable Drawable.Callback callback,
-      @Nullable TransformCallback transformCallback) {
+      final @Nullable Drawable drawable,
+      final @Nullable Drawable.Callback callback,
+      final @Nullable TransformCallback transformCallback) {
     if (drawable != null) {
       drawable.setCallback(callback);
       if (drawable instanceof TransformAwareDrawable) {
@@ -87,7 +87,7 @@ public class DrawableUtils {
    * @param alpha value between 0 and 255
    * @return multiplied color
    */
-  public static int multiplyColorAlpha(int color, int alpha) {
+  public static int multiplyColorAlpha(final int color, final int alpha) {
     if (alpha == 255) {
       return color;
     }
@@ -106,7 +106,7 @@ public class DrawableUtils {
    * @param color
    * @return opacity expressed by one of PixelFormat constants
    */
-  public static int getOpacityFromColor(int color) {
+  public static int getOpacityFromColor(final int color) {
     int colorAlpha = color >>> 24;
     if (colorAlpha == 255) {
       return PixelFormat.OPAQUE;

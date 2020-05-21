@@ -21,9 +21,9 @@ public class BitmapMemoryCacheGetProducer extends BitmapMemoryCacheProducer {
   private static final String ORIGIN_SUBCATEGORY = "pipe_ui";
 
   public BitmapMemoryCacheGetProducer(
-      MemoryCache<CacheKey, CloseableImage> memoryCache,
-      CacheKeyFactory cacheKeyFactory,
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final MemoryCache<CacheKey, CloseableImage> memoryCache,
+      final CacheKeyFactory cacheKeyFactory,
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     super(memoryCache, cacheKeyFactory, inputProducer);
   }
 
@@ -31,7 +31,7 @@ public class BitmapMemoryCacheGetProducer extends BitmapMemoryCacheProducer {
   protected Consumer<CloseableReference<CloseableImage>> wrapConsumer(
       final Consumer<CloseableReference<CloseableImage>> consumer,
       final CacheKey cacheKey,
-      boolean isMemoryCacheEnabled) {
+      final boolean isMemoryCacheEnabled) {
     // since this cache is read-only, we can pass our consumer directly to the next producer
     return consumer;
   }

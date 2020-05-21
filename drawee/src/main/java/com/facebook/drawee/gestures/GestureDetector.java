@@ -41,14 +41,14 @@ public class GestureDetector {
   @VisibleForTesting float mActionDownX;
   @VisibleForTesting float mActionDownY;
 
-  public GestureDetector(Context context) {
+  public GestureDetector(final Context context) {
     final ViewConfiguration viewConfiguration = ViewConfiguration.get(context);
     mSingleTapSlopPx = viewConfiguration.getScaledTouchSlop();
     init();
   }
 
   /** Creates a new instance of this gesture detector. */
-  public static GestureDetector newInstance(Context context) {
+  public static GestureDetector newInstance(final Context context) {
     return new GestureDetector(context);
   }
 
@@ -69,7 +69,7 @@ public class GestureDetector {
   }
 
   /** Sets the click listener. */
-  public void setClickListener(ClickListener clickListener) {
+  public void setClickListener(final ClickListener clickListener) {
     mClickListener = clickListener;
   }
 
@@ -79,7 +79,7 @@ public class GestureDetector {
   }
 
   /** Handles the touch event */
-  public boolean onTouchEvent(MotionEvent event) {
+  public boolean onTouchEvent(final MotionEvent event) {
     switch (event.getAction()) {
       case MotionEvent.ACTION_DOWN:
         mIsCapturingGesture = true;

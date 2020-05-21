@@ -60,7 +60,7 @@ public abstract class DefaultDecoder implements PlatformDecoder {
   private static final byte[] EOI_TAIL =
       new byte[] {(byte) JfifUtil.MARKER_FIRST_BYTE, (byte) JfifUtil.MARKER_EOI};
 
-  public DefaultDecoder(BitmapPool bitmapPool, int maxNumThreads, SynchronizedPool decodeBuffers) {
+  public DefaultDecoder(final BitmapPool bitmapPool, final int maxNumThreads, final SynchronizedPool decodeBuffers) {
     mBitmapPool = bitmapPool;
     mDecodeBuffers = decodeBuffers;
     for (int i = 0; i < maxNumThreads; i++) {
@@ -70,16 +70,16 @@ public abstract class DefaultDecoder implements PlatformDecoder {
 
   @Override
   public CloseableReference<Bitmap> decodeFromEncodedImage(
-      EncodedImage encodedImage, Bitmap.Config bitmapConfig, @Nullable Rect regionToDecode) {
+      final EncodedImage encodedImage, final Bitmap.Config bitmapConfig, final @Nullable Rect regionToDecode) {
     return decodeFromEncodedImageWithColorSpace(encodedImage, bitmapConfig, regionToDecode, null);
   }
 
   @Override
   public CloseableReference<Bitmap> decodeJPEGFromEncodedImage(
-      EncodedImage encodedImage,
-      Bitmap.Config bitmapConfig,
-      @Nullable Rect regionToDecode,
-      int length) {
+      final EncodedImage encodedImage,
+      final Bitmap.Config bitmapConfig,
+      final @Nullable Rect regionToDecode,
+      final int length) {
     return decodeJPEGFromEncodedImageWithColorSpace(
         encodedImage, bitmapConfig, regionToDecode, length, null);
   }
@@ -99,9 +99,9 @@ public abstract class DefaultDecoder implements PlatformDecoder {
    */
   @Override
   public CloseableReference<Bitmap> decodeFromEncodedImageWithColorSpace(
-      EncodedImage encodedImage,
-      Bitmap.Config bitmapConfig,
-      @Nullable Rect regionToDecode,
+      final EncodedImage encodedImage,
+      final Bitmap.Config bitmapConfig,
+      final @Nullable Rect regionToDecode,
       @Nullable final ColorSpace colorSpace) {
     final BitmapFactory.Options options = getDecodeOptionsForStream(encodedImage, bitmapConfig);
     boolean retryOnFail = options.inPreferredConfig != Bitmap.Config.ARGB_8888;
@@ -132,10 +132,10 @@ public abstract class DefaultDecoder implements PlatformDecoder {
    */
   @Override
   public CloseableReference<Bitmap> decodeJPEGFromEncodedImageWithColorSpace(
-      EncodedImage encodedImage,
-      Bitmap.Config bitmapConfig,
-      @Nullable Rect regionToDecode,
-      int length,
+      final EncodedImage encodedImage,
+      final Bitmap.Config bitmapConfig,
+      final @Nullable Rect regionToDecode,
+      final int length,
       @Nullable final ColorSpace colorSpace) {
     boolean isJpegComplete = encodedImage.isCompleteAt(length);
     final BitmapFactory.Options options = getDecodeOptionsForStream(encodedImage, bitmapConfig);
@@ -171,7 +171,7 @@ public abstract class DefaultDecoder implements PlatformDecoder {
    * @return the bitmap
    */
   protected CloseableReference<Bitmap> decodeStaticImageFromStream(
-      InputStream inputStream, BitmapFactory.Options options, @Nullable Rect regionToDecode) {
+      final InputStream inputStream, final BitmapFactory.Options options, final @Nullable Rect regionToDecode) {
     return decodeFromStream(inputStream, options, regionToDecode, null);
   }
 
@@ -187,9 +187,9 @@ public abstract class DefaultDecoder implements PlatformDecoder {
    * @return the bitmap
    */
   private CloseableReference<Bitmap> decodeFromStream(
-      InputStream inputStream,
-      BitmapFactory.Options options,
-      @Nullable Rect regionToDecode,
+      final InputStream inputStream,
+      final BitmapFactory.Options options,
+      final @Nullable Rect regionToDecode,
       @Nullable final ColorSpace colorSpace) {
     Preconditions.checkNotNull(inputStream);
     int targetWidth = options.outWidth;
@@ -299,7 +299,7 @@ public abstract class DefaultDecoder implements PlatformDecoder {
    * Options returned by this method are configured with mDecodeBuffer which is GuardedBy("this")
    */
   private static BitmapFactory.Options getDecodeOptionsForStream(
-      EncodedImage encodedImage, Bitmap.Config bitmapConfig) {
+      final EncodedImage encodedImage, final Bitmap.Config bitmapConfig) {
     final BitmapFactory.Options options = new BitmapFactory.Options();
     // Sample size should ONLY be different than 1 when downsampling is enabled in the pipeline
     options.inSampleSize = encodedImage.getSampleSize();

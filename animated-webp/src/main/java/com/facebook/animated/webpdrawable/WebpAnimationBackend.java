@@ -36,7 +36,7 @@ public class WebpAnimationBackend implements AnimationBackend {
   @GuardedBy("this")
   private @Nullable Bitmap mTempBitmap;
 
-  public static WebpAnimationBackend create(String filePath) throws IOException {
+  public static WebpAnimationBackend create(final String filePath) throws IOException {
     InputStream is = null;
     try {
       is = new BufferedInputStream(new FileInputStream(filePath));
@@ -53,12 +53,12 @@ public class WebpAnimationBackend implements AnimationBackend {
     }
   }
 
-  private WebpAnimationBackend(WebPImage webPImage) {
+  private WebpAnimationBackend(final WebPImage webPImage) {
     mWebPImage = webPImage;
   }
 
   @Override
-  public boolean drawFrame(Drawable parent, Canvas canvas, int frameNumber) {
+  public boolean drawFrame(final Drawable parent, final Canvas canvas, final int frameNumber) {
     WebPFrame frame = mWebPImage.getFrame(frameNumber);
 
     double xScale = (double) mBounds.width() / (double) parent.getIntrinsicWidth();
@@ -88,17 +88,17 @@ public class WebpAnimationBackend implements AnimationBackend {
   }
 
   @Override
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     // unimplemented
   }
 
   @Override
-  public void setColorFilter(@Nullable ColorFilter colorFilter) {
+  public void setColorFilter(final @Nullable ColorFilter colorFilter) {
     // unimplemented
   }
 
   @Override
-  public synchronized void setBounds(Rect bounds) {
+  public synchronized void setBounds(final Rect bounds) {
     mBounds = bounds;
   }
 
@@ -128,7 +128,7 @@ public class WebpAnimationBackend implements AnimationBackend {
   }
 
   @Override
-  public int getFrameDurationMs(int frameNumber) {
+  public int getFrameDurationMs(final int frameNumber) {
     return mWebPImage.getFrameDurations()[frameNumber];
   }
 
@@ -137,7 +137,7 @@ public class WebpAnimationBackend implements AnimationBackend {
     return mWebPImage.getLoopCount();
   }
 
-  private synchronized void prepareTempBitmapForThisSize(int width, int height) {
+  private synchronized void prepareTempBitmapForThisSize(final int width, final int height) {
     // Different webp frames can be different size,
     // So we need to ensure we can fit next frame to temporary bitmap
     if (mTempBitmap != null
@@ -157,7 +157,7 @@ public class WebpAnimationBackend implements AnimationBackend {
     }
   }
 
-  private static void closeSilently(@Nullable Closeable closeable) {
+  private static void closeSilently(final @Nullable Closeable closeable) {
     if (closeable == null) {
       return;
     }

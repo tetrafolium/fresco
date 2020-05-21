@@ -111,7 +111,7 @@ public class Config {
         .build();
   }
 
-  private Config(Builder builder) {
+  private Config(final Builder builder) {
     this.dataSourceType = builder.mDataSourceType;
     this.recyclerLayoutType = builder.mRecyclerLayoutType;
     this.gridSpanCount = builder.mGridSpanCount;
@@ -167,133 +167,133 @@ public class Config {
     private int mDecodingThreadCount;
     private int mBgColor;
 
-    private Builder() {}
+    private Builder() { }
 
     public static Builder newBuilder() {
       return new Builder();
     }
 
-    public Builder setDataSourceType(String dataSourceType) {
+    public Builder setDataSourceType(final String dataSourceType) {
       this.mDataSourceType = dataSourceType;
       return this;
     }
 
-    public Builder setInfiniteDataSource(boolean infiniteDataSource) {
+    public Builder setInfiniteDataSource(final boolean infiniteDataSource) {
       this.mInfiniteDataSource = infiniteDataSource;
       return this;
     }
 
-    public Builder setDistinctUriDataSource(boolean distinctUriDataSource) {
+    public Builder setDistinctUriDataSource(final boolean distinctUriDataSource) {
       this.mDistinctUriDataSource = distinctUriDataSource;
       return this;
     }
 
-    public Builder setRecyclerLayoutType(String recyclerLayoutType) {
+    public Builder setRecyclerLayoutType(final String recyclerLayoutType) {
       this.mRecyclerLayoutType = recyclerLayoutType;
       return this;
     }
 
-    public Builder setGridSpanCount(int gridSpanCount) {
+    public Builder setGridSpanCount(final int gridSpanCount) {
       this.mGridSpanCount = gridSpanCount;
       return this;
     }
 
-    public Builder setReuseOldController(boolean reuseOldController) {
+    public Builder setReuseOldController(final boolean reuseOldController) {
       this.mReuseOldController = reuseOldController;
       return this;
     }
 
-    public Builder setUseRoundedCorners(boolean useRoundedCorners) {
+    public Builder setUseRoundedCorners(final boolean useRoundedCorners) {
       this.mUseRoundedCorners = useRoundedCorners;
       return this;
     }
 
-    public Builder setUseRoundedAsCircle(boolean useRoundedAsCircle) {
+    public Builder setUseRoundedAsCircle(final boolean useRoundedAsCircle) {
       this.mUseRoundedAsCircle = useRoundedAsCircle;
       return this;
     }
 
-    public Builder setUsePostprocessor(boolean usePostprocessor) {
+    public Builder setUsePostprocessor(final boolean usePostprocessor) {
       this.mUsePostprocessor = usePostprocessor;
       return this;
     }
 
-    public Builder setPostprocessorType(String postprocessorType) {
+    public Builder setPostprocessorType(final String postprocessorType) {
       this.mPostprocessorType = postprocessorType;
       return this;
     }
 
-    public Builder setScaleType(String scaleType) {
+    public Builder setScaleType(final String scaleType) {
       this.mScaleType = scaleType;
       return this;
     }
 
-    public Builder setRotateUsingMetaData(boolean rotateUsingMetaData) {
+    public Builder setRotateUsingMetaData(final boolean rotateUsingMetaData) {
       this.mRotateUsingMetaData = rotateUsingMetaData;
       return this;
     }
 
-    public Builder setForcedRotationAngle(int forcedRotationAngle) {
+    public Builder setForcedRotationAngle(final int forcedRotationAngle) {
       this.mForcedRotationAngle = forcedRotationAngle;
       return this;
     }
 
-    public Builder setDecodingThreadCount(int decodingThreadCount) {
+    public Builder setDecodingThreadCount(final int decodingThreadCount) {
       this.mDecodingThreadCount = decodingThreadCount;
       return this;
     }
 
-    public Builder setDownsampling(boolean downsampling) {
+    public Builder setDownsampling(final boolean downsampling) {
       this.mDownsampling = downsampling;
       return this;
     }
 
-    public Builder setOverrideSize(boolean overrideSize) {
+    public Builder setOverrideSize(final boolean overrideSize) {
       this.mOverrideSize = overrideSize;
       return this;
     }
 
-    public Builder setOverridenWidth(int overridenWidth) {
+    public Builder setOverridenWidth(final int overridenWidth) {
       this.mOverridenWidth = overridenWidth;
       return this;
     }
 
-    public Builder setOverridenHeight(int overridenHeight) {
+    public Builder setOverridenHeight(final int overridenHeight) {
       this.mOverridenHeight = overridenHeight;
       return this;
     }
 
-    public Builder setFadeDurationMs(int fadeDurationMs) {
+    public Builder setFadeDurationMs(final int fadeDurationMs) {
       this.mFadeDurationMs = fadeDurationMs;
       return this;
     }
 
-    public Builder setDecodeCancellation(boolean decodeCancellation) {
+    public Builder setDecodeCancellation(final boolean decodeCancellation) {
       this.mDecodeCancellation = decodeCancellation;
       return this;
     }
 
-    public Builder setWebpSupportEnabled(boolean webpSupportEnabled) {
+    public Builder setWebpSupportEnabled(final boolean webpSupportEnabled) {
       this.mWebpSupportEnabled = webpSupportEnabled;
       return this;
     }
 
-    public Builder setDrawBorder(boolean drawBorder) {
+    public Builder setDrawBorder(final boolean drawBorder) {
       this.mDrawBorder = drawBorder;
       return this;
     }
 
-    public Builder setBgColor(int bgColor) {
+    public Builder setBgColor(final int bgColor) {
       this.mBgColor = bgColor;
       return this;
     }
 
-    public Builder setDraweeOverlayEnabled(boolean draweeOverlayEnabled) {
+    public Builder setDraweeOverlayEnabled(final boolean draweeOverlayEnabled) {
       this.mDraweeOverlayEnabled = draweeOverlayEnabled;
       return this;
     }
 
-    public Builder setInstrumentationEnabled(boolean instrumentationEnabled) {
+    public Builder setInstrumentationEnabled(final boolean instrumentationEnabled) {
       this.mInstrumentationEnabled = instrumentationEnabled;
       return this;
     }

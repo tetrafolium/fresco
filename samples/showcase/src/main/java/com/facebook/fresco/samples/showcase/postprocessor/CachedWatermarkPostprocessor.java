@@ -18,7 +18,7 @@ import java.util.Locale;
  */
 public class CachedWatermarkPostprocessor extends WatermarkPostprocessor {
 
-  public CachedWatermarkPostprocessor(int count, String watermarkText) {
+  public CachedWatermarkPostprocessor(final int count, final String watermarkText) {
     super(count, watermarkText);
   }
 

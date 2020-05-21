@@ -53,9 +53,9 @@ public class LocalExifThumbnailProducer implements ThumbnailProducer<EncodedImag
   private final ContentResolver mContentResolver;
 
   public LocalExifThumbnailProducer(
-      Executor executor,
-      PooledByteBufferFactory pooledByteBufferFactory,
-      ContentResolver contentResolver) {
+      final Executor executor,
+      final PooledByteBufferFactory pooledByteBufferFactory,
+      final ContentResolver contentResolver) {
     mExecutor = executor;
     mPooledByteBufferFactory = pooledByteBufferFactory;
     mContentResolver = contentResolver;
@@ -73,7 +73,7 @@ public class LocalExifThumbnailProducer implements ThumbnailProducer<EncodedImag
    * @return true if the producer can meet these needs
    */
   @Override
-  public boolean canProvideImageForSize(ResizeOptions resizeOptions) {
+  public boolean canProvideImageForSize(final ResizeOptions resizeOptions) {
     return ThumbnailSizeChecker.isImageBigEnough(
         COMMON_EXIF_THUMBNAIL_MAX_DIMENSION, COMMON_EXIF_THUMBNAIL_MAX_DIMENSION, resizeOptions);
   }
@@ -103,7 +103,7 @@ public class LocalExifThumbnailProducer implements ThumbnailProducer<EncodedImag
           }
 
           @Override
-          protected void disposeResult(EncodedImage result) {
+          protected void disposeResult(final EncodedImage result) {
             EncodedImage.closeSafely(result);
           }
 
@@ -124,7 +124,7 @@ public class LocalExifThumbnailProducer implements ThumbnailProducer<EncodedImag
 
   @VisibleForTesting
   @Nullable
-  ExifInterface getExifInterface(Uri uri) {
+  ExifInterface getExifInterface(final Uri uri) {
     final String realPath = UriUtil.getRealPathFromUri(mContentResolver, uri);
     try {
       if (canReadAsFile(realPath)) {
@@ -148,7 +148,7 @@ public class LocalExifThumbnailProducer implements ThumbnailProducer<EncodedImag
     return null;
   }
 
-  private EncodedImage buildEncodedImage(PooledByteBuffer imageBytes, ExifInterface exifInterface) {
+  private EncodedImage buildEncodedImage(final PooledByteBuffer imageBytes, final ExifInterface exifInterface) {
     Pair<Integer, Integer> dimensions =
         BitmapUtil.decodeDimensions(new PooledByteBufferInputStream(imageBytes));
     int rotationAngle = getRotationAngle(exifInterface);
@@ -175,7 +175,7 @@ public class LocalExifThumbnailProducer implements ThumbnailProducer<EncodedImag
   }
 
   @VisibleForTesting
-  boolean canReadAsFile(String realPath) throws IOException {
+  boolean canReadAsFile(final String realPath) throws IOException {
     if (realPath == null) {
       return false;
     }
@@ -185,7 +185,7 @@ public class LocalExifThumbnailProducer implements ThumbnailProducer<EncodedImag
 
   @DoNotOptimize
   private class Api24Utils {
-    ExifInterface getExifInterface(FileDescriptor fileDescriptor) throws IOException {
+    ExifInterface getExifInterface(final FileDescriptor fileDescriptor) throws IOException {
       return Build.VERSION.SDK_INT >= 24 ? new ExifInterface(fileDescriptor) : null;
     }
   }

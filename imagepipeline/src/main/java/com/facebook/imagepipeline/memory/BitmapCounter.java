@@ -26,7 +26,7 @@ public class BitmapCounter {
   private final int mMaxSize;
   private final ResourceReleaser<Bitmap> mUnpooledBitmapsReleaser;
 
-  public BitmapCounter(int maxCount, int maxSize) {
+  public BitmapCounter(final int maxCount, final int maxSize) {
     Preconditions.checkArgument(maxCount > 0);
     Preconditions.checkArgument(maxSize > 0);
     mMaxCount = maxCount;
@@ -34,7 +34,7 @@ public class BitmapCounter {
     mUnpooledBitmapsReleaser =
         new ResourceReleaser<Bitmap>() {
           @Override
-          public void release(Bitmap value) {
+          public void release(final Bitmap value) {
             try {
               decrease(value);
             } finally {
@@ -51,7 +51,7 @@ public class BitmapCounter {
    * @param bitmap to include in the count
    * @return true if and only if bitmap is successfully included in the count
    */
-  public synchronized boolean increase(Bitmap bitmap) {
+  public synchronized boolean increase(final Bitmap bitmap) {
     final int bitmapSize = BitmapUtil.getSizeInBytes(bitmap);
     if (mCount >= mMaxCount || mSize + bitmapSize > mMaxSize) {
       return false;
@@ -66,7 +66,7 @@ public class BitmapCounter {
    *
    * @param bitmap to be excluded from the count
    */
-  public synchronized void decrease(Bitmap bitmap) {
+  public synchronized void decrease(final Bitmap bitmap) {
     final int bitmapSize = BitmapUtil.getSizeInBytes(bitmap);
     Preconditions.checkArgument(mCount > 0, "No bitmaps registered.");
     Preconditions.checkArgument(

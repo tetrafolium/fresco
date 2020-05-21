@@ -28,7 +28,7 @@ public class FlexByteArrayPool {
   private final ResourceReleaser<byte[]> mResourceReleaser;
   @VisibleForTesting final SoftRefByteArrayPool mDelegatePool;
 
-  public FlexByteArrayPool(MemoryTrimmableRegistry memoryTrimmableRegistry, PoolParams params) {
+  public FlexByteArrayPool(final MemoryTrimmableRegistry memoryTrimmableRegistry, final PoolParams params) {
     Preconditions.checkArgument(params.maxNumThreads > 0);
     mDelegatePool =
         new SoftRefByteArrayPool(
@@ -36,17 +36,17 @@ public class FlexByteArrayPool {
     mResourceReleaser =
         new ResourceReleaser<byte[]>() {
           @Override
-          public void release(byte[] unused) {
+          public void release(final byte[] unused) {
             FlexByteArrayPool.this.release(unused);
           }
         };
   }
 
-  public CloseableReference<byte[]> get(int size) {
+  public CloseableReference<byte[]> get(final int size) {
     return CloseableReference.of(mDelegatePool.get(size), mResourceReleaser);
   }
 
-  public void release(byte[] value) {
+  public void release(final byte[] value) {
     mDelegatePool.release(value);
   }
 
@@ -61,14 +61,14 @@ public class FlexByteArrayPool {
   @VisibleForTesting
   static class SoftRefByteArrayPool extends GenericByteArrayPool {
     public SoftRefByteArrayPool(
-        MemoryTrimmableRegistry memoryTrimmableRegistry,
-        PoolParams poolParams,
-        PoolStatsTracker poolStatsTracker) {
+        final MemoryTrimmableRegistry memoryTrimmableRegistry,
+        final PoolParams poolParams,
+        final PoolStatsTracker poolStatsTracker) {
       super(memoryTrimmableRegistry, poolParams, poolStatsTracker);
     }
 
     @Override
-    Bucket<byte[]> newBucket(int bucketedSize) {
+    Bucket<byte[]> newBucket(final int bucketedSize) {
       return new OOMSoftReferenceBucket<>(
           getSizeInBytes(bucketedSize), mPoolParams.maxNumThreads, 0);
     }

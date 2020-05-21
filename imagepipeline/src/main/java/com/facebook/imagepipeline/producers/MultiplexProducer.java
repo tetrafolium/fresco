@@ -63,17 +63,17 @@ public abstract class MultiplexProducer<K, T extends Closeable> implements Produ
   private final String mDedupedRequestsCountKey;
 
   protected MultiplexProducer(
-      Producer<T> inputProducer,
-      String producerName,
-      @ProducerContext.ExtraKeys String dedupedRequestsCountKey) {
+      final Producer<T> inputProducer,
+      final String producerName,
+      final @ProducerContext.ExtraKeys String dedupedRequestsCountKey) {
     this(inputProducer, producerName, dedupedRequestsCountKey, false);
   }
 
   protected MultiplexProducer(
-      Producer<T> inputProducer,
-      String producerName,
-      @ProducerContext.ExtraKeys String dedupedRequestsCountKey,
-      boolean keepCancelledFetchAsLowPriority) {
+      final Producer<T> inputProducer,
+      final String producerName,
+      final @ProducerContext.ExtraKeys String dedupedRequestsCountKey,
+      final boolean keepCancelledFetchAsLowPriority) {
     mInputProducer = inputProducer;
     mMultiplexers = new HashMap<>();
     mKeepCancelledFetchAsLowPriority = keepCancelledFetchAsLowPriority;
@@ -82,7 +82,7 @@ public abstract class MultiplexProducer<K, T extends Closeable> implements Produ
   }
 
   @Override
-  public void produceResults(Consumer<T> consumer, ProducerContext context) {
+  public void produceResults(final Consumer<T> consumer, final ProducerContext context) {
     try {
       if (FrescoSystrace.isTracing()) {
         FrescoSystrace.beginSection("MultiplexProducer#produceResults");
@@ -122,17 +122,17 @@ public abstract class MultiplexProducer<K, T extends Closeable> implements Produ
     }
   }
 
-  protected synchronized Multiplexer getExistingMultiplexer(K key) {
+  protected synchronized Multiplexer getExistingMultiplexer(final K key) {
     return mMultiplexers.get(key);
   }
 
-  private synchronized Multiplexer createAndPutNewMultiplexer(K key) {
+  private synchronized Multiplexer createAndPutNewMultiplexer(final K key) {
     Multiplexer multiplexer = new Multiplexer(key);
     mMultiplexers.put(key, multiplexer);
     return multiplexer;
   }
 
-  protected synchronized void removeMultiplexer(K key, Multiplexer multiplexer) {
+  protected synchronized void removeMultiplexer(final K key, final Multiplexer multiplexer) {
     if (mMultiplexers.get(key) == multiplexer) {
       mMultiplexers.remove(key);
     }
@@ -213,7 +213,7 @@ public abstract class MultiplexProducer<K, T extends Closeable> implements Produ
     @Nullable
     private ForwardingConsumer mForwardingConsumer;
 
-    public Multiplexer(K key) {
+    public Multiplexer(final K key) {
       mConsumerContextPairs = Sets.newCopyOnWriteArraySet();
       mKey = key;
     }
@@ -353,7 +353,7 @@ public abstract class MultiplexProducer<K, T extends Closeable> implements Produ
      * the data. If all consumers are cancelled, then this multiplexer is removed from mRequest map
      * to clean up.
      */
-    private void startInputProducerIfHasAttachedConsumers(TriState startedAsPrefetch) {
+    private void startInputProducerIfHasAttachedConsumers(final TriState startedAsPrefetch) {
       BaseProducerContext multiplexProducerContext;
       ForwardingConsumer forwardingConsumer;
       synchronized (Multiplexer.this) {
@@ -527,7 +527,7 @@ public abstract class MultiplexProducer<K, T extends Closeable> implements Produ
       startInputProducerIfHasAttachedConsumers(TriState.UNSET);
     }
 
-    public void onProgressUpdate(ForwardingConsumer forwardingConsumer, float progress) {
+    public void onProgressUpdate(final ForwardingConsumer forwardingConsumer, final float progress) {
       Iterator<Pair<Consumer<T>, ProducerContext>> iterator;
       synchronized (Multiplexer.this) {
         // check for late callbacks
@@ -547,7 +547,7 @@ public abstract class MultiplexProducer<K, T extends Closeable> implements Produ
       }
     }
 
-    private void closeSafely(Closeable obj) {
+    private void closeSafely(final Closeable obj) {
       try {
         if (obj != null) {
           obj.close();
@@ -560,7 +560,7 @@ public abstract class MultiplexProducer<K, T extends Closeable> implements Produ
     /** Forwards {@link Consumer} methods to Multiplexer. */
     private class ForwardingConsumer extends BaseConsumer<T> {
       @Override
-      protected void onNewResultImpl(T newResult, @Status int status) {
+      protected void onNewResultImpl(final T newResult, final @Status int status) {
         try {
           if (FrescoSystrace.isTracing()) {
             FrescoSystrace.beginSection("MultiplexProducer#onNewResult");
@@ -574,7 +574,7 @@ public abstract class MultiplexProducer<K, T extends Closeable> implements Produ
       }
 
       @Override
-      protected void onFailureImpl(Throwable t) {
+      protected void onFailureImpl(final Throwable t) {
         try {
           if (FrescoSystrace.isTracing()) {
             FrescoSystrace.beginSection("MultiplexProducer#onFailure");
@@ -602,7 +602,7 @@ public abstract class MultiplexProducer<K, T extends Closeable> implements Produ
       }
 
       @Override
-      protected void onProgressUpdateImpl(float progress) {
+      protected void onProgressUpdateImpl(final float progress) {
         try {
           if (FrescoSystrace.isTracing()) {
             FrescoSystrace.beginSection("MultiplexProducer#onProgressUpdate");

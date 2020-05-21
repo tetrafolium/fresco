@@ -60,7 +60,7 @@ public abstract class AbstractDataSource<T> implements DataSource<T> {
 
   @Nullable private static volatile DataSourceInstrumenter sDataSourceInstrumenter;
 
-  public static void provideInstrumenter(@Nullable DataSourceInstrumenter dataSourceInstrumenter) {
+  public static void provideInstrumenter(final @Nullable DataSourceInstrumenter dataSourceInstrumenter) {
     sDataSourceInstrumenter = dataSourceInstrumenter;
   }
 
@@ -141,7 +141,7 @@ public abstract class AbstractDataSource<T> implements DataSource<T> {
    * <p>This method is called in two cases: 1. to clear the result when data source gets closed 2.
    * to clear the previous result when a new result is set
    */
-  protected void closeResult(@Nullable T result) {
+  protected void closeResult(final @Nullable T result) {
     // default implementation does nothing
   }
 
@@ -228,7 +228,7 @@ public abstract class AbstractDataSource<T> implements DataSource<T> {
    * @return true if the value was successfully set.
    */
   protected boolean setResult(
-      @Nullable T value, boolean isLast, @Nullable Map<String, Object> extras) {
+      final @Nullable T value, final boolean isLast, final @Nullable Map<String, Object> extras) {
     mExtras = extras;
     boolean result = setResultInternal(value, isLast);
     if (result) {
@@ -237,7 +237,7 @@ public abstract class AbstractDataSource<T> implements DataSource<T> {
     return result;
   }
 
-  public boolean setResult(@Nullable T value, boolean isLast) {
+  public boolean setResult(final @Nullable T value, final boolean isLast) {
     return setResult(value, isLast, null);
   }
 
@@ -258,7 +258,7 @@ public abstract class AbstractDataSource<T> implements DataSource<T> {
    * @param throwable the failure cause to be set.
    * @return true if the failure was successfully set.
    */
-  protected boolean setFailure(Throwable throwable) {
+  protected boolean setFailure(final Throwable throwable) {
     boolean result = setFailureInternal(throwable);
     if (result) {
       notifyDataSubscribers();
@@ -280,7 +280,7 @@ public abstract class AbstractDataSource<T> implements DataSource<T> {
    * @param progress the progress in range [0, 1] to be set.
    * @return true if the progress was successfully set.
    */
-  protected boolean setProgress(float progress) {
+  protected boolean setProgress(final float progress) {
     boolean result = setProgressInternal(progress);
     if (result) {
       notifyProgressUpdate();
@@ -288,7 +288,7 @@ public abstract class AbstractDataSource<T> implements DataSource<T> {
     return result;
   }
 
-  private boolean setResultInternal(@Nullable T value, boolean isLast) {
+  private boolean setResultInternal(final @Nullable T value, final boolean isLast) {
     T resultToClose = null;
     try {
       synchronized (this) {
@@ -314,7 +314,7 @@ public abstract class AbstractDataSource<T> implements DataSource<T> {
     }
   }
 
-  private synchronized boolean setFailureInternal(Throwable throwable) {
+  private synchronized boolean setFailureInternal(final Throwable throwable) {
     if (mIsClosed || mDataSourceStatus != DataSourceStatus.IN_PROGRESS) {
       return false;
     } else {
@@ -324,7 +324,7 @@ public abstract class AbstractDataSource<T> implements DataSource<T> {
     }
   }
 
-  private synchronized boolean setProgressInternal(float progress) {
+  private synchronized boolean setProgressInternal(final float progress) {
     if (mIsClosed || mDataSourceStatus != DataSourceStatus.IN_PROGRESS) {
       return false;
     } else if (progress < mProgress) {

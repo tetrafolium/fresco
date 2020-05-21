@@ -19,9 +19,9 @@ public class DefaultFlexByteArrayPoolParams {
   // the maximum number of threads permitted to touch this pool
   public static final int DEFAULT_MAX_NUM_THREADS = Runtime.getRuntime().availableProcessors();
 
-  private DefaultFlexByteArrayPoolParams() {}
+  private DefaultFlexByteArrayPoolParams() { }
 
-  public static SparseIntArray generateBuckets(int min, int max, int numThreads) {
+  public static SparseIntArray generateBuckets(final int min, final int max, final int numThreads) {
     SparseIntArray buckets = new SparseIntArray();
     for (int i = min; i <= max; i *= 2) {
       buckets.put(i, numThreads);

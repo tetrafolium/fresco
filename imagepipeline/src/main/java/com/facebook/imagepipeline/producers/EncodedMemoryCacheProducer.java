@@ -29,9 +29,9 @@ public class EncodedMemoryCacheProducer implements Producer<EncodedImage> {
   private final Producer<EncodedImage> mInputProducer;
 
   public EncodedMemoryCacheProducer(
-      MemoryCache<CacheKey, PooledByteBuffer> memoryCache,
-      CacheKeyFactory cacheKeyFactory,
-      Producer<EncodedImage> inputProducer) {
+      final MemoryCache<CacheKey, PooledByteBuffer> memoryCache,
+      final CacheKeyFactory cacheKeyFactory,
+      final Producer<EncodedImage> inputProducer) {
     mMemoryCache = memoryCache;
     mCacheKeyFactory = cacheKeyFactory;
     mInputProducer = inputProducer;
@@ -121,11 +121,11 @@ public class EncodedMemoryCacheProducer implements Producer<EncodedImage> {
     private final boolean mEncodedCacheEnabled;
 
     public EncodedMemoryCacheConsumer(
-        Consumer<EncodedImage> consumer,
-        MemoryCache<CacheKey, PooledByteBuffer> memoryCache,
-        CacheKey requestedCacheKey,
-        boolean isMemoryCacheEnabled,
-        boolean encodedCacheEnabled) {
+        final Consumer<EncodedImage> consumer,
+        final MemoryCache<CacheKey, PooledByteBuffer> memoryCache,
+        final CacheKey requestedCacheKey,
+        final boolean isMemoryCacheEnabled,
+        final boolean encodedCacheEnabled) {
       super(consumer);
       mMemoryCache = memoryCache;
       mRequestedCacheKey = requestedCacheKey;
@@ -134,7 +134,7 @@ public class EncodedMemoryCacheProducer implements Producer<EncodedImage> {
     }
 
     @Override
-    public void onNewResultImpl(EncodedImage newResult, @Status int status) {
+    public void onNewResultImpl(final EncodedImage newResult, final @Status int status) {
       try {
         if (FrescoSystrace.isTracing()) {
           FrescoSystrace.beginSection("EncodedMemoryCacheProducer#onNewResultImpl");

@@ -21,13 +21,13 @@ public class BranchOnSeparateImagesProducer implements Producer<EncodedImage> {
   private final Producer<EncodedImage> mInputProducer2;
 
   public BranchOnSeparateImagesProducer(
-      Producer<EncodedImage> inputProducer1, Producer<EncodedImage> inputProducer2) {
+      final Producer<EncodedImage> inputProducer1, final Producer<EncodedImage> inputProducer2) {
     mInputProducer1 = inputProducer1;
     mInputProducer2 = inputProducer2;
   }
 
   @Override
-  public void produceResults(Consumer<EncodedImage> consumer, ProducerContext context) {
+  public void produceResults(final Consumer<EncodedImage> consumer, final ProducerContext context) {
     OnFirstImageConsumer onFirstImageConsumer = new OnFirstImageConsumer(consumer, context);
     mInputProducer1.produceResults(onFirstImageConsumer, context);
   }
@@ -36,13 +36,13 @@ public class BranchOnSeparateImagesProducer implements Producer<EncodedImage> {
 
     private ProducerContext mProducerContext;
 
-    private OnFirstImageConsumer(Consumer<EncodedImage> consumer, ProducerContext producerContext) {
+    private OnFirstImageConsumer(final Consumer<EncodedImage> consumer, final ProducerContext producerContext) {
       super(consumer);
       mProducerContext = producerContext;
     }
 
     @Override
-    protected void onNewResultImpl(EncodedImage newResult, @Status int status) {
+    protected void onNewResultImpl(final EncodedImage newResult, final @Status int status) {
       ImageRequest request = mProducerContext.getImageRequest();
       boolean isLast = isLast(status);
       boolean isGoodEnough =
@@ -63,7 +63,7 @@ public class BranchOnSeparateImagesProducer implements Producer<EncodedImage> {
     }
 
     @Override
-    protected void onFailureImpl(Throwable t) {
+    protected void onFailureImpl(final Throwable t) {
       mInputProducer2.produceResults(getConsumer(), mProducerContext);
     }
   }

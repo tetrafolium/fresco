@@ -18,14 +18,14 @@ public class CircleProgressBarDrawable extends ProgressBarDrawable {
   private int maxLevel = 10000;
 
   @Override
-  protected boolean onLevelChange(int level) {
+  protected boolean onLevelChange(final int level) {
     mLevel = level;
     invalidateSelf();
     return true;
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     if (getHideWhenZero() && mLevel == 0) {
       return;
     }
@@ -33,7 +33,7 @@ public class CircleProgressBarDrawable extends ProgressBarDrawable {
     drawBar(canvas, mLevel, getColor());
   }
 
-  private void drawBar(Canvas canvas, int level, int color) {
+  private void drawBar(final Canvas canvas, final int level, final int color) {
     Rect bounds = getBounds();
     RectF rectF =
         new RectF(

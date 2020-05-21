@@ -85,11 +85,11 @@ public class ProducerToDataSourceAdapterTest {
   /* verification helpers */
 
   private void verifyState(
-      boolean isFinished,
-      boolean hasResult,
-      Object result,
-      boolean hasFailed,
-      Throwable failureCause) {
+      final boolean isFinished,
+      final boolean hasResult,
+      final Object result,
+      final boolean hasFailed,
+      final Throwable failureCause) {
     DataSource<Object> dataSource = mDataSource;
     assertEquals("isFinished", isFinished, dataSource.isFinished());
     assertEquals("hasResult", hasResult, dataSource.hasResult());
@@ -115,24 +115,24 @@ public class ProducerToDataSourceAdapterTest {
     verifyNoMoreInteractionsAndReset();
   }
 
-  private void verifyWithResult(Object result, boolean isLast) {
+  private void verifyWithResult(final Object result, final boolean isLast) {
     verifyState(isLast, result != null, result, NOT_FAILED, null);
     verifyNoMoreInteractionsAndReset();
   }
 
-  private void verifyFailed(Object result, Throwable throwable) {
+  private void verifyFailed(final Object result, final Throwable throwable) {
     verifyState(FINISHED, result != null, result, FAILED, throwable);
     verifyNoMoreInteractionsAndReset();
   }
 
-  private void verifyClosed(boolean isFinished, Throwable throwable) {
+  private void verifyClosed(final boolean isFinished, final Throwable throwable) {
     verifyState(isFinished, WITHOUT_RESULT, null, throwable != null, throwable);
     verifyNoMoreInteractionsAndReset();
   }
 
   /* event testing helpers */
 
-  private void testSubscribe(int expected) {
+  private void testSubscribe(final int expected) {
     mDataSource.subscribe(mDataSubscriber2, CallerThreadExecutor.getInstance());
     switch (expected) {
       case NO_INTERACTIONS:
@@ -147,7 +147,7 @@ public class ProducerToDataSourceAdapterTest {
     verifyNoMoreInteractionsAndReset();
   }
 
-  private void testNewResult(Object result, boolean isLast, int numSubscribers) {
+  private void testNewResult(final Object result, final boolean isLast, final int numSubscribers) {
     mInternalConsumer.onNewResult(result, BaseConsumer.simpleStatusForIsLast(isLast));
     if (isLast) {
       verify(mRequestListener).onRequestSuccess(mSettableProducerContext);
@@ -161,7 +161,7 @@ public class ProducerToDataSourceAdapterTest {
     verifyWithResult(result, isLast);
   }
 
-  private void testFailure(Object result, int numSubscribers) {
+  private void testFailure(final Object result, final int numSubscribers) {
     mInternalConsumer.onFailure(mException);
     verify(mRequestListener).onRequestFailure(mSettableProducerContext, mException);
     if (numSubscribers >= 1) {
@@ -173,12 +173,12 @@ public class ProducerToDataSourceAdapterTest {
     verifyFailed(result, mException);
   }
 
-  private void testClose(Throwable throwable) {
+  private void testClose(final Throwable throwable) {
     mDataSource.close();
     verifyClosed(FINISHED, throwable);
   }
 
-  private void testClose(boolean isFinished, int numSubscribers) {
+  private void testClose(final boolean isFinished, final int numSubscribers) {
     mDataSource.close();
     if (!isFinished) {
       verify(mRequestListener).onRequestCancellation(mSettableProducerContext);

@@ -25,7 +25,7 @@ public class GingerbreadBitmapFactory extends PlatformBitmapFactory {
    */
   @Override
   public CloseableReference<Bitmap> createBitmapInternal(
-      int width, int height, Bitmap.Config bitmapConfig) {
+      final int width, final int height, final Bitmap.Config bitmapConfig) {
     Bitmap bitmap = Bitmap.createBitmap(width, height, bitmapConfig);
     return CloseableReference.of(bitmap, SimpleBitmapReleaser.getInstance());
   }

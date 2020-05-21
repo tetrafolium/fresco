@@ -33,7 +33,7 @@ public class JfifUtil {
   public static final int MARKER_RST7 = 0xD7;
   public static final int APP1_EXIF_MAGIC = 0x45786966;
 
-  private JfifUtil() {}
+  private JfifUtil() { }
 
   /**
    * Determines auto-rotate angle based on orientation information.
@@ -41,7 +41,7 @@ public class JfifUtil {
    * @param orientation orientation information, one of {1, 3, 6, 8}.
    * @return orientation: 1/3/6/8 -> 0/180/90/270.
    */
-  public static int getAutoRotateAngleFromOrientation(int orientation) {
+  public static int getAutoRotateAngleFromOrientation(final int orientation) {
     return TiffUtil.getAutoRotateAngleFromOrientation(orientation);
   }
 
@@ -51,7 +51,7 @@ public class JfifUtil {
    * @param jpeg the input byte array of jpeg image
    * @return orientation: 1/8/3/6. Returns 0 if there is no valid orientation information.
    */
-  public static int getOrientation(byte[] jpeg) {
+  public static int getOrientation(final byte[] jpeg) {
     // wrapping with ByteArrayInputStream is cheap and we don't have duplicate implementation
     return getOrientation(new ByteArrayInputStream(jpeg));
   }
@@ -64,7 +64,7 @@ public class JfifUtil {
    *     android.media.ExifInterface#ORIENTATION_UNDEFINED} if there is no valid orientation
    *     information.
    */
-  public static int getOrientation(InputStream is) {
+  public static int getOrientation(final InputStream is) {
     try {
       int length = moveToAPP1EXIF(is);
       if (length == 0) {
@@ -84,7 +84,7 @@ public class JfifUtil {
    * @param markerToFind the marker we are looking for
    * @return boolean: whether or not we found the expected marker from input stream.
    */
-  public static boolean moveToMarker(InputStream is, int markerToFind) throws IOException {
+  public static boolean moveToMarker(final InputStream is, final int markerToFind) throws IOException {
     Preconditions.checkNotNull(is);
     // ISO/IEC 10918-1:1993(E)
     while (StreamProcessor.readPackedInt(is, 1, false) == MARKER_FIRST_BYTE) {
@@ -120,7 +120,7 @@ public class JfifUtil {
     return false;
   }
 
-  private static boolean isSOFn(int marker) {
+  private static boolean isSOFn(final int marker) {
     // There are no SOF4, SOF8, SOF12
     switch (marker) {
       case 0xC0:
@@ -148,7 +148,7 @@ public class JfifUtil {
    * @param is the input stream of jpeg image
    * @return length of EXIF data
    */
-  private static int moveToAPP1EXIF(InputStream is) throws IOException {
+  private static int moveToAPP1EXIF(final InputStream is) throws IOException {
     if (moveToMarker(is, MARKER_APP1)) {
       // read block length
       // subtract 2 as length contain SIZE field we just read

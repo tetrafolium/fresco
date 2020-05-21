@@ -277,7 +277,7 @@ public class BufferedDiskCacheTest {
     verify(mStagingArea).clearAll();
   }
 
-  private static boolean isTaskCancelled(Task<?> task) {
+  private static boolean isTaskCancelled(final Task<?> task) {
     return task.isCancelled()
         || (task.isFaulted() && task.getError() instanceof CancellationException);
   }

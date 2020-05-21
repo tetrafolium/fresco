@@ -23,18 +23,18 @@ public class LocalResourceFetchProducer extends LocalFetchProducer {
   private final Resources mResources;
 
   public LocalResourceFetchProducer(
-      Executor executor, PooledByteBufferFactory pooledByteBufferFactory, Resources resources) {
+      final Executor executor, final PooledByteBufferFactory pooledByteBufferFactory, final Resources resources) {
     super(executor, pooledByteBufferFactory);
     mResources = resources;
   }
 
   @Override
-  protected EncodedImage getEncodedImage(ImageRequest imageRequest) throws IOException {
+  protected EncodedImage getEncodedImage(final ImageRequest imageRequest) throws IOException {
     return getEncodedImage(
         mResources.openRawResource(getResourceId(imageRequest)), getLength(imageRequest));
   }
 
-  private int getLength(ImageRequest imageRequest) {
+  private int getLength(final ImageRequest imageRequest) {
     AssetFileDescriptor fd = null;
     try {
       fd = mResources.openRawResourceFd(getResourceId(imageRequest));
@@ -57,7 +57,7 @@ public class LocalResourceFetchProducer extends LocalFetchProducer {
     return PRODUCER_NAME;
   }
 
-  private static int getResourceId(ImageRequest imageRequest) {
+  private static int getResourceId(final ImageRequest imageRequest) {
     return Integer.parseInt(imageRequest.getSourceUri().getPath().substring(1));
   }
 }

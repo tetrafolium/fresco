@@ -15,7 +15,7 @@ public enum EncodedImageOrigin {
 
   private final String mOrigin;
 
-  EncodedImageOrigin(String origin) {
+  EncodedImageOrigin(final String origin) {
     mOrigin = origin;
   }
 

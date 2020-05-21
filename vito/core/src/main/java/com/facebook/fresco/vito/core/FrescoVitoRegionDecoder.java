@@ -32,7 +32,7 @@ public class FrescoVitoRegionDecoder implements ImageDecoder {
 
   private final PlatformDecoder mPlatformDecoder;
 
-  public FrescoVitoRegionDecoder(PlatformDecoder platformDecoder) {
+  public FrescoVitoRegionDecoder(final PlatformDecoder platformDecoder) {
     mPlatformDecoder = platformDecoder;
   }
 
@@ -47,7 +47,7 @@ public class FrescoVitoRegionDecoder implements ImageDecoder {
    */
   @Override
   public CloseableImage decode(
-      EncodedImage encodedImage, int length, QualityInfo qualityInfo, ImageDecodeOptions options) {
+      final EncodedImage encodedImage, final int length, final QualityInfo qualityInfo, final ImageDecodeOptions options) {
 
     Rect regionToDecode = computeRegionToDecode(encodedImage, options);
 
@@ -67,7 +67,7 @@ public class FrescoVitoRegionDecoder implements ImageDecoder {
   }
 
   private @Nullable Rect computeRegionToDecode(
-      EncodedImage encodedImage, ImageDecodeOptions options) {
+      final EncodedImage encodedImage, final ImageDecodeOptions options) {
     if (!(options instanceof FrescoVitoImageDecodeOptions)) {
       return null;
     }
@@ -92,7 +92,7 @@ public class FrescoVitoRegionDecoder implements ImageDecoder {
   }
 
   private void maybeApplyTransformation(
-      @Nullable BitmapTransformation transformation, CloseableReference<Bitmap> bitmapReference) {
+      final @Nullable BitmapTransformation transformation, final CloseableReference<Bitmap> bitmapReference) {
     if (transformation == null) {
       return;
     }

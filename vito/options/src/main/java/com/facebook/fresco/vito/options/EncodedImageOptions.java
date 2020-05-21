@@ -21,7 +21,7 @@ public class EncodedImageOptions {
   private final @Nullable Priority mPriority;
   private final @Nullable ImageRequest.CacheChoice mCacheChoice;
 
-  public EncodedImageOptions(Builder builder) {
+  public EncodedImageOptions(final Builder builder) {
     mPriority = builder.mPriority;
     mCacheChoice = builder.mCacheChoice;
   }
@@ -35,7 +35,7 @@ public class EncodedImageOptions {
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (this == obj) {
       return true;
     }
@@ -44,7 +44,7 @@ public class EncodedImageOptions {
     return equalEncodedOptions(other);
   }
 
-  protected boolean equalEncodedOptions(EncodedImageOptions other) {
+  protected boolean equalEncodedOptions(final EncodedImageOptions other) {
     if (!Objects.equal(mPriority, other.mPriority)
         || !Objects.equal(mCacheChoice, other.mCacheChoice)) {
       return false;
@@ -72,19 +72,19 @@ public class EncodedImageOptions {
     private @Nullable Priority mPriority;
     private @Nullable ImageRequest.CacheChoice mCacheChoice;
 
-    protected Builder() {}
+    protected Builder() { }
 
-    protected Builder(ImageOptions defaultOptions) {
+    protected Builder(final ImageOptions defaultOptions) {
       mPriority = defaultOptions.getPriority();
       mCacheChoice = defaultOptions.getCacheChoice();
     }
 
-    public T priority(@Nullable Priority priority) {
+    public T priority(final @Nullable Priority priority) {
       mPriority = priority;
       return getThis();
     }
 
-    public T cacheChoice(@Nullable ImageRequest.CacheChoice cacheChoice) {
+    public T cacheChoice(final @Nullable ImageRequest.CacheChoice cacheChoice) {
       mCacheChoice = cacheChoice;
       return getThis();
     }

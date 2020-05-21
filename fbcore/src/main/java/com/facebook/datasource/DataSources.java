@@ -15,15 +15,15 @@ import javax.annotation.Nullable;
 /** Static utility methods pertaining to the {@link DataSource} interface. */
 public class DataSources {
 
-  private DataSources() {}
+  private DataSources() { }
 
-  public static <T> DataSource<T> immediateFailedDataSource(Throwable failure) {
+  public static <T> DataSource<T> immediateFailedDataSource(final Throwable failure) {
     SimpleDataSource<T> simpleDataSource = SimpleDataSource.create();
     simpleDataSource.setFailure(failure);
     return simpleDataSource;
   }
 
-  public static <T> DataSource<T> immediateDataSource(T result) {
+  public static <T> DataSource<T> immediateDataSource(final T result) {
     SimpleDataSource<T> simpleDataSource = SimpleDataSource.create();
     simpleDataSource.setResult(result);
     return simpleDataSource;
@@ -50,7 +50,7 @@ public class DataSources {
    * @throws Throwable if the {@link DataSource} has failed
    */
   @Nullable
-  public static <T> T waitForFinalResult(DataSource<T> dataSource) throws Throwable {
+  public static <T> T waitForFinalResult(final DataSource<T> dataSource) throws Throwable {
     final CountDownLatch latch = new CountDownLatch(1);
     final ValueHolder<T> resultHolder = new ValueHolder<>();
     final ValueHolder<Throwable> pendingException = new ValueHolder<>();
@@ -58,7 +58,7 @@ public class DataSources {
     dataSource.subscribe(
         new DataSubscriber<T>() {
           @Override
-          public void onNewResult(DataSource<T> dataSource) {
+          public void onNewResult(final DataSource<T> dataSource) {
             // only return the final result
             if (!dataSource.isFinished()) {
               return;
@@ -72,7 +72,7 @@ public class DataSources {
           }
 
           @Override
-          public void onFailure(DataSource<T> dataSource) {
+          public void onFailure(final DataSource<T> dataSource) {
             try {
               pendingException.value = dataSource.getFailureCause();
             } finally {
@@ -81,19 +81,19 @@ public class DataSources {
           }
 
           @Override
-          public void onCancellation(DataSource<T> dataSource) {
+          public void onCancellation(final DataSource<T> dataSource) {
             // will make the outer method return null
             latch.countDown();
           }
 
           @Override
-          public void onProgressUpdate(DataSource<T> dataSource) {
+          public void onProgressUpdate(final DataSource<T> dataSource) {
             // intentionally left blank
           }
         },
         new Executor() {
           @Override
-          public void execute(Runnable command) {
+          public void execute(final Runnable command) {
             // it's fair to run these short methods on the datasource thread to avoid
             // context switching
             command.run();

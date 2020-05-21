@@ -67,14 +67,14 @@ public class AnimatedImageFactoryWebPImplTest {
       new ResourceReleaser<PooledByteBuffer>() {
 
         @Override
-        public void release(PooledByteBuffer value) {}
+        public void release(final PooledByteBuffer value) { }
       };
 
   private static ResourceReleaser<Bitmap> FAKE_BITMAP_RESOURCE_RELEASER =
       new ResourceReleaser<Bitmap>() {
 
         @Override
-        public void release(Bitmap value) {}
+        public void release(final Bitmap value) { }
       };
 
   private AnimatedDrawableBackendProvider mMockAnimatedDrawableBackendProvider;
@@ -191,7 +191,7 @@ public class AnimatedImageFactoryWebPImplTest {
     testCreateWithDecodeAlFrames(mockWebPImage, byteBuffer, mockBitmap1, mockBitmap2);
   }
 
-  private void testCreateDefaults(WebPImage mockWebPImage, PooledByteBuffer byteBuffer) {
+  private void testCreateDefaults(final WebPImage mockWebPImage, final PooledByteBuffer byteBuffer) {
     EncodedImage encodedImage =
         new EncodedImage(CloseableReference.of(byteBuffer, FAKE_RESOURCE_RELEASER));
     encodedImage.setImageFormat(ImageFormat.UNKNOWN);
@@ -213,7 +213,7 @@ public class AnimatedImageFactoryWebPImplTest {
   }
 
   private void testCreateWithPreviewBitmap(
-      WebPImage mockWebPImage, PooledByteBuffer byteBuffer, Bitmap mockBitmap) throws Exception {
+      final WebPImage mockWebPImage, final PooledByteBuffer byteBuffer, final Bitmap mockBitmap) throws Exception {
     // For decoding preview frame, expect some calls.
     final AnimatedDrawableBackend mockAnimatedDrawableBackend =
         createAnimatedDrawableBackendMock(1);
@@ -254,7 +254,7 @@ public class AnimatedImageFactoryWebPImplTest {
   }
 
   private void testCreateWithDecodeAlFrames(
-      WebPImage mockWebPImage, PooledByteBuffer byteBuffer, Bitmap mockBitmap1, Bitmap mockBitmap2)
+      final WebPImage mockWebPImage, final PooledByteBuffer byteBuffer, final Bitmap mockBitmap1, final Bitmap mockBitmap2)
       throws Exception {
     // For decoding preview frame, expect some calls.
     final AnimatedDrawableBackend mockAnimatedDrawableBackend =

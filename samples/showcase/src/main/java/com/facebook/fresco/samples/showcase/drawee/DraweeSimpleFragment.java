@@ -24,12 +24,12 @@ public class DraweeSimpleFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_drawee_simple, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     final Uri uri = sampleUris().createSampleUri(ImageUriProvider.ImageSize.M);
 
     final SimpleDraweeView simpleDraweeView =
@@ -40,7 +40,7 @@ public class DraweeSimpleFragment extends BaseShowcaseFragment {
         .setOnClickListener(
             new View.OnClickListener() {
               @Override
-              public void onClick(View v) {
+              public void onClick(final View v) {
                 simpleDraweeView.setImageURI(sampleUris().createSampleUri());
               }
             });

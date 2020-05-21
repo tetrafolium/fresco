@@ -23,16 +23,16 @@ public abstract class LruBucketsPoolBackend<T> implements PoolBackend<T> {
   private final Set<T> mCurrentItems = new HashSet<>();
   private final BucketMap<T> mMap = new BucketMap<>();
 
-  public LruBucketsPoolBackend() {}
+  public LruBucketsPoolBackend() { }
 
   @Override
   @Nullable
-  public T get(int size) {
+  public T get(final int size) {
     return maybeRemoveFromCurrentItems(mMap.acquire(size));
   }
 
   @Override
-  public void put(T item) {
+  public void put(final T item) {
     boolean wasAdded;
     synchronized (this) {
       wasAdded = mCurrentItems.add(item);
@@ -48,7 +48,7 @@ public abstract class LruBucketsPoolBackend<T> implements PoolBackend<T> {
     return maybeRemoveFromCurrentItems(mMap.removeFromEnd());
   }
 
-  private T maybeRemoveFromCurrentItems(@Nullable T t) {
+  private T maybeRemoveFromCurrentItems(final @Nullable T t) {
     if (t != null) {
       synchronized (this) {
         mCurrentItems.remove(t);

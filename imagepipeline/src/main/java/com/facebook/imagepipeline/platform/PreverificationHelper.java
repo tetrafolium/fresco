@@ -16,7 +16,7 @@ import com.facebook.soloader.DoNotOptimize;
 /*package*/ class PreverificationHelper {
   @TargetApi(Build.VERSION_CODES.O)
   @DoNotOptimize
-  /*package*/ boolean shouldUseHardwareBitmapConfig(Bitmap.Config config) {
+  /*package*/ boolean shouldUseHardwareBitmapConfig(final Bitmap.Config config) {
     return config == Bitmap.Config.HARDWARE;
   }
 }

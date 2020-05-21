@@ -27,13 +27,13 @@ public class MemoryPooledByteBufferFactory implements PooledByteBufferFactory {
   private final PooledByteStreams mPooledByteStreams;
   private final MemoryChunkPool mPool; // memory pool
 
-  public MemoryPooledByteBufferFactory(MemoryChunkPool pool, PooledByteStreams pooledByteStreams) {
+  public MemoryPooledByteBufferFactory(final MemoryChunkPool pool, final PooledByteStreams pooledByteStreams) {
     mPool = pool;
     mPooledByteStreams = pooledByteStreams;
   }
 
   @Override
-  public MemoryPooledByteBuffer newByteBuffer(int size) {
+  public MemoryPooledByteBuffer newByteBuffer(final int size) {
     Preconditions.checkArgument(size > 0);
     CloseableReference<MemoryChunk> chunkRef = CloseableReference.of(mPool.get(size), mPool);
     try {
@@ -44,7 +44,7 @@ public class MemoryPooledByteBufferFactory implements PooledByteBufferFactory {
   }
 
   @Override
-  public MemoryPooledByteBuffer newByteBuffer(InputStream inputStream) throws IOException {
+  public MemoryPooledByteBuffer newByteBuffer(final InputStream inputStream) throws IOException {
     MemoryPooledByteBufferOutputStream outputStream = new MemoryPooledByteBufferOutputStream(mPool);
     try {
       return newByteBuf(inputStream, outputStream);
@@ -54,7 +54,7 @@ public class MemoryPooledByteBufferFactory implements PooledByteBufferFactory {
   }
 
   @Override
-  public MemoryPooledByteBuffer newByteBuffer(byte[] bytes) {
+  public MemoryPooledByteBuffer newByteBuffer(final byte[] bytes) {
     MemoryPooledByteBufferOutputStream outputStream =
         new MemoryPooledByteBufferOutputStream(mPool, bytes.length);
     try {
@@ -68,7 +68,7 @@ public class MemoryPooledByteBufferFactory implements PooledByteBufferFactory {
   }
 
   @Override
-  public MemoryPooledByteBuffer newByteBuffer(InputStream inputStream, int initialCapacity)
+  public MemoryPooledByteBuffer newByteBuffer(final InputStream inputStream, final int initialCapacity)
       throws IOException {
     MemoryPooledByteBufferOutputStream outputStream =
         new MemoryPooledByteBufferOutputStream(mPool, initialCapacity);
@@ -91,7 +91,7 @@ public class MemoryPooledByteBufferFactory implements PooledByteBufferFactory {
    */
   @VisibleForTesting
   MemoryPooledByteBuffer newByteBuf(
-      InputStream inputStream, MemoryPooledByteBufferOutputStream outputStream) throws IOException {
+      final InputStream inputStream, final MemoryPooledByteBufferOutputStream outputStream) throws IOException {
     mPooledByteStreams.copy(inputStream, outputStream);
     return outputStream.toByteBuffer();
   }
@@ -102,7 +102,7 @@ public class MemoryPooledByteBufferFactory implements PooledByteBufferFactory {
   }
 
   @Override
-  public MemoryPooledByteBufferOutputStream newOutputStream(int initialCapacity) {
+  public MemoryPooledByteBufferOutputStream newOutputStream(final int initialCapacity) {
     return new MemoryPooledByteBufferOutputStream(mPool, initialCapacity);
   }
 }

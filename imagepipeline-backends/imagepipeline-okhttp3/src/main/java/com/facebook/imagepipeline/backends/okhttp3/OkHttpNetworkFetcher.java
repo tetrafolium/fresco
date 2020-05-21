@@ -41,7 +41,7 @@ public class OkHttpNetworkFetcher
     public long fetchCompleteTime;
 
     public OkHttpNetworkFetchState(
-        Consumer<EncodedImage> consumer, ProducerContext producerContext) {
+        final Consumer<EncodedImage> consumer, final ProducerContext producerContext) {
       super(consumer, producerContext);
     }
   }
@@ -57,7 +57,7 @@ public class OkHttpNetworkFetcher
   private Executor mCancellationExecutor;
 
   /** @param okHttpClient client to use */
-  public OkHttpNetworkFetcher(OkHttpClient okHttpClient) {
+  public OkHttpNetworkFetcher(final OkHttpClient okHttpClient) {
     this(okHttpClient, okHttpClient.dispatcher().executorService());
   }
 
@@ -66,7 +66,7 @@ public class OkHttpNetworkFetcher
    * @param cancellationExecutor executor on which fetching cancellation is performed if
    *     cancellation is requested from the UI Thread
    */
-  public OkHttpNetworkFetcher(Call.Factory callFactory, Executor cancellationExecutor) {
+  public OkHttpNetworkFetcher(final Call.Factory callFactory, final Executor cancellationExecutor) {
     this(callFactory, cancellationExecutor, true);
   }
 
@@ -77,7 +77,7 @@ public class OkHttpNetworkFetcher
    * @param disableOkHttpCache true if network requests should not be cached by OkHttp
    */
   public OkHttpNetworkFetcher(
-      Call.Factory callFactory, Executor cancellationExecutor, boolean disableOkHttpCache) {
+      final Call.Factory callFactory, final Executor cancellationExecutor, final boolean disableOkHttpCache) {
     mCallFactory = callFactory;
     mCancellationExecutor = cancellationExecutor;
     mCacheControl = disableOkHttpCache ? new CacheControl.Builder().noStore().build() : null;
@@ -85,7 +85,7 @@ public class OkHttpNetworkFetcher
 
   @Override
   public OkHttpNetworkFetchState createFetchState(
-      Consumer<EncodedImage> consumer, ProducerContext context) {
+      final Consumer<EncodedImage> consumer, final ProducerContext context) {
     return new OkHttpNetworkFetchState(consumer, context);
   }
 
@@ -115,12 +115,12 @@ public class OkHttpNetworkFetcher
   }
 
   @Override
-  public void onFetchCompletion(OkHttpNetworkFetchState fetchState, int byteSize) {
+  public void onFetchCompletion(final OkHttpNetworkFetchState fetchState, final int byteSize) {
     fetchState.fetchCompleteTime = SystemClock.elapsedRealtime();
   }
 
   @Override
-  public Map<String, String> getExtraMap(OkHttpNetworkFetchState fetchState, int byteSize) {
+  public Map<String, String> getExtraMap(final OkHttpNetworkFetchState fetchState, final int byteSize) {
     Map<String, String> extraMap = new HashMap<>(4);
     extraMap.put(QUEUE_TIME, Long.toString(fetchState.responseTime - fetchState.submitTime));
     extraMap.put(FETCH_TIME, Long.toString(fetchState.fetchCompleteTime - fetchState.responseTime));
@@ -158,7 +158,7 @@ public class OkHttpNetworkFetcher
     call.enqueue(
         new okhttp3.Callback() {
           @Override
-          public void onResponse(Call call, Response response) throws IOException {
+          public void onResponse(final Call call, final Response response) throws IOException {
             fetchState.responseTime = SystemClock.elapsedRealtime();
             final ResponseBody body = response.body();
             try {
@@ -191,7 +191,7 @@ public class OkHttpNetworkFetcher
           }
 
           @Override
-          public void onFailure(Call call, IOException e) {
+          public void onFailure(final Call call, final IOException e) {
             handleException(call, e, callback);
           }
         });

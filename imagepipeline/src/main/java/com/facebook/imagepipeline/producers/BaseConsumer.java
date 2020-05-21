@@ -40,7 +40,7 @@ public abstract class BaseConsumer<T> implements Consumer<T> {
    * Checks whether the provided status includes the `IS_LAST` flag, marking this as the last result
    * the consumer will receive.
    */
-  public static boolean isLast(@Consumer.Status int status) {
+  public static boolean isLast(final @Consumer.Status int status) {
     return (status & Consumer.IS_LAST) == Consumer.IS_LAST;
   }
 
@@ -48,37 +48,37 @@ public abstract class BaseConsumer<T> implements Consumer<T> {
    * Checks whether the provided status includes the `IS_LAST` flag, marking this as the last result
    * the consumer will receive.
    */
-  public static boolean isNotLast(@Consumer.Status int status) {
+  public static boolean isNotLast(final @Consumer.Status int status) {
     return !isLast(status);
   }
 
   /** Updates a provided status by ensuring the specified flag is turned on. */
-  public static @Status int turnOnStatusFlag(@Status int status, @Status int flag) {
+  public static @Status int turnOnStatusFlag(final @Status int status, final @Status int flag) {
     return status | flag;
   }
 
   /** Updates a provided status by ensuring the specified flag is turned off. */
-  public static @Status int turnOffStatusFlag(@Status int status, @Status int flag) {
+  public static @Status int turnOffStatusFlag(final @Status int status, final @Status int flag) {
     return status & ~flag;
   }
 
   /** Checks whether the provided status contains a specified flag. */
-  public static boolean statusHasFlag(@Status int status, @Status int flag) {
+  public static boolean statusHasFlag(final @Status int status, final @Status int flag) {
     return (status & flag) == flag;
   }
 
   /** Checks whether the provided status contains any of the specified flags. */
-  public static boolean statusHasAnyFlag(@Status int status, @Status int flag) {
+  public static boolean statusHasAnyFlag(final @Status int status, final @Status int flag) {
     return (status & flag) != 0;
   }
 
   /** Creates a simple status value which only identifies whether this is the last result. */
-  public static @Status int simpleStatusForIsLast(boolean isLast) {
+  public static @Status int simpleStatusForIsLast(final boolean isLast) {
     return isLast ? IS_LAST : NO_FLAGS;
   }
 
   @Override
-  public synchronized void onNewResult(@Nullable T newResult, @Status int status) {
+  public synchronized void onNewResult(final @Nullable T newResult, final @Status int status) {
     if (mIsFinished) {
       return;
     }
@@ -91,7 +91,7 @@ public abstract class BaseConsumer<T> implements Consumer<T> {
   }
 
   @Override
-  public synchronized void onFailure(Throwable t) {
+  public synchronized void onFailure(final Throwable t) {
     if (mIsFinished) {
       return;
     }
@@ -122,7 +122,7 @@ public abstract class BaseConsumer<T> implements Consumer<T> {
    * @param progress in range [0, 1]
    */
   @Override
-  public synchronized void onProgressUpdate(float progress) {
+  public synchronized void onProgressUpdate(final float progress) {
     if (mIsFinished) {
       return;
     }
@@ -143,10 +143,10 @@ public abstract class BaseConsumer<T> implements Consumer<T> {
   protected abstract void onCancellationImpl();
 
   /** Called when the progress updates */
-  protected void onProgressUpdateImpl(float progress) {}
+  protected void onProgressUpdateImpl(final float progress) { }
 
   /** Called whenever onNewResultImpl or onFailureImpl throw an exception */
-  protected void onUnhandledException(Exception e) {
+  protected void onUnhandledException(final Exception e) {
     FLog.wtf(this.getClass(), "unhandled exception", e);
   }
 }

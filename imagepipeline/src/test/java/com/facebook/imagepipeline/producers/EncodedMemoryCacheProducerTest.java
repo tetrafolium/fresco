@@ -275,7 +275,7 @@ public class EncodedMemoryCacheProducerTest {
   }
 
   private void setupInputProducerStreamingSuccessWithStatusFlags(
-      @Consumer.Status int statusFlags, EncodedImage finalEncodedImage) {
+      final @Consumer.Status int statusFlags, final EncodedImage finalEncodedImage) {
     doAnswer(
             new ProduceResultsNewResultAnswer(
                 Arrays.asList(mIntermediateEncodedImage, finalEncodedImage), statusFlags))
@@ -301,13 +301,13 @@ public class EncodedMemoryCacheProducerTest {
     private final List<EncodedImage> mResults;
     private final @Consumer.Status int mExtraStatusFlags;
 
-    private ProduceResultsNewResultAnswer(List<EncodedImage> results, int extraStatusFlags) {
+    private ProduceResultsNewResultAnswer(final List<EncodedImage> results, final int extraStatusFlags) {
       mResults = results;
       mExtraStatusFlags = extraStatusFlags;
     }
 
     @Override
-    public Void answer(InvocationOnMock invocation) throws Throwable {
+    public Void answer(final InvocationOnMock invocation) throws Throwable {
       Consumer consumer = (Consumer) invocation.getArguments()[0];
       Iterator<EncodedImage> iterator = mResults.iterator();
       while (iterator.hasNext()) {
@@ -321,7 +321,7 @@ public class EncodedMemoryCacheProducerTest {
 
   private class ProduceResultsFailureAnswer implements Answer<Void> {
     @Override
-    public Void answer(InvocationOnMock invocation) throws Throwable {
+    public Void answer(final InvocationOnMock invocation) throws Throwable {
       Consumer consumer = (Consumer) invocation.getArguments()[0];
       consumer.onFailure(mException);
       return null;

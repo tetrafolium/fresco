@@ -231,7 +231,7 @@ public class DraweeHolderTest {
     verifyControllerLifecycleCalls(0, 1);
   }
 
-  private void verifyControllerLifecycleCalls(int numOnAttach, int numOnDetach) {
+  private void verifyControllerLifecycleCalls(final int numOnAttach, final int numOnDetach) {
     mInOrderVerifier.verify(mController, times(numOnAttach)).onAttach();
     mInOrderVerifier.verify(mController, times(numOnDetach)).onDetach();
   }

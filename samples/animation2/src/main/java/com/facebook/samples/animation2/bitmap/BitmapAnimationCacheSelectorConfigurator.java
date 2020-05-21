@@ -40,9 +40,9 @@ public class BitmapAnimationCacheSelectorConfigurator {
   }
 
   public BitmapAnimationCacheSelectorConfigurator(
-      Spinner spinner,
-      BitmapFrameCacheChangedListener bitmapFrameCacheChangedListener,
-      BitmapFrameCache.FrameCacheListener frameCacheListener) {
+      final Spinner spinner,
+      final BitmapFrameCacheChangedListener bitmapFrameCacheChangedListener,
+      final BitmapFrameCache.FrameCacheListener frameCacheListener) {
     mSpinner = spinner;
     mBitmapFrameCacheChangedListener = bitmapFrameCacheChangedListener;
     mFrameCacheListener = frameCacheListener;
@@ -133,7 +133,7 @@ public class BitmapAnimationCacheSelectorConfigurator {
     mSpinner.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             BitmapFrameCache bitmapFrameCache =
                 mArrayAdapter.getItem(position).createBitmapFrameCache();
             bitmapFrameCache.setFrameCacheListener(mFrameCacheListener);
@@ -141,11 +141,11 @@ public class BitmapAnimationCacheSelectorConfigurator {
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> adapterView) {}
+          public void onNothingSelected(final AdapterView<?> adapterView) { }
         });
   }
 
-  private void updateBitmapFrameCache(BitmapFrameCache bitmapFrameCache) {
+  private void updateBitmapFrameCache(final BitmapFrameCache bitmapFrameCache) {
     if (mBitmapFrameCacheChangedListener != null) {
       mBitmapFrameCacheChangedListener.onBitmapFrameCacheChanged(bitmapFrameCache);
     }

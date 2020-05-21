@@ -110,28 +110,28 @@ public class ProducerFactory {
   private final boolean mKeepCancelledFetchAsLowPriority;
 
   public ProducerFactory(
-      Context context,
-      ByteArrayPool byteArrayPool,
-      ImageDecoder imageDecoder,
-      ProgressiveJpegConfig progressiveJpegConfig,
-      boolean downsampleEnabled,
-      boolean resizeAndRotateEnabledForNetwork,
-      boolean decodeCancellationEnabled,
-      ExecutorSupplier executorSupplier,
-      PooledByteBufferFactory pooledByteBufferFactory,
-      MemoryCache<CacheKey, CloseableImage> bitmapMemoryCache,
-      MemoryCache<CacheKey, PooledByteBuffer> encodedMemoryCache,
-      BufferedDiskCache defaultBufferedDiskCache,
-      BufferedDiskCache smallImageBufferedDiskCache,
-      CacheKeyFactory cacheKeyFactory,
-      PlatformBitmapFactory platformBitmapFactory,
-      int bitmapPrepareToDrawMinSizeBytes,
-      int bitmapPrepareToDrawMaxSizeBytes,
-      boolean bitmapPrepareToDrawForPrefetch,
-      int maxBitmapSize,
-      CloseableReferenceFactory closeableReferenceFactory,
-      boolean keepCancelledFetchAsLowPriority,
-      int trackedKeysSize) {
+      final Context context,
+      final ByteArrayPool byteArrayPool,
+      final ImageDecoder imageDecoder,
+      final ProgressiveJpegConfig progressiveJpegConfig,
+      final boolean downsampleEnabled,
+      final boolean resizeAndRotateEnabledForNetwork,
+      final boolean decodeCancellationEnabled,
+      final ExecutorSupplier executorSupplier,
+      final PooledByteBufferFactory pooledByteBufferFactory,
+      final MemoryCache<CacheKey, CloseableImage> bitmapMemoryCache,
+      final MemoryCache<CacheKey, PooledByteBuffer> encodedMemoryCache,
+      final BufferedDiskCache defaultBufferedDiskCache,
+      final BufferedDiskCache smallImageBufferedDiskCache,
+      final CacheKeyFactory cacheKeyFactory,
+      final PlatformBitmapFactory platformBitmapFactory,
+      final int bitmapPrepareToDrawMinSizeBytes,
+      final int bitmapPrepareToDrawMaxSizeBytes,
+      final boolean bitmapPrepareToDrawForPrefetch,
+      final int maxBitmapSize,
+      final CloseableReferenceFactory closeableReferenceFactory,
+      final boolean keepCancelledFetchAsLowPriority,
+      final int trackedKeysSize) {
     mContentResolver = context.getApplicationContext().getContentResolver();
     mResources = context.getApplicationContext().getResources();
     mAssetManager = context.getApplicationContext().getAssets();
@@ -166,27 +166,27 @@ public class ProducerFactory {
   }
 
   public static AddImageTransformMetaDataProducer newAddImageTransformMetaDataProducer(
-      Producer<EncodedImage> inputProducer) {
+      final Producer<EncodedImage> inputProducer) {
     return new AddImageTransformMetaDataProducer(inputProducer);
   }
 
   public BitmapMemoryCacheGetProducer newBitmapMemoryCacheGetProducer(
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     return new BitmapMemoryCacheGetProducer(mBitmapMemoryCache, mCacheKeyFactory, inputProducer);
   }
 
   public BitmapMemoryCacheKeyMultiplexProducer newBitmapMemoryCacheKeyMultiplexProducer(
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     return new BitmapMemoryCacheKeyMultiplexProducer(mCacheKeyFactory, inputProducer);
   }
 
   public BitmapMemoryCacheProducer newBitmapMemoryCacheProducer(
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     return new BitmapMemoryCacheProducer(mBitmapMemoryCache, mCacheKeyFactory, inputProducer);
   }
 
   public static BranchOnSeparateImagesProducer newBranchOnSeparateImagesProducer(
-      Producer<EncodedImage> inputProducer1, Producer<EncodedImage> inputProducer2) {
+      final Producer<EncodedImage> inputProducer1, final Producer<EncodedImage> inputProducer2) {
     return new BranchOnSeparateImagesProducer(inputProducer1, inputProducer2);
   }
 
@@ -194,7 +194,7 @@ public class ProducerFactory {
     return new DataFetchProducer(mPooledByteBufferFactory);
   }
 
-  public DecodeProducer newDecodeProducer(Producer<EncodedImage> inputProducer) {
+  public DecodeProducer newDecodeProducer(final Producer<EncodedImage> inputProducer) {
     return new DecodeProducer(
         mByteArrayPool,
         mExecutorSupplier.forDecode(),
@@ -208,18 +208,18 @@ public class ProducerFactory {
         mCloseableReferenceFactory);
   }
 
-  public DiskCacheReadProducer newDiskCacheReadProducer(Producer<EncodedImage> inputProducer) {
+  public DiskCacheReadProducer newDiskCacheReadProducer(final Producer<EncodedImage> inputProducer) {
     return new DiskCacheReadProducer(
         mDefaultBufferedDiskCache, mSmallImageBufferedDiskCache, mCacheKeyFactory, inputProducer);
   }
 
-  public DiskCacheWriteProducer newDiskCacheWriteProducer(Producer<EncodedImage> inputProducer) {
+  public DiskCacheWriteProducer newDiskCacheWriteProducer(final Producer<EncodedImage> inputProducer) {
     return new DiskCacheWriteProducer(
         mDefaultBufferedDiskCache, mSmallImageBufferedDiskCache, mCacheKeyFactory, inputProducer);
   }
 
   public PartialDiskCacheProducer newPartialDiskCacheProducer(
-      Producer<EncodedImage> inputProducer) {
+      final Producer<EncodedImage> inputProducer) {
     return new PartialDiskCacheProducer(
         mDefaultBufferedDiskCache,
         mCacheKeyFactory,
@@ -229,13 +229,13 @@ public class ProducerFactory {
   }
 
   public EncodedCacheKeyMultiplexProducer newEncodedCacheKeyMultiplexProducer(
-      Producer<EncodedImage> inputProducer) {
+      final Producer<EncodedImage> inputProducer) {
     return new EncodedCacheKeyMultiplexProducer(
         mCacheKeyFactory, mKeepCancelledFetchAsLowPriority, inputProducer);
   }
 
   public BitmapProbeProducer newBitmapProbeProducer(
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     return new BitmapProbeProducer(
         mEncodedMemoryCache,
         mDefaultBufferedDiskCache,
@@ -246,7 +246,7 @@ public class ProducerFactory {
         inputProducer);
   }
 
-  public EncodedProbeProducer newEncodedProbeProducer(Producer<EncodedImage> inputProducer) {
+  public EncodedProbeProducer newEncodedProbeProducer(final Producer<EncodedImage> inputProducer) {
     return new EncodedProbeProducer(
         mDefaultBufferedDiskCache,
         mSmallImageBufferedDiskCache,
@@ -257,7 +257,7 @@ public class ProducerFactory {
   }
 
   public EncodedMemoryCacheProducer newEncodedMemoryCacheProducer(
-      Producer<EncodedImage> inputProducer) {
+      final Producer<EncodedImage> inputProducer) {
     return new EncodedMemoryCacheProducer(mEncodedMemoryCache, mCacheKeyFactory, inputProducer);
   }
 
@@ -282,7 +282,7 @@ public class ProducerFactory {
   }
 
   public ThumbnailBranchProducer newThumbnailBranchProducer(
-      ThumbnailProducer<EncodedImage>[] thumbnailProducers) {
+      final ThumbnailProducer<EncodedImage>[] thumbnailProducers) {
     return new ThumbnailBranchProducer(thumbnailProducers);
   }
 
@@ -306,7 +306,7 @@ public class ProducerFactory {
         mExecutorSupplier.forLocalStorageRead(), mContentResolver);
   }
 
-  public Producer<EncodedImage> newNetworkFetchProducer(NetworkFetcher networkFetcher) {
+  public Producer<EncodedImage> newNetworkFetchProducer(final NetworkFetcher networkFetcher) {
     return new NetworkFetchProducer(mPooledByteBufferFactory, mByteArrayPool, networkFetcher);
   }
 
@@ -315,21 +315,21 @@ public class ProducerFactory {
   }
 
   public PostprocessedBitmapMemoryCacheProducer newPostprocessorBitmapMemoryCacheProducer(
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     return new PostprocessedBitmapMemoryCacheProducer(
         mBitmapMemoryCache, mCacheKeyFactory, inputProducer);
   }
 
   public PostprocessorProducer newPostprocessorProducer(
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     return new PostprocessorProducer(
         inputProducer, mPlatformBitmapFactory, mExecutorSupplier.forBackgroundTasks());
   }
 
   public ResizeAndRotateProducer newResizeAndRotateProducer(
-      Producer<EncodedImage> inputProducer,
+      final Producer<EncodedImage> inputProducer,
       final boolean isResizingEnabled,
-      ImageTranscoderFactory imageTranscoderFactory) {
+      final ImageTranscoderFactory imageTranscoderFactory) {
     return new ResizeAndRotateProducer(
         mExecutorSupplier.forBackgroundTasks(),
         mPooledByteBufferFactory,
@@ -338,29 +338,29 @@ public class ProducerFactory {
         imageTranscoderFactory);
   }
 
-  public static <T> SwallowResultProducer<T> newSwallowResultProducer(Producer<T> inputProducer) {
+  public static <T> SwallowResultProducer<T> newSwallowResultProducer(final Producer<T> inputProducer) {
     return new SwallowResultProducer<T>(inputProducer);
   }
 
   public <T> ThreadHandoffProducer<T> newBackgroundThreadHandoffProducer(
-      Producer<T> inputProducer, ThreadHandoffProducerQueue inputThreadHandoffProducerQueue) {
+      final Producer<T> inputProducer, final ThreadHandoffProducerQueue inputThreadHandoffProducerQueue) {
     return new ThreadHandoffProducer<T>(inputProducer, inputThreadHandoffProducerQueue);
   }
 
-  public <T> ThrottlingProducer<T> newThrottlingProducer(Producer<T> inputProducer) {
+  public <T> ThrottlingProducer<T> newThrottlingProducer(final Producer<T> inputProducer) {
     return new ThrottlingProducer<T>(
         MAX_SIMULTANEOUS_REQUESTS,
         mExecutorSupplier.forLightweightBackgroundTasks(),
         inputProducer);
   }
 
-  public WebpTranscodeProducer newWebpTranscodeProducer(Producer<EncodedImage> inputProducer) {
+  public WebpTranscodeProducer newWebpTranscodeProducer(final Producer<EncodedImage> inputProducer) {
     return new WebpTranscodeProducer(
         mExecutorSupplier.forBackgroundTasks(), mPooledByteBufferFactory, inputProducer);
   }
 
   public BitmapPrepareProducer newBitmapPrepareProducer(
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     return new BitmapPrepareProducer(
         inputProducer,
         mBitmapPrepareToDrawMinSizeBytes,

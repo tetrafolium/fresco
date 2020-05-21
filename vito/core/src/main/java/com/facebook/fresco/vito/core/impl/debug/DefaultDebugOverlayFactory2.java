@@ -19,18 +19,18 @@ import javax.annotation.Nullable;
 
 public class DefaultDebugOverlayFactory2 extends BaseDebugOverlayFactory2 {
 
-  public DefaultDebugOverlayFactory2(Supplier<Boolean> debugOverlayEnabled) {
+  public DefaultDebugOverlayFactory2(final Supplier<Boolean> debugOverlayEnabled) {
     super(debugOverlayEnabled);
   }
 
   @Override
-  protected void setData(DebugOverlayDrawable overlay, FrescoDrawable2 drawable) {
+  protected void setData(final DebugOverlayDrawable overlay, final FrescoDrawable2 drawable) {
     setBasicData(overlay, drawable);
     setImageRequestData(overlay, drawable.getImageRequest());
     setImageOriginData(overlay, drawable.getImageOrigin());
   }
 
-  private void setBasicData(DebugOverlayDrawable overlay, FrescoDrawable2 drawable) {
+  private void setBasicData(final DebugOverlayDrawable overlay, final FrescoDrawable2 drawable) {
     overlay.addDebugData("ID", VitoUtils.getStringId(drawable.getImageId()));
     overlay.addDebugData(
         "D",
@@ -38,7 +38,7 @@ public class DefaultDebugOverlayFactory2 extends BaseDebugOverlayFactory2 {
             Locale.US, "%dx%d", drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight()));
   }
 
-  private void setImageOriginData(DebugOverlayDrawable overlay, @ImageOrigin int imageOrigin) {
+  private void setImageOriginData(final DebugOverlayDrawable overlay, final @ImageOrigin int imageOrigin) {
     overlay.addDebugData(
         "origin",
         ImageOriginUtils.toString(imageOrigin),
@@ -46,7 +46,7 @@ public class DefaultDebugOverlayFactory2 extends BaseDebugOverlayFactory2 {
   }
 
   private void setImageRequestData(
-      DebugOverlayDrawable overlay, @Nullable VitoImageRequest imageRequest) {
+      final DebugOverlayDrawable overlay, final @Nullable VitoImageRequest imageRequest) {
     if (imageRequest == null) {
       return;
     }

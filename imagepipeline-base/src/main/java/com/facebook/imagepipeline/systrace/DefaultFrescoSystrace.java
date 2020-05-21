@@ -14,14 +14,14 @@ import com.facebook.imagepipelinebase.BuildConfig;
 public class DefaultFrescoSystrace implements FrescoSystrace.Systrace {
 
   @Override
-  public void beginSection(String name) {
+  public void beginSection(final String name) {
     if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
       Trace.beginSection(name);
     }
   }
 
   @Override
-  public FrescoSystrace.ArgsBuilder beginSectionWithArgs(String name) {
+  public FrescoSystrace.ArgsBuilder beginSectionWithArgs(final String name) {
     if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
       return new DefaultArgsBuilder(name);
     }
@@ -50,7 +50,7 @@ public class DefaultFrescoSystrace implements FrescoSystrace.Systrace {
 
     private final StringBuilder mStringBuilder;
 
-    public DefaultArgsBuilder(String name) {
+    public DefaultArgsBuilder(final String name) {
       mStringBuilder = new StringBuilder(name);
     }
 
@@ -67,7 +67,7 @@ public class DefaultFrescoSystrace implements FrescoSystrace.Systrace {
     }
 
     @Override
-    public FrescoSystrace.ArgsBuilder arg(String key, Object value) {
+    public FrescoSystrace.ArgsBuilder arg(final String key, final Object value) {
       mStringBuilder
           .append(';')
           .append(key)
@@ -77,19 +77,19 @@ public class DefaultFrescoSystrace implements FrescoSystrace.Systrace {
     }
 
     @Override
-    public FrescoSystrace.ArgsBuilder arg(String key, int value) {
+    public FrescoSystrace.ArgsBuilder arg(final String key, final int value) {
       mStringBuilder.append(';').append(key).append('=').append(Integer.toString(value));
       return this;
     }
 
     @Override
-    public FrescoSystrace.ArgsBuilder arg(String key, long value) {
+    public FrescoSystrace.ArgsBuilder arg(final String key, final long value) {
       mStringBuilder.append(';').append(key).append('=').append(Long.toString(value));
       return this;
     }
 
     @Override
-    public FrescoSystrace.ArgsBuilder arg(String key, double value) {
+    public FrescoSystrace.ArgsBuilder arg(final String key, final double value) {
       mStringBuilder.append(';').append(key).append('=').append(Double.toString(value));
       return this;
     }

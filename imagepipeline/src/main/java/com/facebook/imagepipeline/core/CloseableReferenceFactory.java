@@ -27,7 +27,7 @@ public class CloseableReferenceFactory {
         new CloseableReference.LeakHandler() {
           @Override
           public void reportLeak(
-              SharedReference<Object> reference, @Nullable Throwable stacktrace) {
+              final SharedReference<Object> reference, final @Nullable Throwable stacktrace) {
             closeableReferenceLeakTracker.trackCloseableReferenceLeak(reference, stacktrace);
             FLog.w(
                 "Fresco",
@@ -45,11 +45,11 @@ public class CloseableReferenceFactory {
         };
   }
 
-  public <U extends Closeable> CloseableReference<U> create(U u) {
+  public <U extends Closeable> CloseableReference<U> create(final U u) {
     return CloseableReference.of(u, mLeakHandler);
   }
 
-  public <T> CloseableReference<T> create(T t, ResourceReleaser<T> resourceReleaser) {
+  public <T> CloseableReference<T> create(final T t, final ResourceReleaser<T> resourceReleaser) {
     return CloseableReference.of(t, resourceReleaser, mLeakHandler);
   }
 
@@ -58,7 +58,7 @@ public class CloseableReferenceFactory {
    *
    * @param tr An exception to log
    */
-  private static String getStackTraceString(@Nullable Throwable tr) {
+  private static String getStackTraceString(final @Nullable Throwable tr) {
     if (tr == null) {
       return "";
     }

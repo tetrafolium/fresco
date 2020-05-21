@@ -169,7 +169,7 @@ public class MemoryPooledByteBufferOutputStreamTest extends TestUsingNativeMemor
   }
 
   // write out the contents of data into the output stream
-  private static MemoryPooledByteBuffer doWrite(MemoryPooledByteBufferOutputStream os, byte[] data)
+  private static MemoryPooledByteBuffer doWrite(final MemoryPooledByteBufferOutputStream os, final byte[] data)
       throws Exception {
     for (int i = 0; i < data.length; i++) {
       os.write(data, i, 1);
@@ -178,7 +178,7 @@ public class MemoryPooledByteBufferOutputStreamTest extends TestUsingNativeMemor
   }
 
   // assert that the first 'length' bytes of expected are the same as those in 'actual'
-  private static void assertArrayEquals(byte[] expected, byte[] actual, int length) {
+  private static void assertArrayEquals(final byte[] expected, final byte[] actual, final int length) {
     Assert.assertTrue(expected.length >= length);
     Assert.assertTrue(actual.length >= length);
     for (int i = 0; i < length; i++) {
@@ -186,7 +186,7 @@ public class MemoryPooledByteBufferOutputStreamTest extends TestUsingNativeMemor
     }
   }
 
-  private static byte[] getBytes(MemoryPooledByteBuffer bb) {
+  private static byte[] getBytes(final MemoryPooledByteBuffer bb) {
     byte[] bytes = new byte[bb.size()];
     bb.getCloseableReference().get().read(0, bytes, 0, bytes.length);
     return bytes;

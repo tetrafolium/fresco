@@ -25,14 +25,14 @@ public class BenchmarkPostprocessorForManualBitmapHandling
   private final BasePostprocessor mPostprocessor;
 
   public BenchmarkPostprocessorForManualBitmapHandling(
-      DurationCallback durationCallback, BasePostprocessor postprocessor) {
+      final DurationCallback durationCallback, final BasePostprocessor postprocessor) {
     super(durationCallback);
     mPostprocessor = postprocessor;
   }
 
   @Override
   public CloseableReference<Bitmap> process(
-      Bitmap sourceBitmap, PlatformBitmapFactory bitmapFactory) {
+      final Bitmap sourceBitmap, final PlatformBitmapFactory bitmapFactory) {
     long startTime = System.nanoTime();
     CloseableReference<Bitmap> result = mPostprocessor.process(sourceBitmap, bitmapFactory);
     showDuration(System.nanoTime() - startTime);

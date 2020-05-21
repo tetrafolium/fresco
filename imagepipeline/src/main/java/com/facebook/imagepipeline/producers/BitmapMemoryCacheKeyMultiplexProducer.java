@@ -22,7 +22,7 @@ public class BitmapMemoryCacheKeyMultiplexProducer
   private final CacheKeyFactory mCacheKeyFactory;
 
   public BitmapMemoryCacheKeyMultiplexProducer(
-      CacheKeyFactory cacheKeyFactory, Producer inputProducer) {
+      final CacheKeyFactory cacheKeyFactory, final Producer inputProducer) {
     super(
         inputProducer,
         "BitmapMemoryCacheKeyMultiplexProducer",
@@ -30,7 +30,7 @@ public class BitmapMemoryCacheKeyMultiplexProducer
     mCacheKeyFactory = cacheKeyFactory;
   }
 
-  protected Pair<CacheKey, ImageRequest.RequestLevel> getKey(ProducerContext producerContext) {
+  protected Pair<CacheKey, ImageRequest.RequestLevel> getKey(final ProducerContext producerContext) {
     return Pair.create(
         mCacheKeyFactory.getBitmapCacheKey(
             producerContext.getImageRequest(), producerContext.getCallerContext()),
@@ -38,7 +38,7 @@ public class BitmapMemoryCacheKeyMultiplexProducer
   }
 
   public CloseableReference<CloseableImage> cloneOrNull(
-      CloseableReference<CloseableImage> closeableImage) {
+      final CloseableReference<CloseableImage> closeableImage) {
     return CloseableReference.cloneOrNull(closeableImage);
   }
 }

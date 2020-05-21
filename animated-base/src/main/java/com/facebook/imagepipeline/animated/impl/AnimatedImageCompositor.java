@@ -62,7 +62,7 @@ public class AnimatedImageCompositor {
   private final Paint mTransparentFillPaint;
 
   public AnimatedImageCompositor(
-      AnimatedDrawableBackend animatedDrawableBackend, Callback callback) {
+      final AnimatedDrawableBackend animatedDrawableBackend, final Callback callback) {
     mAnimatedDrawableBackend = animatedDrawableBackend;
     mCallback = callback;
     mTransparentFillPaint = new Paint();
@@ -77,7 +77,7 @@ public class AnimatedImageCompositor {
    * @param frameNumber the frame to render
    * @param bitmap the bitmap to render into
    */
-  public void renderFrame(int frameNumber, Bitmap bitmap) {
+  public void renderFrame(final int frameNumber, final Bitmap bitmap) {
     Canvas canvas = new Canvas(bitmap);
     canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.SRC);
 
@@ -143,7 +143,7 @@ public class AnimatedImageCompositor {
    * @param canvas the canvas to prepare
    * @return the index of the the next frame to process
    */
-  private int prepareCanvasWithClosestCachedFrame(int previousFrameNumber, Canvas canvas) {
+  private int prepareCanvasWithClosestCachedFrame(final int previousFrameNumber, final Canvas canvas) {
     for (int index = previousFrameNumber; index >= 0; index--) {
       FrameNeededResult neededResult = isFrameNeededForRendering(index);
       switch (neededResult) {
@@ -180,7 +180,7 @@ public class AnimatedImageCompositor {
     return 0;
   }
 
-  private void disposeToBackground(Canvas canvas, AnimatedDrawableFrameInfo frameInfo) {
+  private void disposeToBackground(final Canvas canvas, final AnimatedDrawableFrameInfo frameInfo) {
     canvas.drawRect(
         frameInfo.xOffset,
         frameInfo.yOffset,
@@ -196,7 +196,7 @@ public class AnimatedImageCompositor {
    * @param index the frame to check
    * @return whether the frame is required taking into account special conditions
    */
-  private FrameNeededResult isFrameNeededForRendering(int index) {
+  private FrameNeededResult isFrameNeededForRendering(final int index) {
     AnimatedDrawableFrameInfo frameInfo = mAnimatedDrawableBackend.getFrameInfo(index);
     DisposalMethod disposalMethod = frameInfo.disposalMethod;
     if (disposalMethod == DisposalMethod.DISPOSE_DO_NOT) {
@@ -219,7 +219,7 @@ public class AnimatedImageCompositor {
     }
   }
 
-  private boolean isKeyFrame(int index) {
+  private boolean isKeyFrame(final int index) {
     if (index == 0) {
       return true;
     }
@@ -232,14 +232,14 @@ public class AnimatedImageCompositor {
           && isFullFrame(prevFrameInfo);
   }
 
-  private boolean isFullFrame(AnimatedDrawableFrameInfo frameInfo) {
+  private boolean isFullFrame(final AnimatedDrawableFrameInfo frameInfo) {
     return frameInfo.xOffset == 0
         && frameInfo.yOffset == 0
         && frameInfo.width == mAnimatedDrawableBackend.getRenderedWidth()
         && frameInfo.height == mAnimatedDrawableBackend.getRenderedHeight();
   }
 
-  private void maybeApplyTransformation(Bitmap bitmap) {
+  private void maybeApplyTransformation(final Bitmap bitmap) {
     AnimatedImageResult animatedImageResult = mAnimatedDrawableBackend.getAnimatedImageResult();
 
     if (animatedImageResult == null) {

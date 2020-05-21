@@ -23,7 +23,7 @@ public class FLogDefaultLoggingDelegate implements LoggingDelegate {
     return sInstance;
   }
 
-  private FLogDefaultLoggingDelegate() {}
+  private FLogDefaultLoggingDelegate() { }
 
   /**
    * Sets an application tag that is used for checking if a log line is loggable and also to prefix
@@ -31,12 +31,12 @@ public class FLogDefaultLoggingDelegate implements LoggingDelegate {
    *
    * @param tag the tag
    */
-  public void setApplicationTag(String tag) {
+  public void setApplicationTag(final String tag) {
     mApplicationTag = tag;
   }
 
   @Override
-  public void setMinimumLoggingLevel(int level) {
+  public void setMinimumLoggingLevel(final int level) {
     mMinimumLoggingLevel = level;
   }
 
@@ -46,57 +46,57 @@ public class FLogDefaultLoggingDelegate implements LoggingDelegate {
   }
 
   @Override
-  public boolean isLoggable(int level) {
+  public boolean isLoggable(final int level) {
     return mMinimumLoggingLevel <= level;
   }
 
   @Override
-  public void v(String tag, String msg) {
+  public void v(final String tag, final String msg) {
     println(Log.VERBOSE, tag, msg);
   }
 
   @Override
-  public void v(String tag, String msg, Throwable tr) {
+  public void v(final String tag, final String msg, final Throwable tr) {
     println(Log.VERBOSE, tag, msg, tr);
   }
 
   @Override
-  public void d(String tag, String msg) {
+  public void d(final String tag, final String msg) {
     println(Log.DEBUG, tag, msg);
   }
 
   @Override
-  public void d(String tag, String msg, Throwable tr) {
+  public void d(final String tag, final String msg, final Throwable tr) {
     println(Log.DEBUG, tag, msg, tr);
   }
 
   @Override
-  public void i(String tag, String msg) {
+  public void i(final String tag, final String msg) {
     println(Log.INFO, tag, msg);
   }
 
   @Override
-  public void i(String tag, String msg, Throwable tr) {
+  public void i(final String tag, final String msg, final Throwable tr) {
     println(Log.INFO, tag, msg, tr);
   }
 
   @Override
-  public void w(String tag, String msg) {
+  public void w(final String tag, final String msg) {
     println(Log.WARN, tag, msg);
   }
 
   @Override
-  public void w(String tag, String msg, Throwable tr) {
+  public void w(final String tag, final String msg, final Throwable tr) {
     println(Log.WARN, tag, msg, tr);
   }
 
   @Override
-  public void e(String tag, String msg) {
+  public void e(final String tag, final String msg) {
     println(Log.ERROR, tag, msg);
   }
 
   @Override
-  public void e(String tag, String msg, Throwable tr) {
+  public void e(final String tag, final String msg, final Throwable tr) {
     println(Log.ERROR, tag, msg, tr);
   }
 
@@ -105,7 +105,7 @@ public class FLogDefaultLoggingDelegate implements LoggingDelegate {
    * crash the app.
    */
   @Override
-  public void wtf(String tag, String msg) {
+  public void wtf(final String tag, final String msg) {
     println(Log.ERROR, tag, msg);
   }
 
@@ -114,24 +114,24 @@ public class FLogDefaultLoggingDelegate implements LoggingDelegate {
    * crash the app.
    */
   @Override
-  public void wtf(String tag, String msg, Throwable tr) {
+  public void wtf(final String tag, final String msg, final Throwable tr) {
     println(Log.ERROR, tag, msg, tr);
   }
 
   @Override
-  public void log(int priority, String tag, String msg) {
+  public void log(final int priority, final String tag, final String msg) {
     println(priority, tag, msg);
   }
 
-  private void println(int priority, String tag, String msg) {
+  private void println(final int priority, final String tag, final String msg) {
     Log.println(priority, prefixTag(tag), msg);
   }
 
-  private void println(int priority, String tag, String msg, Throwable tr) {
+  private void println(final int priority, final String tag, final String msg, final Throwable tr) {
     Log.println(priority, prefixTag(tag), getMsg(msg, tr));
   }
 
-  private String prefixTag(String tag) {
+  private String prefixTag(final String tag) {
     if (mApplicationTag != null) {
       return mApplicationTag + ":" + tag;
     } else {
@@ -139,11 +139,11 @@ public class FLogDefaultLoggingDelegate implements LoggingDelegate {
     }
   }
 
-  private static String getMsg(String msg, Throwable tr) {
+  private static String getMsg(final String msg, final Throwable tr) {
     return msg + '\n' + getStackTraceString(tr);
   }
 
-  private static String getStackTraceString(Throwable tr) {
+  private static String getStackTraceString(final Throwable tr) {
     if (tr == null) {
       return "";
     }

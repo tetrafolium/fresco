@@ -45,13 +45,13 @@ public class ImagePerfControllerListener2 extends BaseControllerListener2<ImageI
 
     private final ImagePerfNotifier mNotifier;
 
-    public LogHandler(@NonNull Looper looper, @NonNull ImagePerfNotifier notifier) {
+    public LogHandler(final @NonNull Looper looper, final @NonNull ImagePerfNotifier notifier) {
       super(looper);
       mNotifier = notifier;
     }
 
     @Override
-    public void handleMessage(@NonNull Message msg) {
+    public void handleMessage(final @NonNull Message msg) {
       switch (msg.what) {
         case WHAT_STATUS:
           mNotifier.notifyStatusUpdated((ImagePerfState) msg.obj, msg.arg1);
@@ -64,10 +64,10 @@ public class ImagePerfControllerListener2 extends BaseControllerListener2<ImageI
   };
 
   public ImagePerfControllerListener2(
-      MonotonicClock clock,
-      ImagePerfState imagePerfState,
-      ImagePerfNotifier imagePerfNotifier,
-      Supplier<Boolean> asyncLogging) {
+      final MonotonicClock clock,
+      final ImagePerfState imagePerfState,
+      final ImagePerfNotifier imagePerfNotifier,
+      final Supplier<Boolean> asyncLogging) {
     mClock = clock;
     mImagePerfState = imagePerfState;
     mImagePerfNotifier = imagePerfNotifier;
@@ -76,7 +76,7 @@ public class ImagePerfControllerListener2 extends BaseControllerListener2<ImageI
   }
 
   @Override
-  public void onSubmit(String id, Object callerContext) {
+  public void onSubmit(final String id, final Object callerContext) {
     final long now = mClock.now();
 
     mImagePerfState.resetPointsTimestamps();
@@ -90,7 +90,7 @@ public class ImagePerfControllerListener2 extends BaseControllerListener2<ImageI
   }
 
   @Override
-  public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
+  public void onIntermediateImageSet(final String id, final @Nullable ImageInfo imageInfo) {
     final long now = mClock.now();
 
     mImagePerfState.setControllerIntermediateImageSetTimeMs(now);
@@ -102,7 +102,7 @@ public class ImagePerfControllerListener2 extends BaseControllerListener2<ImageI
 
   @Override
   public void onFinalImageSet(
-      String id, ImageInfo imageInfo, ControllerListener2.Extras extraData) {
+      final String id, final ImageInfo imageInfo, final ControllerListener2.Extras extraData) {
     final long now = mClock.now();
 
     mImagePerfState.setExtraData(extraData);
@@ -116,7 +116,7 @@ public class ImagePerfControllerListener2 extends BaseControllerListener2<ImageI
   }
 
   @Override
-  public void onFailure(String id, Throwable throwable) {
+  public void onFailure(final String id, final Throwable throwable) {
     final long now = mClock.now();
 
     mImagePerfState.setControllerFailureTimeMs(now);
@@ -129,7 +129,7 @@ public class ImagePerfControllerListener2 extends BaseControllerListener2<ImageI
   }
 
   @Override
-  public void onRelease(String id) {
+  public void onRelease(final String id) {
     final long now = mClock.now();
 
     int lastImageLoadStatus = mImagePerfState.getImageLoadStatus();
@@ -146,14 +146,14 @@ public class ImagePerfControllerListener2 extends BaseControllerListener2<ImageI
   }
 
   @Override
-  public void onImageDrawn(String id, ImageInfo info, DimensionsInfo dimensionsInfo) {
+  public void onImageDrawn(final String id, final ImageInfo info, final DimensionsInfo dimensionsInfo) {
     mImagePerfState.setImageDrawTimeMs(mClock.now());
     mImagePerfState.setDimensionsInfo(dimensionsInfo);
     updateStatus(ImageLoadStatus.DRAW);
   }
 
   @VisibleForTesting
-  public void reportViewVisible(long now) {
+  public void reportViewVisible(final long now) {
     mImagePerfState.setVisible(true);
     mImagePerfState.setVisibilityEventTimeMs(now);
 
@@ -161,14 +161,14 @@ public class ImagePerfControllerListener2 extends BaseControllerListener2<ImageI
   }
 
   @VisibleForTesting
-  private void reportViewInvisible(long time) {
+  private void reportViewInvisible(final long time) {
     mImagePerfState.setVisible(false);
     mImagePerfState.setInvisibilityEventTimeMs(time);
 
     updateVisibility(VisibilityState.INVISIBLE);
   }
 
-  private void updateStatus(@ImageLoadStatus int imageLoadStatus) {
+  private void updateStatus(final @ImageLoadStatus int imageLoadStatus) {
     if (shouldDispatchAsync()) {
       Message msg = mHandler.obtainMessage();
       msg.what = WHAT_STATUS;
@@ -180,7 +180,7 @@ public class ImagePerfControllerListener2 extends BaseControllerListener2<ImageI
     }
   }
 
-  private void updateVisibility(@VisibilityState int visibilityState) {
+  private void updateVisibility(final @VisibilityState int visibilityState) {
     if (shouldDispatchAsync()) {
       Message msg = mHandler.obtainMessage();
       msg.what = WHAT_VISIBILITY;

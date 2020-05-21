@@ -74,7 +74,7 @@ public class ColorImageExample {
 
     @Nullable
     @Override
-    public ImageFormat determineFormat(byte[] headerBytes, int headerSize) {
+    public ImageFormat determineFormat(final byte[] headerBytes, final int headerSize) {
       if (headerSize < getHeaderSize()) {
         return null;
       }
@@ -92,7 +92,7 @@ public class ColorImageExample {
 
     private boolean mClosed = false;
 
-    public CloseableColorImage(int color) {
+    public CloseableColorImage(final int color) {
       mColor = color;
     }
 
@@ -132,10 +132,10 @@ public class ColorImageExample {
 
     @Override
     public CloseableImage decode(
-        EncodedImage encodedImage,
-        int length,
-        QualityInfo qualityInfo,
-        ImageDecodeOptions options) {
+        final EncodedImage encodedImage,
+        final int length,
+        final QualityInfo qualityInfo,
+        final ImageDecodeOptions options) {
       try {
         // Read the file as a string
         String text = new String(ByteStreams.toByteArray(encodedImage.getInputStream()));
@@ -170,14 +170,14 @@ public class ColorImageExample {
   public static class ColorDrawableFactory implements DrawableFactory {
 
     @Override
-    public boolean supportsImageType(CloseableImage image) {
+    public boolean supportsImageType(final CloseableImage image) {
       // We can only handle CloseableColorImages
       return image instanceof CloseableColorImage;
     }
 
     @Nullable
     @Override
-    public Drawable createDrawable(CloseableImage image) {
+    public Drawable createDrawable(final CloseableImage image) {
       // Just return a simple ColorDrawable with the given color value
       return new ColorDrawable(((CloseableColorImage) image).getColor());
     }

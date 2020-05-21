@@ -45,7 +45,7 @@ public class BitmapPoolTest {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 int size = (Integer) invocation.getArguments()[0];
                 return MockBitmapFactory.create(
                     1,
@@ -58,7 +58,7 @@ public class BitmapPoolTest {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 final Bitmap bitmap = (Bitmap) invocation.getArguments()[0];
                 return BitmapUtil.getSizeInByteForBitmap(
                     bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());

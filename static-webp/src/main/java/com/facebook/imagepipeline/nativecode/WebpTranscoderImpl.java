@@ -23,7 +23,7 @@ public class WebpTranscoderImpl implements WebpTranscoder {
 
   /** @return true if given type of WebP is supported natively by the framework */
   @Override
-  public boolean isWebpNativelySupported(ImageFormat webpFormat) {
+  public boolean isWebpNativelySupported(final ImageFormat webpFormat) {
     if (webpFormat == DefaultImageFormats.WEBP_SIMPLE) {
       // Simple WebPs are supported on Android 4.0+
       return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
@@ -39,7 +39,7 @@ public class WebpTranscoderImpl implements WebpTranscoder {
 
   /** Transcodes webp image given by input stream into jpeg. */
   @Override
-  public void transcodeWebpToJpeg(InputStream inputStream, OutputStream outputStream, int quality)
+  public void transcodeWebpToJpeg(final InputStream inputStream, final OutputStream outputStream, final int quality)
       throws IOException {
     StaticWebpNativeLoader.ensure();
     nativeTranscodeWebpToJpeg(
@@ -48,7 +48,7 @@ public class WebpTranscoderImpl implements WebpTranscoder {
 
   /** Transcodes Webp image given by input stream into png. */
   @Override
-  public void transcodeWebpToPng(InputStream inputStream, OutputStream outputStream)
+  public void transcodeWebpToPng(final InputStream inputStream, final OutputStream outputStream)
       throws IOException {
     StaticWebpNativeLoader.ensure();
     nativeTranscodeWebpToPng(

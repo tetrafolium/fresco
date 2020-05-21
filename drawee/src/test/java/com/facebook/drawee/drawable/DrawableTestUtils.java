@@ -32,7 +32,7 @@ public class DrawableTestUtils {
 
   public abstract static class FakeDrawable extends Drawable implements VisibilityAwareDrawable {
     @Override
-    public void setVisibilityCallback(VisibilityCallback visibilityCallback) {}
+    public void setVisibilityCallback(final VisibilityCallback visibilityCallback) { }
   }
 
   /**
@@ -58,7 +58,7 @@ public class DrawableTestUtils {
    *
    * @return mock Drawable
    */
-  public static <D extends Drawable> D mockDrawable(Class<D> drawableClassToMock) {
+  public static <D extends Drawable> D mockDrawable(final Class<D> drawableClassToMock) {
     D drawable = mock(drawableClassToMock);
     when(drawable.mutate()).thenReturn(drawable);
     stubGetAndSetBounds(drawable);
@@ -75,13 +75,13 @@ public class DrawableTestUtils {
    *
    * @param drawable drawable to stub methods of
    */
-  public static void stubGetAndSetBounds(Drawable drawable) {
+  public static void stubGetAndSetBounds(final Drawable drawable) {
     final Rect rect = new Rect();
     when(drawable.getBounds()).thenReturn(rect);
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 rect.set(
                     (Integer) invocation.getArguments()[0],
                     (Integer) invocation.getArguments()[1],
@@ -106,7 +106,7 @@ public class DrawableTestUtils {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 callback.set((Drawable.Callback) invocation.getArguments()[0]);
                 return null;
               }
@@ -116,7 +116,7 @@ public class DrawableTestUtils {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 if (callback.get() != null) {
                   callback.get().invalidateDrawable(drawable);
                 }
@@ -142,7 +142,7 @@ public class DrawableTestUtils {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 callback.set((VisibilityCallback) invocation.getArguments()[0]);
                 return null;
               }
@@ -152,7 +152,7 @@ public class DrawableTestUtils {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 if (callback.get() != null) {
                   isVisible.set((Boolean) invocation.getArguments()[0]);
                   callback.get().onVisibilityChange(isVisible.get());
@@ -165,7 +165,7 @@ public class DrawableTestUtils {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 return isVisible.get();
               }
             })
@@ -174,7 +174,7 @@ public class DrawableTestUtils {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 if (callback.get() != null) {
                   callback.get().onDraw();
                 }
@@ -195,7 +195,7 @@ public class DrawableTestUtils {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 Integer alpha = (Integer) invocation.getArguments()[0];
                 drawable.invalidateSelf();
                 atomicInteger.set(alpha);
@@ -211,7 +211,7 @@ public class DrawableTestUtils {
    *
    * @param drawable drawable to stub methods of
    */
-  public static void stubGetPaint(Drawable drawable) {
+  public static void stubGetPaint(final Drawable drawable) {
     if (!(drawable instanceof BitmapDrawable)) {
       return;
     }
@@ -221,7 +221,7 @@ public class DrawableTestUtils {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 paint.setColorFilter((ColorFilter) invocation.getArguments()[0]);
                 return null;
               }
@@ -235,7 +235,7 @@ public class DrawableTestUtils {
    *
    * @param drawable drawable to stub methods of
    */
-  public static void stubGetBitmap(Drawable drawable) {
+  public static void stubGetBitmap(final Drawable drawable) {
     if (!(drawable instanceof BitmapDrawable)) {
       return;
     }

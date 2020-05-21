@@ -44,7 +44,7 @@ public abstract class BaseBitmapDataSubscriber
     extends BaseDataSubscriber<CloseableReference<CloseableImage>> {
 
   @Override
-  public void onNewResultImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
+  public void onNewResultImpl(final DataSource<CloseableReference<CloseableImage>> dataSource) {
     if (!dataSource.isFinished()) {
       return;
     }

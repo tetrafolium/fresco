@@ -30,7 +30,7 @@ public class AnimationBackendDelegate<T extends AnimationBackend> implements Ani
   @Nullable private ColorFilter mColorFilter;
   @Nullable private Rect mBounds;
 
-  public AnimationBackendDelegate(@Nullable T animationBackend) {
+  public AnimationBackendDelegate(final @Nullable T animationBackend) {
     mAnimationBackend = animationBackend;
   }
 
@@ -40,7 +40,7 @@ public class AnimationBackendDelegate<T extends AnimationBackend> implements Ani
   }
 
   @Override
-  public int getFrameDurationMs(int frameNumber) {
+  public int getFrameDurationMs(final int frameNumber) {
     return mAnimationBackend == null ? 0 : mAnimationBackend.getFrameDurationMs(frameNumber);
   }
 
@@ -50,12 +50,12 @@ public class AnimationBackendDelegate<T extends AnimationBackend> implements Ani
   }
 
   @Override
-  public boolean drawFrame(Drawable parent, Canvas canvas, int frameNumber) {
+  public boolean drawFrame(final Drawable parent, final Canvas canvas, final int frameNumber) {
     return mAnimationBackend != null && mAnimationBackend.drawFrame(parent, canvas, frameNumber);
   }
 
   @Override
-  public void setAlpha(@IntRange(from = 0, to = 255) int alpha) {
+  public void setAlpha(final @IntRange(from = 0, to = 255) int alpha) {
     if (mAnimationBackend != null) {
       mAnimationBackend.setAlpha(alpha);
     }
@@ -63,7 +63,7 @@ public class AnimationBackendDelegate<T extends AnimationBackend> implements Ani
   }
 
   @Override
-  public void setColorFilter(ColorFilter colorFilter) {
+  public void setColorFilter(final ColorFilter colorFilter) {
     if (mAnimationBackend != null) {
       mAnimationBackend.setColorFilter(colorFilter);
     }
@@ -71,7 +71,7 @@ public class AnimationBackendDelegate<T extends AnimationBackend> implements Ani
   }
 
   @Override
-  public void setBounds(@Nullable Rect bounds) {
+  public void setBounds(final @Nullable Rect bounds) {
     if (mAnimationBackend != null) {
       mAnimationBackend.setBounds(bounds);
     }
@@ -110,7 +110,7 @@ public class AnimationBackendDelegate<T extends AnimationBackend> implements Ani
    *
    * @param animationBackend the backend to use or null to remove the current backend
    */
-  public void setAnimationBackend(@Nullable T animationBackend) {
+  public void setAnimationBackend(final @Nullable T animationBackend) {
     mAnimationBackend = animationBackend;
     if (mAnimationBackend != null) {
       applyBackendProperties(mAnimationBackend);
@@ -128,7 +128,7 @@ public class AnimationBackendDelegate<T extends AnimationBackend> implements Ani
   }
 
   @SuppressLint("Range")
-  private void applyBackendProperties(AnimationBackend backend) {
+  private void applyBackendProperties(final AnimationBackend backend) {
     if (mBounds != null) {
       backend.setBounds(mBounds);
     }

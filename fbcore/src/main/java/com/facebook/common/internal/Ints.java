@@ -26,7 +26,7 @@ import java.util.Arrays;
  * @since 1.0
  */
 public class Ints {
-  private Ints() {}
+  private Ints() { }
 
   /**
    * Returns the greatest value present in {@code array}.
@@ -36,7 +36,7 @@ public class Ints {
    *     in the array
    * @throws IllegalArgumentException if {@code array} is empty
    */
-  public static int max(int... array) {
+  public static int max(final int... array) {
     Preconditions.checkArgument(array.length > 0);
     int max = array[0];
     for (int i = 1; i < array.length; i++) {

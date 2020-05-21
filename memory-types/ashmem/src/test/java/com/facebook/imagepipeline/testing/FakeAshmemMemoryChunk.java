@@ -18,7 +18,7 @@ import com.facebook.imagepipeline.memory.MemoryChunk;
 public class FakeAshmemMemoryChunk extends AshmemMemoryChunk {
   private byte[] mBuf;
 
-  public FakeAshmemMemoryChunk(int bufSize) {
+  public FakeAshmemMemoryChunk(final int bufSize) {
     super();
     mBuf = new byte[bufSize];
   }
@@ -39,26 +39,26 @@ public class FakeAshmemMemoryChunk extends AshmemMemoryChunk {
   }
 
   @Override
-  public int write(int ashmemMemoryOffset, byte[] byteArray, int byteArrayOffset, int count) {
+  public int write(final int ashmemMemoryOffset, final byte[] byteArray, final int byteArrayOffset, final int count) {
     int numToWrite = Math.min(count, mBuf.length - ashmemMemoryOffset);
     System.arraycopy(byteArray, byteArrayOffset, mBuf, ashmemMemoryOffset, numToWrite);
     return numToWrite;
   }
 
   @Override
-  public byte read(int ashmemMemoryOffset) {
+  public byte read(final int ashmemMemoryOffset) {
     return mBuf[ashmemMemoryOffset];
   }
 
   @Override
-  public int read(int ashmemMemoryOffset, byte[] byteArray, int byteArrayOffset, int count) {
+  public int read(final int ashmemMemoryOffset, final byte[] byteArray, final int byteArrayOffset, final int count) {
     int numToRead = Math.min(count, mBuf.length - ashmemMemoryOffset);
     System.arraycopy(mBuf, ashmemMemoryOffset, byteArray, byteArrayOffset, numToRead);
     return numToRead;
   }
 
   @Override
-  public void copy(int offset, MemoryChunk other, int otherOffset, int count) {
+  public void copy(final int offset, final MemoryChunk other, final int otherOffset, final int count) {
     FakeAshmemMemoryChunk that = (FakeAshmemMemoryChunk) other;
     int numToCopy = Math.min(count, mBuf.length - offset);
     System.arraycopy(mBuf, offset, that.mBuf, otherOffset, numToCopy);

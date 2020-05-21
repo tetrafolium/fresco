@@ -33,7 +33,7 @@ public class ImageFormatChecker {
   }
 
   public void setCustomImageFormatCheckers(
-      @Nullable List<ImageFormat.FormatChecker> customImageFormatCheckers) {
+      final @Nullable List<ImageFormat.FormatChecker> customImageFormatCheckers) {
     mCustomImageFormatCheckers = customImageFormatCheckers;
     updateMaxHeaderLength();
   }
@@ -80,7 +80,7 @@ public class ImageFormatChecker {
    * @throws IOException
    */
   private static int readHeaderFromStream(
-      int maxHeaderLength, final InputStream is, final byte[] imageHeaderBytes) throws IOException {
+      final int maxHeaderLength, final InputStream is, final byte[] imageHeaderBytes) throws IOException {
     Preconditions.checkNotNull(is);
     Preconditions.checkNotNull(imageHeaderBytes);
     Preconditions.checkArgument(imageHeaderBytes.length >= maxHeaderLength);
@@ -145,7 +145,7 @@ public class ImageFormatChecker {
    * @param filename
    * @return ImageFormat for image stored in filename
    */
-  public static ImageFormat getImageFormat(String filename) {
+  public static ImageFormat getImageFormat(final String filename) {
     FileInputStream fileInputStream = null;
     try {
       fileInputStream = new FileInputStream(filename);

@@ -42,14 +42,14 @@ public class FrescoContextImpl implements FrescoContext {
   private @Nullable ImagePipelineFactory mImagePipelineFactory;
 
   public FrescoContextImpl(
-      FrescoController controller,
-      Hierarcher hierarcher,
-      @Nullable CallerContextVerifier callerContextVerifier,
-      FrescoExperiments frescoExperiments,
-      Executor uiThreadExecutor,
-      Executor lightweightBackgroundThreadExecutor,
-      @Nullable ImageListener globalImageListener,
-      @Nullable ImageStateListener globalImageStateListener) {
+      final FrescoController controller,
+      final Hierarcher hierarcher,
+      final @Nullable CallerContextVerifier callerContextVerifier,
+      final FrescoExperiments frescoExperiments,
+      final Executor uiThreadExecutor,
+      final Executor lightweightBackgroundThreadExecutor,
+      final @Nullable ImageListener globalImageListener,
+      final @Nullable ImageStateListener globalImageStateListener) {
     mController = controller;
     mHierarcher = hierarcher;
     mCallerContextVerifier = callerContextVerifier;
@@ -62,15 +62,15 @@ public class FrescoContextImpl implements FrescoContext {
   }
 
   public FrescoContextImpl(
-      Hierarcher hierarcher,
-      @Nullable CallerContextVerifier callerContextVerifier,
-      FrescoExperiments frescoExperiments,
-      Executor uiThreadExecutor,
-      Executor lightweightBackgroundThreadExecutor,
-      @Nullable ImageListener globalImageListener,
-      @Nullable ImageStateListener globalImageStateListener,
-      @Nullable ImagePerfControllerListener2 imagePerfControllerListener2,
-      DebugOverlayFactory debugOverlayFactory) {
+      final Hierarcher hierarcher,
+      final @Nullable CallerContextVerifier callerContextVerifier,
+      final FrescoExperiments frescoExperiments,
+      final Executor uiThreadExecutor,
+      final Executor lightweightBackgroundThreadExecutor,
+      final @Nullable ImageListener globalImageListener,
+      final @Nullable ImageStateListener globalImageStateListener,
+      final @Nullable ImagePerfControllerListener2 imagePerfControllerListener2,
+      final DebugOverlayFactory debugOverlayFactory) {
     mController =
         new FrescoControllerImpl(this, debugOverlayFactory, false, imagePerfControllerListener2);
     mHierarcher = hierarcher;
@@ -92,7 +92,7 @@ public class FrescoContextImpl implements FrescoContext {
   }
 
   @Override
-  public void setImagePipelineFactory(@Nullable ImagePipelineFactory imagePipelineFactory) {
+  public void setImagePipelineFactory(final @Nullable ImagePipelineFactory imagePipelineFactory) {
     mImagePipelineFactory = imagePipelineFactory;
   }
 
@@ -141,7 +141,7 @@ public class FrescoContextImpl implements FrescoContext {
   }
 
   @Override
-  public void verifyCallerContext(@Nullable Object callerContext) {
+  public void verifyCallerContext(final @Nullable Object callerContext) {
     if (mCallerContextVerifier != null) {
       mCallerContextVerifier.verifyCallerContext(callerContext, false);
     }
@@ -158,7 +158,7 @@ public class FrescoContextImpl implements FrescoContext {
   }
 
   @Override
-  public void setController(FrescoController controller) {
+  public void setController(final FrescoController controller) {
     mController = controller;
   }
 }

@@ -29,7 +29,7 @@ public class ControllerListenerWrapper implements ImageListener {
    */
   @Nullable
   public static ControllerListenerWrapper create(
-      @Nullable ControllerListener<ImageInfo> controllerListener) {
+      final @Nullable ControllerListener<ImageInfo> controllerListener) {
     return controllerListener == null ? null : new ControllerListenerWrapper(controllerListener);
   }
 
@@ -37,31 +37,31 @@ public class ControllerListenerWrapper implements ImageListener {
   private @Nullable ImageOriginListener mImageOriginListener;
 
   @VisibleForTesting
-  ControllerListenerWrapper(ControllerListener<ImageInfo> controllerListener) {
+  ControllerListenerWrapper(final ControllerListener<ImageInfo> controllerListener) {
     mControllerListener = controllerListener;
   }
 
-  public ControllerListenerWrapper setImageOriginListener(ImageOriginListener imageOriginListener) {
+  public ControllerListenerWrapper setImageOriginListener(final ImageOriginListener imageOriginListener) {
     mImageOriginListener = imageOriginListener;
     return this;
   }
 
   @Override
-  public void onSubmit(long id, Object callerContext) {
+  public void onSubmit(final long id, final Object callerContext) {
     mControllerListener.onSubmit(toStringId(id), callerContext);
   }
 
   @Override
-  public void onPlaceholderSet(long id, @Nullable Drawable placeholder) {
+  public void onPlaceholderSet(final long id, final @Nullable Drawable placeholder) {
     // Not present in old API
   }
 
   @Override
   public void onFinalImageSet(
-      long id,
-      @ImageOrigin int imageOrigin,
-      @Nullable ImageInfo imageInfo,
-      @Nullable Drawable drawable) {
+      final long id,
+      final @ImageOrigin int imageOrigin,
+      final @Nullable ImageInfo imageInfo,
+      final @Nullable Drawable drawable) {
     String stringId = toStringId(id);
     if (mImageOriginListener != null) {
       mImageOriginListener.onImageLoaded(stringId, imageOrigin, true, "ControllerListenerWrapper");
@@ -71,31 +71,31 @@ public class ControllerListenerWrapper implements ImageListener {
   }
 
   @Override
-  public void onIntermediateImageSet(long id, @Nullable ImageInfo imageInfo) {
+  public void onIntermediateImageSet(final long id, final @Nullable ImageInfo imageInfo) {
     mControllerListener.onIntermediateImageSet(toStringId(id), imageInfo);
   }
 
   @Override
-  public void onIntermediateImageFailed(long id, Throwable throwable) {
+  public void onIntermediateImageFailed(final long id, final Throwable throwable) {
     mControllerListener.onIntermediateImageFailed(toStringId(id), throwable);
   }
 
   @Override
-  public void onFailure(long id, @Nullable Drawable error, Throwable throwable) {
+  public void onFailure(final long id, final @Nullable Drawable error, final Throwable throwable) {
     mControllerListener.onFailure(toStringId(id), throwable);
   }
 
   @Override
-  public void onRelease(long id) {
+  public void onRelease(final long id) {
     mControllerListener.onRelease(toStringId(id));
   }
 
-  private static String toStringId(long id) {
+  private static String toStringId(final long id) {
     return "v" + id;
   }
 
   @Override
-  public void onImageDrawn(String id, ImageInfo imageInfo, DimensionsInfo dimensionsInfo) {
+  public void onImageDrawn(final String id, final ImageInfo imageInfo, final DimensionsInfo dimensionsInfo) {
     if (mControllerListener instanceof OnDrawControllerListener) {
       ((OnDrawControllerListener) mControllerListener).onImageDrawn(id, imageInfo, dimensionsInfo);
     }

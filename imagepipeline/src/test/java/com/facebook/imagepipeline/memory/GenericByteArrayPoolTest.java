@@ -44,7 +44,7 @@ public class GenericByteArrayPoolTest {
   }
 
   @Test
-  public void testFree() throws Exception {}
+  public void testFree() throws Exception { }
 
   // tests out the getBucketedSize method
   @Test

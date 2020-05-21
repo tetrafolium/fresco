@@ -68,7 +68,7 @@ public class BucketMapTest {
   }
 
   private static void assertLinkedList(
-      BucketMap.LinkedEntry head, BucketMap.LinkedEntry tail, int... expected) {
+      final BucketMap.LinkedEntry head, final BucketMap.LinkedEntry tail, final int... expected) {
     int len = expected.length;
     int[] actual = new int[len];
     int[] expectedReverse = new int[len];

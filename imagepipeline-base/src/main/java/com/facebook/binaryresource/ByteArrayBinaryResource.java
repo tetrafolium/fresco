@@ -16,7 +16,7 @@ import java.io.InputStream;
 public class ByteArrayBinaryResource implements BinaryResource {
   private final byte[] mBytes;
 
-  public ByteArrayBinaryResource(byte[] bytes) {
+  public ByteArrayBinaryResource(final byte[] bytes) {
     mBytes = Preconditions.checkNotNull(bytes);
   }
 

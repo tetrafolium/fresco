@@ -24,7 +24,7 @@ public class DeltaQueue<T> {
     public long delay;
     public Node<T> next = null;
 
-    public Node(T value, long nanos) {
+    public Node(final T value, final long nanos) {
       this.value = value;
       this.delay = nanos;
     }
@@ -75,7 +75,7 @@ public class DeltaQueue<T> {
    * @param delay the delay
    * @param value the node to add
    */
-  public void add(long delay, T value) {
+  public void add(final long delay, final T value) {
     Node<T> newNode = new Node<T>(value, delay);
 
     Node<T> prev = null;
@@ -107,7 +107,7 @@ public class DeltaQueue<T> {
    * @param timeUnits the units of time that are desired to have passed
    * @return the time units that were not yet consumed.
    */
-  public long tick(long timeUnits) {
+  public long tick(final long timeUnits) {
     if (head == null) {
       return 0L;
     } else if (head.delay >= timeUnits) {
@@ -143,7 +143,7 @@ public class DeltaQueue<T> {
    * @param element the element to remove
    * @return whether the element was removed
    */
-  public boolean remove(T element) {
+  public boolean remove(final T element) {
     Node<T> prev = null;
     Node<T> node = head;
     while (node != null && node.value != element) {

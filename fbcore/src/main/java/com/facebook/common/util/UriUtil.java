@@ -57,7 +57,7 @@ public class UriUtil {
    * @return url pointing to the same resource as uri
    */
   @Nullable
-  public static URL uriToUrl(@Nullable Uri uri) {
+  public static URL uriToUrl(final @Nullable Uri uri) {
     if (uri == null) {
       return null;
     }
@@ -76,7 +76,7 @@ public class UriUtil {
    * @param uri uri to check
    * @return true if uri's scheme is equal to "http" or "https"
    */
-  public static boolean isNetworkUri(@Nullable Uri uri) {
+  public static boolean isNetworkUri(final @Nullable Uri uri) {
     final String scheme = getSchemeOrNull(uri);
     return HTTPS_SCHEME.equals(scheme) || HTTP_SCHEME.equals(scheme);
   }
@@ -87,7 +87,7 @@ public class UriUtil {
    * @param uri uri to check
    * @return true if uri's scheme is equal to "file"
    */
-  public static boolean isLocalFileUri(@Nullable Uri uri) {
+  public static boolean isLocalFileUri(final @Nullable Uri uri) {
     final String scheme = getSchemeOrNull(uri);
     return LOCAL_FILE_SCHEME.equals(scheme);
   }
@@ -98,7 +98,7 @@ public class UriUtil {
    * @param uri uri to check
    * @return true if uri's scheme is equal to "content"
    */
-  public static boolean isLocalContentUri(@Nullable Uri uri) {
+  public static boolean isLocalContentUri(final @Nullable Uri uri) {
     final String scheme = getSchemeOrNull(uri);
     return LOCAL_CONTENT_SCHEME.equals(scheme);
   }
@@ -109,7 +109,7 @@ public class UriUtil {
    * @param uri the URI to check
    * @return true if the uri is a Contact URI, and is not already specifying a display photo.
    */
-  public static boolean isLocalContactUri(Uri uri) {
+  public static boolean isLocalContactUri(final Uri uri) {
     return isLocalContentUri(uri)
         && ContactsContract.AUTHORITY.equals(uri.getAuthority())
         && !uri.getPath().startsWith(LOCAL_CONTACT_IMAGE_URI.getPath());
@@ -121,7 +121,7 @@ public class UriUtil {
    * @param uri the URI to check
    * @return true if the URI points to a media store photo
    */
-  public static boolean isLocalCameraUri(Uri uri) {
+  public static boolean isLocalCameraUri(final Uri uri) {
     String uriString = uri.toString();
     return uriString.startsWith(MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString())
         || uriString.startsWith(MediaStore.Images.Media.INTERNAL_CONTENT_URI.toString());
@@ -133,7 +133,7 @@ public class UriUtil {
    * @param uri uri to check
    * @return true if uri's scheme is equal to "asset"
    */
-  public static boolean isLocalAssetUri(@Nullable Uri uri) {
+  public static boolean isLocalAssetUri(final @Nullable Uri uri) {
     final String scheme = getSchemeOrNull(uri);
     return LOCAL_ASSET_SCHEME.equals(scheme);
   }
@@ -144,7 +144,7 @@ public class UriUtil {
    * @param uri uri to check
    * @return true if uri's scheme is equal to {@link #LOCAL_RESOURCE_SCHEME}
    */
-  public static boolean isLocalResourceUri(@Nullable Uri uri) {
+  public static boolean isLocalResourceUri(final @Nullable Uri uri) {
     final String scheme = getSchemeOrNull(uri);
     return LOCAL_RESOURCE_SCHEME.equals(scheme);
   }
@@ -155,13 +155,13 @@ public class UriUtil {
    * @param uri uri to check
    * @return true if uri's scheme is equal to {@link #QUALIFIED_RESOURCE_SCHEME}
    */
-  public static boolean isQualifiedResourceUri(@Nullable Uri uri) {
+  public static boolean isQualifiedResourceUri(final @Nullable Uri uri) {
     final String scheme = getSchemeOrNull(uri);
     return QUALIFIED_RESOURCE_SCHEME.equals(scheme);
   }
 
   /** Check if the uri is a data uri */
-  public static boolean isDataUri(@Nullable Uri uri) {
+  public static boolean isDataUri(final @Nullable Uri uri) {
     return DATA_SCHEME.equals(getSchemeOrNull(uri));
   }
 
@@ -170,7 +170,7 @@ public class UriUtil {
    * @return null if uri is null, result of uri.getScheme() otherwise
    */
   @Nullable
-  public static String getSchemeOrNull(@Nullable Uri uri) {
+  public static String getSchemeOrNull(final @Nullable Uri uri) {
     return uri == null ? null : uri.getScheme();
   }
 
@@ -180,7 +180,7 @@ public class UriUtil {
    * @param uriAsString the uri as a string
    * @return the parsed Uri or null if the input was null
    */
-  public static @Nullable Uri parseUriOrNull(@Nullable String uriAsString) {
+  public static @Nullable Uri parseUriOrNull(final @Nullable String uriAsString) {
     return uriAsString != null ? Uri.parse(uriAsString) : null;
   }
 
@@ -192,7 +192,7 @@ public class UriUtil {
    * @return The Path for the file or null if doesn't exists
    */
   @Nullable
-  public static String getRealPathFromUri(ContentResolver contentResolver, final Uri srcUri) {
+  public static String getRealPathFromUri(final ContentResolver contentResolver, final Uri srcUri) {
     String result = null;
     if (isLocalContentUri(srcUri)) {
       Cursor cursor = null;
@@ -225,7 +225,7 @@ public class UriUtil {
    */
   @Nullable
   public static AssetFileDescriptor getAssetFileDescriptor(
-      ContentResolver contentResolver, final Uri srcUri) {
+      final ContentResolver contentResolver, final Uri srcUri) {
     if (isLocalContentUri(srcUri)) {
       try {
         return contentResolver.openAssetFileDescriptor(srcUri, "r");
@@ -242,7 +242,7 @@ public class UriUtil {
    * @param file a file with a valid path
    * @return the URI
    */
-  public static Uri getUriForFile(File file) {
+  public static Uri getUriForFile(final File file) {
     return Uri.fromFile(file);
   }
 
@@ -253,7 +253,7 @@ public class UriUtil {
    * @param resourceId the resource ID to use
    * @return the URI
    */
-  public static Uri getUriForResourceId(int resourceId) {
+  public static Uri getUriForResourceId(final int resourceId) {
     return new Uri.Builder().scheme(LOCAL_RESOURCE_SCHEME).path(String.valueOf(resourceId)).build();
   }
 
@@ -265,7 +265,7 @@ public class UriUtil {
    * @param resourceId to resource ID to use
    * @return the URI
    */
-  public static Uri getUriForQualifiedResource(String packageName, int resourceId) {
+  public static Uri getUriForQualifiedResource(final String packageName, final int resourceId) {
     return new Uri.Builder()
         .scheme(QUALIFIED_RESOURCE_SCHEME)
         .authority(packageName)

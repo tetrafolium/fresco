@@ -50,11 +50,11 @@ public class SimpleScaleTypeAdapter extends BaseAdapter {
 
   private final List<Entry> mEntries;
 
-  private SimpleScaleTypeAdapter(Entry[] entries) {
+  private SimpleScaleTypeAdapter(final Entry[] entries) {
     this(Arrays.asList(entries));
   }
 
-  private SimpleScaleTypeAdapter(List<Entry> entries) {
+  private SimpleScaleTypeAdapter(final List<Entry> entries) {
     mEntries = entries;
   }
 
@@ -64,17 +64,17 @@ public class SimpleScaleTypeAdapter extends BaseAdapter {
   }
 
   @Override
-  public Object getItem(int position) {
+  public Object getItem(final int position) {
     return mEntries.get(position);
   }
 
   @Override
-  public long getItemId(int position) {
+  public long getItemId(final int position) {
     return position;
   }
 
   @Override
-  public View getView(int position, View convertView, ViewGroup parent) {
+  public View getView(final int position, final View convertView, final ViewGroup parent) {
     final LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
     final View view =
@@ -95,7 +95,7 @@ public class SimpleScaleTypeAdapter extends BaseAdapter {
     public final @Nullable PointF focusPoint;
 
     private Entry(
-        ScalingUtils.ScaleType scaleType, String description, @Nullable PointF focusPoint) {
+        final ScalingUtils.ScaleType scaleType, final String description, final @Nullable PointF focusPoint) {
       this.scaleType = scaleType;
       this.description = description;
       this.focusPoint = focusPoint;

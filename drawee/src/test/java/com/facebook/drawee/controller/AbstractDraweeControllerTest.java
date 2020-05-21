@@ -56,7 +56,7 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class AbstractDraweeControllerTest {
 
-  public static class FakeImageInfo {}
+  public static class FakeImageInfo { }
 
   public static class FakeImage {
     private final Drawable mDrawable;
@@ -64,7 +64,7 @@ public class AbstractDraweeControllerTest {
     private boolean mIsOpened;
     private boolean mIsClosed;
 
-    protected FakeImage(Drawable drawable, FakeImageInfo imageInfo) {
+    protected FakeImage(final Drawable drawable, final FakeImageInfo imageInfo) {
       mDrawable = drawable;
       mImageInfo = imageInfo;
       mIsOpened = false;
@@ -95,11 +95,11 @@ public class AbstractDraweeControllerTest {
       return mIsClosed;
     }
 
-    public static FakeImage create(Drawable drawable) {
+    public static FakeImage create(final Drawable drawable) {
       return new FakeImage(drawable, null);
     }
 
-    public static FakeImage create(Drawable drawable, FakeImageInfo imageInfo) {
+    public static FakeImage create(final Drawable drawable, final FakeImageInfo imageInfo) {
       return new FakeImage(drawable, imageInfo);
     }
   }
@@ -111,11 +111,11 @@ public class AbstractDraweeControllerTest {
     public boolean mIsAttached = false;
 
     public FakeDraweeController(
-        DeferredReleaser deferredReleaser,
-        Executor uiThreadExecutor,
-        Supplier<DataSource<FakeImage>> dataSourceSupplier,
-        String id,
-        Object callerContext) {
+        final DeferredReleaser deferredReleaser,
+        final Executor uiThreadExecutor,
+        final Supplier<DataSource<FakeImage>> dataSourceSupplier,
+        final String id,
+        final Object callerContext) {
       super(deferredReleaser, uiThreadExecutor, id, callerContext);
       mDataSourceSupplier = dataSourceSupplier;
     }
@@ -142,33 +142,33 @@ public class AbstractDraweeControllerTest {
     }
 
     @Override
-    protected Drawable createDrawable(FakeImage image) {
+    protected Drawable createDrawable(final FakeImage image) {
       return image.getDrawable();
     }
 
     @Override
-    protected @Nullable FakeImageInfo getImageInfo(FakeImage image) {
+    protected @Nullable FakeImageInfo getImageInfo(final FakeImage image) {
       return image.getImageInfo();
     }
 
     @Override
-    protected void releaseImage(@Nullable FakeImage image) {
+    protected void releaseImage(final @Nullable FakeImage image) {
       if (image != null) {
         image.close();
       }
     }
 
     @Override
-    protected void releaseDrawable(@Nullable Drawable drawable) {}
+    protected void releaseDrawable(final @Nullable Drawable drawable) { }
 
     @Nullable
     @Override
-    public Map<String, Object> obtainExtrasFromImage(FakeImageInfo fakeImageInfo) {
+    public Map<String, Object> obtainExtrasFromImage(final FakeImageInfo fakeImageInfo) {
       return Collections.emptyMap();
     }
 
     @Override
-    public boolean isSameImageRequest(DraweeController other) {
+    public boolean isSameImageRequest(final DraweeController other) {
       return false;
     }
   }
@@ -194,7 +194,7 @@ public class AbstractDraweeControllerTest {
     doAnswer(
             new Answer<Object>() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 ((DeferredReleaser.Releasable) invocation.getArguments()[0]).release();
                 return null;
               }
@@ -342,7 +342,7 @@ public class AbstractDraweeControllerTest {
     testListenerReentrancy(FAILURE);
   }
 
-  private void testListenerReentrancy(int outcome) {
+  private void testListenerReentrancy(final int outcome) {
     final SimpleDataSource<FakeImage> dataSource0 = SimpleDataSource.create();
     final SimpleDataSource<FakeImage> dataSource = SimpleDataSource.create();
     when(mDataSourceSupplier.get()).thenReturn(dataSource0);
@@ -352,23 +352,23 @@ public class AbstractDraweeControllerTest {
     ControllerListener listener =
         new BaseControllerListener<FakeImageInfo>() {
           @Override
-          public void onIntermediateImageSet(String id, @Nullable FakeImageInfo imageInfo) {
+          public void onIntermediateImageSet(final String id, final @Nullable FakeImageInfo imageInfo) {
             initializeAndAttachController("id_AfterIntermediateSet", dataSource);
           }
 
           @Override
-          public void onIntermediateImageFailed(String id, Throwable throwable) {
+          public void onIntermediateImageFailed(final String id, final Throwable throwable) {
             initializeAndAttachController("id_AfterIntermediateFailed", dataSource);
           }
 
           @Override
           public void onFinalImageSet(
-              String id, @Nullable FakeImageInfo imageInfo, @Nullable Animatable animatable) {
+              final String id, final @Nullable FakeImageInfo imageInfo, final @Nullable Animatable animatable) {
             initializeAndAttachController("id_AfterFinalSet", dataSource);
           }
 
           @Override
-          public void onFailure(String id, Throwable throwable) {
+          public void onFailure(final String id, final Throwable throwable) {
             initializeAndAttachController("id_AfterFailure", dataSource);
           }
         };
@@ -402,7 +402,7 @@ public class AbstractDraweeControllerTest {
     verifyDhInteraction(SET_IMAGE_P100, image.getDrawable(), false);
   }
 
-  private void initializeAndAttachController(String id, DataSource<FakeImage> dataSource) {
+  private void initializeAndAttachController(final String id, final DataSource<FakeImage> dataSource) {
     try {
       when(mDataSourceSupplier.get()).thenReturn(dataSource);
       mController.initialize(id, mCallerContext);
@@ -543,7 +543,7 @@ public class AbstractDraweeControllerTest {
    * @param outcome outcomes of the submitted request
    * @param dhInteraction expected interaction with drawee hierarchy after the request finishes
    */
-  private void testLoading(boolean isImmediate, int outcome, int dhInteraction) {
+  private void testLoading(final boolean isImmediate, final int outcome, final int dhInteraction) {
     FakeDraweeController controller =
         new FakeDraweeController(
             mDeferredReleaser, mUiThreadExecutor, mDataSourceSupplier, "id2", mCallerContext);
@@ -587,7 +587,7 @@ public class AbstractDraweeControllerTest {
    * @param outcomes outcomes of submitted requests
    * @param dhInteraction expected interaction with drawee hierarchy after each request finishes
    */
-  private void testStreamedLoading(int[] outcomes, int[] dhInteraction) {
+  private void testStreamedLoading(final int[] outcomes, final int[] dhInteraction) {
     for (int numImmediate = 0; numImmediate <= 1; numImmediate++) {
       reset(mDataSourceSupplier, mDraweeHierarchy);
       System.out.println("numImmediate: " + numImmediate);
@@ -602,7 +602,7 @@ public class AbstractDraweeControllerTest {
    * @param outcomes outcomes of submitted requests
    * @param dhInteraction expected interaction with drawee hierarchy after each request finishes
    */
-  private void testStreamedLoading(int numImmediate, int[] outcomes, int[] dhInteraction) {
+  private void testStreamedLoading(final int numImmediate, final int[] outcomes, final int[] dhInteraction) {
     FakeDraweeController controller =
         new FakeDraweeController(
             mDeferredReleaser,
@@ -654,7 +654,7 @@ public class AbstractDraweeControllerTest {
     verifyNoMoreInteractions(mDataSourceSupplier);
   }
 
-  private static void finish(SimpleDataSource<FakeImage> dataSource, FakeImage image, int outcome) {
+  private static void finish(final SimpleDataSource<FakeImage> dataSource, final FakeImage image, final int outcome) {
     switch (outcome) {
       case FAILURE:
         dataSource.setFailure(new RuntimeException());
@@ -681,7 +681,7 @@ public class AbstractDraweeControllerTest {
     }
   }
 
-  private void verifyDhInteraction(int dhInteraction, Drawable drawable, boolean wasImmediate) {
+  private void verifyDhInteraction(final int dhInteraction, final Drawable drawable, final boolean wasImmediate) {
     switch (dhInteraction) {
       case IGNORE:
         verify(mDraweeHierarchy, never()).setImage(eq(drawable), anyFloat(), anyBoolean());

@@ -22,7 +22,7 @@ public final class PipelineUtil {
    * @param imageRequestBuilder The Builder for ImageRequest
    * @param config The Config
    */
-  public static void addOptionalFeatures(ImageRequestBuilder imageRequestBuilder, Config config) {
+  public static void addOptionalFeatures(final ImageRequestBuilder imageRequestBuilder, final Config config) {
     if (config.usePostprocessor) {
       final Postprocessor postprocessor;
       switch (config.postprocessorType) {

@@ -10,14 +10,14 @@ package com.facebook.samples.gestures;
 import android.view.MotionEvent;
 
 public class MotionEventTestUtils {
-  public static MotionEvent.PointerCoords createCoords(float x, float y) {
+  public static MotionEvent.PointerCoords createCoords(final float x, final float y) {
     MotionEvent.PointerCoords pointerCoords = new MotionEvent.PointerCoords();
     pointerCoords.x = x;
     pointerCoords.y = y;
     return pointerCoords;
   }
 
-  public static MotionEvent.PointerProperties createProperties(int id) {
+  public static MotionEvent.PointerProperties createProperties(final int id) {
     MotionEvent.PointerProperties pointerProperties = new MotionEvent.PointerProperties();
     pointerProperties.id = id;
     pointerProperties.toolType = MotionEvent.TOOL_TYPE_UNKNOWN;
@@ -25,7 +25,7 @@ public class MotionEventTestUtils {
   }
 
   public static MotionEvent obtainMotionEvent(
-      long downTime, long eventTime, int action, int id1, float x1, float y1) {
+      final long downTime, final long eventTime, final int action, final int id1, final float x1, final float y1) {
     int[] ids = new int[] {id1};
     MotionEvent.PointerCoords[] coords = new MotionEvent.PointerCoords[] {createCoords(x1, y1)};
     MotionEvent.PointerProperties[] properties = {createProperties(id1)};
@@ -34,15 +34,15 @@ public class MotionEventTestUtils {
   }
 
   public static MotionEvent obtainMotionEvent(
-      long downTime,
-      long eventTime,
-      int action,
-      int id1,
-      float x1,
-      float y1,
-      int id2,
-      float x2,
-      float y2) {
+      final long downTime,
+      final long eventTime,
+      final int action,
+      final int id1,
+      final float x1,
+      final float y1,
+      final int id2,
+      final float x2,
+      final float y2) {
     int[] ids = new int[] {id1, id2};
     MotionEvent.PointerCoords[] coords =
         new MotionEvent.PointerCoords[] {createCoords(x1, y1), createCoords(x2, y2)};

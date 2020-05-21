@@ -118,7 +118,7 @@ public class LocalVideoThumbnailProducerTest {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 mCloseableReference = ((CloseableReference) invocation.getArguments()[0]).clone();
                 return null;
               }
@@ -145,7 +145,7 @@ public class LocalVideoThumbnailProducerTest {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 mCloseableReference = ((CloseableReference) invocation.getArguments()[0]).clone();
                 return null;
               }

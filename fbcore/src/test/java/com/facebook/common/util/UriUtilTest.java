@@ -36,7 +36,7 @@ public class UriUtilTest {
 
   private String scheme;
 
-  public UriUtilTest(String scheme) {
+  public UriUtilTest(final String scheme) {
     this.scheme = scheme;
   }
 
@@ -86,7 +86,7 @@ public class UriUtilTest {
   }
 
   private void assertConversionFromUriToUrl(
-      String authority, List<String> paths, List<String> keys, List<String> values) {
+      final String authority, final List<String> paths, final List<String> keys, final List<String> values) {
 
     Uri.Builder builder = new Uri.Builder().scheme(scheme).authority(authority);
 

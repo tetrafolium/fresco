@@ -43,11 +43,11 @@ public class RoundingUtils {
     this(false);
   }
 
-  public RoundingUtils(boolean alreadyRounded) {
+  public RoundingUtils(final boolean alreadyRounded) {
     mAlreadyRounded = alreadyRounded;
   }
 
-  public void setAlreadyRounded(boolean alreadyRounded) {
+  public void setAlreadyRounded(final boolean alreadyRounded) {
     mAlreadyRounded = alreadyRounded;
   }
 
@@ -60,10 +60,10 @@ public class RoundingUtils {
    * @return a drawable with the applied effect
    */
   public Drawable roundedDrawable(
-      Resources resources,
-      Bitmap bitmap,
-      @Nullable BorderOptions borderOptions,
-      @Nullable RoundingOptions roundingOptions) {
+      final Resources resources,
+      final Bitmap bitmap,
+      final @Nullable BorderOptions borderOptions,
+      final @Nullable RoundingOptions roundingOptions) {
     if (borderOptions != null && borderOptions.width > 0) {
       return roundedDrawableWithBorder(resources, bitmap, borderOptions, roundingOptions);
     } else {
@@ -80,10 +80,10 @@ public class RoundingUtils {
    * @return a drawable with the applied effect
    */
   public Drawable roundedDrawable(
-      Resources resources,
-      Drawable drawable,
-      @Nullable BorderOptions borderOptions,
-      @Nullable RoundingOptions roundingOptions) {
+      final Resources resources,
+      final Drawable drawable,
+      final @Nullable BorderOptions borderOptions,
+      final @Nullable RoundingOptions roundingOptions) {
     if (borderOptions != null && borderOptions.width > 0) {
       return roundedDrawableWithBorder(resources, drawable, borderOptions, roundingOptions);
     } else {
@@ -92,7 +92,7 @@ public class RoundingUtils {
   }
 
   private Drawable roundedDrawableWithoutBorder(
-      Resources resources, Bitmap bitmap, @Nullable RoundingOptions roundingOptions) {
+      final Resources resources, final Bitmap bitmap, final @Nullable RoundingOptions roundingOptions) {
     if ((roundingOptions == null) || (mAlreadyRounded && roundingOptions.isCircular())) {
       return new BitmapDrawable(resources, bitmap);
     } else {
@@ -101,10 +101,10 @@ public class RoundingUtils {
   }
 
   private Drawable roundedDrawableWithBorder(
-      Resources resources,
-      Bitmap bitmap,
-      BorderOptions borderOptions,
-      @Nullable RoundingOptions roundingOptions) {
+      final Resources resources,
+      final Bitmap bitmap,
+      final BorderOptions borderOptions,
+      final @Nullable RoundingOptions roundingOptions) {
     if (roundingOptions == null) {
       return squareDrawableWithBorder(getRoundedDrawable(resources, bitmap), borderOptions);
     } else {
@@ -118,7 +118,7 @@ public class RoundingUtils {
   }
 
   private Drawable roundedDrawableWithoutBorder(
-      Resources resources, Drawable drawable, @Nullable RoundingOptions roundingOptions) {
+      final Resources resources, final Drawable drawable, final @Nullable RoundingOptions roundingOptions) {
     if (roundingOptions != null) {
       return applyRounding(getRoundedDrawable(resources, drawable), null, roundingOptions);
     }
@@ -126,10 +126,10 @@ public class RoundingUtils {
   }
 
   private Drawable roundedDrawableWithBorder(
-      Resources resources,
-      Drawable drawable,
-      BorderOptions borderOptions,
-      @Nullable RoundingOptions roundingOptions) {
+      final Resources resources,
+      final Drawable drawable,
+      final BorderOptions borderOptions,
+      final @Nullable RoundingOptions roundingOptions) {
     if (roundingOptions == null) {
       return squareDrawableWithBorder(getRoundedDrawable(resources, drawable), borderOptions);
     } else {
@@ -145,12 +145,12 @@ public class RoundingUtils {
   }
 
   private static <T extends Drawable & Rounded> T getRoundedDrawable(
-      Resources resources, Bitmap bitmap) {
+      final Resources resources, final Bitmap bitmap) {
     return (T) new RoundedBitmapDrawable(resources, bitmap);
   }
 
   private <T extends Drawable & Rounded> T getRoundedDrawable(
-      Resources resources, Drawable drawable) {
+      final Resources resources, final Drawable drawable) {
     T roundingDrawable;
     if (drawable instanceof BitmapDrawable) {
       roundingDrawable = getRoundedDrawable(resources, ((BitmapDrawable) drawable).getBitmap());
@@ -166,7 +166,7 @@ public class RoundingUtils {
   }
 
   private <T extends Drawable & Rounded> Drawable applyRounding(
-      T drawable, @Nullable BorderOptions borderOptions, RoundingOptions roundingOptions) {
+      final T drawable, final @Nullable BorderOptions borderOptions, final RoundingOptions roundingOptions) {
     if (!roundingOptions.isCircular()) {
       return roundedCornerDrawable(drawable, borderOptions, roundingOptions);
     } else {
@@ -175,20 +175,20 @@ public class RoundingUtils {
   }
 
   private <T extends Drawable & Rounded> Drawable squareDrawableWithBorder(
-      T drawable, BorderOptions borderOptions) {
+      final T drawable, final BorderOptions borderOptions) {
     // We use the same rounded corner drawable to draw the border without applying rounding
     return roundedCornerDrawable(drawable, borderOptions, null);
   }
 
   private static Drawable circularNativeDrawableWithBorder(
-      Resources resources, Bitmap bitmap, BorderOptions borderOptions) {
+      final Resources resources, final Bitmap bitmap, final BorderOptions borderOptions) {
     CircularBorderBitmapDrawable drawable = new CircularBorderBitmapDrawable(resources, bitmap);
     drawable.setBorder(borderOptions);
     return drawable;
   }
 
   private static <T extends Drawable & Rounded> Drawable circularDrawable(
-      T drawable, @Nullable BorderOptions borderOptions) {
+      final T drawable, final @Nullable BorderOptions borderOptions) {
     drawable.setCircle(true);
     if (borderOptions != null) {
       applyBorders(drawable, borderOptions);
@@ -197,9 +197,9 @@ public class RoundingUtils {
   }
 
   private static <T extends Drawable & Rounded> Drawable roundedCornerDrawable(
-      T drawable,
-      @Nullable BorderOptions borderOptions,
-      @Nullable RoundingOptions roundingOptions) {
+      final T drawable,
+      final @Nullable BorderOptions borderOptions,
+      final @Nullable RoundingOptions roundingOptions) {
     if (borderOptions != null) {
       applyBorders(drawable, borderOptions);
     }
@@ -221,7 +221,7 @@ public class RoundingUtils {
    * @param borderOptions {@link BorderOptions}
    */
   private static <T extends Drawable & Rounded> void applyBorders(
-      T drawable, BorderOptions borderOptions) {
+      final T drawable, final BorderOptions borderOptions) {
     drawable.setBorder(borderOptions.color, borderOptions.width);
     drawable.setPadding(borderOptions.padding);
   }

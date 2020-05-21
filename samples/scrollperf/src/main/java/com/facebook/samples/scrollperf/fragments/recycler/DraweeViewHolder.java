@@ -32,10 +32,10 @@ public class DraweeViewHolder extends RecyclerView.ViewHolder {
   private final PerfListener mPerfListener;
 
   public DraweeViewHolder(
-      View parentView,
-      InstrumentedDraweeView simpleDraweeView,
-      Config config,
-      PerfListener perfListener) {
+      final View parentView,
+      final InstrumentedDraweeView simpleDraweeView,
+      final Config config,
+      final PerfListener perfListener) {
     super(simpleDraweeView);
     mParentView = parentView;
     mDraweeView = simpleDraweeView;
@@ -45,7 +45,7 @@ public class DraweeViewHolder extends RecyclerView.ViewHolder {
   }
 
   /** @param uri The Uri to show into the DraweeView for this Holder */
-  public void bind(Uri uri) {
+  public void bind(final Uri uri) {
     mDraweeView.initInstrumentation(uri.toString(), mPerfListener);
     ImageRequestBuilder imageRequestBuilder =
         ImageRequestBuilder.newBuilderWithSource(uri)

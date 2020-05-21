@@ -36,12 +36,12 @@ public class SimpleImageTranscoder implements ImageTranscoder {
 
   @Override
   public ImageTranscodeResult transcode(
-      EncodedImage encodedImage,
-      OutputStream outputStream,
-      @Nullable RotationOptions rotationOptions,
-      @Nullable ResizeOptions resizeOptions,
-      @Nullable ImageFormat outputFormat,
-      @Nullable Integer quality) {
+      final EncodedImage encodedImage,
+      final OutputStream outputStream,
+      final @Nullable RotationOptions rotationOptions,
+      final @Nullable ResizeOptions resizeOptions,
+      final @Nullable ImageFormat outputFormat,
+      final @Nullable Integer quality) {
     if (quality == null) {
       quality = JpegTranscoderUtils.DEFAULT_JPEG_QUALITY;
     }
@@ -97,9 +97,9 @@ public class SimpleImageTranscoder implements ImageTranscoder {
 
   @Override
   public boolean canResize(
-      EncodedImage encodedImage,
-      @Nullable RotationOptions rotationOptions,
-      @Nullable ResizeOptions resizeOptions) {
+      final EncodedImage encodedImage,
+      final @Nullable RotationOptions rotationOptions,
+      final @Nullable ResizeOptions resizeOptions) {
     if (rotationOptions == null) {
       rotationOptions = RotationOptions.autoRotate();
     }
@@ -110,7 +110,7 @@ public class SimpleImageTranscoder implements ImageTranscoder {
   }
 
   @Override
-  public boolean canTranscode(ImageFormat imageFormat) {
+  public boolean canTranscode(final ImageFormat imageFormat) {
     return imageFormat == DefaultImageFormats.HEIF || imageFormat == DefaultImageFormats.JPEG;
   }
 

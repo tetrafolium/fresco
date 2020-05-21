@@ -145,9 +145,9 @@ public abstract class BasePool<V> implements Pool<V> {
    * @param poolStatsTracker
    */
   public BasePool(
-      MemoryTrimmableRegistry memoryTrimmableRegistry,
-      PoolParams poolParams,
-      PoolStatsTracker poolStatsTracker) {
+      final MemoryTrimmableRegistry memoryTrimmableRegistry,
+      final PoolParams poolParams,
+      final PoolStatsTracker poolStatsTracker) {
     mMemoryTrimmableRegistry = Preconditions.checkNotNull(memoryTrimmableRegistry);
     mPoolParams = Preconditions.checkNotNull(poolParams);
     mPoolStatsTracker = Preconditions.checkNotNull(poolStatsTracker);
@@ -167,10 +167,10 @@ public abstract class BasePool<V> implements Pool<V> {
   }
 
   public BasePool(
-      MemoryTrimmableRegistry memoryTrimmableRegistry,
-      PoolParams poolParams,
-      PoolStatsTracker poolStatsTracker,
-      boolean ignoreHardCap) {
+      final MemoryTrimmableRegistry memoryTrimmableRegistry,
+      final PoolParams poolParams,
+      final PoolStatsTracker poolStatsTracker,
+      final boolean ignoreHardCap) {
     this(memoryTrimmableRegistry, poolParams, poolStatsTracker);
     mIgnoreHardCap = ignoreHardCap;
   }
@@ -182,7 +182,7 @@ public abstract class BasePool<V> implements Pool<V> {
   }
 
   @Nullable
-  protected synchronized V getValue(Bucket<V> bucket) {
+  protected synchronized V getValue(final Bucket<V> bucket) {
     //noinspection deprecation
     return bucket.get();
   }
@@ -198,7 +198,7 @@ public abstract class BasePool<V> implements Pool<V> {
    * @return a new value
    * @throws InvalidSizeException
    */
-  public V get(int size) {
+  public V get(final int size) {
     ensurePoolSizeInvariant();
 
     int bucketedSize = getBucketedSize(size);
@@ -298,7 +298,7 @@ public abstract class BasePool<V> implements Pool<V> {
    * @param value the value to release to the pool
    */
   @Override
-  public void release(V value) {
+  public void release(final V value) {
     Preconditions.checkNotNull(value);
 
     final int bucketedSize = getBucketedSizeForValue(value);
@@ -368,7 +368,7 @@ public abstract class BasePool<V> implements Pool<V> {
    *
    * @param memoryTrimType the kind of trimming we want to perform
    */
-  public void trim(MemoryTrimType memoryTrimType) {
+  public void trim(final MemoryTrimType memoryTrimType) {
     trimToNothing();
   }
 
@@ -419,7 +419,7 @@ public abstract class BasePool<V> implements Pool<V> {
    * The pool parameters may have changed. Subclasses can override this to update any state they
    * were maintaining
    */
-  protected void onParamsChanged() {}
+  protected void onParamsChanged() { }
 
   /**
    * Determines if the supplied value is 'reusable'. This is called during {@link #release(Object)},
@@ -429,7 +429,7 @@ public abstract class BasePool<V> implements Pool<V> {
    * @param value the value to test for reusability
    * @return true if the value is reusable
    */
-  protected boolean isReusable(V value) {
+  protected boolean isReusable(final V value) {
     Preconditions.checkNotNull(value);
     return true;
   }
@@ -448,7 +448,7 @@ public abstract class BasePool<V> implements Pool<V> {
    *
    * @param inUseCounts map of current buckets and their in use counts
    */
-  private synchronized void legacyInitBuckets(SparseIntArray inUseCounts) {
+  private synchronized void legacyInitBuckets(final SparseIntArray inUseCounts) {
     Preconditions.checkNotNull(inUseCounts);
 
     // clear out all the buckets
@@ -496,7 +496,7 @@ public abstract class BasePool<V> implements Pool<V> {
    *
    * @param bucketSizes bucket size to bucket's max length
    */
-  private void fillBuckets(SparseIntArray bucketSizes) {
+  private void fillBuckets(final SparseIntArray bucketSizes) {
     mBuckets.clear();
     for (int i = 0; i < bucketSizes.size(); ++i) {
       final int bucketSize = bucketSizes.keyAt(i);
@@ -612,7 +612,7 @@ public abstract class BasePool<V> implements Pool<V> {
    * @param targetSize target size to trim to
    */
   @VisibleForTesting
-  synchronized void trimToSize(int targetSize) {
+  synchronized void trimToSize(final int targetSize) {
     // find how much we need to free
     int bytesToFree = Math.min(mUsed.mNumBytes + mFree.mNumBytes - targetSize, mFree.mNumBytes);
     if (bytesToFree <= 0) {
@@ -663,7 +663,7 @@ public abstract class BasePool<V> implements Pool<V> {
    * @param bucketedSize the bucket size
    * @return the freelist for the bucket
    */
-  private synchronized Bucket<V> getBucketIfPresent(int bucketedSize) {
+  private synchronized Bucket<V> getBucketIfPresent(final int bucketedSize) {
     return mBuckets.get(bucketedSize);
   }
 
@@ -674,7 +674,7 @@ public abstract class BasePool<V> implements Pool<V> {
    * @return the freelist for the bucket
    */
   @VisibleForTesting
-  synchronized Bucket<V> getBucket(int bucketedSize) {
+  synchronized Bucket<V> getBucket(final int bucketedSize) {
     // get an existing bucket
     Bucket<V> bucket = mBuckets.get(bucketedSize);
     if (bucket != null || !mAllowNewBuckets) {
@@ -690,7 +690,7 @@ public abstract class BasePool<V> implements Pool<V> {
     return newBucket;
   }
 
-  Bucket<V> newBucket(int bucketedSize) {
+  Bucket<V> newBucket(final int bucketedSize) {
     return new Bucket<V>(
         /*itemSize*/ getSizeInBytes(bucketedSize),
         /*maxLength*/ Integer.MAX_VALUE,
@@ -722,7 +722,7 @@ public abstract class BasePool<V> implements Pool<V> {
    * @return true, if we can allocate this; false otherwise
    */
   @VisibleForTesting
-  synchronized boolean canAllocate(int sizeInBytes) {
+  synchronized boolean canAllocate(final int sizeInBytes) {
     if (mIgnoreHardCap) {
       return true;
     }
@@ -804,7 +804,7 @@ public abstract class BasePool<V> implements Pool<V> {
      *
      * @param numBytes size of the item in bytes
      */
-    public void increment(int numBytes) {
+    public void increment(final int numBytes) {
       this.mCount++;
       this.mNumBytes += numBytes;
     }
@@ -814,7 +814,7 @@ public abstract class BasePool<V> implements Pool<V> {
      *
      * @param numBytes size of the item in bytes
      */
-    public void decrement(int numBytes) {
+    public void decrement(final int numBytes) {
       if (this.mNumBytes >= numBytes && this.mCount > 0) {
         this.mCount--;
         this.mNumBytes -= numBytes;
@@ -837,14 +837,14 @@ public abstract class BasePool<V> implements Pool<V> {
 
   /** An exception to indicate if the 'value' is invalid. */
   public static class InvalidValueException extends RuntimeException {
-    public InvalidValueException(Object value) {
+    public InvalidValueException(final Object value) {
       super("Invalid value: " + value.toString());
     }
   }
 
   /** An exception to indicate that the requested size was invalid */
   public static class InvalidSizeException extends RuntimeException {
-    public InvalidSizeException(Object size) {
+    public InvalidSizeException(final Object size) {
       super("Invalid size: " + size.toString());
     }
   }
@@ -853,7 +853,7 @@ public abstract class BasePool<V> implements Pool<V> {
    * A specific case of InvalidSizeException used to indicate that the requested size was too large
    */
   public static class SizeTooLargeException extends InvalidSizeException {
-    public SizeTooLargeException(Object size) {
+    public SizeTooLargeException(final Object size) {
       super(size);
     }
   }
@@ -863,7 +863,7 @@ public abstract class BasePool<V> implements Pool<V> {
    * 'allocSize'
    */
   public static class PoolSizeViolationException extends RuntimeException {
-    public PoolSizeViolationException(int hardCap, int usedBytes, int freeBytes, int allocSize) {
+    public PoolSizeViolationException(final int hardCap, final int usedBytes, final int freeBytes, final int allocSize) {
       super(
           "Pool hard cap violation?"
               + " Hard cap = "

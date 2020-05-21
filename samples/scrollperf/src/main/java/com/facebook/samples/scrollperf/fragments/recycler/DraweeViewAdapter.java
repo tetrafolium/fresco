@@ -33,7 +33,7 @@ public class DraweeViewAdapter extends RecyclerView.Adapter<DraweeViewHolder> {
   private final PerfListener mPerfListener;
 
   public DraweeViewAdapter(
-      Context context, SimpleAdapter<Uri> simpleAdapter, Config config, PerfListener perfListener) {
+      final Context context, final SimpleAdapter<Uri> simpleAdapter, final Config config, final PerfListener perfListener) {
     this.mContext = context;
     this.mSimpleAdapter = simpleAdapter;
     this.mConfig = config;
@@ -42,7 +42,7 @@ public class DraweeViewAdapter extends RecyclerView.Adapter<DraweeViewHolder> {
   }
 
   @Override
-  public DraweeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public DraweeViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
     GenericDraweeHierarchy gdh = DraweeUtil.createDraweeHierarchy(mContext, mConfig);
     final InstrumentedDraweeView simpleDraweeView =
         new InstrumentedDraweeView(mContext, gdh, mConfig);
@@ -51,7 +51,7 @@ public class DraweeViewAdapter extends RecyclerView.Adapter<DraweeViewHolder> {
   }
 
   @Override
-  public void onBindViewHolder(DraweeViewHolder holder, int position) {
+  public void onBindViewHolder(final DraweeViewHolder holder, final int position) {
     holder.bind(mSimpleAdapter.get(position));
   }
 

@@ -31,14 +31,14 @@ import java.io.InputStream;
  * @since 1.0
  */
 public class Files {
-  private Files() {}
+  private Files() { }
 
   /**
    * Reads a file of the given expected size from the given input stream, if it will fit into a byte
    * array. This method handles the case where the file size changes between when the size is read
    * and when the contents are read from the stream.
    */
-  static byte[] readFile(InputStream in, long expectedSize) throws IOException {
+  static byte[] readFile(final InputStream in, final long expectedSize) throws IOException {
     if (expectedSize > Integer.MAX_VALUE) {
       throw new OutOfMemoryError(
           "file is too large to fit in a byte array: " + expectedSize + " bytes");
@@ -59,7 +59,7 @@ public class Files {
    *     (2^31 - 1)
    * @throws IOException if an I/O error occurs
    */
-  public static byte[] toByteArray(File file) throws IOException {
+  public static byte[] toByteArray(final File file) throws IOException {
     FileInputStream in = null;
     try {
       in = new FileInputStream(file);

@@ -27,27 +27,27 @@ public class PipelineDraweeControllerBuilderSupplier
   private final Set<ControllerListener> mBoundControllerListeners;
   private final @Nullable ImagePerfDataListener mDefaultImagePerfDataListener;
 
-  public PipelineDraweeControllerBuilderSupplier(Context context) {
+  public PipelineDraweeControllerBuilderSupplier(final Context context) {
     this(context, null);
   }
 
   public PipelineDraweeControllerBuilderSupplier(
-      Context context, @Nullable DraweeConfig draweeConfig) {
+      final Context context, final @Nullable DraweeConfig draweeConfig) {
     this(context, ImagePipelineFactory.getInstance(), draweeConfig);
   }
 
   public PipelineDraweeControllerBuilderSupplier(
-      Context context,
-      ImagePipelineFactory imagePipelineFactory,
-      @Nullable DraweeConfig draweeConfig) {
+      final Context context,
+      final ImagePipelineFactory imagePipelineFactory,
+      final @Nullable DraweeConfig draweeConfig) {
     this(context, imagePipelineFactory, null, draweeConfig);
   }
 
   public PipelineDraweeControllerBuilderSupplier(
-      Context context,
-      ImagePipelineFactory imagePipelineFactory,
-      Set<ControllerListener> boundControllerListeners,
-      @Nullable DraweeConfig draweeConfig) {
+      final Context context,
+      final ImagePipelineFactory imagePipelineFactory,
+      final Set<ControllerListener> boundControllerListeners,
+      final @Nullable DraweeConfig draweeConfig) {
     mContext = context;
     mImagePipeline = imagePipelineFactory.getImagePipeline();
 

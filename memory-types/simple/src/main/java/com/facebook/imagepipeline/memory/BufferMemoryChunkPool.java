@@ -18,14 +18,14 @@ public class BufferMemoryChunkPool extends MemoryChunkPool {
 
   @DoNotStrip
   public BufferMemoryChunkPool(
-      MemoryTrimmableRegistry memoryTrimmableRegistry,
-      PoolParams poolParams,
-      PoolStatsTracker bufferMemoryChunkPoolStatsTracker) {
+      final MemoryTrimmableRegistry memoryTrimmableRegistry,
+      final PoolParams poolParams,
+      final PoolStatsTracker bufferMemoryChunkPoolStatsTracker) {
     super(memoryTrimmableRegistry, poolParams, bufferMemoryChunkPoolStatsTracker);
   }
 
   @Override
-  protected BufferMemoryChunk alloc(int bucketedSize) {
+  protected BufferMemoryChunk alloc(final int bucketedSize) {
     return new BufferMemoryChunk(bucketedSize);
   }
 }

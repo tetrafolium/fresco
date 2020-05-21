@@ -26,7 +26,7 @@ public class ActivityListenerManager {
    * If given context is an instance of ListenableActivity then creates new instance of
    * WeakReferenceActivityListenerAdapter and adds it to activity's listeners
    */
-  public static void register(ActivityListener activityListener, Context context) {
+  public static void register(final ActivityListener activityListener, final Context context) {
     ListenableActivity activity = getListenableActivity(context);
     if (activity != null) {
       Listener listener = new Listener(activityListener);
@@ -34,7 +34,7 @@ public class ActivityListenerManager {
     }
   }
 
-  public static @Nullable ListenableActivity getListenableActivity(Context context) {
+  public static @Nullable ListenableActivity getListenableActivity(final Context context) {
     if (!(context instanceof ListenableActivity) && context instanceof ContextWrapper) {
       context = ((ContextWrapper) context).getBaseContext();
     }
@@ -47,12 +47,12 @@ public class ActivityListenerManager {
   private static class Listener extends BaseActivityListener {
     private final WeakReference<ActivityListener> mActivityListenerRef;
 
-    public Listener(ActivityListener activityListener) {
+    public Listener(final ActivityListener activityListener) {
       mActivityListenerRef = new WeakReference<ActivityListener>(activityListener);
     }
 
     @Override
-    public void onActivityCreate(Activity activity) {
+    public void onActivityCreate(final Activity activity) {
       ActivityListener activityVisibilityListener = getListenerOrCleanUp(activity);
       if (activityVisibilityListener != null) {
         activityVisibilityListener.onActivityCreate(activity);
@@ -60,7 +60,7 @@ public class ActivityListenerManager {
     }
 
     @Override
-    public void onDestroy(Activity activity) {
+    public void onDestroy(final Activity activity) {
       ActivityListener activityVisibilityListener = getListenerOrCleanUp(activity);
       if (activityVisibilityListener != null) {
         activityVisibilityListener.onDestroy(activity);
@@ -68,7 +68,7 @@ public class ActivityListenerManager {
     }
 
     @Override
-    public void onStart(Activity activity) {
+    public void onStart(final Activity activity) {
       ActivityListener activityVisibilityListener = getListenerOrCleanUp(activity);
       if (activityVisibilityListener != null) {
         activityVisibilityListener.onStart(activity);
@@ -76,7 +76,7 @@ public class ActivityListenerManager {
     }
 
     @Override
-    public void onStop(Activity activity) {
+    public void onStop(final Activity activity) {
       ActivityListener activityVisibilityListener = getListenerOrCleanUp(activity);
       if (activityVisibilityListener != null) {
         activityVisibilityListener.onStop(activity);
@@ -84,7 +84,7 @@ public class ActivityListenerManager {
     }
 
     @Override
-    public void onResume(Activity activity) {
+    public void onResume(final Activity activity) {
       ActivityListener activityVisibilityListener = getListenerOrCleanUp(activity);
       if (activityVisibilityListener != null) {
         activityVisibilityListener.onResume(activity);
@@ -92,14 +92,14 @@ public class ActivityListenerManager {
     }
 
     @Override
-    public void onPause(Activity activity) {
+    public void onPause(final Activity activity) {
       ActivityListener activityVisibilityListener = getListenerOrCleanUp(activity);
       if (activityVisibilityListener != null) {
         activityVisibilityListener.onPause(activity);
       }
     }
 
-    private @Nullable ActivityListener getListenerOrCleanUp(Activity activity) {
+    private @Nullable ActivityListener getListenerOrCleanUp(final Activity activity) {
       ActivityListener activityVisibilityListener = mActivityListenerRef.get();
       if (activityVisibilityListener == null) {
         Preconditions.checkArgument(activity instanceof ListenableActivity);

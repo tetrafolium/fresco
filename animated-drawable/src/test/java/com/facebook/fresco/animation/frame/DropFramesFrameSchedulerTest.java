@@ -143,7 +143,7 @@ public class DropFramesFrameSchedulerTest {
 
     private final int mFrameCount;
 
-    private DummyAnimationBackend(int frameCount) {
+    private DummyAnimationBackend(final int frameCount) {
       mFrameCount = frameCount;
     }
 
@@ -165,7 +165,7 @@ public class DropFramesFrameSchedulerTest {
     }
 
     @Override
-    public int getFrameDurationMs(int frameNumber) {
+    public int getFrameDurationMs(final int frameNumber) {
       return 100;
     }
 
@@ -175,18 +175,18 @@ public class DropFramesFrameSchedulerTest {
     }
 
     @Override
-    public boolean drawFrame(Drawable parent, Canvas canvas, int frameNumber) {
+    public boolean drawFrame(final Drawable parent, final Canvas canvas, final int frameNumber) {
       return false;
     }
 
     @Override
-    public void setAlpha(@IntRange(from = 0, to = 255) int alpha) {}
+    public void setAlpha(final @IntRange(from = 0, to = 255) int alpha) { }
 
     @Override
-    public void setColorFilter(@Nullable ColorFilter colorFilter) {}
+    public void setColorFilter(final @Nullable ColorFilter colorFilter) { }
 
     @Override
-    public void setBounds(Rect bounds) {}
+    public void setBounds(final Rect bounds) { }
 
     @Override
     public int getIntrinsicWidth() {
@@ -204,6 +204,6 @@ public class DropFramesFrameSchedulerTest {
     }
 
     @Override
-    public void clear() {}
+    public void clear() { }
   }
 }

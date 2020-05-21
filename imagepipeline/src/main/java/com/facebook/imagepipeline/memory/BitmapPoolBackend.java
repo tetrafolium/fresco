@@ -18,7 +18,7 @@ public class BitmapPoolBackend extends LruBucketsPoolBackend<Bitmap> {
   private static final String TAG = "BitmapPoolBackend";
 
   @Override
-  public void put(Bitmap bitmap) {
+  public void put(final Bitmap bitmap) {
     if (isReusable(bitmap)) {
       super.put(bitmap);
     }
@@ -26,7 +26,7 @@ public class BitmapPoolBackend extends LruBucketsPoolBackend<Bitmap> {
 
   @Nullable
   @Override
-  public Bitmap get(int size) {
+  public Bitmap get(final int size) {
     Bitmap bitmap = super.get(size);
     if (bitmap != null && isReusable(bitmap)) {
       bitmap.eraseColor(Color.TRANSPARENT);
@@ -36,11 +36,11 @@ public class BitmapPoolBackend extends LruBucketsPoolBackend<Bitmap> {
   }
 
   @Override
-  public int getSize(Bitmap bitmap) {
+  public int getSize(final Bitmap bitmap) {
     return BitmapUtil.getSizeInBytes(bitmap);
   }
 
-  protected boolean isReusable(@Nullable Bitmap bitmap) {
+  protected boolean isReusable(final @Nullable Bitmap bitmap) {
     if (bitmap == null) {
       return false;
     }

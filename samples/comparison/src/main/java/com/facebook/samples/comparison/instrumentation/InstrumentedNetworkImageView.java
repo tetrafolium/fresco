@@ -50,7 +50,7 @@ public class InstrumentedNetworkImageView extends NetworkImageView implements In
     super.setImageBitmap(bm);
   }
 
-  public void setImageResource(int resourceId) {
+  public void setImageResource(final int resourceId) {
     if (resourceId == R.color.placeholder) {
       // ignore
     } else if (resourceId == R.color.error) {

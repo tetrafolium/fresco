@@ -197,7 +197,7 @@ public class KitKatPurgeableDecoderTest {
   private static class BitmapFactoryOptionsMatcher
       implements ArgumentMatcher<BitmapFactory.Options> {
     @Override
-    public boolean matches(BitmapFactory.Options options) {
+    public boolean matches(final BitmapFactory.Options options) {
       return options.inDither && options.inPurgeable;
     }
   }

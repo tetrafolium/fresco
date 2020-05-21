@@ -69,15 +69,15 @@ public class FrescoVitoImageSpec {
   private static final long RELEASE_DELAY_MS = 16 * 5; // Roughly 5 frames.
 
   @OnCreateMountContent(mountingType = MountingType.DRAWABLE)
-  static FrescoDrawable onCreateMountContent(Context c) {
+  static FrescoDrawable onCreateMountContent(final Context c) {
     return new FrescoDrawable();
   }
 
   @OnCreateInitialState
   static void onCreateInitialState(
-      ComponentContext context,
-      StateValue<FrescoState> lastFrescoState,
-      StateValue<AtomicReference<DataSource<Void>>> prefetchData,
+      final ComponentContext context,
+      final StateValue<FrescoState> lastFrescoState,
+      final StateValue<AtomicReference<DataSource<Void>>> prefetchData,
       @Prop(optional = true) final @Nullable Uri uri,
       @Prop(optional = true) final @Nullable MultiUri multiUri,
       @Prop(optional = true) final @Nullable ImageOptions imageOptions,
@@ -98,18 +98,18 @@ public class FrescoVitoImageSpec {
 
   @OnMeasure
   static void onMeasure(
-      ComponentContext context,
-      ComponentLayout layout,
-      int widthSpec,
-      int heightSpec,
-      Size size,
-      @Prop(optional = true, resType = ResType.FLOAT) float imageAspectRatio) {
+      final ComponentContext context,
+      final ComponentLayout layout,
+      final int widthSpec,
+      final int heightSpec,
+      final Size size,
+      final @Prop(optional = true, resType = ResType.FLOAT) float imageAspectRatio) {
     MeasureUtils.measureWithAspectRatio(widthSpec, heightSpec, imageAspectRatio, size);
   }
 
   @OnPrepare
   static void onPrepare(
-      ComponentContext context,
+      final ComponentContext context,
       @Prop(optional = true) final @Nullable Uri uri,
       @Prop(optional = true) final @Nullable MultiUri multiUri,
       @Prop(optional = true) final @Nullable ImageOptions imageOptions,
@@ -117,7 +117,7 @@ public class FrescoVitoImageSpec {
       @Prop(optional = true) final @Nullable Object callerContext,
       @Prop(optional = true) final @Nullable ImageListener imageListener,
       @State(canUpdateLazily = true) final FrescoState lastFrescoState,
-      Output<FrescoState> frescoState) {
+      final Output<FrescoState> frescoState) {
     FrescoState maybeNewFrescoState =
         getController(context, frescoContext)
             .onPrepare(
@@ -136,12 +136,12 @@ public class FrescoVitoImageSpec {
 
   @OnMount
   static void onMount(
-      ComponentContext context,
+      final ComponentContext context,
       final FrescoDrawable frescoDrawable,
       @Prop(optional = true) final @Nullable FrescoContext frescoContext,
       @Prop(optional = true) final @Nullable ImageListener imageListener,
       @FromPrepare final FrescoState frescoState,
-      @FromBoundsDefined Rect viewportDimensions) {
+      final @FromBoundsDefined Rect viewportDimensions) {
     FrescoContext actualFrescoContext = resolveContext(context, frescoContext);
     if (actualFrescoContext.getExperiments().delayedReleaseInUnbind()) {
       cancelDetachRunnable(frescoState);
@@ -154,8 +154,8 @@ public class FrescoVitoImageSpec {
 
   @OnUnmount
   static void onUnmount(
-      ComponentContext context,
-      FrescoDrawable frescoDrawable,
+      final ComponentContext context,
+      final FrescoDrawable frescoDrawable,
       @Prop(optional = true) final @Nullable FrescoContext frescoContext,
       @FromPrepare final FrescoState frescoState) {
     FrescoContext actualFrescoContext = resolveContext(context, frescoContext);
@@ -171,12 +171,12 @@ public class FrescoVitoImageSpec {
 
   @OnBind
   static void onBind(
-      ComponentContext context,
+      final ComponentContext context,
       final FrescoDrawable frescoDrawable,
       @Prop(optional = true) final @Nullable FrescoContext frescoContext,
       @Prop(optional = true) final @Nullable ImageListener imageListener,
       @FromPrepare final FrescoState frescoState,
-      @FromBoundsDefined Rect viewportDimensions) {
+      final @FromBoundsDefined Rect viewportDimensions) {
     FrescoContext actualFrescoContext = resolveContext(context, frescoContext);
     if (actualFrescoContext.getExperiments().delayedReleaseInUnbind()) {
       cancelDetachRunnable(frescoState);
@@ -189,7 +189,7 @@ public class FrescoVitoImageSpec {
 
   @OnUnbind
   static void onUnbind(
-      ComponentContext context,
+      final ComponentContext context,
       final FrescoDrawable frescoDrawable,
       @Prop(optional = true) final @Nullable FrescoContext frescoContext,
       @FromPrepare final FrescoState frescoState) {
@@ -217,7 +217,7 @@ public class FrescoVitoImageSpec {
 
   @OnDetached
   static void onDetached(
-      ComponentContext context,
+      final ComponentContext context,
       @Prop(optional = true) final @Nullable FrescoContext frescoContext,
       @State final FrescoState frescoState) {
     FrescoContext actualFrescoContext = resolveContext(context, frescoContext);
@@ -228,11 +228,11 @@ public class FrescoVitoImageSpec {
 
   @ShouldUpdate(onMount = true)
   static boolean shouldUpdate(
-      @Prop(optional = true) Diff<Uri> uri,
-      @Prop(optional = true) Diff<MultiUri> multiUri,
-      @Prop(optional = true) Diff<ImageOptions> imageOptions,
-      @Prop(optional = true) Diff<FrescoContext> frescoContext,
-      @Prop(optional = true, resType = ResType.FLOAT) Diff<Float> imageAspectRatio) {
+      final @Prop(optional = true) Diff<Uri> uri,
+      final @Prop(optional = true) Diff<MultiUri> multiUri,
+      final @Prop(optional = true) Diff<ImageOptions> imageOptions,
+      final @Prop(optional = true) Diff<FrescoContext> frescoContext,
+      final @Prop(optional = true, resType = ResType.FLOAT) Diff<Float> imageAspectRatio) {
     return !ObjectsCompat.equals(uri.getPrevious(), uri.getNext())
         || !ObjectsCompat.equals(multiUri.getPrevious(), multiUri.getNext())
         || !ObjectsCompat.equals(imageOptions.getPrevious(), imageOptions.getNext())
@@ -241,13 +241,13 @@ public class FrescoVitoImageSpec {
   }
 
   @OnPopulateAccessibilityNode
-  static void onPopulateAccessibilityNode(View host, AccessibilityNodeInfoCompat node) {
+  static void onPopulateAccessibilityNode(final View host, final AccessibilityNodeInfoCompat node) {
     node.setClassName(AccessibilityRole.IMAGE);
   }
 
   @OnEnteredRange(name = "imagePrefetch")
   static void onEnteredWorkingRange(
-      ComponentContext c,
+      final ComponentContext c,
       @Prop(optional = true) final @Nullable Uri uri,
       @Prop(optional = true) final @Nullable MultiUri multiUri,
       @Prop(optional = true) final @Nullable ImageOptions imageOptions,
@@ -260,13 +260,13 @@ public class FrescoVitoImageSpec {
 
   @OnExitedRange(name = "imagePrefetch")
   static void onExitedWorkingRange(
-      ComponentContext c, final AtomicReference<DataSource<Void>> prefetchData) {
+      final ComponentContext c, final AtomicReference<DataSource<Void>> prefetchData) {
     LithoPrefetchUtils.cancelPrefetch(prefetchData);
   }
 
   @OnRegisterRanges
   static void registerWorkingRanges(
-      ComponentContext context, @Prop(optional = true) final FrescoContext frescoContext) {
+      final ComponentContext context, @Prop(optional = true) final FrescoContext frescoContext) {
     FrescoExperiments experiments = resolveContext(context, frescoContext).getExperiments();
     if (experiments.enableWorkingRangePrefetching()) {
       FrescoVitoImage.registerImagePrefetchWorkingRange(
@@ -275,7 +275,7 @@ public class FrescoVitoImageSpec {
   }
 
   static FrescoContext resolveContext(
-      ComponentContext context, @Nullable FrescoContext contextOverride) {
+      final ComponentContext context, final @Nullable FrescoContext contextOverride) {
     if (contextOverride != null) {
       return contextOverride;
     }
@@ -283,11 +283,11 @@ public class FrescoVitoImageSpec {
   }
 
   static FrescoController getController(
-      ComponentContext context, @Nullable FrescoContext contextOverride) {
+      final ComponentContext context, final @Nullable FrescoContext contextOverride) {
     return resolveContext(context, contextOverride).getController();
   }
 
-  static void cancelDetachRunnable(FrescoState state) {
+  static void cancelDetachRunnable(final FrescoState state) {
     Runnable runnable = state.removeDetachRunnable();
     if (runnable != null) {
       sHandler.removeCallbacks(runnable);
@@ -296,9 +296,9 @@ public class FrescoVitoImageSpec {
 
   @OnBoundsDefined
   static void onBoundsDefined(
-      ComponentContext c,
-      ComponentLayout layout,
-      Output<Rect> viewportDimensions,
+      final ComponentContext c,
+      final ComponentLayout layout,
+      final Output<Rect> viewportDimensions,
       @FromPrepare final FrescoState frescoState) {
     final int width = layout.getWidth();
     final int height = layout.getHeight();

@@ -25,12 +25,12 @@ public class MockBitmapFactory {
     return create(DEFAULT_BITMAP_WIDTH, DEFAULT_BITMAP_HEIGHT, Bitmap.Config.ARGB_8888);
   }
 
-  public static Bitmap createForSize(int size, Bitmap.Config config) {
+  public static Bitmap createForSize(final int size, final Bitmap.Config config) {
     Preconditions.checkArgument(size % BitmapUtil.getPixelSizeForBitmapConfig(config) == 0);
     return create(1, size / BitmapUtil.getPixelSizeForBitmapConfig(config), config);
   }
 
-  public static Bitmap create(int width, int height, Bitmap.Config config) {
+  public static Bitmap create(final int width, final int height, final Bitmap.Config config) {
     Preconditions.checkArgument(width > 0);
     Preconditions.checkArgument(height > 0);
     Preconditions.checkNotNull(config);
@@ -44,7 +44,7 @@ public class MockBitmapFactory {
     return bitmap;
   }
 
-  public static int bitmapSize(int width, int height, Bitmap.Config config) {
+  public static int bitmapSize(final int width, final int height, final Bitmap.Config config) {
     return BitmapUtil.getSizeInByteForBitmap(width, height, config);
   }
 }

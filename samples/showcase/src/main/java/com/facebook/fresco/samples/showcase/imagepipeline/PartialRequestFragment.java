@@ -31,12 +31,12 @@ public class PartialRequestFragment extends BaseShowcaseFragment {
 
   @Override
   public View onCreateView(
-      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+      final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_partial_request, container, false);
   }
 
   @Override
-  public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
     final SimpleDraweeView partialDrawee =
@@ -48,7 +48,7 @@ public class PartialRequestFragment extends BaseShowcaseFragment {
     clearCacheButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             partialDrawee.setController(null);
             fullDrawee.setController(null);
             Fresco.getImagePipeline().clearDiskCaches();
@@ -60,7 +60,7 @@ public class PartialRequestFragment extends BaseShowcaseFragment {
     prefetchButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             loadImageIntoDrawee(partialDrawee, BytesRange.toMax(30000));
           }
         });
@@ -69,13 +69,13 @@ public class PartialRequestFragment extends BaseShowcaseFragment {
     loadFull.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             loadImageIntoDrawee(fullDrawee, null);
           }
         });
   }
 
-  private void loadImageIntoDrawee(SimpleDraweeView draweeView, @Nullable BytesRange bytesRange) {
+  private void loadImageIntoDrawee(final SimpleDraweeView draweeView, final @Nullable BytesRange bytesRange) {
     final ImageRequest imageRequest =
         ImageRequestBuilder.newBuilderWithSource(
                 sampleUris().createSampleUri(ImageUriProvider.ImageSize.L))

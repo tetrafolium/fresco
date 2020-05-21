@@ -85,7 +85,7 @@ public class SharedReference<T> {
    * @param value non-null value to manage
    * @param resourceReleaser non-null ResourceReleaser for the value
    */
-  public SharedReference(T value, ResourceReleaser<T> resourceReleaser) {
+  public SharedReference(final T value, final ResourceReleaser<T> resourceReleaser) {
     mValue = Preconditions.checkNotNull(value);
     mResourceReleaser = Preconditions.checkNotNull(resourceReleaser);
     mRefCount = 1;
@@ -98,7 +98,7 @@ public class SharedReference<T> {
    *
    * @param value the value to add.
    */
-  private static void addLiveReference(Object value) {
+  private static void addLiveReference(final Object value) {
     if (CloseableReference.useGc() && (value instanceof Bitmap || value instanceof HasBitmap)) {
       return;
     }
@@ -118,7 +118,7 @@ public class SharedReference<T> {
    *
    * @param value the value to remove.
    */
-  private static void removeLiveReference(Object value) {
+  private static void removeLiveReference(final Object value) {
     synchronized (sLiveObjects) {
       Integer count = sLiveObjects.get(value);
       if (count == null) {
@@ -156,7 +156,7 @@ public class SharedReference<T> {
    *
    * @return true if the shared reference is valid
    */
-  public static boolean isValid(SharedReference<?> ref) {
+  public static boolean isValid(final SharedReference<?> ref) {
     return ref != null && ref.isValid();
   }
 

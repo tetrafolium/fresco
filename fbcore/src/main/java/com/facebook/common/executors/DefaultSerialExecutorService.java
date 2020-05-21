@@ -16,7 +16,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class DefaultSerialExecutorService extends ConstrainedExecutorService
     implements SerialExecutorService {
 
-  public DefaultSerialExecutorService(Executor executor) {
+  public DefaultSerialExecutorService(final Executor executor) {
     // SerialExecutorService is just a ConstrainedExecutorService with a concurrency limit
     // of one and an unbounded work queue.
     super("SerialExecutor", 1, executor, new LinkedBlockingQueue<Runnable>());
@@ -29,7 +29,7 @@ public class DefaultSerialExecutorService extends ConstrainedExecutorService
    * @param runnable The task to be executed.
    */
   @Override
-  public synchronized void execute(Runnable runnable) {
+  public synchronized void execute(final Runnable runnable) {
     super.execute(runnable);
   }
 }

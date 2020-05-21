@@ -41,7 +41,7 @@ public class PooledByteArrayBufferedInputStream extends InputStream {
   private boolean mClosed;
 
   public PooledByteArrayBufferedInputStream(
-      InputStream inputStream, byte[] byteArray, ResourceReleaser<byte[]> resourceReleaser) {
+      final InputStream inputStream, final byte[] byteArray, final ResourceReleaser<byte[]> resourceReleaser) {
     mInputStream = Preconditions.checkNotNull(inputStream);
     mByteArray = Preconditions.checkNotNull(byteArray);
     mResourceReleaser = Preconditions.checkNotNull(resourceReleaser);
@@ -62,7 +62,7 @@ public class PooledByteArrayBufferedInputStream extends InputStream {
   }
 
   @Override
-  public int read(byte[] buffer, int offset, int length) throws IOException {
+  public int read(final byte[] buffer, final int offset, final int length) throws IOException {
     Preconditions.checkState(mBufferOffset <= mBufferedSize);
     ensureNotClosed();
     if (!ensureDataInBuffer()) {
@@ -92,7 +92,7 @@ public class PooledByteArrayBufferedInputStream extends InputStream {
   }
 
   @Override
-  public long skip(long byteCount) throws IOException {
+  public long skip(final long byteCount) throws IOException {
     Preconditions.checkState(mBufferOffset <= mBufferedSize);
     ensureNotClosed();
     final int bytesLeftInBuffer = mBufferedSize - mBufferOffset;

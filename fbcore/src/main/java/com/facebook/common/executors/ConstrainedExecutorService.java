@@ -43,7 +43,7 @@ public class ConstrainedExecutorService extends AbstractExecutorService {
    * @param workQueue Queue to hold {@link Runnable}s for eventual execution.
    */
   public ConstrainedExecutorService(
-      String name, int maxConcurrency, Executor executor, BlockingQueue<Runnable> workQueue) {
+      final String name, final int maxConcurrency, final Executor executor, final BlockingQueue<Runnable> workQueue) {
     if (maxConcurrency <= 0) {
       throw new IllegalArgumentException("max concurrency must be > 0");
     }
@@ -67,7 +67,7 @@ public class ConstrainedExecutorService extends AbstractExecutorService {
    * @return new {@code ConstrainedExecutorService} instance.
    */
   public static ConstrainedExecutorService newConstrainedExecutor(
-      String name, int maxConcurrency, int queueSize, Executor executor) {
+      final String name, final int maxConcurrency, final int queueSize, final Executor executor) {
     return new ConstrainedExecutorService(
         name, maxConcurrency, executor, new LinkedBlockingQueue<Runnable>(queueSize));
   }
@@ -87,7 +87,7 @@ public class ConstrainedExecutorService extends AbstractExecutorService {
    * @param runnable The task to be executed.
    */
   @Override
-  public void execute(Runnable runnable) {
+  public void execute(final Runnable runnable) {
     if (runnable == null) {
       throw new NullPointerException("runnable parameter is null");
     }
@@ -149,7 +149,7 @@ public class ConstrainedExecutorService extends AbstractExecutorService {
   }
 
   @Override
-  public boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException {
+  public boolean awaitTermination(final long timeout, final TimeUnit unit) throws InterruptedException {
     throw new UnsupportedOperationException();
   }
 

@@ -21,7 +21,7 @@ import com.facebook.common.internal.DoNotStrip;
 public class AwakeTimeSinceBootClock implements MonotonicClock, MonotonicNanoClock {
   @DoNotStrip private static final AwakeTimeSinceBootClock INSTANCE = new AwakeTimeSinceBootClock();
 
-  private AwakeTimeSinceBootClock() {}
+  private AwakeTimeSinceBootClock() { }
 
   /**
    * Returns a singleton instance of this clock.

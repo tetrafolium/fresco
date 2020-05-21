@@ -53,17 +53,17 @@ public class PipelineDraweeControllerBuilder
   @Nullable private ImagePerfDataListener mImagePerfDataListener;
 
   public PipelineDraweeControllerBuilder(
-      Context context,
-      PipelineDraweeControllerFactory pipelineDraweeControllerFactory,
-      ImagePipeline imagePipeline,
-      Set<ControllerListener> boundControllerListeners) {
+      final Context context,
+      final PipelineDraweeControllerFactory pipelineDraweeControllerFactory,
+      final ImagePipeline imagePipeline,
+      final Set<ControllerListener> boundControllerListeners) {
     super(context, boundControllerListeners);
     mImagePipeline = imagePipeline;
     mPipelineDraweeControllerFactory = pipelineDraweeControllerFactory;
   }
 
   @Override
-  public PipelineDraweeControllerBuilder setUri(@Nullable Uri uri) {
+  public PipelineDraweeControllerBuilder setUri(final @Nullable Uri uri) {
     if (uri == null) {
       return super.setImageRequest(null);
     }
@@ -75,7 +75,7 @@ public class PipelineDraweeControllerBuilder
   }
 
   @Override
-  public PipelineDraweeControllerBuilder setUri(@Nullable String uriString) {
+  public PipelineDraweeControllerBuilder setUri(final @Nullable String uriString) {
     if (uriString == null || uriString.isEmpty()) {
       return super.setImageRequest(ImageRequest.fromUri(uriString));
     }
@@ -83,30 +83,30 @@ public class PipelineDraweeControllerBuilder
   }
 
   public PipelineDraweeControllerBuilder setCustomDrawableFactories(
-      @Nullable ImmutableList<DrawableFactory> customDrawableFactories) {
+      final @Nullable ImmutableList<DrawableFactory> customDrawableFactories) {
     mCustomDrawableFactories = customDrawableFactories;
     return getThis();
   }
 
   public PipelineDraweeControllerBuilder setCustomDrawableFactories(
-      DrawableFactory... drawableFactories) {
+      final DrawableFactory... drawableFactories) {
     Preconditions.checkNotNull(drawableFactories);
     return setCustomDrawableFactories(ImmutableList.of(drawableFactories));
   }
 
-  public PipelineDraweeControllerBuilder setCustomDrawableFactory(DrawableFactory drawableFactory) {
+  public PipelineDraweeControllerBuilder setCustomDrawableFactory(final DrawableFactory drawableFactory) {
     Preconditions.checkNotNull(drawableFactory);
     return setCustomDrawableFactories(ImmutableList.of(drawableFactory));
   }
 
   public PipelineDraweeControllerBuilder setImageOriginListener(
-      @Nullable ImageOriginListener imageOriginListener) {
+      final @Nullable ImageOriginListener imageOriginListener) {
     mImageOriginListener = imageOriginListener;
     return getThis();
   }
 
   public PipelineDraweeControllerBuilder setPerfDataListener(
-      @Nullable ImagePerfDataListener imagePerfDataListener) {
+      final @Nullable ImagePerfDataListener imagePerfDataListener) {
     mImagePerfDataListener = imagePerfDataListener;
     return getThis();
   }
@@ -158,11 +158,11 @@ public class PipelineDraweeControllerBuilder
 
   @Override
   protected DataSource<CloseableReference<CloseableImage>> getDataSourceForRequest(
-      DraweeController controller,
-      String controllerId,
-      ImageRequest imageRequest,
-      Object callerContext,
-      AbstractDraweeControllerBuilder.CacheLevel cacheLevel) {
+      final DraweeController controller,
+      final String controllerId,
+      final ImageRequest imageRequest,
+      final Object callerContext,
+      final AbstractDraweeControllerBuilder.CacheLevel cacheLevel) {
     return mImagePipeline.fetchDecodedImage(
         imageRequest,
         callerContext,
@@ -180,7 +180,7 @@ public class PipelineDraweeControllerBuilder
   }
 
   public static ImageRequest.RequestLevel convertCacheLevelToRequestLevel(
-      AbstractDraweeControllerBuilder.CacheLevel cacheLevel) {
+      final AbstractDraweeControllerBuilder.CacheLevel cacheLevel) {
     switch (cacheLevel) {
       case FULL_FETCH:
         return ImageRequest.RequestLevel.FULL_FETCH;

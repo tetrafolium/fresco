@@ -37,7 +37,7 @@ public class SimpleListSectionSpec {
   }
 
   @OnEvent(RenderEvent.class)
-  static RenderInfo onRender(final SectionContext c, @FromEvent Data model) {
+  static RenderInfo onRender(final SectionContext c, final @FromEvent Data model) {
     return ComponentRenderInfo.create()
         .component(
             SimpleListItem.create(c)
@@ -47,7 +47,7 @@ public class SimpleListSectionSpec {
         .build();
   }
 
-  private static List<Data> generateData(final SectionContext c, int count) {
+  private static List<Data> generateData(final SectionContext c, final int count) {
     ImageUriProvider uris = ShowcaseApplication.Companion.getImageUriProvider();
     ArrayList<Data> data = new ArrayList<>(count);
     for (int i = 1; i <= count; i++) {
@@ -65,7 +65,7 @@ public class SimpleListSectionSpec {
     final Uri mainPicture;
     final String title;
 
-    Data(Uri profilePicture, Uri mainPicture, String title) {
+    Data(final Uri profilePicture, final Uri mainPicture, final String title) {
       this.profilePicture = profilePicture;
       this.mainPicture = mainPicture;
       this.title = title;

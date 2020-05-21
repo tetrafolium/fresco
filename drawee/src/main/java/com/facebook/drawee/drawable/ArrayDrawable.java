@@ -51,7 +51,7 @@ public class ArrayDrawable extends Drawable
    *
    * @param layers the layers that this drawable displays
    */
-  public ArrayDrawable(Drawable[] layers) {
+  public ArrayDrawable(final Drawable[] layers) {
     Preconditions.checkNotNull(layers);
     mLayers = layers;
     for (int i = 0; i < mLayers.length; i++) {
@@ -76,7 +76,7 @@ public class ArrayDrawable extends Drawable
    * @return drawable at the specified index
    */
   @Nullable
-  public Drawable getDrawable(int index) {
+  public Drawable getDrawable(final int index) {
     Preconditions.checkArgument(index >= 0);
     Preconditions.checkArgument(index < mLayers.length);
     return mLayers[index];
@@ -84,7 +84,7 @@ public class ArrayDrawable extends Drawable
 
   /** Sets a new drawable at the specified index, and return the previous drawable, if any. */
   @Nullable
-  public Drawable setDrawable(int index, @Nullable Drawable drawable) {
+  public Drawable setDrawable(final int index, final @Nullable Drawable drawable) {
     Preconditions.checkArgument(index >= 0);
     Preconditions.checkArgument(index < mLayers.length);
     final Drawable oldDrawable = mLayers[index];
@@ -130,7 +130,7 @@ public class ArrayDrawable extends Drawable
   }
 
   @Override
-  protected void onBoundsChange(Rect bounds) {
+  protected void onBoundsChange(final Rect bounds) {
     for (int i = 0; i < mLayers.length; i++) {
       Drawable drawable = mLayers[i];
       if (drawable != null) {
@@ -153,7 +153,7 @@ public class ArrayDrawable extends Drawable
   }
 
   @Override
-  protected boolean onStateChange(int[] state) {
+  protected boolean onStateChange(final int[] state) {
     boolean stateChanged = false;
     for (int i = 0; i < mLayers.length; i++) {
       Drawable drawable = mLayers[i];
@@ -165,7 +165,7 @@ public class ArrayDrawable extends Drawable
   }
 
   @Override
-  protected boolean onLevelChange(int level) {
+  protected boolean onLevelChange(final int level) {
     boolean levelChanged = false;
     for (int i = 0; i < mLayers.length; i++) {
       Drawable drawable = mLayers[i];
@@ -177,7 +177,7 @@ public class ArrayDrawable extends Drawable
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     for (int i = 0; i < mLayers.length; i++) {
       Drawable drawable = mLayers[i];
       if (drawable != null) {
@@ -187,7 +187,7 @@ public class ArrayDrawable extends Drawable
   }
 
   @Override
-  public boolean getPadding(Rect padding) {
+  public boolean getPadding(final Rect padding) {
     padding.left = 0;
     padding.top = 0;
     padding.right = 0;
@@ -234,7 +234,7 @@ public class ArrayDrawable extends Drawable
   }
 
   @Override
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     mDrawableProperties.setAlpha(alpha);
     for (int i = 0; i < mLayers.length; i++) {
       Drawable drawable = mLayers[i];
@@ -245,7 +245,7 @@ public class ArrayDrawable extends Drawable
   }
 
   @Override
-  public void setColorFilter(ColorFilter colorFilter) {
+  public void setColorFilter(final ColorFilter colorFilter) {
     mDrawableProperties.setColorFilter(colorFilter);
     for (int i = 0; i < mLayers.length; i++) {
       Drawable drawable = mLayers[i];
@@ -256,7 +256,7 @@ public class ArrayDrawable extends Drawable
   }
 
   @Override
-  public void setDither(boolean dither) {
+  public void setDither(final boolean dither) {
     mDrawableProperties.setDither(dither);
     for (int i = 0; i < mLayers.length; i++) {
       Drawable drawable = mLayers[i];
@@ -267,7 +267,7 @@ public class ArrayDrawable extends Drawable
   }
 
   @Override
-  public void setFilterBitmap(boolean filterBitmap) {
+  public void setFilterBitmap(final boolean filterBitmap) {
     mDrawableProperties.setFilterBitmap(filterBitmap);
     for (int i = 0; i < mLayers.length; i++) {
       Drawable drawable = mLayers[i];
@@ -278,7 +278,7 @@ public class ArrayDrawable extends Drawable
   }
 
   @Override
-  public boolean setVisible(boolean visible, boolean restart) {
+  public boolean setVisible(final boolean visible, final boolean restart) {
     boolean changed = super.setVisible(visible, restart);
     for (int i = 0; i < mLayers.length; i++) {
       Drawable drawable = mLayers[i];
@@ -290,7 +290,7 @@ public class ArrayDrawable extends Drawable
   }
 
   /** Gets the {@code DrawableParent} for index. */
-  public DrawableParent getDrawableParentForIndex(int index) {
+  public DrawableParent getDrawableParentForIndex(final int index) {
     Preconditions.checkArgument(index >= 0);
     Preconditions.checkArgument(index < mDrawableParents.length);
     if (mDrawableParents[index] == null) {
@@ -302,7 +302,7 @@ public class ArrayDrawable extends Drawable
   private DrawableParent createDrawableParentForIndex(final int index) {
     return new DrawableParent() {
       @Override
-      public Drawable setDrawable(Drawable newDrawable) {
+      public Drawable setDrawable(final Drawable newDrawable) {
         return ArrayDrawable.this.setDrawable(index, newDrawable);
       }
 
@@ -315,29 +315,29 @@ public class ArrayDrawable extends Drawable
 
   /** Drawable.Callback methods */
   @Override
-  public void invalidateDrawable(Drawable who) {
+  public void invalidateDrawable(final Drawable who) {
     invalidateSelf();
   }
 
   @Override
-  public void scheduleDrawable(Drawable who, Runnable what, long when) {
+  public void scheduleDrawable(final Drawable who, final Runnable what, final long when) {
     scheduleSelf(what, when);
   }
 
   @Override
-  public void unscheduleDrawable(Drawable who, Runnable what) {
+  public void unscheduleDrawable(final Drawable who, final Runnable what) {
     unscheduleSelf(what);
   }
 
   /** TransformationCallbackSetter method */
   @Override
-  public void setTransformCallback(TransformCallback transformCallback) {
+  public void setTransformCallback(final TransformCallback transformCallback) {
     mTransformCallback = transformCallback;
   }
 
   /** TransformationCallback methods */
   @Override
-  public void getTransform(Matrix transform) {
+  public void getTransform(final Matrix transform) {
     if (mTransformCallback != null) {
       mTransformCallback.getTransform(transform);
     } else {
@@ -346,7 +346,7 @@ public class ArrayDrawable extends Drawable
   }
 
   @Override
-  public void getRootBounds(RectF bounds) {
+  public void getRootBounds(final RectF bounds) {
     if (mTransformCallback != null) {
       mTransformCallback.getRootBounds(bounds);
     } else {
@@ -356,7 +356,7 @@ public class ArrayDrawable extends Drawable
 
   @Override
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  public void setHotspot(float x, float y) {
+  public void setHotspot(final float x, final float y) {
     for (int i = 0; i < mLayers.length; i++) {
       Drawable drawable = mLayers[i];
       if (drawable != null) {

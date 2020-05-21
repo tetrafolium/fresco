@@ -64,7 +64,7 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
     public boolean isOrphan;
     @Nullable public final EntryStateObserver<K> observer;
 
-    private Entry(K key, CloseableReference<V> valueRef, @Nullable EntryStateObserver<K> observer) {
+    private Entry(final K key, final CloseableReference<V> valueRef, final @Nullable EntryStateObserver<K> observer) {
       this.key = Preconditions.checkNotNull(key);
       this.valueRef = Preconditions.checkNotNull(CloseableReference.cloneOrNull(valueRef));
       this.clientCount = 0;
@@ -112,10 +112,10 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
   private long mLastCacheParamsCheck;
 
   public CountingMemoryCache(
-      ValueDescriptor<V> valueDescriptor,
-      CacheTrimStrategy cacheTrimStrategy,
-      Supplier<MemoryCacheParams> memoryCacheParamsSupplier,
-      @Nullable EntryStateObserver<K> entryStateObserver) {
+      final ValueDescriptor<V> valueDescriptor,
+      final CacheTrimStrategy cacheTrimStrategy,
+      final Supplier<MemoryCacheParams> memoryCacheParamsSupplier,
+      final @Nullable EntryStateObserver<K> entryStateObserver) {
     mValueDescriptor = valueDescriptor;
     mExclusiveEntries = new CountingLruMap<>(wrapValueDescriptor(valueDescriptor));
     mCachedEntries = new CountingLruMap<>(wrapValueDescriptor(valueDescriptor));
@@ -130,7 +130,7 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
       final ValueDescriptor<V> evictableValueDescriptor) {
     return new ValueDescriptor<Entry<K, V>>() {
       @Override
-      public int getSizeInBytes(Entry<K, V> entry) {
+      public int getSizeInBytes(final Entry<K, V> entry) {
         return evictableValueDescriptor.getSizeInBytes(entry.valueRef.get());
       }
     };
@@ -189,7 +189,7 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
   }
 
   /** Checks the cache constraints to determine whether the new value can be cached or not. */
-  private synchronized boolean canCacheNewValue(V value) {
+  private synchronized boolean canCacheNewValue(final V value) {
     int newValueSize = mValueDescriptor.getSizeInBytes(value);
     return (newValueSize <= mMemoryCacheParams.maxCacheEntrySize)
         && (getInUseCount() <= mMemoryCacheParams.maxCacheEntries - 1)
@@ -242,7 +242,7 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
         entry.valueRef.get(),
         new ResourceReleaser<V>() {
           @Override
-          public void release(V unused) {
+          public void release(final V unused) {
             releaseClientReference(entry);
           }
         });
@@ -265,7 +265,7 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
   }
 
   /** Adds the entry to the exclusively owned queue if it is viable for eviction. */
-  private synchronized boolean maybeAddToExclusives(Entry<K, V> entry) {
+  private synchronized boolean maybeAddToExclusives(final Entry<K, V> entry) {
     if (!entry.isOrphan && entry.clientCount == 0) {
       mExclusiveEntries.put(entry.key, entry);
       return true;
@@ -279,7 +279,7 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
    * <p>The item can be reused only if it is exclusively owned by the cache.
    */
   @Nullable
-  public CloseableReference<V> reuse(K key) {
+  public CloseableReference<V> reuse(final K key) {
     Preconditions.checkNotNull(key);
     CloseableReference<V> clientRef = null;
     boolean removed = false;
@@ -308,7 +308,7 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
    * @param predicate returns true if an item with the given key should be removed
    * @return number of the items removed from the cache
    */
-  public int removeAll(Predicate<K> predicate) {
+  public int removeAll(final Predicate<K> predicate) {
     ArrayList<Entry<K, V>> oldExclusives;
     ArrayList<Entry<K, V>> oldEntries;
     synchronized (this) {
@@ -344,7 +344,7 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
    * @return true is any items matches from the cache
    */
   @Override
-  public synchronized boolean contains(Predicate<K> predicate) {
+  public synchronized boolean contains(final Predicate<K> predicate) {
     return !mCachedEntries.getMatchingEntries(predicate).isEmpty();
   }
 
@@ -355,13 +355,13 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
    * @return true is any items matches from the cache
    */
   @Override
-  public synchronized boolean contains(K key) {
+  public synchronized boolean contains(final K key) {
     return mCachedEntries.contains(key);
   }
 
   /** Trims the cache according to the specified trimming strategy and the given trim type. */
   @Override
-  public void trim(MemoryTrimType trimType) {
+  public void trim(final MemoryTrimType trimType) {
     ArrayList<Entry<K, V>> oldEntries;
     final double trimRatio = mCacheTrimStrategy.getTrimRatio(trimType);
     synchronized (this) {
@@ -422,7 +422,7 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
    * called while holding the <code>this</code> lock.
    */
   @Nullable
-  private synchronized ArrayList<Entry<K, V>> trimExclusivelyOwnedEntries(int count, int size) {
+  private synchronized ArrayList<Entry<K, V>> trimExclusivelyOwnedEntries(final int count, final int size) {
     count = Math.max(count, 0);
     size = Math.max(size, 0);
     // fast path without array allocation if no eviction is necessary
@@ -444,7 +444,7 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
    * <p>This method invokes the external {@link CloseableReference#close} method, so it must not be
    * called while holding the <code>this</code> lock.
    */
-  private void maybeClose(@Nullable ArrayList<Entry<K, V>> oldEntries) {
+  private void maybeClose(final @Nullable ArrayList<Entry<K, V>> oldEntries) {
     if (oldEntries != null) {
       for (Entry<K, V> oldEntry : oldEntries) {
         CloseableReference.closeSafely(referenceToClose(oldEntry));
@@ -452,7 +452,7 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
     }
   }
 
-  private void maybeNotifyExclusiveEntryRemoval(@Nullable ArrayList<Entry<K, V>> entries) {
+  private void maybeNotifyExclusiveEntryRemoval(final @Nullable ArrayList<Entry<K, V>> entries) {
     if (entries != null) {
       for (Entry<K, V> entry : entries) {
         maybeNotifyExclusiveEntryRemoval(entry);
@@ -460,20 +460,20 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
     }
   }
 
-  private static <K, V> void maybeNotifyExclusiveEntryRemoval(@Nullable Entry<K, V> entry) {
+  private static <K, V> void maybeNotifyExclusiveEntryRemoval(final @Nullable Entry<K, V> entry) {
     if (entry != null && entry.observer != null) {
       entry.observer.onExclusivityChanged(entry.key, false);
     }
   }
 
-  private static <K, V> void maybeNotifyExclusiveEntryInsertion(@Nullable Entry<K, V> entry) {
+  private static <K, V> void maybeNotifyExclusiveEntryInsertion(final @Nullable Entry<K, V> entry) {
     if (entry != null && entry.observer != null) {
       entry.observer.onExclusivityChanged(entry.key, true);
     }
   }
 
   /** Marks the given entries as orphans. */
-  private synchronized void makeOrphans(@Nullable ArrayList<Entry<K, V>> oldEntries) {
+  private synchronized void makeOrphans(final @Nullable ArrayList<Entry<K, V>> oldEntries) {
     if (oldEntries != null) {
       for (Entry<K, V> oldEntry : oldEntries) {
         makeOrphan(oldEntry);
@@ -482,21 +482,21 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
   }
 
   /** Marks the entry as orphan. */
-  private synchronized void makeOrphan(Entry<K, V> entry) {
+  private synchronized void makeOrphan(final Entry<K, V> entry) {
     Preconditions.checkNotNull(entry);
     Preconditions.checkState(!entry.isOrphan);
     entry.isOrphan = true;
   }
 
   /** Increases the entry's client count. */
-  private synchronized void increaseClientCount(Entry<K, V> entry) {
+  private synchronized void increaseClientCount(final Entry<K, V> entry) {
     Preconditions.checkNotNull(entry);
     Preconditions.checkState(!entry.isOrphan);
     entry.clientCount++;
   }
 
   /** Decreases the entry's client count. */
-  private synchronized void decreaseClientCount(Entry<K, V> entry) {
+  private synchronized void decreaseClientCount(final Entry<K, V> entry) {
     Preconditions.checkNotNull(entry);
     Preconditions.checkState(entry.clientCount > 0);
     entry.clientCount--;
@@ -504,7 +504,7 @@ public class CountingMemoryCache<K, V> implements MemoryCache<K, V>, MemoryTrimm
 
   /** Returns the value reference of the entry if it should be closed, null otherwise. */
   @Nullable
-  private synchronized CloseableReference<V> referenceToClose(Entry<K, V> entry) {
+  private synchronized CloseableReference<V> referenceToClose(final Entry<K, V> entry) {
     Preconditions.checkNotNull(entry);
     return (entry.isOrphan && entry.clientCount == 0) ? entry.valueRef : null;
   }

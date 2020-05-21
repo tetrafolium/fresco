@@ -40,7 +40,7 @@ public final class BitmapUtil {
 
   /** @return size in bytes of the underlying bitmap */
   @SuppressLint("NewApi")
-  public static int getSizeInBytes(@Nullable Bitmap bitmap) {
+  public static int getSizeInBytes(final @Nullable Bitmap bitmap) {
     if (bitmap == null) {
       return 0;
     }
@@ -71,7 +71,7 @@ public final class BitmapUtil {
    * @param bytes the input byte array of the image
    * @return dimensions of the image
    */
-  public static @Nullable Pair<Integer, Integer> decodeDimensions(byte[] bytes) {
+  public static @Nullable Pair<Integer, Integer> decodeDimensions(final byte[] bytes) {
     // wrapping with ByteArrayInputStream is cheap and we don't have duplicate implementation
     return decodeDimensions(new ByteArrayInputStream(bytes));
   }
@@ -82,7 +82,7 @@ public final class BitmapUtil {
    * @param uri the Uri of the image
    * @return dimensions of the image
    */
-  public static @Nullable Pair<Integer, Integer> decodeDimensions(Uri uri) {
+  public static @Nullable Pair<Integer, Integer> decodeDimensions(final Uri uri) {
     Preconditions.checkNotNull(uri);
     BitmapFactory.Options options = new BitmapFactory.Options();
     options.inJustDecodeBounds = true;
@@ -99,7 +99,7 @@ public final class BitmapUtil {
    * @param is the InputStream containing the image data
    * @return dimensions of the image
    */
-  public static @Nullable Pair<Integer, Integer> decodeDimensions(InputStream is) {
+  public static @Nullable Pair<Integer, Integer> decodeDimensions(final InputStream is) {
     Preconditions.checkNotNull(is);
     ByteBuffer byteBuffer = DECODE_BUFFERS.acquire();
     if (byteBuffer == null) {
@@ -126,7 +126,7 @@ public final class BitmapUtil {
    * @param is the InputStream containing the image data
    * @return the metadata of the image
    */
-  public static ImageMetaData decodeDimensionsAndColorSpace(InputStream is) {
+  public static ImageMetaData decodeDimensionsAndColorSpace(final InputStream is) {
     Preconditions.checkNotNull(is);
     ByteBuffer byteBuffer = DECODE_BUFFERS.acquire();
     if (byteBuffer == null) {
@@ -156,7 +156,7 @@ public final class BitmapUtil {
    *     be returned
    * @return
    */
-  public static int getPixelSizeForBitmapConfig(Bitmap.Config bitmapConfig) {
+  public static int getPixelSizeForBitmapConfig(final Bitmap.Config bitmapConfig) {
 
     switch (bitmapConfig) {
       case ARGB_8888:
@@ -183,7 +183,7 @@ public final class BitmapUtil {
    *     be returned
    * @return
    */
-  public static int getSizeInByteForBitmap(int width, int height, Bitmap.Config bitmapConfig) {
+  public static int getSizeInByteForBitmap(final int width, final int height, final Bitmap.Config bitmapConfig) {
     return width * height * getPixelSizeForBitmapConfig(bitmapConfig);
   }
 }

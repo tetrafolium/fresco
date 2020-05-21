@@ -21,7 +21,7 @@ public enum ImageFormat {
     this.mime = mime;
   }
 
-  public static ImageFormat getImageFormatForMime(String mime) {
+  public static ImageFormat getImageFormatForMime(final String mime) {
     for (ImageFormat type : VALUES) {
       if (type.mime.equals(mime)) {
         return type;

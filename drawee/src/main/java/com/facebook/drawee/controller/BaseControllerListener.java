@@ -23,21 +23,21 @@ public class BaseControllerListener<INFO> implements ControllerListener<INFO> {
   }
 
   @Override
-  public void onSubmit(String id, Object callerContext) {}
+  public void onSubmit(final String id, final Object callerContext) { }
 
   @Override
   public void onFinalImageSet(
-      String id, @Nullable INFO imageInfo, @Nullable Animatable animatable) {}
+      final String id, final @Nullable INFO imageInfo, final @Nullable Animatable animatable) { }
 
   @Override
-  public void onIntermediateImageSet(String id, @Nullable INFO imageInfo) {}
+  public void onIntermediateImageSet(final String id, final @Nullable INFO imageInfo) { }
 
   @Override
-  public void onIntermediateImageFailed(String id, Throwable throwable) {}
+  public void onIntermediateImageFailed(final String id, final Throwable throwable) { }
 
   @Override
-  public void onFailure(String id, Throwable throwable) {}
+  public void onFailure(final String id, final Throwable throwable) { }
 
   @Override
-  public void onRelease(String id) {}
+  public void onRelease(final String id) { }
 }

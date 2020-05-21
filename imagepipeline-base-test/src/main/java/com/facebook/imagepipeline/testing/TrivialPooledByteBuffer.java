@@ -16,11 +16,11 @@ public class TrivialPooledByteBuffer implements PooledByteBuffer {
   private byte[] mBuf;
   private long mNativePtr;
 
-  public TrivialPooledByteBuffer(byte[] buf) {
+  public TrivialPooledByteBuffer(final byte[] buf) {
     this(buf, 0L);
   }
 
-  public TrivialPooledByteBuffer(byte[] buf, long nativePtr) {
+  public TrivialPooledByteBuffer(final byte[] buf, final long nativePtr) {
     mBuf = buf;
     mNativePtr = nativePtr;
   }
@@ -31,12 +31,12 @@ public class TrivialPooledByteBuffer implements PooledByteBuffer {
   }
 
   @Override
-  public byte read(int offset) {
+  public byte read(final int offset) {
     return mBuf[offset];
   }
 
   @Override
-  public int read(int offset, byte[] buffer, int bufferOffset, int length) {
+  public int read(final int offset, final byte[] buffer, final int bufferOffset, final int length) {
     System.arraycopy(mBuf, offset, buffer, bufferOffset, length);
     return length;
   }

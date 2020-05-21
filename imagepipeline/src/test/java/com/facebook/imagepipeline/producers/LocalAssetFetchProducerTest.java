@@ -84,7 +84,7 @@ public class LocalAssetFetchProducerTest {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 mCapturedEncodedImage =
                     EncodedImage.cloneOrNull((EncodedImage) invocation.getArguments()[0]);
                 return null;

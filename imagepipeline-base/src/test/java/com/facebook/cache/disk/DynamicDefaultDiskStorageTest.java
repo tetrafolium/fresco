@@ -38,7 +38,7 @@ public class DynamicDefaultDiskStorageTest {
     mCacheErrorLogger = mock(CacheErrorLogger.class);
   }
 
-  private DynamicDefaultDiskStorage createStorage(boolean useFilesDirInsteadOfCacheDir) {
+  private DynamicDefaultDiskStorage createStorage(final boolean useFilesDirInsteadOfCacheDir) {
     return new DynamicDefaultDiskStorage(
         mVersion,
         useFilesDirInsteadOfCacheDir
@@ -56,7 +56,7 @@ public class DynamicDefaultDiskStorageTest {
     return createStorage(true);
   }
 
-  private static File getStorageSubdirectory(File rootDir, int version) {
+  private static File getStorageSubdirectory(final File rootDir, final int version) {
     return new File(rootDir, DefaultDiskStorage.getVersionSubdirectoryName(version));
   }
 

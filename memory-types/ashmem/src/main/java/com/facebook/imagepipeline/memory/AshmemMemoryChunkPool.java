@@ -20,14 +20,14 @@ public class AshmemMemoryChunkPool extends MemoryChunkPool {
 
   @DoNotStrip
   public AshmemMemoryChunkPool(
-      MemoryTrimmableRegistry memoryTrimmableRegistry,
-      PoolParams poolParams,
-      PoolStatsTracker ashmemMemoryChunkPoolStatsTracker) {
+      final MemoryTrimmableRegistry memoryTrimmableRegistry,
+      final PoolParams poolParams,
+      final PoolStatsTracker ashmemMemoryChunkPoolStatsTracker) {
     super(memoryTrimmableRegistry, poolParams, ashmemMemoryChunkPoolStatsTracker);
   }
 
   @Override
-  public AshmemMemoryChunk alloc(int bucketedSize) {
+  public AshmemMemoryChunk alloc(final int bucketedSize) {
     return new AshmemMemoryChunk(bucketedSize);
   }
 }

@@ -48,7 +48,7 @@ public final class DelayPostprocessor extends BasePostprocessor {
   }
 
   @Override
-  public void process(Bitmap bitmap) {
+  public void process(final Bitmap bitmap) {
     TimeWaster.Fib(mDelay);
   }
 }

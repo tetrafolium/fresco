@@ -82,12 +82,12 @@ public class BitmapCounterTest {
     assertState(MAX_COUNT, MAX_COUNT);
   }
 
-  private void assertState(int count, long size) {
+  private void assertState(final int count, final long size) {
     assertEquals(count, mBitmapCounter.getCount());
     assertEquals(size, mBitmapCounter.getSize());
   }
 
-  private static Bitmap bitmapForSize(int size) {
+  private static Bitmap bitmapForSize(final int size) {
     final Bitmap bitmap = mock(Bitmap.class);
     doReturn(1).when(bitmap).getHeight();
     doReturn(size).when(bitmap).getRowBytes();

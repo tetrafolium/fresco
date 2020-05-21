@@ -18,7 +18,7 @@ public class ScheduledQueue {
   private boolean isTicking;
   private long tickRemaining;
 
-  public ScheduledQueue(FakeClock clock) {
+  public ScheduledQueue(final FakeClock clock) {
     this.clock = clock;
     now = clock.now();
     clock.addListener(
@@ -92,7 +92,7 @@ public class ScheduledQueue {
    *
    * @param runnable the task to execute
    */
-  public void add(Runnable runnable) {
+  public void add(final Runnable runnable) {
     deltaQueue.add(tickRemaining, runnable);
   }
 
@@ -102,7 +102,7 @@ public class ScheduledQueue {
    * @param runnable the task to execute
    * @param delayMs the delay before the task should be executed
    */
-  public void add(Runnable runnable, long delayMs) {
+  public void add(final Runnable runnable, final long delayMs) {
     deltaQueue.add(tickRemaining + delayMs, runnable);
   }
 
@@ -112,7 +112,7 @@ public class ScheduledQueue {
    * @param runnable The runnable to remove
    * @return whether the element was removed
    */
-  public boolean remove(Runnable runnable) {
+  public boolean remove(final Runnable runnable) {
     return deltaQueue.remove(runnable);
   }
 

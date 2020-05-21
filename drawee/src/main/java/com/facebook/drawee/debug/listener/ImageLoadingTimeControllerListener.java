@@ -17,25 +17,25 @@ import javax.annotation.Nullable;
  */
 public class ImageLoadingTimeControllerListener extends BaseControllerListener {
 
-  private long mRequestSubmitTimeMs = -1l;
+  private long mRequestSubmitTimeMs = -1L;
 
-  private long mFinalImageSetTimeMs = -1l;
+  private long mFinalImageSetTimeMs = -1L;
 
   private @Nullable ImageLoadingTimeListener mImageLoadingTimeListener;
 
   public ImageLoadingTimeControllerListener(
-      @Nullable ImageLoadingTimeListener imageLoadingTimeListener) {
+      final @Nullable ImageLoadingTimeListener imageLoadingTimeListener) {
     mImageLoadingTimeListener = imageLoadingTimeListener;
   }
 
   @Override
-  public void onSubmit(String id, Object callerContext) {
+  public void onSubmit(final String id, final Object callerContext) {
     mRequestSubmitTimeMs = System.currentTimeMillis();
   }
 
   @Override
   public void onFinalImageSet(
-      String id, @Nullable Object imageInfo, @Nullable Animatable animatable) {
+      final String id, final @Nullable Object imageInfo, final @Nullable Animatable animatable) {
     mFinalImageSetTimeMs = System.currentTimeMillis();
     if (mImageLoadingTimeListener != null) {
       mImageLoadingTimeListener.onFinalImageSet(mFinalImageSetTimeMs - mRequestSubmitTimeMs);

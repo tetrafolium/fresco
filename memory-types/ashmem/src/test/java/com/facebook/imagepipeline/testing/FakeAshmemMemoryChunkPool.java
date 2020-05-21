@@ -22,7 +22,7 @@ public class FakeAshmemMemoryChunkPool extends AshmemMemoryChunkPool {
     this(new PoolParams(128, getBucketSizes()));
   }
 
-  public FakeAshmemMemoryChunkPool(PoolParams poolParams) {
+  public FakeAshmemMemoryChunkPool(final PoolParams poolParams) {
     super(
         Mockito.mock(MemoryTrimmableRegistry.class),
         poolParams,
@@ -30,7 +30,7 @@ public class FakeAshmemMemoryChunkPool extends AshmemMemoryChunkPool {
   }
 
   @Override
-  public AshmemMemoryChunk alloc(int bucketedSize) {
+  public AshmemMemoryChunk alloc(final int bucketedSize) {
     return new FakeAshmemMemoryChunk(bucketedSize);
   }
 

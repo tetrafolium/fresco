@@ -39,7 +39,7 @@ public class FrescoFrameCache implements BitmapFrameCache {
   @Nullable
   private CloseableReference<CloseableImage> mLastRenderedItem;
 
-  public FrescoFrameCache(AnimatedFrameCache animatedFrameCache, boolean enableBitmapReusing) {
+  public FrescoFrameCache(final AnimatedFrameCache animatedFrameCache, final boolean enableBitmapReusing) {
     mAnimatedFrameCache = animatedFrameCache;
     mEnableBitmapReusing = enableBitmapReusing;
     mPreparedPendingFrames = new SparseArray<>();
@@ -47,20 +47,20 @@ public class FrescoFrameCache implements BitmapFrameCache {
 
   @Nullable
   @Override
-  public synchronized CloseableReference<Bitmap> getCachedFrame(int frameNumber) {
+  public synchronized CloseableReference<Bitmap> getCachedFrame(final int frameNumber) {
     return convertToBitmapReferenceAndClose(mAnimatedFrameCache.get(frameNumber));
   }
 
   @Nullable
   @Override
-  public synchronized CloseableReference<Bitmap> getFallbackFrame(int frameNumber) {
+  public synchronized CloseableReference<Bitmap> getFallbackFrame(final int frameNumber) {
     return convertToBitmapReferenceAndClose(CloseableReference.cloneOrNull(mLastRenderedItem));
   }
 
   @Nullable
   @Override
   public synchronized CloseableReference<Bitmap> getBitmapToReuseForFrame(
-      int frameNumber, int width, int height) {
+      final int frameNumber, final int width, final int height) {
     if (!mEnableBitmapReusing) {
       return null;
     }
@@ -68,7 +68,7 @@ public class FrescoFrameCache implements BitmapFrameCache {
   }
 
   @Override
-  public synchronized boolean contains(int frameNumber) {
+  public synchronized boolean contains(final int frameNumber) {
     return mAnimatedFrameCache.contains(frameNumber);
   }
 
@@ -91,9 +91,9 @@ public class FrescoFrameCache implements BitmapFrameCache {
 
   @Override
   public synchronized void onFrameRendered(
-      int frameNumber,
-      CloseableReference<Bitmap> bitmapReference,
-      @BitmapAnimationBackend.FrameType int frameType) {
+      final int frameNumber,
+      final CloseableReference<Bitmap> bitmapReference,
+      final @BitmapAnimationBackend.FrameType int frameType) {
     Preconditions.checkNotNull(bitmapReference);
 
     // Close up prepared references.
@@ -114,9 +114,9 @@ public class FrescoFrameCache implements BitmapFrameCache {
 
   @Override
   public synchronized void onFramePrepared(
-      int frameNumber,
-      CloseableReference<Bitmap> bitmapReference,
-      @BitmapAnimationBackend.FrameType int frameType) {
+      final int frameNumber,
+      final CloseableReference<Bitmap> bitmapReference,
+      final @BitmapAnimationBackend.FrameType int frameType) {
     Preconditions.checkNotNull(bitmapReference);
     CloseableReference<CloseableImage> closableReference = null;
     try {
@@ -144,7 +144,7 @@ public class FrescoFrameCache implements BitmapFrameCache {
   }
 
   @Override
-  public void setFrameCacheListener(BitmapFrameCache.FrameCacheListener frameCacheListener) {
+  public void setFrameCacheListener(final BitmapFrameCache.FrameCacheListener frameCacheListener) {
     // TODO (t15557326) Not supported for now
   }
 
@@ -156,7 +156,7 @@ public class FrescoFrameCache implements BitmapFrameCache {
     return size;
   }
 
-  private synchronized void removePreparedReference(int frameNumber) {
+  private synchronized void removePreparedReference(final int frameNumber) {
     CloseableReference<CloseableImage> existingPendingReference =
         mPreparedPendingFrames.get(frameNumber);
     if (existingPendingReference != null) {
@@ -201,14 +201,14 @@ public class FrescoFrameCache implements BitmapFrameCache {
   }
 
   private static int getBitmapSizeBytes(
-      @Nullable CloseableReference<CloseableImage> imageReference) {
+      final @Nullable CloseableReference<CloseableImage> imageReference) {
     if (!CloseableReference.isValid(imageReference)) {
       return 0;
     }
     return getBitmapSizeBytes(imageReference.get());
   }
 
-  private static int getBitmapSizeBytes(@Nullable CloseableImage image) {
+  private static int getBitmapSizeBytes(final @Nullable CloseableImage image) {
     if (!(image instanceof CloseableBitmap)) {
       return 0;
     }
@@ -217,7 +217,7 @@ public class FrescoFrameCache implements BitmapFrameCache {
 
   @Nullable
   private static CloseableReference<CloseableImage> createImageReference(
-      CloseableReference<Bitmap> bitmapReference) {
+      final CloseableReference<Bitmap> bitmapReference) {
     // The given CloseableStaticBitmap will be cached and then released by the resource releaser
     // of the closeable reference
     CloseableImage closeableImage =

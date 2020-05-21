@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 public class NoOpCacheEventListener implements CacheEventListener {
   private static @Nullable NoOpCacheEventListener sInstance = null;
 
-  private NoOpCacheEventListener() {}
+  private NoOpCacheEventListener() { }
 
   public static synchronized NoOpCacheEventListener getInstance() {
     if (sInstance == null) {
@@ -23,26 +23,26 @@ public class NoOpCacheEventListener implements CacheEventListener {
   }
 
   @Override
-  public void onHit(CacheEvent cacheEvent) {}
+  public void onHit(final CacheEvent cacheEvent) { }
 
   @Override
-  public void onMiss(CacheEvent cacheEvent) {}
+  public void onMiss(final CacheEvent cacheEvent) { }
 
   @Override
-  public void onWriteAttempt(CacheEvent cacheEvent) {}
+  public void onWriteAttempt(final CacheEvent cacheEvent) { }
 
   @Override
-  public void onWriteSuccess(CacheEvent cacheEvent) {}
+  public void onWriteSuccess(final CacheEvent cacheEvent) { }
 
   @Override
-  public void onReadException(CacheEvent cacheEvent) {}
+  public void onReadException(final CacheEvent cacheEvent) { }
 
   @Override
-  public void onWriteException(CacheEvent cacheEvent) {}
+  public void onWriteException(final CacheEvent cacheEvent) { }
 
   @Override
-  public void onEviction(CacheEvent cacheEvent) {}
+  public void onEviction(final CacheEvent cacheEvent) { }
 
   @Override
-  public void onCleared() {}
+  public void onCleared() { }
 }

@@ -39,9 +39,9 @@ public class BitmapPrepareProducer implements Producer<CloseableReference<Closea
    */
   public BitmapPrepareProducer(
       final Producer<CloseableReference<CloseableImage>> inputProducer,
-      int minBitmapSizeBytes,
-      int maxBitmapSizeBytes,
-      boolean preparePrefetch) {
+      final int minBitmapSizeBytes,
+      final int maxBitmapSizeBytes,
+      final boolean preparePrefetch) {
     Preconditions.checkArgument(minBitmapSizeBytes <= maxBitmapSizeBytes);
     mInputProducer = Preconditions.checkNotNull(inputProducer);
     mMinBitmapSizeBytes = minBitmapSizeBytes;
@@ -71,9 +71,9 @@ public class BitmapPrepareProducer implements Producer<CloseableReference<Closea
     private final int mMaxBitmapSizeBytes;
 
     BitmapPrepareConsumer(
-        Consumer<CloseableReference<CloseableImage>> consumer,
-        int minBitmapSizeBytes,
-        int maxBitmapSizeBytes) {
+        final Consumer<CloseableReference<CloseableImage>> consumer,
+        final int minBitmapSizeBytes,
+        final int maxBitmapSizeBytes) {
       super(consumer);
       mMinBitmapSizeBytes = minBitmapSizeBytes;
       mMaxBitmapSizeBytes = maxBitmapSizeBytes;
@@ -81,12 +81,12 @@ public class BitmapPrepareProducer implements Producer<CloseableReference<Closea
 
     @Override
     protected void onNewResultImpl(
-        CloseableReference<CloseableImage> newResult, @Status int status) {
+        final CloseableReference<CloseableImage> newResult, final @Status int status) {
       internalPrepareBitmap(newResult);
       getConsumer().onNewResult(newResult, status);
     }
 
-    private void internalPrepareBitmap(CloseableReference<CloseableImage> newResult) {
+    private void internalPrepareBitmap(final CloseableReference<CloseableImage> newResult) {
       if (newResult == null || !newResult.isValid()) {
         return;
       }

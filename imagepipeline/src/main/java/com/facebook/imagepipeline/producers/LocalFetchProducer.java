@@ -24,7 +24,7 @@ public abstract class LocalFetchProducer implements Producer<EncodedImage> {
   private final Executor mExecutor;
   private final PooledByteBufferFactory mPooledByteBufferFactory;
 
-  protected LocalFetchProducer(Executor executor, PooledByteBufferFactory pooledByteBufferFactory) {
+  protected LocalFetchProducer(final Executor executor, final PooledByteBufferFactory pooledByteBufferFactory) {
     mExecutor = executor;
     mPooledByteBufferFactory = pooledByteBufferFactory;
   }
@@ -54,7 +54,7 @@ public abstract class LocalFetchProducer implements Producer<EncodedImage> {
           }
 
           @Override
-          protected void disposeResult(EncodedImage result) {
+          protected void disposeResult(final EncodedImage result) {
             EncodedImage.closeSafely(result);
           }
         };
@@ -70,7 +70,7 @@ public abstract class LocalFetchProducer implements Producer<EncodedImage> {
   }
 
   /** Creates a memory-backed encoded image from the stream. The stream is closed. */
-  protected EncodedImage getByteBufferBackedEncodedImage(InputStream inputStream, int length)
+  protected EncodedImage getByteBufferBackedEncodedImage(final InputStream inputStream, final int length)
       throws IOException {
     CloseableReference<PooledByteBuffer> ref = null;
     try {
@@ -86,7 +86,7 @@ public abstract class LocalFetchProducer implements Producer<EncodedImage> {
     }
   }
 
-  protected EncodedImage getEncodedImage(InputStream inputStream, int length) throws IOException {
+  protected EncodedImage getEncodedImage(final InputStream inputStream, final int length) throws IOException {
     return getByteBufferBackedEncodedImage(inputStream, length);
   }
 

@@ -202,12 +202,12 @@ public class ThumbnailBranchProducerTest {
     verify(mThumbnailProducers[2]).produceResults(any(Consumer.class), any(ProducerContext.class));
   }
 
-  private void mockRequestWithResizeOptions(int width, int height) {
+  private void mockRequestWithResizeOptions(final int width, final int height) {
     ResizeOptions resizeOptions = new ResizeOptions(width, height);
     when(mImageRequest.getResizeOptions()).thenReturn(resizeOptions);
   }
 
-  private static EncodedImage mockEncodedImage(int width, int height, int rotationAngle) {
+  private static EncodedImage mockEncodedImage(final int width, final int height, final int rotationAngle) {
     EncodedImage mockImage = mock(EncodedImage.class);
     when(mockImage.getWidth()).thenReturn(width);
     when(mockImage.getHeight()).thenReturn(height);
@@ -216,12 +216,12 @@ public class ThumbnailBranchProducerTest {
   }
 
   private static void mockProducerToSupportSize(
-      ThumbnailProducer<EncodedImage> mockProducer, final int width, final int height) {
+      final ThumbnailProducer<EncodedImage> mockProducer, final int width, final int height) {
     when(mockProducer.canProvideImageForSize(any(ResizeOptions.class)))
         .then(
             new Answer<Boolean>() {
               @Override
-              public Boolean answer(InvocationOnMock invocation) throws Throwable {
+              public Boolean answer(final InvocationOnMock invocation) throws Throwable {
                 ResizeOptions resizeOptions = (ResizeOptions) invocation.getArguments()[0];
                 return resizeOptions.width <= width && resizeOptions.height <= height;
               }
@@ -235,7 +235,7 @@ public class ThumbnailBranchProducerTest {
           mThumbnailProducers[i],
           new ConsumerCallback() {
             @Override
-            public void callback(Consumer<EncodedImage> consumer) {
+            public void callback(final Consumer<EncodedImage> consumer) {
               if (image == THROW_FAILURE) {
                 consumer.onFailure(new IOException("IMAGE FAILED"));
               } else {
@@ -247,11 +247,11 @@ public class ThumbnailBranchProducerTest {
   }
 
   private static void whenProduceResultsCalledTrigger(
-      ThumbnailProducer<EncodedImage> mockProducer, final ConsumerCallback callback) {
+      final ThumbnailProducer<EncodedImage> mockProducer, final ConsumerCallback callback) {
     doAnswer(
             new Answer<Void>() {
               @Override
-              public Void answer(InvocationOnMock invocation) throws Throwable {
+              public Void answer(final InvocationOnMock invocation) throws Throwable {
                 Consumer<EncodedImage> consumer =
                     (Consumer<EncodedImage>) invocation.getArguments()[0];
                 callback.callback(consumer);

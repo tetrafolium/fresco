@@ -49,7 +49,7 @@ public class GifImage implements AnimatedImage, AnimatedImageDecoder {
    *
    * @param source the data to the image (a copy will be made)
    */
-  public static GifImage createFromByteArray(byte[] source) {
+  public static GifImage createFromByteArray(final byte[] source) {
     Preconditions.checkNotNull(source);
 
     ByteBuffer byteBuffer = ByteBuffer.allocateDirect(source.length);
@@ -65,7 +65,7 @@ public class GifImage implements AnimatedImage, AnimatedImageDecoder {
    *
    * @param byteBuffer the ByteBuffer containing the image (a copy will be made)
    */
-  public static GifImage createFromByteBuffer(ByteBuffer byteBuffer) {
+  public static GifImage createFromByteBuffer(final ByteBuffer byteBuffer) {
     return createFromByteBuffer(byteBuffer, ImageDecodeOptions.defaults());
   }
 
@@ -75,7 +75,7 @@ public class GifImage implements AnimatedImage, AnimatedImageDecoder {
    *
    * @param byteBuffer the ByteBuffer containing the image (a copy will be made)
    */
-  public static GifImage createFromByteBuffer(ByteBuffer byteBuffer, ImageDecodeOptions options) {
+  public static GifImage createFromByteBuffer(final ByteBuffer byteBuffer, final ImageDecodeOptions options) {
     ensure();
     byteBuffer.rewind();
 
@@ -84,7 +84,7 @@ public class GifImage implements AnimatedImage, AnimatedImageDecoder {
   }
 
   public static GifImage createFromNativeMemory(
-      long nativePtr, int sizeInBytes, ImageDecodeOptions options) {
+      final long nativePtr, final int sizeInBytes, final ImageDecodeOptions options) {
     ensure();
     Preconditions.checkArgument(nativePtr != 0);
     return nativeCreateFromNativeMemory(
@@ -97,7 +97,7 @@ public class GifImage implements AnimatedImage, AnimatedImageDecoder {
    *
    * @param fileDescriptor the file descriptor containing the image (a copy will be made)
    */
-  public static GifImage createFromFileDescriptor(int fileDescriptor, ImageDecodeOptions options) {
+  public static GifImage createFromFileDescriptor(final int fileDescriptor, final ImageDecodeOptions options) {
     ensure();
 
     return nativeCreateFromFileDescriptor(
@@ -106,17 +106,17 @@ public class GifImage implements AnimatedImage, AnimatedImageDecoder {
 
   @Override
   public AnimatedImage decodeFromNativeMemory(
-      long nativePtr, int sizeInBytes, ImageDecodeOptions options) {
+      final long nativePtr, final int sizeInBytes, final ImageDecodeOptions options) {
     return GifImage.createFromNativeMemory(nativePtr, sizeInBytes, options);
   }
 
   @Override
-  public AnimatedImage decodeFromByteBuffer(ByteBuffer byteBuffer, ImageDecodeOptions options) {
+  public AnimatedImage decodeFromByteBuffer(final ByteBuffer byteBuffer, final ImageDecodeOptions options) {
     return GifImage.createFromByteBuffer(byteBuffer, options);
   }
 
   @DoNotStrip
-  public GifImage() {}
+  public GifImage() { }
 
   /**
    * Constructs the image with the native pointer. This is called by native code.
@@ -124,7 +124,7 @@ public class GifImage implements AnimatedImage, AnimatedImageDecoder {
    * @param nativeContext the native pointer
    */
   @DoNotStrip
-  GifImage(long nativeContext) {
+  GifImage(final long nativeContext) {
     mNativeContext = nativeContext;
   }
 
@@ -182,7 +182,7 @@ public class GifImage implements AnimatedImage, AnimatedImageDecoder {
   }
 
   @Override
-  public GifFrame getFrame(int frameNumber) {
+  public GifFrame getFrame(final int frameNumber) {
     return nativeGetFrame(frameNumber);
   }
 
@@ -201,7 +201,7 @@ public class GifImage implements AnimatedImage, AnimatedImageDecoder {
   }
 
   @Override
-  public AnimatedDrawableFrameInfo getFrameInfo(int frameNumber) {
+  public AnimatedDrawableFrameInfo getFrameInfo(final int frameNumber) {
     GifFrame frame = getFrame(frameNumber);
     try {
       return new AnimatedDrawableFrameInfo(
@@ -217,7 +217,7 @@ public class GifImage implements AnimatedImage, AnimatedImageDecoder {
     }
   }
 
-  private static AnimatedDrawableFrameInfo.DisposalMethod fromGifDisposalMethod(int disposalMode) {
+  private static AnimatedDrawableFrameInfo.DisposalMethod fromGifDisposalMethod(final int disposalMode) {
     if (disposalMode == 0 /* DISPOSAL_UNSPECIFIED */) {
       return AnimatedDrawableFrameInfo.DisposalMethod.DISPOSE_DO_NOT;
     } else if (disposalMode == 1 /* DISPOSE_DO_NOT */) {

@@ -38,7 +38,7 @@ public class PriorityStarvingThrottlingProducer<T> implements Producer<T> {
   private int mNumCurrentRequests;
 
   public PriorityStarvingThrottlingProducer(
-      int maxSimultaneousRequests, Executor executor, final Producer<T> inputProducer) {
+      final int maxSimultaneousRequests, final Executor executor, final Producer<T> inputProducer) {
     mMaxSimultaneousRequests = maxSimultaneousRequests;
     mExecutor = Preconditions.checkNotNull(executor);
     mInputProducer = Preconditions.checkNotNull(inputProducer);
@@ -67,7 +67,7 @@ public class PriorityStarvingThrottlingProducer<T> implements Producer<T> {
     }
   }
 
-  private void produceResultsInternal(Item<T> item) {
+  private void produceResultsInternal(final Item<T> item) {
     ProducerListener2 producerListener = item.producerContext.getProducerListener();
     producerListener.onProducerFinishWithSuccess(item.producerContext, PRODUCER_NAME, null);
     mInputProducer.produceResults(new ThrottlerConsumer(item.consumer), item.producerContext);
@@ -78,7 +78,7 @@ public class PriorityStarvingThrottlingProducer<T> implements Producer<T> {
     final ProducerContext producerContext;
     final long time;
 
-    Item(Consumer<T> consumer, ProducerContext producerContext, long time) {
+    Item(final Consumer<T> consumer, final ProducerContext producerContext, final long time) {
       this.consumer = consumer;
       this.producerContext = producerContext;
       this.time = time;
@@ -87,7 +87,7 @@ public class PriorityStarvingThrottlingProducer<T> implements Producer<T> {
 
   static class PriorityComparator<T> implements Comparator<Item<T>> {
     @Override
-    public int compare(Item<T> o1, Item<T> o2) {
+    public int compare(final Item<T> o1, final Item<T> o2) {
 
       Priority p1 = o1.producerContext.getPriority();
       Priority p2 = o2.producerContext.getPriority();
@@ -109,12 +109,12 @@ public class PriorityStarvingThrottlingProducer<T> implements Producer<T> {
 
   private class ThrottlerConsumer extends DelegatingConsumer<T, T> {
 
-    private ThrottlerConsumer(Consumer<T> consumer) {
+    private ThrottlerConsumer(final Consumer<T> consumer) {
       super(consumer);
     }
 
     @Override
-    protected void onNewResultImpl(T newResult, @Status int status) {
+    protected void onNewResultImpl(final T newResult, final @Status int status) {
       getConsumer().onNewResult(newResult, status);
       if (isLast(status)) {
         onRequestFinished();
@@ -122,7 +122,7 @@ public class PriorityStarvingThrottlingProducer<T> implements Producer<T> {
     }
 
     @Override
-    protected void onFailureImpl(Throwable t) {
+    protected void onFailureImpl(final Throwable t) {
       getConsumer().onFailure(t);
       onRequestFinished();
     }

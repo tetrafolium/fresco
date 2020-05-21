@@ -44,13 +44,13 @@ public class DataSourceTestUtils {
   }
 
   public static void setState(
-      DataSource<Object> dataSource,
-      boolean isClosed,
-      boolean isFinished,
-      boolean hasResult,
-      Object value,
-      boolean hasFailed,
-      Throwable failureCause) {
+      final DataSource<Object> dataSource,
+      final boolean isClosed,
+      final boolean isFinished,
+      final boolean hasResult,
+      final Object value,
+      final boolean hasFailed,
+      final Throwable failureCause) {
     when(dataSource.isClosed()).thenReturn(isClosed);
     when(dataSource.isFinished()).thenReturn(isFinished);
     when(dataSource.hasResult()).thenReturn(hasResult);
@@ -60,13 +60,13 @@ public class DataSourceTestUtils {
   }
 
   public static <T> void verifyState(
-      DataSource<T> dataSource,
-      boolean isClosed,
-      boolean isFinished,
-      boolean hasResult,
-      T result,
-      boolean hasFailed,
-      Throwable failureCause) {
+      final DataSource<T> dataSource,
+      final boolean isClosed,
+      final boolean isFinished,
+      final boolean hasResult,
+      final T result,
+      final boolean hasFailed,
+      final Throwable failureCause) {
     assertEquals("isClosed", isClosed, dataSource.isClosed());
     assertEquals("isFinished", isFinished, dataSource.isFinished());
     assertEquals("hasResult", hasResult, dataSource.hasResult());
@@ -128,7 +128,7 @@ public class DataSourceTestUtils {
           mDataSubscriber);
     }
 
-    protected void verifyOptionals(DataSource<Object> underlyingDataSource) {
+    protected void verifyOptionals(final DataSource<Object> underlyingDataSource) {
       mInOrder.verify(underlyingDataSource, optional()).isFinished();
       mInOrder.verify(underlyingDataSource, optional()).getExtras();
       mInOrder.verify(underlyingDataSource, optional()).hasResult();
@@ -144,9 +144,9 @@ public class DataSourceTestUtils {
      * Subscriber is returned.
      */
     protected DataSubscriber<Object> verifyGetAndSubscribe(
-        Supplier<DataSource<Object>> dataSourceSupplier,
-        DataSource<Object> underlyingDataSource,
-        boolean expectMoreInteractions) {
+        final Supplier<DataSource<Object>> dataSourceSupplier,
+        final DataSource<Object> underlyingDataSource,
+        final boolean expectMoreInteractions) {
       mInOrder.verify(dataSourceSupplier).get();
       ArgumentCaptor<DataSubscriber> captor = ArgumentCaptor.forClass(DataSubscriber.class);
       mInOrder.verify(underlyingDataSource).subscribe(captor.capture(), any(Executor.class));
@@ -157,18 +157,18 @@ public class DataSourceTestUtils {
     }
 
     protected DataSubscriber<Object> verifyGetAndSubscribe(
-        Supplier<DataSource<Object>> dataSourceSupplier, DataSource<Object> underlyingDataSource) {
+        final Supplier<DataSource<Object>> dataSourceSupplier, final DataSource<Object> underlyingDataSource) {
       return verifyGetAndSubscribe(dataSourceSupplier, underlyingDataSource, false);
     }
 
     protected DataSubscriber<Object> verifyGetAndSubscribeM(
-        Supplier<DataSource<Object>> dataSourceSupplier, DataSource<Object> underlyingDataSource) {
+        final Supplier<DataSource<Object>> dataSourceSupplier, final DataSource<Object> underlyingDataSource) {
       return verifyGetAndSubscribe(dataSourceSupplier, underlyingDataSource, true);
     }
 
     /** Verifies that data source provided by our mDataSourceSupplier notified mDataSubscriber. */
     protected void verifySubscriber(
-        DataSource<Object> dataSource, DataSource<Object> underlyingDataSource, int expected) {
+        final DataSource<Object> dataSource, final DataSource<Object> underlyingDataSource, final int expected) {
       switch (expected) {
         case NO_INTERACTIONS:
           verifyNoMoreInteractionsAll();
@@ -191,14 +191,14 @@ public class DataSourceTestUtils {
 
     /** Verifies the state of the data source provided by our mDataSourceSupplier. */
     protected void verifyState(
-        DataSource<Object> dataSource,
-        @Nullable DataSource<Object> dataSourceWithResult,
-        boolean isClosed,
-        boolean isFinished,
-        boolean hasResult,
-        Object result,
-        boolean hasFailed,
-        Throwable failureCause) {
+        final DataSource<Object> dataSource,
+        final @Nullable DataSource<Object> dataSourceWithResult,
+        final boolean isClosed,
+        final boolean isFinished,
+        final boolean hasResult,
+        final Object result,
+        final boolean hasFailed,
+        final Throwable failureCause) {
       DataSourceTestUtils.verifyState(
           dataSource, isClosed, isFinished, hasResult, result, hasFailed, failureCause);
       // DataSourceTestUtils.verifyState will call dataSource.getResult() which should forward to
@@ -214,7 +214,7 @@ public class DataSourceTestUtils {
      * mDataSourceSupplier gets closed.
      */
     protected void testClose(
-        DataSource<Object> dataSource, DataSource<Object>... underlyingDataSources) {
+        final DataSource<Object> dataSource, final DataSource<Object>... underlyingDataSources) {
       dataSource.close();
       if (underlyingDataSources != null) {
         for (DataSource<Object> underlyingDataSource : underlyingDataSources) {
@@ -235,7 +235,7 @@ public class DataSourceTestUtils {
 
     /** Respond to subscriber with given data source and response. */
     protected static <T> void respond(
-        DataSubscriber<T> subscriber, DataSource<T> dataSource, int response) {
+        final DataSubscriber<T> subscriber, final DataSource<T> dataSource, final int response) {
       switch (response) {
         case NO_INTERACTIONS:
           break;
@@ -257,7 +257,7 @@ public class DataSourceTestUtils {
       doAnswer(
               new Answer() {
                 @Override
-                public Object answer(InvocationOnMock invocation) throws Throwable {
+                public Object answer(final InvocationOnMock invocation) throws Throwable {
                   DataSubscriber<T> subscriber = (DataSubscriber<T>) invocation.getArguments()[0];
                   respond(subscriber, dataSource, response);
                   return subscriber;

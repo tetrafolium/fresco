@@ -28,7 +28,7 @@ import org.robolectric.RobolectricTestRunner;
 public class DraweeMocksTest {
 
   @Before
-  public void setUp() {}
+  public void setUp() { }
 
   @Test
   public void testMockProviderOf() {

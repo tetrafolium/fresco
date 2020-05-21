@@ -30,13 +30,13 @@ public class InstrumentedDrawable extends ForwardingDrawable {
   private final Listener mListener;
   private boolean mIsChecked = false;
 
-  public InstrumentedDrawable(Drawable drawable, Listener listener) {
+  public InstrumentedDrawable(final Drawable drawable, final Listener listener) {
     super(drawable);
     mListener = listener;
     mScaleType = getScaleType(drawable);
   }
 
-  private String getScaleType(Drawable drawable) {
+  private String getScaleType(final Drawable drawable) {
     if (drawable instanceof ScaleTypeDrawable) {
       ScalingUtils.ScaleType type = ((ScaleTypeDrawable) drawable).getScaleType();
       return type.toString();
@@ -45,7 +45,7 @@ public class InstrumentedDrawable extends ForwardingDrawable {
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     if (!mIsChecked) {
       mIsChecked = true;
       RectF bounds = new RectF();

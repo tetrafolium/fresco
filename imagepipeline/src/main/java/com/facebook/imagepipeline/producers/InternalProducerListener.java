@@ -16,7 +16,7 @@ public class InternalProducerListener implements ProducerListener2 {
   private final @Nullable ProducerListener2 mProducerListener2;
 
   public InternalProducerListener(
-      ProducerListener producerListener, @Nullable ProducerListener2 producerListener2) {
+      final ProducerListener producerListener, final @Nullable ProducerListener2 producerListener2) {
     mProducerListener = producerListener;
     mProducerListener2 = producerListener2;
   }
@@ -31,7 +31,7 @@ public class InternalProducerListener implements ProducerListener2 {
   }
 
   @Override
-  public void onProducerStart(ProducerContext context, String producerName) {
+  public void onProducerStart(final ProducerContext context, final String producerName) {
     if (mProducerListener != null) {
       mProducerListener.onProducerStart(context.getId(), producerName);
     }
@@ -41,7 +41,7 @@ public class InternalProducerListener implements ProducerListener2 {
   }
 
   @Override
-  public void onProducerEvent(ProducerContext context, String producerName, String eventName) {
+  public void onProducerEvent(final ProducerContext context, final String producerName, final String eventName) {
     if (mProducerListener != null) {
       mProducerListener.onProducerEvent(context.getId(), producerName, eventName);
     }
@@ -52,7 +52,7 @@ public class InternalProducerListener implements ProducerListener2 {
 
   @Override
   public void onProducerFinishWithSuccess(
-      ProducerContext context, String producerName, @Nullable Map<String, String> extraMap) {
+      final ProducerContext context, final String producerName, final @Nullable Map<String, String> extraMap) {
     if (mProducerListener != null) {
       mProducerListener.onProducerFinishWithSuccess(context.getId(), producerName, extraMap);
     }
@@ -63,10 +63,10 @@ public class InternalProducerListener implements ProducerListener2 {
 
   @Override
   public void onProducerFinishWithFailure(
-      ProducerContext context,
-      String producerName,
-      Throwable t,
-      @Nullable Map<String, String> extraMap) {
+      final ProducerContext context,
+      final String producerName,
+      final Throwable t,
+      final @Nullable Map<String, String> extraMap) {
     if (mProducerListener != null) {
       mProducerListener.onProducerFinishWithFailure(context.getId(), producerName, t, extraMap);
     }
@@ -77,7 +77,7 @@ public class InternalProducerListener implements ProducerListener2 {
 
   @Override
   public void onProducerFinishWithCancellation(
-      ProducerContext context, String producerName, @Nullable Map<String, String> extraMap) {
+      final ProducerContext context, final String producerName, final @Nullable Map<String, String> extraMap) {
     if (mProducerListener != null) {
       mProducerListener.onProducerFinishWithCancellation(context.getId(), producerName, extraMap);
     }
@@ -88,7 +88,7 @@ public class InternalProducerListener implements ProducerListener2 {
 
   @Override
   public void onUltimateProducerReached(
-      ProducerContext context, String producerName, boolean successful) {
+      final ProducerContext context, final String producerName, final boolean successful) {
     if (mProducerListener != null) {
       mProducerListener.onUltimateProducerReached(context.getId(), producerName, successful);
     }
@@ -98,7 +98,7 @@ public class InternalProducerListener implements ProducerListener2 {
   }
 
   @Override
-  public boolean requiresExtraMap(ProducerContext context, String producerName) {
+  public boolean requiresExtraMap(final ProducerContext context, final String producerName) {
     boolean required = false;
     if (mProducerListener != null) {
       required = mProducerListener.requiresExtraMap(context.getId());

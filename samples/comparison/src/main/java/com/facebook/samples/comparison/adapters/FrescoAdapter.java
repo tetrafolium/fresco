@@ -24,13 +24,13 @@ import com.facebook.samples.comparison.instrumentation.PerfListener;
 public class FrescoAdapter extends ImageListAdapter {
 
   public FrescoAdapter(
-      Context context, PerfListener perfListener, ImagePipelineConfig imagePipelineConfig) {
+      final Context context, final PerfListener perfListener, final ImagePipelineConfig imagePipelineConfig) {
     super(context, perfListener);
     Fresco.initialize(context, imagePipelineConfig);
   }
 
   @Override
-  public FrescoHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public FrescoHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
     GenericDraweeHierarchy gdh =
         new GenericDraweeHierarchyBuilder(getContext().getResources())
             .setPlaceholderImage(Drawables.sPlaceholderDrawable)

@@ -24,7 +24,7 @@ public class SampleVolleyFactory {
   private static RequestQueue sRequestQueue;
   private static VolleyMemoryCache sMemoryCache;
 
-  public static RequestQueue getRequestQueue(Context context) {
+  public static RequestQueue getRequestQueue(final Context context) {
     if (sRequestQueue == null) {
       File cacheDir = new File(context.getCacheDir(), VOLLEY_CACHE_DIR);
       sRequestQueue =
@@ -43,7 +43,7 @@ public class SampleVolleyFactory {
     return sMemoryCache;
   }
 
-  public static ImageLoader getImageLoader(Context context) {
+  public static ImageLoader getImageLoader(final Context context) {
     if (sImageLoader == null) {
       sImageLoader = new ImageLoader(getRequestQueue(context), getMemoryCache());
     }

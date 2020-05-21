@@ -30,7 +30,7 @@ public class KeepLastFrameCache implements BitmapFrameCache {
 
   @Nullable
   @Override
-  public synchronized CloseableReference<Bitmap> getCachedFrame(int frameNumber) {
+  public synchronized CloseableReference<Bitmap> getCachedFrame(final int frameNumber) {
     if (mLastFrameNumber == frameNumber) {
       return CloseableReference.cloneOrNull(mLastBitmapReference);
     }
@@ -39,13 +39,13 @@ public class KeepLastFrameCache implements BitmapFrameCache {
 
   @Nullable
   @Override
-  public synchronized CloseableReference<Bitmap> getFallbackFrame(int frameNumber) {
+  public synchronized CloseableReference<Bitmap> getFallbackFrame(final int frameNumber) {
     return CloseableReference.cloneOrNull(mLastBitmapReference);
   }
 
   @Override
   public synchronized CloseableReference<Bitmap> getBitmapToReuseForFrame(
-      int frameNumber, int width, int height) {
+      final int frameNumber, final int width, final int height) {
     try {
       return CloseableReference.cloneOrNull(mLastBitmapReference);
     } finally {
@@ -54,7 +54,7 @@ public class KeepLastFrameCache implements BitmapFrameCache {
   }
 
   @Override
-  public synchronized boolean contains(int frameNumber) {
+  public synchronized boolean contains(final int frameNumber) {
     return frameNumber == mLastFrameNumber && CloseableReference.isValid(mLastBitmapReference);
   }
 
@@ -70,9 +70,9 @@ public class KeepLastFrameCache implements BitmapFrameCache {
 
   @Override
   public synchronized void onFrameRendered(
-      int frameNumber,
-      CloseableReference<Bitmap> bitmapReference,
-      @BitmapAnimationBackend.FrameType int frameType) {
+      final int frameNumber,
+      final CloseableReference<Bitmap> bitmapReference,
+      final @BitmapAnimationBackend.FrameType int frameType) {
     if (bitmapReference != null
         && mLastBitmapReference != null
         && bitmapReference.get().equals(mLastBitmapReference.get())) {
@@ -91,12 +91,12 @@ public class KeepLastFrameCache implements BitmapFrameCache {
 
   @Override
   public void onFramePrepared(
-      int frameNumber,
-      CloseableReference<Bitmap> bitmapReference,
-      @BitmapAnimationBackend.FrameType int frameType) {}
+      final int frameNumber,
+      final CloseableReference<Bitmap> bitmapReference,
+      final @BitmapAnimationBackend.FrameType int frameType) { }
 
   @Override
-  public void setFrameCacheListener(FrameCacheListener frameCacheListener) {
+  public void setFrameCacheListener(final FrameCacheListener frameCacheListener) {
     mFrameCacheListener = frameCacheListener;
   }
 

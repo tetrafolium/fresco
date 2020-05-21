@@ -118,7 +118,7 @@ public class ResizeAndRotateProducerTest {
         .thenAnswer(
             new Answer<Long>() {
               @Override
-              public Long answer(InvocationOnMock invocation) throws Throwable {
+              public Long answer(final InvocationOnMock invocation) throws Throwable {
                 return mFakeClockForWorker.now();
               }
             });
@@ -132,7 +132,7 @@ public class ResizeAndRotateProducerTest {
         .thenAnswer(
             new Answer<Object>() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 return mTestScheduledExecutorService.schedule(
                     (Runnable) invocation.getArguments()[0],
                     (long) invocation.getArguments()[1],
@@ -157,7 +157,7 @@ public class ResizeAndRotateProducerTest {
     doAnswer(
             new Answer() {
               @Override
-              public Object answer(InvocationOnMock invocation) throws Throwable {
+              public Object answer(final InvocationOnMock invocation) throws Throwable {
                 mResizeAndRotateProducerConsumer =
                     (Consumer<EncodedImage>) invocation.getArguments()[0];
                 return null;
@@ -299,7 +299,7 @@ public class ResizeAndRotateProducerTest {
     testNewResultContainsRotationAngleForImageFormat(DefaultImageFormats.WEBP_SIMPLE);
   }
 
-  private void testNewResultContainsRotationAngleForImageFormat(ImageFormat imageFormat) {
+  private void testNewResultContainsRotationAngleForImageFormat(final ImageFormat imageFormat) {
     int rotationAngle = 90;
     whenRequestSpecificRotation(rotationAngle);
     provideFinalResult(imageFormat, 10, 10, 0, ExifInterface.ORIENTATION_UNDEFINED);
@@ -309,7 +309,7 @@ public class ResizeAndRotateProducerTest {
     verifyZeroJpegTranscoderExifOrientationInteractions();
   }
 
-  private void assertAngleOnNewResult(int expectedRotationAngle) {
+  private void assertAngleOnNewResult(final int expectedRotationAngle) {
     ArgumentCaptor<EncodedImage> captor = ArgumentCaptor.forClass(EncodedImage.class);
     verify(mConsumer).onNewResult(captor.capture(), eq(Consumer.IS_LAST));
     assertEquals(expectedRotationAngle, captor.getValue().getRotationAngle());
@@ -478,7 +478,7 @@ public class ResizeAndRotateProducerTest {
   }
 
   private void testDoesComputeRightNumerator(
-      int rotationAngle, int exifOrientation, int numerator) {
+      final int rotationAngle, final int exifOrientation, final int numerator) {
     whenResizingEnabled();
     whenRequestWidthAndHeight(50, 100);
     whenRequestsRotationFromMetadataWithoutDeferring();
@@ -509,7 +509,7 @@ public class ResizeAndRotateProducerTest {
   }
 
   private void testDoesComputeRightNumeratorInvertedOrientation(
-      int exifOrientation, int numerator) {
+      final int exifOrientation, final int numerator) {
     whenResizingEnabled();
     whenRequestWidthAndHeight(50, 100);
     whenRequestsRotationFromMetadataWithoutDeferring();
@@ -620,7 +620,7 @@ public class ResizeAndRotateProducerTest {
     verify(mConsumer).onNewResult(any(EncodedImage.class), eq(Consumer.IS_LAST));
   }
 
-  private static void verifyJpegTranscoderInteractions(int numerator, int rotationAngle) {
+  private static void verifyJpegTranscoderInteractions(final int numerator, final int rotationAngle) {
     PowerMockito.verifyStatic(NativeJpegTranscoder.class);
     try {
       NativeJpegTranscoder.transcodeJpeg(
@@ -635,7 +635,7 @@ public class ResizeAndRotateProducerTest {
   }
 
   private static void verifyJpegTranscoderExifOrientationInteractions(
-      int numerator, int exifOrientation) {
+      final int numerator, final int exifOrientation) {
     PowerMockito.verifyStatic(NativeJpegTranscoder.class);
     try {
       NativeJpegTranscoder.transcodeJpegWithExifOrientation(
@@ -669,24 +669,24 @@ public class ResizeAndRotateProducerTest {
     }
   }
 
-  private void provideIntermediateResult(ImageFormat imageFormat) {
+  private void provideIntermediateResult(final ImageFormat imageFormat) {
     provideIntermediateResult(imageFormat, 800, 800, 0, ExifInterface.ORIENTATION_UNDEFINED);
   }
 
   private void provideIntermediateResult(
-      ImageFormat imageFormat, int width, int height, int rotationAngle, int exifOrientation) {
+      final ImageFormat imageFormat, final int width, final int height, final int rotationAngle, final int exifOrientation) {
     mIntermediateEncodedImage =
         buildEncodedImage(
             mIntermediateResult, imageFormat, width, height, rotationAngle, exifOrientation);
     mResizeAndRotateProducerConsumer.onNewResult(mIntermediateEncodedImage, Consumer.NO_FLAGS);
   }
 
-  private void provideFinalResult(ImageFormat imageFormat) {
+  private void provideFinalResult(final ImageFormat imageFormat) {
     provideFinalResult(imageFormat, 800, 800, 0, ExifInterface.ORIENTATION_UNDEFINED);
   }
 
   private void provideFinalResult(
-      ImageFormat imageFormat, int width, int height, int rotationAngle, int exifOrientation) {
+      final ImageFormat imageFormat, final int width, final int height, final int rotationAngle, final int exifOrientation) {
     mFinalEncodedImage =
         buildEncodedImage(mFinalResult, imageFormat, width, height, rotationAngle, exifOrientation);
     mResizeAndRotateProducerConsumer.onNewResult(mFinalEncodedImage, Consumer.IS_LAST);
@@ -695,12 +695,12 @@ public class ResizeAndRotateProducerTest {
   }
 
   private static EncodedImage buildEncodedImage(
-      CloseableReference<PooledByteBuffer> pooledByteBufferRef,
-      ImageFormat imageFormat,
-      int width,
-      int height,
-      int rotationAngle,
-      int exifOrientation) {
+      final CloseableReference<PooledByteBuffer> pooledByteBufferRef,
+      final ImageFormat imageFormat,
+      final int width,
+      final int height,
+      final int rotationAngle,
+      final int exifOrientation) {
     EncodedImage encodedImage = new EncodedImage(pooledByteBufferRef);
     encodedImage.setImageFormat(imageFormat);
     encodedImage.setRotationAngle(rotationAngle);
@@ -718,7 +718,7 @@ public class ResizeAndRotateProducerTest {
     whenResizingEnabledIs(false);
   }
 
-  private void whenResizingEnabledIs(boolean resizingEnabled) {
+  private void whenResizingEnabledIs(final boolean resizingEnabled) {
     NativeJpegTranscoder nativeJpegTranscoder =
         new NativeJpegTranscoder(resizingEnabled, MAX_BITMAP_SIZE, false, false);
     NativeJpegTranscoderFactory jpegTranscoderFactory = mock(NativeJpegTranscoderFactory.class);
@@ -736,7 +736,7 @@ public class ResizeAndRotateProducerTest {
     mResizeAndRotateProducer.produceResults(mConsumer, mProducerContext);
   }
 
-  private void whenRequestWidthAndHeight(int preferredWidth, int preferredHeight) {
+  private void whenRequestWidthAndHeight(final int preferredWidth, final int preferredHeight) {
     when(mImageRequest.getPreferredWidth()).thenReturn(preferredWidth);
     when(mImageRequest.getPreferredHeight()).thenReturn(preferredHeight);
     ResizeOptions resizeOptions = null;
@@ -746,7 +746,7 @@ public class ResizeAndRotateProducerTest {
     when(mImageRequest.getResizeOptions()).thenReturn(resizeOptions);
   }
 
-  private void whenRequestSpecificRotation(@RotationOptions.RotationAngle int rotationAngle) {
+  private void whenRequestSpecificRotation(final @RotationOptions.RotationAngle int rotationAngle) {
     when(mImageRequest.getRotationOptions())
         .thenReturn(RotationOptions.forceRotation(rotationAngle));
   }

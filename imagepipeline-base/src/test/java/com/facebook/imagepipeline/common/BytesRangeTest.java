@@ -62,13 +62,13 @@ public class BytesRangeTest {
   }
 
   private static void assertValidFromContentRangeHeader(
-      String header, int expectedFrom, int expectedEnd) {
+      final String header, final int expectedFrom, final int expectedEnd) {
     final BytesRange bytesRange = BytesRange.fromContentRangeHeader(header);
     assertThat(bytesRange.from).isEqualTo(expectedFrom);
     assertThat(bytesRange.to).isEqualTo(expectedEnd);
   }
 
-  private static void assertInvalidFromContentRangeHeader(String header) {
+  private static void assertInvalidFromContentRangeHeader(final String header) {
     try {
       BytesRange.fromContentRangeHeader(header);
       failBecauseExceptionWasNotThrown(IllegalArgumentException.class);

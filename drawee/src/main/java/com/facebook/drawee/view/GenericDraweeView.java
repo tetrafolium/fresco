@@ -25,33 +25,33 @@ import javax.annotation.Nullable;
  */
 public class GenericDraweeView extends DraweeView<GenericDraweeHierarchy> {
 
-  public GenericDraweeView(Context context, GenericDraweeHierarchy hierarchy) {
+  public GenericDraweeView(final Context context, final GenericDraweeHierarchy hierarchy) {
     super(context);
     setHierarchy(hierarchy);
   }
 
-  public GenericDraweeView(Context context) {
+  public GenericDraweeView(final Context context) {
     super(context);
     inflateHierarchy(context, null);
   }
 
-  public GenericDraweeView(Context context, AttributeSet attrs) {
+  public GenericDraweeView(final Context context, final AttributeSet attrs) {
     super(context, attrs);
     inflateHierarchy(context, attrs);
   }
 
-  public GenericDraweeView(Context context, AttributeSet attrs, int defStyle) {
+  public GenericDraweeView(final Context context, final AttributeSet attrs, final int defStyle) {
     super(context, attrs, defStyle);
     inflateHierarchy(context, attrs);
   }
 
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  public GenericDraweeView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+  public GenericDraweeView(final Context context, final AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
     super(context, attrs, defStyleAttr, defStyleRes);
     inflateHierarchy(context, attrs);
   }
 
-  protected void inflateHierarchy(Context context, @Nullable AttributeSet attrs) {
+  protected void inflateHierarchy(final Context context, final @Nullable AttributeSet attrs) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("GenericDraweeView#inflateHierarchy");
     }

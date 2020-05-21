@@ -25,19 +25,19 @@ public class DefaultDrawableFactory implements DrawableFactory {
   private final @Nullable DrawableFactory mAnimatedDrawableFactory;
 
   public DefaultDrawableFactory(
-      Resources resources, @Nullable DrawableFactory animatedDrawableFactory) {
+      final Resources resources, final @Nullable DrawableFactory animatedDrawableFactory) {
     mResources = resources;
     mAnimatedDrawableFactory = animatedDrawableFactory;
   }
 
   @Override
-  public boolean supportsImageType(CloseableImage image) {
+  public boolean supportsImageType(final CloseableImage image) {
     return true;
   }
 
   @Override
   @Nullable
-  public Drawable createDrawable(CloseableImage closeableImage) {
+  public Drawable createDrawable(final CloseableImage closeableImage) {
     try {
       if (FrescoSystrace.isTracing()) {
         FrescoSystrace.beginSection("DefaultDrawableFactory#createDrawable");
@@ -70,14 +70,14 @@ public class DefaultDrawableFactory implements DrawableFactory {
 
   /* Returns true if there is anything to rotate using the rotation angle */
   private static boolean hasTransformableRotationAngle(
-      CloseableStaticBitmap closeableStaticBitmap) {
+      final CloseableStaticBitmap closeableStaticBitmap) {
     return closeableStaticBitmap.getRotationAngle() != 0
         && closeableStaticBitmap.getRotationAngle() != EncodedImage.UNKNOWN_ROTATION_ANGLE;
   }
 
   /* Returns true if there is anything to rotate using the EXIF orientation */
   private static boolean hasTransformableExifOrientation(
-      CloseableStaticBitmap closeableStaticBitmap) {
+      final CloseableStaticBitmap closeableStaticBitmap) {
     return closeableStaticBitmap.getExifOrientation() != ExifInterface.ORIENTATION_NORMAL
         && closeableStaticBitmap.getExifOrientation() != ExifInterface.ORIENTATION_UNDEFINED;
   }

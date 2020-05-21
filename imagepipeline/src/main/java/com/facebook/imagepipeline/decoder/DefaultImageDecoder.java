@@ -49,10 +49,10 @@ public class DefaultImageDecoder implements ImageDecoder {
       new ImageDecoder() {
         @Override
         public CloseableImage decode(
-            EncodedImage encodedImage,
-            int length,
-            QualityInfo qualityInfo,
-            ImageDecodeOptions options) {
+            final EncodedImage encodedImage,
+            final int length,
+            final QualityInfo qualityInfo,
+            final ImageDecodeOptions options) {
           ImageFormat imageFormat = encodedImage.getImageFormat();
           if (imageFormat == DefaultImageFormats.JPEG) {
             return decodeJpeg(encodedImage, length, qualityInfo, options);
@@ -80,7 +80,7 @@ public class DefaultImageDecoder implements ImageDecoder {
       final ImageDecoder animatedGifDecoder,
       final ImageDecoder animatedWebPDecoder,
       final PlatformDecoder platformDecoder,
-      @Nullable Map<ImageFormat, ImageDecoder> customDecoders) {
+      final @Nullable Map<ImageFormat, ImageDecoder> customDecoders) {
     mAnimatedGifDecoder = animatedGifDecoder;
     mAnimatedWebPDecoder = animatedWebPDecoder;
     mPlatformDecoder = platformDecoder;
@@ -146,7 +146,7 @@ public class DefaultImageDecoder implements ImageDecoder {
    * @return a CloseableStaticBitmap
    */
   public CloseableStaticBitmap decodeStaticImage(
-      final EncodedImage encodedImage, ImageDecodeOptions options) {
+      final EncodedImage encodedImage, final ImageDecodeOptions options) {
     CloseableReference<Bitmap> bitmapReference =
         mPlatformDecoder.decodeFromEncodedImageWithColorSpace(
             encodedImage, options.bitmapConfig, null, options.colorSpace);
@@ -172,9 +172,9 @@ public class DefaultImageDecoder implements ImageDecoder {
    */
   public CloseableStaticBitmap decodeJpeg(
       final EncodedImage encodedImage,
-      int length,
-      QualityInfo qualityInfo,
-      ImageDecodeOptions options) {
+      final int length,
+      final QualityInfo qualityInfo,
+      final ImageDecodeOptions options) {
     CloseableReference<Bitmap> bitmapReference =
         mPlatformDecoder.decodeJPEGFromEncodedImageWithColorSpace(
             encodedImage, options.bitmapConfig, null, length, options.colorSpace);
@@ -208,7 +208,7 @@ public class DefaultImageDecoder implements ImageDecoder {
   }
 
   private void maybeApplyTransformation(
-      @Nullable BitmapTransformation transformation, CloseableReference<Bitmap> bitmapReference) {
+      final @Nullable BitmapTransformation transformation, final CloseableReference<Bitmap> bitmapReference) {
     if (transformation == null) {
       return;
     }

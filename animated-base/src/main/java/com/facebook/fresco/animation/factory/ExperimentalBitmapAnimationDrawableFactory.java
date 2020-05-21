@@ -59,14 +59,14 @@ public class ExperimentalBitmapAnimationDrawableFactory implements DrawableFacto
   private final Supplier<Integer> mNumberOfFramesToPrepareSupplier;
 
   public ExperimentalBitmapAnimationDrawableFactory(
-      AnimatedDrawableBackendProvider animatedDrawableBackendProvider,
-      ScheduledExecutorService scheduledExecutorServiceForUiThread,
-      ExecutorService executorServiceForFramePreparing,
-      MonotonicClock monotonicClock,
-      PlatformBitmapFactory platformBitmapFactory,
-      CountingMemoryCache<CacheKey, CloseableImage> backingCache,
-      Supplier<Integer> cachingStrategySupplier,
-      Supplier<Integer> numberOfFramesToPrepareSupplier) {
+      final AnimatedDrawableBackendProvider animatedDrawableBackendProvider,
+      final ScheduledExecutorService scheduledExecutorServiceForUiThread,
+      final ExecutorService executorServiceForFramePreparing,
+      final MonotonicClock monotonicClock,
+      final PlatformBitmapFactory platformBitmapFactory,
+      final CountingMemoryCache<CacheKey, CloseableImage> backingCache,
+      final Supplier<Integer> cachingStrategySupplier,
+      final Supplier<Integer> numberOfFramesToPrepareSupplier) {
     mAnimatedDrawableBackendProvider = animatedDrawableBackendProvider;
     mScheduledExecutorServiceForUiThread = scheduledExecutorServiceForUiThread;
     mExecutorServiceForFramePreparing = executorServiceForFramePreparing;
@@ -78,17 +78,17 @@ public class ExperimentalBitmapAnimationDrawableFactory implements DrawableFacto
   }
 
   @Override
-  public boolean supportsImageType(CloseableImage image) {
+  public boolean supportsImageType(final CloseableImage image) {
     return image instanceof CloseableAnimatedImage;
   }
 
   @Override
-  public AnimatedDrawable2 createDrawable(CloseableImage image) {
+  public AnimatedDrawable2 createDrawable(final CloseableImage image) {
     return new AnimatedDrawable2(
         createAnimationBackend(((CloseableAnimatedImage) image).getImageResult()));
   }
 
-  private AnimationBackend createAnimationBackend(AnimatedImageResult animatedImageResult) {
+  private AnimationBackend createAnimationBackend(final AnimatedImageResult animatedImageResult) {
     AnimatedDrawableBackend animatedDrawableBackend =
         createAnimatedDrawableBackend(animatedImageResult);
 
@@ -118,7 +118,7 @@ public class ExperimentalBitmapAnimationDrawableFactory implements DrawableFacto
         bitmapAnimationBackend, mMonotonicClock, mScheduledExecutorServiceForUiThread);
   }
 
-  private BitmapFramePreparer createBitmapFramePreparer(BitmapFrameRenderer bitmapFrameRenderer) {
+  private BitmapFramePreparer createBitmapFramePreparer(final BitmapFrameRenderer bitmapFrameRenderer) {
     return new DefaultBitmapFramePreparer(
         mPlatformBitmapFactory,
         bitmapFrameRenderer,
@@ -127,13 +127,13 @@ public class ExperimentalBitmapAnimationDrawableFactory implements DrawableFacto
   }
 
   private AnimatedDrawableBackend createAnimatedDrawableBackend(
-      AnimatedImageResult animatedImageResult) {
+      final AnimatedImageResult animatedImageResult) {
     AnimatedImage animatedImage = animatedImageResult.getImage();
     Rect initialBounds = new Rect(0, 0, animatedImage.getWidth(), animatedImage.getHeight());
     return mAnimatedDrawableBackendProvider.get(animatedImageResult, initialBounds);
   }
 
-  private BitmapFrameCache createBitmapFrameCache(AnimatedImageResult animatedImageResult) {
+  private BitmapFrameCache createBitmapFrameCache(final AnimatedImageResult animatedImageResult) {
     switch (mCachingStrategySupplier.get()) {
       case CACHING_STRATEGY_FRESCO_CACHE:
         return new FrescoFrameCache(createAnimatedFrameCache(animatedImageResult), true);

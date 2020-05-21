@@ -25,7 +25,7 @@ public abstract class BaseViewHolder<V extends View & Instrumented>
   protected final V mImageView;
   private Context mContext;
 
-  public BaseViewHolder(Context context, View parentView, V imageView, PerfListener perfListener) {
+  public BaseViewHolder(final Context context, final View parentView, final V imageView, final PerfListener perfListener) {
     super(imageView);
     this.mContext = context;
     this.mPerfListener = perfListener;
@@ -37,7 +37,7 @@ public abstract class BaseViewHolder<V extends View & Instrumented>
     }
   }
 
-  public void bind(String model) {
+  public void bind(final String model) {
     mImageView.initInstrumentation(model.toString(), mPerfListener);
     onBind(model);
   }
@@ -49,7 +49,7 @@ public abstract class BaseViewHolder<V extends View & Instrumented>
     return mContext;
   }
 
-  private void updateViewLayoutParams(View view, int width, int height) {
+  private void updateViewLayoutParams(final View view, final int width, final int height) {
     ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
     if (layoutParams == null || layoutParams.height != width || layoutParams.width != height) {
       layoutParams = new AbsListView.LayoutParams(width, height);
@@ -57,7 +57,7 @@ public abstract class BaseViewHolder<V extends View & Instrumented>
     }
   }
 
-  private int calcDesiredSize(int parentWidth, int parentHeight) {
+  private int calcDesiredSize(final int parentWidth, final int parentHeight) {
     return MainActivity.calcDesiredSize(mContext, parentWidth, parentHeight);
   }
 }

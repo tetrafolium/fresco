@@ -22,7 +22,7 @@ public class NullProducer<T> implements Producer<T> {
    * @param consumer
    * @param context
    */
-  public void produceResults(Consumer<T> consumer, ProducerContext context) {
+  public void produceResults(final Consumer<T> consumer, final ProducerContext context) {
     consumer.onNewResult((T) null, Consumer.IS_LAST);
   }
 }

@@ -20,7 +20,7 @@ import com.facebook.samples.comparison.configs.ConfigConstants;
 @GlideModule
 public class SampleGlideModule extends AppGlideModule {
   @Override
-  public void applyOptions(final Context context, GlideBuilder builder) {
+  public void applyOptions(final Context context, final GlideBuilder builder) {
     builder.setDiskCache(
         new DiskCache.Factory() {
           @Override

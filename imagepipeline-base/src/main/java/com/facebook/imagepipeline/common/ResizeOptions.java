@@ -36,7 +36,7 @@ public class ResizeOptions {
   public final float roundUpFraction;
 
   /** @return new ResizeOptions, if the width and height values are valid, and null otherwise */
-  public @Nullable static ResizeOptions forDimensions(int width, int height) {
+  public @Nullable static ResizeOptions forDimensions(final int width, final int height) {
     if (width <= 0 || height <= 0) {
       return null;
     }
@@ -44,22 +44,22 @@ public class ResizeOptions {
   }
 
   /** @return new ResizeOptions, if the width and height values are valid, and null otherwise */
-  public @Nullable static ResizeOptions forSquareSize(int size) {
+  public @Nullable static ResizeOptions forSquareSize(final int size) {
     if (size <= 0) {
       return null;
     }
     return new ResizeOptions(size, size);
   }
 
-  public ResizeOptions(int width, int height) {
+  public ResizeOptions(final int width, final int height) {
     this(width, height, BitmapUtil.MAX_BITMAP_SIZE);
   }
 
-  public ResizeOptions(int width, int height, float maxBitmapSize) {
+  public ResizeOptions(final int width, final int height, final float maxBitmapSize) {
     this(width, height, maxBitmapSize, DEFAULT_ROUNDUP_FRACTION);
   }
 
-  public ResizeOptions(int width, int height, float maxBitmapSize, float roundUpFraction) {
+  public ResizeOptions(final int width, final int height, final float maxBitmapSize, final float roundUpFraction) {
     Preconditions.checkArgument(width > 0);
     Preconditions.checkArgument(height > 0);
     this.width = width;
@@ -74,7 +74,7 @@ public class ResizeOptions {
   }
 
   @Override
-  public boolean equals(Object other) {
+  public boolean equals(final Object other) {
     if (other == this) {
       return true;
     }

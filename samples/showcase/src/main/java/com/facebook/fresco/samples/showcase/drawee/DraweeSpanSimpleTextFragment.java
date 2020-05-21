@@ -41,12 +41,12 @@ public class DraweeSpanSimpleTextFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_drawee_span_simple, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     mInlineImageUri = sampleUris().createSampleUri(ImageUriProvider.ImageSize.M);
     mInlineAnimatedImageUri = sampleUris().createGifUriWithPause(ImageUriProvider.ImageSize.M);
 
@@ -58,7 +58,7 @@ public class DraweeSpanSimpleTextFragment extends BaseShowcaseFragment {
     scaleType.setOnItemSelectedListener(
         new AdapterView.OnItemSelectedListener() {
           @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
             final SimpleScaleTypeAdapter.Entry spinnerEntry =
                 (SimpleScaleTypeAdapter.Entry) scaleTypeAdapter.getItem(position);
             mScaleType = spinnerEntry.scaleType;
@@ -66,7 +66,7 @@ public class DraweeSpanSimpleTextFragment extends BaseShowcaseFragment {
           }
 
           @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
+          public void onNothingSelected(final AdapterView<?> parent) { }
         });
 
     updateText();

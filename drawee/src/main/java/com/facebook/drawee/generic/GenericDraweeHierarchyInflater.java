@@ -62,7 +62,7 @@ public class GenericDraweeHierarchyInflater {
 
   /** Inflates a new hierarchy from XML. */
   public static GenericDraweeHierarchy inflateHierarchy(
-      Context context, @Nullable AttributeSet attrs) {
+      final Context context, final @Nullable AttributeSet attrs) {
     return inflateBuilder(context, attrs).build();
   }
 
@@ -71,7 +71,7 @@ public class GenericDraweeHierarchyInflater {
    * override XML attributes if necessary.
    */
   public static GenericDraweeHierarchyBuilder inflateBuilder(
-      Context context, @Nullable AttributeSet attrs) {
+      final Context context, final @Nullable AttributeSet attrs) {
     if (FrescoSystrace.isTracing()) {
       FrescoSystrace.beginSection("GenericDraweeHierarchyBuilder#inflateBuilder");
     }
@@ -96,7 +96,7 @@ public class GenericDraweeHierarchyInflater {
    * @return the modified instance of the same builder
    */
   public static GenericDraweeHierarchyBuilder updateBuilder(
-      GenericDraweeHierarchyBuilder builder, Context context, @Nullable AttributeSet attrs) {
+      final GenericDraweeHierarchyBuilder builder, final Context context, final @Nullable AttributeSet attrs) {
     // these paramters cannot be applied immediately so we store them first
     int progressBarAutoRotateInterval = 0;
     int roundedCornerRadius = 0;
@@ -246,7 +246,7 @@ public class GenericDraweeHierarchyInflater {
   }
 
   @ReturnsOwnership
-  private static RoundingParams getRoundingParams(GenericDraweeHierarchyBuilder builder) {
+  private static RoundingParams getRoundingParams(final GenericDraweeHierarchyBuilder builder) {
     if (builder.getRoundingParams() == null) {
       builder.setRoundingParams(new RoundingParams());
     }
@@ -254,7 +254,7 @@ public class GenericDraweeHierarchyInflater {
   }
 
   @Nullable
-  private static Drawable getDrawable(Context context, TypedArray gdhAttrs, int attrId) {
+  private static Drawable getDrawable(final Context context, final TypedArray gdhAttrs, final int attrId) {
     int resourceId = gdhAttrs.getResourceId(attrId, 0);
     return (resourceId == 0) ? null : context.getResources().getDrawable(resourceId);
   }
@@ -264,7 +264,7 @@ public class GenericDraweeHierarchyInflater {
    * Important: these values need to be in sync with GenericDraweeHierarchy styleable attributes.
    */
   @Nullable
-  private static ScaleType getScaleTypeFromXml(TypedArray gdhAttrs, int attrId) {
+  private static ScaleType getScaleTypeFromXml(final TypedArray gdhAttrs, final int attrId) {
     switch (gdhAttrs.getInt(attrId, -2)) {
       case -1: // none
         return null;

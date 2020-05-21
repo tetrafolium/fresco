@@ -112,12 +112,12 @@ public class SwallowResultProducerTest {
   private static class ProduceResultsNewResultAnswer implements Answer<Void> {
     private final List<CloseableReference<CloseableImage>> mResults;
 
-    private ProduceResultsNewResultAnswer(List<CloseableReference<CloseableImage>> results) {
+    private ProduceResultsNewResultAnswer(final List<CloseableReference<CloseableImage>> results) {
       mResults = results;
     }
 
     @Override
-    public Void answer(InvocationOnMock invocation) throws Throwable {
+    public Void answer(final InvocationOnMock invocation) throws Throwable {
       Consumer consumer = (Consumer) invocation.getArguments()[0];
       Iterator<CloseableReference<CloseableImage>> iterator = mResults.iterator();
       while (iterator.hasNext()) {
@@ -130,7 +130,7 @@ public class SwallowResultProducerTest {
 
   private class ProduceResultsFailureAnswer implements Answer<Void> {
     @Override
-    public Void answer(InvocationOnMock invocation) throws Throwable {
+    public Void answer(final InvocationOnMock invocation) throws Throwable {
       Consumer consumer = (Consumer) invocation.getArguments()[0];
       consumer.onFailure(mException);
       return null;
@@ -139,7 +139,7 @@ public class SwallowResultProducerTest {
 
   private class ProduceResultsCancellationAnswer implements Answer<Void> {
     @Override
-    public Void answer(InvocationOnMock invocation) throws Throwable {
+    public Void answer(final InvocationOnMock invocation) throws Throwable {
       Consumer consumer = (Consumer) invocation.getArguments()[0];
       consumer.onCancellation();
       return null;

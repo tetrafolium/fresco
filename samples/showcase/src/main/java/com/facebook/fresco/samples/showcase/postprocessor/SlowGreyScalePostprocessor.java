@@ -16,7 +16,7 @@ import com.facebook.imagepipeline.request.BasePostprocessor;
  */
 public class SlowGreyScalePostprocessor extends BasePostprocessor {
 
-  static int getGreyColor(int color) {
+  static int getGreyColor(final int color) {
     final int r = (color >> 16) & 0xFF;
     final int g = (color >> 8) & 0xFF;
     final int b = color & 0xFF;
@@ -28,7 +28,7 @@ public class SlowGreyScalePostprocessor extends BasePostprocessor {
   }
 
   @Override
-  public void process(Bitmap bitmap) {
+  public void process(final Bitmap bitmap) {
     final int w = bitmap.getWidth();
     final int h = bitmap.getHeight();
 

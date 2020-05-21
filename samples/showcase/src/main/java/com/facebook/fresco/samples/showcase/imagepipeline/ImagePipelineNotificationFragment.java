@@ -45,12 +45,12 @@ public class ImagePipelineNotificationFragment extends BaseShowcaseFragment {
   @Nullable
   @Override
   public View onCreateView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      final LayoutInflater inflater, final @Nullable ViewGroup container, final @Nullable Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_imagepipeline_notification, container, false);
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  public void onViewCreated(final View view, final @Nullable Bundle savedInstanceState) {
     if (Build.VERSION.SDK_INT >= 26) {
       // newer versions of android require the creation of notification channels to show
       // notifications to the user.
@@ -61,7 +61,7 @@ public class ImagePipelineNotificationFragment extends BaseShowcaseFragment {
     button.setOnClickListener(
         new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(final View v) {
             createNotification();
           }
         });
@@ -93,12 +93,12 @@ public class ImagePipelineNotificationFragment extends BaseShowcaseFragment {
         new BaseBitmapDataSubscriber() {
 
           @Override
-          protected void onNewResultImpl(Bitmap bitmap) {
+          protected void onNewResultImpl(final Bitmap bitmap) {
             displayNotification(bitmap);
           }
 
           @Override
-          protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
+          protected void onFailureImpl(final DataSource<CloseableReference<CloseableImage>> dataSource) {
             showToastText("Failed to fetch image directly: " + dataSource.getFailureCause());
 
             // In general, failing to fetch the image should not keep us from displaying the
@@ -109,7 +109,7 @@ public class ImagePipelineNotificationFragment extends BaseShowcaseFragment {
         UiThreadImmediateExecutorService.getInstance());
   }
 
-  private void displayNotification(@Nullable Bitmap bitmap) {
+  private void displayNotification(final @Nullable Bitmap bitmap) {
     final Notification notification;
     if (Build.VERSION.SDK_INT >= 26) {
       notification =
@@ -135,7 +135,7 @@ public class ImagePipelineNotificationFragment extends BaseShowcaseFragment {
     notificationManager.notify(NOTIFICATION_ID, notification);
   }
 
-  private void showToastText(String text) {
+  private void showToastText(final String text) {
     Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
   }
 

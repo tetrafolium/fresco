@@ -32,9 +32,9 @@ public class HoneycombBitmapFactory extends PlatformBitmapFactory {
   private boolean mImmutableBitmapFallback;
 
   public HoneycombBitmapFactory(
-      EmptyJpegGenerator jpegGenerator,
-      PlatformDecoder purgeableDecoder,
-      CloseableReferenceFactory closeableReferenceFactory) {
+      final EmptyJpegGenerator jpegGenerator,
+      final PlatformDecoder purgeableDecoder,
+      final CloseableReferenceFactory closeableReferenceFactory) {
     mJpegGenerator = jpegGenerator;
     mPurgeableDecoder = purgeableDecoder;
     mCloseableReferenceFactory = closeableReferenceFactory;
@@ -54,7 +54,7 @@ public class HoneycombBitmapFactory extends PlatformBitmapFactory {
   @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
   @Override
   public CloseableReference<Bitmap> createBitmapInternal(
-      int width, int height, Bitmap.Config bitmapConfig) {
+      final int width, final int height, final Bitmap.Config bitmapConfig) {
     if (mImmutableBitmapFallback) {
       return createFallbackBitmap(width, height, bitmapConfig);
     }
@@ -87,7 +87,7 @@ public class HoneycombBitmapFactory extends PlatformBitmapFactory {
   }
 
   private CloseableReference<Bitmap> createFallbackBitmap(
-      int width, int height, Bitmap.Config bitmapConfig) {
+      final int width, final int height, final Bitmap.Config bitmapConfig) {
     return mCloseableReferenceFactory.create(
         Bitmap.createBitmap(width, height, bitmapConfig), SimpleBitmapReleaser.getInstance());
   }

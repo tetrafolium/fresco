@@ -28,7 +28,7 @@ public final class SettableDataSource<T> extends AbstractDataSource<CloseableRef
     return new SettableDataSource<V>();
   }
 
-  private SettableDataSource() {}
+  private SettableDataSource() { }
 
   /**
    * Sets the value of this data source.
@@ -42,7 +42,7 @@ public final class SettableDataSource<T> extends AbstractDataSource<CloseableRef
    * @param valueRef closeable reference to the value the data source should hold.
    * @return true if the value was successfully set.
    */
-  public boolean set(@Nullable CloseableReference<T> valueRef) {
+  public boolean set(final @Nullable CloseableReference<T> valueRef) {
     CloseableReference<T> clonedRef = CloseableReference.cloneOrNull(valueRef);
     return super.setResult(clonedRef, /* isLast */ true, null);
   }
@@ -56,7 +56,7 @@ public final class SettableDataSource<T> extends AbstractDataSource<CloseableRef
    * @param throwable the exception the data source should hold.
    * @return true if the exception was successfully set.
    */
-  public boolean setException(Throwable throwable) {
+  public boolean setException(final Throwable throwable) {
     return super.setFailure(throwable);
   }
 
@@ -67,7 +67,7 @@ public final class SettableDataSource<T> extends AbstractDataSource<CloseableRef
    * @return true if the progress was successfully set.
    */
   @Override
-  public boolean setProgress(float progress) {
+  public boolean setProgress(final float progress) {
     return super.setProgress(progress);
   }
 
@@ -83,7 +83,7 @@ public final class SettableDataSource<T> extends AbstractDataSource<CloseableRef
   }
 
   @Override
-  protected void closeResult(@Nullable CloseableReference<T> result) {
+  protected void closeResult(final @Nullable CloseableReference<T> result) {
     CloseableReference.closeSafely(result);
   }
 }

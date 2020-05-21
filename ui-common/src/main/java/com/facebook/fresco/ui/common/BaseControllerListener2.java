@@ -16,20 +16,20 @@ public class BaseControllerListener2<INFO> implements ControllerListener2<INFO> 
   }
 
   @Override
-  public void onSubmit(String id, Object callerContext) {}
+  public void onSubmit(final String id, final Object callerContext) { }
 
   @Override
-  public void onFinalImageSet(String id, @Nullable INFO imageInfo, Extras extraData) {}
+  public void onFinalImageSet(final String id, final @Nullable INFO imageInfo, final Extras extraData) { }
 
   @Override
-  public void onIntermediateImageSet(String id, @Nullable INFO imageInfo) {}
+  public void onIntermediateImageSet(final String id, final @Nullable INFO imageInfo) { }
 
   @Override
-  public void onIntermediateImageFailed(String id) {}
+  public void onIntermediateImageFailed(final String id) { }
 
   @Override
-  public void onFailure(String id, Throwable throwable) {}
+  public void onFailure(final String id, final Throwable throwable) { }
 
   @Override
-  public void onRelease(String id) {}
+  public void onRelease(final String id) { }
 }

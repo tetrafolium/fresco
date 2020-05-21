@@ -25,32 +25,32 @@ public class ForwardingControllerListener<INFO>
 
   private final List<ControllerListener<? super INFO>> mListeners = new ArrayList<>(2);
 
-  public ForwardingControllerListener() {}
+  public ForwardingControllerListener() { }
 
   public static <INFO> ForwardingControllerListener<INFO> create() {
     return new ForwardingControllerListener<INFO>();
   }
 
   public static <INFO> ForwardingControllerListener<INFO> of(
-      ControllerListener<? super INFO> listener) {
+      final ControllerListener<? super INFO> listener) {
     ForwardingControllerListener<INFO> forwarder = create();
     forwarder.addListener(listener);
     return forwarder;
   }
 
   public static <INFO> ForwardingControllerListener<INFO> of(
-      ControllerListener<? super INFO> listener1, ControllerListener<? super INFO> listener2) {
+      final ControllerListener<? super INFO> listener1, final ControllerListener<? super INFO> listener2) {
     ForwardingControllerListener<INFO> forwarder = create();
     forwarder.addListener(listener1);
     forwarder.addListener(listener2);
     return forwarder;
   }
 
-  public synchronized void addListener(ControllerListener<? super INFO> listener) {
+  public synchronized void addListener(final ControllerListener<? super INFO> listener) {
     mListeners.add(listener);
   }
 
-  public synchronized void removeListener(ControllerListener<? super INFO> listener) {
+  public synchronized void removeListener(final ControllerListener<? super INFO> listener) {
     int index = mListeners.indexOf(listener);
     if (index != -1) {
       mListeners.set(index, null);
@@ -61,12 +61,12 @@ public class ForwardingControllerListener<INFO>
     mListeners.clear();
   }
 
-  private synchronized void onException(String message, Throwable t) {
+  private synchronized void onException(final String message, final Throwable t) {
     Log.e(TAG, message, t);
   }
 
   @Override
-  public synchronized void onSubmit(String id, Object callerContext) {
+  public synchronized void onSubmit(final String id, final Object callerContext) {
     final int numberOfListeners = mListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       try {
@@ -83,7 +83,7 @@ public class ForwardingControllerListener<INFO>
 
   @Override
   public synchronized void onFinalImageSet(
-      String id, @Nullable INFO imageInfo, @Nullable Animatable animatable) {
+      final String id, final @Nullable INFO imageInfo, final @Nullable Animatable animatable) {
     final int numberOfListeners = mListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       try {
@@ -99,7 +99,7 @@ public class ForwardingControllerListener<INFO>
   }
 
   @Override
-  public void onIntermediateImageSet(String id, @Nullable INFO imageInfo) {
+  public void onIntermediateImageSet(final String id, final @Nullable INFO imageInfo) {
     final int numberOfListeners = mListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       try {
@@ -115,7 +115,7 @@ public class ForwardingControllerListener<INFO>
   }
 
   @Override
-  public void onIntermediateImageFailed(String id, Throwable throwable) {
+  public void onIntermediateImageFailed(final String id, final Throwable throwable) {
     final int numberOfListeners = mListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       try {
@@ -131,7 +131,7 @@ public class ForwardingControllerListener<INFO>
   }
 
   @Override
-  public synchronized void onFailure(String id, Throwable throwable) {
+  public synchronized void onFailure(final String id, final Throwable throwable) {
     final int numberOfListeners = mListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       try {
@@ -147,7 +147,7 @@ public class ForwardingControllerListener<INFO>
   }
 
   @Override
-  public synchronized void onRelease(String id) {
+  public synchronized void onRelease(final String id) {
     final int numberOfListeners = mListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       try {
@@ -163,7 +163,7 @@ public class ForwardingControllerListener<INFO>
   }
 
   @Override
-  public void onImageDrawn(String id, INFO imageInfo, DimensionsInfo dimensionsInfo) {
+  public void onImageDrawn(final String id, final INFO imageInfo, final DimensionsInfo dimensionsInfo) {
     final int numberOfListeners = mListeners.size();
     for (int i = 0; i < numberOfListeners; ++i) {
       try {

@@ -31,10 +31,10 @@ public class BucketMap<T> {
     @Nullable LinkedEntry<I> next;
 
     private LinkedEntry(
-        @Nullable LinkedEntry<I> prev,
-        int key,
-        LinkedList<I> value,
-        @Nullable LinkedEntry<I> next) {
+        final @Nullable LinkedEntry<I> prev,
+        final int key,
+        final LinkedList<I> value,
+        final @Nullable LinkedEntry<I> next) {
       this.prev = prev;
       this.key = key;
       this.value = value;
@@ -53,7 +53,7 @@ public class BucketMap<T> {
    *     {@link BucketMap} or null otherwise
    */
   @Nullable
-  public synchronized T acquire(int key) {
+  public synchronized T acquire(final int key) {
     LinkedEntry<T> bucket = mMap.get(key);
     if (bucket == null) {
       return null;
@@ -70,7 +70,7 @@ public class BucketMap<T> {
    *
    * @param key
    */
-  public synchronized void release(int key, T value) {
+  public synchronized void release(final int key, final T value) {
     LinkedEntry<T> bucket = mMap.get(key);
     if (bucket == null) {
       bucket = new LinkedEntry<T>(null, key, new LinkedList<T>(), null);
@@ -96,7 +96,7 @@ public class BucketMap<T> {
     return count;
   }
 
-  private synchronized void prune(LinkedEntry<T> bucket) {
+  private synchronized void prune(final LinkedEntry<T> bucket) {
     LinkedEntry<T> prev = bucket.prev;
     LinkedEntry<T> next = bucket.next;
     if (prev != null) {
@@ -118,7 +118,7 @@ public class BucketMap<T> {
     }
   }
 
-  private void moveToFront(LinkedEntry<T> bucket) {
+  private void moveToFront(final LinkedEntry<T> bucket) {
     if (mHead == bucket) {
       return;
     }
@@ -148,7 +148,7 @@ public class BucketMap<T> {
     return value;
   }
 
-  private void maybePrune(LinkedEntry<T> bucket) {
+  private void maybePrune(final LinkedEntry<T> bucket) {
     if (bucket != null && bucket.value.isEmpty()) {
       prune(bucket);
       mMap.remove(bucket.key);

@@ -29,7 +29,7 @@ public class MemoryPooledByteBufferOutputStream extends PooledByteBufferOutputSt
    *
    * @param pool the pool to use
    */
-  public MemoryPooledByteBufferOutputStream(MemoryChunkPool pool) {
+  public MemoryPooledByteBufferOutputStream(final MemoryChunkPool pool) {
     this(pool, pool.getMinBufferSize());
   }
 
@@ -42,7 +42,7 @@ public class MemoryPooledByteBufferOutputStream extends PooledByteBufferOutputSt
    * @param pool the pool to use
    * @param initialCapacity initial capacity to allocate for this stream
    */
-  public MemoryPooledByteBufferOutputStream(MemoryChunkPool pool, int initialCapacity) {
+  public MemoryPooledByteBufferOutputStream(final MemoryChunkPool pool, final int initialCapacity) {
     super();
 
     Preconditions.checkArgument(initialCapacity > 0);
@@ -82,7 +82,7 @@ public class MemoryPooledByteBufferOutputStream extends PooledByteBufferOutputSt
    * @throws IOException in case of an I/O error during the write
    */
   @Override
-  public void write(int oneByte) throws IOException {
+  public void write(final int oneByte) throws IOException {
     byte[] buf = new byte[1];
     buf[0] = (byte) oneByte;
     this.write(buf);
@@ -100,7 +100,7 @@ public class MemoryPooledByteBufferOutputStream extends PooledByteBufferOutputSt
    *     offset + count} is bigger than the length of {@code buffer}.
    * @throws InvalidStreamException if the stream is invalid
    */
-  public void write(byte[] buffer, int offset, int count) throws IOException {
+  public void write(final byte[] buffer, final int offset, final int count) throws IOException {
     if (offset < 0 || count < 0 || offset + count > buffer.length) {
       throw new ArrayIndexOutOfBoundsException(
           "length=" + buffer.length + "; regionStart=" + offset + "; regionLength=" + count);
@@ -134,7 +134,7 @@ public class MemoryPooledByteBufferOutputStream extends PooledByteBufferOutputSt
    * @throws BasePool.SizeTooLargeException if the allocation from the pool fails
    */
   @VisibleForTesting
-  void realloc(int newLength) {
+  void realloc(final int newLength) {
     ensureValid();
     /* Can the buffer handle @i more bytes, if not expand it */
     if (newLength <= mBufRef.get().getSize()) {

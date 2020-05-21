@@ -34,13 +34,13 @@ public class BitmapProbeProducer implements Producer<CloseableReference<Closeabl
   private final BoundedLinkedHashSet<CacheKey> mDiskCacheHistory;
 
   public BitmapProbeProducer(
-      MemoryCache<CacheKey, PooledByteBuffer> encodedMemoryCache,
-      BufferedDiskCache defaultBufferedDiskCache,
-      BufferedDiskCache smallImageBufferedDiskCache,
-      CacheKeyFactory cacheKeyFactory,
-      BoundedLinkedHashSet<CacheKey> encodedMemoryCacheHistory,
-      BoundedLinkedHashSet<CacheKey> diskCacheHistory,
-      Producer<CloseableReference<CloseableImage>> inputProducer) {
+      final MemoryCache<CacheKey, PooledByteBuffer> encodedMemoryCache,
+      final BufferedDiskCache defaultBufferedDiskCache,
+      final BufferedDiskCache smallImageBufferedDiskCache,
+      final CacheKeyFactory cacheKeyFactory,
+      final BoundedLinkedHashSet<CacheKey> encodedMemoryCacheHistory,
+      final BoundedLinkedHashSet<CacheKey> diskCacheHistory,
+      final Producer<CloseableReference<CloseableImage>> inputProducer) {
     mEncodedMemoryCache = encodedMemoryCache;
     mDefaultBufferedDiskCache = defaultBufferedDiskCache;
     mSmallImageBufferedDiskCache = smallImageBufferedDiskCache;
@@ -99,14 +99,14 @@ public class BitmapProbeProducer implements Producer<CloseableReference<Closeabl
     private final BoundedLinkedHashSet<CacheKey> mDiskCacheHistory;
 
     public ProbeConsumer(
-        Consumer<CloseableReference<CloseableImage>> consumer,
-        ProducerContext producerContext,
-        MemoryCache<CacheKey, PooledByteBuffer> encodedMemoryCache,
-        BufferedDiskCache defaultBufferedDiskCache,
-        BufferedDiskCache smallImageBufferedDiskCache,
-        CacheKeyFactory cacheKeyFactory,
-        BoundedLinkedHashSet<CacheKey> encodedMemoryCacheHistory,
-        BoundedLinkedHashSet<CacheKey> diskCacheHistory) {
+        final Consumer<CloseableReference<CloseableImage>> consumer,
+        final ProducerContext producerContext,
+        final MemoryCache<CacheKey, PooledByteBuffer> encodedMemoryCache,
+        final BufferedDiskCache defaultBufferedDiskCache,
+        final BufferedDiskCache smallImageBufferedDiskCache,
+        final CacheKeyFactory cacheKeyFactory,
+        final BoundedLinkedHashSet<CacheKey> encodedMemoryCacheHistory,
+        final BoundedLinkedHashSet<CacheKey> diskCacheHistory) {
       super(consumer);
       mProducerContext = producerContext;
       mEncodedMemoryCache = encodedMemoryCache;
@@ -118,7 +118,7 @@ public class BitmapProbeProducer implements Producer<CloseableReference<Closeabl
     }
 
     @Override
-    public void onNewResultImpl(CloseableReference<CloseableImage> newResult, @Status int status) {
+    public void onNewResultImpl(final CloseableReference<CloseableImage> newResult, final @Status int status) {
       try {
         if (FrescoSystrace.isTracing()) {
           FrescoSystrace.beginSection("BitmapProbeProducer#onNewResultImpl");

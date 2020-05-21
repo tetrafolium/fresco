@@ -87,7 +87,7 @@ public class DefaultDiskStorage implements DiskStorage {
    *     saved with the previous value will not be read and will be purged eventually.
    * @param cacheErrorLogger logger for various events
    */
-  public DefaultDiskStorage(File rootDirectory, int version, CacheErrorLogger cacheErrorLogger) {
+  public DefaultDiskStorage(final File rootDirectory, final int version, final CacheErrorLogger cacheErrorLogger) {
     Preconditions.checkNotNull(rootDirectory);
 
     mRootDirectory = rootDirectory;
@@ -103,7 +103,7 @@ public class DefaultDiskStorage implements DiskStorage {
     mClock = SystemClock.get();
   }
 
-  private static boolean isExternal(File directory, CacheErrorLogger cacheErrorLogger) {
+  private static boolean isExternal(final File directory, final CacheErrorLogger cacheErrorLogger) {
     boolean state = false;
     String appCacheDirPath = null;
 
@@ -135,7 +135,7 @@ public class DefaultDiskStorage implements DiskStorage {
   }
 
   @VisibleForTesting
-  static String getVersionSubdirectoryName(int version) {
+  static String getVersionSubdirectoryName(final int version) {
     return String.format(
         (Locale) null,
         "%s.ols%d.%d",
@@ -196,7 +196,7 @@ public class DefaultDiskStorage implements DiskStorage {
     public final long expected;
     public final long actual;
 
-    public IncompleteFileException(long expected, long actual) {
+    public IncompleteFileException(final long expected, final long actual) {
       super("File was not written completely. Expected: " + expected + ", found: " + actual);
       this.expected = expected;
       this.actual = actual;
@@ -205,7 +205,7 @@ public class DefaultDiskStorage implements DiskStorage {
 
   /** Calculates which should be the CONTENT file for the given key */
   @VisibleForTesting
-  File getContentFileFor(String resourceId) {
+  File getContentFileFor(final String resourceId) {
     return new File(getFilename(resourceId));
   }
 
@@ -215,7 +215,7 @@ public class DefaultDiskStorage implements DiskStorage {
    * @param resourceId the id of the file we're going to store
    * @return the directory to store the file in
    */
-  private String getSubdirectoryPath(String resourceId) {
+  private String getSubdirectoryPath(final String resourceId) {
     String subdirectory = String.valueOf(Math.abs(resourceId.hashCode() % SHARDING_BUCKET_COUNT));
     return mVersionDirectory + File.separator + subdirectory;
   }
@@ -226,7 +226,7 @@ public class DefaultDiskStorage implements DiskStorage {
    * @param resourceId the id of the file we're going to store
    * @return the directory to store the file in
    */
-  private File getSubdirectory(String resourceId) {
+  private File getSubdirectory(final String resourceId) {
     return new File(getSubdirectoryPath(resourceId));
   }
 
@@ -239,10 +239,10 @@ public class DefaultDiskStorage implements DiskStorage {
     private final List<Entry> result = new ArrayList<>();
 
     @Override
-    public void preVisitDirectory(File directory) {}
+    public void preVisitDirectory(final File directory) { }
 
     @Override
-    public void visitFile(File file) {
+    public void visitFile(final File file) {
       FileInfo info = getShardFileInfo(file);
       if (info != null && info.type == FileType.CONTENT) {
         result.add(new EntryImpl(info.resourceId, file));
@@ -250,7 +250,7 @@ public class DefaultDiskStorage implements DiskStorage {
     }
 
     @Override
-    public void postVisitDirectory(File directory) {}
+    public void postVisitDirectory(final File directory) { }
 
     /** Returns an immutable list of the entries. */
     public List<Entry> getEntries() {
@@ -270,7 +270,7 @@ public class DefaultDiskStorage implements DiskStorage {
     private boolean insideBaseDirectory;
 
     @Override
-    public void preVisitDirectory(File directory) {
+    public void preVisitDirectory(final File directory) {
       if (!insideBaseDirectory && directory.equals(mVersionDirectory)) {
         // if we enter version-directory turn flag on
         insideBaseDirectory = true;
@@ -278,14 +278,14 @@ public class DefaultDiskStorage implements DiskStorage {
     }
 
     @Override
-    public void visitFile(File file) {
+    public void visitFile(final File file) {
       if (!insideBaseDirectory || !isExpectedFile(file)) {
         file.delete();
       }
     }
 
     @Override
-    public void postVisitDirectory(File directory) {
+    public void postVisitDirectory(final File directory) {
       if (!mRootDirectory.equals(directory)) { // if it's root directory we must not touch it
         if (!insideBaseDirectory) {
           // if not in version-directory then it's unexpected!
@@ -298,7 +298,7 @@ public class DefaultDiskStorage implements DiskStorage {
       }
     }
 
-    private boolean isExpectedFile(File file) {
+    private boolean isExpectedFile(final File file) {
       FileInfo info = getShardFileInfo(file);
       if (info == null) {
         return false;
@@ -311,7 +311,7 @@ public class DefaultDiskStorage implements DiskStorage {
     }
 
     /** @return true if and only if the file is not old enough to be considered an old temp file */
-    private boolean isRecentFile(File file) {
+    private boolean isRecentFile(final File file) {
       return file.lastModified() > (mClock.now() - TEMP_FILE_LIFETIME_MS);
     }
   };
@@ -329,7 +329,7 @@ public class DefaultDiskStorage implements DiskStorage {
    * @param message message to use
    * @throws IOException
    */
-  private void mkdirs(File directory, String message) throws IOException {
+  private void mkdirs(final File directory, final String message) throws IOException {
     try {
       FileUtils.mkdirs(directory);
     } catch (FileUtils.CreateDirectoryException cde) {
@@ -340,7 +340,7 @@ public class DefaultDiskStorage implements DiskStorage {
   }
 
   @Override
-  public Inserter insert(String resourceId, Object debugInfo) throws IOException {
+  public Inserter insert(final String resourceId, final Object debugInfo) throws IOException {
     // ensure that the parent directory exists
     FileInfo info = new FileInfo(FileType.TEMP, resourceId);
     File parent = getSubdirectory(info.resourceId);
@@ -359,7 +359,7 @@ public class DefaultDiskStorage implements DiskStorage {
   }
 
   @Override
-  public @Nullable BinaryResource getResource(String resourceId, Object debugInfo) {
+  public @Nullable BinaryResource getResource(final String resourceId, final Object debugInfo) {
     final File file = getContentFileFor(resourceId);
     if (file.exists()) {
       file.setLastModified(mClock.now());
@@ -368,23 +368,23 @@ public class DefaultDiskStorage implements DiskStorage {
     return null;
   }
 
-  private String getFilename(String resourceId) {
+  private String getFilename(final String resourceId) {
     FileInfo fileInfo = new FileInfo(FileType.CONTENT, resourceId);
     String path = getSubdirectoryPath(fileInfo.resourceId);
     return fileInfo.toPath(path);
   }
 
   @Override
-  public boolean contains(String resourceId, Object debugInfo) {
+  public boolean contains(final String resourceId, final Object debugInfo) {
     return query(resourceId, false);
   }
 
   @Override
-  public boolean touch(String resourceId, Object debugInfo) {
+  public boolean touch(final String resourceId, final Object debugInfo) {
     return query(resourceId, true);
   }
 
-  private boolean query(String resourceId, boolean touch) {
+  private boolean query(final String resourceId, final boolean touch) {
     File contentFile = getContentFileFor(resourceId);
     boolean exists = contentFile.exists();
     if (touch && exists) {
@@ -394,7 +394,7 @@ public class DefaultDiskStorage implements DiskStorage {
   }
 
   @Override
-  public long remove(Entry entry) {
+  public long remove(final Entry entry) {
     // it should be one entry return by us :)
     EntryImpl entryImpl = (EntryImpl) entry;
     FileBinaryResource resource = entryImpl.getResource();
@@ -440,7 +440,7 @@ public class DefaultDiskStorage implements DiskStorage {
     return dumpInfo;
   }
 
-  private DiskDumpInfoEntry dumpCacheEntry(Entry entry) throws IOException {
+  private DiskDumpInfoEntry dumpCacheEntry(final Entry entry) throws IOException {
     EntryImpl entryImpl = (EntryImpl) entry;
     String firstBits = "";
     byte[] bytes = entryImpl.getResource().read();
@@ -454,7 +454,7 @@ public class DefaultDiskStorage implements DiskStorage {
     return new DiskDumpInfoEntry(entryImpl.getId(), path, type, entryImpl.getSize(), firstBits);
   }
 
-  private String typeOfBytes(byte[] bytes) {
+  private String typeOfBytes(final byte[] bytes) {
     if (bytes.length >= 2) {
       if (bytes[0] == (byte) 0xFF && bytes[1] == (byte) 0xD8) {
         return "jpg";
@@ -469,12 +469,12 @@ public class DefaultDiskStorage implements DiskStorage {
     return "undefined";
   }
 
-  @Override
   /**
    * Returns a list of entries.
    *
    * <p>This list is immutable.
    */
+  @Override
   public List<Entry> getEntries() throws IOException {
     EntriesCollector collector = new EntriesCollector();
     FileTree.walkFileTree(mVersionDirectory, collector);
@@ -489,7 +489,7 @@ public class DefaultDiskStorage implements DiskStorage {
     private long size;
     private long timestamp;
 
-    private EntryImpl(String id, File cachedFile) {
+    private EntryImpl(final String id, final File cachedFile) {
       Preconditions.checkNotNull(cachedFile);
       this.id = Preconditions.checkNotNull(id);
       this.resource = FileBinaryResource.createOrNull(cachedFile);
@@ -532,7 +532,7 @@ public class DefaultDiskStorage implements DiskStorage {
    * @param file the file to check
    * @return the corresponding FileInfo object if shard is correct, null otherwise
    */
-  private @Nullable FileInfo getShardFileInfo(File file) {
+  private @Nullable FileInfo getShardFileInfo(final File file) {
     FileInfo info = FileInfo.fromFile(file);
     if (info == null) {
       return null; // file with incorrect name/extension
@@ -556,7 +556,7 @@ public class DefaultDiskStorage implements DiskStorage {
     String TEMP = TEMP_FILE_EXTENSION;
   }
 
-  private static @Nullable @FileType String getFileTypefromExtension(String extension) {
+  private static @Nullable @FileType String getFileTypefromExtension(final String extension) {
     if (CONTENT_FILE_EXTENSION.equals(extension)) {
       return FileType.CONTENT;
     } else if (TEMP_FILE_EXTENSION.equals(extension)) {
@@ -575,7 +575,7 @@ public class DefaultDiskStorage implements DiskStorage {
     public final @FileType String type;
     public final String resourceId;
 
-    private FileInfo(@FileType String type, String resourceId) {
+    private FileInfo(final @FileType String type, final String resourceId) {
       this.type = type;
       this.resourceId = resourceId;
     }
@@ -585,17 +585,17 @@ public class DefaultDiskStorage implements DiskStorage {
       return type + "(" + resourceId + ")";
     }
 
-    public String toPath(String parentPath) {
+    public String toPath(final String parentPath) {
       return parentPath + File.separator + resourceId + type;
     }
 
-    public File createTempFile(File parent) throws IOException {
+    public File createTempFile(final File parent) throws IOException {
       File f = File.createTempFile(resourceId + ".", TEMP_FILE_EXTENSION, parent);
       return f;
     }
 
     @Nullable
-    public static FileInfo fromFile(File file) {
+    public static FileInfo fromFile(final File file) {
       String name = file.getName();
       int pos = name.lastIndexOf('.');
       if (pos <= 0) {
@@ -626,13 +626,13 @@ public class DefaultDiskStorage implements DiskStorage {
 
     @VisibleForTesting /* package protected*/ final File mTemporaryFile;
 
-    public InserterImpl(String resourceId, File temporaryFile) {
+    public InserterImpl(final String resourceId, final File temporaryFile) {
       mResourceId = resourceId;
       mTemporaryFile = temporaryFile;
     }
 
     @Override
-    public void writeData(WriterCallback callback, Object debugInfo) throws IOException {
+    public void writeData(final WriterCallback callback, final Object debugInfo) throws IOException {
       FileOutputStream fileStream;
       try {
         fileStream = new FileOutputStream(mTemporaryFile);
@@ -667,7 +667,7 @@ public class DefaultDiskStorage implements DiskStorage {
     }
 
     @Override
-    public BinaryResource commit(Object debugInfo) throws IOException {
+    public BinaryResource commit(final Object debugInfo) throws IOException {
       // the temp resource must be ours!
       File targetFile = getContentFileFor(mResourceId);
 

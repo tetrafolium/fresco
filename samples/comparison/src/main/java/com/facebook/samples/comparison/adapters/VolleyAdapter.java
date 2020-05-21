@@ -21,13 +21,13 @@ public class VolleyAdapter extends ImageListAdapter {
 
   private final ImageLoader mImageLoader;
 
-  public VolleyAdapter(Context context, PerfListener perfListener) {
+  public VolleyAdapter(final Context context, final PerfListener perfListener) {
     super(context, perfListener);
     mImageLoader = SampleVolleyFactory.getImageLoader(context);
   }
 
   @Override
-  public VolleyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public VolleyHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
     InstrumentedNetworkImageView view = new InstrumentedNetworkImageView(getContext());
     view.setDefaultImageResId(R.color.placeholder);
     view.setErrorImageResId(R.color.error);

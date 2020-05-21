@@ -30,19 +30,19 @@ public class AnimatedDrawableBackendFrameRenderer implements BitmapFrameRenderer
   private final AnimatedImageCompositor.Callback mCallback =
       new AnimatedImageCompositor.Callback() {
         @Override
-        public void onIntermediateResult(int frameNumber, Bitmap bitmap) {
+        public void onIntermediateResult(final int frameNumber, final Bitmap bitmap) {
           // We currently don't cache intermediate bitmaps here
         }
 
         @Nullable
         @Override
-        public CloseableReference<Bitmap> getCachedBitmap(int frameNumber) {
+        public CloseableReference<Bitmap> getCachedBitmap(final int frameNumber) {
           return mBitmapFrameCache.getCachedFrame(frameNumber);
         }
       };
 
   public AnimatedDrawableBackendFrameRenderer(
-      BitmapFrameCache bitmapFrameCache, AnimatedDrawableBackend animatedDrawableBackend) {
+      final BitmapFrameCache bitmapFrameCache, final AnimatedDrawableBackend animatedDrawableBackend) {
     mBitmapFrameCache = bitmapFrameCache;
     mAnimatedDrawableBackend = animatedDrawableBackend;
 
@@ -50,7 +50,7 @@ public class AnimatedDrawableBackendFrameRenderer implements BitmapFrameRenderer
   }
 
   @Override
-  public void setBounds(@Nullable Rect bounds) {
+  public void setBounds(final @Nullable Rect bounds) {
     AnimatedDrawableBackend newBackend = mAnimatedDrawableBackend.forNewBounds(bounds);
     if (newBackend != mAnimatedDrawableBackend) {
       mAnimatedDrawableBackend = newBackend;
@@ -69,7 +69,7 @@ public class AnimatedDrawableBackendFrameRenderer implements BitmapFrameRenderer
   }
 
   @Override
-  public boolean renderFrame(int frameNumber, Bitmap targetBitmap) {
+  public boolean renderFrame(final int frameNumber, final Bitmap targetBitmap) {
     try {
       mAnimatedImageCompositor.renderFrame(frameNumber, targetBitmap);
     } catch (IllegalStateException exception) {

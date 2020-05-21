@@ -93,7 +93,7 @@ public class StreamUtilTest {
     verifyNoMoreInteractions(inputStream);
   }
 
-  private void checkFileInputStream(int size) throws IOException {
+  private void checkFileInputStream(final int size) throws IOException {
     byte[] bytesToWrite = new byte[size];
     for (int i = 0; i < size; i++) {
       bytesToWrite[i] = (byte) i; // It's okay to truncate

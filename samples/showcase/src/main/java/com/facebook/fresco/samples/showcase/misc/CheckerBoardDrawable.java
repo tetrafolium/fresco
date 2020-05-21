@@ -27,7 +27,7 @@ public class CheckerBoardDrawable extends Drawable {
   private int mColorDark;
   private int mSquareSize;
 
-  public CheckerBoardDrawable(Resources resources) {
+  public CheckerBoardDrawable(final Resources resources) {
     //noinspection deprecation
     mColorLight = resources.getColor(R.color.checker_board_light);
     //noinspection deprecation
@@ -37,7 +37,7 @@ public class CheckerBoardDrawable extends Drawable {
   }
 
   @Override
-  public void draw(Canvas canvas) {
+  public void draw(final Canvas canvas) {
     final int w = canvas.getWidth();
     final int h = canvas.getHeight();
 
@@ -55,12 +55,12 @@ public class CheckerBoardDrawable extends Drawable {
   }
 
   @Override
-  public void setAlpha(int alpha) {
+  public void setAlpha(final int alpha) {
     // ignore
   }
 
   @Override
-  public void setColorFilter(ColorFilter colorFilter) {
+  public void setColorFilter(final ColorFilter colorFilter) {
     // ignore
   }
 

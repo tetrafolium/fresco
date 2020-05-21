@@ -286,11 +286,10 @@ public class DefaultDiskStorage implements DiskStorage {
 
     @Override
     public void postVisitDirectory(final File directory) {
-      if (!mRootDirectory.equals(directory)) { // if it's root directory we must not touch it
-        if (!insideBaseDirectory) {
-          // if not in version-directory then it's unexpected!
-          directory.delete();
-        }
+      // if it's root directory we must not touch it
+      if ((!mRootDirectory.equals(directory)) && (!insideBaseDirectory)) {
+        // if not in version-directory then it's unexpected!
+        directory.delete();
       }
       if (insideBaseDirectory && directory.equals(mVersionDirectory)) {
         // if we just finished visiting version-directory turn flag off

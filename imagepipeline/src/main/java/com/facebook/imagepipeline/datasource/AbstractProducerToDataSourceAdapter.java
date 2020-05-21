@@ -89,10 +89,8 @@ public abstract class AbstractProducerToDataSourceAdapter<T> extends AbstractDat
 
   protected void onNewResultImpl(final @Nullable T result, final int status, final ProducerContext producerContext) {
     boolean isLast = BaseConsumer.isLast(status);
-    if (super.setResult(result, isLast, getExtras(producerContext))) {
-      if (isLast) {
-        mRequestListener.onRequestSuccess(mSettableProducerContext);
-      }
+    if ((super.setResult(result, isLast, getExtras(producerContext))) && (isLast)) {
+      mRequestListener.onRequestSuccess(mSettableProducerContext);
     }
   }
 

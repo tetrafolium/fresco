@@ -203,10 +203,8 @@ public class AnimatedDrawable2 extends Drawable implements Animatable, DrawableW
       frameNumberToDraw = mAnimationBackend.getFrameCount() - 1;
       mAnimationListener.onAnimationStop(this);
       mIsRunning = false;
-    } else if (frameNumberToDraw == 0) {
-      if (mLastDrawnFrameNumber != -1 && actualRenderTimeStartMs >= mExpectedRenderTimeMs) {
-        mAnimationListener.onAnimationRepeat(this);
-      }
+    } else if ((frameNumberToDraw == 0) && (mLastDrawnFrameNumber != -1 && actualRenderTimeStartMs >= mExpectedRenderTimeMs)) {
+      mAnimationListener.onAnimationRepeat(this);
     }
 
     // Draw the frame

@@ -94,9 +94,7 @@ public class FrescoControllerImpl implements FrescoController {
               && ObjectsCompat.equals(uri, frescoState.getUri())
               && ObjectsCompat.equals(multiUri, frescoState.getMultiUri())
               && ObjectsCompat.equals(imageOptions, frescoState.getImageOptions())
-              && (mFrescoContext.getExperiments().shouldDiffCallerContext()
-                  ? ObjectsCompat.equals(callerContext, frescoState.getCallerContext())
-                  : true);
+              && (!(mFrescoContext.getExperiments().shouldDiffCallerContext()) || ObjectsCompat.equals(callerContext, frescoState.getCallerContext()));
       // If state is recycled from another component we must create a new one
       return stateHasSameProps
           ? frescoState

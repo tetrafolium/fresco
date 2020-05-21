@@ -109,10 +109,8 @@ public class MultiPointerGestureDetector {
     final int count = event.getPointerCount();
     final int action = event.getActionMasked();
     final int index = event.getActionIndex();
-    if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_POINTER_UP) {
-      if (i >= index) {
-        i++;
-      }
+    if ((action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_POINTER_UP) && (i >= index)) {
+      i++;
     }
     return (i < count) ? i : -1;
   }
